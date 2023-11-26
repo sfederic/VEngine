@@ -1936,7 +1936,7 @@ void Renderer::ScreenshotCapture()
 void Renderer::MeshIconImageCapture()
 {
 	Actor* actor = WorldEditor::GetPickedActor();
-	std::vector<MeshComponent*> meshComponents = actor->GetComponentsOfType<MeshComponent>();
+	std::vector<MeshComponent*> meshComponents = actor->GetComponents<MeshComponent>();
 
 	//@Todo: isn't working with multiple meshes nicely
 	if (!meshComponents.empty())
@@ -2178,7 +2178,7 @@ void RenderWireframeForVertexPaintingAndPickedActor()
 	{
 		if (WorldEditor::GetPickedActor())
 		{
-			for (auto mesh : WorldEditor::GetPickedActor()->GetComponentsOfType<MeshComponent>())
+			for (auto mesh : WorldEditor::GetPickedActor()->GetComponents<MeshComponent>())
 			{
 				wireframeRender(mesh);
 			}
@@ -2186,7 +2186,7 @@ void RenderWireframeForVertexPaintingAndPickedActor()
 
 		for (auto actor : WorldEditor::GetPickedActors())
 		{
-			for (auto mesh : actor->GetComponentsOfType<MeshComponent>())
+			for (auto mesh : actor->GetComponents<MeshComponent>())
 			{
 				wireframeRender(mesh);
 			}
@@ -2199,7 +2199,7 @@ void RenderWireframeForVertexPaintingAndPickedActor()
 	{
 		if (WorldEditor::vertexPaintLockActor != nullptr)
 		{
-			for (auto mesh : WorldEditor::vertexPaintLockActor->GetComponentsOfType<MeshComponent>())
+			for (auto mesh : WorldEditor::vertexPaintLockActor->GetComponents<MeshComponent>())
 			{
 				wireframeRender(mesh);
 			}

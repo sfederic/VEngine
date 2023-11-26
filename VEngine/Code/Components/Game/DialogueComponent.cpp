@@ -115,7 +115,7 @@ bool DialogueComponent::ShowTextAtActor()
 
 	Camera::SetActiveCameraTarget(actor);
 
-	auto dcs = actor->GetComponentsOfType<DialogueComponent>();
+	auto dcs = actor->GetComponents<DialogueComponent>();
 	for (auto* d : dcs)
 	{
 		d->dialogueWidget->worldPosition = actor->GetHomogeneousPositionV();
@@ -190,7 +190,7 @@ void DialogueComponent::ConversationShowTextAtActor()
 		return;
 	}
 
-	auto dcs = actor->GetComponentsOfType<DialogueComponent>();
+	auto dcs = actor->GetComponents<DialogueComponent>();
 	for (auto* d : dcs)
 	{
 		d->dialogueWidget->worldPosition = actor->GetHomogeneousPositionV();

@@ -223,7 +223,7 @@ void DuplicateActor()
 				newDuplicateActor->PostCreate();
 
 				//@Todo: move to Paint debug menu
-				auto newDuplicateActorMeshes = newDuplicateActor->GetComponentsOfType<MeshComponent>();
+				auto newDuplicateActorMeshes = newDuplicateActor->GetComponents<MeshComponent>();
 				for (auto mesh : newDuplicateActorMeshes)
 				{
 					auto matchingMesh = pickedActor->GetComponent<MeshComponent>(mesh->name);
@@ -393,7 +393,7 @@ void VertexPainting()
 					}
 				}
 
-				auto meshes = hit.hitActor->GetComponentsOfType<MeshComponent>();
+				auto meshes = hit.hitActor->GetComponents<MeshComponent>();
 				for (auto mesh : meshes)
 				{
 					for (auto& vertIndex : hit.hitVertIndexes)
@@ -417,7 +417,7 @@ void VertexPainting()
 					}
 				}
 
-				auto meshes = hit.hitActor->GetComponentsOfType<MeshComponent>();
+				auto meshes = hit.hitActor->GetComponents<MeshComponent>();
 				for (auto mesh : meshes)
 				{
 					for (auto& vertIndex : hit.hitVertIndexes)
@@ -505,7 +505,7 @@ void QuickMeshChangeMenu()
 				const std::string meshFilename =
 					VString::GetSubStringAtFoundOffset(filePath.toStdString(), AssetBaseFolders::mesh);
 
-				for (auto mesh : pickedActor->GetComponentsOfType<MeshComponent>())
+				for (auto mesh : pickedActor->GetComponents<MeshComponent>())
 				{
 					mesh->SetMeshFilename(meshFilename);
 					mesh->ReCreate();
@@ -536,7 +536,7 @@ void QuickTextureChangeMenu()
 				const std::string textureFilename =
 					VString::GetSubStringAtFoundOffset(filePath.toStdString(), AssetBaseFolders::texture);
 
-				for (auto mesh : pickedActor->GetComponentsOfType<MeshComponent>())
+				for (auto mesh : pickedActor->GetComponents<MeshComponent>())
 				{
 					mesh->SetTexture(textureFilename);
 					Log("[%s] mesh [%u] changed mesh texture to [%s].",

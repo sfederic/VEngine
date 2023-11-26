@@ -111,7 +111,7 @@ bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float ra
 			continue;
 		}
 
-		for (auto mesh : actor->GetComponentsOfType<MeshComponent>())
+		for (auto mesh : actor->GetComponents<MeshComponent>())
 		{
 			checkSpatialComponentCollision(mesh);
 		}
@@ -371,7 +371,7 @@ bool OrientedBoxCast(HitResult& hit, BoundingOrientedBox& boundsInWorldSpace, bo
 			continue;
 		}
 
-		for (auto mesh : actor->GetComponentsOfType<MeshComponent>())
+		for (auto mesh : actor->GetComponents<MeshComponent>())
 		{
 			const auto meshBoundsInWorld = mesh->GetBoundsInWorldSpace();
 			if (boundsInWorldSpace.Intersects(meshBoundsInWorld))
@@ -413,7 +413,7 @@ bool OrientedBoxCast(HitResult& hitResult, XMVECTOR origin, XMVECTOR end, XMFLOA
 			continue;
 		}
 
-		for (auto mesh : actor->GetComponentsOfType<MeshComponent>())
+		for (auto mesh : actor->GetComponents<MeshComponent>())
 		{
 			const auto meshBoundsInWorld = mesh->GetBoundsInWorldSpace();
 			if (boundingOrientedBox.Intersects(meshBoundsInWorld))
@@ -447,7 +447,7 @@ bool SimpleBoxCast(XMVECTOR center, XMFLOAT3 extents, HitResult& hit, bool drawD
 			continue;
 		}
 
-		for (auto mesh : actor->GetComponentsOfType<MeshComponent>())
+		for (auto mesh : actor->GetComponents<MeshComponent>())
 		{
 			const BoundingOrientedBox meshWorldBounds = mesh->GetBoundsInWorldSpace();
 

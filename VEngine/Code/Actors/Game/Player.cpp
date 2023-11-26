@@ -243,7 +243,7 @@ void Player::HighlightLinkableGridActor()
 			}
 
 			highlightedGridActor = gridActor;
-			for (auto mesh : highlightedGridActor->GetComponentsOfType<MeshComponent>())
+			for (auto mesh : highlightedGridActor->GetComponents<MeshComponent>())
 			{
 				mesh->SetAmbientColour(XMFLOAT3(0.9f, 0.3f, 0.1f));
 			}
@@ -1078,7 +1078,7 @@ void Player::ResetHighlightedActor()
 		return;
 	}
 
-	for (auto mesh : highlightedGridActor->GetComponentsOfType<MeshComponent>())
+	for (auto mesh : highlightedGridActor->GetComponents<MeshComponent>())
 	{
 		mesh->SetAmbientColour(XMFLOAT3(1.f, 1.f, 1.f));
 	}

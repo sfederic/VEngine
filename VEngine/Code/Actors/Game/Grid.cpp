@@ -185,7 +185,7 @@ void Grid::RecalcAllNodes(HitResult& hit)
 
 				if (hit.hitActor)
 				{
-					auto meshes = hit.hitActor->GetComponentsOfType<MeshComponent>();
+					auto meshes = hit.hitActor->GetComponents<MeshComponent>();
 					for (auto mesh : meshes)
 					{
 						if (mesh->gridObstacle)
@@ -215,7 +215,7 @@ void Grid::RecalcNodesToIgnoreLinkedGridActor(GridActor* gridActorToIgnore)
 {
 	HitResult hit(this);
 	hit.actorsToIgnore.push_back(gridActorToIgnore);
-	for (auto mesh : gridActorToIgnore->GetComponentsOfType<MeshComponent>())
+	for (auto mesh : gridActorToIgnore->GetComponents<MeshComponent>())
 	{
 		hit.componentsToIgnore.push_back(mesh);
 	}

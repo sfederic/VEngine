@@ -418,7 +418,7 @@ bool Actor::HasTag(const std::string& tag)
 //it back to the actor before re-creating the physics actor state.
 void Actor::SetMeshesToDynamicPhysicsState()
 {
-	for (auto mesh : GetComponentsOfType<MeshComponent>())
+	for (auto mesh : GetComponents<MeshComponent>())
 	{
 		PhysicsSystem::ReleasePhysicsActor(mesh);
 		mesh->isPhysicsStatic = false;
@@ -428,7 +428,7 @@ void Actor::SetMeshesToDynamicPhysicsState()
 
 void Actor::SetMeshesToStaticPhysicsState()
 {
-	for (auto mesh : GetComponentsOfType<MeshComponent>())
+	for (auto mesh : GetComponents<MeshComponent>())
 	{
 		PhysicsSystem::ReleasePhysicsActor(mesh);
 		mesh->isPhysicsStatic = true;

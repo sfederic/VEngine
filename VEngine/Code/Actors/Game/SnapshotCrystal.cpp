@@ -32,7 +32,7 @@ void SnapshotCrystal::SetProjectionMeshFromFacingGridActor()
 		{
 			//Only get the first mesh
 			int meshIndexCheck = 0;
-			for (auto mesh : gridActor->GetComponentsOfType<MeshComponent>())
+			for (auto mesh : gridActor->GetComponents<MeshComponent>())
 			{
 				projectionMesh->SetMeshFilename(mesh->GetMeshFilename());
 				projectionMesh->ReCreate();

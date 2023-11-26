@@ -14,7 +14,7 @@ void GridNode::Hide()
 }
 
 void GridNode::Show()
-{	
+{
 	active = true;
 	DisplayShow();
 }
@@ -50,7 +50,7 @@ void GridNode::RecalcNodeHeight(HitResult& hitResult)
 
 	if (Raycast(hitResult, origin, -VMath::GlobalUpVector(), 40.f))
 	{
-		for (auto mesh : hitResult.hitActor->GetComponentsOfType<MeshComponent>())
+		for (auto mesh : hitResult.hitActor->GetComponents<MeshComponent>())
 		{
 			if (mesh->ignoreGridRaycasts)
 			{

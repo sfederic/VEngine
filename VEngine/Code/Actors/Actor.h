@@ -133,7 +133,7 @@ public:
 	std::vector<Component*> GetAllComponents();
 
 	template <typename T>
-	std::vector<T*> GetComponentsOfType()
+	std::vector<T*> GetComponents()
 	{
 		std::vector<T*> outComponents;
 
@@ -152,7 +152,7 @@ public:
 	template <typename T>
 	T* GetFirstComponentOfTypeAllowNull()
 	{
-		std::vector<T*> componentsOfType = GetComponentsOfType<T>();
+		std::vector<T*> componentsOfType = GetComponents<T>();
 		if (!componentsOfType.empty())
 		{
 			return componentsOfType.front();

@@ -77,7 +77,7 @@ void PhysicsSystem::Start()
 	auto actors = World::GetAllActorsInWorld();
 	for (auto actor : actors)
 	{
-		auto meshes = actor->GetComponentsOfType<MeshComponent>();
+		auto meshes = actor->GetComponents<MeshComponent>();
 		for (auto mesh : meshes)
 		{
 			auto dMesh = dynamic_cast<DestructibleMeshComponent*>(mesh);

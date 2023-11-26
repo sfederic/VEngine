@@ -34,7 +34,7 @@ void FireSource::Tick(float deltaTime)
 
 	for (auto& gridActor : World::GetAllActorsAsBaseType<GridActor>())
 	{
-		for (auto mesh : gridActor->GetComponentsOfType<MeshComponent>())
+		for (auto mesh : gridActor->GetComponents<MeshComponent>())
 		{
 			if (fireTrigger->Intersects(mesh->GetBoundsInWorldSpace()))
 			{

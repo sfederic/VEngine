@@ -285,7 +285,7 @@ void DebugMenu::RenderSkeletonViewMenu()
 	auto pickedActor = WorldEditor::GetPickedActor();
 	if (pickedActor)
 	{
-		auto skeletalMeshes = pickedActor->GetComponentsOfType<SkeletalMeshComponent>();
+		auto skeletalMeshes = pickedActor->GetComponents<SkeletalMeshComponent>();
 		for (auto skeletalMesh : skeletalMeshes)
 		{
 			ImGui::Text("Skeleton: %s", skeletalMesh->meshComponentData.filename.c_str());
@@ -313,7 +313,7 @@ void DebugMenu::RenderSkeletalAnimationMenu()
 	auto picked = WorldEditor::GetPickedActor();
 	if (picked)
 	{
-		auto skeletalMeshes = picked->GetComponentsOfType<SkeletalMeshComponent>();
+		auto skeletalMeshes = picked->GetComponents<SkeletalMeshComponent>();
 		for (auto skeletalMesh : skeletalMeshes)
 		{
 			ImGui::Text("SkeletalMesh: %s", skeletalMesh->meshComponentData.filename.c_str());
@@ -485,7 +485,7 @@ void DebugMenu::RenderVertexPaintMenu()
 		auto pickedActor = WorldEditor::GetPickedActor();
 		if (pickedActor != nullptr)
 		{
-			for (auto* mesh : pickedActor->GetComponentsOfType<MeshComponent>())
+			for (auto* mesh : pickedActor->GetComponents<MeshComponent>())
 			{
 				for (auto& vertex : mesh->GetAllVertices())
 				{
@@ -518,7 +518,7 @@ void DebugMenu::RenderUVMenu()
 		VMath::HomogenousWorldPosToScreenSpaceCoords(worldPosition, sx, sy);
 		ImGui::SetWindowPos(ImVec2(sx, sy));
 
-		for (const auto mesh : WorldEditor::GetPickedActor()->GetComponentsOfType<MeshComponent>())
+		for (const auto mesh : WorldEditor::GetPickedActor()->GetComponents<MeshComponent>())
 		{
 			auto& materialShaderData = mesh->GetMaterial().materialShaderData;
 
