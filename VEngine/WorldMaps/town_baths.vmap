@@ -53,6 +53,23 @@ Rotate Yaw
 UID
 1377942649
 next
+DirectionalLightActor
+1
+ Enabled
+1
+ Position
+4 3 3
+ Rotation
+0.967975 0.0283035 -0.214581 0.127196
+ Scale
+1 1 1
+ Visible
+1
+Name
+DirectionalLightActor0
+UID
+1797020972
+next
 Grid
 1
  Enabled
@@ -87,7 +104,7 @@ MeshActor
  Visible
 1
 Name
-node0
+grid_low0
 UID
 953283118
 next
@@ -318,23 +335,6 @@ Player0
 UID
 670146422
 next
-PointLightActor
-1
- Enabled
-1
- Position
-4 1 5
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Name
-PointLightActor0
-UID
-3696783915
-next
 WaterSource
 1
  Enabled
@@ -505,6 +505,27 @@ File
 UID
 2566479882
 next
+DirectionalLightComponent
+1
+1797020972
+DirectionalLight
+ Enabled
+1
+ Pos
+4 3 3
+ Rot
+0.967975 0.0283035 -0.214581 0.127196
+ Scale
+1 1 1
+ Visible
+1
+Colour
+0.8 0.7 0.4 1
+LightEnabled
+1
+UID
+3409427604
+next
 EmptyComponent
 2
 670146422
@@ -587,7 +608,9 @@ M_UvScale
 1 1
 Mesh
 node.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -629,7 +652,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+crate.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -644,8 +667,10 @@ M_UvScale
 1 1
 Mesh
 hollow_barrel.vmesh
-Static
+Physics Static
 1
+Render Static
+0
 Trans. Occlude
 0
 UID
@@ -699,7 +724,9 @@ M_UvScale
 1 1
 Mesh
 node.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -739,7 +766,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/test_floortile_texture.png
 M_Use Texture
 1
 M_UvOffset
@@ -751,10 +778,12 @@ M_UvRotation
 M_UvRotationSpeed
 0
 M_UvScale
-1 1
+8 8
 Mesh
-node.vmesh
-Static
+grid_low.vmesh
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -794,7 +823,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Walls/wall06.png
 M_Use Texture
 1
 M_UvOffset
@@ -809,7 +838,9 @@ M_UvScale
 1 1
 Mesh
 pillar2.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -849,7 +880,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Walls/wall06.png
 M_Use Texture
 1
 M_UvOffset
@@ -864,7 +895,9 @@ M_UvScale
 1 1
 Mesh
 pillar2.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -904,7 +937,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Walls/wall06.png
 M_Use Texture
 1
 M_UvOffset
@@ -919,7 +952,9 @@ M_UvScale
 1 1
 Mesh
 pillar2.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -959,7 +994,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Walls/wall06.png
 M_Use Texture
 1
 M_UvOffset
@@ -974,7 +1009,9 @@ M_UvScale
 1 1
 Mesh
 pillar2.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1014,7 +1051,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/floor.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -1029,7 +1066,9 @@ M_UvScale
 1 1
 Mesh
 step_small.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1069,7 +1108,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/floor.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -1084,7 +1123,9 @@ M_UvScale
 1 1
 Mesh
 step_small.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1124,7 +1165,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/floor.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -1139,7 +1180,9 @@ M_UvScale
 1 1
 Mesh
 step_small.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1179,7 +1222,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/floor.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -1194,7 +1237,9 @@ M_UvScale
 1 1
 Mesh
 step_small.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1234,7 +1279,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/floor.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -1249,7 +1294,9 @@ M_UvScale
 1 1
 Mesh
 step_small.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1289,7 +1336,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/floor.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -1304,7 +1351,9 @@ M_UvScale
 1 1
 Mesh
 step_small.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1344,7 +1393,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/floor.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -1359,7 +1408,9 @@ M_UvScale
 1 1
 Mesh
 step_small.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1399,7 +1450,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/floor.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -1414,7 +1465,9 @@ M_UvScale
 1 1
 Mesh
 step_small.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1454,7 +1507,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/floor.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -1469,7 +1522,9 @@ M_UvScale
 1 1
 Mesh
 step_small.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1509,7 +1564,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/floor.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -1524,7 +1579,9 @@ M_UvScale
 1 1
 Mesh
 step_small.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1579,8 +1636,10 @@ M_UvScale
 1 1
 Mesh
 char.vmesh
-Static
+Physics Static
 1
+Render Static
+0
 Trans. Occlude
 0
 UID
@@ -1634,8 +1693,10 @@ M_UvScale
 1 1
 Mesh
 plane.vmesh
-Static
+Physics Static
 1
+Render Static
+0
 Trans. Occlude
 0
 UID
@@ -1689,34 +1750,13 @@ M_UvScale
 1 1
 Mesh
 node.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
 UID
 773702984
-next
-PointLightComponent
-1
-3696783915
-PointLight
- Enabled
-1
- Pos
-4 1 5
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Colour
-1 1 1 1
-Intensity
-25
-LightEnabled
-1
-UID
-3327530950
 next
 end
