@@ -9,7 +9,7 @@ class DirectionalLightComponent : public SpatialComponent
 public:
 	COMPONENT_SYSTEM(DirectionalLightComponent);
 
-	DirectionalLightComponent() {}
+	DirectionalLightComponent();
 	void Create() override;
 	Properties GetProps() override;
 

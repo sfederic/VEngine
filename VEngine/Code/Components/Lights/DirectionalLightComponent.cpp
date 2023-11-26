@@ -1,6 +1,11 @@
 #include "vpch.h"
 #include "DirectionalLightComponent.h"
 
+DirectionalLightComponent::DirectionalLightComponent()
+{
+	lightData.intensity = 1.0f;
+}
+
 void DirectionalLightComponent::Create()
 {
 	shadowMapOrthoSize = 30.f;
@@ -13,6 +18,7 @@ Properties DirectionalLightComponent::GetProps()
 	auto props = __super::GetProps();
 	props.title = "DirectionalLight";
 	props.Add("Colour", &lightData.colour);
+	props.Add("Intensity", &lightData.intensity);
 	props.Add("LightEnabled", &lightData.enabled);
 	return props;
 }
