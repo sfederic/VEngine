@@ -382,7 +382,13 @@ void AssetSystem::LoadVertexColourDataFromFile()
 		}
 
 		const size_t vertexCount = mesh->meshDataProxy.GetVertices().size();
-		assert(vertexColourData.colours.size() == vertexCount);
+		if (vertexColourData.colours.size() != vertexCount)
+		{
+			Log("Mismatch of vertex colour data size and vertex count for mesh [%u] on Actor [%s].",
+				mesh->GetUID(), mesh->GetOwner()->GetName().c_str());
+			continue;
+		}
+
 		for (int vertexIndex = 0; vertexIndex < vertexCount; vertexIndex++)
 		{
 			mesh->meshDataProxy.vertices.at(vertexIndex).colour = vertexColourData.colours[vertexIndex];
