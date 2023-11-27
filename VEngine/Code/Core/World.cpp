@@ -324,6 +324,7 @@ void World::Cleanup()
 
 	for (auto componentSystem : activeComponentSystems)
 	{
+		componentSystem->DestroyAll();
 		componentSystem->Cleanup();
 	}
 

@@ -16,6 +16,7 @@ public:
 	virtual void Init() = 0;
 	virtual void Tick(float deltaTime) = 0;
 	virtual void Start() = 0;
+	virtual void DestroyAll() = 0;
 	virtual void Cleanup() = 0;
 	virtual void Serialise(Serialiser& s) = 0;
 	virtual void SerialiseBinary(BinarySerialiser& s) = 0;

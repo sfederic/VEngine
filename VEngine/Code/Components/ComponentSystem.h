@@ -190,12 +190,16 @@ public:
 		}
 	}
 
-	virtual void Cleanup() override
+	virtual void DestroyAll() override
 	{
 		for (auto& component : components)
 		{
 			component->Destroy();
 		}
+	}
+
+	virtual void Cleanup() override
+	{
 		components.clear();
 		systemState = SystemStates::Unloaded;
 	}
@@ -234,4 +238,4 @@ private:
 
 #define COMPONENT_SYSTEM(type) \
 inline static ComponentSystem<type> system; \
-virtual void Remove() override { Destroy(); system.Remove(GetIndex()); } \
+virtual void Remove() override { system.Remove(GetIndex()); } \
