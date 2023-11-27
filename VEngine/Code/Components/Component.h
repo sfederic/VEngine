@@ -50,11 +50,9 @@ public:
 	void SetVisibility(bool isVisible) { visible = isVisible; }
 	void ToggleVisibility() { visible = !visible; }
 
-protected:
 	//Cleanup all the innards of the component.
 	virtual void Destroy() {}
 
-public:
 	std::string name;
 
 private:

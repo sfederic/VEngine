@@ -118,7 +118,7 @@ public:
 		}
 	}
 
-	std::vector<std::unique_ptr<T>>& GetActors() 
+	std::vector<std::unique_ptr<T>>& GetActors()
 	{
 		return actors;
 	}
@@ -220,6 +220,10 @@ public:
 
 	virtual void Cleanup() override
 	{
+		for (auto& actor : actors)
+		{
+			actor->Destroy();
+		}
 		actors.clear();
 	}
 

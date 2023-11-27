@@ -192,6 +192,10 @@ public:
 
 	virtual void Cleanup() override
 	{
+		for (auto& component : components)
+		{
+			component->Destroy();
+		}
 		components.clear();
 		systemState = SystemStates::Unloaded;
 	}
