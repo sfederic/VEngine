@@ -33,7 +33,7 @@ void Pickup::Interact()
 	GameInstance::SetHeldPlayerItem(itemName);
 
 	RecalcCurrentNodePosition();
-	Destroy();
+	Remove();
 }
 
 Properties Pickup::GetProps()

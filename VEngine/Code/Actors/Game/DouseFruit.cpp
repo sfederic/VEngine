@@ -39,6 +39,6 @@ void DouseFruit::OnLinkDeactivate()
 	if (!hasBeenDoused)
 	{
 		GameUtils::SpawnSpriteSheet("Sprites/blue_explosion.png", GetPositionV(), false, 5, 5);
-		Destroy();
+		Remove();
 	}
 }

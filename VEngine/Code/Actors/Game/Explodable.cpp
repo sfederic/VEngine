@@ -10,5 +10,5 @@ Properties Explodable::GetProps()
 
 void Explodable::HitByExplosive()
 {
-	Destroy();
+	Remove();
 }

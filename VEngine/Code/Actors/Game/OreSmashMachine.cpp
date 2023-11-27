@@ -26,7 +26,7 @@ void OreSmashMachine::Interact()
 			crystal->CreateAllComponents();
 			crystal->Start();
 
-			ore->Destroy();
+			ore->Remove();
 
 			return;
 		}

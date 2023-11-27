@@ -16,5 +16,5 @@ void HotCoals::Douse()
 	__super::Douse();
 
 	GameUtils::SpawnParticleEmitter("Particle/smoke.png", GetPositionV(), 1.5f);
-	Destroy();
+	Remove();
 }

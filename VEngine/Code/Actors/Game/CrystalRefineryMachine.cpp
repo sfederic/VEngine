@@ -24,7 +24,7 @@ void CrystalRefineryMachine::Interact()
 	{
 		if (materialInputTrigger->Contains(mineable->GetPositionV()))
 		{
-			mineable->Destroy();
+			mineable->Remove();
 
 			Transform transform;
 			transform.position = crystalOutputTrigger->GetWorldPosition();

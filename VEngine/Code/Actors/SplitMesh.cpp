@@ -17,7 +17,7 @@ void SplitMesh::Tick(float deltaTime)
 	destroyTimer += deltaTime;
 	if (destroyTimer > 3.f)
 	{
-		Destroy();
+		Remove();
 	}
 }
 

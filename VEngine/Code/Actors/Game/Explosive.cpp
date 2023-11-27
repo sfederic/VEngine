@@ -31,7 +31,7 @@ void Explosive::Burn()
 
 	//To make sure not hitting null after destroy if player is still linked to Explosive on Destroy
 	Player::system.GetOnlyActor()->ResetLinkedGridActorIfThis(this);
-	Destroy();
+	Remove();
 }
 
 void Explosive::HitNearbyExplodables()

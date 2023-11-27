@@ -173,7 +173,7 @@ void HandleActorPicking()
 					if (pickedActor)
 					{
 						auto pickedActorTransform = pickedActor->GetTransform();
-						pickedActor->Destroy();
+						pickedActor->Remove();
 
 						auto replacementActor = spawnSystem->SpawnActor(pickedActorTransform);
 						replacementActor->Create();
@@ -281,14 +281,14 @@ void DeleteActor()
 					//Destroy all multiple picked actors
 					for (auto actor : pickedActors)
 					{
-						actor->Destroy();
+						actor->Remove();
 					}
 				}
 				else
 				{
 					debugMenu.AddNotification(VString::wformat(
 						L"Destroyed actor [%S]", pickedActor->GetName().c_str()));
-					pickedActor->Destroy();
+					pickedActor->Remove();
 				}
 			}
 

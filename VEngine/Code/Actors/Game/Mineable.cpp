@@ -10,5 +10,5 @@ void Mineable::Create()
 
 void Mineable::Mine()
 {
-	Destroy();
+	Remove();
 }

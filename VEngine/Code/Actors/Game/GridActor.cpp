@@ -211,7 +211,7 @@ void GridActor::InflictDamage(int damage)
 
 		HitResult hit(this);
 		GetCurrentNode()->RecalcNodeHeight(hit);
-		Destroy();
+		Remove();
 	}
 }
 
