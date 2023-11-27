@@ -330,6 +330,7 @@ void World::Cleanup()
 
 	for (auto actorSystem : activeActorSystems)
 	{
+		actorSystem->DestroyAll();
 		actorSystem->Cleanup();
 	}
 
