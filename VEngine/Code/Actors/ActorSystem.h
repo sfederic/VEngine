@@ -220,10 +220,6 @@ public:
 
 	virtual void Cleanup() override
 	{
-		for (auto& actor : actors)
-		{
-			actor->Destroy();
-		}
 		actors.clear();
 	}
 
@@ -242,10 +238,18 @@ public:
 		actorIndexToDeferDestroy.clear();
 	}
 
+	virtual void DestroyAll() override
+	{
+		for (auto& actor : actors)
+		{
+			actor->Destroy();
+		}
+	}
+
 private:
 	std::vector<std::unique_ptr<T>> actors;
 	std::unordered_set<int> actorIndexToDeferDestroy;
 };
 
 #define ACTOR_SYSTEM(type) inline static ActorSystem<type> system; \
-virtual void Destroy() override { system.Remove(GetSystemIndex()); } \
+virtual void Remove() override { Destroy(); system.Remove(GetSystemIndex()); } \
