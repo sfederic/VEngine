@@ -14,6 +14,11 @@ void ParticleEmitter::Create()
 	material->Create();
 }
 
+void ParticleEmitter::Destroy()
+{
+	material->Destroy();
+}
+
 void ParticleEmitter::Start()
 {
 	//Start spawnTimer off with random value so multiples of similar particle systems don't look samey.
