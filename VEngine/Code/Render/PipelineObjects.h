@@ -8,6 +8,8 @@ struct ID3D11SamplerState;
 struct ID3D11BlendState;
 struct ID3D11RasterizerState;
 
+struct MeshDataProxy;
+
 struct Buffer
 {
 	ID3D11Buffer* data = nullptr;
@@ -52,7 +54,14 @@ struct MeshBuffers
 	Buffer vertexBuffer;
 };
 
-struct PipelineStateObject
+class PipelineStateObject
 {
+private:
 	Buffer vertexBuffer;
+
+public:
+	void Create(MeshDataProxy& meshDataProxy);
+	void Destroy();
+
+	Buffer& GetVertexBuffer() { return vertexBuffer; }
 };

@@ -1,5 +1,6 @@
 #include "vpch.h"
 #include "PipelineObjects.h"
+#include "RenderUtils.h"
 
 RastState::RastState(std::string name_, ID3D11RasterizerState* data_)
 {
@@ -39,4 +40,14 @@ BlendState::~BlendState()
 ShaderResourceView::~ShaderResourceView()
 {
 	data->Release();
+}
+
+void PipelineStateObject::Create(MeshDataProxy& meshDataProxy)
+{
+	vertexBuffer.data = RenderUtils::CreateVertexBuffer(meshDataProxy);
+}
+
+void PipelineStateObject::Destroy()
+{
+	vertexBuffer.data->Release();
 }

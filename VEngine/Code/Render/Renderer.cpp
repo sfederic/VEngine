@@ -776,7 +776,7 @@ void RenderShadowPass()
 		context->RSSetState(rastStateMap["shadow"]->data);
 
 		PipelineStateObject& pso = mesh->pso;
-		context->IASetVertexBuffers(0, 1, &pso.vertexBuffer.data, &Renderer::stride, &Renderer::offset);
+		context->IASetVertexBuffers(0, 1, &pso.GetVertexBuffer().data, &Renderer::stride, &Renderer::offset);
 
 		ShaderItem* shader = ShaderItems::ShadowAnimation;
 
@@ -1102,7 +1102,7 @@ void Renderer::RenderLightProbeViews()
 
 				SetShaderResourceFromMaterial(0, material);
 
-				context->IASetVertexBuffers(0, 1, &mesh->pso.vertexBuffer.data, &stride, &offset);
+				context->IASetVertexBuffers(0, 1, &mesh->pso.GetVertexBuffer().data, &stride, &offset);
 
 				cbMaterial->Map(&material.materialShaderData);
 				cbMaterial->SetPS();
@@ -2001,7 +2001,7 @@ void SetRenderPipelineStates(MeshComponent* mesh)
 	context->PSSetSamplers(0, 1, &material.sampler->data);
 	SetShaderResourceFromMaterial(0, material);
 
-	SetVertexBuffer(pso.vertexBuffer);
+	SetVertexBuffer(pso.GetVertexBuffer());
 
 	cbMaterial->Map(&material.materialShaderData);
 	cbMaterial->SetPS();
@@ -2019,7 +2019,7 @@ void SetRenderPipelineStatesForShadows(MeshComponent* mesh)
 	context->VSSetShader(shader->GetVertexShader(), nullptr, 0);
 	context->PSSetShader(shader->GetPixelShader(), nullptr, 0);
 
-	context->IASetVertexBuffers(0, 1, &pso.vertexBuffer.data, &Renderer::stride, &Renderer::offset);
+	context->IASetVertexBuffers(0, 1, &pso.GetVertexBuffer().data, &Renderer::stride, &Renderer::offset);
 }
 
 void SetShaders(ShaderItem* shaderItem)
@@ -2166,7 +2166,7 @@ void RenderWireframeForVertexPaintingAndPickedActor()
 			context->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
 			context->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
 
-			SetVertexBuffer(mesh->pso.vertexBuffer);
+			SetVertexBuffer(mesh->pso.GetVertexBuffer());
 
 			SetMatricesFromMesh(mesh);
 			SetShaderMeshData(mesh);
