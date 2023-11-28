@@ -1,0 +1,360 @@
+Grid
+1
+ Enabled
+1
+ Position
+0 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+Grid0
+Size X
+7
+Size Y
+14
+UID
+1574039554
+next
+MeshActor
+1
+ Enabled
+1
+ Position
+2.5 -0.5 2.5
+ Rotation
+-0 0 -0 1
+ Scale
+3 3 3
+ Visible
+1
+Name
+vagrant_0100
+UID
+1020006060
+next
+Player
+1
+ Enabled
+1
+ Position
+0 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+Player0
+UID
+504219443
+next
+PointLightActor
+2
+ Enabled
+1
+ Position
+3 3 3
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+PointLightActor0
+UID
+4176888479
+next
+ Enabled
+1
+ Position
+3 4 10
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+PointLightActor1
+UID
+3528307980
+next
+CameraComponent
+1
+504219443
+Camera
+ Enabled
+1
+ Pos
+1.75 1.75 -2.75
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+FOV
+60
+Far Z
+1000
+Near Z
+0.01
+UID
+1336326812
+next
+DialogueComponent
+1
+504219443
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+3669964113
+next
+EmptyComponent
+1
+504219443
+Root
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+1090931098
+next
+InstanceMeshComponent
+1
+1574039554
+NodeMesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Instance
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+3824577731
+next
+MeshComponent
+2
+1020006060
+Mesh
+ Enabled
+1
+ Pos
+2.5 -0.5 2.5
+ Rot
+-0 0 -0 1
+ Scale
+3 3 3
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+vagrant_010.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+vagrant_010.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+2052239384
+next
+504219443
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+char.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
+UID
+1591925698
+next
+PointLightComponent
+2
+4176888479
+PointLight
+ Enabled
+1
+ Pos
+3 3 3
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Colour
+1 1 1 1
+Intensity
+50
+LightEnabled
+1
+UID
+522538642
+next
+3528307980
+PointLight
+ Enabled
+1
+ Pos
+3 4 10
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Colour
+1 1 1 1
+Intensity
+50
+LightEnabled
+1
+UID
+1597592267
+next
+end
