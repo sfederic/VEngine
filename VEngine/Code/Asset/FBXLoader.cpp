@@ -587,7 +587,7 @@ void ReadVertexColours(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounte
 
 	if (vertexColour == nullptr)
 	{
-		outColour = XMFLOAT4(1.f, 0.f, 1.f, 1.f);
+		outColour = XMFLOAT4(1.f, 1.f, 1.f, 1.f);
 		return;
 	}
 
