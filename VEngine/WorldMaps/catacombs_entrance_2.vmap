@@ -1,5 +1,5 @@
 CrystalLight
-4
+2
  Enabled
 1
  Position
@@ -29,36 +29,6 @@ Name
 CrystalLight1
 UID
 510356119
-next
- Enabled
-1
- Position
-1 1 12
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Name
-CrystalLight2
-UID
-1394671180
-next
- Enabled
-1
- Position
-5 1 12
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Name
-CrystalLight3
-UID
-856803795
 next
 EntranceTrigger
 2
@@ -161,66 +131,6 @@ next
  Enabled
 1
  Position
-0 2 0
- Rotation
--0.707107 0 -0 0.707107
- Scale
-1 0.999989 0.999989
- Visible
-1
-Name
-pillar11
-UID
-2307279930
-next
- Enabled
-1
- Position
-6 2 0
- Rotation
--0.707107 0 -0 0.707107
- Scale
-1 0.999986 0.999986
- Visible
-1
-Name
-pillar12
-UID
-914723601
-next
- Enabled
-1
- Position
-6 2 12
- Rotation
--0.707107 0 -0 0.707107
- Scale
-1 0.999983 0.999983
- Visible
-1
-Name
-pillar13
-UID
-2329162846
-next
- Enabled
-1
- Position
-0 2 12
- Rotation
--0.707107 0 -0 0.707107
- Scale
-1 0.99998 0.99998
- Visible
-1
-Name
-pillar14
-UID
-3528260421
-next
- Enabled
-1
- Position
 0 2 6
  Rotation
 -0.707107 0 -0 0.707107
@@ -229,24 +139,84 @@ next
  Visible
 1
 Name
-pillar15
+pillar11
 UID
 206686292
 next
  Enabled
 1
  Position
+0 2 11
+ Rotation
+0.707107 0 0 -0.707107
+ Scale
+1 0.99997 0.99997
+ Visible
+1
+Name
+pillar12
+UID
+1200030024
+next
+ Enabled
+1
+ Position
+6 2 11
+ Rotation
+1.54543e-08 0.707107 0.707107 -1.54543e-08
+ Scale
+0.999999 0.999965 0.999965
+ Visible
+1
+Name
+pillar13
+UID
+670827634
+next
+ Enabled
+1
+ Position
 6 2 6
  Rotation
--0.707107 0 -0 0.707107
+1.54543e-08 0.707107 0.707107 -1.54543e-08
  Scale
-1 0.999973 0.999973
+0.999997 0.999963 0.999963
+ Visible
+1
+Name
+pillar14
+UID
+3229350328
+next
+ Enabled
+1
+ Position
+6 2 1
+ Rotation
+1.54543e-08 0.707107 0.707107 -1.54543e-08
+ Scale
+0.999992 0.999959 0.999959
+ Visible
+1
+Name
+pillar15
+UID
+2692748067
+next
+ Enabled
+1
+ Position
+0 2 1
+ Rotation
+0.707107 0 0 -0.707107
+ Scale
+1 0.999975 0.999975
  Visible
 1
 Name
 pillar16
 UID
-1140717219
+2996469079
 next
 Player
 1
@@ -436,7 +406,9 @@ M_UvScale
 1 1
 Mesh
 node.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -444,7 +416,7 @@ UID
 2391233449
 next
 MeshComponent
-12
+10
 1721439695
 Mesh
  Enabled
@@ -493,7 +465,9 @@ M_UvScale
 1 1
 Mesh
 crystal.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -548,507 +522,14 @@ M_UvScale
 1 1
 Mesh
 crystal.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
 UID
 1008697673
-next
-1394671180
-Mesh
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-crystal.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-2550939184
-next
-856803795
-Mesh
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-crystal.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-1615926950
-next
-4209532974
-Mesh
- Enabled
-1
- Pos
-3 -0.5 6
- Rot
--0 0 -0 1
- Scale
-7 1 13
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-node.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-97214298
-next
-2307279930
-Mesh
- Enabled
-1
- Pos
-0 2 0
- Rot
--0.707107 0 -0 0.707107
- Scale
-1 0.999989 0.999989
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-pillar1.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-2835736809
-next
-914723601
-Mesh
- Enabled
-1
- Pos
-6 2 0
- Rot
--0.707107 0 -0 0.707107
- Scale
-1 0.999986 0.999986
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-pillar1.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-1200678322
-next
-2329162846
-Mesh
- Enabled
-1
- Pos
-6 2 12
- Rot
--0.707107 0 -0 0.707107
- Scale
-1 0.999983 0.999983
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-pillar1.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-2947952983
-next
-3528260421
-Mesh
- Enabled
-1
- Pos
-0 2 12
- Rot
--0.707107 0 -0 0.707107
- Scale
-1 0.99998 0.99998
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-pillar1.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-3770931634
-next
-206686292
-Mesh
- Enabled
-1
- Pos
-0 2 6
- Rot
--0.707107 0 -0 0.707107
- Scale
-1 0.999977 0.999977
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-pillar1.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-4282890479
-next
-1140717219
-Mesh
- Enabled
-1
- Pos
-6 2 6
- Rot
--0.707107 0 -0 0.707107
- Scale
-1 0.999973 0.999973
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-pillar1.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-56682269
 next
 3734446500
 Mesh
@@ -1098,15 +579,416 @@ M_UvScale
 1 1
 Mesh
 char.vmesh
-Static
+Physics Static
 1
+Render Static
+0
 Trans. Occlude
 0
 UID
 2915255587
 next
+2996469079
+Mesh
+ Enabled
+1
+ Pos
+0 2 1
+ Rot
+0.707107 0 0 -0.707107
+ Scale
+1 0.999975 0.999975
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+pillar1.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+2266025653
+next
+4209532974
+Mesh
+ Enabled
+1
+ Pos
+3 -0.5 6
+ Rot
+-0 0 -0 1
+ Scale
+7 1 13
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+97214298
+next
+206686292
+Mesh
+ Enabled
+1
+ Pos
+0 2 6
+ Rot
+-0.707107 0 -0 0.707107
+ Scale
+1 0.999977 0.999977
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+pillar1.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+4282890479
+next
+1200030024
+Mesh
+ Enabled
+1
+ Pos
+0 2 11
+ Rot
+0.707107 0 0 -0.707107
+ Scale
+1 0.99997 0.99997
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+pillar1.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+2884129873
+next
+670827634
+Mesh
+ Enabled
+1
+ Pos
+6 2 11
+ Rot
+1.54543e-08 0.707107 0.707107 -1.54543e-08
+ Scale
+0.999999 0.999965 0.999965
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+pillar1.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+3790104535
+next
+3229350328
+Mesh
+ Enabled
+1
+ Pos
+6 2 6
+ Rot
+1.54543e-08 0.707107 0.707107 -1.54543e-08
+ Scale
+0.999997 0.999963 0.999963
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+pillar1.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+3105887955
+next
+2692748067
+Mesh
+ Enabled
+1
+ Pos
+6 2 1
+ Rot
+1.54543e-08 0.707107 0.707107 -1.54543e-08
+ Scale
+0.999992 0.999959 0.999959
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+pillar1.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+759218920
+next
 PointLightComponent
-4
+2
 1721439695
 PointLight
  Enabled
@@ -1122,7 +1004,7 @@ PointLight
 Colour
 0.8 0.8 1 1
 Intensity
-25
+12.879
 LightEnabled
 1
 UID
@@ -1143,56 +1025,14 @@ PointLight
 Colour
 0.8 0.8 1 1
 Intensity
-25
+12.0034
 LightEnabled
 1
 UID
 3310554034
 next
-1394671180
-PointLight
- Enabled
-1
- Pos
-1 1 12
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Colour
-0.8 0.8 1 1
-Intensity
-25
-LightEnabled
-1
-UID
-4108987387
-next
-856803795
-PointLight
- Enabled
-1
- Pos
-5 1 12
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Colour
-0.8 0.8 1 1
-Intensity
-25
-LightEnabled
-1
-UID
-1106824112
-next
 SpriteSheet
-4
+2
 1721439695
 Sprite
  Enabled
@@ -1200,7 +1040,7 @@ Sprite
  Pos
 0 0 0
  Rot
--0.164119 0.739679 0.1949 0.62286
+-0.0354292 0.96399 0.168556 0.202624
  Scale
 0.35 0.35 0.35
  Visible
@@ -1225,7 +1065,7 @@ Sprite
  Pos
 0 0 0
  Rot
--0.109437 0.732438 0.121274 0.660947
+-0.0518287 0.888799 0.103904 0.443344
  Scale
 0.35 0.35 0.35
  Visible
@@ -1242,55 +1082,5 @@ Texture
 Sprites/blue_explosion.png
 UID
 3215089639
-next
-1394671180
-Sprite
- Enabled
-1
- Pos
-0 0 0
- Rot
--0.0622837 0.88022 0.120557 0.454752
- Scale
-0.35 0.35 0.35
- Visible
-1
-Animation Speed
-15
-Loop Animation
-1
-Sheet Columns
-5
-Sheet Rows
-5
-Texture
-Sprites/blue_explosion.png
-UID
-26295484
-next
-856803795
-Sprite
- Enabled
-1
- Pos
-0 0 0
- Rot
--0.0602304 0.924979 0.165425 0.336781
- Scale
-0.35 0.35 0.35
- Visible
-1
-Animation Speed
-15
-Loop Animation
-1
-Sheet Columns
-5
-Sheet Rows
-5
-Texture
-Sprites/blue_explosion.png
-UID
-1281567225
 next
 end
