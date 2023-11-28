@@ -420,9 +420,16 @@ void VertexPainting()
 				auto meshes = hit.hitActor->GetComponents<MeshComponent>();
 				for (auto mesh : meshes)
 				{
-					for (auto& vertIndex : hit.hitVertIndexes)
+					const auto numVerts = mesh->meshDataProxy.vertices.size();
+					auto& vertices = mesh->meshDataProxy.GetVertices();
+
+					for (int vertIndex : hit.hitVertIndexes)
 					{
-						Vertex& v = mesh->meshDataProxy.vertices.at(vertIndex);
+						if (vertIndex >= numVerts)
+						{
+							continue;
+						}
+						Vertex& v = vertices.at(vertIndex);
 						v.colour = WorldEditor::vertexPaintColour;
 					}
 
