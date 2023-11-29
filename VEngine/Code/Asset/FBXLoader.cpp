@@ -332,6 +332,13 @@ void ProcessAllChildNodes(FbxNode* node, MeshData& meshData)
 
 		meshData.vertices.reserve(triangleCount);
 
+		//Blender exporting FBX to right-handed coordinate system means you have to:
+		// - invert the vertex's Z by -1 (-1.0 * vertex.z)
+		// - invert the texture UV u coordinate by (1.0 - uv.v) [can be done in shader too]
+		// - flip the vertex order (from v0, v1, v2 to v0, v2, v1)
+		// Also optional to rotate the model around a bit (apply a -90 rotation on the x-axis, apply the rotation
+		//then rotate 90 deg on the x-axis), I think Unity does this approach internally.
+
 		//Main import loop
 		for (int i = 0; i < triangleCount; i++)
 		{
@@ -346,11 +353,15 @@ void ProcessAllChildNodes(FbxNode* node, MeshData& meshData)
 				auto controlPoint = mesh->GetControlPointAt(index);
 				vert.pos.x = controlPoint.mData[0];
 				vert.pos.y = controlPoint.mData[1];
-				vert.pos.z = controlPoint.mData[2];
+				vert.pos.z = -1.0f * controlPoint.mData[2];
 
 				ReadUVs(mesh, index, polyIndexCounter, vert.uv);
+				vert.uv.y = 1.0f - vert.uv.y;
+
 				ReadVertexColours(mesh, index, polyIndexCounter, vert.colour);
 				ReadNormal(mesh, index, polyIndexCounter, vert.normal);
+
+				vert.normal.z = -1.0f * vert.normal.z;
 
 				//Bone Weights
 				if (boneWeightsMap.find(index) != boneWeightsMap.end())
@@ -374,6 +385,16 @@ void ProcessAllChildNodes(FbxNode* node, MeshData& meshData)
 				meshData.vertices.emplace_back(vert);
 				polyIndexCounter++;
 			}
+		}
+
+		//Flip vertex face order
+		for (int i = 0; i < meshData.vertices.size() / 3; i++)
+		{
+			const int index0 = i * 3;
+			const int index1 = i * 3 + 1;
+			const int index2 = i * 3 + 2;
+
+			std::swap(meshData.vertices[index1], meshData.vertices[index2]);
 		}
 
 		for (int i = 0; i < meshData.vertices.size() / 3; i++)
