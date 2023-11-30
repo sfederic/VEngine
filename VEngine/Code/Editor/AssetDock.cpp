@@ -95,13 +95,16 @@ AssetDock::AssetDock() : QDockWidget("Assets")
 	assetFilterLineEdit->setPlaceholderText("Search Assets...");
 	connect(assetFilterLineEdit, &QLineEdit::textChanged, this, &AssetDock::FilterAssets);
 
-	//Setup Import button
+	//Setup Import buttons
 	importMeshButton = new QPushButton("Import Mesh", this);
-	connect(importMeshButton, &QPushButton::clicked, this, &AssetDock::ImportAsset);
+	connect(importMeshButton, &QPushButton::clicked, this, &AssetDock::ImportMesh);
+	importAnimButton = new QPushButton("Import Anim", this);
+	connect(importAnimButton, &QPushButton::clicked, this, &AssetDock::ImportAnim);
 
 	auto assetToolbarHBox = new QHBoxLayout();
 	assetToolbarHBox->addWidget(assetFilterLineEdit);
 	assetToolbarHBox->addWidget(importMeshButton);
+	assetToolbarHBox->addWidget(importAnimButton);
 
 	auto vLayout = new QVBoxLayout();
 	vLayout->addLayout(assetToolbarHBox);
@@ -468,23 +471,45 @@ void AssetDock::SerialiseMaterialPropsToFile(Material& material)
 	Log("Material [%s] created.", materialFileName.toStdString().c_str());
 }
 
-void AssetDock::ImportAsset()
+void AssetDock::ImportMesh()
 {
 	QFileDialog dialog;
 	dialog.setFileMode(QFileDialog::AnyFile);
 
-	QString filePath = dialog.getOpenFileName(
+	const QString filePath = dialog.getOpenFileName(
 		nullptr,
 		"Import Mesh",
 		QString::fromStdString(AssetBaseFolders::fbxFiles),
 		nullptr,
 		nullptr,
 		QFileDialog::Option::DontUseNativeDialog);
+
 	if (!filePath.isEmpty())
 	{
 		const std::string filename = QFileInfo(filePath).fileName().toStdString();
 		AssetSystem::BuildSingleVMeshFromFBX(filePath.toStdString(), filename);
 		Log("VMesh built from [%s].", filename.c_str());
+	}
+}
+
+void AssetDock::ImportAnim()
+{
+	QFileDialog dialog;
+	dialog.setFileMode(QFileDialog::AnyFile);
+
+	const QString filePath = dialog.getOpenFileName(
+		nullptr,
+		"Import Anim",
+		QString::fromStdString(AssetBaseFolders::animationFBXFiles),
+		nullptr,
+		nullptr,
+		QFileDialog::Option::DontUseNativeDialog);
+
+	if (!filePath.isEmpty())
+	{
+		const std::string filename = QFileInfo(filePath).fileName().toStdString();
+		AssetSystem::BuildSingleVAnimFromFBX(filePath.toStdString(), filename);
+		Log("VAnim built from [%s].", filename.c_str());
 	}
 }
 
