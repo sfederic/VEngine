@@ -184,6 +184,8 @@ Animation FBXLoader::ImportAsAnimation(const std::string filepath, const std::st
 								FbxAnimCurve* animCurve = curveNode->GetCurve(curveIndex);
 								std::string animCurveName = animCurve->GetName();
 
+								std::vector<AnimFrame> animFrames;
+
 								const int keyCount = animCurve->KeyGetCount();
 								for (int keyIndex = 0; keyIndex < keyCount; keyIndex++)
 								{
@@ -213,12 +215,11 @@ Animation FBXLoader::ImportAsAnimation(const std::string filepath, const std::st
 									animFrame.pos.y = pos[1];
 									animFrame.pos.z = pos[2];
 
-									Animation& animation = skeleton.GetAnimation(animationName);
-									if (animation.HasFrames())
-									{
-										animation.GetFrame(currentJointIndex).emplace_back(animFrame);
-									}
+									animFrames.push_back(animFrame);
 								}
+
+								Animation& animation = skeleton.GetAnimation(animationName);
+								animation.AddFrame(currentJointIndex, animFrames);
 							}
 						}
 					}

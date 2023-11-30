@@ -8,16 +8,16 @@
 
 Properties SkeletalMeshComponent::GetProps()
 {
-    auto props = __super::GetProps();
-    props.title = "SkeletonMeshComponent";
-    return props;
+	auto props = __super::GetProps();
+	props.title = "SkeletonMeshComponent";
+	return props;
 }
 
 void SkeletalMeshComponent::Create()
 {
-    MeshComponent::Create();
+	MeshComponent::Create();
 
-	for (auto& animationFilename : animationsToLoadOnCreate) 
+	for (auto& animationFilename : animationsToLoadOnCreate)
 	{
 		LoadAnimation(animationFilename);
 	}
@@ -48,9 +48,9 @@ void SkeletalMeshComponent::ResetAnimationTime()
 
 Animation& SkeletalMeshComponent::GetCurrentAnimation()
 {
-    auto& skeleton = GetSkeleton();
-    auto& animation = skeleton.GetAnimation(currentAnimationName);
-    return animation;
+	auto& skeleton = GetSkeleton();
+	auto& animation = skeleton.GetAnimation(currentAnimationName);
+	return animation;
 }
 
 Animation& SkeletalMeshComponent::GetNextAnimation()
@@ -69,22 +69,22 @@ Animation& SkeletalMeshComponent::GetAnimation(std::string animationName)
 
 std::vector<Animation*> SkeletalMeshComponent::GetAllAnimations()
 {
-    std::vector<Animation*> animations;
-    for (auto& [name, animation] : GetSkeleton().GetAnimations())
-    {
-        animations.push_back(&animation);
-    }
-    return animations;
+	std::vector<Animation*> animations;
+	for (auto& [name, animation] : GetSkeleton().GetAnimations())
+	{
+		animations.push_back(&animation);
+	}
+	return animations;
 }
 
 std::vector<Joint>& SkeletalMeshComponent::GetAllJoints()
 {
-    return GetSkeleton().GetJoints();
+	return GetSkeleton().GetJoints();
 }
 
 bool SkeletalMeshComponent::HasJoints()
 {
-    return GetSkeleton().GetNumJoints();
+	return GetSkeleton().GetNumJoints();
 }
 
 int SkeletalMeshComponent::GetJointIndexByName(const std::string boneName)
@@ -98,8 +98,8 @@ void SkeletalMeshComponent::PlayAnimation(std::string animationName, float speed
 {
 	isAnimationLooping = loop;
 	animationState = AnimationState::Play;
-    currentAnimationName = animationName;
-    currentAnimationSpeed = speed;
+	currentAnimationName = animationName;
+	currentAnimationSpeed = speed;
 }
 
 void SkeletalMeshComponent::StopAnimation()
@@ -133,7 +133,7 @@ void SkeletalMeshComponent::InterpolateCurrentAnimation()
 	int skinningDataIndex = 0;
 	Animation& anim = GetCurrentAnimation();
 
-	if (!anim.HasFrames())
+	if (anim.HasFrames())
 	{
 		shaderSkinningData.isAnimated = true;
 
