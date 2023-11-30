@@ -5,21 +5,18 @@
 
 AnimCube::AnimCube()
 {
-	skeletalMesh = CreateComponent("Skeleton", SkeletalMeshComponent("spin_cubes.vmesh", "test.png"));
+	skeletalMesh = CreateComponent("Skeleton", SkeletalMeshComponent("anim_cube_3.vmesh", "test.png"));
 	rootComponent = skeletalMesh;
-
-	socketMesh = CreateComponent("Socket", SocketMeshComponent(0, "ico_sphere.vmesh", "test.png"));
-	socketMesh->LinkToSkeletalMeshComponent(skeletalMesh);
 }
 
 void AnimCube::PostCreate()
 {
-	skeletalMesh->LoadAnimation("spin_cubes@spin.vanim");
+	skeletalMesh->LoadAnimation("anim_cube_3@move.vanim");
 }
 
 void AnimCube::Start()
 {
-	skeletalMesh->PlayAnimation("spin");
+	skeletalMesh->PlayAnimation("move");
 }
 
 Properties AnimCube::GetProps()

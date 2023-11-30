@@ -18,5 +18,5 @@ public:
 
 private:
 	SkeletalMeshComponent* skeletalMesh = nullptr;
-	SocketMeshComponent* socketMesh = nullptr;
+	//SocketMeshComponent* socketMesh = nullptr;
 };
