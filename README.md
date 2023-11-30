@@ -217,8 +217,14 @@ Though there are heaps of references on Global Illumination, Lightmapping and th
 
 To import skeletal .fbx animations via Blender:
 * Add an Armature and bone structure to a mesh in Blender
+![image](https://github.com/sfederic/VEngine/assets/45758254/44af7544-edcf-46d9-b14b-f09f3a13c5cc)
+* hit Ctrl+P to parent the mesh to the armature and automate the weights
+![image](https://github.com/sfederic/VEngine/assets/45758254/ef04d695-f06e-41f7-bc01-f6e7cc9545c7)
 * Record the poses using the Timeline and Dope Sheet -> Action Editor windows
+![image](https://github.com/sfederic/VEngine/assets/45758254/7a99555a-fdb9-4543-a80f-fd0a3ce49c48)
 * Use the Non-Linear Animation window to organise animations. 'Star' is to select one animation
+* ![image](https://github.com/sfederic/VEngine/assets/45758254/cbc73877-5679-45fa-a98b-e91fbc22105e)
 * Export as an FBX with these settings
+![image](https://github.com/sfederic/VEngine/assets/45758254/e6dc8056-676a-4add-834d-7d7cf79150e8)
 
 Note that a .vmesh file of the mesh is needed without animations baked in, exported as a seperate .vmesh, assigned as the mesh of a SkeletalMeshComponent, where then the exported FBX animations are linked to that SkeletalMeshComponent.
