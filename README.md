@@ -212,3 +212,13 @@ While not a huge component of the engine, the implementations were taken from EA
 The engine uses a very simple GI technique using light probes spread around a level uniformly. Leveraging the DirectXSH spherical harmonics library (good reference for DirectX 11 [https://interplayoflight.wordpress.com/2021/12/31/occlusion-and-directionality-in-image-based-lighting-implementation-details/]), each probe takes a cubemap snapshot of its surroundings an encodes it using spherical harmonics. Actors then just find their closest probe and apply its colours.
 
 Though there are heaps of references on Global Illumination, Lightmapping and the sort, the references for this system are mostly taken from Bluepoint's Shadow of the Colossus [https://gdcvault.com/play/1027011/Advanced-Graphics-Summit-Lifting-the] and Sonic Unleashed [https://www.gdcvault.com/play/1428/Global-Illumination-in-SONIC].
+
+### Skeletal Animation (FBX) with Blender Workflow
+
+To import skeletal .fbx animations via Blender:
+* Add an Armature and bone structure to a mesh in Blender
+* Record the poses using the Timeline and Dope Sheet -> Action Editor windows
+* Use the Non-Linear Animation window to organise animations. 'Star' is to select one animation
+* Export as an FBX with these settings
+
+Note that a .vmesh file of the mesh is needed without animations baked in, exported as a seperate .vmesh, assigned as the mesh of a SkeletalMeshComponent, where then the exported FBX animations are linked to that SkeletalMeshComponent.
