@@ -28,8 +28,12 @@ void SkeletalMeshComponent::Create()
 void SkeletalMeshComponent::LoadAnimation(std::string animationFilename)
 {
 	Skeleton& skel = GetSkeleton();
-	Animation anim = AssetSystem::ReadVAnimAssetFromFile(animationFilename);
-	skel.GetAnimations().emplace(anim.GetName(), anim);
+	std::vector<Animation> animations = AssetSystem::ReadVAnimAssetFromFile(animationFilename);
+	for (auto& anim : animations)
+	{
+		//@Todo: this is not nice. Make a fucking "AddAnimation()"
+		skel.GetAnimations().emplace(anim.GetName(), anim);
+	}
 }
 
 Skeleton& SkeletalMeshComponent::GetSkeleton()

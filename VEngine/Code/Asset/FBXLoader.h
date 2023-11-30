@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <map>
 #include <vector>
 #include "Animation/Animation.h"
 
@@ -20,7 +21,7 @@ namespace FBXLoader
 	//For importing generic fbx assets
 	void ImportAsMesh(std::string filepath, MeshData& meshData);
 
-	Animation ImportAsAnimation(const std::string filepath, const std::string filename);
+	std::map<std::string, Animation> ImportAsAnimation(const std::string filepath, const std::string filename);
 
 	//For importing cell fractured meshes
 	void ImportFracturedMesh(std::string filepath, std::vector<MeshData>& meshDatas);

@@ -20,7 +20,7 @@ public:
 		strcpy_s(name, sizeof(char) * ANIM_NAME_MAX, name_);
 	}
 
-	std::string GetName() { return name; }
+	std::string GetName() const { return name; }
 
 	float GetStartTime(int jointIndex)
 	{

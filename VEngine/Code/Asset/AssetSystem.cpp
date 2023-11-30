@@ -187,7 +187,7 @@ void AssetSystem::BuildSingleVMeshFromFBX(const std::string fbxFilePath, const s
 
 void AssetSystem::BuildSingleVAnimFromFBX(const std::string fbxAnimFilePath, const std::string fbxAnimFilename)
 {
-	Animation animation = FBXLoader::ImportAsAnimation(fbxAnimFilePath, fbxAnimFilename);
+	auto animations = FBXLoader::ImportAsAnimation(fbxAnimFilePath, fbxAnimFilename);
 
 	const std::string baseFBXAnimPath = VString::GetSubStringAtFoundOffset(fbxAnimFilePath, AssetBaseFolders::animationFBXFiles);
 	const std::string vAnimPath = VString::ReplaceFileExtesnion(baseFBXAnimPath, ".vanim");
@@ -199,18 +199,27 @@ void AssetSystem::BuildSingleVAnimFromFBX(const std::string fbxAnimFilePath, con
 	fopen_s(&file, animFilePath.string().c_str(), "wb");
 	assert(file);
 
-	AnimationAssetHeader header;
-	strcpy_s(header.name, sizeof(char) * Animation::ANIM_NAME_MAX, animation.GetName().c_str());
-	header.frameCount = animation.GetFrames().size();
-	assert(fwrite(&header, sizeof(AnimationAssetHeader), 1, file));
-
-	for (auto& [jointIndex, animFrame] : animation.GetFrames())
 	{
-		assert(fwrite(&jointIndex, sizeof(int), 1, file));
+		AnimationAssetHeader header;
+		header.animationCount = animations.size();
+		assert(fwrite(&header, sizeof(AnimationAssetHeader), 1, file));
+	}
 
-		const size_t animFrameCount = animFrame.size();
-		assert(fwrite(&animFrameCount, sizeof(size_t), 1, file));
-		assert(fwrite(animFrame.data(), sizeof(AnimFrame), animFrameCount, file));
+	for (auto& [animName, animation] : animations)
+	{
+		AnimationFrameHeader animFrameHeader = {};
+		strcpy_s(animFrameHeader.name, sizeof(char) * Animation::ANIM_NAME_MAX, animName.c_str());
+		animFrameHeader.frameCount = animation.GetFrames().size();
+		assert(fwrite(&animFrameHeader, sizeof(AnimationFrameHeader), 1, file));
+
+		for (auto& [jointIndex, animFrame] : animation.GetFrames())
+		{
+			assert(fwrite(&jointIndex, sizeof(int), 1, file));
+
+			const size_t animFrameCount = animFrame.size();
+			assert(fwrite(&animFrameCount, sizeof(size_t), 1, file));
+			assert(fwrite(animFrame.data(), sizeof(AnimFrame), animFrameCount, file));
+		}
 	}
 
 	fclose(file);
@@ -260,7 +269,7 @@ MeshDataProxy AssetSystem::ReadVMeshAssetFromFile(const std::string filename)
 	return meshDataProxy;
 }
 
-Animation AssetSystem::ReadVAnimAssetFromFile(const std::string filename)
+std::vector<Animation> AssetSystem::ReadVAnimAssetFromFile(const std::string filename)
 {
 	const std::string filepath = AssetBaseFolders::anim + filename;
 
@@ -268,31 +277,40 @@ Animation AssetSystem::ReadVAnimAssetFromFile(const std::string filename)
 	fopen_s(&file, filepath.c_str(), "rb");
 	assert(file);
 
-	AnimationAssetHeader header;
+	AnimationAssetHeader header = {};
+	assert(fread(&header, sizeof(AnimationAssetHeader), 1, file));
 
-	fread(&header, sizeof(AnimationAssetHeader), 1, file);
+	std::vector<Animation> animations;
 
-	Animation anim = Animation(header.name);
-
-	for (uint64_t i = 0; i < header.frameCount; i++)
+	for (int i = 0; i < header.animationCount; i++)
 	{
-		int jointIndex = Joint::INVALID_JOINT_INDEX;
-		fread(&jointIndex, sizeof(int), 1, file);
-		assert(jointIndex != -2);
+		AnimationFrameHeader animFrameHeader = {};
+		assert(fread(&animFrameHeader, sizeof(AnimationFrameHeader), 1, file));
 
-		size_t animFrameCount = 0;
-		fread(&animFrameCount, sizeof(size_t), 1, file);
+		Animation anim = Animation(animFrameHeader.name);
 
-		std::vector<AnimFrame> animFrames;
-		animFrames.resize(animFrameCount);
-		fread(animFrames.data(), sizeof(AnimFrame) * animFrameCount, 1, file);
+		for (int animFrameIndex = 0; animFrameIndex < animFrameHeader.frameCount; animFrameIndex++)
+		{
+			int jointIndex = Joint::INVALID_JOINT_INDEX;
+			fread(&jointIndex, sizeof(int), 1, file);
+			assert(jointIndex != Joint::INVALID_JOINT_INDEX);
 
-		anim.AddFrame(jointIndex, animFrames);
+			size_t animFrameCount = 0;
+			fread(&animFrameCount, sizeof(size_t), 1, file);
+
+			std::vector<AnimFrame> animFrames;
+			animFrames.resize(animFrameCount);
+			fread(animFrames.data(), sizeof(AnimFrame) * animFrameCount, 1, file);
+
+			anim.AddFrame(jointIndex, animFrames);
+		}
+
+		animations.push_back(anim);
 	}
 
 	fclose(file);
 
-	return anim;
+	return animations;
 }
 
 void AssetSystem::BuildAllGameplayMapFiles()

@@ -78,7 +78,7 @@ void FBXLoader::ImportAsMesh(std::string filepath, MeshData& meshData)
 		&meshData.vertices.at(0).pos, sizeof(Vertex));
 }
 
-Animation FBXLoader::ImportAsAnimation(const std::string filepath, const std::string filename)
+std::map<std::string, Animation> FBXLoader::ImportAsAnimation(const std::string filepath, const std::string filename)
 {
 	assert(std::filesystem::exists(filepath));
 
@@ -113,113 +113,114 @@ Animation FBXLoader::ImportAsAnimation(const std::string filepath, const std::st
 		FbxMesh* mesh = childNode->GetMesh();
 		if (mesh == nullptr) continue;
 
-		FbxAnimStack* animStack = scene->GetSrcObject<FbxAnimStack>();
-		if (animStack)
+		const int animStackCount = scene->GetSrcObjectCount<FbxAnimStack>();
+		for (int animStackIndex = 0; animStackIndex < animStackCount; animStackIndex++)
 		{
-			//Create animation in animation structures
-			//Stole naming convention from Unity. Animation file will have format: <mesh_name>@<animation_name>.fbx
-			animationName = VString::GetSubStringAtFoundOffset(filename, "@");
-			animationName = VString::GetSubStringBeforeFoundOffset(animationName, ".");
-			skeleton.CreateAnimation(animationName);
-		}
-
-		const int deformerCount = mesh->GetDeformerCount(FbxDeformer::eSkin);
-		for (int deformerIndex = 0; deformerIndex < deformerCount; deformerIndex++)
-		{
-			FbxSkin* skin = reinterpret_cast<FbxSkin*>(mesh->GetDeformer(deformerIndex, FbxDeformer::eSkin));
-			if (!skin) continue;
-
-			const int clusterCount = skin->GetClusterCount();
-			for (int clusterIndex = 0; clusterIndex < clusterCount; clusterIndex++)
+			FbxAnimStack* animStack = scene->GetSrcObject<FbxAnimStack>(animStackIndex);
+			if (animStack)
 			{
-				FbxCluster* cluster = skin->GetCluster(clusterIndex);
+				animationName = animStack->GetName();
+				skeleton.CreateAnimation(animationName);
+			}
 
-				//'Link' is the joint
-				std::string currentJointName = cluster->GetLink()->GetName();
-				const int currentJointIndex = skeleton.FindJointIndexByName(currentJointName);
+			const int deformerCount = mesh->GetDeformerCount(FbxDeformer::eSkin);
+			for (int deformerIndex = 0; deformerIndex < deformerCount; deformerIndex++)
+			{
+				FbxSkin* skin = reinterpret_cast<FbxSkin*>(mesh->GetDeformer(deformerIndex, FbxDeformer::eSkin));
+				if (!skin) continue;
 
-				FbxAMatrix clusterMatrix, linkMatrix;
-				cluster->GetTransformMatrix(clusterMatrix);
-				cluster->GetTransformLinkMatrix(linkMatrix);
-
+				const int clusterCount = skin->GetClusterCount();
+				for (int clusterIndex = 0; clusterIndex < clusterCount; clusterIndex++)
 				{
-					//Set inverse bind pose for joint
-					FbxAMatrix bindposeInverseMatrix = linkMatrix.Inverse() * clusterMatrix;
+					FbxCluster* cluster = skin->GetCluster(clusterIndex);
 
-					FbxQuaternion Q = bindposeInverseMatrix.GetQ();
-					FbxVector4 T = bindposeInverseMatrix.GetT();
+					//'Link' is the joint
+					std::string currentJointName = cluster->GetLink()->GetName();
+					const int currentJointIndex = skeleton.FindJointIndexByName(currentJointName);
 
-					XMVECTOR pos = XMVectorSet(T[0], T[1], T[2], 1.0f);
-					XMVECTOR scale = XMVectorSet(1.f, 1.f, 1.f, 0.f);
-					XMVECTOR rot = XMVectorSet(Q[0], Q[1], Q[2], Q[3]);
+					FbxAMatrix clusterMatrix, linkMatrix;
+					cluster->GetTransformMatrix(clusterMatrix);
+					cluster->GetTransformLinkMatrix(linkMatrix);
 
-					XMMATRIX pose = XMMatrixAffineTransformation(scale,
-						XMVectorSet(0.f, 0.f, 0.f, 1.f), rot, pos);
-
-					skeleton.GetJoints()[currentJointIndex].inverseBindPose = pose;
-					skeleton.GetJoints()[currentJointIndex].currentPose = pose;
-				}
-
-				FbxInt nodeFlags = rootNode->GetAllObjectFlags();
-				if (nodeFlags & FbxPropertyFlags::eAnimated)
-				{
-					if (animStack)
 					{
-						FbxAnimLayer* animLayer = animStack->GetMember<FbxAnimLayer>();
-						std::string animLayerName = animLayer->GetName();
+						//Set inverse bind pose for joint
+						FbxAMatrix bindposeInverseMatrix = linkMatrix.Inverse() * clusterMatrix;
 
-						//Link is the joint
-						FbxNode* link = cluster->GetLink();
-						std::string linkName = link->GetName();
+						FbxQuaternion Q = bindposeInverseMatrix.GetQ();
+						FbxVector4 T = bindposeInverseMatrix.GetT();
 
-						//@Todo: Feels like just getting one curve isn't the right thing here,
-						//as it might be null if the skeleton only has translations.
-						//I'm thinking if there are no rotation curves in the fbx, this won't work.
-						FbxAnimCurveNode* curveNode = link->LclRotation.GetCurveNode(animLayer);
-						if (curveNode)
+						XMVECTOR pos = XMVectorSet(T[0], T[1], T[2], 1.0f);
+						XMVECTOR scale = XMVectorSet(1.f, 1.f, 1.f, 0.f);
+						XMVECTOR rot = XMVectorSet(Q[0], Q[1], Q[2], Q[3]);
+
+						XMMATRIX pose = XMMatrixAffineTransformation(scale,
+							XMVectorSet(0.f, 0.f, 0.f, 1.f), rot, pos);
+
+						skeleton.GetJoints()[currentJointIndex].inverseBindPose = pose;
+						skeleton.GetJoints()[currentJointIndex].currentPose = pose;
+					}
+
+					FbxInt nodeFlags = rootNode->GetAllObjectFlags();
+					if (nodeFlags & FbxPropertyFlags::eAnimated)
+					{
+						if (animStack)
 						{
-							const int numCurveNodes = curveNode->GetCurveCount(0);
-							for (int curveIndex = 0; curveIndex < numCurveNodes; curveIndex++)
+							FbxAnimLayer* animLayer = animStack->GetMember<FbxAnimLayer>();
+							std::string animLayerName = animLayer->GetName();
+
+							//Link is the joint
+							FbxNode* link = cluster->GetLink();
+							std::string linkName = link->GetName();
+
+							//@Todo: Feels like just getting one curve isn't the right thing here,
+							//as it might be null if the skeleton only has translations.
+							//I'm thinking if there are no rotation curves in the fbx, this won't work.
+							FbxAnimCurveNode* curveNode = link->LclRotation.GetCurveNode(animLayer);
+							if (curveNode)
 							{
-								FbxAnimCurve* animCurve = curveNode->GetCurve(curveIndex);
-								std::string animCurveName = animCurve->GetName();
-
-								std::vector<AnimFrame> animFrames;
-
-								const int keyCount = animCurve->KeyGetCount();
-								for (int keyIndex = 0; keyIndex < keyCount; keyIndex++)
+								const int numCurveNodes = curveNode->GetCurveCount(0);
+								for (int curveIndex = 0; curveIndex < numCurveNodes; curveIndex++)
 								{
-									//Keys are the keyframes into the animation
-									const double keyTime = animCurve->KeyGet(keyIndex).GetTime().GetSecondDouble();
-									FbxTime time = {};
-									time.SetSecondDouble(keyTime);
+									FbxAnimCurve* animCurve = curveNode->GetCurve(curveIndex);
+									std::string animCurveName = animCurve->GetName();
 
-									const FbxAMatrix globalTransform = animEvaluator->GetNodeGlobalTransform(link, time);
-									const FbxQuaternion rot = globalTransform.GetQ();
-									const FbxVector4 scale = globalTransform.GetS();
-									const FbxVector4 pos = globalTransform.GetT();
+									std::vector<AnimFrame> animFrames;
 
-									AnimFrame animFrame = {};
-									animFrame.time = keyTime;
+									const int keyCount = animCurve->KeyGetCount();
+									for (int keyIndex = 0; keyIndex < keyCount; keyIndex++)
+									{
+										//Keys are the keyframes into the animation
+										const double keyTime = animCurve->KeyGet(keyIndex).GetTime().GetSecondDouble();
+										FbxTime time = {};
+										time.SetSecondDouble(keyTime);
 
-									animFrame.rot.x = rot[0];
-									animFrame.rot.y = rot[1];
-									animFrame.rot.z = rot[2];
-									animFrame.rot.w = rot[3];
+										const FbxAMatrix globalTransform = animEvaluator->GetNodeGlobalTransform(link, time);
+										const FbxQuaternion rot = globalTransform.GetQ();
+										const FbxVector4 scale = globalTransform.GetS();
+										const FbxVector4 pos = globalTransform.GetT();
 
-									animFrame.scale.x = 1.f;
-									animFrame.scale.y = 1.f;
-									animFrame.scale.z = 1.f;
+										AnimFrame animFrame = {};
+										animFrame.time = keyTime;
 
-									animFrame.pos.x = pos[0];
-									animFrame.pos.y = pos[1];
-									animFrame.pos.z = pos[2];
+										animFrame.rot.x = rot[0];
+										animFrame.rot.y = rot[1];
+										animFrame.rot.z = rot[2];
+										animFrame.rot.w = rot[3];
 
-									animFrames.push_back(animFrame);
+										animFrame.scale.x = 1.f;
+										animFrame.scale.y = 1.f;
+										animFrame.scale.z = 1.f;
+
+										animFrame.pos.x = pos[0];
+										animFrame.pos.y = pos[1];
+										animFrame.pos.z = pos[2];
+
+										animFrames.push_back(animFrame);
+									}
+
+									Animation& animation = skeleton.GetAnimation(animationName);
+									animation.AddFrame(currentJointIndex, animFrames);
 								}
-
-								Animation& animation = skeleton.GetAnimation(animationName);
-								animation.AddFrame(currentJointIndex, animFrames);
 							}
 						}
 					}
@@ -228,7 +229,7 @@ Animation FBXLoader::ImportAsAnimation(const std::string filepath, const std::st
 		}
 	}
 
-	return skeleton.GetAnimation(animationName);
+	return skeleton.GetAnimations();
 }
 
 void ProcessAllChildNodes(FbxNode* node, MeshData& meshData)

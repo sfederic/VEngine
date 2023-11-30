@@ -1,5 +1,6 @@
 #pragma once
 
+#include <vector>
 #include "Render/MeshDataProxy.h"
 #include "Animation/Animation.h"
 
@@ -15,7 +16,7 @@ namespace AssetSystem
 	void BuildSingleVAnimFromFBX(const std::string fbxAnimFilePath, const std::string fbxAnimFilename);
 
 	MeshDataProxy ReadVMeshAssetFromFile(const std::string filename);
-	Animation ReadVAnimAssetFromFile(const std::string filename);
+	std::vector<Animation> ReadVAnimAssetFromFile(const std::string filename);
 
 	void BuildAllGameplayMapFiles();
 
