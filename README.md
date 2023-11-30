@@ -215,6 +215,8 @@ Though there are heaps of references on Global Illumination, Lightmapping and th
 
 ### Skeletal Animation (FBX) with Blender Workflow
 
+- I think this is a nice tutorial on the general gist of multiple animations from Blender to Unity https://www.zuluonezero.net/2021/11/16/exporting-multiple-animations-from-blender-to-unity/
+
 To import skeletal .fbx animations via Blender:
 
 * Add an Armature and bone structure to a mesh in Blender
