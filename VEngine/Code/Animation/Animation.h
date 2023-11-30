@@ -8,6 +8,8 @@
 class Animation
 {
 public:
+	static inline const int ANIM_NAME_MAX = 128;
+
 	Animation(const char* name_)
 	{
 		SetName(name_);
@@ -41,8 +43,6 @@ public:
 	float GetFinalTime();
 
 	void Interpolate(float t, Joint& joint, std::vector<Joint>& joints);
-
-	static inline const int ANIM_NAME_MAX = 128;
 
 private:
 	char name[ANIM_NAME_MAX]{};
