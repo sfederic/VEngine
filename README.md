@@ -260,3 +260,69 @@ private:
 	SkeletalMeshComponent* skeletalMesh = nullptr;
 }
 ```
+
+## References and Helpful Links
+
+Below is a collection of the most influential articles, tutorials, talks and concepts for development of the engine over time.
+
+### Game Object Component Models
+
+- https://www.unrealengine.com/en-US/events/unreal-fest-europe-2019/aggregating-ticks-to-manage-scale-in-sea-of-thieves
+- https://www.youtube.com/watch?v=jjEsB611kxs
+
+### Global Illumination 
+
+- https://therealmjp.github.io/posts sg-series-part-1-a-brief-and-incomplete-history-of-baked-lighting-representations/
+- https://therealmjp.github.io/posts/radiosity-dx11-style/
+- https://morgan3d.github.io/articles/2019-04-01-ddgi/overview.html
+- https://www.gdcvault.com/play/1428/Global-Illumination-in-SONIC
+- https://chetanjags.wordpress.com/2015/08/26/image-based-lighting/
+- https://www.flipcode.com/archives/Light_Mapping_Theory_and_Implementation.shtml
+- https://interplayoflight.wordpress.com/2021/12/28/notes-on-occlusion-and-directionality-in-image-based-lighting/
+
+### Navigation
+
+- https://docs.unrealengine.com/udk/Three/NavigationMeshReference.html
+
+### FBX SDK
+
+- https://help.autodesk.com/view/FBX/2020/ENU/
+- https://www.gamedev.net/tutorials/_/technical/graphics-programming-and-theory/how-to-work-with-fbx-sdk-r3582/
+
+### Audio 
+
+- https://gdcvault.com/play/1022061/How-to-Write-an-Audio
+
+### Cameras
+
+- https://gdcvault.com/play/1023146/Math-for-Game-Programmers-Juicing
+- https://asliceofrendering.com/camera/2019/11/30/ArcballCamera/
+
+### Animation 
+
+- https://blog.demofox.org/2012/09/21/anatomy-of-a-skeletal-animation-system-part-1/
+
+### Mesh Slicing
+
+- https://itecnote.com/tecnote/c-algorithm-or-software-for-slicing-a-mesh/
+- https://gdcvault.com/play/1026882/How-to-Dissect-an-Exploding
+- http://simonschreibt.de/gat/metal-gear-rising-slicing/
+
+### Dialog Editor
+
+- https://gdcvault.com/play/1013446/The-Neverwinter-Nights-2-Toolset
+- https://gdcvault.com/play/1025962/Technical-Tools-for-Authoring-Branching
+
+### Editor UI Design
+
+- https://www.youtube.com/watch?v=YhnIW2XY_wU
+
+### Transform Gizmo
+
+- https://maxliani.wordpress.com/2021/06/26/offline-to-realtime-gesture-graphics/
+- https://ourmachinery.com/post/borderland-between-rendering-and-editor-part-1/
+
+### Shadow Mapping 
+
+- https://takinginitiative.wordpress.com/2011/05/15/directx10-tutorial-10-shadow-mapping/
+- https://takinginitiative.wordpress.com/2011/05/25/directx10-tutorial-10-shadow-mapping-part-2/
