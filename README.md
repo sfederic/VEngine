@@ -179,7 +179,7 @@ Attack
 
 VEngine uses DirectX 11 for 3D/2D rendering and DirectWrite + Direct2D for in-game UI.
 
-## FBX Importing
+### FBX Importing
 
 VEngine uses the official FBX SDK to import models and animations. While not very robust, details can be gleamed in https://github.com/sfederic/VEngine/blob/7259295eb490466392d2f999852f023e92c7182a/VEngine/Code/Asset/FBXLoader.cpp
 
