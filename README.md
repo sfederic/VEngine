@@ -179,6 +179,10 @@ Attack
 
 VEngine uses DirectX 11 for 3D/2D rendering and DirectWrite + Direct2D for in-game UI.
 
+## FBX Importing
+
+VEngine uses the official FBX SDK to import models and animations. While not very robust, details can be gleamed in https://github.com/sfederic/VEngine/blob/7259295eb490466392d2f999852f023e92c7182a/VEngine/Code/Asset/FBXLoader.cpp
+
 ### Game UI
 
 For in-game UI, an immediate approach is used. An example in-game widget would be declared like so:
@@ -234,28 +238,23 @@ To import skeletal .fbx animations via Blender:
 
 #### Setup Skeletal mesh in code
 
-Note that a seperate .vmesh file of the mesh is needed without animations baked in, assigned as the mesh of a SkeletalMeshComponent, where then the exported FBX animations are linked to that SkeletalMeshComponent.
+Note that a seperate .vmesh file of the mesh is needed without animations baked in (but with the same bone structure as the animations), assigned as the mesh of a SkeletalMeshComponent, where then the imported FBX animations are linked to.
 
 For example:
 ```cpp
 class AnimCube : public Actor
 {
 public:
-	AnimCubeAnimCube()
-        {
-            skeletalMesh = CreateComponent("Skeleton", SkeletalMeshComponent("anim_cube.vmesh", "testure.jpg"));
-            rootComponent = skeletalMesh;
-        }
+	AnimCube()
+    {
+        skeletalMesh = CreateComponent("Skeleton", SkeletalMeshComponent("anim_cube.vmesh", "texture jpg"));
+        rootComponent = skeletalMesh;
+    }
 
-        void PostCreate() override
-        {
-	    skeletalMesh->LoadAnimation("anim_cube@move.vanim");
-        }
-
-        void Start() override
-        {
-	    skeletalMesh->PlayAnimation("move");
-        }
+    void Start() override
+    {
+        skeletalMesh->PlayAnimation("move");
+    }
 
 private:
 	SkeletalMeshComponent* skeletalMesh = nullptr;
