@@ -1,19 +1,19 @@
-DirectionalLightActor
+AnimCube
 1
  Enabled
 1
  Position
-1 0 0
+0 1 3
  Rotation
-0.231588 -0.283132 -0.1164 0.923393
+-0 0 -0 1
  Scale
-0.999998 0.999998 0.999998
+1 1 1
  Visible
 1
 Name
-DirectionalLightActor0
+AnimCube0
 UID
-1630758363
+1355848846
 next
 Grid
 1
@@ -36,128 +36,22 @@ Size Y
 UID
 1947260760
 next
-MeshActor
-2
+PointLightActor
+1
  Enabled
 1
  Position
-2 -0.5 2
- Rotation
-0 0 0 1
- Scale
-5 1 5
- Visible
-1
-Name
-grid0
-UID
-2300291772
-next
- Enabled
-1
- Position
-2 2 3
+-1 0 1
  Rotation
 -0 0 -0 1
  Scale
-2 2 2
- Visible
-1
-Name
-house071
-UID
-4027941771
-next
-Player
-1
- Enabled
-1
- Position
-0 0 0
- Rotation
-0 0 0 1
- Scale
 1 1 1
  Visible
 1
 Name
-Player0
+PointLightActor0
 UID
-1449106299
-next
-CameraComponent
-1
-1449106299
-Camera
- Enabled
-1
- Pos
-1.75 1.75 -2.75
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-FOV
-60
-Far Z
-1000
-Near Z
-0.01
-UID
-558158746
-next
-DialogueComponent
-1
-1449106299
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-1834952798
-next
-DirectionalLightComponent
-1
-1630758363
-DirectionalLight
- Enabled
-1
- Pos
-1 0 0
- Rot
-0.231588 -0.283132 -0.1164 0.923393
- Scale
-0.999998 0.999998 0.999998
- Visible
-1
-Colour
-1 1 1 1
-LightEnabled
-1
-UID
-3400602343
-next
-EmptyComponent
-1
-1449106299
-Root
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-UID
-808333232
+180474539
 next
 InstanceMeshComponent
 1
@@ -218,130 +112,39 @@ Trans. Occlude
 UID
 3376190792
 next
-MeshComponent
-3
-2300291772
-Mesh
+PointLightComponent
+1
+180474539
+PointLight
  Enabled
 1
  Pos
-2 -0.5 2
- Rot
-0 0 0 1
- Scale
-5 1 5
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-grid.vmesh
-Physics Static
-1
-Render Static
-1
-Trans. Occlude
-0
-UID
-4241752078
-next
-4027941771
-Mesh
- Enabled
-1
- Pos
-2 2 3
+-1 0 1
  Rot
 -0 0 -0 1
  Scale
-2 2 2
+1 1 1
  Visible
 1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
+Colour
 1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-RenderToFront
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-stone.jpg
-M_Use Texture
+Intensity
+25
+LightEnabled
 1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-4 4
-Mesh
-house07.vmesh
-Physics Static
-1
-Render Static
-1
-Trans. Occlude
-0
 UID
-673887097
+3641563316
 next
-1449106299
-Mesh
+SkeletalMeshComponent
+1
+1355848846
+Skeleton
  Enabled
 1
  Pos
-0 0 0
+0 1 3
  Rot
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -381,14 +184,14 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-char.vmesh
+anim_cube_3.vmesh
 Physics Static
 1
 Render Static
-0
+1
 Trans. Occlude
 0
 UID
-3366481219
+868374561
 next
 end

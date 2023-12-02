@@ -5,18 +5,19 @@
 
 AnimCube::AnimCube()
 {
-	skeletalMesh = CreateComponent("Skeleton", SkeletalMeshComponent("anim_cube_3.vmesh", "test.png"));
+	skeletalMesh = CreateComponent<SkeletalMeshComponent>("Skeleton");
 	rootComponent = skeletalMesh;
+}
+
+void AnimCube::Create()
+{
+	skeletalMesh->SetMeshFilename("cube_left_right.vmesh");
+	skeletalMesh->SetTexture("test.png");
 }
 
 void AnimCube::PostCreate()
 {
-	skeletalMesh->LoadAnimation("anim_cube_3@move.vanim");
-}
-
-void AnimCube::Start()
-{
-	skeletalMesh->PlayAnimation("move");
+	skeletalMesh->LoadAnimations("cube_left_right.vanim");
 }
 
 Properties AnimCube::GetProps()
