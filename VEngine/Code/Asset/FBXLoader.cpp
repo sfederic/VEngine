@@ -119,6 +119,13 @@ std::map<std::string, Animation> FBXLoader::ImportAsAnimation(const std::string 
 			FbxAnimStack* animStack = scene->GetSrcObject<FbxAnimStack>(animStackIndex);
 			if (animStack)
 			{
+				//SUPER IMPORTANT to set the current FbxAnimStack. Otherwise, the SDK just grabs the first global
+				//animation in the file and works the Deformers, Clusters Links and Curves from that.
+				//Was hard to find this. Not much information on it, didn't see it in the official samples.
+				//https://www.reddit.com/r/gamedev/comments/tmery7/fbx_sdk_evaluatelocaltransform/
+				//https://blender.stackexchange.com/questions/142783/can-i-export-multiple-objects-with-individual-animations-to-fbx
+				scene->SetCurrentAnimationStack(animStack);
+
 				animationName = animStack->GetName();
 				skeleton.CreateAnimation(animationName);
 			}
