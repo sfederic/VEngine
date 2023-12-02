@@ -19,13 +19,13 @@ void SkeletalMeshComponent::Create()
 
 	for (auto& animationFilename : animationsToLoadOnCreate)
 	{
-		LoadAnimation(animationFilename);
+		LoadAnimations(animationFilename);
 	}
 
 	animationsToLoadOnCreate.clear();
 }
 
-void SkeletalMeshComponent::LoadAnimation(std::string animationFilename)
+void SkeletalMeshComponent::LoadAnimations(std::string animationFilename)
 {
 	Skeleton& skel = GetSkeleton();
 	std::vector<Animation> animations = AssetSystem::ReadVAnimAssetFromFile(animationFilename);
@@ -185,7 +185,7 @@ void SkeletalMeshComponent::CrossFadeNextAnimation()
 		blendFactor = 0.f;
 		currentAnimationName = nextAnimationName;
 		nextAnimationName.clear();
-		Log("Cross fade for %s animation skipped for being the same Animation", name1);
+		Log("Cross fade for %s animation skipped for being the same Animation", name1.c_str());
 		return;
 	}
 

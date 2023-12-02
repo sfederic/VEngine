@@ -35,7 +35,7 @@ public:
 
 	Skeleton& GetSkeleton();
 
-	void LoadAnimation(std::string animationFilename);
+	void LoadAnimations(std::string animationFilename);
 	float GetCurrentAnimationTime() { return currentAnimationTime; }
 	void ResetAnimationTime();
 	void IncrementAnimationTime(float increment) { currentAnimationTime += increment * currentAnimationSpeed; }
