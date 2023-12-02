@@ -341,6 +341,10 @@ void DebugMenu::RenderSkeletalAnimationMenu()
 						skeletalMesh->PlayAnimation(animationName, animationSpeed);
 						skeletalMesh->ResetAnimationTime();
 					}
+					if (ImGui::Button(std::string(animationName + " CrossFade").c_str()))
+					{
+						skeletalMesh->SetCrossFade(animationName);
+					}
 				}
 			}
 		}
