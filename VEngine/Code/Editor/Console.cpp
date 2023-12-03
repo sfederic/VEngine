@@ -208,19 +208,16 @@ void Console::Init()
 
 void Console::ConsoleInput()
 {
-	if (Input::GetAnyKeyUp())
+	if (Input::GetKeyDown(Keys::BackSpace) && !consoleString.empty())
 	{
-		if (Input::GetKeyUp(Keys::BackSpace) && !consoleString.empty())
+		consoleString.pop_back();
+	}
+	else
+	{
+		auto keys = Input::GetAllDownKeys();
+		for (auto key : keys)
 		{
-			consoleString.pop_back();
-		}
-		else
-		{
-			std::set<Keys> upKeys = Input::GetAllUpKeys();
-			for (Keys key : upKeys)
-			{
-				consoleString.push_back((int)key);
-			}
+			consoleString.push_back((int)key);
 		}
 	}
 }
@@ -243,7 +240,7 @@ void Console::Tick()
 
 void Console::InputTick()
 {
-	if (Input::GetKeyUp(Keys::Tilde)) //~ key, like doom and unreal
+	if (Input::GetKeyDown(Keys::Tilde)) //~ key, like doom and unreal
 	{
 		bConsoleActive = !bConsoleActive;
 		consoleString.clear();
@@ -252,7 +249,7 @@ void Console::InputTick()
 
 	if (bConsoleActive)
 	{
-		if (Input::GetKeyUp(Keys::Enter))
+		if (Input::GetKeyDown(Keys::Enter))
 		{
 			ExecuteString();
 			bConsoleActive = false;
