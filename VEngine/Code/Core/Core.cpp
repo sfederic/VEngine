@@ -186,6 +186,10 @@ void Core::SetGameplayState()
 
 void Core::HandleWin32MessagePump(UINT message, WPARAM wparam, LPARAM lparam)
 {
+	//@Todo: Win32 handles too many WM_KEYUPs and WM_KEYDOWNs. Qt is fine, but Win32Editor struggles with input.
+	//Not really sure what to do here. Maybe leverage DirectX Toolkits input and make the Editor class handle it
+	//in a virtual call?
+
 	switch (message)
 	{
 	case WM_DESTROY:
