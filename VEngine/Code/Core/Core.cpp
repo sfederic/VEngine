@@ -237,18 +237,31 @@ void Core::HandleWin32MessagePump(UINT message, WPARAM wparam, LPARAM lparam)
 		break;
 
 	case WM_SIZE:
-		switch (wparam)
-		{
-		case SIZE_MINIMIZED: //swapchain resize messes up if minimised (width & height = 0)
-			return;
-		}
-
 		//@Todo: if you ever want a low poly look, just divide the width and height here.
 		//Note that it messes with in-game widget layouts. Might come back here and make a main menu
 		//setting that changes it to that jagged PS1 look.
 		UINT resizedWidth = LOWORD(lparam);
 		UINT resizedHeight = HIWORD(lparam);
+
+		//Minimizing the window for some reason when using Qt returns the wrong resize sizes. With Win32 it works
+		//fine, but using the previous width and height here regardless doesn't hurt.
+		static UINT previousWidth = 0;
+		static UINT previousHeight = 0;
+
+		switch (wparam)
+		{
+		case SIZE_MINIMIZED: //swapchain resize messes up if minimised (width & height = 0)
+			return;
+		case SIZE_MAXIMIZED:
+			resizedWidth = previousWidth;
+			resizedHeight = previousHeight;
+			break;
+		}
+
 		Renderer::ResizeSwapchain(resizedWidth, resizedHeight);
+
+		previousWidth = resizedWidth;
+		previousHeight = resizedHeight;
 
 		break;
 	}
