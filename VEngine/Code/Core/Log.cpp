@@ -20,6 +20,8 @@ void Log(std::string logMessage, ...)
 	std::ofstream os;
 	os.open("Log.txt", std::ios_base::app);
 	os << std::chrono::system_clock::now() << " | " << msg << std::endl;
+
+	OutputDebugString(logMessage.c_str());
 }
 
 void Log(std::wstring logMessage, ...)
