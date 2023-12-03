@@ -20,13 +20,11 @@ void Win32Editor::Tick()
 {
 	SetMousePos();
 
-	if (ImGui_ImplWin32_WndProcHandler(msg.hwnd, msg.message, msg.wParam, msg.lParam))
-	{
-		return;
-	}
 
 	HandleMessages();
 	Core::HandleWin32MessagePump(msg.message, msg.wParam, msg.lParam);
+
+	ImGui_ImplWin32_WndProcHandler(msg.hwnd, msg.message, msg.wParam, msg.lParam);
 }
 
 void Win32Editor::SetMousePos()
