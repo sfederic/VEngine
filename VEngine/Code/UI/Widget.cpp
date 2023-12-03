@@ -99,9 +99,12 @@ bool Widget::Button(const std::wstring text, Layout layout, float lineWidth,
 	UISystem::FillRect(layout, Colours::Grey);
 	Text(text, layout.rect, textAlign, textColor, textOpacity);
 
-	if (editor->viewportMouseX > layout.rect.left && editor->viewportMouseX < layout.rect.right)
+	const int viewportMouseX = editor->GetViewportMouseX();
+	const int viewportMouseY = editor->GetViewportMouseY();
+
+	if (viewportMouseX > layout.rect.left && viewportMouseX < layout.rect.right)
 	{
-		if (editor->viewportMouseY > layout.rect.top && editor->viewportMouseY < layout.rect.bottom)
+		if (viewportMouseY > layout.rect.top && viewportMouseY < layout.rect.bottom)
 		{
 			//Hover animation/image
 			UISystem::DrawRect(layout, Colours::Black, 2.0f);
@@ -150,9 +153,12 @@ bool Widget::ImageButton(std::string_view filename, Layout layout)
 
 	SpriteSystem::CreateScreenSprite(sprite);
 
-	if (editor->viewportMouseX > layout.rect.left && editor->viewportMouseX < layout.rect.right)
+	const int viewportMouseX = editor->GetViewportMouseX();
+	const int viewportMouseY = editor->GetViewportMouseY();
+
+	if (viewportMouseX > layout.rect.left && viewportMouseX < layout.rect.right)
 	{
-		if (editor->viewportMouseY > layout.rect.top && editor->viewportMouseY < layout.rect.bottom)
+		if (viewportMouseY > layout.rect.top && viewportMouseY < layout.rect.bottom)
 		{
 			//Hover animation/image
 			UISystem::DrawRect(layout, Colours::Black, 2.f);

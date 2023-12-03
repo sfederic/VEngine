@@ -1,14 +1,14 @@
 #pragma once
+
 #include <string>
 
 class Actor;
 class IActorSystem;
 
 //Base class for Toolkit and Native editors
-struct IEditor
+class IEditor
 {
-	void* windowHwnd = nullptr;
-
+private:
 	int viewportMouseX = 0;
 	int viewportMouseY = 0;
 
@@ -17,6 +17,36 @@ struct IEditor
 
 	int centerOffsetX = 0;
 	int centerOffsetY = 0;
+
+public:
+	void* windowHwnd = nullptr;
+
+	int GetViewportMouseX() const { return viewportMouseX; }
+	int GetViewportMouseY() const { return viewportMouseY; }
+
+	void SetCenterOffsetPositions(int offsetX, int offsetY)
+	{
+		centerOffsetX = offsetX;
+		centerOffsetY = offsetY;
+	}
+
+	void SetViewportMousePositions(int mouseX, int mouseY)
+	{
+		viewportMouseX = mouseX;
+		viewportMouseY = mouseY;
+	}
+
+	int GetCenterOffsetX() const { return centerOffsetX; }
+	int GetCenterOffsetY() const { return centerOffsetY; }
+
+	void SetViewportDimensions(int width, int height)
+	{
+		viewportWidth = width;
+		viewportHeight = height;
+	}
+
+	int GetViewportWidth() const { return viewportWidth; }
+	int GetViewportHeight() const { return viewportHeight; }
 
 	virtual void Init(int argc, char* argv[]) = 0;
 	virtual void Tick() = 0;

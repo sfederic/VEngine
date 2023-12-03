@@ -13,7 +13,7 @@ void EditorCamera::Tick(float deltaTime)
 	XMVECTOR up = GetUpVectorV();
 	XMVECTOR forward = GetForwardVectorV();
 
-	MouseMove(editor->viewportMouseX, editor->viewportMouseY);
+	MouseMove(editor->GetViewportMouseX(), editor->GetViewportMouseY());
 
 	//WASD MOVEMENT
 	if (!Console::bConsoleActive)

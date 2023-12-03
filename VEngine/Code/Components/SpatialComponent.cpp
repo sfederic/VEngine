@@ -294,7 +294,7 @@ void SpatialComponent::SetWorldRotation(XMVECTOR newRotation)
 
 void SpatialComponent::AddLocalRotation(XMVECTOR vector, float angle)
 {
-	auto newRotation = 
+	auto newRotation =
 		XMQuaternionMultiply(GetLocalRotationV(),
 			DirectX::XMQuaternionRotationAxis(vector, XMConvertToRadians(angle)));
 	SetLocalRotation(newRotation);
@@ -347,8 +347,8 @@ void SpatialComponent::RotateY(float angle)
 
 void SpatialComponent::FPSCameraRotation()
 {
-	const int x = editor->centerOffsetX;
-	const int y = editor->centerOffsetY;
+	const int x = editor->GetCenterOffsetX();
+	const int y = editor->GetCenterOffsetX();
 
 	const float dx = -XMConvertToRadians(0.25f * (float)x);
 	const float dy = -XMConvertToRadians(0.25f * (float)y);

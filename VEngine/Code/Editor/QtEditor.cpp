@@ -21,206 +21,205 @@
 
 void QtEditor::Init(int argc, char* argv[])
 {
-    app = new QApplication(argc, argv); //Init order matters here. Qt wants a QApp before a QMainWindow/QWidget
-    mainWindow = new EditorMainWindow();
-    windowHwnd = (void*)mainWindow->renderView->winId();
+	app = new QApplication(argc, argv); //Init order matters here. Qt wants a QApp before a QMainWindow/QWidget
+	mainWindow = new EditorMainWindow();
+	windowHwnd = (void*)mainWindow->renderView->winId();
 
-    app->setWindowIcon(QIcon("Icons/engine_icon.png"));
+	app->setWindowIcon(QIcon("Icons/engine_icon.png"));
 
-    viewportWidth = mainWindow->renderView->size().width();
-    viewportHeight = mainWindow->renderView->size().height();
+	SetViewportDimensions(mainWindow->renderView->size().width(),
+		mainWindow->renderView->size().height());
 
-    SetEditorFont();
-    EnableDarkMode();
+	SetEditorFont();
+	EnableDarkMode();
 }
 
 void QtEditor::Tick()
 {
-    mainWindow->Tick();
+	mainWindow->Tick();
 
-    app->processEvents();
+	app->processEvents();
 
-    //if (Core::gameplayOn && !UISystem::GetWidgetControlActive())
-    //{
-    //    SetMousePosFPSGameplay();
-    //}
-    //else
-    {
-        SetMousePos();
-    }
+	//if (Core::gameplayOn && !UISystem::GetWidgetControlActive())
+	//{
+	//    SetMousePosFPSGameplay();
+	//}
+	//else
+	{
+		SetMousePos();
+	}
 
-    //update property dock values if game is running
-    if (Core::gameplayOn)
-    {
-        mainWindow->propertiesDock->ResetPropertyWidgetValues();
-    }
+	//update property dock values if game is running
+	if (Core::gameplayOn)
+	{
+		mainWindow->propertiesDock->ResetPropertyWidgetValues();
+	}
 
-    if (Input::GetKeyUp(Keys::F11))
-    {
-        mainWindow->HideAllDocks();
-    }
+	if (Input::GetKeyUp(Keys::F11))
+	{
+		mainWindow->HideAllDocks();
+	}
 }
 
 void QtEditor::SetMousePos()
 {
-    QPoint mousePos = mainWindow->renderView->mapFromGlobal(QCursor::pos());
-    viewportMouseX = mousePos.x();
-    viewportMouseY = mousePos.y();
+	const QPoint mousePos = mainWindow->renderView->mapFromGlobal(QCursor::pos());
+	SetViewportMousePositions(mousePos.x(), mousePos.y());
 }
 
 //For first person camera controls during gameplay
 void QtEditor::SetMousePosFPSGameplay()
 {
-    viewportWidth = mainWindow->renderView->size().width();
-    viewportHeight = mainWindow->renderView->size().height();
+	SetViewportDimensions(mainWindow->renderView->size().width(),
+		mainWindow->renderView->size().height());
 
-    QPoint mousePos = mainWindow->renderView->mapFromGlobal(QCursor::pos());
-    viewportMouseX = mousePos.x();
-    viewportMouseY = mousePos.y();
+	const QPoint mousePos = mainWindow->renderView->mapFromGlobal(QCursor::pos());
+	SetViewportMousePositions(mousePos.x(), mousePos.y());
 
-    centerOffsetX = (viewportWidth / 2) - viewportMouseX;
-    centerOffsetY = (viewportHeight / 2) - viewportMouseY;
+	const int centerOffsetX = (GetViewportWidth() / 2) - GetViewportMouseX();
+	const int centerOffsetY = (GetViewportWidth() / 2) - GetViewportMouseY();
+	SetCenterOffsetPositions(centerOffsetX, centerOffsetY);
 
-    QPoint glob = mainWindow->renderView->mapToGlobal(QPoint(viewportWidth / 2, viewportHeight / 2));
-    QCursor::setPos(glob);
+	const QPoint glob = mainWindow->renderView->mapToGlobal(QPoint(GetViewportWidth() / 2, GetViewportHeight() / 2));
+	QCursor::setPos(glob);
 }
 
 void QtEditor::Log(const std::wstring logMessage)
 {
-    mainWindow->logDock->Print(logMessage);
+	mainWindow->logDock->Print(logMessage);
 }
 
 void QtEditor::Log(const std::string logMessage)
 {
-    mainWindow->logDock->Print(logMessage);
+	mainWindow->logDock->Print(logMessage);
 }
 
 void QtEditor::SetActorProps(Actor* actor)
 {
-    mainWindow->propertiesDock->DisplayActorProperties(actor);
+	mainWindow->propertiesDock->DisplayActorProperties(actor);
 }
 
 void QtEditor::UpdateWorldList()
 {
-    mainWindow->worldDock->PopulateWorldActorList();
+	mainWindow->worldDock->PopulateWorldActorList();
 }
 
 void QtEditor::UpdateSystemsList()
 {
-    mainWindow->systemDock->PopulateSystemLists();
+	mainWindow->systemDock->PopulateSystemLists();
 }
 
 void QtEditor::AddActorToWorldList(Actor* actor)
 {
-    mainWindow->worldDock->AddActorToList(actor);
+	mainWindow->worldDock->AddActorToList(actor);
 }
 
 void QtEditor::RemoveActorFromWorldList()
 {
-    mainWindow->worldDock->RemoveActorFromList();
+	mainWindow->worldDock->RemoveActorFromList();
 }
 
 void QtEditor::RefreshAssetList()
 {
-    mainWindow->assetDock->AssetFolderClicked();
+	mainWindow->assetDock->AssetFolderClicked();
 }
 
 void QtEditor::ClearProperties()
 {
-    mainWindow->propertiesDock->Clear();
+	mainWindow->propertiesDock->Clear();
 }
 
 void QtEditor::ResetPropertyWidgetValues()
 {
-    mainWindow->propertiesDock->ResetPropertyWidgetValues();
+	mainWindow->propertiesDock->ResetPropertyWidgetValues();
 }
 
 void QtEditor::SetEditorFont()
 {
-    //Capcom have a cool talk on UI design and fonts for RE Engine
-    //REF:https://www.youtube.com/watch?v=YhnIW2XY_wU
-    QFont font;
-    font.setStyleHint(QFont::SansSerif);
-    font.setPixelSize(16);
-    app->setFont(font);
+	//Capcom have a cool talk on UI design and fonts for RE Engine
+	//REF:https://www.youtube.com/watch?v=YhnIW2XY_wU
+	QFont font;
+	font.setStyleHint(QFont::SansSerif);
+	font.setPixelSize(16);
+	app->setFont(font);
 }
 
 void QtEditor::EnableDarkMode()
 {
-    //rgb(77, 77, 77) for nice off grey color
-    //rgb(80, 170, 200) - RE Engine UI blue
-    
-    //Stole all the scrollbar stuff from https://stackoverflow.com/questions/54595957/how-to-set-a-stylesheet-for-the-qscrollbar-in-a-qscrollarea
-    app->setStyleSheet(
-        "QWidget { background-color: rgb(45, 45, 45); border-color: rgb(11, 11, 11); border-width: 0.0px; border-style: none; } "
+	//rgb(77, 77, 77) for nice off grey color
+	//rgb(80, 170, 200) - RE Engine UI blue
 
-        "QComboBox { border: 2px solid; border-radius: 4px; border-color: rgb(77, 77, 77); height: 30px; } "
-        "QComboBox::hover { border-color: rgb(80, 170, 200); } "
+	//Stole all the scrollbar stuff from https://stackoverflow.com/questions/54595957/how-to-set-a-stylesheet-for-the-qscrollbar-in-a-qscrollarea
+	app->setStyleSheet(
+		"QWidget { background-color: rgb(45, 45, 45); border-color: rgb(11, 11, 11); border-width: 0.0px; border-style: none; } "
 
-        "QDockWidget { background-color: rgb(37, 37, 37); border: 5px solid black; } "
+		"QComboBox { border: 2px solid; border-radius: 4px; border-color: rgb(77, 77, 77); height: 30px; } "
+		"QComboBox::hover { border-color: rgb(80, 170, 200); } "
 
-        "QLineEdit { background-color: rgb(40, 40, 40); border: 2px solid; border-radius: 4px; border-color: rgb(77, 77, 77); height: 25px; } "
-        "QLineEdit::hover { border-color: rgb(80, 170, 200); } "
+		"QDockWidget { background-color: rgb(37, 37, 37); border: 5px solid black; } "
 
-        "QSpinBox { background-color: rgb(40, 40, 40); border: 2px solid; border-radius: 4px; border-color: rgb(77, 77, 77); height: 25px; } "
-        "QSpinBox::hover { border-color: rgb(80, 170, 200); } "
+		"QLineEdit { background-color: rgb(40, 40, 40); border: 2px solid; border-radius: 4px; border-color: rgb(77, 77, 77); height: 25px; } "
+		"QLineEdit::hover { border-color: rgb(80, 170, 200); } "
 
-        "QDoubleSpinBox { background-color: rgb(40, 40, 40); border: 2px solid; border-radius: 4px; border-color: rgb(77, 77, 77); height: 25px; } "
-        "QDoubleSpinBox::hover { border-color: rgb(80, 170, 200); } "
+		"QSpinBox { background-color: rgb(40, 40, 40); border: 2px solid; border-radius: 4px; border-color: rgb(77, 77, 77); height: 25px; } "
+		"QSpinBox::hover { border-color: rgb(80, 170, 200); } "
 
-        "QPushButton { min-height:30px; min-width:50px; background-color: rgb(53, 53, 53); border-radius: 5px; } "
-        "QPushButton:hover { background-color: rgb(80, 80, 80); } "
-        "QPushButton:pressed { background-color: rgb(140, 140, 140); } "
+		"QDoubleSpinBox { background-color: rgb(40, 40, 40); border: 2px solid; border-radius: 4px; border-color: rgb(77, 77, 77); height: 25px; } "
+		"QDoubleSpinBox::hover { border-color: rgb(80, 170, 200); } "
 
-        "QHeaderView { color: rgb(210, 210, 210); border: 0px; } "
-        "QHeaderView:section { background-color: rgb(37, 37, 37); } "
+		"QPushButton { min-height:30px; min-width:50px; background-color: rgb(53, 53, 53); border-radius: 5px; } "
+		"QPushButton:hover { background-color: rgb(80, 80, 80); } "
+		"QPushButton:pressed { background-color: rgb(140, 140, 140); } "
 
-        "QTabWidget { border: none; } "
-        "QTabBar::tab { background: rgb(66, 66, 66); } "
+		"QHeaderView { color: rgb(210, 210, 210); border: 0px; } "
+		"QHeaderView:section { background-color: rgb(37, 37, 37); } "
 
-        "QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical { background: none;  border: 0px; } "
-        "QScrollBar:vertical { background-color: #2A2929; width: 15px; margin: 15px 3px 15px 3px; border: 1px transparent #2A2929; border-radius: 4px } "
-        "QScrollBar::handle:vertical { background-color: rgb(11, 11, 11); min-height: 5px; border-radius: 4px; } "
-        "QScrollBar::sub-line:vertical { margin: 3px 0px 3px 0px; height: 10px; border-image: url(:/qss_icons/rc/up_arrow_disabled.png); width: 10px; subcontrol-position: top; subcontrol-origin: margin; } "
-        "QScrollBar::add-line:vertical { margin: 3px 0px 3px 0px; border-image: url(:/qss_icons/rc/down_arrow_disabled.png); height: 10px;width: 10px; subcontrol-position: bottom; subcontrol-origin: margin; } "
+		"QTabWidget { border: none; } "
+		"QTabBar::tab { background: rgb(66, 66, 66); } "
 
-        "QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal { background: none;  border: 0px; } "
-        "QScrollBar:horizontal { height: 15px; margin: 3px 15px 3px 15px; border: 1px transparent #2A2929; border-radius: 4px; } "
-        "QScrollBar::handle:horizontal { background-color: rgb(11, 11, 11); min-width: 5px; border-radius: 4px; } "
-        "QScrollBar::add-line:horizontal{ margin: 0px 3px 0px 3px; border-image: url(:/qss_icons/rc/right_arrow_disabled.png); width: 10px; height: 10px; subcontrol - position: right; subcontrol - origin: margin; } "
-        "QScrollBar::sub-line:horizontal { margin: 0px 3px 0px 3px; border-image: url(:/qss_icons/rc/left_arrow_disabled.png); height: 10px; width: 10px; subcontrol-position: left; subcontrol-origin: margin; } "
+		"QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical { background: none;  border: 0px; } "
+		"QScrollBar:vertical { background-color: #2A2929; width: 15px; margin: 15px 3px 15px 3px; border: 1px transparent #2A2929; border-radius: 4px } "
+		"QScrollBar::handle:vertical { background-color: rgb(11, 11, 11); min-height: 5px; border-radius: 4px; } "
+		"QScrollBar::sub-line:vertical { margin: 3px 0px 3px 0px; height: 10px; border-image: url(:/qss_icons/rc/up_arrow_disabled.png); width: 10px; subcontrol-position: top; subcontrol-origin: margin; } "
+		"QScrollBar::add-line:vertical { margin: 3px 0px 3px 0px; border-image: url(:/qss_icons/rc/down_arrow_disabled.png); height: 10px;width: 10px; subcontrol-position: bottom; subcontrol-origin: margin; } "
 
-        "QTreeWidget::item::selected { color : skyblue } " 
-    );
+		"QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal { background: none;  border: 0px; } "
+		"QScrollBar:horizontal { height: 15px; margin: 3px 15px 3px 15px; border: 1px transparent #2A2929; border-radius: 4px; } "
+		"QScrollBar::handle:horizontal { background-color: rgb(11, 11, 11); min-width: 5px; border-radius: 4px; } "
+		"QScrollBar::add-line:horizontal{ margin: 0px 3px 0px 3px; border-image: url(:/qss_icons/rc/right_arrow_disabled.png); width: 10px; height: 10px; subcontrol - position: right; subcontrol - origin: margin; } "
+		"QScrollBar::sub-line:horizontal { margin: 0px 3px 0px 3px; border-image: url(:/qss_icons/rc/left_arrow_disabled.png); height: 10px; width: 10px; subcontrol-position: left; subcontrol-origin: margin; } "
 
-    //Set global font to  off white
-    QPalette p = app->palette();
-    QColor fontColour = QColor::fromRgb(215, 215, 215);
-    p.setColor(QPalette::Text, fontColour);
-    p.setColor(QPalette::WindowText, fontColour);
-    p.setColor(QPalette::ButtonText, fontColour);
-    p.setColor(QPalette::BrightText, fontColour);
-    app->setPalette(p);
+		"QTreeWidget::item::selected { color : skyblue } "
+	);
+
+	//Set global font to  off white
+	QPalette p = app->palette();
+	QColor fontColour = QColor::fromRgb(215, 215, 215);
+	p.setColor(QPalette::Text, fontColour);
+	p.setColor(QPalette::WindowText, fontColour);
+	p.setColor(QPalette::ButtonText, fontColour);
+	p.setColor(QPalette::BrightText, fontColour);
+	app->setPalette(p);
 }
 
 void QtEditor::SelectActorInWorldList()
 {
-    mainWindow->worldDock->SelectActorInList();
+	mainWindow->worldDock->SelectActorInList();
 }
 
 void QtEditor::SetPlayButtonText()
 {
-    mainWindow->toolbarDock->SetPlayButtonText();
+	mainWindow->toolbarDock->SetPlayButtonText();
 }
 
 void QtEditor::SetEditorTitle(const std::string title)
 {
-    QString world = QString::fromStdString(title);
-    mainWindow->setWindowTitle(editorTitle + world);
+	QString world = QString::fromStdString(title);
+	mainWindow->setWindowTitle(editorTitle + world);
 }
 
 void QtEditor::SetCurrentTransformMode(const std::string transformMode)
 {
-    const int index = mainWindow->toolbarDock->worldLocalTransformSetting->findText(QString::fromStdString(transformMode));
-    mainWindow->toolbarDock->worldLocalTransformSetting->setCurrentIndex(index);
+	const int index = mainWindow->toolbarDock->worldLocalTransformSetting->findText(QString::fromStdString(transformMode));
+	mainWindow->toolbarDock->worldLocalTransformSetting->setCurrentIndex(index);
 }

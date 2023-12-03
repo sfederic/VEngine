@@ -9,8 +9,7 @@ HWND window;
 
 void Win32Editor::Init(int argc, char* argv[])
 {
-	viewportWidth = 1000;
-	viewportHeight = 600;
+	SetViewportDimensions(1000, 600);
 
 	SetupWindow();
 	windowHwnd = (void*)window;
@@ -31,8 +30,7 @@ void Win32Editor::SetMousePos()
 	POINT mousePos;
 	GetCursorPos(&mousePos);
 	ScreenToClient((HWND)windowHwnd, &mousePos);
-	viewportMouseX = mousePos.x;
-	viewportMouseY = mousePos.y;
+	SetViewportMousePositions(mousePos.x, mousePos.y);
 }
 
 void Win32Editor::Log(const std::wstring logMessage)
@@ -73,7 +71,7 @@ void Win32Editor::SetupWindow()
 	wc.hCursor = LoadCursor(0, IDC_CROSS);
 
 	RegisterClass(&wc);
-	window = CreateWindow("Window", "VEngine2.0", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, viewportWidth, viewportHeight, 0, 0, instance, 0);
+	window = CreateWindow("Window", "VEngine2.0", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, GetViewportWidth(), GetViewportHeight(), 0, 0, instance, 0);
 	if (!window)
 	{
 		HR(GetLastError());

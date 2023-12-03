@@ -54,7 +54,7 @@ void Engine::Init(int argc, char* argv[])
 	auto fbxInit = std::async(std::launch::async, []() { FBXLoader::Init(); });
 
 	editor->Init(argc, argv);
-	auto rendererInit = std::async(std::launch::async, []() { Renderer::Init(editor->windowHwnd, editor->viewportWidth, editor->viewportHeight); });
+	auto rendererInit = std::async(std::launch::async, []() { Renderer::Init(editor->windowHwnd, editor->GetViewportWidth(), editor->GetViewportHeight()); });
 
 	rendererInit.wait();
 	MaterialSystem::Init();

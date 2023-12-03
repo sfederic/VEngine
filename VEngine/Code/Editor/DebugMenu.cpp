@@ -699,7 +699,7 @@ void DebugMenu::RenderActorInspectMenu()
 			if (actor)
 			{
 				ImGui::Begin("Actor Inspect");
-				ImGui::SetWindowPos(ImVec2(editor->viewportMouseX, editor->viewportMouseY));
+				ImGui::SetWindowPos(ImVec2(editor->GetViewportMouseX(), editor->GetViewportMouseY()));
 
 				ImGui::Text("Name: %s", actor->GetName().c_str());
 				ImGui::Text("System: %s", actor->GetActorSystem()->GetName().c_str());

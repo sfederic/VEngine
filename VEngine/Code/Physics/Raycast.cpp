@@ -331,8 +331,8 @@ bool RaycastTriangleIntersect(HitResult& hitResult)
 
 bool RaycastFromScreen(HitResult& hitResult)
 {
-	const int sx = editor->viewportMouseX;
-	const int sy = editor->viewportMouseY;
+	const int sx = editor->GetViewportMouseX();
+	const int sy = editor->GetViewportMouseY();
 
 	const XMMATRIX proj = Camera::GetActiveCamera().GetProjectionMatrix();
 
