@@ -20,7 +20,6 @@ void Win32Editor::Tick()
 {
 	SetMousePos();
 
-
 	HandleMessages();
 	Core::HandleWin32MessagePump(msg.message, msg.wParam, msg.lParam);
 

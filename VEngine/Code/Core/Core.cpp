@@ -247,6 +247,9 @@ void Core::HandleWin32MessagePump(UINT message, WPARAM wparam, LPARAM lparam)
 		UINT resizedWidth = LOWORD(lparam);
 		UINT resizedHeight = HIWORD(lparam);
 
+		editor->viewportWidth = resizedWidth;
+		editor->viewportHeight = resizedHeight;
+
 		//Minimizing the window for some reason when using Qt returns the wrong resize sizes. With Win32 it works
 		//fine, but using the previous width and height here regardless doesn't hurt.
 		static UINT previousWidth = 0;
