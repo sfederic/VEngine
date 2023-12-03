@@ -1,20 +1,3 @@
-DirectionalLightActor
-1
- Enabled
-1
- Position
-2 9 -2
- Rotation
-0.34248 0.000162324 5.92546e-05 0.939525
- Scale
-1 1 1
- Visible
-1
-Name
-DirectionalLightActor0
-UID
-4078284418
-next
 Grid
 1
  Enabled
@@ -22,7 +5,7 @@ Grid
  Position
 0 0 0
  Rotation
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -30,37 +13,37 @@ Grid
 Name
 Grid0
 Size X
-7
+10
 Size Y
-14
+10
 UID
-1574039554
+661661050
 next
 MeshActor
 1
  Enabled
 1
  Position
-2.5 -0.5 2.5
+4.5 -0.5 4.5
  Rotation
--0 0 -0 1
+0 0.707279 0 0.706934
  Scale
-3 3 3
+5 5 5
  Visible
 1
 Name
-vagrant_0100
+vgrant_1240
 UID
-1020006060
+1052588470
 next
 Player
 1
  Enabled
 1
  Position
-0 0 0
+4 0 0
  Rotation
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -68,28 +51,11 @@ Player
 Name
 Player0
 UID
-504219443
-next
-PointLightActor
-1
- Enabled
-1
- Position
-3 4 10
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Name
-PointLightActor1
-UID
-3528307980
+1305467215
 next
 CameraComponent
 1
-504219443
+1305467215
 Camera
  Enabled
 1
@@ -108,11 +74,11 @@ Far Z
 Near Z
 0.01
 UID
-1336326812
+3824049163
 next
 DialogueComponent
 1
-504219443
+1305467215
 Dialogue
  Enabled
 1
@@ -121,58 +87,35 @@ Dialogue
 File
 
 UID
-3669964113
-next
-DirectionalLightComponent
-1
-4078284418
-DirectionalLight
- Enabled
-1
- Pos
-2 9 -2
- Rot
-0.34248 0.000162324 5.92546e-05 0.939525
- Scale
-1 1 1
- Visible
-1
-Colour
-1 1 1 1
-Intensity
-10
-LightEnabled
-1
-UID
-2675536964
+2034593711
 next
 EmptyComponent
 1
-504219443
+1305467215
 Root
  Enabled
 1
  Pos
-0 0 0
+4 0 0
  Rot
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
 1
 UID
-1090931098
+1309251884
 next
 InstanceMeshComponent
 1
-1574039554
+661661050
 NodeMesh
  Enabled
 1
  Pos
 0 0 0
  Rot
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -220,20 +163,20 @@ Render Static
 Trans. Occlude
 0
 UID
-3824577731
+1888485763
 next
 MeshComponent
 2
-1020006060
+1052588470
 Mesh
  Enabled
 1
  Pos
-2.5 -0.5 2.5
+4.5 -0.5 4.5
  Rot
--0 0 -0 1
+0 0.707279 0 0.706934
  Scale
-3 3 3
+5 5 5
  Visible
 1
 Casts Shadow
@@ -257,7 +200,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-vagrant_010.png
+vagrant_map.png
 M_Use Texture
 1
 M_UvOffset
@@ -271,7 +214,7 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-vagrant_010.vmesh
+vgrant_124.vmesh
 Physics Static
 1
 Render Static
@@ -279,9 +222,9 @@ Render Static
 Trans. Occlude
 0
 UID
-2052239384
+1547845444
 next
-504219443
+1305467215
 Mesh
  Enabled
 1
@@ -336,29 +279,6 @@ Render Static
 Trans. Occlude
 0
 UID
-1591925698
-next
-PointLightComponent
-1
-3528307980
-PointLight
- Enabled
-1
- Pos
-3 4 10
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Colour
-1 1 1 1
-Intensity
-50
-LightEnabled
-1
-UID
-1597592267
+1387639723
 next
 end
