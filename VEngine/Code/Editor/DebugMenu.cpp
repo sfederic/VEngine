@@ -502,9 +502,25 @@ void DebugMenu::RenderVertexPaintMenu()
 		}
 	}
 
-	if (ImGui::Button("Flood Fill"))
+	if (ImGui::Button("Flood Fill Set"))
 	{
 		SetMeshVertexColours(XMFLOAT4(colour[0], colour[1], colour[2], 1.f));
+	}
+
+	if (ImGui::Button("Flood Fill Multiply"))
+	{
+		for (auto& mesh : MeshComponent::system.GetComponents())
+		{
+			const auto fillColour = XMLoadFloat4(&WorldEditor::vertexPaintColour);
+			for (auto& vertex : mesh->GetAllVertices())
+			{
+				auto colour = XMLoadFloat4(&vertex.colour);
+				colour *= fillColour;
+				XMStoreFloat4(&vertex.colour, colour);
+			}
+
+			mesh->CreateNewVertexBuffer();
+		}
 	}
 
 	if (ImGui::Button("Export VMesh"))
