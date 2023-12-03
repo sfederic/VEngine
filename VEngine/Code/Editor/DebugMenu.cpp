@@ -429,6 +429,11 @@ void DebugMenu::RenderVertexPaintMenu()
 
 	ImGui::Begin("Vertex Paint Menu");
 
+	if (ImGui::Button("Save Vertex Colours"))
+	{
+		AssetSystem::WriteOutAllVertexColourData();
+	}
+
 	float colour[4] = {
 		WorldEditor::vertexPaintColour.x,
 		WorldEditor::vertexPaintColour.y,
@@ -443,10 +448,6 @@ void DebugMenu::RenderVertexPaintMenu()
 	WorldEditor::vertexPaintColour.z = colour[2];
 	WorldEditor::vertexPaintColour.w = colour[3];
 
-	if (ImGui::Button("Save Vertex Colours"))
-	{
-		AssetSystem::WriteOutAllVertexColourData();
-	}
 	if (ImGui::Button("Load Vertex Colours"))
 	{
 		AssetSystem::LoadVertexColourDataFromFile();
