@@ -1,7 +1,7 @@
 #pragma once
 
-#include <DirectXMath.h>
 #include <vector>
+#include <DirectXMath.h>
 #include "CollisionLayers.h"
 
 class Actor;
@@ -70,6 +70,9 @@ struct HitResult
 	//Result is in world space.
 	DirectX::XMVECTOR GetHitPosV() const { return XMLoadFloat3(&hitPos); }
 	DirectX::XMVECTOR GetNormalV() const { return XMLoadFloat3(&hitNormal); }
+
+	//Mainly got this here for vertex colour painting, to be able to switch brush modes and paint entire faces at once.
+	std::vector<int> vertIndexesOfHitTriangleFace;
 
 	std::vector<int> hitVertIndexes;
 };

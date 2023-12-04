@@ -41,6 +41,7 @@ bool WorldEditor::moveActorViaKeyboardInput = false;
 bool WorldEditor::entranceTriggerWorldLoadMode = false;
 
 DirectX::XMFLOAT4 WorldEditor::vertexPaintColour = XMFLOAT4(0.f, 0.f, 0.f, 1.f);
+bool WorldEditor::vertexPaintFaceFillMode = false;
 Actor* WorldEditor::vertexPaintLockActor;
 
 void HandleActorPicking();
@@ -423,7 +424,18 @@ void VertexPainting()
 					const auto numVerts = mesh->meshDataProxy.vertices.size();
 					auto& vertices = mesh->meshDataProxy.GetVertices();
 
-					for (int vertIndex : hit.hitVertIndexes)
+					//Set indicies based on face fill or single vertex
+					std::vector<int> vertIndexes;
+					if (WorldEditor::vertexPaintFaceFillMode)
+					{
+						vertIndexes = hit.vertIndexesOfHitTriangleFace;
+					}
+					else
+					{
+						vertIndexes = hit.hitVertIndexes;
+					}
+
+					for (const int vertIndex : vertIndexes)
 					{
 						if (vertIndex >= numVerts)
 						{

@@ -30,6 +30,9 @@ namespace WorldEditor
 
 	extern DirectX::XMFLOAT4 vertexPaintColour;
 
+	//Determines whether vertex colouring paints to all three verts of a hit face or the closest vert on click.
+	extern bool vertexPaintFaceFillMode;
+
 	//In vertex paint mode, setting this actor in the debug menu will denote that only raycasts
 	//will hit and paint this actor, making it paintable when its occluded by other meshes.
 	extern Actor* vertexPaintLockActor;

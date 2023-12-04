@@ -235,6 +235,10 @@ bool RaycastTriangleIntersect(HitResult& hitResult)
 					indexToVertMap.emplace(index2, v2);
 					tempHitResult.hitVertIndexes.push_back(VMath::GetIndexOfClosestVertexFromTriangleIntersect(indexToVertMap, hitPosition));
 
+					tempHitResult.vertIndexesOfHitTriangleFace.push_back(index0);
+					tempHitResult.vertIndexesOfHitTriangleFace.push_back(index1);
+					tempHitResult.vertIndexesOfHitTriangleFace.push_back(index2);
+
 					//Get hit UV
 					float hitU, hitV;
 					VMath::TriangleXYZToUV(mesh.meshDataProxy.vertices.at(index0),

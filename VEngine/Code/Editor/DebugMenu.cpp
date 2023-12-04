@@ -523,6 +523,13 @@ void DebugMenu::RenderVertexPaintMenu()
 		}
 	}
 
+	if (ImGui::Button("Face Fill Mode"))
+	{
+		WorldEditor::vertexPaintFaceFillMode = !WorldEditor::vertexPaintFaceFillMode;
+	}
+	ImGui::SameLine();
+	ImGui::Text("%d", WorldEditor::vertexPaintFaceFillMode);
+
 	if (ImGui::Button("Export VMesh"))
 	{
 		AssetSystem::CreateVMeshFromInWorldMesh();
