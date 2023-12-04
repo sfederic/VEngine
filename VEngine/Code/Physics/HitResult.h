@@ -68,8 +68,8 @@ struct HitResult
 	void AddAllRenderStaticMeshesToIgnore();
 
 	//Result is in world space.
-	DirectX::XMVECTOR GetHitPosV() { return XMLoadFloat3(&hitPos); }
-	DirectX::XMVECTOR GetNormalV() { return XMLoadFloat3(&hitNormal); }
+	DirectX::XMVECTOR GetHitPosV() const { return XMLoadFloat3(&hitPos); }
+	DirectX::XMVECTOR GetNormalV() const { return XMLoadFloat3(&hitNormal); }
 
 	std::vector<int> hitVertIndexes;
 };
