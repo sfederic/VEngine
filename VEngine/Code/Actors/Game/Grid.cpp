@@ -166,20 +166,24 @@ void Grid::RecalcAllNodes(HitResult& hit)
 			//raycast against the world to set node position
 			if (Raycast(hit, rayOrigin, -VMath::GlobalUpVector(), 40.0f))
 			{
-				//Scale the node down to nothing
-				XMMATRIX scaleMatrix = XMMatrixScaling(0.f, 0.f, 0.f);
-				instanceData.world *= scaleMatrix;
-
 				//Position the node at the raycast's hitpos
 				XMFLOAT3 hitPos = hit.hitPos;
 				hitPos.y += 0.1f;
 				XMVECTOR hitPosVector = XMLoadFloat3(&hitPos);
 				hitPosVector.m128_f32[3] = 1.0f;
 
-				//set the y-pos for the node
+				//Set the y-pos for the node. This is slightly higher so that GridActors are moving to the 
+				//correct positions in world on their next moves as opposed to the node's actual position.
 				node.worldPosition.y = hitPos.y + 0.4f;
 
+				//Make node rotation match the hit normal.
+				instanceData.world = VMath::MakeRotationFromYAxis(hit.GetNormalV());
 				instanceData.world.r[3] = hitPosVector;
+
+				//Scale the node down to nothing so that nodes are 'hidden' on world load
+				instanceData.world.r[0].m128_f32[0] = 0.f;
+				instanceData.world.r[1].m128_f32[1] = 0.f;
+				instanceData.world.r[2].m128_f32[2] = 0.f;
 
 				node.active = true;
 

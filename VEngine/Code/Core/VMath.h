@@ -48,8 +48,11 @@ namespace VMath
 
 	//Builds a matrix to extract a quaternion rotation to return.
 	XMVECTOR LookAtRotation(XMVECTOR lookAtPoint, XMVECTOR currentPosition);
-
 	XMVECTOR AddRotationAngle(XMVECTOR rotationQuat, XMVECTOR axis, float angleDegrees);
+
+	//Mainly for GridNodes to orient themselves into a rotation based on hit normal via Raycast,
+	//giving a nice FFTactics look for the Grid.
+	XMMATRIX MakeRotationFromYAxis(XMVECTOR axis);
 
 	//Rotates on the Y-axis
 	void RotateTowardsCamera(Transform& transform, float zAngle = 0.f);

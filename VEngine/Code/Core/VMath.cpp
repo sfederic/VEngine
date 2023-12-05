@@ -70,6 +70,22 @@ namespace VMath
 		return selectedDirection;
 	}
 
+	//Read over over from Unreal (UKismetMathLibrary::MakeRotFromZ)
+	XMMATRIX MakeRotationFromYAxis(XMVECTOR yAxis)
+	{
+		yAxis = XMVector3Normalize(yAxis);
+
+		constexpr float SMALL_NUMBER = 1.e-4f;
+		const XMVECTOR forwardVector = (std::abs(yAxis.m128_f32[2]) < (1.f - SMALL_NUMBER)) ?
+			VMath::GlobalForwardVector() : VMath::GlobalRightVector();
+
+		const XMVECTOR xAxis = XMVector3Normalize(XMVector3Cross(forwardVector, yAxis));
+		const XMVECTOR zAxis = XMVector3Cross(yAxis, xAxis);
+
+		//Reverse the X-Axis here to fit with DirectX's coordinate system.
+		return XMMATRIX(-xAxis, yAxis, zAxis, XMVectorZero());
+	}
+
 	XMMATRIX ZeroMatrix()
 	{
 		return XMMATRIX();
@@ -278,7 +294,7 @@ namespace VMath
 		return max;
 	}
 
-	//Copied heavily from UE4
+	//Read over from Unreal
 	XMVECTOR VectorConstantLerp(XMVECTOR current, XMVECTOR target, float deltaTime, float interpSpeed)
 	{
 		XMVECTOR toTarget = XMVectorSubtract(target, current);
@@ -302,7 +318,7 @@ namespace VMath
 		return target;
 	}
 
-	//Copied heavily from UE4
+	//Read over from Unreal
 	XMVECTOR QuatConstantLerp(XMVECTOR current, XMVECTOR target, float deltaTime, float interpSpeed)
 	{
 		float deltaInterpSpeed = std::clamp(deltaTime * interpSpeed, 0.f, 1.f);
