@@ -27,7 +27,6 @@ Player::Player()
 	SetEmptyRootComponent();
 
 	camera = CreateComponent<CameraComponent>("Camera");
-	camera->SetLocalPosition(cameraStartingLocalPosition);
 	rootComponent->AddChild(camera);
 
 	nextPos = XMVectorZero();
@@ -37,6 +36,8 @@ Player::Player()
 	rootComponent->AddChild(mesh);
 
 	dialogueComponent = DialogueComponent::system.Add("Dialogue", this);
+
+	camera->SetLocalPosition(cameraStartingLocalPosition);
 }
 
 void Player::Create()
@@ -45,7 +46,6 @@ void Player::Create()
 
 	mesh->SetRenderStatic(false);
 
-	cameraStartingLocalPosition = XMVectorSet(1.75f, 1.75f, -2.75f, 1.f);
 	cameraLinkActiveLocalPosition = XMVectorSet(1.25f, 0.55f, -0.75f, 1.f);
 
 	moveSpeed = 5.35f;

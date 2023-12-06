@@ -91,7 +91,7 @@ private:
 
 	XMVECTOR nextCameraPosition = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 	XMVECTOR cameraLinkActiveLocalPosition = XMVectorSet(0.f, 0.f, 0.f, 1.f);
-	XMVECTOR cameraStartingLocalPosition = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+	XMVECTOR cameraStartingLocalPosition = XMVectorSet(1.75f, 1.75f, -2.75f, 1.f);
 	float nextCameraFOV = 0.f;
 
 	bool isInputLinkedToGridActor = false;
