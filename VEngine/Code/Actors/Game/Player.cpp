@@ -27,6 +27,7 @@ Player::Player()
 	SetEmptyRootComponent();
 
 	camera = CreateComponent<CameraComponent>("Camera");
+	camera->SetLocalPosition(cameraStartingLocalPosition);
 	rootComponent->AddChild(camera);
 
 	nextPos = XMVectorZero();
@@ -46,7 +47,6 @@ void Player::Create()
 
 	cameraStartingLocalPosition = XMVectorSet(1.75f, 1.75f, -2.75f, 1.f);
 	cameraLinkActiveLocalPosition = XMVectorSet(1.25f, 0.55f, -0.75f, 1.f);
-	camera->SetLocalPosition(cameraStartingLocalPosition);
 
 	moveSpeed = 5.35f;
 	rotateSpeed = 4.75f;
