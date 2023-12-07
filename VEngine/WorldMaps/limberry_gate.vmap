@@ -15,6 +15,23 @@ DirectionalLightActor0
 UID
 3459398235
 next
+EmptyActor
+1
+ Enabled
+1
+ Position
+6 6 9
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+BridgeFocus
+UID
+3535680506
+next
 Grid
 1
  Enabled
@@ -43,7 +60,7 @@ GridActor
  Position
 4 1 9
  Rotation
-0 0 0 1
+-0 0 -0 1
  Scale
 2 4 2
  Visible
@@ -168,6 +185,86 @@ Player0
 UID
 2593024526
 next
+PlayerCameraTrigger
+2
+ Enabled
+1
+ Position
+3.5 1.5 5
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+PlayerCameraTrigger0
+NewLocalCameraPos
+1 1 -2
+NewTargetActor
+
+UID
+825995251
+next
+ Enabled
+1
+ Position
+1 6 6
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+PlayerCameraTrigger1
+NewLocalCameraPos
+1.5 1.5 -2.25
+NewTargetActor
+BridgeFocus
+UID
+3900279098
+next
+BoxTriggerComponent
+2
+825995251
+BoxTrigger
+ Enabled
+1
+ Pos
+3.5 1.5 5
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+1 1 2
+Offset
+0 0 0
+UID
+2135709379
+next
+3900279098
+BoxTrigger
+ Enabled
+1
+ Pos
+1 6 6
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.5 0.5 0.5
+Offset
+0 0 0
+UID
+1367376214
+next
 CameraComponent
 1
 2593024526
@@ -239,7 +336,22 @@ UID
 3866019048
 next
 EmptyComponent
+2
+3535680506
+Root
+ Enabled
 1
+ Pos
+6 6 9
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+181058155
+next
 2593024526
 Root
  Enabled
@@ -323,7 +435,7 @@ Mesh
  Pos
 4 1 9
  Rot
-0 0 0 1
+-0 0 -0 1
  Scale
 2 4 2
  Visible
