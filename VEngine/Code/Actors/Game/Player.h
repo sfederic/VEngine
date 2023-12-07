@@ -83,6 +83,7 @@ public:
 	void RemovePickupWidgetFromViewport();
 
 	void SetNextCameraPosition(XMVECTOR pos) { nextCameraPosition = pos; }
+	XMVECTOR GetCameraLocalPosition();
 	void ResetCameraPosAndTargetToPlayer();
 	void SetCameraTargetActor(Actor* target);
 

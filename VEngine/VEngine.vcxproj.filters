@@ -800,6 +800,9 @@
     <ClCompile Include="Code\Physics\HitResult.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Actors\Game\PlayerCameraTrigger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\main.cpp">
@@ -1633,6 +1636,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Physics\HitResult.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Actors\Game\PlayerCameraTrigger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

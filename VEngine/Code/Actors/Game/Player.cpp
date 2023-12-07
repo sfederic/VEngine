@@ -1086,6 +1086,11 @@ void Player::ResetHighlightedActor()
 	highlightedGridActor = nullptr;
 }
 
+XMVECTOR Player::GetCameraLocalPosition()
+{
+	return camera->GetLocalPositionV();
+}
+
 void Player::ResetCameraPosAndTargetToPlayer()
 {
 	nextCameraPosition = cameraStartingLocalPosition;
