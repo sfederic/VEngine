@@ -130,13 +130,13 @@ void BoxTriggerComponent::TargetActorIntersectCallbackLogic()
 			switch (targetActorIntersecting)
 			{
 			case true:
-				if (!triggerEnterCallback) //Note that this is std::function's operator.
+				if (triggerEnterCallback) //Note that this is std::function's operator.
 				{
 					triggerEnterCallback();
 				}
 				break;
 			case false:
-				if (!triggerEnterCallback)
+				if (triggerExitCallback)
 				{
 					triggerExitCallback();
 				}
