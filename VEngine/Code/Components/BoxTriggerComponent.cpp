@@ -14,6 +14,11 @@ BoxTriggerComponent::BoxTriggerComponent()
 	boundingBox.Extents = XMFLOAT3(0.45f, 0.45f, 0.45f);
 }
 
+void BoxTriggerComponent::Tick(float deltaTime)
+{
+	TargetActorIntersectCallbackLogic();
+}
+
 Properties BoxTriggerComponent::GetProps()
 {
 	auto props = __super::GetProps();
@@ -93,7 +98,7 @@ void BoxTriggerComponent::SetExtents(float x, float y, float z)
 	boundingBox.Extents = XMFLOAT3(x, y, z);
 }
 
-XMFLOAT3 BoxTriggerComponent::GetExtents()
+XMFLOAT3 BoxTriggerComponent::GetExtents() const
 {
 	return boundingBox.Extents;
 }
@@ -101,4 +106,36 @@ XMFLOAT3 BoxTriggerComponent::GetExtents()
 bool BoxTriggerComponent::QuickInPlaceBoxCast(HitResult& hitResult, bool drawDebug)
 {
 	return SimpleBoxCast(GetWorldPositionV(), boundingBox.Extents, hitResult, drawDebug, true);
+}
+
+void BoxTriggerComponent::SetTriggerEnterCallback(std::function<void()> callback)
+{
+	triggerEnterCallback = callback;
+}
+
+void BoxTriggerComponent::SetTriggerExitCallback(std::function<void()> callback)
+{
+	triggerExitCallback = callback;
+}
+
+void BoxTriggerComponent::TargetActorIntersectCallbackLogic()
+{
+	if (targetActor)
+	{
+		const bool newIntersectingValue = ContainsTarget();
+		if (targetActorIntersecting == !newIntersectingValue)
+		{
+			targetActorIntersecting = newIntersectingValue;
+
+			switch (targetActorIntersecting)
+			{
+			case true:
+				triggerEnterCallback();
+				break;
+			case false:
+				triggerExitCallback();
+				break;
+			}
+		}
+	}
 }
