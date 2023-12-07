@@ -12,23 +12,36 @@ PlayerCameraTrigger::PlayerCameraTrigger()
 void PlayerCameraTrigger::Start()
 {
 	boxTrigger->SetTargetAsPlayer();
-
 	{
 		//Set initial camera position outside of trigger.
 		const auto player = Player::system.GetOnlyActor();
 		initialLocalCameraPos = player->GetCameraLocalPosition();
 	}
-
 	boxTrigger->SetTriggerEnterCallback([&]()
 		{
 			auto player = Player::system.GetOnlyActor();
 			player->SetNextCameraPosition(DirectX::XMLoadFloat3(&newLocalCameraPos));
+			if (newTargetActor != nullptr)
+			{
+				player->SetCameraTargetActor(newTargetActor);
+			}
 		});
 	boxTrigger->SetTriggerExitCallback([&]()
 		{
 			auto player = Player::system.GetOnlyActor();
 			player->SetNextCameraPosition(initialLocalCameraPos);
+			player->SetCameraTargetActor(initialTargetActor);
 		});
+}
+
+void PlayerCameraTrigger::LateStart()
+{
+	//Set these fields on late start so player has a chance to set up camera
+	//and new targets have a chance to spawn.
+	newTargetActor = World::GetActorByNameAllowNull(newTargetActorName);
+	auto player = Player::system.GetOnlyActor();
+	initialTargetActor = &player->GetCameraTargetActor();
+	assert(initialTargetActor);
 }
 
 Properties PlayerCameraTrigger::GetProps()
@@ -36,5 +49,6 @@ Properties PlayerCameraTrigger::GetProps()
 	auto props = __super::GetProps();
 	props.title = GetTypeName();
 	props.Add("NewLocalCameraPos", &newLocalCameraPos);
+	props.Add("NewTargetActor", &newTargetActorName);
 	return props;
 }

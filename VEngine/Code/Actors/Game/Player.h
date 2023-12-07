@@ -86,6 +86,7 @@ public:
 	XMVECTOR GetCameraLocalPosition();
 	void ResetCameraPosAndTargetToPlayer();
 	void SetCameraTargetActor(Actor* target);
+	Actor& GetCameraTargetActor();
 
 private:
 	PickupWidget* pickupWidget = nullptr;

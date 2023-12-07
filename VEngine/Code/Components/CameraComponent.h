@@ -26,6 +26,8 @@ public:
 	void SetShakeLevel(float shake) { shakeLevel = shake; }
 	void SetTargetActor(Actor* actor) { targetActor = actor; }
 
+	Actor& GetTargetActor() { return *targetActor; }
+
 protected:
 	XMVECTOR Shake();
 	void ZoomTo(Actor* actor);

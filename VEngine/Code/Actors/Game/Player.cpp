@@ -1101,3 +1101,8 @@ void Player::SetCameraTargetActor(Actor* target)
 {
 	camera->SetTargetActor(target);
 }
+
+Actor& Player::GetCameraTargetActor()
+{
+	return camera->GetTargetActor();
+}
