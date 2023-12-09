@@ -63,10 +63,9 @@ struct GridNode
 	inline static XMFLOAT4 normalColour = XMFLOAT4(0.07f, 0.27f, 0.89f, 0.4f);
 	inline static XMFLOAT4 previewColour = XMFLOAT4(0.89f, 0.07f, 0.07f, 0.4f);
 
-	XMFLOAT3 worldPosition = XMFLOAT3(0.f, 0.f, 0.f);
 	GridNode* parentNode = nullptr;
-
 	size_t instancedMeshIndex = 0;
+	XMFLOAT3 worldPosition = XMFLOAT3(0.f, 0.f, 0.f);
 
 	float gCost = 0.f; //Distance from start node
 	float hCost = 0.f; //Distance to end node
