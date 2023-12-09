@@ -22,7 +22,7 @@ void GridNode::Show()
 void GridNode::DisplayHide() const
 {
 	auto grid = Grid::system.GetFirstActor();
-	auto& meshInstanceData = grid->nodeMesh->GetInstanceData()[instancedMeshIndex];
+	auto& meshInstanceData = grid->GetNodeMeshInstanceData().at(instancedMeshIndex);
 
 	meshInstanceData.world.r[0].m128_f32[0] = 0.f;
 	meshInstanceData.world.r[1].m128_f32[1] = 0.f;
@@ -32,7 +32,7 @@ void GridNode::DisplayHide() const
 void GridNode::DisplayShow() const
 {
 	auto grid = Grid::system.GetFirstActor();
-	auto& meshInstanceData = grid->nodeMesh->GetInstanceData()[instancedMeshIndex];
+	auto& meshInstanceData = grid->GetNodeMeshInstanceData().at(instancedMeshIndex);
 
 	meshInstanceData.world.r[0].m128_f32[0] = 0.9f;
 	meshInstanceData.world.r[1].m128_f32[1] = 0.9f;
@@ -60,7 +60,7 @@ void GridNode::RecalcNodeHeight(HitResult& hitResult)
 		}
 
 		auto grid = Grid::system.GetFirstActor();
-		auto& meshInstanceData = grid->nodeMesh->GetInstanceData()[instancedMeshIndex];
+		auto& meshInstanceData = grid->GetNodeMeshInstanceData().at(instancedMeshIndex);
 
 		XMFLOAT3 hitPos = hitResult.hitPos;
 		hitPos.y += 0.1f;
@@ -77,7 +77,7 @@ void GridNode::RecalcNodeHeight(HitResult& hitResult)
 void GridNode::SetColour(XMFLOAT4 newColour) const
 {
 	auto grid = Grid::system.GetFirstActor();
-	auto& meshInstanceData = grid->nodeMesh->GetInstanceData()[instancedMeshIndex];
+	auto& meshInstanceData = grid->GetNodeMeshInstanceData().at(instancedMeshIndex);
 
 	meshInstanceData.colour = newColour;
 }

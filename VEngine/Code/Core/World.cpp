@@ -142,8 +142,7 @@ void World::CreateDefaultMapActors()
 	dlight->SetPosition(XMVectorSet(0.f, 5.f, 0.f, 1.f));
 
 	auto grid = Grid::system.Add();
-	grid->sizeX = 5;
-	grid->sizeY = 5;
+	grid->SetGridSize(5, 5);
 	grid->Create();
 	grid->CreateAllComponents();
 

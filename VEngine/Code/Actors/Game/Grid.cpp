@@ -37,13 +37,13 @@ void Grid::Tick(float deltaTime)
 {
 	__super::Tick(deltaTime);
 
-	switch (lerpValue)
+	switch (lerpSetting)
 	{
-	case LerpValue::LerpIn:
+	case LerpSetting::LerpIn:
 		LerpInNodes(deltaTime);
 		break;
 
-	case LerpValue::LerpOut:
+	case LerpSetting::LerpOut:
 		LerpOutNodes(deltaTime);
 		break;
 	}
@@ -438,6 +438,12 @@ void Grid::ResetAllNodes()
 void Grid::LerpInNodes(float deltaTime)
 {
 	constexpr float lerpSpeed = 4.5f;
+	constexpr float lerpMin = 0.01f;
+
+	if (currentLerpValue < lerpMin)
+	{
+		return;
+	}
 
 	for (auto& row : rows)
 	{
@@ -449,9 +455,9 @@ void Grid::LerpInNodes(float deltaTime)
 			}
 
 			auto& data = nodeMesh->GetInstanceData().at(node.instancedMeshIndex);
-			data.world.r[0].m128_f32[0] = std::lerp(data.world.r[0].m128_f32[0], 0.f, deltaTime * lerpSpeed);
-			data.world.r[1].m128_f32[1] = std::lerp(data.world.r[1].m128_f32[1], 0.f, deltaTime * lerpSpeed);
-			data.world.r[2].m128_f32[2] = std::lerp(data.world.r[2].m128_f32[2], 0.f, deltaTime * lerpSpeed);
+			data.world.r[0].m128_f32[0] = std::lerp(data.world.r[0].m128_f32[0], lerpMin, deltaTime * lerpSpeed);
+			data.world.r[1].m128_f32[1] = std::lerp(data.world.r[1].m128_f32[1], lerpMin, deltaTime * lerpSpeed);
+			data.world.r[2].m128_f32[2] = std::lerp(data.world.r[2].m128_f32[2], lerpMin, deltaTime * lerpSpeed);
 		}
 	}
 }
@@ -479,7 +485,7 @@ void Grid::LerpOutNodes(float deltaTime)
 
 void Grid::DisplayHideAllNodes()
 {
-	lerpValue = LerpValue::LerpIn;
+	lerpSetting = LerpSetting::LerpIn;
 
 	for (auto& row : rows)
 	{
@@ -492,7 +498,7 @@ void Grid::DisplayHideAllNodes()
 
 void Grid::DisplayShowAllNodes()
 {
-	lerpValue = LerpValue::LerpOut;
+	lerpSetting = LerpSetting::LerpOut;
 
 	for (auto& row : rows)
 	{
@@ -501,4 +507,15 @@ void Grid::DisplayShowAllNodes()
 			node.DisplayShow();
 		}
 	}
+}
+
+std::vector<InstanceData>& Grid::GetNodeMeshInstanceData()
+{
+	return nodeMesh->GetInstanceData();
+}
+
+void Grid::SetGridSize(int x, int y)
+{
+	sizeX = x;
+	sizeY = y;
 }

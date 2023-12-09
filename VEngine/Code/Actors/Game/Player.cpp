@@ -201,14 +201,15 @@ void Player::ToggleGrid()
 	if (Input::GetKeyUp(Keys::Space))
 	{
 		GameUtils::PlayAudioOneShot("sword_sheathe.wav");
+
 		auto grid = Grid::system.GetOnlyActor();
-		if (grid->lerpValue == Grid::LerpValue::LerpIn)
+		if (grid->IsLerpingIn())
 		{
-			grid->lerpValue = Grid::LerpValue::LerpOut;
+			grid->SetLerpOut();
 		}
 		else
 		{
-			grid->lerpValue = Grid::LerpValue::LerpIn;
+			grid->SetLerpIn();
 		}
 	}
 }
@@ -854,7 +855,7 @@ void Player::CheckNextMoveNode(const XMVECTOR previousPos)
 
 	auto grid = Grid::system.GetFirstActor();
 
-	if (nextXIndex >= grid->sizeX || nextYIndex >= grid->sizeY
+	if (nextXIndex >= grid->GetSizeX() || nextYIndex >= grid->GetSizeY()
 		|| nextXIndex < 0 || nextYIndex < 0)
 	{
 		nextPos = previousPos;

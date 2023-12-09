@@ -249,7 +249,7 @@ bool GridActor::CheckNextNodeMoveIsValid(const XMVECTOR nextMoveCardinalDirectio
 
 	const XMVECTOR currentPos = GetPositionV();
 
-	if (nextXIndex >= grid->sizeX || nextYIndex >= grid->sizeY
+	if (nextXIndex >= grid->GetSizeX() || nextYIndex >= grid->GetSizeY()
 		|| nextXIndex < 0 || nextYIndex < 0)
 	{
 		nextPos = currentPos;

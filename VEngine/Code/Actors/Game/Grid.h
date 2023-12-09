@@ -1,12 +1,13 @@
 #pragma once
 
+#include <vector>
 #include "../Actor.h"
 #include "../ActorSystem.h"
 #include "Gameplay/GridNode.h"
 
 struct InstanceMeshComponent;
+struct InstanceData;
 class Unit;
-class PlayerUnit;
 class GridActor;
 
 //@Todo: if pathfinding needs a more grid-less solution,
@@ -14,10 +15,15 @@ class GridActor;
 
 //Actor that holds all the traversable nodes in the level.
 //Grid needs to always be at (0, 0, 0) in world because of how rows & nodes are created at index.
-struct Grid : public Actor
+class Grid : public Actor
 {
+public:
 	ACTOR_SYSTEM(Grid);
 
+	inline static float maxHeightMove = 1.1f;
+	inline static float maxPlayerDropHeight = 1.9f;
+
+private:
 	struct GridRow
 	{
 		std::vector<GridNode> columns;
@@ -32,20 +38,19 @@ struct Grid : public Actor
 
 	std::vector<GridRow> rows;
 
-	inline static float maxHeightMove = 1.1f;
-	inline static float maxPlayerDropHeight = 1.9f;
-
 	int sizeX = 1;
 	int sizeY = 1;
 
-	enum class LerpValue
+	enum class LerpSetting
 	{
 		LerpIn,
 		LerpOut
 	};
 
-	LerpValue lerpValue = LerpValue::LerpIn;
+	LerpSetting lerpSetting = LerpSetting::LerpIn;
+	float currentLerpValue = 1.0f;
 
+public:
 	Grid();
 	void Awake() override;
 	void Create() override;
@@ -84,4 +89,15 @@ struct Grid : public Actor
 	void LerpOutNodes(float deltaTime);
 	void DisplayHideAllNodes();
 	void DisplayShowAllNodes();
+
+	std::vector<InstanceData>& GetNodeMeshInstanceData();
+
+	auto GetSizeX() const { return sizeX; }
+	auto GetSizeY() const { return sizeY; }
+	void SetGridSize(int x, int y);
+
+	bool IsLerpingIn() const { return lerpSetting == LerpSetting::LerpIn; }
+	bool IsLerpingOut() const { return lerpSetting == LerpSetting::LerpOut; }
+	void SetLerpIn() { lerpSetting = LerpSetting::LerpIn; }
+	void SetLerpOut() { lerpSetting = LerpSetting::LerpOut; }
 };
