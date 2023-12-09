@@ -437,7 +437,7 @@ void Grid::ResetAllNodes()
 
 void Grid::LerpInNodes(float deltaTime)
 {
-	const float lerpSpeed = 4.5f;
+	constexpr float lerpSpeed = 4.5f;
 
 	for (auto& row : rows)
 	{
@@ -448,7 +448,7 @@ void Grid::LerpInNodes(float deltaTime)
 				continue;
 			}
 
-			auto& data = nodeMesh->GetInstanceData()[node.instancedMeshIndex];
+			auto& data = nodeMesh->GetInstanceData().at(node.instancedMeshIndex);
 			data.world.r[0].m128_f32[0] = std::lerp(data.world.r[0].m128_f32[0], 0.f, deltaTime * lerpSpeed);
 			data.world.r[1].m128_f32[1] = std::lerp(data.world.r[1].m128_f32[1], 0.f, deltaTime * lerpSpeed);
 			data.world.r[2].m128_f32[2] = std::lerp(data.world.r[2].m128_f32[2], 0.f, deltaTime * lerpSpeed);
@@ -458,7 +458,7 @@ void Grid::LerpInNodes(float deltaTime)
 
 void Grid::LerpOutNodes(float deltaTime)
 {
-	const float lerpSpeed = 4.5f;
+	constexpr float lerpSpeed = 4.5f;
 
 	for (auto& row : rows)
 	{
@@ -469,7 +469,7 @@ void Grid::LerpOutNodes(float deltaTime)
 				continue;
 			}
 
-			auto& data = nodeMesh->GetInstanceData()[node.instancedMeshIndex];
+			auto& data = nodeMesh->GetInstanceData().at(node.instancedMeshIndex);
 			data.world.r[0].m128_f32[0] = std::lerp(data.world.r[0].m128_f32[0], 0.9f, deltaTime * lerpSpeed);
 			data.world.r[1].m128_f32[1] = std::lerp(data.world.r[1].m128_f32[1], 0.9f, deltaTime * lerpSpeed);
 			data.world.r[2].m128_f32[2] = std::lerp(data.world.r[2].m128_f32[2], 0.9f, deltaTime * lerpSpeed);

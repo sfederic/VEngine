@@ -19,17 +19,17 @@ struct GridNode
 		worldPosition = XMFLOAT3((float)x, 0.f, (float)y);
 	}
 
-	bool Equals(int x, int y)
+	bool Equals(int x, int y) const
 	{
 		return (x == xIndex) && (y == yIndex);
 	}
 
-	bool Equals(GridNode* node)
+	bool Equals(GridNode* node) const
 	{
 		return (node->xIndex == xIndex) && (node->yIndex == yIndex);
 	}
 
-	float GetFCost()
+	float GetFCost() const
 	{
 		return gCost + hCost;
 	}
@@ -48,29 +48,31 @@ struct GridNode
 	void Show();
 
 	//These ones only care about the visual display of the node
-	void DisplayHide();
-	void DisplayShow();
+	void DisplayHide() const;
+	void DisplayShow() const;
 
 	//Use a raycast recalculate node's world position height.
 	//Has the HitResult here because sometimes you might need to add the owning actor to the ignore list for the array.
 	void RecalcNodeHeight(HitResult& hit);
 
-	void SetColour(XMFLOAT4 newColour);
+	void SetColour(XMFLOAT4 newColour) const;
 
-	GridNode* parentNode = nullptr;
-	XMFLOAT3 worldPosition = XMFLOAT3(0.f, 0.f, 0.f);
-
-	XMVECTOR GetWorldPosV() { return XMLoadFloat3(&worldPosition); }
+	XMVECTOR GetWorldPosV() const { return XMLoadFloat3(&worldPosition); }
 
 	//COLOURS
 	inline static XMFLOAT4 normalColour = XMFLOAT4(0.07f, 0.27f, 0.89f, 0.4f);
 	inline static XMFLOAT4 previewColour = XMFLOAT4(0.89f, 0.07f, 0.07f, 0.4f);
 
+	XMFLOAT3 worldPosition = XMFLOAT3(0.f, 0.f, 0.f);
+	GridNode* parentNode = nullptr;
+
+	size_t instancedMeshIndex = 0;
+
 	float gCost = 0.f; //Distance from start node
 	float hCost = 0.f; //Distance to end node
 	int xIndex = 0;
 	int yIndex = 0;
-	uint32_t instancedMeshIndex = 0;
+
 	bool closed = false;
 	bool active = true;
 	bool preview = false; //If the node is to show preview movements, ignores lerp

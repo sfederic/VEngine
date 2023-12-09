@@ -19,7 +19,7 @@ void GridNode::Show()
 	DisplayShow();
 }
 
-void GridNode::DisplayHide()
+void GridNode::DisplayHide() const
 {
 	auto grid = Grid::system.GetFirstActor();
 	auto& meshInstanceData = grid->nodeMesh->GetInstanceData()[instancedMeshIndex];
@@ -29,7 +29,7 @@ void GridNode::DisplayHide()
 	meshInstanceData.world.r[2].m128_f32[2] = 0.f;
 }
 
-void GridNode::DisplayShow()
+void GridNode::DisplayShow() const
 {
 	auto grid = Grid::system.GetFirstActor();
 	auto& meshInstanceData = grid->nodeMesh->GetInstanceData()[instancedMeshIndex];
@@ -42,7 +42,7 @@ void GridNode::DisplayShow()
 //@Todo: there are a lot of options to ignore actors here, and future problems.
 void GridNode::RecalcNodeHeight(HitResult& hitResult)
 {
-	XMVECTOR origin = XMVectorSet((float)xIndex, 20.f, (float)yIndex, 1.f);
+	const XMVECTOR origin = XMVectorSet((float)xIndex, 20.f, (float)yIndex, 1.f);
 	hitResult.actorsToIgnore.push_back(Grid::system.GetOnlyActor());
 	auto waterVolumes = WaterVolume::system.GetActorsAsBaseClass();
 	hitResult.AddActorsToIgnore(waterVolumes);
@@ -74,7 +74,7 @@ void GridNode::RecalcNodeHeight(HitResult& hitResult)
 	}
 }
 
-void GridNode::SetColour(XMFLOAT4 newColour)
+void GridNode::SetColour(XMFLOAT4 newColour) const
 {
 	auto grid = Grid::system.GetFirstActor();
 	auto& meshInstanceData = grid->nodeMesh->GetInstanceData()[instancedMeshIndex];
