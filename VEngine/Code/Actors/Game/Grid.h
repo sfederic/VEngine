@@ -48,7 +48,7 @@ private:
 	};
 
 	LerpSetting lerpSetting = LerpSetting::LerpIn;
-	float currentLerpValue = 1.0f;
+	float currentLerpValue = 0.0f;
 
 public:
 	Grid();
@@ -100,4 +100,7 @@ public:
 	bool IsLerpingOut() const { return lerpSetting == LerpSetting::LerpOut; }
 	void SetLerpIn() { lerpSetting = LerpSetting::LerpIn; }
 	void SetLerpOut() { lerpSetting = LerpSetting::LerpOut; }
+
+private:
+	void SetAllNodesToCurrentLerpValue();
 };
