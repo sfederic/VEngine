@@ -205,13 +205,13 @@ public:
 	virtual void Deactivate() {}
 
 protected:
-	Actor* parent = nullptr;
+	std::string name;
 	std::vector<Actor*> children;
 	std::set<std::string> tags;
 	std::map<std::string, Component*> componentMap;
+	Actor* parent = nullptr;
 	SpatialComponent* rootComponent = nullptr;
 	IActorSystem* actorSystem = nullptr;
-	std::string name;
 	UID uid = GenerateUID();
 	int actorSystemIndex = -1;
 	bool active = true;
