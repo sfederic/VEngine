@@ -1,0 +1,900 @@
+DirectionalLightActor
+1
+ Enabled
+1
+ Position
+0 5 0
+ Rotation
+0.707107 0 0 0.707107
+ Scale
+1 1 1
+ Visible
+1
+Name
+DirectionalLightActor0
+UID
+1903782432
+next
+Grid
+1
+ Enabled
+1
+ Position
+0 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+Grid0
+Size X
+20
+Size Y
+40
+UID
+2391635249
+next
+MeshActor
+9
+ Enabled
+1
+ Position
+9.5 -0.5 19.5
+ Rotation
+0 1 0 -0.000244163
+ Scale
+1.00006 1 1.00006
+ Visible
+1
+Name
+market0
+UID
+306309750
+next
+ Enabled
+1
+ Position
+12.5 0.5 19
+ Rotation
+-0 0.706985 -0 0.707229
+ Scale
+1 1 1
+ Visible
+1
+Name
+market_store_tent1
+UID
+199559476
+next
+ Enabled
+1
+ Position
+12.5 0.5 22
+ Rotation
+-0 0.706985 -0 0.707229
+ Scale
+1 1 1
+ Visible
+1
+Name
+market_store_tent2
+UID
+2554023393
+next
+ Enabled
+1
+ Position
+12.5 0.5 25
+ Rotation
+-0 0.706985 -0 0.707229
+ Scale
+1 1 1
+ Visible
+1
+Name
+market_store_tent3
+UID
+4085061233
+next
+ Enabled
+1
+ Position
+12.5 0.5 28.5
+ Rotation
+-0 0.706985 -0 0.707229
+ Scale
+1 1 1
+ Visible
+1
+Name
+market_store_tent4
+UID
+2593715224
+next
+ Enabled
+1
+ Position
+18.5 0.5 12
+ Rotation
+0 0.707107 0 -0.707107
+ Scale
+0.999988 1 0.999988
+ Visible
+1
+Name
+market_store_tent5
+UID
+164931874
+next
+ Enabled
+1
+ Position
+18.5 0.5 17.5
+ Rotation
+0 0.707107 0 -0.707107
+ Scale
+0.999984 1 0.999984
+ Visible
+1
+Name
+market_store_tent6
+UID
+2863087016
+next
+ Enabled
+1
+ Position
+18.5 0.5 22.5
+ Rotation
+0 0.707107 0 -0.707107
+ Scale
+0.999982 1 0.999982
+ Visible
+1
+Name
+market_store_tent7
+UID
+3709535476
+next
+ Enabled
+1
+ Position
+18.5 0.5 30.5
+ Rotation
+0 0.707107 0 -0.707107
+ Scale
+0.99998 1 0.99998
+ Visible
+1
+Name
+market_store_tent8
+UID
+253552285
+next
+Player
+1
+ Enabled
+1
+ Position
+0 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+Player0
+UID
+1107760604
+next
+CameraComponent
+1
+1107760604
+Camera
+ Enabled
+1
+ Pos
+1.75 1.75 -2.75
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+FOV
+60
+Far Z
+1000
+Near Z
+0.01
+UID
+492150792
+next
+DialogueComponent
+1
+1107760604
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+3575969165
+next
+DirectionalLightComponent
+1
+1903782432
+DirectionalLight
+ Enabled
+1
+ Pos
+0 5 0
+ Rot
+0.707107 0 0 0.707107
+ Scale
+1 1 1
+ Visible
+1
+Colour
+1 1 1 1
+Intensity
+1
+LightEnabled
+1
+UID
+90306119
+next
+EmptyComponent
+1
+1107760604
+Root
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+3169236772
+next
+InstanceMeshComponent
+1
+2391635249
+NodeMesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Instance
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+282192193
+next
+MeshComponent
+10
+306309750
+Mesh
+ Enabled
+1
+ Pos
+9.5 -0.5 19.5
+ Rot
+0 1 0 -0.000244163
+ Scale
+1.00006 1 1.00006
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+market.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+1363319203
+next
+1107760604
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+char.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
+UID
+1805232978
+next
+199559476
+Mesh
+ Enabled
+1
+ Pos
+12.5 0.5 19
+ Rot
+-0 0.706985 -0 0.707229
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+market_store_tent.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+2473314681
+next
+2554023393
+Mesh
+ Enabled
+1
+ Pos
+12.5 0.5 22
+ Rot
+-0 0.706985 -0 0.707229
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+market_store_tent.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+2336619167
+next
+4085061233
+Mesh
+ Enabled
+1
+ Pos
+12.5 0.5 25
+ Rot
+-0 0.706985 -0 0.707229
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+market_store_tent.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+1393427452
+next
+2593715224
+Mesh
+ Enabled
+1
+ Pos
+12.5 0.5 28.5
+ Rot
+-0 0.706985 -0 0.707229
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+market_store_tent.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+650944841
+next
+164931874
+Mesh
+ Enabled
+1
+ Pos
+18.5 0.5 12
+ Rot
+0 0.707107 0 -0.707107
+ Scale
+0.999988 1 0.999988
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+market_store_tent.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+2588002667
+next
+2863087016
+Mesh
+ Enabled
+1
+ Pos
+18.5 0.5 17.5
+ Rot
+0 0.707107 0 -0.707107
+ Scale
+0.999984 1 0.999984
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+market_store_tent.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+2098843294
+next
+3709535476
+Mesh
+ Enabled
+1
+ Pos
+18.5 0.5 22.5
+ Rot
+0 0.707107 0 -0.707107
+ Scale
+0.999982 1 0.999982
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+market_store_tent.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+4173003466
+next
+253552285
+Mesh
+ Enabled
+1
+ Pos
+18.5 0.5 30.5
+ Rot
+0 0.707107 0 -0.707107
+ Scale
+0.99998 1 0.99998
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+market_store_tent.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+2395602283
+next
+end
