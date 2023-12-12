@@ -132,4 +132,8 @@ private:
 	void OverlapPickupGridActor();
 
 	void ResetHighlightedActor();
+
+	void OnMoveAndRotateEnd();
+
+	bool previousMovementAndRotationStoppedValue = false;
 };
