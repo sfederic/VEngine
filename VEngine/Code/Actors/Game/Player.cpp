@@ -731,6 +731,8 @@ void Player::MoveLinkedGridActor()
 	}
 }
 
+//Note: If a GridActor isn't aligned to the player's positional axis (i.e. if it's off on the x-axis
+//by 0.5 compared to Player), the GridActor won't rotate properly because it's working off of the Player's axis.
 void Player::RotateLinkedGridActor()
 {
 	if (linkedGridActor == nullptr || !linkedGridActor->CheckMovementAndRotationStopped())
