@@ -152,7 +152,7 @@ void Widget::Image(std::string_view filename, Layout layout)
 	SpriteSystem::CreateScreenSprite(sprite);
 }
 
-void Widget::ImageAsOriginalSize(std::string_view textureFilename, long x, long y)
+Layout Widget::ImageAsOriginalSize(std::string_view textureFilename, long x, long y)
 {
 	Sprite sprite = {};
 	sprite.textureFilename = textureFilename;
@@ -165,6 +165,13 @@ void Widget::ImageAsOriginalSize(std::string_view textureFilename, long x, long 
 	sprite.srcRect = { 0, 0, (long)texWidth, (long)texHeight };
 
 	SpriteSystem::CreateScreenSprite(sprite);
+
+	Layout imageLayout = {};
+	imageLayout.rect.left = (float)x;
+	imageLayout.rect.top = (float)y;
+	imageLayout.rect.right = (float)texWidth;
+	imageLayout.rect.bottom = (float)texHeight;
+	return imageLayout;
 }
 
 void Widget::Image(std::string_view filename, int x, int y, int w, int h)

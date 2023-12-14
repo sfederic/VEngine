@@ -5,25 +5,25 @@
 
 void UVPaintWidget::Draw(float deltaTime)
 {
-	const auto layout = PercentAlignLayout(0.1f, 0.1f, 0.5f, 0.5f);
+	const auto imageLayout = ImageAsOriginalSize("vagrant_map.png", 0, 0);
 
-	ImageAsOriginalSize("vagrant_map.png", 0, 0);
+	auto pickerLayout = Layout({ previousMouseX, previousMouseY, previousMouseX + 100.f, previousMouseY + 100.f });
 
-	auto rectLayout = Layout({ previousMouseX, previousMouseY, previousMouseX + 100.f, previousMouseY + 100.f });
-
-	//@Todo: this might need to change to only click when inside the image
-	if (Input::GetMouseMiddleDown())
+	if (IsMouseInLayout(imageLayout))
 	{
-		const auto mouseX = (float)editor->GetViewportMouseX();
-		const auto mouseY = (float)editor->GetViewportMouseY();
+		if (Input::GetMouseLeftDown())
+		{
+			const auto mouseX = (float)editor->GetViewportMouseX();
+			const auto mouseY = (float)editor->GetViewportMouseY();
 
-		rectLayout = Layout({ mouseX, mouseY, mouseX + 100.f, mouseY + 100.f });
+			pickerLayout = Layout({ mouseX, mouseY, mouseX + 100.f, mouseY + 100.f });
 
-		previousMouseX = mouseX;
-		previousMouseY = mouseY;
+			previousMouseX = mouseX;
+			previousMouseY = mouseY;
+		}
 	}
 
-	Rect(rectLayout);
+	Rect(pickerLayout);
 
 	UpdateWorldEditor();
 }

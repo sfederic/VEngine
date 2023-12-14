@@ -65,7 +65,7 @@ protected:
 		TextAlign textAlign = TextAlign::Center, D2D1_COLOR_F textColor = { 0.f, 0.f, 0.f, 1.f }, float textOpacity = 1.0f);
 
 	void Image(std::string_view filename, Layout layout);
-	void ImageAsOriginalSize(std::string_view textureFilename, long x, long y);
+	Layout ImageAsOriginalSize(std::string_view textureFilename, long x, long y);
 	void Image(std::string_view filename, int x, int y, int w, int h);
 	bool ImageButton(std::string_view filename, Layout layout);
 
