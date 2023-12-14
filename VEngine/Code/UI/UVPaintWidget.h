@@ -11,6 +11,8 @@ public:
 	void Draw(float deltaTime) override;
 
 private:
+	void UpdateWorldEditor();
+
 	float previousMouseX = 0.f;
 	float previousMouseY = 0.f;
 };

@@ -11,6 +11,15 @@ struct Transform;
 
 //@Todo: actor delete undo
 
+struct UVPaintData
+{
+	std::string texture;
+	float x = 0.f;
+	float y = 0.f;
+	float w = 0.f;
+	float h = 0.f;
+};
+
 namespace WorldEditor
 {
 	enum class PickMode
@@ -18,6 +27,8 @@ namespace WorldEditor
 		Actor,
 		Component
 	};
+
+	extern UVPaintData uvPaintData;
 
 	extern bool texturePlacement;
 	extern bool meshPlacement;

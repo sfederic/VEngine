@@ -18,6 +18,7 @@
 #include "Core/Log.h"
 #include "Asset/AssetPaths.h"
 #include "Render/TextureSystem.h"
+#include "Render/Texture2D.h"
 #include "Render/Material.h"
 #include "Render/MaterialSystem.h"
 #include "Components/MeshComponent.h"
@@ -37,6 +38,8 @@ bool WorldEditor::uvPaintActive = false;
 bool WorldEditor::actorReplaceModeActive = false;
 bool WorldEditor::parentSetActive = false;
 bool WorldEditor::moveActorViaKeyboardInput = false;
+
+UVPaintData WorldEditor::uvPaintData;
 
 //Load world based on EntranceTrigger's props on actor click in-world.
 bool WorldEditor::entranceTriggerWorldLoadMode = false;
@@ -459,7 +462,10 @@ void UVPainting()
 {
 	if (WorldEditor::uvPaintActive)
 	{
-		if (Input::GetMouseLeftDown())
+		const bool leftClick = Input::GetMouseLeftUp();
+		const bool rightClick = Input::GetMouseRightUp();
+
+		if (leftClick || rightClick)
 		{
 			HitResult hit;
 			if (RaycastFromScreen(hit))
@@ -473,16 +479,53 @@ void UVPainting()
 					assert(hit.vertIndexesOfHitTriangleFace.size() == 3);
 					std::vector<XMFLOAT2*> newUVs;
 
+					std::vector<Vertex> newVerts;
+
 					for (int vertIndex : hit.vertIndexesOfHitTriangleFace)
 					{
 						auto& vertex = vertices.at(vertIndex);
+						newVerts.push_back(vertex);
 						newUVs.push_back(&vertex.uv);
 					}
 
+					auto texture = TextureSystem::FindTexture2D(WorldEditor::uvPaintData.texture);
+					const auto textureWidth = texture->GetWidth();
+					const auto textureHeight = texture->GetHeight();
+
 					assert(newUVs.size() == 3);
-					*newUVs[0] = XMFLOAT2(0.f, 0.f);
-					*newUVs[1] = XMFLOAT2(1.f, 0.f);
-					*newUVs[2] = XMFLOAT2(0.f, 1.f);
+					if (leftClick)
+					{
+						const float u0 = WorldEditor::uvPaintData.x / textureWidth;
+						const float v0 = WorldEditor::uvPaintData.y / textureHeight;
+
+						const float u1 = WorldEditor::uvPaintData.w / textureWidth;
+						const float v1 = WorldEditor::uvPaintData.h / textureHeight;
+
+						const float u2 = WorldEditor::uvPaintData.x / textureWidth;
+						const float v2 = WorldEditor::uvPaintData.h / textureHeight;
+
+						*newUVs[0] = XMFLOAT2(u0, v0);
+						*newUVs[1] = XMFLOAT2(u1, v1);
+						*newUVs[2] = XMFLOAT2(u2, v2);
+					}
+					else if (rightClick)
+					{
+						const float u0 = WorldEditor::uvPaintData.x / textureWidth;
+						const float v0 = WorldEditor::uvPaintData.y / textureHeight;
+
+						const float u1 = WorldEditor::uvPaintData.w / textureWidth;
+						const float v1 = WorldEditor::uvPaintData.y / textureHeight;
+
+						const float u2 = WorldEditor::uvPaintData.w / textureWidth;
+						const float v2 = WorldEditor::uvPaintData.h / textureHeight;
+
+
+						*newUVs[0] = XMFLOAT2(u0, v0);
+						*newUVs[1] = XMFLOAT2(u1, v1);
+						*newUVs[2] = XMFLOAT2(u2, v2);
+					}
+
+					mesh->SetTexture(WorldEditor::uvPaintData.texture);
 
 					mesh->CreateNewVertexBuffer();
 				}
