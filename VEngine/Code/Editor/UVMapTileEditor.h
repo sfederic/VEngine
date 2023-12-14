@@ -18,3 +18,8 @@
 
 //Note that this tool might be easier to go in ImGui instead of Qt. Maybe even Direct2D.
 //Try use the FFTactics https://www.youtube.com/watch?v=vl1uGM-KmY8 tools as a reference too.
+
+//IMPLEMENTATION NOTES AND IDEAS
+//Trying to think on how to do this, I'm thinking have this texture map reticle/picker be split into two triangles.
+//So the left click will asign the selected mesh face to the top left triangle, and the right click will assign the
+//bottom right. Should be able to rotate this sort of setup to offer more flexibility.
