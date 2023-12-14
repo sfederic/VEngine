@@ -57,17 +57,18 @@ protected:
 		D2D1_COLOR_F color = { 0.f, 0.f, 0.f, 1.f }, float opacity = 1.0f);
 
 	bool Button(const std::wstring text, Layout layout, float lineWidth = 1.0f,
-		TextAlign textAlign = TextAlign::Center, D2D1_COLOR_F textColor = {0.f, 0.f, 0.f, 1.f}, float textOpacity = 1.0f);
+		TextAlign textAlign = TextAlign::Center, D2D1_COLOR_F textColor = { 0.f, 0.f, 0.f, 1.f }, float textOpacity = 1.0f);
 
 	bool Button(const std::string text, Layout layout, float lineWidth = 1.0f,
 		TextAlign textAlign = TextAlign::Center, D2D1_COLOR_F textColor = { 0.f, 0.f, 0.f, 1.f }, float textOpacity = 1.0f);
 
 	void Image(std::string_view filename, Layout layout);
+	void ImageAsOriginalSize(std::string_view textureFilename, long x, long y);
 	void Image(std::string_view filename, int x, int y, int w, int h);
 	bool ImageButton(std::string_view filename, Layout layout);
 
 	void Rect(Layout layout);
-	void FillRect(Layout layout, D2D1_COLOR_F color = {0.5f, 0.5f, 0.5f, 1.f}, float opacity = 1.0f);
+	void FillRect(Layout layout, D2D1_COLOR_F color = { 0.5f, 0.5f, 0.5f, 1.f }, float opacity = 1.0f);
 
 	//Aligns widget via enum with specific width and height
 	Layout AlignLayout(float w, float h, Align align);

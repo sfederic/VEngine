@@ -8,6 +8,8 @@
 #include "Core/VString.h"
 #include "Core/VMath.h"
 #include "UISystem.h"
+#include "Render/TextureSystem.h"
+#include "Render/Texture2D.h"
 
 void Widget::Destroy()
 {
@@ -130,6 +132,21 @@ void Widget::Image(std::string_view filename, Layout layout)
 	sprite.textureFilename = filename;
 	sprite.dstRect = { (long)layout.rect.left, (long)layout.rect.top, (long)layout.rect.right, (long)layout.rect.bottom };
 	sprite.srcRect = { 0, 0, (long)layout.rect.right, (long)layout.rect.bottom };
+
+	SpriteSystem::CreateScreenSprite(sprite);
+}
+
+void Widget::ImageAsOriginalSize(std::string_view textureFilename, long x, long y)
+{
+	Sprite sprite = {};
+	sprite.textureFilename = textureFilename;
+
+	const auto texture = TextureSystem::FindTexture2D(sprite.textureFilename);
+	const auto texWidth = texture->GetWidth();
+	const auto texHeight = texture->GetHeight();
+
+	sprite.dstRect = { x, y, x + (long)texWidth, y + (long)texHeight };
+	sprite.srcRect = { 0, 0, (long)texWidth, (long)texHeight };
 
 	SpriteSystem::CreateScreenSprite(sprite);
 }

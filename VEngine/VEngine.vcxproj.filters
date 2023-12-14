@@ -806,6 +806,9 @@
     <ClCompile Include="Code\Actors\EmptyActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\UI\UVPaintWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\main.cpp">
@@ -1648,6 +1651,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Editor\UVMapTileEditor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\UI\UVPaintWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
