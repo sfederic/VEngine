@@ -9,7 +9,7 @@
 //the selected area of the texture map.
 
 //What this tool would need is a picker that could be resized to various dimensions (e.g. 1x16, 4x4, 8x4, etc.)
-//with the texture map image loaded, and then able to map the selcted triangles to the texture map picker.
+//with the texture map image loaded, and then able to map the selected triangles to the texture map picker.
 
 //The workflow currently in Blender isn't too bad, but this sort of tool is worth looking into down the line.
 //The hardest part would be trying to map two triangles and orient them into a single quad so that the texture
