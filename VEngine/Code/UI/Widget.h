@@ -47,6 +47,8 @@ public:
 
 	bool IsInViewport();
 
+	bool IsMouseInLayout(Layout layout);
+
 protected:
 	void GetScreenSpaceCoords(int& sx, int& sy);
 

@@ -58,6 +58,22 @@ bool Widget::IsInViewport()
 	return false;
 }
 
+bool Widget::IsMouseInLayout(Layout layout)
+{
+	const int viewportMouseX = editor->GetViewportMouseX();
+	const int viewportMouseY = editor->GetViewportMouseY();
+
+	if (viewportMouseX > layout.rect.left && viewportMouseX < layout.rect.right)
+	{
+		if (viewportMouseY > layout.rect.top && viewportMouseY < layout.rect.bottom)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 void Widget::GetScreenSpaceCoords(int& sx, int& sy)
 {
 	VMath::HomogenousWorldPosToScreenSpaceCoords(worldPosition, sx, sy);
