@@ -1647,6 +1647,9 @@
     <ClInclude Include="Code\Actors\EmptyActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Code\Editor\UVMapTileEditor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
