@@ -18,6 +18,7 @@
 #include "Components/InstanceMeshComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "UI/UISystem.h"
+#include "UI/UVPaintWidget.h"
 #include "UI/Layout.h"
 #include "Physics/Raycast.h"
 #include "Core/World.h"
@@ -86,6 +87,7 @@ void DebugMenu::Tick(float deltaTime)
 	RenderMaterialPlacementMenu();
 	RenderVertexPaintMenu();
 	RenderUVMenu();
+	RenderUVPaintMenu();
 
 	ImGui::EndFrame();
 
@@ -583,6 +585,23 @@ void DebugMenu::RenderUVMenu()
 	}
 
 	ImGui::End();
+}
+
+void DebugMenu::RenderUVPaintMenu()
+{
+	if (uvPaintWidget == nullptr)
+	{
+		//needs to be called in a here so that World::Cleanup() doesn't remove the widget
+		uvPaintWidget = UISystem::CreateWidget<UVPaintWidget>();
+	}
+
+	if (!uvPaintMenuOpen)
+	{
+		uvPaintWidget->RemoveFromViewport();
+		return;
+	}
+
+	uvPaintWidget->AddToViewport();
 }
 
 //Handle viewport notifications (e.g. "Shaders recompiled", "ERROR: Not X", etc.)

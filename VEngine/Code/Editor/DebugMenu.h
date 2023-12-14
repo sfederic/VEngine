@@ -4,6 +4,7 @@
 #include <string>
 
 struct Properties;
+class UVPaintWidget;
 
 struct DebugNotification
 {
@@ -35,6 +36,7 @@ public:
 	bool worldMenuOpen = false;
 	bool vertexPaintMenuOpen = false;
 	bool uvMenuOpen = false;
+	bool uvPaintMenuOpen = false;
 
 	//Whether the Imgui windows have been clicked
 	bool hasMouseFocus = false;
@@ -67,9 +69,12 @@ private:
 	void RenderWorldMenu();
 	void RenderVertexPaintMenu();
 	void RenderUVMenu();
+	void RenderUVPaintMenu();
 
 	void RenderTexturePlacementMenu();
 	void RenderMaterialPlacementMenu();
+
+	UVPaintWidget* uvPaintWidget = nullptr;
 };
 
 extern DebugMenu debugMenu;
