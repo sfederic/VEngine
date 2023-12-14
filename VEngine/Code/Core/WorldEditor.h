@@ -23,6 +23,7 @@ namespace WorldEditor
 	extern bool meshPlacement;
 	extern bool materialPlacement;
 	extern bool vertexPaintActive;
+	extern bool uvPaintActive;
 	extern bool actorReplaceModeActive;
 	extern bool parentSetActive;
 	extern bool moveActorViaKeyboardInput;

@@ -33,6 +33,7 @@ bool WorldEditor::texturePlacement = false;
 bool WorldEditor::meshPlacement = false;
 bool WorldEditor::materialPlacement = false;
 bool WorldEditor::vertexPaintActive = false;
+bool WorldEditor::uvPaintActive = false;
 bool WorldEditor::actorReplaceModeActive = false;
 bool WorldEditor::parentSetActive = false;
 bool WorldEditor::moveActorViaKeyboardInput = false;
@@ -51,6 +52,7 @@ void DeleteActor();
 void SpawnActorOnClick();
 void SpawnActor(Transform& transform);
 void VertexPainting();
+void UVPainting();
 void SetParentOnClick(Actor& hitActor);
 void MoveActorViaKeyboardInput();
 void LoadWorldOnEntranceTriggerClick(Actor* pickedActor);
@@ -64,6 +66,7 @@ void WorldEditor::Tick()
 		SpawnActorOnClick();
 		HandleActorPicking();
 		VertexPainting();
+		UVPainting();
 	}
 
 	DuplicateActor();
@@ -444,6 +447,42 @@ void VertexPainting()
 						Vertex& v = vertices.at(vertIndex);
 						v.colour = WorldEditor::vertexPaintColour;
 					}
+
+					mesh->CreateNewVertexBuffer();
+				}
+			}
+		}
+	}
+}
+
+void UVPainting()
+{
+	if (WorldEditor::uvPaintActive)
+	{
+		if (Input::GetMouseLeftDown())
+		{
+			HitResult hit;
+			if (RaycastFromScreen(hit))
+			{
+				auto meshes = hit.hitActor->GetComponents<MeshComponent>();
+				for (auto mesh : meshes)
+				{
+					const auto numVerts = mesh->meshDataProxy.vertices.size();
+					auto& vertices = mesh->meshDataProxy.GetVertices();
+
+					assert(hit.vertIndexesOfHitTriangleFace.size() == 3);
+					std::vector<XMFLOAT2*> newUVs;
+
+					for (int vertIndex : hit.vertIndexesOfHitTriangleFace)
+					{
+						auto& vertex = vertices.at(vertIndex);
+						newUVs.push_back(&vertex.uv);
+					}
+
+					assert(newUVs.size() == 3);
+					*newUVs[0] = XMFLOAT2(0.f, 0.f);
+					*newUVs[1] = XMFLOAT2(1.f, 0.f);
+					*newUVs[2] = XMFLOAT2(0.f, 1.f);
 
 					mesh->CreateNewVertexBuffer();
 				}

@@ -177,6 +177,12 @@ void Console::Init()
 			WorldEditor::vertexPaintActive = !WorldEditor::vertexPaintActive;
 			}, "Activate vertex paint mode."));
 
+	executeMap.emplace(L"UVPAINT",
+		std::make_pair([]() {
+			WorldEditor::uvPaintActive = !WorldEditor::uvPaintActive;
+			debugMenu.AddStaticNotification(L"UV Paint Active");
+			}, "Activate UV paint mode."));
+
 	executeMap.emplace(L"RESET UID",
 		std::make_pair([]() {
 			ResetUIDCache();
