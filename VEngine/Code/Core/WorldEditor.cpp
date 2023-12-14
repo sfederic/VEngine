@@ -95,7 +95,7 @@ void WorldEditor::Reset()
 void HandleActorPicking()
 {
 	if (transformGizmo.CheckMouseOver() && transformGizmo.CheckInUse()
-		|| Core::gameplayOn || WorldEditor::vertexPaintActive)
+		|| Core::gameplayOn || WorldEditor::vertexPaintActive || WorldEditor::uvPaintActive)
 	{
 		return;
 	}
