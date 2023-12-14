@@ -12,3 +12,7 @@
 //with the texture map image loaded, and then able to map the selcted triangles to the texture map picker.
 
 //The workflow currently in Blender isn't too bad, but this sort of tool is worth looking into down the line.
+//The hardest part would be trying to map two triangles and orient them into a single quad so that the texture
+//picker would line up.
+
+//Note that this tool might be easier to go in ImGui instead of Qt.
