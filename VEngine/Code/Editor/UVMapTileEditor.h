@@ -16,4 +16,5 @@
 //picker would line up. The output would have to remape the UVs to the selcted mesh's .vmesh file, which wouldn't 
 //show up in the original .fbx export which is a worry.
 
-//Note that this tool might be easier to go in ImGui instead of Qt.
+//Note that this tool might be easier to go in ImGui instead of Qt. Maybe even Direct2D.
+//Try use the FFTactics https://www.youtube.com/watch?v=vl1uGM-KmY8 tools as a reference too.
