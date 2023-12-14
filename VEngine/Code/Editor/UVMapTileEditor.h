@@ -13,6 +13,7 @@
 
 //The workflow currently in Blender isn't too bad, but this sort of tool is worth looking into down the line.
 //The hardest part would be trying to map two triangles and orient them into a single quad so that the texture
-//picker would line up.
+//picker would line up. The output would have to remape the UVs to the selcted mesh's .vmesh file, which wouldn't 
+//show up in the original .fbx export which is a worry.
 
 //Note that this tool might be easier to go in ImGui instead of Qt.
