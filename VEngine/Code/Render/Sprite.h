@@ -8,7 +8,10 @@ struct Sprite
 {
 	Transform transform;
 
+	//Source Rect is the size of the texture to itself (note that you could render half a texture for example).
 	VRect srcRect;
+
+	//Destination Rect is the pixel dimensions and positions to render the texture at.
 	VRect dstRect;
 
 	std::string textureFilename;
