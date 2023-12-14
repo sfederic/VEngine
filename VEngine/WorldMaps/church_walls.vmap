@@ -1017,7 +1017,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+vagrant_map.png
 M_Use Texture
 1
 M_UvOffset
