@@ -652,6 +652,7 @@ void DebugMenu::RenderUVPaintMenu()
 	{
 		WorldEditor::uvPaintData.uvPaintRotate = UVPaintRotate::Right;
 	}
+	ImGui::SameLine();
 	if (ImGui::ArrowButton("Up", 2))
 	{
 		WorldEditor::uvPaintData.uvPaintRotate = UVPaintRotate::Up;
@@ -661,6 +662,24 @@ void DebugMenu::RenderUVPaintMenu()
 	{
 		WorldEditor::uvPaintData.uvPaintRotate = UVPaintRotate::Down;
 	}
+	ImGui::SameLine();
+	static std::string paintRotateStr;
+	switch (WorldEditor::uvPaintData.uvPaintRotate)
+	{
+	case UVPaintRotate::Left:
+		paintRotateStr = "Left";
+		break;
+	case UVPaintRotate::Right:
+		paintRotateStr = "Right";
+		break;
+	case UVPaintRotate::Up:
+		paintRotateStr = "Up";
+		break;
+	case UVPaintRotate::Down:
+		paintRotateStr = "Down";
+		break;
+	}
+	ImGui::Text(paintRotateStr.c_str());
 
 	if (ImGui::Button("Export Selected Actor .vmesh"))
 	{
