@@ -33,6 +33,8 @@ ID2D1SolidColorBrush* debugBrushText;
 ID2D1SolidColorBrush* brushShapes;
 ID2D1SolidColorBrush* brushShapesAlpha;
 
+void ResetWidgets();
+
 void UISystem::Init(void* swapchain)
 {
 	//Direct2D Init
@@ -100,7 +102,8 @@ void UISystem::RemoveWidget(Widget* widgetToRemove)
 void UISystem::Reset()
 {
 	widgetsInViewport.clear();
-	widgets.clear();
+
+	ResetWidgets();
 
 	//@Todo: there should be a way to not have to reset global widgets. 
 	//Answer might be to through ALL widgets into UISystem.
@@ -148,7 +151,7 @@ void UISystem::Cleanup()
 {
 	//Skip during gameplay because screen resizes cause all gameplay widgets to be deleted otherwise
 	if (!Core::gameplayOn)
-	{ 
+	{
 		Reset();
 	}
 
@@ -170,9 +173,9 @@ void UISystem::Cleanup()
 }
 
 void UISystem::TextDraw(const std::wstring text,
-	const Layout& layout, 
-	const DWRITE_TEXT_ALIGNMENT alignment, 
-	const D2D1_COLOR_F colour, 
+	const Layout& layout,
+	const DWRITE_TEXT_ALIGNMENT alignment,
+	const D2D1_COLOR_F colour,
 	const float opacity)
 {
 	textFormat->SetTextAlignment(alignment);
@@ -207,4 +210,16 @@ void UISystem::SetWidgetControlActive(bool active)
 bool UISystem::GetWidgetControlActive()
 {
 	return widgetControlActive;
+}
+
+void ResetWidgets()
+{
+	for (int i = 0; i < UISystem::widgets.size(); i++)
+	{
+		auto& widget = UISystem::widgets[i];
+		if (!widget->IsStatic())
+		{
+			UISystem::widgets.erase(UISystem::widgets.begin() + i);
+		}
+	}
 }

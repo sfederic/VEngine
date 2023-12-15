@@ -49,6 +49,8 @@ public:
 
 	bool IsMouseInLayout(Layout layout);
 
+	bool IsStatic() const { return isStaticWidget; }
+
 protected:
 	void GetScreenSpaceCoords(int& sx, int& sy);
 
@@ -80,4 +82,7 @@ protected:
 
 	Layout CenterLayoutOnScreenSpaceCoords(float w, float h);
 	Layout CenterLayoutOnScreenSpaceCoords(float w, float h, float sx, float sy);
+
+	//Means the widget won't be cleaned up on world resets. Mostly for Debug widgets.
+	bool isStaticWidget = false;
 };
