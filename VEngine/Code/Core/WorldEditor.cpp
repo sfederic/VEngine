@@ -465,7 +465,7 @@ void UVPainting()
 	if (!WorldEditor::uvPaintOn) return;
 
 	const bool leftClick = Input::GetMouseLeftDown();
-	const bool middleClick = Input::GetMouseRightDown();
+	const bool middleClick = Input::GetMouseMiddleDown();
 
 	if (leftClick || middleClick)
 	{
