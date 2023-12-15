@@ -525,31 +525,90 @@ void UVPainting()
 							*newUVs[2] = XMFLOAT2(u2, v2);
 							break;
 						}
+						case UVPaintRotate::Up:
+						{
+							const float u0 = WorldEditor::uvPaintData.w / textureWidth;
+							const float v0 = WorldEditor::uvPaintData.h / textureHeight;
+							const float u1 = WorldEditor::uvPaintData.x / textureWidth;
+							const float v1 = WorldEditor::uvPaintData.y / textureHeight;
+							const float u2 = WorldEditor::uvPaintData.w / textureWidth;
+							const float v2 = WorldEditor::uvPaintData.y / textureHeight;
+							*newUVs[0] = XMFLOAT2(u0, v0);
+							*newUVs[1] = XMFLOAT2(u1, v2);
+							*newUVs[2] = XMFLOAT2(u2, v2);
+							break;
+						}
+						case UVPaintRotate::Down:
+						{
+							const float u0 = WorldEditor::uvPaintData.x / textureWidth;
+							const float v0 = WorldEditor::uvPaintData.y / textureHeight;
+							const float u1 = WorldEditor::uvPaintData.w / textureWidth;
+							const float v1 = WorldEditor::uvPaintData.y / textureHeight;
+							const float u2 = WorldEditor::uvPaintData.w / textureWidth;
+							const float v2 = WorldEditor::uvPaintData.h / textureHeight;
+							*newUVs[0] = XMFLOAT2(u0, v0);
+							*newUVs[2] = XMFLOAT2(u1, v1);
+							*newUVs[1] = XMFLOAT2(u2, v2);
+							break;
+						}
 						}
 					}
 					else if (rightClick)
 					{
-						const float u0 = WorldEditor::uvPaintData.x / textureWidth;
-						const float v0 = WorldEditor::uvPaintData.y / textureHeight;
-
-						const float u1 = WorldEditor::uvPaintData.w / textureWidth;
-						const float v1 = WorldEditor::uvPaintData.y / textureHeight;
-
-						const float u2 = WorldEditor::uvPaintData.w / textureWidth;
-						const float v2 = WorldEditor::uvPaintData.h / textureHeight;
-
 						switch (WorldEditor::uvPaintData.uvPaintRotate)
 						{
 						case UVPaintRotate::Left:
+						{
+							const float u0 = WorldEditor::uvPaintData.x / textureWidth;
+							const float v0 = WorldEditor::uvPaintData.y / textureHeight;
+							const float u1 = WorldEditor::uvPaintData.w / textureWidth;
+							const float v1 = WorldEditor::uvPaintData.y / textureHeight;
+							const float u2 = WorldEditor::uvPaintData.w / textureWidth;
+							const float v2 = WorldEditor::uvPaintData.h / textureHeight;
 							*newUVs[0] = XMFLOAT2(u0, v0);
 							*newUVs[1] = XMFLOAT2(u1, v1);
 							*newUVs[2] = XMFLOAT2(u2, v2);
 							break;
+						}
 						case UVPaintRotate::Right:
+						{
+							const float u0 = WorldEditor::uvPaintData.x / textureWidth;
+							const float v0 = WorldEditor::uvPaintData.y / textureHeight;
+							const float u1 = WorldEditor::uvPaintData.w / textureWidth;
+							const float v1 = WorldEditor::uvPaintData.y / textureHeight;
+							const float u2 = WorldEditor::uvPaintData.w / textureWidth;
+							const float v2 = WorldEditor::uvPaintData.h / textureHeight;
 							*newUVs[2] = XMFLOAT2(u0, v0);
 							*newUVs[1] = XMFLOAT2(u1, v1);
 							*newUVs[0] = XMFLOAT2(u2, v2);
 							break;
+						}
+						case UVPaintRotate::Up:
+						{
+							const float u0 = WorldEditor::uvPaintData.w / textureWidth;
+							const float v0 = WorldEditor::uvPaintData.h / textureHeight;
+							const float u1 = WorldEditor::uvPaintData.x / textureWidth;
+							const float v1 = WorldEditor::uvPaintData.h / textureHeight;
+							const float u2 = WorldEditor::uvPaintData.x / textureWidth;
+							const float v2 = WorldEditor::uvPaintData.y / textureHeight;
+							*newUVs[0] = XMFLOAT2(u0, v0);
+							*newUVs[1] = XMFLOAT2(u1, v2);
+							*newUVs[2] = XMFLOAT2(u2, v2);
+							break;
+						}
+						case UVPaintRotate::Down:
+						{
+							const float u0 = WorldEditor::uvPaintData.x / textureWidth;
+							const float v0 = WorldEditor::uvPaintData.y / textureHeight;
+							const float u1 = WorldEditor::uvPaintData.w / textureWidth;
+							const float v1 = WorldEditor::uvPaintData.y / textureHeight;
+							const float u2 = WorldEditor::uvPaintData.w / textureWidth;
+							const float v2 = WorldEditor::uvPaintData.h / textureHeight;
+							*newUVs[2] = XMFLOAT2(u0, v0);
+							*newUVs[0] = XMFLOAT2(u1, v2);
+							*newUVs[1] = XMFLOAT2(u2, v2);
+							break;
+						}
 						}
 					}
 
