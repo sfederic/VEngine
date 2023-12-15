@@ -18,6 +18,8 @@ enum class UVPaintRotate
 {
 	Left,
 	Right,
+	Up,
+	Down
 };
 
 struct UVPaintData

@@ -638,6 +638,15 @@ void DebugMenu::RenderUVPaintMenu()
 	{
 		WorldEditor::uvPaintData.uvPaintRotate = UVPaintRotate::Right;
 	}
+	if (ImGui::ArrowButton("Up", 2))
+	{
+		WorldEditor::uvPaintData.uvPaintRotate = UVPaintRotate::Up;
+	}
+	ImGui::SameLine();
+	if (ImGui::ArrowButton("Down", 3))
+	{
+		WorldEditor::uvPaintData.uvPaintRotate = UVPaintRotate::Down;
+	}
 
 	if (ImGui::Button("Export Selected Actor .vmesh"))
 	{
