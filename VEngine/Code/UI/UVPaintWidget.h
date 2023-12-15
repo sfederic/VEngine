@@ -2,9 +2,6 @@
 
 #include "Widget.h"
 
-//@Todo: the fucking UISystem keeps cleaning up widgets on swap chain resize.
-//make a bool in Widget to denote not to delete shit.
-
 class UVPaintWidget : public Widget
 {
 public:
