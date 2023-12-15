@@ -28,15 +28,9 @@ void UVPaintWidget::Draw(float deltaTime)
 	UpdateWorldEditorUVData();
 }
 
-void UVPaintWidget::SetUVPickerDimensions(float width, float height)
+void UVPaintWidget::UpdateWorldEditorUVData() const
 {
-	uvPickerWidth = width;
-	uvPickerHeight = height;
-}
-
-void UVPaintWidget::UpdateWorldEditorUVData()
-{
-	WorldEditor::uvPaintData.texture = "vagrant_map.png";
+	WorldEditor::uvPaintData.texture = uvPreviewTextureFilename;
 	WorldEditor::uvPaintData.x = previousMouseX;
 	WorldEditor::uvPaintData.y = previousMouseY;
 	WorldEditor::uvPaintData.w = previousMouseX + uvPickerWidth;

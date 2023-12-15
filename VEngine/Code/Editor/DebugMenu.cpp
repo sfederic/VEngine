@@ -594,14 +594,23 @@ void DebugMenu::RenderUVPaintMenu()
 		//needs to be called in a here so that World::Cleanup() doesn't remove the widget
 		uvPaintWidget = UISystem::CreateWidget<UVPaintWidget>();
 	}
-
 	if (!uvPaintMenuOpen)
 	{
 		uvPaintWidget->RemoveFromViewport();
 		return;
 	}
-
 	uvPaintWidget->AddToViewport();
+
+	ImGui::Begin("UV Paint");
+	static char texFilename[128];
+	ImGui::InputText("Texture", texFilename, sizeof(texFilename));
+	if (ImGui::Button("Set Texture"))
+	{
+		uvPaintWidget->uvPreviewTextureFilename = texFilename;
+	}
+	ImGui::InputFloat("Picker Width", &uvPaintWidget->uvPickerWidth);
+	ImGui::InputFloat("Picker Height", &uvPaintWidget->uvPickerHeight);
+	ImGui::End();
 }
 
 //Handle viewport notifications (e.g. "Shaders recompiled", "ERROR: Not X", etc.)
