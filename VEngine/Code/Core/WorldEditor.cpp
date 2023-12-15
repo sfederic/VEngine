@@ -462,13 +462,12 @@ void VertexPainting()
 void UVPainting()
 {
 	if (!WorldEditor::uvPaintActive) return;
-
 	if (!WorldEditor::uvPaintOn) return;
 
 	const bool leftClick = Input::GetMouseLeftDown();
-	const bool rightClick = Input::GetMouseRightDown();
+	const bool middleClick = Input::GetMouseRightDown();
 
-	if (leftClick || rightClick)
+	if (leftClick || middleClick)
 	{
 		HitResult hit;
 		if (RaycastFromScreen(hit))
@@ -484,22 +483,19 @@ void UVPainting()
 				assert(hit.vertIndexesOfHitTriangleFace.size() == 3);
 				std::vector<XMFLOAT2*> newUVs;
 
-				std::vector<Vertex> newVerts;
-
 				for (int vertIndex : hit.vertIndexesOfHitTriangleFace)
 				{
 					auto& vertex = vertices.at(vertIndex);
-					newVerts.push_back(vertex);
 					newUVs.push_back(&vertex.uv);
 				}
 
-				auto texture = TextureSystem::FindTexture2D(WorldEditor::uvPaintData.texture);
+				const auto texture = TextureSystem::FindTexture2D(WorldEditor::uvPaintData.texture);
 				const auto textureWidth = texture->GetWidth();
 				const auto textureHeight = texture->GetHeight();
 
 				assert(newUVs.size() == 3);
 
-				//The uv values here are very finiky. Keep an eye on them.
+				//The uv values here are very finicky. Keep an eye on them.
 				if (leftClick)
 				{
 					switch (WorldEditor::uvPaintData.uvPaintRotate)
@@ -558,7 +554,7 @@ void UVPainting()
 					}
 					}
 				}
-				else if (rightClick)
+				else if (middleClick)
 				{
 					switch (WorldEditor::uvPaintData.uvPaintRotate)
 					{
@@ -618,7 +614,6 @@ void UVPainting()
 				}
 
 				mesh->SetTexture(WorldEditor::uvPaintData.texture);
-
 				mesh->CreateNewVertexBuffer();
 			}
 		}
