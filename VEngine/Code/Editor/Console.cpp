@@ -177,7 +177,7 @@ void Console::Init()
 			WorldEditor::vertexPaintActive = !WorldEditor::vertexPaintActive;
 			}, "Activate vertex paint mode."));
 
-	executeMap.emplace(L"UVPAINT",
+	executeMap.emplace(L"UVP",
 		std::make_pair([]() {
 			WorldEditor::uvPaintActive = !WorldEditor::uvPaintActive;
 			debugMenu.uvPaintMenuOpen = !debugMenu.uvPaintMenuOpen;
