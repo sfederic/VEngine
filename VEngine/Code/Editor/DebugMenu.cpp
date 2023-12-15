@@ -614,9 +614,31 @@ void DebugMenu::RenderUVPaintMenu()
 	if (ImGui::Button("Set Texture"))
 	{
 		uvPaintWidget->uvPreviewTextureFilename = texFilename;
+		auto actor = WorldEditor::GetPickedActor();
+		if (actor)
+		{
+			auto mesh = actor->GetFirstComponentOfTypeAllowNull<MeshComponent>();
+			if (mesh)
+			{
+				mesh->SetTexture(texFilename);
+			}
+		}
 	}
 	ImGui::InputFloat("Picker Width", &uvPaintWidget->uvPickerWidth);
 	ImGui::InputFloat("Picker Height", &uvPaintWidget->uvPickerHeight);
+
+	//ImGui what are you doing use an enum.
+	//ImGuiDir is just an int typedef. https://wiki.giderosmobile.com/index.php/ImGui.Core:arrowButton
+	if (ImGui::ArrowButton("Left", 0))
+	{
+		WorldEditor::uvPaintData.uvPaintRotate = UVPaintRotate::Left;
+	}
+	ImGui::SameLine();
+	if (ImGui::ArrowButton("Right", 1))
+	{
+		WorldEditor::uvPaintData.uvPaintRotate = UVPaintRotate::Right;
+	}
+
 	ImGui::End();
 }
 

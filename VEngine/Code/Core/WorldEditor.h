@@ -11,9 +11,18 @@ struct Transform;
 
 //@Todo: actor delete undo
 
+//Because the UV painting is working with triangle faces and not quads, you can really only rotate
+//the newly set UVs either left or right. 
+enum class UVPaintRotate
+{
+	Left,
+	Right,
+};
+
 struct UVPaintData
 {
 	std::string texture;
+	UVPaintRotate uvPaintRotate = UVPaintRotate::Left;
 	float x = 0.f;
 	float y = 0.f;
 	float w = 0.f;

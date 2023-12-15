@@ -470,6 +470,8 @@ void UVPainting()
 			HitResult hit;
 			if (RaycastFromScreen(hit))
 			{
+				if (hit.hitActor != WorldEditor::GetPickedActor()) return;
+
 				auto meshes = hit.hitActor->GetComponents<MeshComponent>();
 				for (auto mesh : meshes)
 				{
@@ -504,9 +506,19 @@ void UVPainting()
 						const float u2 = WorldEditor::uvPaintData.x / textureWidth;
 						const float v2 = WorldEditor::uvPaintData.h / textureHeight;
 
-						*newUVs[0] = XMFLOAT2(u0, v0);
-						*newUVs[1] = XMFLOAT2(u1, v1);
-						*newUVs[2] = XMFLOAT2(u2, v2);
+						switch (WorldEditor::uvPaintData.uvPaintRotate)
+						{
+						case UVPaintRotate::Left:
+							*newUVs[0] = XMFLOAT2(u0, v0);
+							*newUVs[1] = XMFLOAT2(u1, v1);
+							*newUVs[2] = XMFLOAT2(u2, v2);
+							break;
+						case UVPaintRotate::Right:
+							*newUVs[1] = XMFLOAT2(u0, v0);
+							*newUVs[2] = XMFLOAT2(u1, v1);
+							*newUVs[0] = XMFLOAT2(u2, v2);
+							break;
+						}
 					}
 					else if (rightClick)
 					{
@@ -519,10 +531,19 @@ void UVPainting()
 						const float u2 = WorldEditor::uvPaintData.w / textureWidth;
 						const float v2 = WorldEditor::uvPaintData.h / textureHeight;
 
-
-						*newUVs[0] = XMFLOAT2(u0, v0);
-						*newUVs[1] = XMFLOAT2(u1, v1);
-						*newUVs[2] = XMFLOAT2(u2, v2);
+						switch (WorldEditor::uvPaintData.uvPaintRotate)
+						{
+						case UVPaintRotate::Left:
+							*newUVs[0] = XMFLOAT2(u0, v0);
+							*newUVs[1] = XMFLOAT2(u1, v1);
+							*newUVs[2] = XMFLOAT2(u2, v2);
+							break;
+						case UVPaintRotate::Right:
+							*newUVs[2] = XMFLOAT2(u0, v0);
+							*newUVs[1] = XMFLOAT2(u1, v1);
+							*newUVs[0] = XMFLOAT2(u2, v2);
+							break;
+						}
 					}
 
 					mesh->SetTexture(WorldEditor::uvPaintData.texture);
