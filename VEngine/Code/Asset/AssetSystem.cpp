@@ -79,8 +79,8 @@ void AssetSystem::CreateVMeshFromInWorldMesh()
 	{
 		//@Todo: can loop through skeletalmeshcomponents here to export the skeleton too to mesh data.
 
-		auto mesh = actor->GetFirstComponentOfTypeAllowNull<MeshComponent>();
-		if (mesh)
+		auto meshes = actor->GetComponents<MeshComponent>();
+		for (auto mesh : meshes)
 		{
 			MeshData meshData = {};
 			XMStoreFloat3(&meshData.boundingBox.Center, mesh->GetBoundsCenter());
