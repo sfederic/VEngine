@@ -2,6 +2,8 @@
 
 #include "Widget.h"
 
+//Displays a reticle to select a segment over the displayed texture.
+//Links with WorldEditor to UV paint meshes.
 class UVPaintWidget : public Widget
 {
 public:
