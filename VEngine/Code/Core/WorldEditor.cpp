@@ -35,6 +35,7 @@ bool WorldEditor::meshPlacement = false;
 bool WorldEditor::materialPlacement = false;
 bool WorldEditor::vertexPaintActive = false;
 bool WorldEditor::uvPaintActive = false;
+bool WorldEditor::uvPaintOn = false;
 bool WorldEditor::actorReplaceModeActive = false;
 bool WorldEditor::parentSetActive = false;
 bool WorldEditor::moveActorViaKeyboardInput = false;
@@ -460,164 +461,165 @@ void VertexPainting()
 
 void UVPainting()
 {
-	if (WorldEditor::uvPaintActive)
+	if (!WorldEditor::uvPaintActive) return;
+
+	if (!WorldEditor::uvPaintOn) return;
+
+	const bool leftClick = Input::GetMouseLeftDown();
+	const bool rightClick = Input::GetMouseRightDown();
+
+	if (leftClick || rightClick)
 	{
-		const bool leftClick = Input::GetMouseLeftUp();
-		const bool rightClick = Input::GetMouseRightUp();
-
-		if (leftClick || rightClick)
+		HitResult hit;
+		if (RaycastFromScreen(hit))
 		{
-			HitResult hit;
-			if (RaycastFromScreen(hit))
+			if (hit.hitActor != WorldEditor::GetPickedActor()) return;
+
+			auto meshes = hit.hitActor->GetComponents<MeshComponent>();
+			for (auto mesh : meshes)
 			{
-				if (hit.hitActor != WorldEditor::GetPickedActor()) return;
+				const auto numVerts = mesh->meshDataProxy.vertices.size();
+				auto& vertices = mesh->meshDataProxy.GetVertices();
 
-				auto meshes = hit.hitActor->GetComponents<MeshComponent>();
-				for (auto mesh : meshes)
+				assert(hit.vertIndexesOfHitTriangleFace.size() == 3);
+				std::vector<XMFLOAT2*> newUVs;
+
+				std::vector<Vertex> newVerts;
+
+				for (int vertIndex : hit.vertIndexesOfHitTriangleFace)
 				{
-					const auto numVerts = mesh->meshDataProxy.vertices.size();
-					auto& vertices = mesh->meshDataProxy.GetVertices();
-
-					assert(hit.vertIndexesOfHitTriangleFace.size() == 3);
-					std::vector<XMFLOAT2*> newUVs;
-
-					std::vector<Vertex> newVerts;
-
-					for (int vertIndex : hit.vertIndexesOfHitTriangleFace)
-					{
-						auto& vertex = vertices.at(vertIndex);
-						newVerts.push_back(vertex);
-						newUVs.push_back(&vertex.uv);
-					}
-
-					auto texture = TextureSystem::FindTexture2D(WorldEditor::uvPaintData.texture);
-					const auto textureWidth = texture->GetWidth();
-					const auto textureHeight = texture->GetHeight();
-
-					assert(newUVs.size() == 3);
-
-					//The uv values here are very finiky. Keep an eye on them.
-					if (leftClick)
-					{
-						switch (WorldEditor::uvPaintData.uvPaintRotate)
-						{
-						case UVPaintRotate::Left:
-						{
-							const float u0 = WorldEditor::uvPaintData.x / textureWidth;
-							const float v0 = WorldEditor::uvPaintData.y / textureHeight;
-							const float u1 = WorldEditor::uvPaintData.w / textureWidth;
-							const float v1 = WorldEditor::uvPaintData.y / textureHeight;
-							const float u2 = WorldEditor::uvPaintData.w / textureWidth;
-							const float v2 = WorldEditor::uvPaintData.h / textureHeight;
-							*newUVs[0] = XMFLOAT2(u0, v0);
-							*newUVs[2] = XMFLOAT2(u1, v1);
-							*newUVs[1] = XMFLOAT2(u2, v2);
-							break;
-						}
-						case UVPaintRotate::Right:
-						{
-							const float u0 = WorldEditor::uvPaintData.x / textureWidth;
-							const float v0 = WorldEditor::uvPaintData.y / textureHeight;
-							const float u1 = WorldEditor::uvPaintData.w / textureWidth;
-							const float v1 = WorldEditor::uvPaintData.h / textureHeight;
-							const float u2 = WorldEditor::uvPaintData.x / textureWidth;
-							const float v2 = WorldEditor::uvPaintData.h / textureHeight;
-							*newUVs[1] = XMFLOAT2(u0, v0);
-							*newUVs[0] = XMFLOAT2(u1, v1);
-							*newUVs[2] = XMFLOAT2(u2, v2);
-							break;
-						}
-						case UVPaintRotate::Up:
-						{
-							const float u0 = WorldEditor::uvPaintData.w / textureWidth;
-							const float v0 = WorldEditor::uvPaintData.h / textureHeight;
-							const float u1 = WorldEditor::uvPaintData.x / textureWidth;
-							const float v1 = WorldEditor::uvPaintData.y / textureHeight;
-							const float u2 = WorldEditor::uvPaintData.w / textureWidth;
-							const float v2 = WorldEditor::uvPaintData.y / textureHeight;
-							*newUVs[0] = XMFLOAT2(u0, v0);
-							*newUVs[1] = XMFLOAT2(u1, v2);
-							*newUVs[2] = XMFLOAT2(u2, v2);
-							break;
-						}
-						case UVPaintRotate::Down:
-						{
-							const float u0 = WorldEditor::uvPaintData.x / textureWidth;
-							const float v0 = WorldEditor::uvPaintData.y / textureHeight;
-							const float u1 = WorldEditor::uvPaintData.w / textureWidth;
-							const float v1 = WorldEditor::uvPaintData.h / textureHeight;
-							const float u2 = WorldEditor::uvPaintData.x / textureWidth;
-							const float v2 = WorldEditor::uvPaintData.h / textureHeight;
-							*newUVs[0] = XMFLOAT2(u0, v0);
-							*newUVs[1] = XMFLOAT2(u1, v1);
-							*newUVs[2] = XMFLOAT2(u2, v2);
-							break;
-						}
-						}
-					}
-					else if (rightClick)
-					{
-						switch (WorldEditor::uvPaintData.uvPaintRotate)
-						{
-						case UVPaintRotate::Left:
-						{
-							const float u0 = WorldEditor::uvPaintData.x / textureWidth;
-							const float v0 = WorldEditor::uvPaintData.y / textureHeight;
-							const float u1 = WorldEditor::uvPaintData.w / textureWidth;
-							const float v1 = WorldEditor::uvPaintData.h / textureHeight;
-							const float u2 = WorldEditor::uvPaintData.x / textureWidth;
-							const float v2 = WorldEditor::uvPaintData.h / textureHeight;
-							*newUVs[0] = XMFLOAT2(u0, v0);
-							*newUVs[2] = XMFLOAT2(u1, v1);
-							*newUVs[1] = XMFLOAT2(u2, v2);
-							break;
-						}
-						case UVPaintRotate::Right:
-						{
-							const float u0 = WorldEditor::uvPaintData.x / textureWidth;
-							const float v0 = WorldEditor::uvPaintData.y / textureHeight;
-							const float u1 = WorldEditor::uvPaintData.w / textureWidth;
-							const float v1 = WorldEditor::uvPaintData.y / textureHeight;
-							const float u2 = WorldEditor::uvPaintData.w / textureWidth;
-							const float v2 = WorldEditor::uvPaintData.h / textureHeight;
-							*newUVs[2] = XMFLOAT2(u0, v0);
-							*newUVs[1] = XMFLOAT2(u1, v1);
-							*newUVs[0] = XMFLOAT2(u2, v2);
-							break;
-						}
-						case UVPaintRotate::Up:
-						{
-							const float u0 = WorldEditor::uvPaintData.x / textureWidth;
-							const float v0 = WorldEditor::uvPaintData.y / textureHeight;
-							const float u1 = WorldEditor::uvPaintData.w / textureWidth;
-							const float v1 = WorldEditor::uvPaintData.h / textureHeight;
-							const float u2 = WorldEditor::uvPaintData.x / textureWidth;
-							const float v2 = WorldEditor::uvPaintData.h / textureHeight;
-							*newUVs[2] = XMFLOAT2(u0, v0);
-							*newUVs[0] = XMFLOAT2(u1, v1);
-							*newUVs[1] = XMFLOAT2(u2, v2);
-							break;
-						}
-						case UVPaintRotate::Down:
-						{
-							const float u0 = WorldEditor::uvPaintData.x / textureWidth;
-							const float v0 = WorldEditor::uvPaintData.y / textureHeight;
-							const float u1 = WorldEditor::uvPaintData.w / textureWidth;
-							const float v1 = WorldEditor::uvPaintData.y / textureHeight;
-							const float u2 = WorldEditor::uvPaintData.w / textureWidth;
-							const float v2 = WorldEditor::uvPaintData.h / textureHeight;
-							*newUVs[0] = XMFLOAT2(u0, v0);
-							*newUVs[1] = XMFLOAT2(u1, v1);
-							*newUVs[2] = XMFLOAT2(u2, v2);
-							break;
-						}
-						}
-					}
-
-					mesh->SetTexture(WorldEditor::uvPaintData.texture);
-
-					mesh->CreateNewVertexBuffer();
+					auto& vertex = vertices.at(vertIndex);
+					newVerts.push_back(vertex);
+					newUVs.push_back(&vertex.uv);
 				}
+
+				auto texture = TextureSystem::FindTexture2D(WorldEditor::uvPaintData.texture);
+				const auto textureWidth = texture->GetWidth();
+				const auto textureHeight = texture->GetHeight();
+
+				assert(newUVs.size() == 3);
+
+				//The uv values here are very finiky. Keep an eye on them.
+				if (leftClick)
+				{
+					switch (WorldEditor::uvPaintData.uvPaintRotate)
+					{
+					case UVPaintRotate::Left:
+					{
+						const float u0 = WorldEditor::uvPaintData.x / textureWidth;
+						const float v0 = WorldEditor::uvPaintData.y / textureHeight;
+						const float u1 = WorldEditor::uvPaintData.w / textureWidth;
+						const float v1 = WorldEditor::uvPaintData.y / textureHeight;
+						const float u2 = WorldEditor::uvPaintData.w / textureWidth;
+						const float v2 = WorldEditor::uvPaintData.h / textureHeight;
+						*newUVs[0] = XMFLOAT2(u0, v0);
+						*newUVs[2] = XMFLOAT2(u1, v1);
+						*newUVs[1] = XMFLOAT2(u2, v2);
+						break;
+					}
+					case UVPaintRotate::Right:
+					{
+						const float u0 = WorldEditor::uvPaintData.x / textureWidth;
+						const float v0 = WorldEditor::uvPaintData.y / textureHeight;
+						const float u1 = WorldEditor::uvPaintData.w / textureWidth;
+						const float v1 = WorldEditor::uvPaintData.h / textureHeight;
+						const float u2 = WorldEditor::uvPaintData.x / textureWidth;
+						const float v2 = WorldEditor::uvPaintData.h / textureHeight;
+						*newUVs[1] = XMFLOAT2(u0, v0);
+						*newUVs[0] = XMFLOAT2(u1, v1);
+						*newUVs[2] = XMFLOAT2(u2, v2);
+						break;
+					}
+					case UVPaintRotate::Up:
+					{
+						const float u0 = WorldEditor::uvPaintData.w / textureWidth;
+						const float v0 = WorldEditor::uvPaintData.h / textureHeight;
+						const float u1 = WorldEditor::uvPaintData.x / textureWidth;
+						const float v1 = WorldEditor::uvPaintData.y / textureHeight;
+						const float u2 = WorldEditor::uvPaintData.w / textureWidth;
+						const float v2 = WorldEditor::uvPaintData.y / textureHeight;
+						*newUVs[0] = XMFLOAT2(u0, v0);
+						*newUVs[1] = XMFLOAT2(u1, v2);
+						*newUVs[2] = XMFLOAT2(u2, v2);
+						break;
+					}
+					case UVPaintRotate::Down:
+					{
+						const float u0 = WorldEditor::uvPaintData.x / textureWidth;
+						const float v0 = WorldEditor::uvPaintData.y / textureHeight;
+						const float u1 = WorldEditor::uvPaintData.w / textureWidth;
+						const float v1 = WorldEditor::uvPaintData.h / textureHeight;
+						const float u2 = WorldEditor::uvPaintData.x / textureWidth;
+						const float v2 = WorldEditor::uvPaintData.h / textureHeight;
+						*newUVs[0] = XMFLOAT2(u0, v0);
+						*newUVs[1] = XMFLOAT2(u1, v1);
+						*newUVs[2] = XMFLOAT2(u2, v2);
+						break;
+					}
+					}
+				}
+				else if (rightClick)
+				{
+					switch (WorldEditor::uvPaintData.uvPaintRotate)
+					{
+					case UVPaintRotate::Left:
+					{
+						const float u0 = WorldEditor::uvPaintData.x / textureWidth;
+						const float v0 = WorldEditor::uvPaintData.y / textureHeight;
+						const float u1 = WorldEditor::uvPaintData.w / textureWidth;
+						const float v1 = WorldEditor::uvPaintData.h / textureHeight;
+						const float u2 = WorldEditor::uvPaintData.x / textureWidth;
+						const float v2 = WorldEditor::uvPaintData.h / textureHeight;
+						*newUVs[0] = XMFLOAT2(u0, v0);
+						*newUVs[2] = XMFLOAT2(u1, v1);
+						*newUVs[1] = XMFLOAT2(u2, v2);
+						break;
+					}
+					case UVPaintRotate::Right:
+					{
+						const float u0 = WorldEditor::uvPaintData.x / textureWidth;
+						const float v0 = WorldEditor::uvPaintData.y / textureHeight;
+						const float u1 = WorldEditor::uvPaintData.w / textureWidth;
+						const float v1 = WorldEditor::uvPaintData.y / textureHeight;
+						const float u2 = WorldEditor::uvPaintData.w / textureWidth;
+						const float v2 = WorldEditor::uvPaintData.h / textureHeight;
+						*newUVs[2] = XMFLOAT2(u0, v0);
+						*newUVs[1] = XMFLOAT2(u1, v1);
+						*newUVs[0] = XMFLOAT2(u2, v2);
+						break;
+					}
+					case UVPaintRotate::Up:
+					{
+						const float u0 = WorldEditor::uvPaintData.x / textureWidth;
+						const float v0 = WorldEditor::uvPaintData.y / textureHeight;
+						const float u1 = WorldEditor::uvPaintData.w / textureWidth;
+						const float v1 = WorldEditor::uvPaintData.h / textureHeight;
+						const float u2 = WorldEditor::uvPaintData.x / textureWidth;
+						const float v2 = WorldEditor::uvPaintData.h / textureHeight;
+						*newUVs[2] = XMFLOAT2(u0, v0);
+						*newUVs[0] = XMFLOAT2(u1, v1);
+						*newUVs[1] = XMFLOAT2(u2, v2);
+						break;
+					}
+					case UVPaintRotate::Down:
+					{
+						const float u0 = WorldEditor::uvPaintData.x / textureWidth;
+						const float v0 = WorldEditor::uvPaintData.y / textureHeight;
+						const float u1 = WorldEditor::uvPaintData.w / textureWidth;
+						const float v1 = WorldEditor::uvPaintData.y / textureHeight;
+						const float u2 = WorldEditor::uvPaintData.w / textureWidth;
+						const float v2 = WorldEditor::uvPaintData.h / textureHeight;
+						*newUVs[0] = XMFLOAT2(u0, v0);
+						*newUVs[1] = XMFLOAT2(u1, v1);
+						*newUVs[2] = XMFLOAT2(u2, v2);
+						break;
+					}
+					}
+				}
+
+				mesh->SetTexture(WorldEditor::uvPaintData.texture);
+
+				mesh->CreateNewVertexBuffer();
 			}
 		}
 	}

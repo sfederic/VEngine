@@ -25,7 +25,8 @@ enum class UVPaintRotate
 struct UVPaintData
 {
 	std::string texture;
-	UVPaintRotate uvPaintRotate = UVPaintRotate::Left;
+	//Right is the default to map the texture uv to World axis (x-right, y-up, z-forward)
+	UVPaintRotate uvPaintRotate = UVPaintRotate::Right;
 	float x = 0.f;
 	float y = 0.f;
 	float w = 0.f;
@@ -47,6 +48,7 @@ namespace WorldEditor
 	extern bool materialPlacement;
 	extern bool vertexPaintActive;
 	extern bool uvPaintActive;
+	extern bool uvPaintOn;
 	extern bool actorReplaceModeActive;
 	extern bool parentSetActive;
 	extern bool moveActorViaKeyboardInput;

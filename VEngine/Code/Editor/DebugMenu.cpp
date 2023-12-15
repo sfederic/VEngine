@@ -607,6 +607,14 @@ void DebugMenu::RenderUVPaintMenu()
 	uvPaintWidget->AddToViewport();
 
 	ImGui::Begin("UV Paint");
+	if (ImGui::Button("Paint On/off"))
+	{
+		WorldEditor::uvPaintOn = !WorldEditor::uvPaintOn;
+		WorldEditor::uvPaintOn ?
+			AddStaticNotification(L"uv paint on") :
+			ClearAllStaticNotifications();
+	}
+
 	//@Todo: this is junk, it won't update the uv image right when you swap actors. Put it into the console and 
 	//set it when uvPaintMenuOpen changes.
 	static std::string texFilename = uvPaintWidget->uvPreviewTextureFilename;
