@@ -589,6 +589,11 @@ void DebugMenu::RenderUVMenu()
 
 void DebugMenu::RenderUVPaintMenu()
 {
+	if (!uvPaintMenuOpen && uvPaintWidget == nullptr)
+	{
+		return;
+	}
+
 	if (uvPaintWidget == nullptr)
 	{
 		//needs to be called in a here so that World::Cleanup() doesn't remove the widget
@@ -602,8 +607,10 @@ void DebugMenu::RenderUVPaintMenu()
 	uvPaintWidget->AddToViewport();
 
 	ImGui::Begin("UV Paint");
-	static char texFilename[128];
-	ImGui::InputText("Texture", texFilename, sizeof(texFilename));
+	//@Todo: this is junk, it won't update the uv image right when you swap actors. Put it into the console and 
+	//set it when uvPaintMenuOpen changes.
+	static std::string texFilename = uvPaintWidget->uvPreviewTextureFilename;
+	ImGui::InputText("Texture", (char*)texFilename.c_str(), texFilename.capacity() + 1);
 	if (ImGui::Button("Set Texture"))
 	{
 		uvPaintWidget->uvPreviewTextureFilename = texFilename;

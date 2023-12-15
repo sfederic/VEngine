@@ -10,6 +10,7 @@ class UVPaintWidget : public Widget
 public:
 	UVPaintWidget()
 	{
+		SetTextureFromPickedActor();
 		isStaticWidget = true;
 	}
 
