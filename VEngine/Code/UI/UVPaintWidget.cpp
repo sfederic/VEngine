@@ -2,9 +2,12 @@
 #include "UVPaintWidget.h"
 #include "Core/Input.h"
 #include "Core/WorldEditor.h"
+#include "Components/MeshComponent.h"
 
 void UVPaintWidget::Draw(float deltaTime)
 {
+	SetTextureFromPickedActor();
+
 	const auto imageLayout = ImageAsOriginalSize(uvPreviewTextureFilename, 0, 0);
 
 	auto pickerLayout = Layout({ previousMouseX, previousMouseY, previousMouseX + uvPickerWidth, previousMouseY + uvPickerHeight });
@@ -35,4 +38,17 @@ void UVPaintWidget::UpdateWorldEditorUVData() const
 	WorldEditor::uvPaintData.y = previousMouseY;
 	WorldEditor::uvPaintData.w = previousMouseX + uvPickerWidth;
 	WorldEditor::uvPaintData.h = previousMouseY + uvPickerHeight;
+}
+
+void UVPaintWidget::SetTextureFromPickedActor()
+{
+	auto actor = WorldEditor::GetPickedActor();
+	if (actor)
+	{
+		auto mesh = actor->GetFirstComponentOfTypeAllowNull<MeshComponent>();
+		if (mesh)
+		{
+			uvPreviewTextureFilename = mesh->GetTextureFilename();
+		}
+	}
 }

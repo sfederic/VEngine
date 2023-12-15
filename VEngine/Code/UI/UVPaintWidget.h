@@ -8,16 +8,22 @@
 class UVPaintWidget : public Widget
 {
 public:
+	UVPaintWidget()
+	{
+		isStaticWidget = true;
+	}
+
 	void Draw(float deltaTime) override;
 
 	//Keep these variables public so ImGui can access them easier without the static nonsense.
-	std::string uvPreviewTextureFilename = "vagrant_map.png";
+	std::string uvPreviewTextureFilename;
 
 	float uvPickerWidth = 100.f;
 	float uvPickerHeight = 100.f;
 
 private:
 	void UpdateWorldEditorUVData() const;
+	void SetTextureFromPickedActor();
 
 	float previousMouseX = 0.f;
 	float previousMouseY = 0.f;
