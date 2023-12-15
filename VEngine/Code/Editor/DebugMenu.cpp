@@ -127,6 +127,20 @@ void DebugMenu::AddStaticNotification(std::wstring note)
 	debugNotifications.emplace_back(dn);
 }
 
+void DebugMenu::CreateUVPaintWidget()
+{
+	if (uvPaintWidget == nullptr)
+	{
+		uvPaintWidget = UISystem::CreateWidget<UVPaintWidget>();
+	}
+}
+
+void DebugMenu::SetUVPaintMenuTextureFilename()
+{
+	//Needs to be called here so that World::Cleanup() doesn't remove the widget.
+	uvPaintMenuTextureFilename = uvPaintWidget->uvPreviewTextureFilename;
+}
+
 void DebugMenu::IterateOverProperties(Properties& props)
 {
 	ImGui::Text(props.title.c_str());
@@ -593,12 +607,6 @@ void DebugMenu::RenderUVPaintMenu()
 	{
 		return;
 	}
-
-	if (uvPaintWidget == nullptr)
-	{
-		//needs to be called in a here so that World::Cleanup() doesn't remove the widget
-		uvPaintWidget = UISystem::CreateWidget<UVPaintWidget>();
-	}
 	if (!uvPaintMenuOpen)
 	{
 		uvPaintWidget->RemoveFromViewport();
@@ -615,23 +623,21 @@ void DebugMenu::RenderUVPaintMenu()
 			ClearAllStaticNotifications();
 	}
 
-	//@Todo: this is junk, it won't update the uv image right when you swap actors. Put it into the console and 
-	//set it when uvPaintMenuOpen changes.
-	static std::string texFilename = uvPaintWidget->uvPreviewTextureFilename;
-	ImGui::InputText("Texture", (char*)texFilename.c_str(), texFilename.capacity() + 1);
+	ImGui::InputText("Texture", (char*)uvPaintMenuTextureFilename.c_str(), uvPaintMenuTextureFilename.capacity() + 1);
 	if (ImGui::Button("Set Texture"))
 	{
-		uvPaintWidget->uvPreviewTextureFilename = texFilename;
+		uvPaintWidget->uvPreviewTextureFilename = uvPaintMenuTextureFilename;
 		auto actor = WorldEditor::GetPickedActor();
 		if (actor)
 		{
 			auto mesh = actor->GetFirstComponentOfTypeAllowNull<MeshComponent>();
 			if (mesh)
 			{
-				mesh->SetTexture(texFilename);
+				mesh->SetTexture(uvPaintMenuTextureFilename);
 			}
 		}
 	}
+
 	ImGui::InputFloat("Picker Width", &uvPaintWidget->uvPickerWidth);
 	ImGui::InputFloat("Picker Height", &uvPaintWidget->uvPickerHeight);
 

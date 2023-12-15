@@ -48,6 +48,9 @@ public:
 	void AddNotification(const std::wstring note);
 	void AddStaticNotification(std::wstring note);
 
+	void CreateUVPaintWidget();
+	void SetUVPaintMenuTextureFilename();
+
 private:
 	void RenderNotifications(float deltaTime);
 
@@ -74,6 +77,7 @@ private:
 	void RenderTexturePlacementMenu();
 	void RenderMaterialPlacementMenu();
 
+	std::string uvPaintMenuTextureFilename;
 	UVPaintWidget* uvPaintWidget = nullptr;
 };
 
