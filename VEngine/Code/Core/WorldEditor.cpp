@@ -495,6 +495,8 @@ void UVPainting()
 					const auto textureHeight = texture->GetHeight();
 
 					assert(newUVs.size() == 3);
+
+					//The uv values here are very finiky. Keep an eye on them.
 					if (leftClick)
 					{
 						switch (WorldEditor::uvPaintData.uvPaintRotate)
