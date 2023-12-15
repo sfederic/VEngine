@@ -181,7 +181,6 @@ void Console::Init()
 		std::make_pair([]() {
 			WorldEditor::uvPaintActive = !WorldEditor::uvPaintActive;
 			debugMenu.uvPaintMenuOpen = !debugMenu.uvPaintMenuOpen;
-			debugMenu.AddStaticNotification(L"UV Paint Active");
 			}, "Activate UV paint mode."));
 
 	executeMap.emplace(L"RESET UID",
