@@ -639,6 +639,12 @@ void DebugMenu::RenderUVPaintMenu()
 		WorldEditor::uvPaintData.uvPaintRotate = UVPaintRotate::Right;
 	}
 
+	if (ImGui::Button("Export Selected Actor .vmesh"))
+	{
+		AssetSystem::CreateVMeshFromInWorldMesh();
+		Log("Exported .vmesh for picked actor UV painting.");
+	}
+
 	ImGui::End();
 }
 
