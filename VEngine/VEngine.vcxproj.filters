@@ -1650,9 +1650,6 @@
     <ClInclude Include="Code\Actors\EmptyActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Editor\UVMapTileEditor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Code\UI\UVPaintWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>

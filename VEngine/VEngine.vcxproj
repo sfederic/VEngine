@@ -379,7 +379,6 @@
     <ClInclude Include="Code\Components\Game\ConditionComponent.h" />
     <ClInclude Include="Code\Components\Game\DialogueComponent.h" />
     <ClInclude Include="Code\Core\PropertyTypes.h" />
-    <ClInclude Include="Code\Editor\UVMapTileEditor.h" />
     <ClInclude Include="Code\Gameplay\BattleEnums.h" />
     <ClInclude Include="Code\Gameplay\ConditionSystem.h" />
     <ClInclude Include="Code\Gameplay\DialogueStructures.h" />
