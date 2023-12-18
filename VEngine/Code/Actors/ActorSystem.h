@@ -211,6 +211,7 @@ public:
 	virtual std::vector<Actor*> GetActorsAsBaseClass() override
 	{
 		std::vector<Actor*> outActors;
+		outActors.reserve(actors.size());
 		for (auto& actor : actors)
 		{
 			outActors.push_back(actor.get());
