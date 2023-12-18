@@ -25,6 +25,10 @@ enum class PhysicsType
 	Dynamic
 };
 
+//@Todo: Switching the project config to Release works bu the entire PhysX debug dlls and libs have to be replaced 
+//with the release specific ones. Try find a way to change this with a build file process so that switching to 
+//Release doesn't need Ctrl+V'ing everything.
+
 //@Todo: if non static MeshComponents are inside a skybox for example, they'll explode out because that
 //skybox hasn't disabled its BoundingBox and/or PhysicsComponent. make a flag that turns it off.
 
