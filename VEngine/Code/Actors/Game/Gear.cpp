@@ -16,12 +16,27 @@ void Gear::OnLinkRotate()
 {
 	__super::OnLinkRotate();
 
+	//This code is because gears don't normally cascade the same rotation, they'll invert
+	//the rotation every second gear. Watch a video or something to see it in motion.
+	const auto OddEvenAngleIncrement = [=](int index) -> float
+		{
+			const int oddIndex = index % 2;
+			if (oddIndex > 0)
+			{
+				return -90.f;
+			}
+			else
+			{
+				return 90.f;
+			}
+		};
+
 	//This is so any adjacent gears will cascade their movement, think like a watch's internals.
 	//Code here is a bit complex, but it works.
 	auto& gears = Gear::system.GetActors();
 	for (int gearIndex = 0; gearIndex < gears.size(); gearIndex++)
 	{
-		auto gear = gears[gearIndex].get();
+		auto gear = gears.at(gearIndex).get();
 
 		if (gear == this)
 		{
@@ -40,15 +55,19 @@ void Gear::OnLinkRotate()
 			this->previouslyCascadedGears.push_back(gear);
 
 			gear->OnLinkRotate();
-			gear->AddNextRotation(gear->GetUpVectorV(), 90.f);
+
+			const float angleIncrement = OddEvenAngleIncrement(gearIndex);
+			gear->AddNextRotation(gear->GetUpVectorV(), angleIncrement);
 		}
 	}
 
-	for (auto& gearSet : GearSet::system.GetActors())
+	for (int gearIndex = 0; gearIndex < GearSet::system.GetNumActors(); gearIndex++)
 	{
+		auto& gearSet = GearSet::system.GetActors().at(gearIndex);
 		if (gearSet->Intersects(mesh->GetBoundsInWorldSpace()))
 		{
-			gearSet->AddNextRotation(gearSet->GetUpVectorV(), 90.f);
+			const float angleIncrement = OddEvenAngleIncrement(gearIndex);
+			gearSet->AddNextRotation(gearSet->GetUpVectorV(), angleIncrement);
 			gearSet->IncrementDoor();
 		}
 	}
@@ -75,6 +94,5 @@ bool Gear::CheckIfPreviousGear(Gear* gear)
 			return true;
 		}
 	}
-
 	return false;
 }
