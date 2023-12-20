@@ -85,6 +85,7 @@ public:
 	void SetNextCameraPosition(XMVECTOR pos) { nextCameraPosition = pos; }
 	XMVECTOR GetCameraLocalPosition();
 	void ResetCameraPosAndTargetToPlayer();
+	void ResetCameraPosAndTargetToPlayerIfThisActor(Actor* actor);
 	void SetCameraTargetActor(Actor* target);
 	Actor& GetCameraTargetActor();
 

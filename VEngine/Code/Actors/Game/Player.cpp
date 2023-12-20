@@ -1143,6 +1143,15 @@ void Player::ResetCameraPosAndTargetToPlayer()
 	camera->SetTargetActor(this);
 }
 
+void Player::ResetCameraPosAndTargetToPlayerIfThisActor(Actor* actor)
+{
+	auto& targetActor = camera->GetTargetActor();
+	if (&targetActor == actor);
+	{
+		ResetCameraPosAndTargetToPlayer();
+	}
+}
+
 void Player::SetCameraTargetActor(Actor* target)
 {
 	camera->SetTargetActor(target);
