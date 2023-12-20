@@ -177,6 +177,7 @@ Properties GridActor::GetProps()
 	props.Add("Ignore Rotate Check", &ignoreRotationValidCheck);
 	props.Add("Rotate Yaw", &canBeRotatedYawYAxis);
 	props.Add("Rotate Pitch", &canBeRotatedPitchXAxis);
+	props.Add("Rotate Roll", &canBeRotatedRollZAxis);
 	props.Add("Move Axis Pos.", &validPositiveMovementAxis);
 	props.Add("Move Axis Neg.", &validNegativeMovementAxis);
 	props.Add("Move Speed", &moveSpeed);

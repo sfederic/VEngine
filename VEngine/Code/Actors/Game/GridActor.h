@@ -44,6 +44,12 @@ protected:
 	bool canBeRotatedYawYAxis = true;
 	bool canBeRotatedPitchXAxis = true;
 
+	//This bool is for rotating grid actors (e.g. actors stuck on walls) on their z-axis. Because the controls for rotation need
+	//to be simple (previous player input had this when holding down shift), some actors will be using this bool
+	//to denote that left and right will rotate along the z-axis instead. 
+	//Note that this will override yaw (y-axis) rotations.
+	bool canBeRotatedRollZAxis = false;
+
 	bool ignoreRotationValidCheck = false;
 
 	bool isLinked = false;
@@ -152,11 +158,12 @@ public:
 
 	bool IsNextMoveAxisValid(XMVECTOR direction);
 
-	bool IsLinked() { return isLinked; }
-	bool CanBeMovedInLink() { return canBeMovedInLink; }
-	bool CanBeRotatedInLink() { return canBeRotatedInLink; }
-	bool CanBeRotatedYawYAxis() { return canBeRotatedYawYAxis; }
-	bool CanBeRotatedPitchXAxis() { return canBeRotatedPitchXAxis; }
+	bool IsLinked() const { return isLinked; }
+	bool CanBeMovedInLink() const { return canBeMovedInLink; }
+	bool CanBeRotatedInLink() const { return canBeRotatedInLink; }
+	bool CanBeRotatedYawYAxis() const { return canBeRotatedYawYAxis; }
+	bool CanBeRotatedPitchXAxis() const { return canBeRotatedPitchXAxis; }
+	bool CanBeRotatedRollZAxis() const { return canBeRotatedRollZAxis; }
 
 	void SetCanFall(bool fall) { canFall = fall; }
 
