@@ -25,7 +25,7 @@ void PickupPlacementActor::Tick(float deltaTime)
 
 	if (boxTrigger->ContainsTarget())
 	{
-		if (Input::GetKeyUp(Keys::Down))
+		if (Input::GetKeyUp("Interact"))
 		{
 			const std::string heldItemName = GameInstance::GetHeldPlayerItem();
 			if (heldItemName == heldItemToCheck)

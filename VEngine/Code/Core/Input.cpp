@@ -5,8 +5,8 @@ std::set<Keys> currentHeldKeys;
 std::set<Keys> currentDownKeys;
 std::set<Keys> currentUpKeys;
 
-//@Todo: need to map keys to a string map so that you're not directly calling win32 key enum inputs,
-//instead calling "Use" or whatever.
+//@Todo: the keymap here isn't really good. Needs to be a std::multimap and be able to read from a config file.
+std::multimap<std::string, Keys> keyMap;
 
 namespace Input
 {
@@ -21,6 +21,26 @@ namespace Input
 	bool mouseRightDown;
 	bool mouseMiddleUp;
 	bool mouseMiddleDown;
+
+	void InitKeyMap()
+	{
+		keyMap.emplace("MoveForward", Keys::W);
+		keyMap.emplace("MoveBack", Keys::S);
+		keyMap.emplace("MoveLeft", Keys::A);
+		keyMap.emplace("MoveRight", Keys::D);
+
+		keyMap.emplace("RotateUp", Keys::Up);
+		keyMap.emplace("RotateDown", Keys::Down);
+		keyMap.emplace("RotateLeft", Keys::Left);
+		keyMap.emplace("RotateRight", Keys::Right);
+
+		keyMap.emplace("Link", Keys::Enter);
+		keyMap.emplace("Unlink", Keys::BackSpace);
+
+		keyMap.emplace("ToggleGrid", Keys::Space);
+
+		keyMap.emplace("Interact", Keys::Down);
+	}
 
 	void Reset()
 	{
@@ -51,6 +71,45 @@ namespace Input
 		currentUpKeys.insert(key);
 		currentDownKeys.erase(key);
 		currentHeldKeys.erase(key);
+	}
+
+	bool GetKeyDown(std::string keyMapping)
+	{
+		auto mappingIt = keyMap.find(keyMapping);
+		if (mappingIt != keyMap.end())
+		{
+			if (currentDownKeys.contains(mappingIt->second))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	bool GetKeyUp(std::string keyMapping)
+	{
+		auto mappingIt = keyMap.find(keyMapping);
+		if (mappingIt != keyMap.end())
+		{
+			if (currentUpKeys.contains(mappingIt->second))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	bool GetKeyHeld(std::string keyMapping)
+	{
+		auto mappingIt = keyMap.find(keyMapping);
+		if (mappingIt != keyMap.end())
+		{
+			if (currentHeldKeys.contains(mappingIt->second))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 	bool GetKeyDown(Keys key)

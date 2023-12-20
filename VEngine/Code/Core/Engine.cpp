@@ -34,14 +34,12 @@ void ClearLog()
 
 void Engine::Init(int argc, char* argv[])
 {
-	auto startTime = Profile::QuickStart();
+	const auto startTime = Profile::QuickStart();
 
 	ClearLog();
-
+	Input::InitKeyMap();
 	PropertyTypes::SetupPropertyTypesVEnum();
-
 	WorldFunctions::SetupWorldStartFunctions();
-
 	Camera::SetEditorCameraAsActive();
 
 	auto coreInit = std::async(std::launch::async, []() { Core::Init(); });
@@ -75,7 +73,7 @@ void Engine::Init(int argc, char* argv[])
 	debugMenuInit.wait();
 	consoleInit.wait();
 
-	double endTime = Profile::QuickEnd(startTime);
+	const double endTime = Profile::QuickEnd(startTime);
 	Log("Startup took: %f seconds", endTime);
 }
 

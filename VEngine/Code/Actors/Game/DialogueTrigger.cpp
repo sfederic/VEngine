@@ -39,7 +39,7 @@ void DialogueTrigger::Tick(float deltaTime)
 			NextLine();
 			return;
 		}
-		else if (Input::GetKeyUp(Keys::Down)) //Play dialogue on input
+		else if (Input::GetKeyUp("Interact")) //Play dialogue on input
 		{
 			firstTimePlaying = false;
 			NextLine();

@@ -10,6 +10,7 @@ namespace Input
 
 	extern bool blockInput;
 
+	void InitKeyMap();
 	void Reset();
 
 	//Used for when Qt or ImGui might take away input WndProc focus from the program with a QtDialog for example,
@@ -19,9 +20,14 @@ namespace Input
 	void SetKeyDown(Keys key);
 	void SetKeyUp(Keys key);
 
+	bool GetKeyDown(std::string keyMapping);
+	bool GetKeyUp(std::string keyMapping);
+	bool GetKeyHeld(std::string keyMapping);
+
 	bool GetKeyDown(Keys key);
 	bool GetKeyUp(Keys key);
 	bool GetKeyHeld(Keys key);
+
 	bool GetAnyKeyDown();
 	bool GetAnyKeyUp();
 

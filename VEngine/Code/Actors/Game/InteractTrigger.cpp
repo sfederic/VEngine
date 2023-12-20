@@ -37,7 +37,7 @@ void InteractTrigger::Tick(float deltaTime)
 	{
 		interactWidget->AddToViewport();
 
-		if (Input::GetKeyUp(Keys::Down))
+		if (Input::GetKeyUp("Interact"))
 		{
 			if (!isBeingInteractedWith)
 			{

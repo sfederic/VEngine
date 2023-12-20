@@ -198,7 +198,7 @@ bool Player::CheckAttackPositionAgainstUnitDirection(Unit* unit)
 
 void Player::ToggleGrid()
 {
-	if (Input::GetKeyUp(Keys::Space))
+	if (Input::GetKeyUp("ToggleGrid"))
 	{
 		GameUtils::PlayAudioOneShot("sword_sheathe.wav");
 
@@ -293,7 +293,7 @@ void Player::PrimaryAction()
 		return;
 	}
 
-	if (Input::GetKeyUp(Keys::Down))
+	if (Input::GetKeyUp("Interact"))
 	{
 		if (!inInspection)
 		{
@@ -613,12 +613,12 @@ void Player::LinkToGridActor()
 
 	if (isInputLinkedToGridActor) //Cancel
 	{
-		if (Input::GetKeyUp(Keys::BackSpace))
+		if (Input::GetKeyUp("Unlink"))
 		{
 			ResetLinkedGridActor();
 		}
 	}
-	else if (!isInputLinkedToGridActor && Input::GetKeyUp(Keys::Enter)) //Raycast forward
+	else if (!isInputLinkedToGridActor && Input::GetKeyUp("Link")) //Raycast forward
 	{
 		HitResult hit(this);
 		if (Raycast(hit, GetPositionV(), GetMeshForward(), 100.f))
@@ -671,7 +671,7 @@ void Player::MoveLinkedGridActor()
 			return true;
 		};
 
-	if (Input::GetKeyUp(Keys::W))
+	if (Input::GetKeyUp("MoveForward"))
 	{
 		if (checkLinkMovement(linkedGridActor->CanBeMovedInLink()))
 		{
@@ -689,7 +689,7 @@ void Player::MoveLinkedGridActor()
 			}
 		}
 	}
-	else if (Input::GetKeyUp(Keys::S))
+	else if (Input::GetKeyUp("MoveBack"))
 	{
 		if (checkLinkMovement(linkedGridActor->CanBeMovedInLink()))
 		{
@@ -707,7 +707,7 @@ void Player::MoveLinkedGridActor()
 			}
 		}
 	}
-	else if (Input::GetKeyUp(Keys::A))
+	else if (Input::GetKeyUp("MoveLeft"))
 	{
 		if (checkLinkMovement(linkedGridActor->CanBeMovedInLink()))
 		{
@@ -725,7 +725,7 @@ void Player::MoveLinkedGridActor()
 			}
 		}
 	}
-	else if (Input::GetKeyUp(Keys::D))
+	else if (Input::GetKeyUp("MoveRight"))
 	{
 		if (checkLinkMovement(linkedGridActor->CanBeMovedInLink()))
 		{
@@ -766,7 +766,7 @@ void Player::RotateLinkedGridActor()
 
 	constexpr float angleIncrement = 90.f;
 
-	if (Input::GetKeyUp(Keys::Right))
+	if (Input::GetKeyUp("RotateRight"))
 	{
 		if (checkLinkRotation(linkedGridActor->CanBeRotatedInLink()))
 		{
@@ -802,7 +802,7 @@ void Player::RotateLinkedGridActor()
 			}
 		}
 	}
-	else if (Input::GetKeyUp(Keys::Left))
+	else if (Input::GetKeyUp("RotateLeft"))
 	{
 		if (checkLinkRotation(linkedGridActor->CanBeRotatedInLink()))
 		{
@@ -838,7 +838,7 @@ void Player::RotateLinkedGridActor()
 			}
 		}
 	}
-	else if (Input::GetKeyUp(Keys::Down))
+	else if (Input::GetKeyUp("RotateDown"))
 	{
 		if (checkLinkRotation(linkedGridActor->CanBeRotatedInLink()))
 		{
@@ -858,7 +858,7 @@ void Player::RotateLinkedGridActor()
 			}
 		}
 	}
-	else if (Input::GetKeyUp(Keys::Up))
+	else if (Input::GetKeyUp("RotateUp"))
 	{
 		if (checkLinkRotation(linkedGridActor->CanBeRotatedInLink()))
 		{
@@ -965,22 +965,22 @@ void Player::MovementInput(float deltaTime)
 
 		const XMVECTOR previousPos = nextPos;
 
-		if (Input::GetKeyHeld(Keys::W))
+		if (Input::GetKeyHeld("MoveForward"))
 		{
 			nextPos = GetPositionV() + GetForwardVectorV();
 			CheckNextMoveNode(previousPos);
 		}
-		if (Input::GetKeyHeld(Keys::S))
+		if (Input::GetKeyHeld("MoveBack"))
 		{
 			nextPos = GetPositionV() + -GetForwardVectorV();
 			CheckNextMoveNode(previousPos);
 		}
-		if (Input::GetKeyHeld(Keys::A))
+		if (Input::GetKeyHeld("MoveLeft"))
 		{
 			nextPos = GetPositionV() + -GetRightVectorV();
 			CheckNextMoveNode(previousPos);
 		}
-		if (Input::GetKeyHeld(Keys::D))
+		if (Input::GetKeyHeld("MoveRight"))
 		{
 			nextPos = GetPositionV() + GetRightVectorV();
 			CheckNextMoveNode(previousPos);
@@ -997,12 +997,12 @@ void Player::RotationInput(float deltaTime)
 
 	if (!isInputLinkedToGridActor && CheckIfMovementAndRotationStopped())
 	{
-		if (Input::GetKeyHeld(Keys::Right))
+		if (Input::GetKeyHeld("RotateRight"))
 		{
 			constexpr float angle = XMConvertToRadians(90.f);
 			nextRot = XMQuaternionMultiply(nextRot, DirectX::XMQuaternionRotationAxis(VMath::GlobalUpVector(), angle));
 		}
-		if (Input::GetKeyHeld(Keys::Left))
+		if (Input::GetKeyHeld("RotateLeft"))
 		{
 			constexpr float angle = XMConvertToRadians(-90.f);
 			nextRot = XMQuaternionMultiply(nextRot, DirectX::XMQuaternionRotationAxis(VMath::GlobalUpVector(), angle));
