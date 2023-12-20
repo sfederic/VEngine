@@ -1067,6 +1067,12 @@ void Player::ResetLinkedGridActorIfThis(GridActor* gridActor)
 	{
 		linkedGridActor = nullptr;
 	}
+
+	auto& targetActor = camera->GetTargetActor();
+	if (&targetActor == gridActor)
+	{
+		ResetCameraPosAndTargetToPlayer();
+	}
 }
 
 void Player::SetNextPosAndRotToCurrent()
@@ -1141,15 +1147,6 @@ void Player::ResetCameraPosAndTargetToPlayer()
 {
 	nextCameraPosition = cameraStartingLocalPosition;
 	camera->SetTargetActor(this);
-}
-
-void Player::ResetCameraPosAndTargetToPlayerIfThisActor(Actor* actor)
-{
-	auto& targetActor = camera->GetTargetActor();
-	if (&targetActor == actor);
-	{
-		ResetCameraPosAndTargetToPlayer();
-	}
 }
 
 void Player::SetCameraTargetActor(Actor* target)

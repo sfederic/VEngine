@@ -13,6 +13,6 @@ Properties Burnable::GetProps()
 void Burnable::Burn()
 {
 	GameUtils::SpawnSpriteSheet("Sprites/fire_sheet.png", GetPositionV(), false, 4, 4);
-	Player::system.GetOnlyActor()->ResetCameraPosAndTargetToPlayerIfThisActor(this);
+	Player::system.GetOnlyActor()->ResetLinkedGridActorIfThis(this);
 	Remove();
 }
