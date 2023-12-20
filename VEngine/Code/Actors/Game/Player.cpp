@@ -1069,6 +1069,7 @@ void Player::ResetLinkedGridActorIfThis(GridActor* gridActor)
 	if (gridActor == linkedGridActor)
 	{
 		linkedGridActor = nullptr;
+		isInputLinkedToGridActor = false;
 	}
 
 	auto& targetActor = camera->GetTargetActor();
