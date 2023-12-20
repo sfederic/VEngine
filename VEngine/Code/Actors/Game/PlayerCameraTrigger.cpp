@@ -19,12 +19,7 @@ void PlayerCameraTrigger::Start()
 	}
 	boxTrigger->SetTriggerEnterCallback([&]()
 		{
-			auto player = Player::system.GetOnlyActor();
-			player->SetNextCameraPosition(DirectX::XMLoadFloat3(&newLocalCameraPos));
-			if (newTargetActor != nullptr)
-			{
-				player->SetCameraTargetActor(newTargetActor);
-			}
+			ResetCameraPosAndTarget();
 		});
 	boxTrigger->SetTriggerExitCallback([&]()
 		{
@@ -51,4 +46,19 @@ Properties PlayerCameraTrigger::GetProps()
 	props.Add("NewLocalCameraPos", &newLocalCameraPos);
 	props.Add("NewTargetActor", &newTargetActorName);
 	return props;
+}
+
+bool PlayerCameraTrigger::ContainsPlayer()
+{
+	return boxTrigger->ContainsTarget();
+}
+
+void PlayerCameraTrigger::ResetCameraPosAndTarget()
+{
+	auto player = Player::system.GetOnlyActor();
+	player->SetNextCameraPosition(DirectX::XMLoadFloat3(&newLocalCameraPos));
+	if (newTargetActor != nullptr)
+	{
+		player->SetCameraTargetActor(newTargetActor);
+	}
 }

@@ -11,6 +11,7 @@
 #include "Actors/Game/InspectionTrigger.h"
 #include "Actors/Game/FenceActor.h"
 #include "Actors/Game/Pickup.h"
+#include "Actors/Game/PlayerCameraTrigger.h"
 #include "Grid.h"
 #include "GridActor.h"
 #include "Components/Game/DialogueComponent.h"
@@ -465,6 +466,19 @@ void Player::MakeOccludingMeshBetweenCameraAndPlayerTransparent()
 			previousHitTransparentActors.erase(actor);
 		}
 	}
+}
+
+bool Player::CheckIfPlayerIsInsidePlayerCameraTriggerAndReset()
+{
+	for (auto& playerCameraTrigger : PlayerCameraTrigger::system.GetActors())
+	{
+		if (playerCameraTrigger->ContainsPlayer())
+		{
+			playerCameraTrigger->ResetCameraPosAndTarget();
+			return true;
+		}
+	}
+	return false;
 }
 
 bool Player::QuickTalkCheck(Actor* hitActor)
@@ -1046,7 +1060,7 @@ void Player::SetLinkedGridActor(GridActor& gridActor)
 
 void Player::ResetLinkedGridActor()
 {
-	nextCameraPosition = cameraStartingLocalPosition;
+	isInputLinkedToGridActor = false;
 
 	ResetHighlightedActor();
 
@@ -1059,9 +1073,11 @@ void Player::ResetLinkedGridActor()
 		linkedGridActor = nullptr;
 	}
 
-	camera->SetTargetActor(this);
-
-	isInputLinkedToGridActor = false;
+	if (!CheckIfPlayerIsInsidePlayerCameraTriggerAndReset())
+	{
+		nextCameraPosition = cameraStartingLocalPosition;
+		camera->SetTargetActor(this);
+	}
 }
 
 void Player::ResetLinkedGridActorIfThis(GridActor* gridActor)

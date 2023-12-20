@@ -119,6 +119,7 @@ private:
 	bool CheckAttackPositionAgainstUnitDirection(Unit* unit);
 
 	void MakeOccludingMeshBetweenCameraAndPlayerTransparent();
+	bool CheckIfPlayerIsInsidePlayerCameraTriggerAndReset();
 
 	void LinkToGridActor();
 	void MoveLinkedGridActor();

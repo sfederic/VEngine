@@ -18,6 +18,9 @@ public:
 	void LateStart() override;
 	Properties GetProps() override;
 
+	bool ContainsPlayer();
+	void ResetCameraPosAndTarget();
+
 private:
 	BoxTriggerComponent* boxTrigger = nullptr;
 
