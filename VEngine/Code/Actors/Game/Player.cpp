@@ -756,7 +756,22 @@ void Player::RotateLinkedGridActor()
 	{
 		if (checkLinkRotation(linkedGridActor->CanBeRotatedInLink()))
 		{
-			if (linkedGridActor->CanBeRotatedYawYAxis())
+			if (linkedGridActor->CanBeRotatedRollZAxis())
+			{
+				linkedGridActor->SetNextRot(VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
+					VMath::GlobalForwardVector(), -angleIncrement));
+				if (!linkedGridActor->CheckNextRotationBoundsIntersect())
+				{
+					linkedGridActor->OnLinkRotate();
+					linkedGridActor->OnLinkRotateRight();
+				}
+				else
+				{
+					linkedGridActor->SetNextRot(linkedGridActor->GetRotationV());
+					Camera::GetActiveCamera().SetShakeLevel(0.25f);
+				}
+			}
+			else if (linkedGridActor->CanBeRotatedYawYAxis())
 			{
 				linkedGridActor->SetNextRot(VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
 					VMath::GlobalUpVector(), -angleIncrement));
@@ -777,6 +792,21 @@ void Player::RotateLinkedGridActor()
 	{
 		if (checkLinkRotation(linkedGridActor->CanBeRotatedInLink()))
 		{
+			if (linkedGridActor->CanBeRotatedRollZAxis())
+			{
+				linkedGridActor->SetNextRot(VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
+					VMath::GlobalForwardVector(), angleIncrement));
+				if (!linkedGridActor->CheckNextRotationBoundsIntersect())
+				{
+					linkedGridActor->OnLinkRotate();
+					linkedGridActor->OnLinkRotateLeft();
+				}
+				else
+				{
+					linkedGridActor->SetNextRot(linkedGridActor->GetRotationV());
+					Camera::GetActiveCamera().SetShakeLevel(0.25f);
+				}
+			}
 			if (linkedGridActor->CanBeRotatedYawYAxis())
 			{
 				linkedGridActor->SetNextRot(VMath::AddRotationAngle(linkedGridActor->GetRotationV(),
