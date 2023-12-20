@@ -5,6 +5,9 @@ std::set<Keys> currentHeldKeys;
 std::set<Keys> currentDownKeys;
 std::set<Keys> currentUpKeys;
 
+//@Todo: need to map keys to a string map so that you're not directly calling win32 key enum inputs,
+//instead calling "Use" or whatever.
+
 namespace Input
 {
 	bool mouseWheelUp;
