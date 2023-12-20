@@ -1050,11 +1050,14 @@ void Player::ResetLinkedGridActor()
 
 	ResetHighlightedActor();
 
-	linkedGridActor->SetGridPosition();
-	HitResult hit(this);
-	linkedGridActor->GetCurrentNode()->RecalcNodeHeight(hit);
-	linkedGridActor->OnLinkDeactivate();
-	linkedGridActor = nullptr;
+	if (linkedGridActor)
+	{
+		linkedGridActor->SetGridPosition();
+		HitResult hit(this);
+		linkedGridActor->GetCurrentNode()->RecalcNodeHeight(hit);
+		linkedGridActor->OnLinkDeactivate();
+		linkedGridActor = nullptr;
+	}
 
 	camera->SetTargetActor(this);
 
