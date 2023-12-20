@@ -12,7 +12,7 @@ void Magnet::Tick(float deltaTime)
 		auto gridActor = hit.GetHitActorAs<GridActor>();
 		if (gridActor && gridActor->CheckMovementAndRotationStopped())
 		{
-			gridActor->SetNextPos(GetPositionV());
+			gridActor->SetNextPos(GetPositionV() + GetForwardVectorV());
 		}
 	}
 }
