@@ -6,8 +6,8 @@
 
 void Weight::Create()
 {
-	moveSpeed = moveSpeed / 2.f;
-	rotateSpeed = rotateSpeed / 2.f;
+	moveSpeed = 6.f;
+	rotateSpeed = 6.f;
 }
 
 void Weight::Tick(float deltaTime)
