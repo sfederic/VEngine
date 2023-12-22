@@ -16,9 +16,9 @@ namespace ShaderSystem
 
 	void AddShaderItem(ShaderItem* shaderItem);
 
-	VertexShader* FindVertexShader(const std::wstring filename);
-	PixelShader* FindPixelShader(const std::wstring filename);
-	ShaderItem* FindShaderItem(const std::string shaderItemName);
+	VertexShader* FindVertexShader(const std::wstring& filename);
+	PixelShader* FindPixelShader(const std::wstring& filename);
+	ShaderItem* FindShaderItem(const std::string& shaderItemName);
 
 	bool DoesShaderItemExist(std::string shaderItemName);
 

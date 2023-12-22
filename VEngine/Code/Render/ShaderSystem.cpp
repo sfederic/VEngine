@@ -11,9 +11,9 @@
 
 void CompileAllShadersFromFile();
 
-std::map<std::wstring, std::unique_ptr<VertexShader>> vertexShaders;
-std::map<std::wstring, std::unique_ptr<PixelShader>> pixelShaders;
-std::map<std::string, std::shared_ptr<ShaderItem>> shaderItems;
+std::unordered_map<std::wstring, std::unique_ptr<VertexShader>> vertexShaders;
+std::unordered_map<std::wstring, std::unique_ptr<PixelShader>> pixelShaders;
+std::unordered_map<std::string, std::shared_ptr<ShaderItem>> shaderItems;
 
 void ShaderSystem::Init()
 {
@@ -34,16 +34,14 @@ void ShaderSystem::Init()
 	ShaderItems::Floating = new ShaderItem("Floating", L"Floating_vs.cso", L"Default_ps.cso");
 }
 
-VertexShader* ShaderSystem::FindVertexShader(const std::wstring filename)
+VertexShader* ShaderSystem::FindVertexShader(const std::wstring& filename)
 {
-	assert(vertexShaders.find(filename) != vertexShaders.end());
-	return vertexShaders[filename].get();
+	return vertexShaders.find(filename)->second.get();
 }
 
-PixelShader* ShaderSystem::FindPixelShader(const std::wstring filename)
+PixelShader* ShaderSystem::FindPixelShader(const std::wstring& filename)
 {
-	assert(pixelShaders.find(filename) != pixelShaders.end());
-	return pixelShaders[filename].get();
+	return pixelShaders.find(filename)->second.get();
 }
 
 void ShaderSystem::AddShaderItem(ShaderItem* shaderItem)
@@ -51,10 +49,9 @@ void ShaderSystem::AddShaderItem(ShaderItem* shaderItem)
 	shaderItems.emplace(shaderItem->GetName(), shaderItem);
 }
 
-ShaderItem* ShaderSystem::FindShaderItem(const std::string shaderItemName)
+ShaderItem* ShaderSystem::FindShaderItem(const std::string& shaderItemName)
 {
-	assert(shaderItems.find(shaderItemName) != shaderItems.end());
-	return shaderItems[shaderItemName].get();
+	return shaderItems.find(shaderItemName)->second.get();
 }
 
 bool ShaderSystem::DoesShaderItemExist(std::string shaderItemName)
