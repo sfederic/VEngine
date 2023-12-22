@@ -25,29 +25,33 @@ void SpatialComponent::RemoveChild(SpatialComponent* component)
 	throw new std::exception("child not found");
 }
 
-__forceinline XMMATRIX SpatialComponent::GetWorldMatrix()
+XMMATRIX SpatialComponent::GetWorldMatrix()
 {
 	XMMATRIX parentWorld = XMMatrixIdentity();
-
 	if (parent)
 	{
 		parentWorld = parent->GetWorldMatrix();
 	}
-
-	UpdateTransform(parentWorld);
-
-	return transform.world;
+	return GetParentWorldMatrix(parentWorld);
 }
 
-__forceinline void SpatialComponent::UpdateTransform(XMMATRIX parentWorld)
+XMMATRIX SpatialComponent::GetParentWorldMatrix(XMMATRIX parentWorld)
 {
 	XMMATRIX world = transform.GetAffine() * parentWorld;
+	for (SpatialComponent* child : children)
+	{
+		child->GetParentWorldMatrix(world);
+	}
+	return world;
+}
 
+void SpatialComponent::UpdateTransform(XMMATRIX parentWorld)
+{
+	XMMATRIX world = transform.GetAffine() * parentWorld;
 	for (SpatialComponent* child : children)
 	{
 		child->UpdateTransform(world);
 	}
-
 	transform.world = world;
 }
 

@@ -16,8 +16,8 @@ public:
 
 	Properties GetProps() override;
 
-	__forceinline XMMATRIX GetWorldMatrix();
-	__forceinline void UpdateTransform(XMMATRIX parentWorld = XMMatrixIdentity());
+	XMMATRIX GetWorldMatrix();
+	void UpdateTransform(XMMATRIX parentWorld = XMMatrixIdentity());
 
 	XMFLOAT3 GetLocalPosition();
 	XMVECTOR GetLocalPositionV();
@@ -89,4 +89,7 @@ protected:
 	std::vector<SpatialComponent*> children;
 
 	CollisionLayers layer = CollisionLayers::All;
+
+private:
+	XMMATRIX GetParentWorldMatrix(XMMATRIX parentWorld);
 };
