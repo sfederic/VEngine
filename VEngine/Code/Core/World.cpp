@@ -248,6 +248,7 @@ std::vector<Component*> World::GetAllComponentsInWorld()
 	std::vector<Component*> outComponents;
 	for (IComponentSystem* componentSystem : activeComponentSystems)
 	{
+		if (componentSystem->GetNumComponents() == 0) continue;
 		auto components = componentSystem->GetComponentsAsBaseClass();
 		outComponents.insert(outComponents.end(), components.begin(), components.end());
 	}
