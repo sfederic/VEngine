@@ -199,8 +199,9 @@ void World::TickAllComponentSystems(float deltaTime)
 std::vector<Actor*> World::GetAllActorsInWorld()
 {
 	std::vector<Actor*> outActors;
-	for (IActorSystem* actorSystem : activeActorSystems)
+	for (auto actorSystem : activeActorSystems)
 	{
+		if (actorSystem->GetNumActors() == 0) continue;
 		auto actors = actorSystem->GetActorsAsBaseClass();
 		outActors.insert(outActors.end(), actors.begin(), actors.end());
 	}
