@@ -161,6 +161,8 @@ Obstacle
 1
 Rotate Pitch
 1
+Rotate Roll
+0
 Rotate Speed
 12
 Rotate Yaw
@@ -212,6 +214,8 @@ Obstacle
 1
 Rotate Pitch
 1
+Rotate Roll
+0
 Rotate Speed
 12
 Rotate Yaw
@@ -263,6 +267,8 @@ Obstacle
 1
 Rotate Pitch
 1
+Rotate Roll
+0
 Rotate Speed
 12
 Rotate Yaw
@@ -484,8 +490,29 @@ Player0
 UID
 3694903621
 next
+PlayerCameraTrigger
+1
+ Enabled
+1
+ Position
+4 3 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+PlayerCameraTrigger0
+NewLocalCameraPos
+3 5 -2
+NewTargetActor
+node6
+UID
+2843846285
+next
 BoxTriggerComponent
-2
+3
 3522257636
 Trigger
  Enabled
@@ -523,6 +550,25 @@ Offset
 0 0 0
 UID
 2714068493
+next
+2843846285
+BoxTrigger
+ Enabled
+1
+ Pos
+4 3 1
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+4 3 2
+Offset
+0 0 0
+UID
+2543161259
 next
 CameraComponent
 1
@@ -637,6 +683,8 @@ DirectionalLight
 1
 Colour
 1 1 1 1
+Intensity
+1
 LightEnabled
 1
 UID
@@ -724,7 +772,9 @@ M_UvScale
 1 1
 Mesh
 node.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -781,8 +831,10 @@ M_UvScale
 1 1
 Mesh
 rock_L_shape.vmesh
-Static
+Physics Static
 1
+Render Static
+0
 Trans. Occlude
 0
 UID
@@ -836,8 +888,10 @@ M_UvScale
 1 1
 Mesh
 rock_L_shape.vmesh
-Static
+Physics Static
 1
+Render Static
+0
 Trans. Occlude
 0
 UID
@@ -891,8 +945,10 @@ M_UvScale
 1 1
 Mesh
 rock_L_shape.vmesh
-Static
+Physics Static
 1
+Render Static
+0
 Trans. Occlude
 0
 UID
@@ -946,7 +1002,9 @@ M_UvScale
 1 1
 Mesh
 cube.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1001,7 +1059,9 @@ M_UvScale
 1 1
 Mesh
 cube.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1056,7 +1116,9 @@ M_UvScale
 1 1
 Mesh
 cube.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1111,7 +1173,9 @@ M_UvScale
 1 1
 Mesh
 cube.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1166,7 +1230,9 @@ M_UvScale
 1 1
 Mesh
 cube.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1221,7 +1287,9 @@ M_UvScale
 1 1
 Mesh
 cube.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1276,67 +1344,14 @@ M_UvScale
 1 0.5
 Mesh
 node.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
 UID
 3350274308
-next
-3694903621
-Mesh
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-char.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-3873124553
 next
 653947760
 Mesh
@@ -1386,7 +1401,9 @@ M_UvScale
 1 1
 Mesh
 step_medium.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1441,7 +1458,9 @@ M_UvScale
 1 1
 Mesh
 step_medium.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1496,7 +1515,9 @@ M_UvScale
 1 1
 Mesh
 step_medium.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1551,7 +1572,9 @@ M_UvScale
 1 1
 Mesh
 step_medium.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1606,7 +1629,9 @@ M_UvScale
 1 1
 Mesh
 step_medium.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1661,11 +1686,70 @@ M_UvScale
 1 1
 Mesh
 step_medium.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
 UID
 2088211997
+next
+3694903621
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+char.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
+UID
+3873124553
 next
 end
