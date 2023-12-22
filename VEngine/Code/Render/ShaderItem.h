@@ -12,19 +12,19 @@ struct ID3D11PixelShader;
 class ShaderItem
 {
 public:
-	ShaderItem(const std::string shaderItemName_,
-		const std::wstring vertexShaderFilename_,
-		const std::wstring pixelShaderFilename_);
+	ShaderItem(std::string shaderItemName_,
+		std::wstring vertexShaderFilename_,
+		std::wstring pixelShaderFilename_);
 
-	ID3D11VertexShader* GetVertexShader();
-	ID3D11PixelShader* GetPixelShader();
+	auto GetVertexShader() { return vertexShader; }
+	auto GetPixelShader() { return pixelShader; }
 
-	std::string GetName() { return shaderItemName; }
+	auto GetName() { return shaderItemName; }
 
-	std::wstring GetVertexShaderFilename() { return vertexShaderFilename; }
-	std::wstring GetPixelShaderFilename() { return pixelShaderFilename; }
+	auto GetVertexShaderFilename() { return vertexShaderFilename; }
+	auto GetPixelShaderFilename() { return pixelShaderFilename; }
 
-	UID GetUID() { return uid; }
+	auto GetUID() const { return uid; }
 
 private:
 	//UID here is used for sorting meshes on render.
@@ -34,6 +34,9 @@ private:
 
 	std::wstring vertexShaderFilename;
 	std::wstring pixelShaderFilename;
+
+	ID3D11VertexShader* vertexShader = nullptr;
+	ID3D11PixelShader* pixelShader = nullptr;
 };
 
 //@Todo: adding new shaders and shader pairs to the engine is really slow and bad.
