@@ -188,8 +188,8 @@ ID3D11DepthStencilView* dsv;
 ID3D11InputLayout* inputLayout;
 
 //Rasterizer states
-std::map<std::string, std::unique_ptr<RastState>> rastStateMap;
-std::map<std::string, std::unique_ptr<BlendState>> blendStateMap;
+std::unordered_map<std::string, std::unique_ptr<RastState>> rastStateMap;
+std::unordered_map<std::string, std::unique_ptr<BlendState>> blendStateMap;
 ID3D11RasterizerState* rastStateSolid;
 ID3D11RasterizerState* rastStateWireframe;
 ID3D11RasterizerState* rastStateNoBackCull;
@@ -2012,7 +2012,7 @@ void SetRenderPipelineStatesForShadows(MeshComponent* mesh)
 	Material& material = mesh->GetMaterial();
 	PipelineStateObject& pso = mesh->pso;
 
-	context->RSSetState(rastStateMap["shadow"]->data);
+	context->RSSetState(rastStateMap.find(RastStates::shadow)->second->data);
 
 	ShaderItem* shader = ShaderItems::Shadow;
 
