@@ -21,7 +21,7 @@ Health
 Ignore Rotate Check
 0
 Inspect
-1
+0
 Interact
 1
 Interact Text
@@ -44,6 +44,8 @@ Obstacle
 1
 Rotate Pitch
 1
+Rotate Roll
+0
 Rotate Speed
 12
 Rotate Yaw
@@ -72,7 +74,7 @@ Health
 Ignore Rotate Check
 0
 Inspect
-1
+0
 Interact
 1
 Interact Text
@@ -95,6 +97,8 @@ Obstacle
 1
 Rotate Pitch
 1
+Rotate Roll
+0
 Rotate Speed
 12
 Rotate Yaw
@@ -123,7 +127,7 @@ Health
 Ignore Rotate Check
 0
 Inspect
-1
+0
 Interact
 1
 Interact Text
@@ -146,6 +150,8 @@ Obstacle
 1
 Rotate Pitch
 1
+Rotate Roll
+0
 Rotate Speed
 12
 Rotate Yaw
@@ -264,7 +270,7 @@ MeshActor
  Visible
 1
 Name
-rock20
+node0
 UID
 607909136
 next
@@ -279,7 +285,7 @@ next
  Visible
 1
 Name
-rock21
+cube1
 UID
 83027465
 next
@@ -294,7 +300,7 @@ next
  Visible
 1
 Name
-rock22
+cube2
 UID
 1966518442
 next
@@ -354,15 +360,17 @@ Move Axis Neg.
 Move Axis Pos.
 1 1
 Move Speed
-12
+6
 Name
 Weight0
 Obstacle
 1
 Rotate Pitch
 1
+Rotate Roll
+0
 Rotate Speed
-12
+6
 Rotate Yaw
 1
 UID
@@ -461,28 +469,6 @@ UID
 next
 DialogueComponent
 5
-2409731601
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-2929052235
-next
-2362806004
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-1283926951
-next
 1004683711
 Dialogue
  Enabled
@@ -516,6 +502,28 @@ File
 UID
 3481685299
 next
+2409731601
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+2929052235
+next
+2362806004
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+1283926951
+next
 DirectionalLightComponent
 1
 4081696272
@@ -532,6 +540,8 @@ DirectionalLight
 1
 Colour
 1 1 1 1
+Intensity
+1
 LightEnabled
 1
 UID
@@ -604,7 +614,9 @@ M_UvScale
 1 1
 Mesh
 node.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -613,6 +625,177 @@ UID
 next
 MeshComponent
 8
+1004683711
+Mesh
+ Enabled
+1
+ Pos
+2 0 6
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+rock_cracked.jpg
+M_Use Texture
+1
+M_UvOffset
+0.2 0.6
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
+UID
+2239012416
+next
+3025387417
+Mesh
+ Enabled
+1
+ Pos
+3 0 6
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+rock_cracked.jpg
+M_Use Texture
+1
+M_UvOffset
+0.1 1
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+0.9 0.9
+Mesh
+cube.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
+UID
+1511058663
+next
+1048658828
+Mesh
+ Enabled
+1
+ Pos
+1 0 6
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+rock_cracked.jpg
+M_Use Texture
+1
+M_UvOffset
+0.4 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+0.8 0.9
+Mesh
+cube.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
+UID
+3034387318
+next
 607909136
 Mesh
  Enabled
@@ -661,7 +844,9 @@ M_UvScale
 1 1
 Mesh
 node.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -716,7 +901,9 @@ M_UvScale
 1 1
 Mesh
 cube.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -771,7 +958,9 @@ M_UvScale
 1 1
 Mesh
 cube.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -826,8 +1015,10 @@ M_UvScale
 1 1
 Mesh
 char.vmesh
-Static
+Physics Static
 1
+Render Static
+0
 Trans. Occlude
 0
 UID
@@ -881,176 +1072,13 @@ M_UvScale
 4 4
 Mesh
 cube.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
 UID
 3978309366
-next
-1004683711
-Mesh
- Enabled
-1
- Pos
-2 0 6
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cube.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-2239012416
-next
-3025387417
-Mesh
- Enabled
-1
- Pos
-3 0 6
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cube.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-1511058663
-next
-1048658828
-Mesh
- Enabled
-1
- Pos
-1 0 6
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cube.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-3034387318
 next
 end
