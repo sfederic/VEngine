@@ -2270,8 +2270,8 @@ void PointLightVertexColourMap()
 				const auto worldSpaceVertexPos = XMVector3TransformCoord(vertexPos, meshWorldMatrix);
 
 				HitResult hit;
-				hit.actorsToIgnore.push_back(pointLight->GetOwner());
-				hit.componentsToIgnore.push_back(pointLight.get());
+				hit.actorsToIgnore.emplace_back(pointLight->GetOwner());
+				hit.componentsToIgnore.emplace_back(pointLight.get());
 				hit.AddAllRenderStaticMeshesToIgnore();
 				hit.ignoreBackFaceHits = false;
 
@@ -2330,8 +2330,8 @@ void PointLightVertexColourMap()
 				const auto worldSpaceVertexPos = XMVector3TransformCoord(vertexPos, meshWorldMatrix);
 
 				HitResult hit;
-				hit.actorsToIgnore.push_back(dLight->GetOwner());
-				hit.componentsToIgnore.push_back(dLight.get());
+				hit.actorsToIgnore.emplace_back(dLight->GetOwner());
+				hit.componentsToIgnore.emplace_back(dLight.get());
 				hit.ignoreBackFaceHits = false;
 
 				auto normal = XMLoadFloat3(&vertex.normal);
@@ -2375,7 +2375,7 @@ void Renderer::AddDebugDrawOrientedBox(DirectX::BoundingOrientedBox& orientedBox
 	data.bb = orientedBox;
 	data.clearWithTimer = clear;
 	data.timer = 3.f;
-	debugOrientedBoxesOnTimerToRender.push_back(data);
+	debugOrientedBoxesOnTimerToRender.emplace_back(data);
 }
 
 void ClearBounds()
