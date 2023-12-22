@@ -2009,16 +2009,14 @@ void SetRenderPipelineStates(MeshComponent* mesh)
 
 void SetRenderPipelineStatesForShadows(MeshComponent* mesh)
 {
-	Material& material = mesh->GetMaterial();
-	PipelineStateObject& pso = mesh->pso;
-
-	context->RSSetState(rastStateMap.find(RastStates::shadow)->second->data);
+	context->RSSetState(rastStateShadow);
 
 	ShaderItem* shader = ShaderItems::Shadow;
 
 	context->VSSetShader(shader->GetVertexShader(), nullptr, 0);
 	context->PSSetShader(shader->GetPixelShader(), nullptr, 0);
 
+	PipelineStateObject& pso = mesh->pso;
 	context->IASetVertexBuffers(0, 1, &pso.GetVertexBuffer().data, &Renderer::stride, &Renderer::offset);
 }
 
