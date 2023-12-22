@@ -1,7 +1,5 @@
 #include "vpch.h"
 #include "World.h"
-#include <algorithm>
-#include <execution>
 #include "VMath.h"
 #include "FileSystem.h"
 #include "Profile.h"
@@ -127,6 +125,7 @@ void World::DestroyAllDeferredActors()
 	}
 }
 
+//Note that this function is game specific.
 void World::CreateDefaultMapActors()
 {
 	auto player = Player::system.Add();
@@ -180,45 +179,31 @@ std::vector<IActorSystem*> World::GetLayerActorSystems()
 void World::TickAllActorSystems(float deltaTime)
 {
 	Profile::Start();
-
-	std::for_each(
-		std::execution::par,
-		activeActorSystems.begin(),
-		activeActorSystems.end(),
-		[&](auto actorSystem)
-		{
-			actorSystem->Tick(deltaTime);
-		});
-
+	for (auto actorSystem : activeActorSystems)
+	{
+		actorSystem->Tick(deltaTime);
+	}
 	Profile::End();
 }
 
 void World::TickAllComponentSystems(float deltaTime)
 {
 	Profile::Start();
-
-	std::for_each(
-		std::execution::par,
-		activeComponentSystems.begin(),
-		activeComponentSystems.end(),
-		[&](auto componentSystem)
-		{
-			componentSystem->Tick(deltaTime);
-		});
-
+	for (auto componentSystem : activeComponentSystems)
+	{
+		componentSystem->Tick(deltaTime);
+	}
 	Profile::End();
 }
 
 std::vector<Actor*> World::GetAllActorsInWorld()
 {
 	std::vector<Actor*> outActors;
-
 	for (IActorSystem* actorSystem : activeActorSystems)
 	{
 		auto actors = actorSystem->GetActorsAsBaseClass();
 		outActors.insert(outActors.end(), actors.begin(), actors.end());
 	}
-
 	return outActors;
 }
 
@@ -236,7 +221,6 @@ Actor* World::GetActorByUIDAllowNull(UID uid)
 	{
 		return nullptr;
 	}
-
 	return actorIt->second;
 }
 
@@ -261,13 +245,11 @@ Actor* World::GetActorByNameAllowNull(std::string actorName)
 std::vector<Component*> World::GetAllComponentsInWorld()
 {
 	std::vector<Component*> outComponents;
-
 	for (IComponentSystem* componentSystem : activeComponentSystems)
 	{
 		auto components = componentSystem->GetComponentsAsBaseClass();
 		outComponents.insert(outComponents.end(), components.begin(), components.end());
 	}
-
 	return outComponents;
 }
 
