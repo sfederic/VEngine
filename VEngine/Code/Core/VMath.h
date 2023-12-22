@@ -1,6 +1,6 @@
 #pragma once
 
-#include <map>
+#include <unordered_map>
 #include <DirectXMath.h>
 #include <DirectXCollision.h>
 
@@ -91,7 +91,7 @@ namespace VMath
 	bool IsUVInTriangleUVs(XMFLOAT2 pt, XMFLOAT2 v1, XMFLOAT2 v2, XMFLOAT2 v3);
 	void GetBarycentricCoords(XMVECTOR p0, XMVECTOR p1, XMVECTOR p2, XMVECTOR hitPoint, float& b1, float& b2);
 	void TriangleXYZToUV(Vertex& v0, Vertex& v1, Vertex& v2, XMVECTOR hitPoint, float& u, float& v);
-	int GetIndexOfClosestVertexFromTriangleIntersect(std::map<int, XMVECTOR>& vertexPositions, XMVECTOR hitPoint);
+	int GetIndexOfClosestVertexFromTriangleIntersect(std::unordered_map<int, XMVECTOR>& vertexPositions, XMVECTOR hitPoint);
 
 	void HomogenousWorldPosToScreenSpaceCoords(XMVECTOR worldPos, int& screenX, int& screenY);
 }

@@ -545,7 +545,7 @@ namespace VMath
 	}
 
 	//Make sure to put the vertex positions into world space
-	int GetIndexOfClosestVertexFromTriangleIntersect(std::map<int, XMVECTOR>& vertexPositions, XMVECTOR hitPoint)
+	int GetIndexOfClosestVertexFromTriangleIntersect(std::unordered_map<int, XMVECTOR>& vertexPositions, XMVECTOR hitPoint)
 	{
 		int vertexIndex = -1;
 		float lowestDistance = std::numeric_limits<float>::max();

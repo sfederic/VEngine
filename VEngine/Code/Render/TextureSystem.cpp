@@ -8,7 +8,7 @@
 #include "Asset/AssetPaths.h"
 
 static SystemStates systemState = SystemStates::Unloaded;
-std::map<std::string, std::unique_ptr<Texture2D>> texture2DMap;
+std::unordered_map<std::string, std::unique_ptr<Texture2D>> texture2DMap;
 std::wstring TextureSystem::selectedTextureInEditor;
 
 Texture2D* TextureSystem::FindTexture2D(std::string textureFilename)

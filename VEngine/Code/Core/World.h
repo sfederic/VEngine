@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <string>
+#include <unordered_map>
 #include "UID.h"
 #include "Actors/ActorSystemCache.h"
 #include "Core/Log.h"
@@ -15,8 +16,8 @@ namespace World
 {
 	extern std::string worldFilename;
 
-	extern std::map<UID, Actor*> actorUIDMap;
-	extern std::map<std::string, Actor*> actorNameMap;
+	extern std::unordered_map<UID, Actor*> actorUIDMap;
+	extern std::unordered_map<std::string, Actor*> actorNameMap;
 
 	extern std::vector<IActorSystem*> activeActorSystems;
 	extern std::vector<IComponentSystem*> activeComponentSystems;

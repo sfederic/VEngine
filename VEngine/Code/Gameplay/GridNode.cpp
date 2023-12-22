@@ -43,10 +43,10 @@ void GridNode::DisplayShow() const
 void GridNode::RecalcNodeHeight(HitResult& hitResult)
 {
 	const XMVECTOR origin = XMVectorSet((float)xIndex, 20.f, (float)yIndex, 1.f);
-	hitResult.actorsToIgnore.push_back(Grid::system.GetOnlyActor());
+	hitResult.actorsToIgnore.emplace_back(Grid::system.GetOnlyActor());
 	auto waterVolumes = WaterVolume::system.GetActorsAsBaseClass();
 	hitResult.AddActorsToIgnore(waterVolumes);
-	hitResult.actorsToIgnore.push_back(Player::system.GetOnlyActor());
+	hitResult.actorsToIgnore.emplace_back(Player::system.GetOnlyActor());
 
 	if (Raycast(hitResult, origin, -VMath::GlobalUpVector(), 40.f))
 	{

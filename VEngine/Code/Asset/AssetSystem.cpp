@@ -25,7 +25,7 @@ struct FBXFileInfo
 	std::string filename;
 };
 
-std::map<std::string, MeshData> existingMeshData;
+std::unordered_map<std::string, MeshData> existingMeshData;
 
 static const std::string vertexColourDataFileExtension = ".vertexcolourdata";
 
@@ -305,7 +305,7 @@ std::vector<Animation> AssetSystem::ReadVAnimAssetFromFile(const std::string fil
 			anim.AddFrame(jointIndex, animFrames);
 		}
 
-		animations.push_back(anim);
+		animations.emplace_back(anim);
 	}
 
 	fclose(file);
@@ -349,7 +349,7 @@ void AssetSystem::WriteOutAllVertexColourData()
 		data.numVertices = mesh->meshDataProxy.GetVertices().size();
 		for (auto& vertex : mesh->meshDataProxy.GetVertices())
 		{
-			data.colours.push_back(vertex.colour);
+			data.colours.emplace_back(vertex.colour);
 		}
 
 		fwrite(&data.numVertices, sizeof(data.numVertices), 1, file);

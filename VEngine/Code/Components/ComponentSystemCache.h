@@ -23,5 +23,5 @@ public:
 
 private:
 	std::unordered_map<std::optional<std::type_index>, IComponentSystem*> typeToSystemMap;
-	std::map<std::string, IComponentSystem*> nameToSystemMap;
+	std::unordered_map<std::string, IComponentSystem*> nameToSystemMap;
 };

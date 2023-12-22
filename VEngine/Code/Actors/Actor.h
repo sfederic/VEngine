@@ -2,7 +2,7 @@
 
 #include <vector>
 #include <string>
-#include <map>
+#include <unordered_map>
 #include <set>
 #include "Core/Transform.h"
 #include "Core/Properties.h"
@@ -208,7 +208,7 @@ protected:
 	std::string name;
 	std::vector<Actor*> children;
 	std::set<std::string> tags;
-	std::map<std::string, Component*> componentMap;
+	std::unordered_map<std::string, Component*> componentMap;
 	Actor* parent = nullptr;
 	SpatialComponent* rootComponent = nullptr;
 	IActorSystem* actorSystem = nullptr;

@@ -25,5 +25,5 @@ public:
 
 private:
 	std::unordered_map<std::optional<std::type_index>, IActorSystem*> typeToSystemMap;
-	std::map<std::string, IActorSystem*> nameToSystemMap;
+	std::unordered_map<std::string, IActorSystem*> nameToSystemMap;
 };

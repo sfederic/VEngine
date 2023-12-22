@@ -10,7 +10,7 @@
 #include "Render/TextureSystem.h"
 #include "Physics/PhysicsSystem.h"
 
-std::map<std::string, MeshComponent*> debugMeshes;
+std::unordered_map<std::string, MeshComponent*> debugMeshes;
 
 void MeshComponent::CreateDebugMeshes()
 {

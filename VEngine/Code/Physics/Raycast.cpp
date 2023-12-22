@@ -229,15 +229,15 @@ bool RaycastTriangleIntersect(HitResult& hitResult)
 					const XMVECTOR hitPosition = hitResult.origin + (hitResult.direction * tempHitResult.hitDistance);
 
 					//Hit vertex indices
-					std::map<int, XMVECTOR> indexToVertMap;
+					std::unordered_map<int, XMVECTOR> indexToVertMap;
 					indexToVertMap.emplace(index0, v0);
 					indexToVertMap.emplace(index1, v1);
 					indexToVertMap.emplace(index2, v2);
-					tempHitResult.hitVertIndexes.push_back(VMath::GetIndexOfClosestVertexFromTriangleIntersect(indexToVertMap, hitPosition));
+					tempHitResult.hitVertIndexes.emplace_back(VMath::GetIndexOfClosestVertexFromTriangleIntersect(indexToVertMap, hitPosition));
 
-					tempHitResult.vertIndexesOfHitTriangleFace.push_back(index0);
-					tempHitResult.vertIndexesOfHitTriangleFace.push_back(index1);
-					tempHitResult.vertIndexesOfHitTriangleFace.push_back(index2);
+					tempHitResult.vertIndexesOfHitTriangleFace.emplace_back(index0);
+					tempHitResult.vertIndexesOfHitTriangleFace.emplace_back(index1);
+					tempHitResult.vertIndexesOfHitTriangleFace.emplace_back(index2);
 
 					//Get hit UV
 					float hitU, hitV;
