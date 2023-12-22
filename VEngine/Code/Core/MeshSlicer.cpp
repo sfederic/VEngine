@@ -137,7 +137,7 @@ void TriangulateNewVerts(std::vector<Vertex>& remainingNewVerts)
 	Vertex initialVert = verts.front();
 
 	std::vector<Vertex> newTriangleFan;
-	newTriangleFan.push_back(initialVert);
+	newTriangleFan.emplace_back(initialVert);
 
 	//Roll back triangle positions when this hits 2
 	int indexCounter = 0;
@@ -166,13 +166,13 @@ void TriangulateNewVerts(std::vector<Vertex>& remainingNewVerts)
 		}
 
 		assert(shortestDistIndex != 0);
-		newTriangleFan.push_back(verts[shortestDistIndex]);
+		newTriangleFan.emplace_back(verts[shortestDistIndex]);
 
 		indexCounter++;
 		if (indexCounter == 2)
 		{
-			newTriangleFan.push_back(initialVert);
-			newTriangleFan.push_back(verts[shortestDistIndex]);
+			newTriangleFan.emplace_back(initialVert);
+			newTriangleFan.emplace_back(verts[shortestDistIndex]);
 
 			verts.erase(verts.begin() + shortestDistIndex);
 
@@ -261,20 +261,20 @@ void MeshSlicer::SliceMeshViaPlane(DirectX::XMVECTOR planeCenter,
 			if (!DirectX::XMVectorIsNaN(line0).m128_f32[0] && CheckIntersectLine(planeNormal, planeCenter, p0, p1))
 			{
 				Vertex v = InterpolateVerts(v0, v1, line0);
-				newVerts.push_back(v);
-				allNewVerts.push_back(v);
+				newVerts.emplace_back(v);
+				allNewVerts.emplace_back(v);
 			}
 			if (!DirectX::XMVectorIsNaN(line1).m128_f32[0] && CheckIntersectLine(planeNormal, planeCenter, p1, p2))
 			{
 				Vertex v = InterpolateVerts(v1, v2, line1);
-				newVerts.push_back(v);
-				allNewVerts.push_back(v);
+				newVerts.emplace_back(v);
+				allNewVerts.emplace_back(v);
 			}
 			if (!DirectX::XMVectorIsNaN(line2).m128_f32[0] && CheckIntersectLine(planeNormal, planeCenter, p2, p0))
 			{
 				Vertex v = InterpolateVerts(v2, v0, line2);
-				newVerts.push_back(v);
-				allNewVerts.push_back(v);
+				newVerts.emplace_back(v);
+				allNewVerts.emplace_back(v);
 			}
 
 			//Make sure only two edges of the triangle are split
@@ -289,9 +289,9 @@ void MeshSlicer::SliceMeshViaPlane(DirectX::XMVECTOR planeCenter,
 
 			std::vector<std::pair<float, Vertex>> dotAndVertex;
 
-			dotAndVertex.push_back(std::make_pair(p0Dot, v0));
-			dotAndVertex.push_back(std::make_pair(p1Dot, v1));
-			dotAndVertex.push_back(std::make_pair(p2Dot, v2));
+			dotAndVertex.emplace_back(std::make_pair(p0Dot, v0));
+			dotAndVertex.emplace_back(std::make_pair(p1Dot, v1));
+			dotAndVertex.emplace_back(std::make_pair(p2Dot, v2));
 
 			for (auto& [dot, vertex] : dotAndVertex)
 			{

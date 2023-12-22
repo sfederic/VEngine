@@ -72,7 +72,7 @@ namespace World
 		std::vector<T*> outActors;
 		for (auto actor : actors)
 		{
-			outActors.push_back(dynamic_cast<T*>(actor));
+			outActors.emplace_back(dynamic_cast<T*>(actor));
 		}
 		return outActors;
 	}
@@ -87,7 +87,7 @@ namespace World
 			auto componentType = dynamic_cast<T*>(component);
 			if (componentType)
 			{
-				outComponents.push_back(componentType);
+				outComponents.emplace_back(componentType);
 			}
 		}
 		return outComponents;
@@ -136,7 +136,7 @@ namespace World
 			auto actorType = dynamic_cast<T*>(actor);
 			if (actorType)
 			{
-				outActors.push_back(actorType);
+				outActors.emplace_back(actorType);
 			}
 		}
 		return outActors;

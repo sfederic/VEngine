@@ -60,7 +60,7 @@ std::vector<GridActor*> WaterVolume::GetAllGridActorsWithinVolume()
 	{
 		if (Contains(gridActor->GetPositionV()))
 		{
-			outActors.push_back(gridActor);
+			outActors.emplace_back(gridActor);
 		}
 	}
 	return outActors;

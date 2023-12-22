@@ -51,8 +51,8 @@ void Gear::OnLinkRotate()
 		const auto bounds = this->GetRootComponent().GetBoundsInWorldSpace();
 		if (gear->Intersects(bounds))
 		{
-			gear->previouslyCascadedGears.push_back(this);
-			this->previouslyCascadedGears.push_back(gear);
+			gear->previouslyCascadedGears.emplace_back(this);
+			this->previouslyCascadedGears.emplace_back(gear);
 
 			gear->OnLinkRotate();
 

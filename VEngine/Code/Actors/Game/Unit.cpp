@@ -127,7 +127,7 @@ void Unit::MoveToNode(GridNode* destinationNode)
 		//reset the closes state
 		node->closed = false;
 
-		movementPathNodes.push_back(node);
+		movementPathNodes.emplace_back(node);
 	}
 
 	//Assign all costs
@@ -181,7 +181,7 @@ void Unit::MoveToNode(GridNode* destinationNode)
 	// isn't going to move onto the node of the player, instead to a neighbouring node
 	if (nextNode != nullptr)
 	{
-		pathNodes.push_back(nextNode);
+		pathNodes.emplace_back(nextNode);
 	}
 
 	if (nextNode)
@@ -191,7 +191,7 @@ void Unit::MoveToNode(GridNode* destinationNode)
 			if (nextNode->parentNode)
 			{
 				nextNode = nextNode->parentNode;
-				pathNodes.push_back(nextNode);
+				pathNodes.emplace_back(nextNode);
 			}
 		}
 	}

@@ -28,7 +28,7 @@ void HitResult::AddActorsToIgnore(std::vector<Actor*>& actors)
 
 void HitResult::IgnorePlayer()
 {
-	actorsToIgnore.push_back(Player::system.GetOnlyActor());
+	actorsToIgnore.emplace_back(Player::system.GetOnlyActor());
 }
 
 void HitResult::AddAllRenderStaticMeshesToIgnore()
@@ -37,7 +37,7 @@ void HitResult::AddAllRenderStaticMeshesToIgnore()
 	{
 		if (!mesh->IsRenderStatic())
 		{
-			componentsToIgnore.push_back(mesh.get());
+			componentsToIgnore.emplace_back(mesh.get());
 		}
 	}
 }

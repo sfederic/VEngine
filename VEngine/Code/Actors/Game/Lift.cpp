@@ -57,7 +57,7 @@ std::vector<GridActor*> Lift::GetGridActorsContainedInLiftTrigger()
 		}
 		if (liftTrigger->Contains(gridActor->GetPositionV()))
 		{
-			gridActors.push_back(gridActor);
+			gridActors.emplace_back(gridActor);
 		}
 	}
 	return gridActors;

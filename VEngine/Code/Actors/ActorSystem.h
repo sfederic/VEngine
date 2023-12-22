@@ -214,7 +214,7 @@ public:
 		outActors.reserve(actors.size());
 		for (auto& actor : actors)
 		{
-			outActors.push_back(actor.get());
+			outActors.emplace_back(actor.get());
 		}
 		return outActors;
 	}

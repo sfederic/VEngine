@@ -76,7 +76,7 @@ std::vector<Animation*> SkeletalMeshComponent::GetAllAnimations()
 	std::vector<Animation*> animations;
 	for (auto& [name, animation] : GetSkeleton().GetAnimations())
 	{
-		animations.push_back(&animation);
+		animations.emplace_back(&animation);
 	}
 	return animations;
 }

@@ -49,7 +49,7 @@ void DestructibleMeshComponent::Create()
 
 		mesh->GetMaterial().Create();
 
-		meshCells.push_back(mesh);
+		meshCells.emplace_back(mesh);
 
 		meshIndex++;
 	}

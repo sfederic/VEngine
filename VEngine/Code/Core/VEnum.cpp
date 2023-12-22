@@ -29,7 +29,7 @@ std::vector<std::string> VEnum::GetAllNames()
 	std::vector<std::string> names;
 	for (auto& dataPair : data)
 	{
-		names.push_back(dataPair.first);
+		names.emplace_back(dataPair.first);
 	}
 	return names;
 }

@@ -25,10 +25,10 @@ std::string persistentAudioFilename;
 std::unique_ptr<AudioBase> persistentAudio;
 std::unique_ptr<AudioChannel> persistentChannel;
 
-typedef std::map<std::string, std::unique_ptr<AudioBase>> AudioMap;
+typedef std::unordered_map<std::string, std::unique_ptr<AudioBase>> AudioMap;
 AudioMap loadedAudioMap;
 
-typedef std::map<uint64_t, std::unique_ptr<AudioChannel>> ChannelMap;
+typedef std::unordered_map<uint64_t, std::unique_ptr<AudioChannel>> ChannelMap;
 ChannelMap channelMap;
 
 HRESULT LoadWAV(const std::string filename, WAVEFORMATEXTENSIBLE& waveFormat, XAUDIO2_BUFFER& buffer);
@@ -41,7 +41,7 @@ AudioBase* CreateAudioBase(std::string audioFilename);
 void AudioSystem::Init()
 {
 	HR(XAudio2Create(&audioEngine));
-	
+
 #ifdef _DEBUG
 	XAUDIO2_DEBUG_CONFIGURATION debug = {};
 	debug.BreakMask = XAUDIO2_LOG_ERRORS;
@@ -245,7 +245,7 @@ void AudioSystem::PlayPersistentAudio(std::string filename)
 
 	IXAudio2SourceVoice* sourceVoice = nullptr;
 	HR(audioEngine->CreateSourceVoice(&sourceVoice, (WAVEFORMATEX*)&persistentAudio->waveFormat, 0, 2.0f, persistentChannel.get()));
-	
+
 	persistentChannel->sourceVoice = sourceVoice;
 
 	HR(sourceVoice->SubmitSourceBuffer(&persistentAudio->buffer));
@@ -341,12 +341,12 @@ HRESULT LoadWAV(const std::string filename, WAVEFORMATEXTENSIBLE& waveFormat, XA
 {
 	HANDLE file = CreateFileA(filename.c_str(), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
 
-	if (INVALID_HANDLE_VALUE == file) 
+	if (INVALID_HANDLE_VALUE == file)
 	{
 		return HRESULT_FROM_WIN32(GetLastError());
 	}
 
-	if (INVALID_SET_FILE_POINTER == SetFilePointer(file, 0, NULL, FILE_BEGIN)) 
+	if (INVALID_SET_FILE_POINTER == SetFilePointer(file, 0, NULL, FILE_BEGIN))
 	{
 		return HRESULT_FROM_WIN32(GetLastError());
 	}
@@ -357,7 +357,7 @@ HRESULT LoadWAV(const std::string filename, WAVEFORMATEXTENSIBLE& waveFormat, XA
 
 	DWORD fileType;
 	HR(ReadChunkData(file, &fileType, sizeof(DWORD), chunkPosition));
-	if (fileType != fourccWAVE) 
+	if (fileType != fourccWAVE)
 	{
 		return S_FALSE;
 	}

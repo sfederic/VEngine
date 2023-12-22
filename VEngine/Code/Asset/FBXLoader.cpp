@@ -222,7 +222,7 @@ std::map<std::string, Animation> FBXLoader::ImportAsAnimation(const std::string 
 										animFrame.pos.y = pos[1];
 										animFrame.pos.z = pos[2];
 
-										animFrames.push_back(animFrame);
+										animFrames.emplace_back(animFrame);
 									}
 
 									Animation& animation = skeleton.GetAnimation(animationName);

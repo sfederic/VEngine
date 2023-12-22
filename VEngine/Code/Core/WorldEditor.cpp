@@ -486,7 +486,7 @@ void UVPainting()
 				for (int vertIndex : hit.vertIndexesOfHitTriangleFace)
 				{
 					auto& vertex = vertices.at(vertIndex);
-					newUVs.push_back(&vertex.uv);
+					newUVs.emplace_back(&vertex.uv);
 				}
 
 				const auto texture = TextureSystem::FindTexture2D(WorldEditor::uvPaintData.texture);

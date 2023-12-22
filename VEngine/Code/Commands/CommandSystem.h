@@ -16,10 +16,10 @@ public:
 	template <typename T>
 	void AddCommand(Property& prop)
 	{
-		commands.push_back(std::make_unique<Command<T>>(prop));
+		commands.emplace_back(std::make_unique<Command<T>>(prop));
 		commandIndex = commands.size() - 1;
 	}
-	
+
 	void Tick();
 	void Reset();
 

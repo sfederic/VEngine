@@ -298,8 +298,8 @@ bool GridActor::CheckNextNodeMoveIsValid(const XMVECTOR nextMoveCardinalDirectio
 	const int lastGridIndexY = (int)std::round(GetPosition().z);
 	GridNode* lastNode = grid->GetNode(lastGridIndexX, lastGridIndexY);
 	HitResult lastPosHit;
-	lastPosHit.actorsToIgnore.push_back(this);
-	lastPosHit.actorsToIgnore.push_back(Player::system.GetOnlyActor());
+	lastPosHit.actorsToIgnore.emplace_back(this);
+	lastPosHit.actorsToIgnore.emplace_back(Player::system.GetOnlyActor());
 	lastNode->RecalcNodeHeight(lastPosHit);
 
 	return true;

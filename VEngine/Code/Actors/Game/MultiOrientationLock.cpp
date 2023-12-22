@@ -13,10 +13,10 @@ void MultiOrientationLock::Start()
 {
 	__super::Start();
 
-	lockActors.push_back(dynamic_cast<OrientationLock*>(World::GetActorByNameAllowNull(lockActorName0)));
-	lockActors.push_back(dynamic_cast<OrientationLock*>(World::GetActorByNameAllowNull(lockActorName1)));
-	lockActors.push_back(dynamic_cast<OrientationLock*>(World::GetActorByNameAllowNull(lockActorName2)));
-	lockActors.push_back(dynamic_cast<OrientationLock*>(World::GetActorByNameAllowNull(lockActorName3)));
+	lockActors.emplace_back(dynamic_cast<OrientationLock*>(World::GetActorByNameAllowNull(lockActorName0)));
+	lockActors.emplace_back(dynamic_cast<OrientationLock*>(World::GetActorByNameAllowNull(lockActorName1)));
+	lockActors.emplace_back(dynamic_cast<OrientationLock*>(World::GetActorByNameAllowNull(lockActorName2)));
+	lockActors.emplace_back(dynamic_cast<OrientationLock*>(World::GetActorByNameAllowNull(lockActorName3)));
 
 	actorToActivateOnAllLocksBeingCorrect = World::GetActorByNameAllowNull(actorToActivate);
 }

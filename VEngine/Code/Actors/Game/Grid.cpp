@@ -82,7 +82,7 @@ std::vector<GridNode*> Grid::GetAllNodes()
 	{
 		for (int y = 0; y < sizeX; y++)
 		{
-			outNodes.push_back(GetNode(x, y));
+			outNodes.emplace_back(GetNode(x, y));
 		}
 	}
 
@@ -95,7 +95,7 @@ void Grid::RecalcAllNodes(HitResult& hit)
 
 	//Set the mesh count as 1 and empty the data just to put dummy data into the buffers
 	nodeMesh->GetInstanceData().clear();
-	nodeMesh->GetInstanceData().push_back(InstanceData());
+	nodeMesh->GetInstanceData().emplace_back(InstanceData());
 
 	int meshInstanceCount = sizeX * sizeY;
 	nodeMesh->SetInstanceCount(meshInstanceCount);
@@ -113,7 +113,7 @@ void Grid::RecalcAllNodes(HitResult& hit)
 
 	//Ignore player and units
 	hit.ignoreLayer = CollisionLayers::Editor;
-	hit.actorsToIgnore.push_back((Actor*)Player::system.GetFirstActor());
+	hit.actorsToIgnore.emplace_back((Actor*)Player::system.GetFirstActor());
 	auto gridActors = World::GetAllActorsOfTypeAsActor<GridActor>();
 	for (auto gridActor : gridActors)
 	{
@@ -126,7 +126,7 @@ void Grid::RecalcAllNodes(HitResult& hit)
 			}
 		}
 
-		hit.actorsToIgnore.push_back(gridActor);
+		hit.actorsToIgnore.emplace_back(gridActor);
 	}
 
 	auto meshesToIgnore = World::GetAllComponentsOfType<MeshComponent>();
@@ -134,7 +134,7 @@ void Grid::RecalcAllNodes(HitResult& hit)
 	{
 		if (mesh->ignoreGridRaycasts)
 		{
-			hit.componentsToIgnore.push_back(mesh);
+			hit.componentsToIgnore.emplace_back(mesh);
 		}
 	}
 
@@ -143,7 +143,7 @@ void Grid::RecalcAllNodes(HitResult& hit)
 	for (int x = 0; x < sizeX; x++)
 	{
 		//create grid row
-		rows.push_back(GridRow());
+		rows.emplace_back(GridRow());
 
 		for (int y = 0; y < sizeY; y++)
 		{
@@ -207,7 +207,7 @@ void Grid::RecalcAllNodes(HitResult& hit)
 				node.active = false;
 			}
 
-			nodeMesh->GetInstanceData().push_back(instanceData);
+			nodeMesh->GetInstanceData().emplace_back(instanceData);
 
 			//Add node to column
 			rows[x].Add(node);
@@ -218,10 +218,10 @@ void Grid::RecalcAllNodes(HitResult& hit)
 void Grid::RecalcNodesToIgnoreLinkedGridActor(GridActor* gridActorToIgnore)
 {
 	HitResult hit(this);
-	hit.actorsToIgnore.push_back(gridActorToIgnore);
+	hit.actorsToIgnore.emplace_back(gridActorToIgnore);
 	for (auto mesh : gridActorToIgnore->GetComponents<MeshComponent>())
 	{
-		hit.componentsToIgnore.push_back(mesh);
+		hit.componentsToIgnore.emplace_back(mesh);
 	}
 	RecalcAllNodes(hit);
 }
@@ -250,7 +250,7 @@ void Grid::GetNeighbouringNodes(GridNode* centerNode, std::vector<GridNode*>& ou
 			{
 				node.closed = true;
 				node.parentNode = centerNode;
-				outNodes.push_back(&node);
+				outNodes.emplace_back(&node);
 			}
 		}
 	}
@@ -265,7 +265,7 @@ void Grid::GetNeighbouringNodes(GridNode* centerNode, std::vector<GridNode*>& ou
 			{
 				node.closed = true;
 				node.parentNode = centerNode;
-				outNodes.push_back(&node);
+				outNodes.emplace_back(&node);
 			}
 		}
 	}
@@ -280,7 +280,7 @@ void Grid::GetNeighbouringNodes(GridNode* centerNode, std::vector<GridNode*>& ou
 			{
 				node.closed = true;
 				node.parentNode = centerNode;
-				outNodes.push_back(&node);
+				outNodes.emplace_back(&node);
 			}
 		}
 	}
@@ -295,7 +295,7 @@ void Grid::GetNeighbouringNodes(GridNode* centerNode, std::vector<GridNode*>& ou
 			{
 				node.closed = true;
 				node.parentNode = centerNode;
-				outNodes.push_back(&node);
+				outNodes.emplace_back(&node);
 			}
 		}
 	}
@@ -312,7 +312,7 @@ void Grid::GetNeighbouringNodesForceful(GridNode* centerNode, std::vector<GridNo
 		GridNode& node = rows[currentX + 1].columns[currentY];
 		if (node.active)
 		{
-			outNodes.push_back(&node);
+			outNodes.emplace_back(&node);
 		}
 	}
 
@@ -322,7 +322,7 @@ void Grid::GetNeighbouringNodesForceful(GridNode* centerNode, std::vector<GridNo
 		GridNode& node = rows[currentX - 1].columns[currentY];
 		if (node.active)
 		{
-			outNodes.push_back(&node);
+			outNodes.emplace_back(&node);
 		}
 	}
 
@@ -332,7 +332,7 @@ void Grid::GetNeighbouringNodesForceful(GridNode* centerNode, std::vector<GridNo
 		GridNode& node = rows[currentX].columns[currentY + 1];
 		if (node.active)
 		{
-			outNodes.push_back(&node);
+			outNodes.emplace_back(&node);
 		}
 	}
 
@@ -342,7 +342,7 @@ void Grid::GetNeighbouringNodesForceful(GridNode* centerNode, std::vector<GridNo
 		GridNode& node = rows[currentX].columns[currentY - 1];
 		if (node.active)
 		{
-			outNodes.push_back(&node);
+			outNodes.emplace_back(&node);
 		}
 	}
 }
@@ -358,28 +358,28 @@ std::vector<GridNode*> Grid::GetNeighbouringActiveAndInactiveNodesForceful(GridN
 	if (currentX < (sizeX - 1))
 	{
 		GridNode& node = rows[currentX + 1].columns[currentY];
-		outNodes.push_back(&node);
+		outNodes.emplace_back(&node);
 	}
 
 	//-X
 	if (currentX > 0)
 	{
 		GridNode& node = rows[currentX - 1].columns[currentY];
-		outNodes.push_back(&node);
+		outNodes.emplace_back(&node);
 	}
 
 	//+Y
 	if (currentY < (sizeY - 1))
 	{
 		GridNode& node = rows[currentX].columns[currentY + 1];
-		outNodes.push_back(&node);
+		outNodes.emplace_back(&node);
 	}
 
 	//-Y
 	if (currentY > 0)
 	{
 		GridNode& node = rows[currentX].columns[currentY - 1];
-		outNodes.push_back(&node);
+		outNodes.emplace_back(&node);
 	}
 
 	return outNodes;
@@ -418,7 +418,7 @@ std::vector<Unit*> Grid::GetAllUnitsFromNodes(std::vector<GridNode*>& nodes)
 		auto unit = GetUnitAtNode(node);
 		if (unit)
 		{
-			units.push_back(unit);
+			units.emplace_back(unit);
 		}
 	}
 	return units;

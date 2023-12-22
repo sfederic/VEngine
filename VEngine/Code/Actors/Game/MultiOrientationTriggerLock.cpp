@@ -12,10 +12,10 @@ void MultiOrientationTriggerLock::Start()
 {
 	__super::Start();
 
-	triggerActors.push_back(dynamic_cast<OrientationTrigger*>(World::GetActorByNameAllowNull(triggerName0)));
-	triggerActors.push_back(dynamic_cast<OrientationTrigger*>(World::GetActorByNameAllowNull(triggerName1)));
-	triggerActors.push_back(dynamic_cast<OrientationTrigger*>(World::GetActorByNameAllowNull(triggerName2)));
-	triggerActors.push_back(dynamic_cast<OrientationTrigger*>(World::GetActorByNameAllowNull(triggerName3)));
+	triggerActors.emplace_back(dynamic_cast<OrientationTrigger*>(World::GetActorByNameAllowNull(triggerName0)));
+	triggerActors.emplace_back(dynamic_cast<OrientationTrigger*>(World::GetActorByNameAllowNull(triggerName1)));
+	triggerActors.emplace_back(dynamic_cast<OrientationTrigger*>(World::GetActorByNameAllowNull(triggerName2)));
+	triggerActors.emplace_back(dynamic_cast<OrientationTrigger*>(World::GetActorByNameAllowNull(triggerName3)));
 
 	actorToActivateOnAllLocksBeingCorrect = World::GetActorByNameAllowNull(actorToActivate);
 }

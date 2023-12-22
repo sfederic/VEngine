@@ -72,7 +72,7 @@ void WriteToPackage()
 		strcpy_s(entry.name, texturePair.first.c_str());
 		entry.offset = ftell(file);
 		entry.size = resource.size;
-		entries.push_back(entry);
+		entries.emplace_back(entry);
 
 		fwrite(resource.data, Resource::elementSize, resource.size, file);
 	}

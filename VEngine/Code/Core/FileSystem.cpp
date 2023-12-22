@@ -410,7 +410,7 @@ void MovePlayerToEntranceTriggerFromPreviousWorldFilename()
 	{
 		if (entranceTrigger->GetLevelToMoveTo() == previousWorldMovedFromFilename)
 		{
-			possibleEntrancesToMoveTo.push_back(entranceTrigger.get());
+			possibleEntrancesToMoveTo.emplace_back(entranceTrigger.get());
 		}
 	}
 
