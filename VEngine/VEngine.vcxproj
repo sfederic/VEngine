@@ -347,6 +347,7 @@
     <ClCompile Include="Code\Actors\EmptyActor.cpp" />
     <ClCompile Include="Code\UI\UVPaintWidget.cpp" />
     <ClCompile Include="Code\Actors\Game\OnOffPointLight.cpp" />
+    <ClCompile Include="Code\Actors\Game\ScannerEnemy.cpp" />
     <ClInclude Include="Code\Actors\Game\ChurchLockPropActivator.h" />
     <ClInclude Include="Code\Actors\Game\GlobalPropSetter.h" />
     <ClInclude Include="Code\Actors\Game\ActivateOnGlobalProp.h" />
@@ -723,6 +724,7 @@
     <ClInclude Include="Code\Actors\EmptyActor.h" />
     <ClInclude Include="Code\UI\UVPaintWidget.h" />
     <ClInclude Include="Code\Actors\Game\OnOffPointLight.h" />
+    <ClInclude Include="Code\Actors\Game\ScannerEnemy.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
