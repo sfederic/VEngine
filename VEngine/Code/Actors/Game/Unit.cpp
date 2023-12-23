@@ -209,6 +209,15 @@ void Unit::MoveToNode(int x, int y)
 	MoveToNode(destinationNode);
 }
 
+void Unit::MoveToRandomNode()
+{
+	auto grid = Grid::system.GetOnlyActor();
+	int x = VMath::RandomRangeInt(0, grid->GetSizeX());
+	int y = VMath::RandomRangeInt(0, grid->GetSizeY());
+	GridNode* destinationNode = grid->GetNode(x, y);
+	MoveToNode(destinationNode);
+}
+
 void Unit::StartTurn()
 {
 	GetCurrentNode()->Show();
