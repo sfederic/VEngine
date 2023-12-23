@@ -14,10 +14,10 @@ public:
 	ScannerEnemy();
 	void Create() override;
 	void Tick(float deltaTime) override;
+	Properties GetProps() override;
 
-private:
-	void ScanForPlayer();
-	void RotateWhileScanning();
+protected:
+	void ScanForPlayer(float deltaTime);
 
 	Polyboard* scanLaser = nullptr;
 
@@ -28,6 +28,4 @@ private:
 	};
 
 	ScanMode scanMode = ScanMode::Scanning;
-
-	float scanTimer = 0.f;
 };

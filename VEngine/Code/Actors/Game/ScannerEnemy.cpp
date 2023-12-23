@@ -3,7 +3,6 @@
 #include "Physics/Raycast.h"
 #include "Player.h"
 #include "Core/VMath.h"
-#include "Core/Core.h"
 #include "Particle/Polyboard.h"
 
 ScannerEnemy::ScannerEnemy()
@@ -22,18 +21,18 @@ void ScannerEnemy::Create()
 
 void ScannerEnemy::Tick(float deltaTime)
 {
-	ScanForPlayer();
-
 	__super::Tick(deltaTime);
-
-	//Careful with this call. It might be overriding NextRot sets in the parent tick.
-	auto newRotation =
-		XMQuaternionMultiply(nextRot,
-			DirectX::XMQuaternionRotationAxis(VMath::GlobalUpVector(), XMConvertToRadians(deltaTime * 15.f)));
-	SetNextRot(newRotation);
+	ScanForPlayer(deltaTime);
 }
 
-void ScannerEnemy::ScanForPlayer()
+Properties ScannerEnemy::GetProps()
+{
+	auto props = __super::GetProps();
+	props.title = GetTypeName();
+	return props;
+}
+
+void ScannerEnemy::ScanForPlayer(float deltaTime)
 {
 	const auto start = GetPositionV();
 
@@ -57,7 +56,11 @@ void ScannerEnemy::ScanForPlayer()
 			}
 		}
 
-		RotateWhileScanning();
+		//Careful with this call. It might be overriding NextRot sets in the parent tick.
+		auto newRotation =
+			XMQuaternionMultiply(nextRot,
+				DirectX::XMQuaternionRotationAxis(VMath::GlobalUpVector(), XMConvertToRadians(deltaTime * 15.f)));
+		SetNextRot(newRotation);
 
 		break;
 	}
@@ -82,17 +85,5 @@ void ScannerEnemy::ScanForPlayer()
 
 		break;
 	}
-	}
-}
-
-//@Todo: ideally want two different scanner enemies. One that just spins, and one that scouts around a bit.
-void ScannerEnemy::RotateWhileScanning()
-{
-	constexpr float scanInterval = 5.f;
-	scanTimer += Core::GetDeltaTime();
-	if (scanTimer > scanInterval)
-	{
-		scanTimer = 0.f;
-		//MoveToRandomNode();
 	}
 }

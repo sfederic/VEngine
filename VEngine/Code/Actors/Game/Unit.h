@@ -56,7 +56,7 @@ struct Unit : GridActor
 	virtual void InflictDamage(int damage) override;
 	void MoveToNode(GridNode* destinationNode);
 	void MoveToNode(int x, int y);
-	void MoveToRandomNode();
+	void MoveToRandomNodeInMovementRange();
 	void StartTurn();
 	bool Attack();
 	void WindUpAttack();

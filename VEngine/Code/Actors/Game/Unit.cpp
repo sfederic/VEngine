@@ -210,11 +210,19 @@ void Unit::MoveToNode(int x, int y)
 	MoveToNode(destinationNode);
 }
 
-void Unit::MoveToRandomNode()
+void Unit::MoveToRandomNodeInMovementRange()
 {
 	auto grid = Grid::system.GetOnlyActor();
-	int x = VMath::RandomRangeInt(0, grid->GetSizeX() - 1);
-	int y = VMath::RandomRangeInt(0, grid->GetSizeY() - 1);
+
+	const int xMin = xIndex - movementPoints;
+	const int yMin = yIndex - movementPoints;
+
+	const int xMax = xIndex + movementPoints;
+	const int yMax = yIndex + movementPoints;
+
+	const int x = std::clamp(VMath::RandomRangeInt(xMin, xMax), 0, grid->GetSizeX() - 1);
+	const int y = std::clamp(VMath::RandomRangeInt(yMin, yMax), 0, grid->GetSizeY() - 1);
+
 	GridNode* destinationNode = grid->GetNode(x, y);
 	MoveToNode(destinationNode);
 }
