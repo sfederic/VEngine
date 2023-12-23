@@ -818,6 +818,9 @@
     <ClCompile Include="Code\Actors\Game\ScoutingScannerEnemy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\UI\Game\ScanningEnemyAlertWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\main.cpp">
@@ -1669,6 +1672,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\ScoutingScannerEnemy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\UI\Game\ScanningEnemyAlertWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
