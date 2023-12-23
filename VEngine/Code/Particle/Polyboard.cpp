@@ -48,6 +48,7 @@ void Polyboard::GenerateVertices()
 		vertices.emplace_back(Vertex());
 	}
 
+	//@Todo: still got a bug here when creating the dynamic buffers. Only happens occasionally, d3d11 just throws.
 	vertexBuffer->data = RenderUtils::CreateDynamicBuffer(sizeof(Vertex) * 256,
 		D3D11_BIND_VERTEX_BUFFER, vertices.data());
 
