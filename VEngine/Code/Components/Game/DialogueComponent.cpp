@@ -118,7 +118,7 @@ bool DialogueComponent::ShowTextAtActor()
 	auto dcs = actor->GetComponents<DialogueComponent>();
 	for (auto* d : dcs)
 	{
-		d->dialogueWidget->worldPosition = actor->GetHomogeneousPositionV();
+		d->dialogueWidget->SetWorldPosition(actor->GetHomogeneousPositionV());
 		d->dialogueWidget->SetText(dataIt->second.text);
 		d->dialogueWidget->AddToViewport();
 
@@ -193,7 +193,7 @@ void DialogueComponent::ConversationShowTextAtActor()
 	auto dcs = actor->GetComponents<DialogueComponent>();
 	for (auto* d : dcs)
 	{
-		d->dialogueWidget->worldPosition = actor->GetHomogeneousPositionV();
+		d->dialogueWidget->SetWorldPosition(actor->GetHomogeneousPositionV());
 		d->dialogueWidget->SetText(dataIt->second.text);
 		d->dialogueWidget->AddToViewport();
 

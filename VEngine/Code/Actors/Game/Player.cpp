@@ -562,7 +562,7 @@ void Player::InteractInfoToWidgetCheck()
 		auto npc = hit.GetHitActorAs<NPC>();
 		if (npc)
 		{
-			interactWidget->worldPosition = GetHomogeneousPositionV();
+			interactWidget->SetWorldPosition(GetHomogeneousPositionV());
 			interactWidget->interactText = L"Talk";
 			interactWidget->AddToViewport();
 			return;
@@ -573,7 +573,7 @@ void Player::InteractInfoToWidgetCheck()
 		{
 			if (!gridActor->interactText.empty())
 			{
-				interactWidget->worldPosition = GetHomogeneousPositionV();
+				interactWidget->SetWorldPosition(GetHomogeneousPositionV());
 				interactWidget->interactText = gridActor->interactText;
 				interactWidget->AddToViewport();
 			}

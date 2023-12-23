@@ -42,7 +42,7 @@ void NPC::Tick(float deltaTime)
 {
 	if (spawnTextWidget)
 	{
-		spawnTextWidget->worldPosition = GetHomogeneousPositionV();
+		spawnTextWidget->SetWorldPosition(GetHomogeneousPositionV());
 	}
 
 	if (isQuickDialogueActive)

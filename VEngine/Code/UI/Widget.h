@@ -31,9 +31,6 @@ public:
 		BottomRight,
 	};
 
-	//The widget's position in world space to be mapped to screen space (Use Actor::GetHomogeneousPositionV() to set this)
-	XMVECTOR worldPosition = XMVectorSet(0.f, 0.f, 0.f, 1.f);
-
 	bool render = true;
 
 	virtual void Draw(float deltaTime) = 0;
@@ -50,6 +47,8 @@ public:
 	bool IsMouseInLayout(Layout layout);
 
 	bool IsStatic() const { return isStaticWidget; }
+
+	void SetWorldPosition(XMVECTOR pos) { worldPosition = pos; }
 
 protected:
 	void GetScreenSpaceCoords(int& sx, int& sy);
@@ -85,4 +84,7 @@ protected:
 
 	//Means the widget won't be cleaned up on world resets. Mostly for Debug widgets.
 	bool isStaticWidget = false;
+
+	//The widget's position in world space to be mapped to screen space (Use Actor::GetHomogeneousPositionV() to set this)
+	XMVECTOR worldPosition = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 };

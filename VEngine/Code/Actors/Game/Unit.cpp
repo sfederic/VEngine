@@ -38,7 +38,7 @@ void Unit::Tick(float deltaTime)
 {
 	__super::Tick(deltaTime);
 
-	healthWidget->worldPosition = GetHomogeneousPositionV();
+	healthWidget->SetWorldPosition(GetHomogeneousPositionV());
 
 	if (VMath::VecEqual(nextPos, GetPositionV()))
 	{
