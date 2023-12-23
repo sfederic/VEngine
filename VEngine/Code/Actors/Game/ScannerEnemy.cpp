@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "Core/VMath.h"
 #include "Particle/Polyboard.h"
+#include "Gameplay/GameUtils.h"
 
 ScannerEnemy::ScannerEnemy()
 {
@@ -53,6 +54,7 @@ void ScannerEnemy::ScanForPlayer(float deltaTime)
 			{
 				//Lock on to player
 				scanMode = ScanMode::LockedOnToPlayer;
+				GameUtils::PlayAudioOneShot("alert.wav");
 			}
 		}
 
