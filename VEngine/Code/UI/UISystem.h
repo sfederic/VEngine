@@ -6,8 +6,8 @@
 #include <dwrite_1.h>
 #include "Layout.h"
 #include "Colours.h"
+#include "Widget.h"
 
-class Widget;
 class ScreenFadeWidget;
 
 namespace UISystem
@@ -35,6 +35,7 @@ namespace UISystem
 	template <typename T>
 	T* CreateWidget()
 	{
+		static_assert(std::is_convertible<T*, Widget*>::value, "Derived must inherit Widget as public");
 		widgets.emplace_back(std::make_unique<T>());
 		return (T*)widgets.back().get();
 	}
