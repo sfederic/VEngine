@@ -9,6 +9,16 @@ class SpatialComponent;
 
 struct HitResult
 {
+	//Mainly got this here for vertex colour painting, to be able to switch brush modes and paint entire faces at once.
+	std::vector<int> vertIndexesOfHitTriangleFace;
+	std::vector<int> hitVertIndexes;
+
+	//List of actors to ignore when cast
+	std::vector<Actor*> actorsToIgnore;
+	std::vector<SpatialComponent*> componentsToIgnore;
+	std::vector<Actor*> hitActors;
+	std::vector<SpatialComponent*> hitComponents;
+
 	DirectX::XMVECTOR origin = DirectX::XMVectorSet(0.f, 0.f, 0.f, 1.f);
 	DirectX::XMVECTOR direction = DirectX::XMVectorSet(0.f, 0.f, 0.f, 0.f);
 
@@ -17,17 +27,9 @@ struct HitResult
 	DirectX::XMFLOAT3 hitNormal = DirectX::XMFLOAT3(0.f, 0.f, 0.f);
 	DirectX::XMFLOAT2 uv = DirectX::XMFLOAT2(0.f, 0.f);
 
-	//List of actors to ignore when cast
-	std::vector<Actor*> actorsToIgnore;
-
-	std::vector<SpatialComponent*> componentsToIgnore;
-
-	std::vector<Actor*> hitActors;
-
 	//The closest hit actor.
 	Actor* hitActor = nullptr;
 
-	std::vector<SpatialComponent*> hitComponents;
 	SpatialComponent* hitComponent = nullptr;
 
 	//Layer to ignore on raycast
@@ -70,9 +72,4 @@ struct HitResult
 	//Result is in world space.
 	DirectX::XMVECTOR GetHitPosV() const { return XMLoadFloat3(&hitPos); }
 	DirectX::XMVECTOR GetNormalV() const { return XMLoadFloat3(&hitNormal); }
-
-	//Mainly got this here for vertex colour painting, to be able to switch brush modes and paint entire faces at once.
-	std::vector<int> vertIndexesOfHitTriangleFace;
-
-	std::vector<int> hitVertIndexes;
 };
