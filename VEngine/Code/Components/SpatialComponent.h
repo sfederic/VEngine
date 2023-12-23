@@ -52,6 +52,7 @@ public:
 	void SetLocalRotation(XMVECTOR newRotation);
 	void SetWorldRotation(XMVECTOR newRotation);
 	void AddLocalRotation(XMVECTOR vector, float angle);
+	void AddWorldRotation(XMVECTOR vector, float angle);
 
 	XMFLOAT3 GetForwardVector();
 	XMVECTOR GetForwardVectorV();
