@@ -60,14 +60,15 @@ void Unit::Tick(float deltaTime)
 
 			GetCurrentNode()->Hide();
 
-			auto player = Player::system.GetFirstActor();
-
+			//@Todo: see about uncommenting this Attack section and what can be done about it.
+			//Originally commented it out because ScannerEnemy was having trouble finding new paths.
+			/*auto player = Player::system.GetFirstActor();
 			if (Attack())
 			{
 				player->SetZoomedInCameraFOV();
 				Camera::SetActiveCameraTarget(this);
 				Timer::SetTimer(2.f, std::bind(&Unit::WindUpAttack, this));
-			}
+			}*/
 		}
 	}
 }
@@ -212,8 +213,8 @@ void Unit::MoveToNode(int x, int y)
 void Unit::MoveToRandomNode()
 {
 	auto grid = Grid::system.GetOnlyActor();
-	int x = VMath::RandomRangeInt(0, grid->GetSizeX());
-	int y = VMath::RandomRangeInt(0, grid->GetSizeY());
+	int x = VMath::RandomRangeInt(0, grid->GetSizeX() - 1);
+	int y = VMath::RandomRangeInt(0, grid->GetSizeY() - 1);
 	GridNode* destinationNode = grid->GetNode(x, y);
 	MoveToNode(destinationNode);
 }
