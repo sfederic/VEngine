@@ -5,6 +5,8 @@
 #include "Core/VMath.h"
 #include "Particle/Polyboard.h"
 #include "Gameplay/GameUtils.h"
+#include "UI/Game/ScanningEnemyAlertWidget.h"
+#include "UI/UISystem.h"
 
 ScannerEnemy::ScannerEnemy()
 {
@@ -20,10 +22,18 @@ void ScannerEnemy::Create()
 	scanLaser->SetTextureFilename("Particle/beam_blue.png");
 }
 
+void ScannerEnemy::Start()
+{
+	__super::Start();
+
+	alertWidget = UISystem::CreateWidget<ScanningEnemyAlertWidget>();
+}
+
 void ScannerEnemy::Tick(float deltaTime)
 {
 	__super::Tick(deltaTime);
 	ScanForPlayer(deltaTime);
+	alertWidget->SetWorldPosition(GetHomogeneousPositionV());
 }
 
 Properties ScannerEnemy::GetProps()
@@ -55,6 +65,7 @@ void ScannerEnemy::ScanForPlayer(float deltaTime)
 				//Lock on to player
 				scanMode = ScanMode::LockedOnToPlayer;
 				GameUtils::PlayAudioOneShot("alert.wav");
+				alertWidget->AddToViewport(2.f);
 			}
 		}
 
@@ -80,6 +91,7 @@ void ScannerEnemy::ScanForPlayer(float deltaTime)
 			{
 				//Can't find player
 				scanMode = ScanMode::Scanning;
+				alertWidget->RemoveFromViewport();
 			}
 		}
 

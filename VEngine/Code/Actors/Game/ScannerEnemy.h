@@ -2,6 +2,7 @@
 
 #include "Unit.h"
 
+class ScanningEnemyAlertWidget;
 class Polyboard;
 
 //Enemy that scans around, prompting the player to use GridActors as cover from its sight.
@@ -13,6 +14,7 @@ public:
 
 	ScannerEnemy();
 	void Create() override;
+	void Start() override;
 	void Tick(float deltaTime) override;
 	Properties GetProps() override;
 
@@ -28,4 +30,6 @@ protected:
 	};
 
 	ScanMode scanMode = ScanMode::Scanning;
+
+	ScanningEnemyAlertWidget* alertWidget = nullptr;
 };
