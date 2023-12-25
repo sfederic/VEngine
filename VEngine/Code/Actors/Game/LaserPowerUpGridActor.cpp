@@ -21,7 +21,6 @@ void LaserPowerUpGridActor::Tick(float deltaTime)
 	laser->SetStartPoint(GetPositionV());
 
 	PowerUpHitRaycastActor();
-	PowerDownPreviousHitActor();
 }
 
 Properties LaserPowerUpGridActor::GetProps()
@@ -46,10 +45,17 @@ void LaserPowerUpGridActor::PowerUpHitRaycastActor()
 			previousHitGridActor = gridActor;
 			gridActor->PowerUp();
 		}
+
+		if (hit.hitActor != previousHitGridActor)
+		{
+			PowerDownPreviousHitActor();
+		}
 	}
 	else
 	{
 		laser->SetEndPoint(end);
+
+		PowerDownPreviousHitActor();
 	}
 }
 
