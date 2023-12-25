@@ -60,6 +60,8 @@ void ScannerEnemy::ScanForPlayer(float deltaTime)
 		HitResult hit(this);
 		if (Raycast(hit, start, end))
 		{
+			scanLaser->SetEndPoint(hit.GetHitPosV());
+
 			auto player = hit.GetHitActorAs<Player>();
 			if (player)
 			{
