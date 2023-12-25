@@ -9,9 +9,16 @@ LaserPowerUpGridActor::LaserPowerUpGridActor()
 	rootComponent->AddChild(laser);
 }
 
+void LaserPowerUpGridActor::Create()
+{
+	laser->SetTextureFilename("Particle/beam_blue.png");
+}
+
 void LaserPowerUpGridActor::Tick(float deltaTime)
 {
 	__super::Tick(deltaTime);
+
+	laser->SetStartPoint(GetPositionV());
 
 	PowerUpHitRaycastActor();
 	PowerDownPreviousHitActor();
@@ -26,15 +33,23 @@ Properties LaserPowerUpGridActor::GetProps()
 
 void LaserPowerUpGridActor::PowerUpHitRaycastActor()
 {
+	const auto pos = GetPositionV();
+	const auto end = pos + (GetForwardVectorV() * 10.f);
 	HitResult hit(this);
-	if (Raycast(hit, GetPositionV(), GetForwardVectorV(), 100.f))
+	if (Raycast(hit, GetPositionV(), end))
 	{
+		laser->SetEndPoint(hit.GetHitPosV());
+
 		auto gridActor = hit.GetHitActorAs<GridActor>();
 		if (gridActor)
 		{
 			previousHitGridActor = gridActor;
 			gridActor->PowerUp();
 		}
+	}
+	else
+	{
+		laser->SetEndPoint(end);
 	}
 }
 
