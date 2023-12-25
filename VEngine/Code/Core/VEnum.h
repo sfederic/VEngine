@@ -11,7 +11,7 @@ public:
 	void SetValue(const std::string& newValue);
 	void Add(const std::string& name);
 	std::vector<std::string> GetAllNames();
-	bool Contains(std::string value);
+	bool Contains(std::string _value);
 	bool Compare(std::string valueToCompare);
 	void Reset();
 
