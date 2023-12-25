@@ -21,15 +21,16 @@ public:
 protected:
 	void ScanForPlayer(float deltaTime);
 
-	Polyboard* scanLaser = nullptr;
-
 	enum class ScanMode
 	{
 		Scanning,
 		LockedOnToPlayer
 	};
 
+	Polyboard* scanLaser = nullptr;
+	ScanningEnemyAlertWidget* alertWidget = nullptr;
 	ScanMode scanMode = ScanMode::Scanning;
 
-	ScanningEnemyAlertWidget* alertWidget = nullptr;
+	//Set this to 0 if you want stationary ScannerEnemies
+	float spinSpeed = 20.f;
 };
