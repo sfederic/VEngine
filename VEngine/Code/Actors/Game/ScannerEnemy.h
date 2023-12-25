@@ -31,6 +31,6 @@ protected:
 	ScanningEnemyAlertWidget* alertWidget = nullptr;
 	ScanMode scanMode = ScanMode::Scanning;
 
-	//Set this to 0 if you want stationary ScannerEnemies
+	//Set this to 0 if you want stationary ScannerEnemies (careful, very closely named to rotateSpeed)
 	float spinSpeed = 20.f;
 };

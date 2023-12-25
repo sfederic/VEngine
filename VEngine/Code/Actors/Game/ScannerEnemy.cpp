@@ -40,8 +40,8 @@ Properties ScannerEnemy::GetProps()
 {
 	auto props = __super::GetProps();
 	props.title = GetTypeName();
-	props.Add("Spin Speed", &spinSpeed)
-		return props;
+	props.Add("Spin Speed", &spinSpeed);
+	return props;
 }
 
 void ScannerEnemy::ScanForPlayer(float deltaTime)
@@ -73,7 +73,7 @@ void ScannerEnemy::ScanForPlayer(float deltaTime)
 		//Careful with this call. It might be overriding NextRot sets in the parent tick.
 		auto newRotation =
 			XMQuaternionMultiply(nextRot,
-				DirectX::XMQuaternionRotationAxis(VMath::GlobalUpVector(), XMConvertToRadians(deltaTime * rotateSpeed)));
+				DirectX::XMQuaternionRotationAxis(VMath::GlobalUpVector(), XMConvertToRadians(deltaTime * spinSpeed)));
 		SetNextRot(newRotation);
 
 		break;
