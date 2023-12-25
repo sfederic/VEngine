@@ -209,7 +209,7 @@ UID
 2471375064
 next
 ScannerEnemy
-7
+6
  Enabled
 1
  Position
@@ -558,78 +558,9 @@ next
  Enabled
 1
  Position
-2 1 12
+4 0 12
  Rotation
--0 0.706985 -0 0.707229
- Scale
-1 1 1
- Visible
-1
-Attack Points
-1
-Attack Range
-1
-Battle State
-fight
-Can Fall
-1
-Death Text
-
-Destruct
-1
-DisableGridInteract
-0
-Focus Actor
-
-Health
-1
-Ignore Rotate Check
-0
-Inspect
-0
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Move Points
-10
-Move Speed
-3
-Name
-ScannerEnemy5
-Num Attacks
-1
-Obstacle
-0
-Rotate Pitch
-1
-Rotate Roll
-0
-Rotate Speed
-12
-Rotate Yaw
-1
-Spin Speed
-0
-UID
-3472862284
-next
- Enabled
-1
- Position
-2 0 12
- Rotation
--0 0.706985 -0 0.707229
+0 0.707229 0 -0.706985
  Scale
 1 1 1
  Visible
@@ -694,7 +625,7 @@ UID
 2575521668
 next
 MeshComponent
-13
+12
 1545783641
 Mesh
  Enabled
@@ -1322,71 +1253,14 @@ Trans. Occlude
 UID
 144463865
 next
-3472862284
-Mesh
- Enabled
-1
- Pos
-2 1 12
- Rot
--0 0.706985 -0 0.707229
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-crystal_pickup_icon.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cube.vmesh
-Physics Static
-1
-Render Static
-1
-Trans. Occlude
-0
-UID
-2302987391
-next
 2575521668
 Mesh
  Enabled
 1
  Pos
-2 0 12
+4 0 12
  Rot
--0 0.706985 -0 0.707229
+0 0.707229 0 -0.706985
  Scale
 1 1 1
  Visible
@@ -1437,7 +1311,7 @@ UID
 987617540
 next
 Polyboard
-7
+6
 2694676277
 Laser
  Enabled
@@ -1513,21 +1387,6 @@ Laser
 UID
 1550385750
 next
-3472862284
-Laser
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-UID
-561404021
-next
 2575521668
 Laser
  Enabled
@@ -1544,7 +1403,7 @@ UID
 300828635
 next
 DialogueComponent
-10
+9
 1545783641
 Dialogue
  Enabled
@@ -1632,17 +1491,6 @@ File
 
 UID
 408059535
-next
-3472862284
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-1323473501
 next
 2575521668
 Dialogue
