@@ -1,26 +1,156 @@
-DebugNoteActor
+OrientationLock
 2
  Enabled
 1
  Position
--0 -0 -0
+7 0 3
  Rotation
-0 0 0 1
+-6.32204e-08 1 -2.18557e-08 2.10733e-08
  Scale
-1 1 1
+0.999996 0.999998 0.999998
  Visible
 1
+Can Fall
+1
+Destruct
+1
+Dir Forward
+0 0 0
+Dir Right
+0 0 0
+Dir Up
+0 0 1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+1
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+0
+Link Rotation
+1
+Linked GridActor
+
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
 Name
-DebugNoteActor0
-Note Text
-Intent here is to match the sword rotations with the paintings.
+Sword1
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Roll
+0
+Rotate Speed
+12
+Rotate Yaw
+1
 UID
-2028731464
+409432671
 next
  Enabled
 1
  Position
-2 0 9
+7 0 6
+ Rotation
+-2.90077e-07 0 -0 1
+ Scale
+1 0.999997 0.999997
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+Dir Forward
+0 0 0
+Dir Right
+0 0 0
+Dir Up
+0 -1 0
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+1
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+0
+Link Rotation
+1
+Linked GridActor
+
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+Sword0
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Roll
+0
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+3821641987
+next
+GlobalPropSetter
+1
+ Enabled
+1
+ Position
+2 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Activated
+0
+Name
+GlobalPropSetter0
+Property Name
+ChurchSwordLock
+Property Value
+1
+UID
+1619675645
+next
+Player
+1
+ Enabled
+1
+ Position
+2 0 1
  Rotation
 -0 0 -0 1
  Scale
@@ -28,51 +158,9 @@ next
  Visible
 1
 Name
-DebugNoteActor1
-Note Text
-entrance to a little garden here that reveals a sundial to match the clock upstairs with
+Player0
 UID
-2544657414
-next
-DiffuseProbeMap
-1
- Enabled
-0
- Position
-0 0 0
- Rotation
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Name
-DiffuseProbeMap0
-Size X
-10
-Size Y
-4
-Size Z
-10
-UID
-2522248940
-next
-DirectionalLightActor
-1
- Enabled
-1
- Position
-0 5 0
- Rotation
-0.707107 0 0 0.707107
- Scale
-1 1 1
- Visible
-1
-Name
-DirectionalLightActor0
-UID
-3227738273
+3817475245
 next
 EntranceTrigger
 2
@@ -134,29 +222,6 @@ UID
 Unlock Audio
 
 next
-GlobalPropSetter
-1
- Enabled
-1
- Position
-2 0 4
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Activated
-0
-Name
-GlobalPropSetter0
-Property Name
-ChurchSwordLock
-Property Value
-1
-UID
-1619675645
-next
 Grid
 1
  Enabled
@@ -177,6 +242,42 @@ Size Y
 11
 UID
 2699739853
+next
+DebugNoteActor
+2
+ Enabled
+1
+ Position
+-0 -0 -0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+DebugNoteActor0
+Note Text
+Intent here is to match the sword rotations with the paintings.
+UID
+2028731464
+next
+ Enabled
+1
+ Position
+2 0 9
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+DebugNoteActor1
+Note Text
+entrance to a little garden here that reveals a sundial to match the clock upstairs with
+UID
+2544657414
 next
 MeshActor
 13
@@ -260,9 +361,9 @@ next
  Position
 8.5 1 3
  Rotation
-0 0.707107 0 0.707107
+0.707107 -1.54543e-08 0.707107 -1.54543e-08
  Scale
-1.99999 2 0.999995
+1.99999 2 0.999994
  Visible
 1
 Name
@@ -275,9 +376,9 @@ next
  Position
 8.5 1 6
  Rotation
--0 0.707107 -0 0.707107
+0.707107 1.54543e-08 0.707107 1.54543e-08
  Scale
-1.99998 2 0.99999
+1.99998 2 0.999989
  Visible
 1
 Name
@@ -375,6 +476,46 @@ pillar312
 UID
 1068462139
 next
+DirectionalLightActor
+1
+ Enabled
+1
+ Position
+0 5 0
+ Rotation
+0.707107 0 0 0.707107
+ Scale
+1 1 1
+ Visible
+1
+Name
+DirectionalLightActor0
+UID
+3227738273
+next
+DiffuseProbeMap
+1
+ Enabled
+0
+ Position
+0 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+DiffuseProbeMap0
+Size X
+10
+Size Y
+4
+Size Z
+10
+UID
+2522248940
+next
 MultiOrientationLock
 1
  Enabled
@@ -401,439 +542,6 @@ Name
 MultiOrientationLock0
 UID
 4178313292
-next
-OrientationLock
-2
- Enabled
-1
- Position
-7 0 3
- Rotation
--6.32204e-08 1 -2.18557e-08 2.10733e-08
- Scale
-0.999996 0.999998 0.999998
- Visible
-1
-Can Fall
-1
-Destruct
-1
-Dir Forward
-0 0 0
-Dir Right
-0 0 0
-Dir Up
-0 0 1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-1
-Inspect
-0
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-0
-Link Rotation
-1
-Linked GridActor
-
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Move Speed
-12
-Name
-Sword1
-Obstacle
-1
-Rotate Pitch
-1
-Rotate Speed
-12
-Rotate Yaw
-1
-UID
-409432671
-next
- Enabled
-1
- Position
-7 0 6
- Rotation
--2.90077e-07 0 -0 1
- Scale
-1 0.999997 0.999997
- Visible
-1
-Can Fall
-1
-Destruct
-1
-Dir Forward
-0 0 0
-Dir Right
-0 0 0
-Dir Up
-0 -1 0
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-1
-Inspect
-0
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-0
-Link Rotation
-1
-Linked GridActor
-
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Move Speed
-12
-Name
-Sword0
-Obstacle
-1
-Rotate Pitch
-1
-Rotate Speed
-12
-Rotate Yaw
-1
-UID
-3821641987
-next
-Player
-1
- Enabled
-1
- Position
-2 0 1
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Name
-Player0
-UID
-3817475245
-next
-BoxTriggerComponent
-2
-280888480
-Trigger
- Enabled
-1
- Pos
-2 0 0
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Extents
-0.45 0.45 0.45
-Offset
-0 0 0
-UID
-3679155548
-next
-2057913117
-Trigger
- Enabled
-1
- Pos
-2 0 10
- Rot
-0 1 0 -0.000244075
- Scale
-1 1 1
- Visible
-1
-Extents
-0.45 0.45 0.45
-Offset
-0 0 0
-UID
-2752743143
-next
-CameraComponent
-1
-3817475245
-Camera
- Enabled
-1
- Pos
-1.75 1.75 -2.75
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-FOV
-60
-Far Z
-1000
-Near Z
-0.01
-UID
-2533692700
-next
-ConditionComponent
-2
-280888480
-Condition
- Enabled
-1
- Visible
-1
-Condition
-
-Condition Arg
-
-UID
-809116919
-next
-2057913117
-Condition
- Enabled
-1
- Visible
-1
-Condition
-
-Condition Arg
-
-UID
-2570326750
-next
-DialogueComponent
-3
-409432671
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-2853361186
-next
-3821641987
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-3679690994
-next
-3817475245
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-1029481882
-next
-DirectionalLightComponent
-1
-3227738273
-DirectionalLight
- Enabled
-1
- Pos
-0 5 0
- Rot
-0.707107 0 0 0.707107
- Scale
-1 1 1
- Visible
-1
-Colour
-1 1 1 1
-LightEnabled
-1
-UID
-814014588
-next
-EmptyComponent
-6
-2028731464
-Root
- Enabled
-1
- Pos
--0 -0 -0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-UID
-4130548357
-next
-2544657414
-Root
- Enabled
-1
- Pos
-2 0 9
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-UID
-890647334
-next
-1619675645
-Root
- Enabled
-1
- Pos
-2 0 4
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-UID
-1989328311
-next
-4178313292
-Root
- Enabled
-1
- Pos
-2 0 3
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-UID
-4240988592
-next
-3817475245
-Root
- Enabled
-1
- Pos
-2 0 1
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-UID
-1498646771
-next
-2522248940
-Root
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-UID
-690763964
-next
-InstanceMeshComponent
-1
-2699739853
-NodeMesh
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-default
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Instance
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-node.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-2365725188
 next
 MeshComponent
 16
@@ -885,7 +593,9 @@ M_UvScale
 1 1
 Mesh
 node.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -940,7 +650,9 @@ M_UvScale
 1 1
 Mesh
 char.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -995,7 +707,9 @@ M_UvScale
 1 1
 Mesh
 char.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1050,7 +764,9 @@ M_UvScale
 1 1
 Mesh
 node.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1105,7 +821,9 @@ M_UvScale
 1 1
 Mesh
 node.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1119,9 +837,9 @@ Mesh
  Pos
 8.5 1 3
  Rot
-0 0.707107 0 0.707107
+0.707107 -1.54543e-08 0.707107 -1.54543e-08
  Scale
-1.99999 2 0.999995
+1.99999 2 0.999994
  Visible
 1
 Casts Shadow
@@ -1160,7 +878,9 @@ M_UvScale
 2 2
 Mesh
 pictureframe_square.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1174,9 +894,9 @@ Mesh
  Pos
 8.5 1 6
  Rot
--0 0.707107 -0 0.707107
+0.707107 1.54543e-08 0.707107 1.54543e-08
  Scale
-1.99998 2 0.99999
+1.99998 2 0.999989
  Visible
 1
 Casts Shadow
@@ -1215,7 +935,9 @@ M_UvScale
 2 2
 Mesh
 pictureframe_square.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1270,7 +992,9 @@ M_UvScale
 1 1
 Mesh
 node.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1325,7 +1049,9 @@ M_UvScale
 1 1
 Mesh
 pillar3.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1380,7 +1106,9 @@ M_UvScale
 1 1
 Mesh
 pillar3.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1435,7 +1163,9 @@ M_UvScale
 1 1
 Mesh
 pillar3.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1490,7 +1220,9 @@ M_UvScale
 1 1
 Mesh
 pillar3.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1545,7 +1277,9 @@ M_UvScale
 1 1
 Mesh
 pillar3.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1600,8 +1334,10 @@ M_UvScale
 1 1
 Mesh
 sword.vmesh
-Static
+Physics Static
 1
+Render Static
+0
 Trans. Occlude
 0
 UID
@@ -1655,8 +1391,10 @@ M_UvScale
 1 1
 Mesh
 sword.vmesh
-Static
+Physics Static
 1
+Render Static
+0
 Trans. Occlude
 0
 UID
@@ -1710,11 +1448,313 @@ M_UvScale
 1 1
 Mesh
 char.vmesh
-Static
+Physics Static
 1
+Render Static
+0
 Trans. Occlude
 0
 UID
 2755487854
+next
+ConditionComponent
+2
+280888480
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+809116919
+next
+2057913117
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+2570326750
+next
+BoxTriggerComponent
+2
+280888480
+Trigger
+ Enabled
+1
+ Pos
+2 0 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+3679155548
+next
+2057913117
+Trigger
+ Enabled
+1
+ Pos
+2 0 10
+ Rot
+0 1 0 -0.000244075
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+2752743143
+next
+DialogueComponent
+3
+409432671
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+2853361186
+next
+3821641987
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+3679690994
+next
+3817475245
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+1029481882
+next
+InstanceMeshComponent
+1
+2699739853
+NodeMesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Instance
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+2365725188
+next
+CameraComponent
+1
+3817475245
+Camera
+ Enabled
+1
+ Pos
+1.75 1.75 -2.75
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+FOV
+60
+Far Z
+1000
+Near Z
+0.01
+UID
+2533692700
+next
+DirectionalLightComponent
+1
+3227738273
+DirectionalLight
+ Enabled
+1
+ Pos
+0 5 0
+ Rot
+0.707107 0 0 0.707107
+ Scale
+1 1 1
+ Visible
+1
+Colour
+1 1 1 1
+Intensity
+1
+LightEnabled
+1
+UID
+814014588
+next
+EmptyComponent
+6
+2028731464
+Root
+ Enabled
+1
+ Pos
+-0 -0 -0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+4130548357
+next
+2544657414
+Root
+ Enabled
+1
+ Pos
+2 0 9
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+890647334
+next
+2522248940
+Root
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+690763964
+next
+1619675645
+Root
+ Enabled
+1
+ Pos
+2 0 4
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+1989328311
+next
+4178313292
+Root
+ Enabled
+1
+ Pos
+2 0 3
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+4240988592
+next
+3817475245
+Root
+ Enabled
+1
+ Pos
+2 0 1
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+1498646771
 next
 end
