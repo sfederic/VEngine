@@ -1735,7 +1735,7 @@ void Renderer::RenderParticleEmitters()
 
 	for (auto& emitter : ParticleEmitter::system.GetComponents())
 	{
-		if (!emitter->IsVisible())
+		if (!emitter->IsVisible() || !emitter->IsActive())
 		{
 			continue;
 		}
