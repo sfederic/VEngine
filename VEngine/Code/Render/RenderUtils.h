@@ -19,5 +19,7 @@ namespace RenderUtils
 	ID3D11Buffer* CreateStructuredBuffer(uint32_t byteWidth, uint32_t byteStride, const void* initData);
 	void CreateTexture(Texture2D& texture);
 
+	UINT CalcBufferByteSize(UINT byteSize);
+
 	Sampler* CreateSampler();
 };

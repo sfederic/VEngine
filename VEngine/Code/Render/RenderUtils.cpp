@@ -29,17 +29,12 @@ namespace RenderUtils
 		return buffer;
 	}
 
-	//@Todo: there's something up with how D3D11 creates dynamic buffers, where the create will fail sometimes.
-	//Hard to find anything on the issue. This stackoverflow issue thinks its this from the official docs:
-	//"Create a buffer with D3D11_USAGE_DYNAMIC, and fill it with ID3D11DeviceContext::Map, ID3D11DeviceContext::Unmap (using the Discard and NoOverwrite flags appropriately)."
-	//https://stackoverflow.com/questions/25589346/dynamic-vertex-buffer-creation-failure
-	//Dynamic buffers also sometimes blow up when map()/unmap()ping the buffer.
 	ID3D11Buffer* CreateDynamicBuffer(uint64_t byteWidth, uint32_t bindFlags, const void* initData)
 	{
 		ID3D11Buffer* buffer;
 
 		D3D11_BUFFER_DESC desc = {};
-		desc.ByteWidth = byteWidth;
+		desc.ByteWidth = RenderUtils::CalcBufferByteSize(byteWidth);
 		desc.BindFlags = bindFlags;
 		desc.Usage = D3D11_USAGE_DYNAMIC;
 		desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
@@ -154,5 +149,10 @@ namespace RenderUtils
 
 		texture.SetWidth(texDesc.Width);
 		texture.SetHeight(texDesc.Height);
+	}
+
+	UINT CalcBufferByteSize(UINT byteSize)
+	{
+		return (byteSize + 255) & ~255;
 	}
 }
