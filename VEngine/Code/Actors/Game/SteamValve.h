@@ -17,5 +17,5 @@ public:
 
 private:
 	ParticleEmitter* steamEmitter = nullptr;
-	bool isValveOn = false;
+	bool isValveOn = true;
 };

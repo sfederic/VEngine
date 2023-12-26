@@ -7,7 +7,7 @@ void SteamValve::Create()
 {
 	__super::Create();
 
-	SetMeshFilename("valve.vmesh");
+	SetMeshFilename("gear.vmesh");
 }
 
 void SteamValve::Start()
@@ -22,6 +22,7 @@ Properties SteamValve::GetProps()
 {
 	auto props = __super::GetProps();
 	props.title = GetTypeName();
+	props.Add("Valve On", &isValveOn);
 	return props;
 }
 
