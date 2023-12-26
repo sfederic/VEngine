@@ -20,7 +20,11 @@ struct Command : ICommand
 
 	void Execute() override
 	{
-		auto actor = World::GetActorByUID(prop.ownerUID);
+		auto actor = World::GetActorByUIDAllowNull(prop.ownerUID);
+		if (actor == nullptr)
+		{
+			return;
+		}
 		auto allProps = actor->GetAllProps();
 		for (auto& props : allProps)
 		{
