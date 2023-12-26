@@ -72,11 +72,7 @@ void ScannerEnemy::ScanForPlayer(float deltaTime)
 			}
 		}
 
-		//Careful with this call. It might be overriding NextRot sets in the parent tick.
-		auto newRotation =
-			XMQuaternionMultiply(nextRot,
-				DirectX::XMQuaternionRotationAxis(VMath::GlobalUpVector(), XMConvertToRadians(deltaTime * spinSpeed)));
-		SetNextRot(newRotation);
+		AddNextRot(VMath::GlobalUpVector(), spinSpeed);
 
 		break;
 	}
