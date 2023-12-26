@@ -37,7 +37,7 @@ UID
 4269789978
 next
 PowerUpLaserReflector
-1
+4
  Enabled
 1
  Position
@@ -90,6 +90,165 @@ Rotate Yaw
 1
 UID
 2754407996
+next
+ Enabled
+1
+ Position
+4 0 0
+ Rotation
+0 0.707229 0 0.706985
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+PowerUpLaserReflector1
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Roll
+0
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+3389298032
+next
+ Enabled
+1
+ Position
+2 0 0
+ Rotation
+0 0.707229 0 0.706985
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+PowerUpLaserReflector2
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Roll
+0
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+2190967997
+next
+ Enabled
+1
+ Position
+2 0 4
+ Rotation
+0 0.707229 0 0.706985
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+PowerUpLaserReflector3
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Roll
+0
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+3101512625
 next
 MeshActor
 1
@@ -181,7 +340,7 @@ UID
 1830004736
 next
 MeshComponent
-4
+7
 248135478
 Mesh
  Enabled
@@ -295,6 +454,63 @@ Trans. Occlude
 0
 UID
 539879116
+next
+3389298032
+Mesh
+ Enabled
+1
+ Pos
+4 0 0
+ Rot
+0 0.707229 0 0.706985
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
+UID
+77716502
 next
 1936502162
 Mesh
@@ -410,8 +626,122 @@ Trans. Occlude
 UID
 4159381434
 next
+2190967997
+Mesh
+ Enabled
+1
+ Pos
+2 0 0
+ Rot
+0 0.707229 0 0.706985
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
+UID
+3789576747
+next
+3101512625
+Mesh
+ Enabled
+1
+ Pos
+2 0 4
+ Rot
+0 0.707229 0 0.706985
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
+UID
+1924612978
+next
 Polyboard
-2
+5
 2754407996
 ReflectedLaser
  Enabled
@@ -426,6 +756,21 @@ ReflectedLaser
 1
 UID
 939317769
+next
+3389298032
+ReflectedLaser
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+4241202332
 next
 1830004736
 Laser
@@ -442,8 +787,38 @@ Laser
 UID
 2699176197
 next
+2190967997
+ReflectedLaser
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+2547491024
+next
+3101512625
+ReflectedLaser
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+2779008619
+next
 DialogueComponent
-3
+6
 248135478
 Dialogue
  Enabled
@@ -466,6 +841,17 @@ File
 UID
 1332585289
 next
+3389298032
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+875355197
+next
 1830004736
 Dialogue
  Enabled
@@ -476,6 +862,28 @@ File
 
 UID
 458121833
+next
+2190967997
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+2123856873
+next
+3101512625
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+2070124717
 next
 InstanceMeshComponent
 1
