@@ -18,6 +18,9 @@ public:
 
 private:
 	void ReflectIncomingLaser();
+	void CascadeLaser();
 
 	class Polyboard* reflectedLaser = nullptr;
+
+	GridActor* previousHitGridActor = nullptr;
 };

@@ -28,6 +28,7 @@ void PowerUpLaserReflector::Tick(float deltaTime)
 	__super::Tick(deltaTime);
 
 	ReflectIncomingLaser();
+	CascadeLaser();
 }
 
 void PowerUpLaserReflector::PowerUp()
@@ -54,5 +55,40 @@ void PowerUpLaserReflector::ReflectIncomingLaser()
 		constexpr float range = 10.f;
 		const auto newLaserEnd = pos + (GetRightVectorV() * range);
 		reflectedLaser->SetEndPoint(newLaserEnd);
+	}
+}
+
+void PowerUpLaserReflector::CascadeLaser()
+{
+	if (reflectedLaser->IsActive())
+	{
+		HitResult hit(this);
+		if (Raycast(hit, GetPositionV(), GetRightVectorV(), 10.f))
+		{
+			reflectedLaser->SetEndPoint(hit.GetHitPosV());
+
+			auto gridActor = hit.GetHitActorAs<GridActor>();
+			if (gridActor)
+			{
+				previousHitGridActor = gridActor;
+				gridActor->PowerUp();
+			}
+
+			if (previousHitGridActor != nullptr && hit.hitActor != previousHitGridActor)
+			{
+				previousHitGridActor->PowerDown();
+				previousHitGridActor = nullptr;
+			}
+		}
+		else
+		{
+			reflectedLaser->SetEndPoint(GetPositionV() + (GetRightVectorV() * 10.f));
+
+			if (previousHitGridActor != nullptr)
+			{
+				previousHitGridActor->PowerDown();
+				previousHitGridActor = nullptr;
+			}
+		}
 	}
 }
