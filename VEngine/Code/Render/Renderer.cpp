@@ -1577,6 +1577,8 @@ void RenderPolyboards()
 
 	for (auto polyboard : World::GetAllComponentsOfType<Polyboard>())
 	{
+		if (!polyboard->IsActive() || !polyboard->IsVisible()) continue;
+
 		polyboard->CalcVertices();
 
 		context->PSSetSamplers(0, 1, &Renderer::GetDefaultSampler().data);
