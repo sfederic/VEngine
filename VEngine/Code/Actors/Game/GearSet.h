@@ -18,6 +18,7 @@ public:
 	Properties GetProps() override;
 
 	void OnLinkRotate() override;
+	void PowerUp() override;
 
 	bool Intersects(const DirectX::BoundingOrientedBox& intersectCheck) const;
 	void IncrementDoor();

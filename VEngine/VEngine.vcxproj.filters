@@ -665,9 +665,6 @@
     <ClCompile Include="Code\Actors\Game\PowerCrystal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\PowerCrystalGear.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Actors\Game\SpecificSwitch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -819,6 +816,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\UI\Game\ScanningEnemyAlertWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Actors\Game\LaserPowerUpGridActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1518,9 +1518,6 @@
     <ClInclude Include="Code\Actors\Game\PowerCrystal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\Game\PowerCrystalGear.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Code\Actors\Game\SpecificSwitch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -1675,6 +1672,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\Game\ScanningEnemyAlertWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Actors\Game\LaserPowerUpGridActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -57,3 +57,10 @@ void GearSet::IncrementDoor()
 		Log("No GearSetDoor with name [%s] found.", gearSetDoorName.c_str());
 	}
 }
+
+void GearSet::PowerUp()
+{
+	__super::PowerUp();
+	OnLinkRotate();
+	AddRotation(GetUpVectorV(), 2.5f);
+}

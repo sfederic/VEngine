@@ -303,7 +303,6 @@
     <ClCompile Include="Code\Actors\Game\OreSmashMachine.cpp" />
     <ClCompile Include="Code\Actors\Game\Ore.cpp" />
     <ClCompile Include="Code\Actors\Game\PowerCrystal.cpp" />
-    <ClCompile Include="Code\Actors\Game\PowerCrystalGear.cpp" />
     <ClCompile Include="Code\Actors\Game\SpecificSwitch.cpp" />
     <ClCompile Include="Code\Actors\Game\WellWinch.cpp" />
     <ClCompile Include="Code\Actors\Game\DouseFruit.cpp" />
@@ -683,7 +682,6 @@
     <ClInclude Include="Code\Actors\Game\OreSmashMachine.h" />
     <ClInclude Include="Code\Actors\Game\Ore.h" />
     <ClInclude Include="Code\Actors\Game\PowerCrystal.h" />
-    <ClInclude Include="Code\Actors\Game\PowerCrystalGear.h" />
     <ClInclude Include="Code\Actors\Game\SpecificSwitch.h" />
     <ClInclude Include="Code\Actors\Game\WellWinch.h" />
     <ClInclude Include="Code\Actors\Game\DouseFruit.h" />
