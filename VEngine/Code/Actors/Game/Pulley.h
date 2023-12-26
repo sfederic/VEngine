@@ -10,7 +10,6 @@ public:
 	ACTOR_SYSTEM(Pulley);
 
 	void Start() override;
-	void Tick(float deltaTime) override;
 	void Create() override;
 	Properties GetProps() override;
 
@@ -25,4 +24,9 @@ private:
 	GridActor* pullActor = nullptr;
 	XMFLOAT3 pullDirection;
 	float pullIncrement = 1.f;
+
+	//The current 'index' the pulley is on per each direction.
+	int pullIndex = 0;
+	int pullMin = 0;
+	int pullMax = 3;
 };

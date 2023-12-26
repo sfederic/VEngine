@@ -11,16 +11,14 @@ void Pulley::Start()
 	{
 		Log("Pull actor [%s] not found for Pulley [%s].", pullActorName.c_str(), GetName().c_str());
 	}
-}
-
-void Pulley::Tick(float deltaTime)
-{
-	__super::Tick(deltaTime);
+	SetPlayerFocusGridActor(pullActor);
 }
 
 void Pulley::Create()
 {
 	__super::Create();
+
+	SetMeshFilename("gear.vmesh");
 
 	canBeMovedInLink = false;
 }
@@ -32,6 +30,10 @@ Properties Pulley::GetProps()
 	props.Add("Pull Actor", &pullActorName);
 	props.Add("Pull Increment", &pullIncrement);
 	props.Add("Pull Direction", &pullDirection);
+	props.Add("Pull Min", &pullMin);
+	props.Add("Pull Max", &pullMax);
+	//Needs to be a prop to be able to set actor in the middle of its pull trajectory for example
+	props.Add("Pull Index", &pullIndex);
 	return props;
 }
 
@@ -39,14 +41,22 @@ void Pulley::OnLinkRotateLeft()
 {
 	__super::OnLinkRotateLeft();
 
-	ReelActorIn();
+	if (pullIndex < pullMax)
+	{
+		pullIndex++;
+		ReelActorIn();
+	}
 }
 
 void Pulley::OnLinkRotateRight()
 {
 	__super::OnLinkRotateRight();
 
-	ReelActorOut();
+	if (pullIndex > pullMin)
+	{
+		pullIndex--;
+		ReelActorOut();
+	}
 }
 
 void Pulley::ReelActorIn()
