@@ -10,6 +10,7 @@
 #include "WaterVolume.h"
 #include "FenceActor.h"
 #include "Core/VMath.h"
+#include "Core/Core.h"
 #include "Physics/Raycast.h"
 #include "Gameplay/GameUtils.h"
 #include "Particle/SpriteSheet.h"
@@ -330,6 +331,14 @@ void GridActor::RoundPosition()
 	XMVECTOR pos = GetPositionV();
 	VMath::RoundVector(pos);
 	SetNextPos(pos);
+}
+
+void GridActor::AddNextRot(XMVECTOR axis, float angle)
+{
+	auto newRotation = XMQuaternionMultiply(nextRot,
+		DirectX::XMQuaternionRotationAxis(axis,
+			XMConvertToRadians(Core::GetDeltaTime() * angle)));
+	SetNextRot(newRotation);
 }
 
 void GridActor::SetMeshFilename(std::string_view filename)
