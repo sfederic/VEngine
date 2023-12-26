@@ -9,8 +9,7 @@ public:
 	ACTOR_SYSTEM(GearSetDoor);
 
 	void Create() override;
-	void Start() override { __super::Start(); }
-	void Tick(float deltaTime) override { __super::Tick(deltaTime); }
+	Properties GetProps() override;
 
 	//Number of increments before the door is fully opened.
 	static const int maxNumIncrements = 10;

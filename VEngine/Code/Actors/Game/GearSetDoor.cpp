@@ -11,3 +11,10 @@ void GearSetDoor::Create()
 
 	SetMeshFilename("plane.vmesh");
 }
+
+Properties GearSetDoor::GetProps()
+{
+	auto props = __super::GetProps();
+	props.title = GetTypeName();
+	return props;
+}
