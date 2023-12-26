@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "SteamValve.h"
 #include "Gameplay/GameUtils.h"
+#include "Particle/ParticleEmitter.h"
 
 void SteamValve::Create()
 {
@@ -9,11 +10,25 @@ void SteamValve::Create()
 	SetMeshFilename("valve.vmesh");
 }
 
+void SteamValve::Start()
+{
+	__super::Start();
+
+	steamEmitter = GameUtils::SpawnParticleEmitter("Particle/smoke.png", GetPositionV());
+	steamEmitter->SetActive(isValveOn);
+}
+
+Properties SteamValve::GetProps()
+{
+	auto props = __super::GetProps();
+	props.title = GetTypeName();
+	return props;
+}
+
 void SteamValve::OnLinkRotate()
 {
 	__super::OnLinkRotate();
 
-	//@Todo: logic is thin here. Come back to it when you want to use it for something like a SteamSource actor
-	GameUtils::SpawnParticleEmitter("Particle/smoke.png", GetPositionV());
 	isValveOn = !isValveOn;
+	steamEmitter->SetActive(isValveOn);
 }
