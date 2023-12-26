@@ -1,41 +1,3 @@
-DirectionalLightActor
-1
- Enabled
-1
- Position
-0 5 0
- Rotation
-0.707107 0 0 0.707107
- Scale
-1 1 1
- Visible
-1
-Name
-DirectionalLightActor0
-UID
-86421912
-next
-Grid
-1
- Enabled
-1
- Position
-0 0 0
- Rotation
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Name
-Grid0
-Size X
-10
-Size Y
-15
-UID
-331093905
-next
 GridActor
 1
  Enabled
@@ -82,29 +44,14 @@ Obstacle
 1
 Rotate Pitch
 1
+Rotate Roll
+0
 Rotate Speed
 4
 Rotate Yaw
 1
 UID
 955598247
-next
-MeshActor
-1
- Enabled
-1
- Position
-4.5 -0.5 4.5
- Rotation
-0 1 0 -1.56958e-07
- Scale
-1 1 1
- Visible
-1
-Name
-church_sanctuary_icon0
-UID
-4072685593
 next
 Player
 1
@@ -122,6 +69,179 @@ Name
 Player0
 UID
 3635565679
+next
+FenceActor
+10
+ Enabled
+1
+ Position
+2.5 2.5 0.5
+ Rotation
+0.707107 1.54543e-08 0.707107 1.54543e-08
+ Scale
+0.999995 0.999995 0.999995
+ Visible
+1
+Name
+FenceActor0
+UID
+2176097241
+next
+ Enabled
+1
+ Position
+2.5 2.5 2.5
+ Rotation
+0.707107 1.54543e-08 0.707107 1.54543e-08
+ Scale
+0.999992 0.999992 0.999992
+ Visible
+1
+Name
+FenceActor1
+UID
+1147423529
+next
+ Enabled
+1
+ Position
+2.5 2.5 4.5
+ Rotation
+0.707107 1.54543e-08 0.707107 1.54543e-08
+ Scale
+0.999989 0.999989 0.999989
+ Visible
+1
+Name
+FenceActor2
+UID
+2720528082
+next
+ Enabled
+1
+ Position
+2.5 2.5 6.5
+ Rotation
+0.707107 1.54543e-08 0.707107 1.54543e-08
+ Scale
+0.999986 0.999986 0.999986
+ Visible
+1
+Name
+FenceActor3
+UID
+87137519
+next
+ Enabled
+1
+ Position
+7.5 2.5 6.5
+ Rotation
+0.707107 1.54543e-08 0.707107 1.54543e-08
+ Scale
+0.999979 0.999979 0.999979
+ Visible
+1
+Name
+FenceActor4
+UID
+432504718
+next
+ Enabled
+1
+ Position
+7.5 2.5 4.5
+ Rotation
+0.707107 1.54543e-08 0.707107 1.54543e-08
+ Scale
+0.999973 0.999973 0.999973
+ Visible
+1
+Name
+FenceActor5
+UID
+683406931
+next
+ Enabled
+1
+ Position
+7.5 3 2.5
+ Rotation
+0.707107 1.54543e-08 0.707107 1.54543e-08
+ Scale
+0.99996 0.99996 0.99996
+ Visible
+1
+Name
+FenceActor6
+UID
+1762112114
+next
+ Enabled
+1
+ Position
+7.5 3.5 0.5
+ Rotation
+0.707107 1.54543e-08 0.707107 1.54543e-08
+ Scale
+0.99995 0.99995 0.99995
+ Visible
+1
+Name
+FenceActor7
+UID
+169506014
+next
+ Enabled
+1
+ Position
+7 2 7.5
+ Rotation
+-2.18557e-08 8.03466e-14 1 2.18557e-08
+ Scale
+0.5 0.5 1
+ Visible
+1
+Name
+FenceActor8
+UID
+2675754477
+next
+ Enabled
+1
+ Position
+3 2 7.5
+ Rotation
+-2.18557e-08 8.03466e-14 1 2.18557e-08
+ Scale
+0.5 0.5 1
+ Visible
+1
+Name
+FenceActor9
+UID
+2306921217
+next
+Grid
+1
+ Enabled
+1
+ Position
+0 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+Grid0
+Size X
+10
+Size Y
+15
+UID
+331093905
 next
 PlayerCameraTrigger
 1
@@ -144,6 +264,783 @@ Icon
 UID
 1784637590
 next
+MeshActor
+1
+ Enabled
+1
+ Position
+4.5 -0.5 4.5
+ Rotation
+0 1 0 -1.56958e-07
+ Scale
+1 1 1
+ Visible
+1
+Name
+church_sanctuary_icon0
+UID
+4072685593
+next
+DirectionalLightActor
+1
+ Enabled
+1
+ Position
+0 5 0
+ Rotation
+0.707107 0 0 0.707107
+ Scale
+1 1 1
+ Visible
+1
+Name
+DirectionalLightActor0
+UID
+86421912
+next
+MeshComponent
+13
+955598247
+Mesh
+ Enabled
+1
+ Pos
+5 3 12
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+0.9 0.3 0.1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+church_icon.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
+UID
+2750795050
+next
+3635565679
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+char.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
+UID
+1964708655
+next
+2176097241
+Mesh
+ Enabled
+1
+ Pos
+2.5 2.5 0.5
+ Rot
+0.707107 1.54543e-08 0.707107 1.54543e-08
+ Scale
+0.999995 0.999995 0.999995
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+nobackcull
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test_fence.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+plane.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+2566473489
+next
+1147423529
+Mesh
+ Enabled
+1
+ Pos
+2.5 2.5 2.5
+ Rot
+0.707107 1.54543e-08 0.707107 1.54543e-08
+ Scale
+0.999992 0.999992 0.999992
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+nobackcull
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test_fence.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+plane.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+600942035
+next
+2720528082
+Mesh
+ Enabled
+1
+ Pos
+2.5 2.5 4.5
+ Rot
+0.707107 1.54543e-08 0.707107 1.54543e-08
+ Scale
+0.999989 0.999989 0.999989
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+nobackcull
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test_fence.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+plane.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+1888995079
+next
+87137519
+Mesh
+ Enabled
+1
+ Pos
+2.5 2.5 6.5
+ Rot
+0.707107 1.54543e-08 0.707107 1.54543e-08
+ Scale
+0.999986 0.999986 0.999986
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+nobackcull
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test_fence.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+plane.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+640501385
+next
+432504718
+Mesh
+ Enabled
+1
+ Pos
+7.5 2.5 6.5
+ Rot
+0.707107 1.54543e-08 0.707107 1.54543e-08
+ Scale
+0.999979 0.999979 0.999979
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+nobackcull
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test_fence.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+plane.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+1073772594
+next
+683406931
+Mesh
+ Enabled
+1
+ Pos
+7.5 2.5 4.5
+ Rot
+0.707107 1.54543e-08 0.707107 1.54543e-08
+ Scale
+0.999973 0.999973 0.999973
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+nobackcull
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test_fence.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+plane.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+887691669
+next
+1762112114
+Mesh
+ Enabled
+1
+ Pos
+7.5 3 2.5
+ Rot
+0.707107 1.54543e-08 0.707107 1.54543e-08
+ Scale
+0.99996 0.99996 0.99996
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+nobackcull
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test_fence.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+plane.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+3613446944
+next
+169506014
+Mesh
+ Enabled
+1
+ Pos
+7.5 3.5 0.5
+ Rot
+0.707107 1.54543e-08 0.707107 1.54543e-08
+ Scale
+0.99995 0.99995 0.99995
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+nobackcull
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test_fence.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+plane.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+3008082377
+next
+4072685593
+Mesh
+ Enabled
+1
+ Pos
+4.5 -0.5 4.5
+ Rot
+0 1 0 -1.56958e-07
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+church_sanctuary_icon.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+262314144
+next
+2675754477
+Mesh
+ Enabled
+1
+ Pos
+7 2 7.5
+ Rot
+-2.18557e-08 8.03466e-14 1 2.18557e-08
+ Scale
+0.5 0.5 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+nobackcull
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test_fence.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+plane.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+1585231346
+next
+2306921217
+Mesh
+ Enabled
+1
+ Pos
+3 2 7.5
+ Rot
+-2.18557e-08 8.03466e-14 1 2.18557e-08
+ Scale
+0.5 0.5 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+nobackcull
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test_fence.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+plane.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+994955423
+next
 BoxTriggerComponent
 1
 1784637590
@@ -164,29 +1061,6 @@ Offset
 0 0 0
 UID
 1611384329
-next
-CameraComponent
-1
-3635565679
-Camera
- Enabled
-1
- Pos
-1.75 1.75 -2.75
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-FOV
-60
-Far Z
-1000
-Near Z
-0.01
-UID
-238643427
 next
 DialogueComponent
 2
@@ -211,46 +1085,6 @@ File
 
 UID
 800032500
-next
-DirectionalLightComponent
-1
-86421912
-DirectionalLight
- Enabled
-1
- Pos
-0 5 0
- Rot
-0.707107 0 0 0.707107
- Scale
-1 1 1
- Visible
-1
-Colour
-1 1 1 1
-Intensity
-1
-LightEnabled
-1
-UID
-4101632683
-next
-EmptyComponent
-1
-3635565679
-Root
- Enabled
-1
- Pos
-5 2.2 6
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-UID
-3947305957
 next
 InstanceMeshComponent
 1
@@ -311,177 +1145,67 @@ Trans. Occlude
 UID
 1094166010
 next
-MeshComponent
-3
-955598247
-Mesh
- Enabled
+CameraComponent
 1
- Pos
-5 3 12
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-0.9 0.3 0.1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-church_icon.vmesh
-Physics Static
-1
-Render Static
-0
-Trans. Occlude
-0
-UID
-2750795050
-next
-4072685593
-Mesh
- Enabled
-1
- Pos
-4.5 -0.5 4.5
- Rot
-0 1 0 -1.56958e-07
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-church_sanctuary_icon.vmesh
-Physics Static
-1
-Render Static
-1
-Trans. Occlude
-0
-UID
-262314144
-next
 3635565679
-Mesh
+Camera
  Enabled
 1
  Pos
-0 0 0
+1.75 1.75 -2.75
  Rot
 0 0 0 1
  Scale
 1 1 1
  Visible
 1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-char.vmesh
-Physics Static
-1
-Render Static
-0
-Trans. Occlude
-0
+FOV
+60
+Far Z
+1000
+Near Z
+0.01
 UID
-1964708655
+238643427
+next
+DirectionalLightComponent
+1
+86421912
+DirectionalLight
+ Enabled
+1
+ Pos
+0 5 0
+ Rot
+0.707107 0 0 0.707107
+ Scale
+1 1 1
+ Visible
+1
+Colour
+1 1 1 1
+Intensity
+1
+LightEnabled
+1
+UID
+4101632683
+next
+EmptyComponent
+1
+3635565679
+Root
+ Enabled
+1
+ Pos
+5 2.2 6
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+3947305957
 next
 end
