@@ -404,6 +404,11 @@ void CreateRTVAndDSV()
 
 void CreateInputLayout()
 {
+	//@Todo: Because the game worlds are so simple for the time being, the vertex structure being fat with the animation
+	//variables is fine, it's only a few more bytes. Later on if you want to utilise D3D reflection and pretty input layouts
+	//up, can use https://takinginitiative.net/2011/12/11/directx-1011-basic-shader-reflection-automatic-input-layout-creation/
+	//as a starting point.
+
 	D3D11_INPUT_ELEMENT_DESC inputDesc[] =
 	{
 		{"COLOUR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, offsetof(Vertex, colour), D3D11_INPUT_PER_VERTEX_DATA, 0},
