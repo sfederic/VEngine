@@ -62,5 +62,5 @@ void GearSet::PowerUp()
 {
 	__super::PowerUp();
 	OnLinkRotate();
-	AddRotation(GetUpVectorV(), 2.5f);
+	AddNextRotation(GetUpVectorV(), 2.5f);
 }
