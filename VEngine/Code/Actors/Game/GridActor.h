@@ -135,6 +135,7 @@ public:
 	//returns the node the gridactor is currently on.
 	GridNode* GetCurrentNode();
 	void RecalcCurrentNodePosition();
+	void RecalcCurrentNodeDontIgnoreThis();
 
 	bool CheckNextNodeMoveIsValid(const XMVECTOR nextMoveCardinalDirection);
 

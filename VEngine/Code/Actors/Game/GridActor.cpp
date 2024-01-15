@@ -242,6 +242,13 @@ void GridActor::RecalcCurrentNodePosition()
 	node->RecalcNodeHeight(hit);
 }
 
+void GridActor::RecalcCurrentNodeDontIgnoreThis()
+{
+	auto node = GetCurrentNode();
+	HitResult hit;
+	node->RecalcNodeHeight(hit);
+}
+
 bool GridActor::CheckNextNodeMoveIsValid(const XMVECTOR nextMoveCardinalDirection)
 {
 	const int nextXIndex = (int)std::round(nextPos.m128_f32[0]);
