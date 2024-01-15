@@ -43,6 +43,23 @@ public:
 	void SetTriggerEnterCallback(std::function<void()> callback);
 	void SetTriggerExitCallback(std::function<void()> callback);
 
+	template <typename T>
+	std::vector<T*> GetAllContainedActors()
+	{
+		std::vector<T*> containedActors;
+
+		std::vector<T*> actors = World::GetAllActorsOfTypeInWorld<T>();
+		for (auto actor : actors)
+		{
+			if (Contains(actor->GetPositionV()))
+			{
+				containedActors.emplace_back(actor);
+			}
+		}
+
+		return containedActors;
+	}
+
 private:
 	//On trigger enter/exist callback logic for target actor intersection
 	void TargetActorIntersectCallbackLogic();
