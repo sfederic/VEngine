@@ -168,6 +168,7 @@ public:
 	bool CanBeRotatedRollZAxis() const { return canBeRotatedRollZAxis; }
 
 	void SetCanFall(bool fall) { canFall = fall; }
+	bool GetCanFall() { return canFall; }
 
 	void CheckIfSubmerged();
 
