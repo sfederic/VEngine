@@ -8,3 +8,11 @@ void LockedDoor::Activate()
 	SetActive(false);
 	SetVisibility(false);
 }
+
+void LockedDoor::Deactivate()
+{
+	__super::Activate();
+
+	SetActive(true);
+	SetVisibility(true);
+}

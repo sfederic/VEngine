@@ -8,5 +8,5 @@ public:
 	ACTOR_SYSTEM(LockedDoor);
 
 	void Activate() override;
+	void Deactivate() override;
 };
-
