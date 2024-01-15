@@ -7,21 +7,7 @@ void OrientationLock::Start()
 {
 	__super::Start();
 
-	auto actor = World::GetActorByNameAllowNull(gridActorToActivateOnCorrectOrientation);
-	if (actor)
-	{
-		linkedGridActor = dynamic_cast<GridActor*>(actor);
-		if (!linkedGridActor)
-		{
-			Log("Linked actor [%s] for [%s] isn't derived from GridActor.",
-				gridActorToActivateOnCorrectOrientation.c_str(), GetName().c_str());
-		}
-	}
-	else
-	{
-		Log("Linked actor [%s] for [%s] not found.",
-			gridActorToActivateOnCorrectOrientation.c_str(), GetName().c_str());
-	}
+	linkedGridActor = World::GetActorByNameAndLogCast<GridActor>(gridActorToActivateOnCorrectOrientation);
 }
 
 void OrientationLock::Tick(float deltaTime)
