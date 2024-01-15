@@ -351,6 +351,7 @@
     <ClCompile Include="Code\UI\Game\ScanningEnemyAlertWidget.cpp" />
     <ClCompile Include="Code\Actors\Game\LaserPowerUpGridActor.cpp" />
     <ClCompile Include="Code\Actors\Game\PowerUpLaserReflector.cpp" />
+    <ClCompile Include="Code\Actors\Game\TwinOrientationLock.cpp" />
     <ClInclude Include="Code\Actors\Game\ChurchLockPropActivator.h" />
     <ClInclude Include="Code\Actors\Game\GlobalPropSetter.h" />
     <ClInclude Include="Code\Actors\Game\ActivateOnGlobalProp.h" />
@@ -731,6 +732,7 @@
     <ClInclude Include="Code\UI\Game\ScanningEnemyAlertWidget.h" />
     <ClInclude Include="Code\Actors\Game\LaserPowerUpGridActor.h" />
     <ClInclude Include="Code\Actors\Game\PowerUpLaserReflector.h" />
+    <ClInclude Include="Code\Actors\Game\TwinOrientationLock.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
