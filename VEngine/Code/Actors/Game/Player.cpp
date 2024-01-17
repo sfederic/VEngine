@@ -198,6 +198,11 @@ bool Player::CheckAttackPositionAgainstUnitDirection(Unit* unit)
 
 void Player::ToggleGrid()
 {
+	if (IsInInteraction())
+	{
+		return;
+	}
+
 	if (Input::GetKeyUp("ToggleGrid"))
 	{
 		GameUtils::PlayAudioOneShot("sword_sheathe.wav");
@@ -609,6 +614,11 @@ bool Player::AttackGridActorBasedOnNode()
 
 void Player::LinkToGridActor()
 {
+	if (IsInInteraction())
+	{
+		return;
+	}
+
 	if (!CheckIfMovementAndRotationStopped())
 	{
 		return;
@@ -957,7 +967,7 @@ bool Player::CheckIfMovementAndRotationStopped()
 
 void Player::MovementInput(float deltaTime)
 {
-	if (inInspection || inInteraction)
+	if (IsInInteraction())
 	{
 		return;
 	}
@@ -993,7 +1003,7 @@ void Player::MovementInput(float deltaTime)
 
 void Player::RotationInput(float deltaTime)
 {
-	if (inInspection || inInteraction)
+	if (IsInInteraction())
 	{
 		return;
 	}
@@ -1159,6 +1169,11 @@ void Player::OnMoveAndRotateEnd()
 		HighlightLinkableGridActor();
 		previousMovementAndRotationStoppedValue = stopped;
 	}
+}
+
+bool Player::IsInInteraction() const
+{
+	return inInteraction || inConversation || inInspection;
 }
 
 XMVECTOR Player::GetCameraLocalPosition()

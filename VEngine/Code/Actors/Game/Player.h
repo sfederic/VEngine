@@ -136,5 +136,7 @@ private:
 
 	void OnMoveAndRotateEnd();
 
+	bool IsInInteraction() const;
+
 	bool previousMovementAndRotationStoppedValue = false;
 };
