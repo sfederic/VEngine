@@ -311,7 +311,10 @@ void Player::PrimaryAction()
 		if (inInteraction)
 		{
 			//End interact with GridActor
-			if (gridActorInteractingWith == nullptr) return;
+			if (gridActorInteractingWith == nullptr)
+			{
+				return;
+			}
 
 			gridActorInteractingWith->EndInteract();
 			gridActorInteractingWith = nullptr;
@@ -1167,6 +1170,7 @@ void Player::ResetCameraPosAndTargetToPlayer()
 {
 	nextCameraPosition = cameraStartingLocalPosition;
 	camera->SetTargetActor(this);
+	camera->SetLerpToFocusPoint(false);
 }
 
 void Player::SetCameraTargetActor(Actor* target)

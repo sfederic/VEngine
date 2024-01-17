@@ -17,7 +17,12 @@ XMMATRIX CameraComponent::GetViewMatrix()
 {
 	XMVECTOR worldPos = GetWorldPositionV();
 
-	if (targetActor)
+	if (lerpToFocusPoint && targetActor)
+	{
+		lerpToFocusPointPercent += Core::GetDeltaTime() * 0.5f;
+		focusPoint = XMVectorLerp(focusPoint, targetActor->GetPositionV(), lerpToFocusPointPercent);
+	}
+	else if (targetActor)
 	{
 		focusPoint = targetActor->GetPositionV();
 	}
@@ -58,6 +63,12 @@ void CameraComponent::ZoomTo(Actor* actor)
 	XMVECTOR zoomPos = actorPos - (forward * 5.f);
 
 	SetLocalPosition(zoomPos);
+}
+
+void CameraComponent::SetLerpToFocusPoint(bool value)
+{
+	lerpToFocusPoint = value;
+	lerpToFocusPointPercent = 0.f;
 }
 
 //Only works with translation for now.

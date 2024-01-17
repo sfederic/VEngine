@@ -56,6 +56,8 @@ void InteractTrigger::Tick(float deltaTime)
 				if (targetActor)
 				{
 					Camera::SetActiveCameraTargetAndZoomIn(targetActor);
+					auto& activeCam = Camera::GetActiveCamera();
+					activeCam.SetLerpToFocusPoint(true);
 				}
 			}
 			else
@@ -68,6 +70,8 @@ void InteractTrigger::Tick(float deltaTime)
 				interactWidget->RemoveFromViewport();
 
 				Camera::SetActiveCameraTargetAndZoomOut(Player::system.GetFirstActor());
+				auto& activeCam = Camera::GetActiveCamera();
+				activeCam.SetLerpToFocusPoint(false);
 			}
 		}
 	}

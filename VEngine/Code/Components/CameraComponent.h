@@ -19,12 +19,13 @@ public:
 
 	void SetAsActiveCamera();
 
-	float GetCameraMoveSpeed() { return cameraMoveSpeed; }
+	float GetCameraMoveSpeed() const { return cameraMoveSpeed; }
 	void SetCameraMoveSpeed(float moveSpeed) { cameraMoveSpeed = moveSpeed; }
-	float GetFOV() { return FOV; }
+	float GetFOV() const { return FOV; }
 	void SetFOV(float fov) { FOV = fov; }
 	void SetShakeLevel(float shake) { shakeLevel = shake; }
 	void SetTargetActor(Actor* actor) { targetActor = actor; }
+	void SetLerpToFocusPoint(bool value);
 
 	Actor& GetTargetActor() { return *targetActor; }
 
@@ -42,4 +43,7 @@ protected:
 
 	float nearZ = 0.01f;
 	float farZ = 1000.f;
+
+	float lerpToFocusPointPercent = 0.f;
+	bool lerpToFocusPoint = false;
 };
