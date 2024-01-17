@@ -954,7 +954,7 @@ bool Player::CheckIfMovementAndRotationStopped()
 
 void Player::MovementInput(float deltaTime)
 {
-	if (inInspection)
+	if (inInspection || inInteraction)
 	{
 		return;
 	}
@@ -990,7 +990,7 @@ void Player::MovementInput(float deltaTime)
 
 void Player::RotationInput(float deltaTime)
 {
-	if (inInspection)
+	if (inInspection || inInteraction)
 	{
 		return;
 	}
