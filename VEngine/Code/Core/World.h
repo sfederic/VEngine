@@ -150,10 +150,17 @@ namespace World
 		auto foundActorIt = actorNameMap.find(actorName);
 		if (foundActorIt == actorNameMap.end())
 		{
-			Log("%s actor not found.", actorName.c_str());
+			Log("[%s] actor not found.", actorName.c_str());
 			return nullptr;
 		}
-		return dynamic_cast<T*>(foundActorIt->second);
+
+		auto castResult = dynamic_cast<T*>(foundActorIt->second);
+		if (castResult == nullptr)
+		{
+			Log("[%s] actor not of type [%s]. Unable to cast.", actorName.c_str(), typeid(T).name());
+			return nullptr;
+		}
+		return castResult;
 	}
 
 	template <typename T>
