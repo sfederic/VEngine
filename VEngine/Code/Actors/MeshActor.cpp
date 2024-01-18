@@ -15,10 +15,7 @@ MeshActor::MeshActor()
 	}
 
 	rootComponent = mesh;
-}
 
-void MeshActor::Create()
-{
 	const std::string meshFilename = mesh->GetMeshFilename();
 	const std::string meshSubStr = meshFilename.substr(0, meshFilename.find("."));
 	SetName(meshSubStr + std::to_string(GetSystemIndex()));
