@@ -830,6 +830,9 @@
     <ClCompile Include="Code\Actors\Game\GravityCrystal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Actors\Game\TimeOfDayWheel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\main.cpp">
@@ -1693,6 +1696,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\GravityCrystal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Actors\Game\TimeOfDayWheel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
