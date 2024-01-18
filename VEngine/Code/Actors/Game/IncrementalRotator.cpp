@@ -9,6 +9,20 @@ void IncrementalRotator::Start()
 	SetPlayerFocusGridActor(actorToRotate);
 }
 
+void IncrementalRotator::Tick(float deltaTime)
+{
+	__super::Tick(deltaTime);
+
+	if (actorToRotate && actorToRotate->CheckMovementAndRotationStopped())
+	{
+		if (isActorRotating == true)
+		{
+			actorToRotate->OnRotationEnd();
+			isActorRotating = false;
+		}
+	}
+}
+
 Properties IncrementalRotator::GetProps()
 {
 	auto props = __super::GetProps();
@@ -29,6 +43,8 @@ void IncrementalRotator::OnLinkRotateLeft()
 			DirectX::XMQuaternionRotationAxis(XMLoadFloat3(&rotateDirection),
 				XMConvertToRadians(rotationIncrement)));
 		actorToRotate->SetNextRot(newNextRot);
+
+		isActorRotating = true;
 	}
 }
 
@@ -42,6 +58,8 @@ void IncrementalRotator::OnLinkRotateRight()
 			DirectX::XMQuaternionRotationAxis(XMLoadFloat3(&rotateDirection),
 				XMConvertToRadians(-rotationIncrement)));
 		actorToRotate->SetNextRot(newNextRot);
+
+		isActorRotating = true;
 	}
 }
 

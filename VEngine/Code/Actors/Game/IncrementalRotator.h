@@ -8,6 +8,7 @@ public:
 	ACTOR_SYSTEM(IncrementalRotator);
 
 	void Start() override;
+	void Tick(float deltaTime) override;
 	Properties GetProps() override;
 
 	void OnLinkRotateLeft() override;
@@ -20,4 +21,5 @@ private:
 	GridActor* actorToRotate = nullptr;
 	XMFLOAT3 rotateDirection = XMFLOAT3(0.f, 1.f, 0.f);
 	float rotationIncrement = 90.f; //In degrees
+	bool isActorRotating = false;
 };
