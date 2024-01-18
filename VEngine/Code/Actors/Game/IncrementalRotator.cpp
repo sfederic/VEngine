@@ -21,16 +21,36 @@ Properties IncrementalRotator::GetProps()
 
 void IncrementalRotator::OnLinkRotateLeft()
 {
-	XMVECTOR newNextRot = XMQuaternionMultiply(actorToRotate->GetNextRot(),
-		DirectX::XMQuaternionRotationAxis(XMLoadFloat3(&rotateDirection),
-			XMConvertToRadians(rotationIncrement)));
-	actorToRotate->SetNextRot(newNextRot);
+	__super::OnLinkRotateLeft();
+
+	if (CheckActorToRotate())
+	{
+		XMVECTOR newNextRot = XMQuaternionMultiply(actorToRotate->GetNextRot(),
+			DirectX::XMQuaternionRotationAxis(XMLoadFloat3(&rotateDirection),
+				XMConvertToRadians(rotationIncrement)));
+		actorToRotate->SetNextRot(newNextRot);
+	}
 }
 
 void IncrementalRotator::OnLinkRotateRight()
 {
-	XMVECTOR newNextRot = XMQuaternionMultiply(actorToRotate->GetNextRot(),
-		DirectX::XMQuaternionRotationAxis(XMLoadFloat3(&rotateDirection),
-			XMConvertToRadians(-rotationIncrement)));
-	actorToRotate->SetNextRot(newNextRot);
+	__super::OnLinkRotateRight();
+
+	if (CheckActorToRotate())
+	{
+		XMVECTOR newNextRot = XMQuaternionMultiply(actorToRotate->GetNextRot(),
+			DirectX::XMQuaternionRotationAxis(XMLoadFloat3(&rotateDirection),
+				XMConvertToRadians(-rotationIncrement)));
+		actorToRotate->SetNextRot(newNextRot);
+	}
+}
+
+bool IncrementalRotator::CheckActorToRotate()
+{
+	if (actorToRotate == nullptr)
+	{
+		Log("No actor [%s] for [%s] to rotate.", actorNameToRotate.c_str(), GetName().c_str());
+		return false;
+	}
+	return true;
 }
