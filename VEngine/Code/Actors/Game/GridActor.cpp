@@ -69,24 +69,24 @@ void GridActor::OnLinkRotate()
 	SpawnDustSpriteSheet();
 }
 
-void GridActor::OnRotationEnd()
-{
-	if (isRotating)
-	{
-		if (CheckMovementAndRotationStopped())
-		{
-			isRotating = false;
-		}
-	}
-}
-
-void GridActor::OnMoveEnd()
+void GridActor::CheckSetIsMoving()
 {
 	if (isMoving)
 	{
 		if (CheckMovementAndRotationStopped())
 		{
 			isMoving = false;
+		}
+	}
+}
+
+void GridActor::CheckSetIsRotating()
+{
+	if (isRotating)
+	{
+		if (CheckMovementAndRotationStopped())
+		{
+			isRotating = false;
 		}
 	}
 }
@@ -128,8 +128,8 @@ void GridActor::Tick(float deltaTime)
 {
 	__super::Tick(deltaTime);
 
-	OnMoveEnd();
-	OnRotationEnd();
+	CheckSetIsMoving();
+	CheckSetIsRotating();
 
 	SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextPos, deltaTime, moveSpeed));
 	SetRotation(VMath::QuatConstantLerp(GetRotationV(), nextRot, deltaTime, rotateSpeed));

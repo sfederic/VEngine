@@ -92,8 +92,8 @@ public:
 	virtual void OnLinkRotateRight() {}
 	virtual void OnLinkRotateLeft() {}
 
-	virtual void OnRotationEnd();
-	virtual void OnMoveEnd();
+	virtual void OnRotationEnd() {}
+	virtual void OnMoveEnd() {}
 
 	virtual void OnLinkMove();
 
@@ -180,6 +180,9 @@ public:
 
 private:
 	void SpawnDustSpriteSheet();
+
+	void CheckSetIsMoving();
+	void CheckSetIsRotating();
 
 	//For any grid actor that will move/rotate another grid actor on a player's link, 
 	//this is the actor the player's camera will focus on instead of itself.
