@@ -58,7 +58,7 @@ void EntranceTrigger::Tick(float deltaTime)
 	{
 		interactWidget->AddToViewport();
 
-		if (Input::GetKeyDown(Keys::Down))
+		if (Input::GetKeyDown("Interact"))
 		{
 			if (levelToMoveTo.empty())
 			{
