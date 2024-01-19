@@ -13,22 +13,22 @@ void TimeOfDayWheel::OnRotationEnd()
 	//Change time of day global prop based on rotation orientation
 	if (VMath::VecEqual(up, VMath::GlobalUpVector()))
 	{
-		GameInstance::SetGlobalProp("TownTimeOfDay", "Morning");
+		GameInstance::SetGlobalProp<std::string>("TownTimeOfDay", "Morning");
 		Log("Town time of day set to Morning");
 	}
 	else if (VMath::VecEqual(up, VMath::GlobalRightVector()))
 	{
-		GameInstance::SetGlobalProp("TownTimeOfDay", "Day");
+		GameInstance::SetGlobalProp<std::string>("TownTimeOfDay", "Day");
 		Log("Town time of day set to Day");
 	}
 	else if (VMath::VecEqual(up, -VMath::GlobalUpVector()))
 	{
-		GameInstance::SetGlobalProp("TownTimeOfDay", "Sunset");
+		GameInstance::SetGlobalProp<std::string>("TownTimeOfDay", "Sunset");
 		Log("Town time of day set to Sunset");
 	}
 	else if (VMath::VecEqual(up, -VMath::GlobalRightVector()))
 	{
-		GameInstance::SetGlobalProp("TownTimeOfDay", "Night");
+		GameInstance::SetGlobalProp<std::string>("TownTimeOfDay", "Night");
 		Log("Town time of day set to Night");
 	}
 }
