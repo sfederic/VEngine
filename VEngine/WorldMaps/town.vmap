@@ -295,7 +295,7 @@ EntranceTrigger
  Visible
 1
 Entrance Active
-0
+1
 Level Name
 town_clock_tower_stairwell.vmap
 Locked Text
@@ -353,7 +353,7 @@ next
  Visible
 1
 Entrance Active
-0
+1
 Level Name
 trails_in_the_sky.vmap
 Locked Text
@@ -382,7 +382,7 @@ next
  Visible
 1
 Entrance Active
-0
+1
 Level Name
 
 Locked Text
@@ -440,7 +440,7 @@ next
  Visible
 1
 Entrance Active
-0
+1
 Level Name
 
 Locked Text
@@ -469,7 +469,7 @@ next
  Visible
 1
 Entrance Active
-0
+1
 Level Name
 
 Locked Text
