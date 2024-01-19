@@ -11,9 +11,40 @@ Player
  Visible
 1
 Name
-Player1188
+Player0
 UID
 2425241928
+next
+EntranceTrigger
+1
+ Enabled
+1
+ Position
+3 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+town_clock_tower_stairwell.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger0
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+2058870462
+Unlock Audio
+
 next
 Grid
 1
@@ -36,8 +67,27 @@ Size Y
 UID
 4278121551
 next
+DebugNoteActor
+1
+ Enabled
+1
+ Position
+6 0 6
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+DebugNoteActor0
+Note Text
+Time of day symbols texture on wheel
+UID
+608968205
+next
 MeshActor
-2
+1
  Enabled
 1
  Position
@@ -52,21 +102,6 @@ Name
 node0
 UID
 1325764669
-next
- Enabled
-1
- Position
-3 -0 6
- Rotation
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Name
-cylinder1
-UID
-419209653
 next
 DirectionalLightActor
 1
@@ -92,7 +127,7 @@ IncrementalRotator
  Position
 3 0 3
  Rotation
-0 -0.707107 0 0.707107
+0 -0.707107 0 -0.707107
  Scale
 1 1 1
  Visible
@@ -132,7 +167,7 @@ IncrementalRotator0
 Obstacle
 1
 Rotate Direction
-0 1 0
+0 0 1
 Rotate Pitch
 1
 Rotate Roll
@@ -145,6 +180,61 @@ Rotation Increment
 90
 UID
 796589272
+next
+TimeOfDayWheel
+1
+ Enabled
+1
+ Position
+3 -0 6
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+Name
+TimeOfDayWheel
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Roll
+0
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+3344833625
 next
 MeshComponent
 4
@@ -262,63 +352,6 @@ Trans. Occlude
 UID
 2930275343
 next
-419209653
-Mesh
- Enabled
-1
- Pos
-3 -0 6
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cylinder.vmesh
-Physics Static
-1
-Render Static
-1
-Trans. Occlude
-0
-UID
-4082897217
-next
 796589272
 Mesh
  Enabled
@@ -326,7 +359,7 @@ Mesh
  Pos
 3 0 3
  Rot
-0 -0.707107 0 0.707107
+0 -0.707107 0 -0.707107
  Scale
 1 1 1
  Visible
@@ -376,8 +409,101 @@ Trans. Occlude
 UID
 2960005048
 next
+3344833625
+Mesh
+ Enabled
+1
+ Pos
+3 -0 6
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
+UID
+1357359496
+next
+ConditionComponent
+1
+2058870462
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+1564295262
+next
+BoxTriggerComponent
+1
+2058870462
+Trigger
+ Enabled
+1
+ Pos
+3 0 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+1352007778
+next
 DialogueComponent
-2
+3
 2425241928
 Dialogue
  Enabled
@@ -399,6 +525,17 @@ File
 
 UID
 2413886688
+next
+3344833625
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+1960532768
 next
 InstanceMeshComponent
 1
@@ -466,7 +603,7 @@ Camera
  Enabled
 1
  Pos
-1.25 0.55 -0.75
+1.75 1.75 -2.75
  Rot
 0 0 0 1
  Scale
@@ -506,7 +643,7 @@ UID
 3469670577
 next
 EmptyComponent
-1
+2
 2425241928
 Root
  Enabled
@@ -521,5 +658,20 @@ Root
 1
 UID
 3406746186
+next
+608968205
+Root
+ Enabled
+1
+ Pos
+6 0 6
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+986172264
 next
 end
