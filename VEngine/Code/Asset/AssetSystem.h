@@ -22,4 +22,5 @@ namespace AssetSystem
 
 	void WriteOutAllVertexColourData();
 	void LoadVertexColourDataFromFile();
+	void LoadVertexColourDataFromFilename(const std::string filename);
 };

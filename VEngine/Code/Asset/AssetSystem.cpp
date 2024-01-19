@@ -365,14 +365,20 @@ void AssetSystem::LoadVertexColourDataFromFile()
 {
 	const std::string vertexColourFileFilename = AssetBaseFolders::vertexColourData +
 		VString::ReplaceFileExtesnion(World::worldFilename, vertexColourDataFileExtension);
+
+	LoadVertexColourDataFromFilename(vertexColourFileFilename);
+}
+
+void AssetSystem::LoadVertexColourDataFromFilename(const std::string filename)
+{
 	FILE* file = nullptr;
-	if (!std::filesystem::exists(vertexColourFileFilename))
+	if (!std::filesystem::exists(filename))
 	{
 		Log("No vertex colour file data for world %s.", World::worldFilename.c_str());
 		return;
 	}
 
-	fopen_s(&file, vertexColourFileFilename.c_str(), "rb");
+	fopen_s(&file, filename.c_str(), "rb");
 	assert(file);
 
 	VertexColourHeader header;
@@ -417,5 +423,5 @@ void AssetSystem::LoadVertexColourDataFromFile()
 
 	fclose(file);
 
-	Log("Vertex colour data loaded from file [%s].", vertexColourFileFilename.c_str());
+	Log("Vertex colour data loaded from file [%s].", filename.c_str());
 }
