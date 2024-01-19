@@ -11,9 +11,13 @@ static std::string heldPlayerItem;
 
 //Global properties
 //...
-static bool churchClockLock = false;
+
+//CHURCH
 static bool churchSwordLock = false;
 static bool churchStatueRotateLock = false;
+
+//TOWN
+static std::string townTimeOfDay = "Night";
 
 //Used when continuing from game save files
 static std::string mapToLoadOnContinue;
@@ -22,10 +26,10 @@ static std::string mapToLoadOnContinue;
 Properties GameInstance::GetGlobalProps()
 {
 	Properties props("GameInstance");
-	props.Add("ChurchClockLock", &churchClockLock);
 	props.Add("ChurchSwordLock", &churchSwordLock);
 	props.Add("ChurchStatueRotateLock", &churchStatueRotateLock);
 	props.Add("MapToLoadOnContinue", &mapToLoadOnContinue);
+	props.Add("TownTimeOfDay", &townTimeOfDay);
 	return props;
 }
 
