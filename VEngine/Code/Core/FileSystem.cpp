@@ -318,11 +318,11 @@ void FileSystem::LoadWorld(std::string worldName)
 		systemName.clear();
 	}
 
-	WorldFunctions::CallWorldStartFunction(World::worldFilename);
-
 	ResetWorldState();
 
 	AssetSystem::LoadVertexColourDataFromFile();
+
+	WorldFunctions::CallWorldStartFunction(World::worldFilename);
 
 	debugMenu.AddNotification(VString::wformat(L"%S world loaded", World::worldFilename.c_str()));
 
