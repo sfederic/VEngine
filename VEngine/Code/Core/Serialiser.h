@@ -105,4 +105,10 @@ struct Deserialiser
 	Deserialiser(const std::string filename, const OpenMode mode);
 	~Deserialiser();
 	void Deserialise(Properties& props);
+
+	template <typename T>
+	void ReadLine(T& arg)
+	{
+		is >> arg;
+	}
 };
