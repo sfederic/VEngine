@@ -16,7 +16,7 @@ void JournalEntryTrigger::Start()
 
 	if (JournalSystem::Get().DoesJournalEntryExist(journalEntry.title))
 	{
-		alreadyInteractWith = true;
+		journalEntryAlreadyExists = true;
 	}
 }
 
@@ -24,10 +24,10 @@ void JournalEntryTrigger::Tick(float deltaTime)
 {
 	__super::Tick(deltaTime);
 
-	if (Input::GetKeyUp("Interact") && !alreadyInteractWith)
+	if (Input::GetKeyUp("Interact") && !journalEntryAlreadyExists)
 	{
 		Log("Added to Journal");
-		alreadyInteractWith = true;
+		journalEntryAlreadyExists = true;
 		JournalSystem::Get().AddJournalEntry(journalEntry);
 	}
 }
