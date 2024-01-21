@@ -356,6 +356,7 @@
     <ClCompile Include="Code\Actors\Game\TimeOfDayWheel.cpp" />
     <ClCompile Include="Code\Actors\Game\JournalEntryTrigger.cpp" />
     <ClCompile Include="Code\UI\Game\JournalWidget.cpp" />
+    <ClCompile Include="Code\Gameplay\JournalSystem.cpp" />
     <ClInclude Include="Code\Actors\Game\ChurchLockPropActivator.h" />
     <ClInclude Include="Code\Actors\Game\GlobalPropSetter.h" />
     <ClInclude Include="Code\Actors\Game\ActivateOnGlobalProp.h" />
@@ -742,6 +743,7 @@
     <ClInclude Include="Code\Actors\Game\TimeOfDayWheel.h" />
     <ClInclude Include="Code\Actors\Game\JournalEntryTrigger.h" />
     <ClInclude Include="Code\UI\Game\JournalWidget.h" />
+    <ClInclude Include="Code\Gameplay\JournalSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
