@@ -193,6 +193,7 @@ std::unordered_map<std::string, std::unique_ptr<BlendState>> blendStateMap;
 ID3D11RasterizerState* rastStateSolid;
 ID3D11RasterizerState* rastStateWireframe;
 ID3D11RasterizerState* rastStateNoBackCull;
+ID3D11RasterizerState* rastStateFrontCull;
 ID3D11RasterizerState* rastStateShadow;
 
 //Blendstates
@@ -457,6 +458,15 @@ void CreateRasterizerStates()
 		HR(device->CreateRasterizerState(&rastDesc, &rastStateNoBackCull));
 
 		rastStateMap.emplace(RastStates::noBackCull, std::make_unique<RastState>(RastStates::noBackCull, rastStateNoBackCull));
+	}
+
+	//FRONT CULL
+	{
+		rastDesc.CullMode = D3D11_CULL_FRONT;
+		rastDesc.FillMode = D3D11_FILL_SOLID;
+		HR(device->CreateRasterizerState(&rastDesc, &rastStateFrontCull));
+
+		rastStateMap.emplace(RastStates::frontCull, std::make_unique<RastState>(RastStates::frontCull, rastStateFrontCull));
 	}
 
 	//SHADOWS

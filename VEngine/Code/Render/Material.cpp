@@ -23,6 +23,7 @@ void Material::SetupBlendShaderItemsAndRastStateValues()
 	rastStates.Add(RastStates::noBackCull);
 	rastStates.Add(RastStates::shadow);
 	rastStates.Add(RastStates::wireframe);
+	rastStates.Add(RastStates::frontCull);
 
 	blendStates.Add(BlendStates::null);
 	blendStates.Add(BlendStates::Default);
