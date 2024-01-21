@@ -58,4 +58,5 @@ struct ShaderItems
 	inline static ShaderItem* PostProcess;
 	inline static ShaderItem* Water;
 	inline static ShaderItem* Floating;
+	inline static ShaderItem* Outline;
 };

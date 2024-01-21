@@ -1727,5 +1727,6 @@
     <FxCompile Include="Code\Render\Shaders\Pixel\LightProbe_ps.hlsl" />
     <FxCompile Include="Code\Render\Shaders\Vertex\LightProbe_vs.hlsl" />
     <FxCompile Include="Code\Render\Shaders\Vertex\Floating_vs.hlsl" />
+    <FxCompile Include="Code\Render\Shaders\Vertex\Outline_vs.hlsl" />
   </ItemGroup>
 </Project>
