@@ -2,7 +2,12 @@
 #include "JournalSystem.h"
 #include "JournalEntry.h"
 
-void JournalSystem::Init()
+void JournalSystem::AddJournalEntry(JournalEntry& journalEntry)
 {
-	journalEntries.emplace(L"Test", JournalEntry{ .title = L"Test", .text = L"Test text", .image = "test.png" });
+	journalEntries.emplace(journalEntry.title, journalEntry);
+}
+
+bool JournalSystem::DoesJournalEntryExist(std::wstring journalEntryTitle)
+{
+	return journalEntries.find(journalEntryTitle) != journalEntries.end();
 }

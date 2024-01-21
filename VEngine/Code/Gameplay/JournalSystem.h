@@ -12,7 +12,8 @@ public:
 		return instance;
 	}
 
-	void Init();
+	void AddJournalEntry(JournalEntry& journalEntry);
+	bool DoesJournalEntryExist(std::wstring journalEntryTitle);
 
 private:
 	std::map<std::wstring, JournalEntry> journalEntries;
