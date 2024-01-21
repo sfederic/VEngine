@@ -47,7 +47,10 @@ PixelShader* ShaderSystem::FindPixelShader(const std::wstring& filename)
 
 void ShaderSystem::AddShaderItem(ShaderItem* shaderItem)
 {
-	shaderItems.emplace(shaderItem->GetName(), shaderItem);
+	const auto shaderItemName = shaderItem->GetName();
+	//Duplicate shader item name
+	assert(shaderItems.find(shaderItemName) == shaderItems.end());
+	shaderItems.emplace(shaderItemName, shaderItem);
 }
 
 ShaderItem* ShaderSystem::FindShaderItem(const std::string& shaderItemName)
