@@ -1,15 +1,15 @@
 #include "vpch.h"
-#include "JournalTrigger.h"
+#include "JournalEntryTrigger.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Core/Input.h"
 
-JournalTrigger::JournalTrigger()
+JournalEntryTrigger::JournalEntryTrigger()
 {
 	boxTrigger = CreateComponent<BoxTriggerComponent>("BoxTrigger");
 	rootComponent = boxTrigger;
 }
 
-void JournalTrigger::Tick(float deltaTime)
+void JournalEntryTrigger::Tick(float deltaTime)
 {
 	__super::Tick(deltaTime);
 
@@ -20,7 +20,7 @@ void JournalTrigger::Tick(float deltaTime)
 	}
 }
 
-Properties JournalTrigger::GetProps()
+Properties JournalEntryTrigger::GetProps()
 {
 	auto props = __super::GetProps();
 	props.title = GetTypeName();

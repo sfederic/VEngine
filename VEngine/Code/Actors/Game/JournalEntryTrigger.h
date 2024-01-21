@@ -5,12 +5,12 @@
 
 class BoxTriggerComponent;
 
-class JournalTrigger : public Actor
+class JournalEntryTrigger : public Actor
 {
 public:
-	ACTOR_SYSTEM(JournalTrigger);
+	ACTOR_SYSTEM(JournalEntryTrigger);
 
-	JournalTrigger();
+	JournalEntryTrigger();
 	void Tick(float deltaTime) override;
 	Properties GetProps() override;
 
