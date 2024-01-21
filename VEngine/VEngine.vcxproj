@@ -354,6 +354,7 @@
     <ClCompile Include="Code\Actors\Game\TwinOrientationLock.cpp" />
     <ClCompile Include="Code\Actors\Game\GravityCrystal.cpp" />
     <ClCompile Include="Code\Actors\Game\TimeOfDayWheel.cpp" />
+    <ClCompile Include="Code\Actors\Game\JournalTrigger.cpp" />
     <ClInclude Include="Code\Actors\Game\ChurchLockPropActivator.h" />
     <ClInclude Include="Code\Actors\Game\GlobalPropSetter.h" />
     <ClInclude Include="Code\Actors\Game\ActivateOnGlobalProp.h" />
@@ -737,6 +738,7 @@
     <ClInclude Include="Code\Actors\Game\TwinOrientationLock.h" />
     <ClInclude Include="Code\Actors\Game\GravityCrystal.h" />
     <ClInclude Include="Code\Actors\Game\TimeOfDayWheel.h" />
+    <ClInclude Include="Code\Actors\Game\JournalTrigger.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
