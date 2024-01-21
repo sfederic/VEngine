@@ -21,6 +21,5 @@ private:
 
 	JournalEntry journalEntry;
 
-	//@Todo: placeholder. will need to check against a gameplay std::map holding which triggers have been done.
-	bool alreadyInteractWith = false;
+	bool journalEntryAlreadyExists = false;
 };

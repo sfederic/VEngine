@@ -4,6 +4,7 @@
 #include "Render/Renderer.h"
 #include "Debug.h"
 #include "Gameplay/GameUtils.h"
+#include "Gameplay/JournalSystem.h"
 #include "Camera.h"
 #include "Editor/DebugMenu.h"
 #include "Components/SkeletalMeshComponent.h"
@@ -140,6 +141,8 @@ void Core::StartGame()
 	SkeletalMeshComponent::StartAllAnimations();
 
 	GameUtils::LoadGameInstanceData();
+
+	JournalSystem::Get().LoadJournalEntriesFromFile();
 
 	editor->SetPlayButtonText();
 	debugMenu.AddNotification(L"Gameplay started");

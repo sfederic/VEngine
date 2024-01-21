@@ -15,6 +15,11 @@ public:
 	void AddJournalEntry(JournalEntry& journalEntry);
 	bool DoesJournalEntryExist(std::wstring journalEntryTitle);
 
+	//@Todo: these functions work, but they feel funny with how they're wedging into Properties.
+	//Maybe think about some sort of JSON asset to add to the engine instead.
+	void SaveAllJournalEntriesToFile();
+	void LoadJournalEntriesFromFile();
+
 private:
 	std::map<std::wstring, JournalEntry> journalEntries;
 };

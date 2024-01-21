@@ -14,6 +14,8 @@ void JournalEntryTrigger::Start()
 {
 	__super::Start();
 
+	boxTrigger->SetTargetAsPlayer();
+
 	if (JournalSystem::Get().DoesJournalEntryExist(journalEntry.title))
 	{
 		journalEntryAlreadyExists = true;
@@ -24,11 +26,13 @@ void JournalEntryTrigger::Tick(float deltaTime)
 {
 	__super::Tick(deltaTime);
 
-	if (Input::GetKeyUp("Interact") && !journalEntryAlreadyExists)
+	if (boxTrigger->ContainsTarget() && Input::GetKeyUp("Interact") && !journalEntryAlreadyExists)
 	{
 		Log("Added to Journal");
 		journalEntryAlreadyExists = true;
+
 		JournalSystem::Get().AddJournalEntry(journalEntry);
+		JournalSystem::Get().SaveAllJournalEntriesToFile();
 	}
 }
 
