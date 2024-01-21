@@ -6,7 +6,7 @@
 class JournalSystem
 {
 public:
-	JournalSystem& Get()
+	static JournalSystem& Get()
 	{
 		static JournalSystem instance;
 		return instance;
