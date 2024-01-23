@@ -3,6 +3,7 @@
 #include "Actors/Game/Player.h"
 #include "Audio/AudioSystem.h"
 #include "Core/World.h"
+#include "Core/Core.h"
 #include "Core/FileSystem.h"
 #include "GameInstance.h"
 #include "Core/Camera.h"

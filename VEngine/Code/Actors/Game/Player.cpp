@@ -96,18 +96,6 @@ void Player::Tick(float deltaTime)
 		//GameUtils::TriggerGameOver();
 	}
 
-	if (Input::GetKeyUp("OpenJournal"))
-	{
-		if (!journalWidget->IsInViewport())
-		{
-			journalWidget->AddToViewport();
-		}
-		else
-		{
-			journalWidget->RemoveFromViewport();
-		}
-	}
-
 	OverlapPickupGridActor();
 
 	OnMoveAndRotateEnd();
@@ -135,6 +123,8 @@ void Player::Tick(float deltaTime)
 	//Lerp camera position
 	camera->SetLocalPosition(
 		VMath::VectorConstantLerp(camera->GetLocalPositionV(), nextCameraPosition, deltaTime, 14.f));
+
+	JournalWidgetInput();
 }
 
 Properties Player::GetProps()
@@ -1188,6 +1178,25 @@ void Player::OnMoveAndRotateEnd()
 bool Player::IsInInteraction() const
 {
 	return inInteraction || inConversation || inInspection;
+}
+
+//Keep this at the end of the Tick() as the JournalWidget pauses the game world, meaning no extra 
+//player tick logic will run after opening this widget.
+void Player::JournalWidgetInput()
+{
+	if (Input::GetKeyUp("OpenJournal"))
+	{
+		if (!journalWidget->IsInViewport())
+		{
+			Core::PauseGameWorld();
+			journalWidget->AddToViewport();
+		}
+		else
+		{
+			Core::UnPauseGameWorld();
+			journalWidget->RemoveFromViewport();
+		}
+	}
 }
 
 XMVECTOR Player::GetCameraLocalPosition()

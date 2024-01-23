@@ -18,6 +18,8 @@
 #include "Physics/PhysicsSystem.h"
 #include "Timer.h"
 
+static bool gameWorldPaused = false;
+
 double ticks = 0.0;
 double deltaTime = 0.0;
 double deltaAccum = 0.0;
@@ -34,7 +36,6 @@ namespace Core
 
 	bool mainLoop = true;
 	bool gameplayOn = false;
-	bool gameWorldPaused = false;
 	bool isImGUIEnabled = true;
 
 	double timeSinceStartup;
@@ -171,6 +172,24 @@ void Core::EndGame()
 
 	editor->SetPlayButtonText();
 	debugMenu.AddNotification(L"Gameplay stopped");
+}
+
+void Core::PauseGameWorld()
+{
+	gameWorldPaused = true;
+	debugMenu.AddStaticNotification(L"Game World Paused");
+}
+
+void Core::UnPauseGameWorld()
+{
+	gameWorldPaused = false;
+	debugMenu.ClearAllStaticNotifications();
+	debugMenu.AddNotification(L"Game World Unpaused");
+}
+
+bool Core::IsGameWorldPaused()
+{
+	return gameWorldPaused;
 }
 
 void Core::SetGameplayState()

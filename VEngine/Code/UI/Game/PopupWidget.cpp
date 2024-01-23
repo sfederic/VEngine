@@ -5,7 +5,7 @@
 
 void PopupWidget::Draw(float deltaTime)
 {
-	Core::gameWorldPaused = true;
+	Core::PauseGameWorld();
 
 	auto layout = PercentAlignLayout(0.3f, 0.3f, 0.7f, 0.7f);
 
@@ -18,7 +18,7 @@ void PopupWidget::Draw(float deltaTime)
 
 	if (Input::GetKeyUp(Keys::Down))
 	{
-		Core::gameWorldPaused = false;
+		Core::UnPauseGameWorld();
 
 		RemoveFromViewport();
 	}

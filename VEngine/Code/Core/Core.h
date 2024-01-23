@@ -9,8 +9,6 @@ namespace Core
 {
 	extern bool mainLoop;
 	extern bool gameplayOn;
-	extern bool gameWorldPaused;
-
 	extern bool isImGUIEnabled;
 
 	extern double timeSinceStartup;
@@ -32,6 +30,9 @@ namespace Core
 	void EndTimer();
 	void StartGame();
 	void EndGame();
+	void PauseGameWorld();
+	void UnPauseGameWorld();
+	bool IsGameWorldPaused();
 	void SetGameplayState();
 	void HandleWin32MessagePump(UINT message, WPARAM wparam, LPARAM lparam);
 	LRESULT __stdcall WndProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam);

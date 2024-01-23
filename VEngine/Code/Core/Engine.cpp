@@ -95,7 +95,7 @@ void Engine::TickSystems(float deltaTime)
 	PhysicsSystem::Tick(deltaTime);
 	Renderer::Tick();
 
-	if (Core::gameplayOn && !Core::gameWorldPaused)
+	if (Core::gameplayOn && !Core::IsGameWorldPaused())
 	{
 		World::TickAllActorSystems(deltaTime);
 		World::TickAllComponentSystems(deltaTime);

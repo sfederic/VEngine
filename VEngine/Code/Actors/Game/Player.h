@@ -140,5 +140,7 @@ private:
 
 	bool IsInInteraction() const;
 
+	void JournalWidgetInput();
+
 	bool previousMovementAndRotationStoppedValue = false;
 };
