@@ -1191,11 +1191,6 @@ void Player::JournalWidgetInput()
 			Core::PauseGameWorld();
 			journalWidget->AddToViewport();
 		}
-		else
-		{
-			Core::UnPauseGameWorld();
-			journalWidget->RemoveFromViewport();
-		}
 	}
 }
 
