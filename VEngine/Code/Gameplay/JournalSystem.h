@@ -20,6 +20,8 @@ public:
 	void SaveAllJournalEntriesToFile();
 	void LoadJournalEntriesFromFile();
 
+	auto& GetJournalEntries() { return journalEntries; }
+
 private:
 	std::map<std::wstring, JournalEntry> journalEntries;
 };
