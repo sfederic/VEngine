@@ -8,21 +8,22 @@
 
 void JournalWidget::Draw(float deltaTime)
 {
-	auto gridOverallLayout = PercentAlignLayout(0.1f, 0.1f, 0.9f, 0.9f);
-	const int numRows = 4;
+	const auto gridOverallLayout = PercentAlignLayout(0.1f, 0.1f, 0.9f, 0.9f);
+	const int numRows = 3;
 	const int numColumns = 3;
 	GridLayout gridLayout;
 	gridLayout.SetLayouts(numRows, numColumns, gridOverallLayout, 20.f);
 
-	for (int i = 0; i < numRows; i++)
+	const std::vector<Layout> gridLayouts = gridLayout.GetAllLayouts();
+	int gridLayoutIndex = 0;
+
+	for (const auto& [title, entry] : JournalSystem::Get().GetJournalEntries())
 	{
-		for (int j = 0; j < numColumns; j++)
+		const auto& layout = gridLayouts.at(gridLayoutIndex);
+		if (Button(title, layout))
 		{
-			auto layout = gridLayout.GetLayoutAt(i, j);
-			if (Button(VString::format("%d %d", i, j), layout))
-			{
-				Log("%d %d clicked.", i, j);
-			}
+			Log("%s clicked.", title.c_str());
 		}
+		gridLayoutIndex++;
 	}
 }

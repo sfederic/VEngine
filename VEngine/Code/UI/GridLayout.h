@@ -3,12 +3,27 @@
 #include <vector>
 #include "Layout.h"
 
+//Note that the vernacular with this class can be a bit funny with how its referencing columns, that being
+//that a 'column' is more like a single 'entry' along a row rather than an entire literal column of data.
 class GridLayout
 {
 public:
-	Layout GetLayoutAt(int x, int y)
+	Layout GetLayoutAt(int rowIndex, int columnIndex)
 	{
-		return rows.at(x).columns.at(y);
+		return rows.at(rowIndex).columns.at(columnIndex);
+	}
+
+	std::vector<Layout> GetAllLayouts()
+	{
+		std::vector<Layout> layouts;
+		for (GridLayoutRow& row : rows)
+		{
+			for (Layout layout : row.columns)
+			{
+				layouts.emplace_back(layout);
+			}
+		}
+		return layouts;
 	}
 
 	void SetLayouts(const int numRows, const int numColumns, const Layout& gridBounds, const float spacing = 0.f)

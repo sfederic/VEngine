@@ -23,5 +23,6 @@ public:
 	auto& GetJournalEntries() { return journalEntries; }
 
 private:
+	//Keep this as a std::map, make sure the entries are sorted for widget UI display.
 	std::map<std::wstring, JournalEntry> journalEntries;
 };
