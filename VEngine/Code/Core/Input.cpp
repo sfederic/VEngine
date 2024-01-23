@@ -40,6 +40,8 @@ namespace Input
 		keyMap.emplace("ToggleGrid", Keys::Space);
 
 		keyMap.emplace("Interact", Keys::Down);
+
+		keyMap.emplace("OpenJournal", Keys::J);
 	}
 
 	void Reset()

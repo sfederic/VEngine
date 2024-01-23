@@ -38,6 +38,7 @@ enum class Keys
 	T = 'T',
 	C = 'C',
 	I = 'I',
+	J = 'J',
 	Num1 = '1',
 	Num2 = '2',
 	Num3 = '3',

@@ -21,6 +21,7 @@
 #include "UI/Game/PickupWidget.h"
 #include "UI/Game/InteractWidget.h"
 #include "UI/Game/PlayerHealthWidget.h"
+#include "UI/Game/JournalWidget.h"
 #include "Gameplay/GameUtils.h"
 
 Player::Player()
@@ -71,6 +72,7 @@ void Player::Start()
 	interactWidget = UISystem::CreateWidget<InteractWidget>();
 	healthWidget = UISystem::CreateWidget<PlayerHealthWidget>();
 	pickupWidget = UISystem::CreateWidget<PickupWidget>();
+	journalWidget = UISystem::CreateWidget<JournalWidget>();
 }
 
 void Player::End()
@@ -92,6 +94,18 @@ void Player::Tick(float deltaTime)
 	if (healthPoints <= 0)
 	{
 		//GameUtils::TriggerGameOver();
+	}
+
+	if (Input::GetKeyUp("OpenJournal"))
+	{
+		if (!journalWidget->IsInViewport())
+		{
+			journalWidget->AddToViewport();
+		}
+		else
+		{
+			journalWidget->RemoveFromViewport();
+		}
 	}
 
 	OverlapPickupGridActor();
