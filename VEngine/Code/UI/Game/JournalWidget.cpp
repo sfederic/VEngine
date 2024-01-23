@@ -8,11 +8,11 @@
 
 void JournalWidget::Draw(float deltaTime)
 {
-	auto gridOverallLayout = PercentAlignLayout(0.2f, 0.2f, 0.8f, 0.8f);
+	auto gridOverallLayout = PercentAlignLayout(0.1f, 0.1f, 0.9f, 0.9f);
 	const int numRows = 4;
-	const int numColumns = 4;
+	const int numColumns = 3;
 	GridLayout gridLayout;
-	gridLayout.SetLayouts(numRows, numColumns, gridOverallLayout);
+	gridLayout.SetLayouts(numRows, numColumns, gridOverallLayout, 20.f);
 
 	for (int i = 0; i < numRows; i++)
 	{

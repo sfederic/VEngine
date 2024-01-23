@@ -11,30 +11,32 @@ public:
 		return rows.at(x).columns.at(y);
 	}
 
-	void SetLayouts(const int numRows, const int numColumns, const Layout& gridBounds)
+	void SetLayouts(const int numRows, const int numColumns, const Layout& gridBounds, const float spacing = 0.f)
 	{
 		Layout columnLayout = gridBounds;
-		columnLayout.PushToTop();
-		columnLayout.PushToLeft();
+		columnLayout.PushToTop(spacing);
+		columnLayout.PushToLeft(spacing);
 
-		for (int rowIndex = 1; rowIndex < numRows + 1; rowIndex++)
+		const float rowIncrement = (gridBounds.rect.bottom - gridBounds.rect.top) / numRows;
+		columnLayout.rect.bottom = columnLayout.rect.top + rowIncrement;
+
+		for (int rowIndex = 0; rowIndex < numRows; rowIndex++)
 		{
 			AddRow();
 
-			const float rowIncrement = ((gridBounds.rect.bottom - gridBounds.rect.top) / numRows);
-			columnLayout.rect.bottom = columnLayout.rect.top + rowIncrement;
-
-			const float columnIncrement = ((gridBounds.rect.right - gridBounds.rect.left) / numColumns);
+			const float columnIncrement = (gridBounds.rect.right - gridBounds.rect.left) / numColumns;
 			columnLayout.rect.right = columnLayout.rect.left + columnIncrement;
 
-			for (int columnIndex = 1; columnIndex < numColumns + 1; columnIndex++)
+			for (int columnIndex = 0; columnIndex < numColumns; columnIndex++)
 			{
-				AddColumn(rowIndex - 1, columnLayout);
-				columnLayout.AddHorizontalSpace(columnIncrement);
+				AddColumn(rowIndex, columnLayout);
+				columnLayout.AddHorizontalSpace(columnIncrement + spacing);
 			}
 
+			//Reset left back to original extent
 			columnLayout.rect.left = gridBounds.rect.left;
-			columnLayout.rect.top += rowIncrement;
+
+			columnLayout.AddVerticalSpace(rowIncrement + spacing);
 		}
 	}
 
@@ -58,5 +60,6 @@ private:
 	{
 		rows.at(rowIndex).Add(layout);
 	}
+
 	std::vector<GridLayoutRow> rows;
 };
