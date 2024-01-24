@@ -664,7 +664,7 @@ void Player::LinkToGridActor()
 					}
 				}
 
-				SetLinkedGridActor(*gridActor);
+				SetLinkedGridActor(*gridActor, hit.GetHitPosV());
 			}
 		}
 	}
@@ -1039,7 +1039,7 @@ void Player::SetInteractWidgetText(std::wstring_view interactText)
 	interactWidget->interactText = interactText;
 }
 
-void Player::SetLinkedGridActor(GridActor& gridActor)
+void Player::SetLinkedGridActor(GridActor& gridActor, const XMVECTOR playerEyeLevelPos)
 {
 	nextCameraPosition = cameraLinkActiveLocalPosition;
 
@@ -1065,10 +1065,14 @@ void Player::SetLinkedGridActor(GridActor& gridActor)
 
 	gridActor.OnLinkActivate();
 
-	//Orient player towards the linked actor so that input isn't messy from various directions.
-	auto playerEyeLevelPos = gridActor.GetPositionV();
-	//bring the point to player eye level so that rotation is skewed up.
-	playerEyeLevelPos.m128_f32[1] = GetPosition().y;
+	//If default value for `playerEyeLevelPos` is used and not set by user, don't set the player's look at rotation.
+	if (XMVector4Equal(playerEyeLevelPos, XMVectorZero()))
+	{
+		Log("Note: playerEyeLevelPos was not set when setting player linked grid actor. Look at rotation won't be set.");
+		return;
+	}
+
+	//Orient player towards the linked actor's point from the raycast so that input isn't messy from various directions.
 	const auto lookAtRotation = VMath::LookAtRotation(playerEyeLevelPos, GetPositionV());
 	nextRot = lookAtRotation;
 	SetRotation(lookAtRotation);

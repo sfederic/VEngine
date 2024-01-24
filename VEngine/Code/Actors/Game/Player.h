@@ -74,7 +74,7 @@ public:
 
 	void SetInteractWidgetText(std::wstring_view interactText);
 
-	void SetLinkedGridActor(GridActor& gridActor);
+	void SetLinkedGridActor(GridActor& gridActor, const XMVECTOR playerEyeLevelPos = XMVectorZero());
 	void ResetLinkedGridActor();
 	void ResetLinkedGridActorIfThis(GridActor* gridActor);
 
