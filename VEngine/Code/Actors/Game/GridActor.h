@@ -187,4 +187,8 @@ private:
 	//For any grid actor that will move/rotate another grid actor on a player's link, 
 	//this is the actor the player's camera will focus on instead of itself.
 	Actor* actorForPlayerFocusOnLink = nullptr;
+
+	//This bool is to denote larger grid actors that need multiple or all nodes on the grid recalculated
+	//every time this particular grid actor is moved or rotated.
+	bool bigGridActor = false;
 };
