@@ -20,6 +20,7 @@
 #include "Render/ShaderItem.h"
 #include "Render/MaterialSystem.h"
 #include "Gameplay/GameInstance.h"
+#include "Gameplay/JournalEntry.h"
 #include "Core/Log.h"
 #include "Asset/AssetPaths.h"
 #include "Asset/AssetFileExtensions.h"
@@ -393,19 +394,18 @@ void AssetDock::CreateNewDialogueFile()
 
 void AssetDock::CreateNewJournalEntry()
 {
-	QFileDialog dialog;
-	dialog.setFileMode(QFileDialog::AnyFile);
-
-	QString dialogueFile = dialog.getSaveFileName(nullptr,
-		"Create New Journal Entry File",
+	QString journalFileName = QFileDialog::getSaveFileName(nullptr, "Create Journal Entry File",
 		QString::fromStdString(AssetBaseFolders::journalEntry),
 		QString::fromStdString(AssetFileExtensions::journalEntry));
 
-	QFile file(dialogueFile);
-	file.open(QIODevice::WriteOnly);
-	file.close();
+	if (journalFileName.isEmpty()) return;
 
-	AssetFolderClicked();
+	Serialiser s(journalFileName.toStdString(), OpenMode::Out);
+	JournalEntry journalEntry;
+	Properties entryProps = journalEntry.GetProps();
+	s.Serialise(entryProps);
+
+	Log("Journal Entry [%s] created.", journalFileName.toStdString().c_str());
 }
 
 void AssetDock::CreateNewActorTemplateFile()
