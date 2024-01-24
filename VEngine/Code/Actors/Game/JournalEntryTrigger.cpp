@@ -3,6 +3,7 @@
 #include "Components/BoxTriggerComponent.h"
 #include "Core/Input.h"
 #include "Gameplay/JournalSystem.h"
+#include "Asset/AssetPaths.h"
 
 JournalEntryTrigger::JournalEntryTrigger()
 {
@@ -15,11 +16,6 @@ void JournalEntryTrigger::Start()
 	__super::Start();
 
 	boxTrigger->SetTargetAsPlayer();
-
-	if (JournalSystem::Get().DoesJournalEntryExist(journalEntry.title))
-	{
-		journalEntryAlreadyExists = true;
-	}
 }
 
 void JournalEntryTrigger::Tick(float deltaTime)
@@ -31,8 +27,8 @@ void JournalEntryTrigger::Tick(float deltaTime)
 		Log("Added to Journal");
 		journalEntryAlreadyExists = true;
 
-		JournalSystem::Get().AddJournalEntry(journalEntry);
-		JournalSystem::Get().SaveAllJournalEntriesToFile();
+		journalEntry = JournalSystem::Get().LoadSingleJournalEntryFromFile(
+			AssetBaseFolders::journalEntry + "/" + journalEntryFilename);
 	}
 }
 
@@ -40,8 +36,6 @@ Properties JournalEntryTrigger::GetProps()
 {
 	auto props = __super::GetProps();
 	props.title = GetTypeName();
-	props.Add("Journal Entry Title", &journalEntry.title);
-	props.Add("Journal Entry Text", &journalEntry.text);
-	props.Add("Journal Entry Image", &journalEntry.image);
+	props.Add("Journal Entry Filename", &journalEntryFilename).autoCompletePath = "/" + AssetBaseFolders::journalEntry;
 	return props;
 }

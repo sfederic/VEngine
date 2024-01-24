@@ -20,6 +20,7 @@ private:
 	BoxTriggerComponent* boxTrigger = nullptr;
 
 	JournalEntry journalEntry;
+	std::string journalEntryFilename;
 
 	bool journalEntryAlreadyExists = false;
 };

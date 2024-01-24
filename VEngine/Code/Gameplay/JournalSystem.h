@@ -3,6 +3,8 @@
 #include <map>
 #include "JournalEntry.h"
 
+//@Todo: this class needs reworking. There's a discrprency between how the assetdock and this journal_entries.sav
+//files are working with this class.
 class JournalSystem
 {
 public:
@@ -20,7 +22,7 @@ public:
 	void SaveAllJournalEntriesToFile();
 	void LoadJournalEntriesFromFile();
 
-	void LoadSingleJournalEntryFromFile(const std::string filename);
+	JournalEntry LoadSingleJournalEntryFromFile(const std::string filename);
 
 	auto& GetJournalEntries() { return journalEntries; }
 

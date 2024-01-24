@@ -50,11 +50,11 @@ void JournalSystem::LoadJournalEntriesFromFile()
 	}
 }
 
-void JournalSystem::LoadSingleJournalEntryFromFile(const std::string filename)
+JournalEntry JournalSystem::LoadSingleJournalEntryFromFile(const std::string filename)
 {
 	Deserialiser d(filename, OpenMode::In);
 	JournalEntry entry = {};
 	Properties entryProps = entry.GetProps();
 	d.Deserialise(entryProps);
-	return;
+	return entry;
 }
