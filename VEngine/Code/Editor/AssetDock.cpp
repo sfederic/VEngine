@@ -269,6 +269,10 @@ void AssetDock::ShowContextMenu(const QPoint& point)
 	connect(&newDialogueAction, &QAction::triggered, this, &AssetDock::CreateNewDialogueFile);
 	contextMenu.addAction(&newDialogueAction);
 
+	QAction newJournalEntryAction("New Journal Entry", this);
+	connect(&newJournalEntryAction, &QAction::triggered, this, &AssetDock::CreateNewJournalEntry);
+	contextMenu.addAction(&newJournalEntryAction);
+
 	QAction newActorTemplateAction("New Actor Template", this);
 	connect(&newActorTemplateAction, &QAction::triggered, this, &AssetDock::CreateNewActorTemplateFile);
 	contextMenu.addAction(&newActorTemplateAction);
@@ -384,6 +388,23 @@ void AssetDock::CreateNewDialogueFile()
 	file.close();
 
 	//refresh asset items in dock
+	AssetFolderClicked();
+}
+
+void AssetDock::CreateNewJournalEntry()
+{
+	QFileDialog dialog;
+	dialog.setFileMode(QFileDialog::AnyFile);
+
+	QString dialogueFile = dialog.getSaveFileName(nullptr,
+		"Create New Journal Entry File",
+		QString::fromStdString(AssetBaseFolders::journalEntry),
+		QString::fromStdString(AssetFileExtensions::journalEntry));
+
+	QFile file(dialogueFile);
+	file.open(QIODevice::WriteOnly);
+	file.close();
+
 	AssetFolderClicked();
 }
 

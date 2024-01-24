@@ -30,6 +30,7 @@ private:
 	//Create asset functions
 	void CreateNewMapFile();
 	void CreateNewDialogueFile();
+	void CreateNewJournalEntry();
 
 	//Select the picked actor in the editor and create a template from it by writing its properties and 
 	//component properties to file.
