@@ -20,6 +20,8 @@ public:
 	void SaveAllJournalEntriesToFile();
 	void LoadJournalEntriesFromFile();
 
+	void LoadSingleJournalEntryFromFile(const std::string filename);
+
 	auto& GetJournalEntries() { return journalEntries; }
 
 private:
