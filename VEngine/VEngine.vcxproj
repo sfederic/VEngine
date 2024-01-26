@@ -357,6 +357,7 @@
     <ClCompile Include="Code\Actors\Game\JournalEntryTrigger.cpp" />
     <ClCompile Include="Code\UI\Game\JournalWidget.cpp" />
     <ClCompile Include="Code\Gameplay\JournalSystem.cpp" />
+    <ClCompile Include="Code\Actors\OcclusionWall.cpp" />
     <ClInclude Include="Code\Actors\Game\ChurchLockPropActivator.h" />
     <ClInclude Include="Code\Actors\Game\GlobalPropSetter.h" />
     <ClInclude Include="Code\Actors\Game\ActivateOnGlobalProp.h" />
@@ -745,6 +746,7 @@
     <ClInclude Include="Code\UI\Game\JournalWidget.h" />
     <ClInclude Include="Code\Gameplay\JournalSystem.h" />
     <ClInclude Include="Code\UI\GridLayout.h" />
+    <ClInclude Include="Code\Actors\OcclusionWall.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
