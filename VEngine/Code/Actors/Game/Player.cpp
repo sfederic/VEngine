@@ -423,8 +423,10 @@ bool Player::DialogueCheck(Actor* hitActor)
 //Note: Default blend state needs to already be set for the mesh.
 void Player::MakeOccludingMeshBetweenCameraAndPlayerTransparent()
 {
+	const auto cameraToPlayerDir = XMVector3Normalize(camera->GetWorldPositionV() - GetPositionV());
+	const auto start = GetPositionV() + cameraToPlayerDir;
 	HitResult hit(this);
-	if (OrientedBoxCast(hit, camera->GetWorldPositionV(), GetPositionV(), XMFLOAT2(0.25f, 0.25f), true, false))
+	if (OrientedBoxCast(hit, start, camera->GetWorldPositionV(), XMFLOAT2(0.25f, 0.25f), true, false))
 	{
 		for (Actor* actor : hit.hitActors)
 		{
