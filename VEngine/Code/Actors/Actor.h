@@ -19,37 +19,37 @@ class Actor
 public:
 	Actor() {}
 
-	XMMATRIX GetWorldMatrix();
-	void UpdateTransform(const XMMATRIX parentWorld);
-	XMMATRIX GetTransformMatrix();
+	DirectX::XMMATRIX GetWorldMatrix();
+	void UpdateTransform(const DirectX::XMMATRIX parentWorld);
+	DirectX::XMMATRIX GetTransformMatrix();
 	void SetTransform(const Transform transform);
 	Transform GetTransform();
 
-	XMFLOAT3 GetPosition();
-	XMVECTOR GetPositionV();
-	XMVECTOR GetHomogeneousPositionV();
+	DirectX::XMFLOAT3 GetPosition();
+	DirectX::XMVECTOR GetPositionV();
+	DirectX::XMVECTOR GetHomogeneousPositionV();
 
-	XMFLOAT3 GetScale();
-	XMVECTOR GetScaleV();
+	DirectX::XMFLOAT3 GetScale();
+	DirectX::XMVECTOR GetScaleV();
 
-	XMFLOAT4 GetRotation();
-	XMVECTOR GetRotationV();
+	DirectX::XMFLOAT4 GetRotation();
+	DirectX::XMVECTOR GetRotationV();
 
-	void SetPosition(const XMVECTOR position);
-	void SetPosition(const XMFLOAT3 position);
-	void SetScale(const XMVECTOR scale);
-	void SetRotation(const XMVECTOR rotation);
+	void SetPosition(const DirectX::XMVECTOR position);
+	void SetPosition(const DirectX::XMFLOAT3 position);
+	void SetScale(const DirectX::XMVECTOR scale);
+	void SetRotation(const DirectX::XMVECTOR rotation);
 
-	void AddPositionV(const XMVECTOR offset);
-	void AddRotation(XMVECTOR direction, float angle);
+	void AddPositionV(const DirectX::XMVECTOR offset);
+	void AddRotation(DirectX::XMVECTOR direction, float angle);
 
 	//All vector functions return in world space, not local.
-	XMFLOAT3 GetForwardVector();
-	XMVECTOR GetForwardVectorV();
-	XMFLOAT3 GetRightVector();
-	XMVECTOR GetRightVectorV();
-	XMFLOAT3 GetUpVector();
-	XMVECTOR GetUpVectorV();
+	DirectX::XMFLOAT3 GetForwardVector();
+	DirectX::XMVECTOR GetForwardVectorV();
+	DirectX::XMFLOAT3 GetRightVector();
+	DirectX::XMVECTOR GetRightVectorV();
+	DirectX::XMFLOAT3 GetUpVector();
+	DirectX::XMVECTOR GetUpVectorV();
 
 	virtual Properties GetProps() = 0;
 	std::vector<Properties> GetAllProps();
@@ -76,7 +76,7 @@ public:
 	//Create function called after all components are created.
 	virtual void PostCreate() {}
 
-	//Do not override this direcly. ACTOR_SYSTEM macro overrides instead.
+	//Do not override this directly. ACTOR_SYSTEM macro overrides instead.
 	virtual void Destroy() {}
 
 	virtual void Remove() {}
@@ -100,13 +100,13 @@ public:
 	//Set Actor and all components as active/inactive. Active state sets actor components as equivalent.
 	void SetActive(bool newActive);
 
-	bool IsActive() { return active; }
+	bool IsActive() const { return active; }
 
 	void SetVisibility(bool visibility);
-	bool IsVisible() { return visible; }
+	bool IsVisible() const { return visible; }
 
 	void SetTickEnabled(bool enabled);
-	inline bool IsTickEnabled() { return tickEnabled; }
+	inline bool IsTickEnabled() const { return tickEnabled; }
 
 	//Set Actor and components active field as opposite of what it currently is.
 	void ToggleActive();
@@ -180,10 +180,10 @@ public:
 
 	void ResetOwnerUIDToComponents();
 
-	UID GetUID() { return uid; }
+	UID GetUID() const { return uid; }
 	void SetUID(const UID uid_) { uid = uid_; }
 
-	int GetSystemIndex() { return actorSystemIndex; }
+	int GetSystemIndex() const { return actorSystemIndex; }
 	void SetSystemIndex(const int index) { actorSystemIndex = index; }
 
 	IActorSystem* GetActorSystem() { return actorSystem; }
