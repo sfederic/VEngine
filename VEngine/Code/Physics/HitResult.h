@@ -65,6 +65,10 @@ struct HitResult
 	}
 
 	Actor* FindHitActor(Actor* findActor);
+
+	//Iterates over every hitActor and returns the closest to 'point' (Good for working with box casts).
+	Actor* GetClosestHitActor(const DirectX::XMVECTOR point);
+
 	void AddActorsToIgnore(std::vector<Actor*>& actors);
 	void IgnorePlayer();
 	void AddAllRenderStaticMeshesToIgnore();

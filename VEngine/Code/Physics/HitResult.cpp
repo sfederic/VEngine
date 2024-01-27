@@ -16,6 +16,33 @@ Actor* HitResult::FindHitActor(Actor* findActor)
 	return nullptr;
 }
 
+Actor* HitResult::GetClosestHitActor(const DirectX::XMVECTOR point)
+{
+	struct ActorPack
+	{
+		Actor* actor = nullptr;
+		float distance = 0.f;
+	};
+
+	std::vector<ActorPack> actorPacks;
+
+	for (auto hitActor : hitActors)
+	{
+		const float distance = XMVector3Length(point - hitActor->GetPositionV()).m128_f32[0];
+		ActorPack pack = { hitActor, distance };
+		actorPacks.emplace_back(pack);
+	}
+
+	auto DistCompare = [](const ActorPack& leftPack, const ActorPack& rightPack)
+		{
+			return leftPack.distance < rightPack.distance;
+		};
+
+	std::sort(actorPacks.begin(), actorPacks.end(), DistCompare);
+
+	return actorPacks.front().actor;
+}
+
 void HitResult::AddActorsToIgnore(std::vector<Actor*>& actors)
 {
 	actorsToIgnore.reserve(actorsToIgnore.size() + actors.size());
