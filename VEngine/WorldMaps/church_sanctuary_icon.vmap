@@ -10,6 +10,8 @@ GridActor
 1 1 1
  Visible
 1
+BigGridActor
+0
 Can Fall
 0
 Destruct
@@ -69,6 +71,37 @@ Name
 Player0
 UID
 3635565679
+next
+EntranceTrigger
+1
+ Enabled
+1
+ Position
+5 2 1
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+church_upstairs.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger0
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+1064228402
+Unlock Audio
+
 next
 FenceActor
 10
@@ -870,63 +903,6 @@ Trans. Occlude
 UID
 3008082377
 next
-4072685593
-Mesh
- Enabled
-1
- Pos
-4.5 -0.5 4.5
- Rot
-0 1 0 -1.56958e-07
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-church_sanctuary_icon.vmesh
-Physics Static
-1
-Render Static
-1
-Trans. Occlude
-0
-UID
-262314144
-next
 2675754477
 Mesh
  Enabled
@@ -1041,8 +1017,80 @@ Trans. Occlude
 UID
 994955423
 next
-BoxTriggerComponent
+4072685593
+Mesh
+ Enabled
 1
+ Pos
+4.5 -0.5 4.5
+ Rot
+0 1 0 -1.56958e-07
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+church_sanctuary_icon.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+262314144
+next
+ConditionComponent
+1
+1064228402
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+51544294
+next
+BoxTriggerComponent
+2
 1784637590
 BoxTrigger
  Enabled
@@ -1061,6 +1109,25 @@ Offset
 0 0 0
 UID
 1611384329
+next
+1064228402
+Trigger
+ Enabled
+1
+ Pos
+5 2 1
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+3095016830
 next
 DialogueComponent
 2

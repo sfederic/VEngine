@@ -1,19 +1,19 @@
-DirectionalLightActor
+Player
 1
  Enabled
 1
  Position
-0 5 0
+0 0 0
  Rotation
-0.707107 0 0 0.707107
+0 0 0 1
  Scale
 1 1 1
  Visible
 1
 Name
-DirectionalLightActor0
+Player0
 UID
-3738143309
+1433483335
 next
 EntranceTrigger
 2
@@ -51,7 +51,7 @@ next
  Position
 1 0 9
  Rotation
--0 0 -0 1
+0 1 0 1.56958e-07
  Scale
 1 1 1
  Visible
@@ -59,7 +59,7 @@ next
 Entrance Active
 1
 Level Name
-church_hall.vmap
+church_foyer.vmap
 Locked Text
 Locked
 Name
@@ -233,223 +233,22 @@ vase8
 UID
 1653748092
 next
-Player
+DirectionalLightActor
 1
  Enabled
 1
  Position
-0 0 0
- Rotation
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Name
-Player0
-UID
-1433483335
-next
-BoxTriggerComponent
-2
-847339183
-Trigger
- Enabled
-1
- Pos
-1 0 0
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Extents
-0.45 0.45 0.45
-Offset
-0 0 0
-UID
-4195114937
-next
-1037875813
-Trigger
- Enabled
-1
- Pos
-1 0 9
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Extents
-0.45 0.45 0.45
-Offset
-0 0 0
-UID
-2499014062
-next
-CameraComponent
-1
-1433483335
-Camera
- Enabled
-1
- Pos
-1.75 1.75 -2.75
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-FOV
-60
-Far Z
-1000
-Near Z
-0.01
-UID
-1475494938
-next
-ConditionComponent
-2
-847339183
-Condition
- Enabled
-1
- Visible
-1
-Condition
-
-Condition Arg
-
-UID
-3649895542
-next
-1037875813
-Condition
- Enabled
-1
- Visible
-1
-Condition
-
-Condition Arg
-
-UID
-2129227952
-next
-DialogueComponent
-1
-1433483335
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-1788418340
-next
-DirectionalLightComponent
-1
-3738143309
-DirectionalLight
- Enabled
-1
- Pos
 0 5 0
- Rot
+ Rotation
 0.707107 0 0 0.707107
  Scale
 1 1 1
  Visible
 1
-Colour
-1 1 1 1
-LightEnabled
-1
+Name
+DirectionalLightActor0
 UID
-1881114985
-next
-EmptyComponent
-1
-1433483335
-Root
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-UID
-1943293329
-next
-InstanceMeshComponent
-1
-1790791153
-NodeMesh
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-default
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Instance
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-node.vmesh
-Physics Static
-1
-Render Static
-1
-Trans. Occlude
-0
-UID
-506022058
+3738143309
 next
 MeshComponent
 10
@@ -738,16 +537,16 @@ Trans. Occlude
 UID
 700165881
 next
-1433483335
+2023385581
 Mesh
  Enabled
 1
  Pos
-0 0 0
+1 -0.5 4.5
  Rot
-0 0 0 1
+0.000243718 1 0.000172477 -1.48986e-07
  Scale
-1 1 1
+3.00003 0.999997 10.0001
  Visible
 1
 Casts Shadow
@@ -771,7 +570,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/carpet.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -783,17 +582,17 @@ M_UvRotation
 M_UvRotationSpeed
 0
 M_UvScale
-1 1
+1 3
 Mesh
-char.vmesh
+node.vmesh
 Physics Static
 1
 Render Static
-0
+1
 Trans. Occlude
 0
 UID
-3114853707
+1214978354
 next
 2286057121
 Mesh
@@ -909,63 +708,6 @@ Trans. Occlude
 UID
 643699149
 next
-2023385581
-Mesh
- Enabled
-1
- Pos
-1 -0.5 4.5
- Rot
-0.000243718 1 0.000172477 -1.48986e-07
- Scale
-3.00003 0.999997 10.0001
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Floors/carpet.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 3
-Mesh
-node.vmesh
-Physics Static
-1
-Render Static
-1
-Trans. Occlude
-0
-UID
-1214978354
-next
 1653748092
 Mesh
  Enabled
@@ -1022,5 +764,265 @@ Trans. Occlude
 0
 UID
 2389333925
+next
+1433483335
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+char.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
+UID
+3114853707
+next
+ConditionComponent
+2
+847339183
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+3649895542
+next
+1037875813
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+2129227952
+next
+BoxTriggerComponent
+2
+847339183
+Trigger
+ Enabled
+1
+ Pos
+1 0 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+4195114937
+next
+1037875813
+Trigger
+ Enabled
+1
+ Pos
+1 0 9
+ Rot
+0 1 0 1.56958e-07
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+2499014062
+next
+DialogueComponent
+1
+1433483335
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+1788418340
+next
+InstanceMeshComponent
+1
+1790791153
+NodeMesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Instance
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+506022058
+next
+CameraComponent
+1
+1433483335
+Camera
+ Enabled
+1
+ Pos
+1.75 1.75 -2.75
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+FOV
+60
+Far Z
+1000
+Near Z
+0.01
+UID
+1475494938
+next
+DirectionalLightComponent
+1
+3738143309
+DirectionalLight
+ Enabled
+1
+ Pos
+0 5 0
+ Rot
+0.707107 0 0 0.707107
+ Scale
+1 1 1
+ Visible
+1
+Colour
+1 1 1 1
+Intensity
+1
+LightEnabled
+1
+UID
+1881114985
+next
+EmptyComponent
+1
+1433483335
+Root
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+1943293329
 next
 end

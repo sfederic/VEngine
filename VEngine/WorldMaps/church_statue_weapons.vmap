@@ -10,6 +10,8 @@ OrientationLock
 0.999996 0.999998 0.999998
  Visible
 1
+BigGridActor
+0
 Can Fall
 1
 Destruct
@@ -71,6 +73,8 @@ next
 1 0.999997 0.999997
  Visible
 1
+BigGridActor
+0
 Can Fall
 1
 Destruct
@@ -177,7 +181,7 @@ EntranceTrigger
 Entrance Active
 1
 Level Name
-church_hall.vmap
+church_foyer.vmap
 Locked Text
 Locked
 Name
@@ -545,6 +549,177 @@ UID
 next
 MeshComponent
 16
+409432671
+Mesh
+ Enabled
+1
+ Pos
+7 0 3
+ Rot
+-6.32204e-08 1 -2.18557e-08 2.10733e-08
+ Scale
+0.999996 0.999998 0.999998
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+sword.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
+UID
+2792569261
+next
+3821641987
+Mesh
+ Enabled
+1
+ Pos
+7 0 6
+ Rot
+-2.90077e-07 0 -0 1
+ Scale
+1 0.999997 0.999997
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+sword.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
+UID
+1870221416
+next
+3817475245
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+-0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+char.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
+UID
+2755487854
+next
 2178099073
 Mesh
  Enabled
@@ -1286,177 +1461,6 @@ Trans. Occlude
 UID
 746807424
 next
-409432671
-Mesh
- Enabled
-1
- Pos
-7 0 3
- Rot
--6.32204e-08 1 -2.18557e-08 2.10733e-08
- Scale
-0.999996 0.999998 0.999998
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-sword.vmesh
-Physics Static
-1
-Render Static
-0
-Trans. Occlude
-0
-UID
-2792569261
-next
-3821641987
-Mesh
- Enabled
-1
- Pos
-7 0 6
- Rot
--2.90077e-07 0 -0 1
- Scale
-1 0.999997 0.999997
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-sword.vmesh
-Physics Static
-1
-Render Static
-0
-Trans. Occlude
-0
-UID
-1870221416
-next
-3817475245
-Mesh
- Enabled
-1
- Pos
-0 0 0
- Rot
--0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-char.vmesh
-Physics Static
-1
-Render Static
-0
-Trans. Occlude
-0
-UID
-2755487854
-next
 ConditionComponent
 2
 280888480
@@ -1667,6 +1671,36 @@ UID
 next
 EmptyComponent
 6
+1619675645
+Root
+ Enabled
+1
+ Pos
+2 0 4
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+1989328311
+next
+3817475245
+Root
+ Enabled
+1
+ Pos
+2 0 1
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+1498646771
+next
 2028731464
 Root
  Enabled
@@ -1712,21 +1746,6 @@ Root
 UID
 690763964
 next
-1619675645
-Root
- Enabled
-1
- Pos
-2 0 4
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-UID
-1989328311
-next
 4178313292
 Root
  Enabled
@@ -1741,20 +1760,5 @@ Root
 1
 UID
 4240988592
-next
-3817475245
-Root
- Enabled
-1
- Pos
-2 0 1
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-UID
-1498646771
 next
 end

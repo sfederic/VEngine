@@ -189,7 +189,7 @@ EntranceTrigger
  Position
 0 0 6
  Rotation
--0 0 -0 1
+-0 0.707107 -0 0.707107
  Scale
 1 1 1
  Visible
@@ -197,7 +197,7 @@ EntranceTrigger
 Entrance Active
 1
 Level Name
-
+church_library.vmap
 Locked Text
 Locked
 Name
@@ -226,7 +226,7 @@ next
 Entrance Active
 1
 Level Name
-
+church_foyer.vmap
 Locked Text
 Locked
 Name
@@ -909,7 +909,7 @@ Trigger
  Pos
 0 0 6
  Rot
--0 0 -0 1
+-0 0.707107 -0 0.707107
  Scale
 1 1 1
  Visible
