@@ -640,28 +640,33 @@ void Player::LinkToGridActor()
 	else if (!isInputLinkedToGridActor && Input::GetKeyUp("Link")) //Raycast forward
 	{
 		HitResult hit(this);
-		if (Raycast(hit, GetPositionV(), GetMeshForward(), 100.f))
+		const auto playerPos = GetPositionV();
+		const auto end = playerPos + (GetMeshForward() * 5.f);
+		if (OrientedBoxCast(hit, playerPos, end, XMFLOAT2(0.25f, 0.25f), false, false))
 		{
+			auto hitActor = hit.GetClosestHitActor(playerPos);
+			assert(hitActor);
+
 			//This raycast is to make sure the player is not standing on the same actor it's linking to
-			//to avoid potentially rotating the linked actor and the player being stuck in mid-air.
+				//to avoid potentially rotating the linked actor and the player being stuck in mid-air.
 			HitResult sameActorHit(this);
 			Raycast(sameActorHit, GetPositionV(), -VMath::GlobalUpVector(), 5.f);
-			if (sameActorHit.hitActor == hit.hitActor)
+			if (sameActorHit.hitActor == hitActor)
 			{
 				Camera::GetActiveCamera().SetShakeLevel(0.3f);
 				Log("Cannot link to [%s], player is standing on it.", hit.hitActor->GetName().c_str());
 				return;
 			}
 
-			auto gridActor = dynamic_cast<GridActor*>(hit.hitActor);
+			auto gridActor = dynamic_cast<GridActor*>(hitActor);
 			if (gridActor)
 			{
-				auto hitMesh = dynamic_cast<MeshComponent*>(hit.hitComponent);
-				if (hitMesh)
+				//@Todo: I don't really know what this mesh check is for. Come back to it and maybe delete.
+				for (auto mesh : gridActor->GetComponents<MeshComponent>())
 				{
-					if (!hitMesh->canBeLinkedTo)
+					if (!mesh->canBeLinkedTo)
 					{
-						Log("Cannot link to GridActor via hit mesh [%s]. canBeLinkedTo set to false.", hitMesh->name.c_str());
+						Log("Cannot link to GridActor via hit mesh [%s]. canBeLinkedTo set to false.", mesh->name.c_str());
 						return;
 					}
 				}
