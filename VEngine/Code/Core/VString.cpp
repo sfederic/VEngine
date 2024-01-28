@@ -9,20 +9,12 @@ namespace VString
 {
 	std::wstring stows(const std::string str)
 	{
-		if (str.empty())
-		{
-			return std::wstring();
-		}
 		std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t> converter;
 		return converter.from_bytes(str);
 	}
 
 	std::string wstos(const std::wstring wstr)
 	{
-		if (wstr.empty())
-		{
-			return std::string();
-		}
 		std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t> converter;
 		return converter.to_bytes(wstr);
 	}
@@ -57,7 +49,6 @@ namespace VString
 		{
 			return mainString.substr(mainString.find(findCase) + findCase.size());
 		}
-
 		return mainString;
 	}
 
@@ -67,7 +58,6 @@ namespace VString
 		{
 			return mainString.substr(mainString.find(findCase));
 		}
-
 		return mainString;
 	}
 
@@ -77,7 +67,6 @@ namespace VString
 		{
 			return mainString.substr(0, mainString.find(findCase));
 		}
-
 		return mainString;
 	}
 
