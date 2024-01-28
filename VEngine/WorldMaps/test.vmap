@@ -1,60 +1,3 @@
-GridActor
-1
- Enabled
-1
- Position
-4 -0.5 6
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-BigGridActor
-0
-Can Fall
-1
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-0
-Inspect
-0
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Move Speed
-12
-Name
-GridActor0
-Obstacle
-1
-Rotate Pitch
-1
-Rotate Roll
-0
-Rotate Speed
-12
-Rotate Yaw
-1
-UID
-3130004950
-next
 Player
 1
  Enabled
@@ -110,144 +53,25 @@ MeshActor1
 UID
 1373377342
 next
-DirectionalLightActor
+PointLightActor
 1
  Enabled
 1
  Position
-0 5 0
+4 4 3
  Rotation
-0.707107 0 0 0.707107
- Scale
-1 1 1
- Visible
-1
-Name
-DirectionalLightActor0
-UID
-1766423118
-next
-OcclusionWall
-4
- Enabled
-1
- Position
-4.5 -0.3 9.5
- Rotation
-0 1 0 -0.000244163
- Scale
-5.00063 5 5.00063
- Visible
-1
-Name
-OcclusionWall0
-UID
-1255145686
-next
- Enabled
-1
- Position
--0.5 0 4.3
- Rotation
-0 0.707401 0 0.706812
- Scale
-5.00066 5 5.00066
- Visible
-1
-Name
-OcclusionWall1
-UID
-3983294959
-next
- Enabled
-1
- Position
-9.5 0 4.3
- Rotation
--0 -0.706639 -0 0.707574
- Scale
-5.00067 5 5.00067
- Visible
-1
-Name
-OcclusionWall2
-UID
-162904478
-next
- Enabled
-1
- Position
-4.5 0 -0.7
- Rotation
--0 0.000660863 -0 1
- Scale
-5.00067 5 5.00067
- Visible
-1
-Name
-OcclusionWall3
-UID
-1177384587
-next
-MeshComponent
-7
-3130004950
-Mesh
- Enabled
-1
- Pos
-4 -0.5 6
- Rot
 -0 0 -0 1
  Scale
 1 1 1
  Visible
 1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cube.vmesh
-Physics Static
-1
-Render Static
-0
-Trans. Occlude
-0
+Name
+PointLightActor0
 UID
-1607917326
+4223582235
 next
+MeshComponent
+2
 2989755610
 Mesh
  Enabled
@@ -338,7 +162,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/floor_09.jpg
 M_Use Texture
 1
 M_UvOffset
@@ -362,247 +186,8 @@ Trans. Occlude
 UID
 1359728781
 next
-1255145686
-Mesh
- Enabled
-1
- Pos
-4.5 -0.3 9.5
- Rot
-0 1 0 -0.000244163
- Scale
-5.00063 5 5.00063
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-catacombs_033_wall.vmesh
-Physics Static
-1
-Render Static
-1
-Trans. Occlude
-0
-UID
-312414158
-next
-3983294959
-Mesh
- Enabled
-1
- Pos
--0.5 0 4.3
- Rot
-0 0.707401 0 0.706812
- Scale
-5.00066 5 5.00066
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-catacombs_033_wall.vmesh
-Physics Static
-1
-Render Static
-1
-Trans. Occlude
-0
-UID
-2916659187
-next
-162904478
-Mesh
- Enabled
-1
- Pos
-9.5 0 4.3
- Rot
--0 -0.706639 -0 0.707574
- Scale
-5.00067 5 5.00067
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-catacombs_033_wall.vmesh
-Physics Static
-1
-Render Static
-1
-Trans. Occlude
-0
-UID
-3787473768
-next
-1177384587
-Mesh
- Enabled
-1
- Pos
-4.5 0 -0.7
- Rot
--0 0.000660863 -0 1
- Scale
-5.00067 5 5.00067
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-catacombs_033_wall.vmesh
-Physics Static
-1
-Render Static
-1
-Trans. Occlude
-0
-UID
-2650458050
-next
 DialogueComponent
-2
-3130004950
-Dialogue
- Enabled
 1
- Visible
-1
-File
-
-UID
-179241597
-next
 2989755610
 Dialogue
  Enabled
@@ -696,16 +281,16 @@ Near Z
 UID
 4271484372
 next
-DirectionalLightComponent
+PointLightComponent
 1
-1766423118
-DirectionalLight
+4223582235
+PointLight
  Enabled
 1
  Pos
-0 5 0
+4 4 3
  Rot
-0.707107 0 0 0.707107
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -713,11 +298,11 @@ DirectionalLight
 Colour
 1 1 1 1
 Intensity
-1
+25
 LightEnabled
 1
 UID
-1351249682
+3346583480
 next
 EmptyComponent
 1
