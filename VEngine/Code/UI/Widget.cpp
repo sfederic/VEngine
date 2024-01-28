@@ -220,7 +220,7 @@ void Widget::Rect(Layout layout)
 
 void Widget::FillRect(Layout layout, D2D1_COLOR_F color, float opacity)
 {
-	UISystem::FillRect(layout, color);
+	UISystem::FillRect(layout, color, opacity);
 }
 
 Layout Widget::AlignLayout(float w, float h, Align align)
