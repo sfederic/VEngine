@@ -199,6 +199,7 @@
     <ClCompile Include="Code\Core\VEnum.cpp" />
     <ClCompile Include="Code\UI\Game\DialogueWidget.cpp" />
     <ClCompile Include="Code\UI\Game\HealthWidget.cpp" />
+    <ClCompile Include="Code\UI\Game\MapInfoWidget.cpp" />
     <ClCompile Include="Code\UI\Game\PlayerHealthWidget.cpp" />
     <ClCompile Include="Code\UI\Game\PopupWidget.cpp" />
     <ClCompile Include="Code\vpch.cpp">
@@ -559,6 +560,7 @@
     <ClInclude Include="Code\Core\UID.h" />
     <ClInclude Include="Code\UI\Game\DialogueWidget.h" />
     <ClInclude Include="Code\UI\Game\HealthWidget.h" />
+    <ClInclude Include="Code\UI\Game\MapInfoWidget.h" />
     <ClInclude Include="Code\UI\Game\PlayerHealthWidget.h" />
     <ClInclude Include="Code\UI\Game\PopupWidget.h" />
     <ClInclude Include="Code\UI\Layout.h" />

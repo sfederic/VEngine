@@ -61,6 +61,16 @@ void WorldFunctions::SetupWorldNames()
 	worldFilenamesToInGameNames.emplace("church_upstairs.vmap", "Main Hall");
 }
 
+std::string WorldFunctions::GetWorldDisplayName(std::string mapFilename)
+{
+	auto mapIt = worldFilenamesToInGameNames.find(mapFilename);
+	if (mapIt == worldFilenamesToInGameNames.end())
+	{
+		return "NO NAME FOUND";
+	}
+	return mapIt->second;
+}
+
 void WorldFunctions::SetupWorldStartFunctions()
 {
 	worldStartFunctionMap.emplace("town.vmap", &TownStart);

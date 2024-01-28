@@ -6,6 +6,8 @@
 namespace WorldFunctions
 {
 	void SetupWorldNames();
+	std::string GetWorldDisplayName(std::string mapFilename);
+
 	void SetupWorldStartFunctions();
 	void CallWorldStartFunction(const std::string worldName);
 }
