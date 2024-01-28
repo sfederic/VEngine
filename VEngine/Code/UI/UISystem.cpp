@@ -6,11 +6,13 @@
 #include "Core/Core.h"
 #include "UI/Widget.h"
 #include "UI/ScreenFadeWidget.h"
+#include "UI/Game/MapInfoWidget.h"
 #include "Core/SystemStates.h"
 
 static SystemStates systemState = SystemStates::Unloaded;
 
 ScreenFadeWidget* UISystem::screenFadeWidget;
+MapInfoWidget* UISystem::mapInfoWidget;
 
 std::vector<std::unique_ptr<Widget>> UISystem::widgets;
 
@@ -113,6 +115,7 @@ void UISystem::Reset()
 void UISystem::CreateGlobalWidgets()
 {
 	screenFadeWidget = CreateWidget<ScreenFadeWidget>();
+	mapInfoWidget = CreateWidget<MapInfoWidget>();
 }
 
 void UISystem::DestroyWidget(Widget* widget)

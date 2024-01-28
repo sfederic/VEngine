@@ -9,6 +9,7 @@
 #include "Widget.h"
 
 class ScreenFadeWidget;
+class MapInfoWidget;
 
 namespace UISystem
 {
@@ -16,6 +17,7 @@ namespace UISystem
 	extern std::vector<Widget*> widgetsInViewport;
 
 	extern ScreenFadeWidget* screenFadeWidget;
+	extern MapInfoWidget* mapInfoWidget;
 
 	template <typename T>
 	std::vector<T*> GetAllWidgetsOfType()

@@ -20,6 +20,7 @@
 #include "Audio/AudioSystem.h"
 #include "Render/SpriteSystem.h"
 #include "UI/UISystem.h"
+#include "UI/Game/MapInfoWidget.h"
 #include "Gameplay/GameInstance.h"
 #include "Gameplay/GameUtils.h"
 #include "Physics/PhysicsSystem.h"
@@ -76,6 +77,8 @@ void World::Start()
 		WakeAndStartAllActors();
 
 		GameUtils::LoadGameInstanceData();
+
+		UISystem::mapInfoWidget->AddToViewport(3.f);
 	}
 }
 
