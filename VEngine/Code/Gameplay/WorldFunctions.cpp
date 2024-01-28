@@ -4,7 +4,10 @@
 #include "Gameplay/GameInstance.h"
 #include "Components/MeshComponent.h"
 
-std::map<std::string, std::function<void()>> worldStartFunctionMap;
+static std::map<std::string, std::function<void()>> worldStartFunctionMap;
+
+//Map that sets up the world filename (e.g. town.vmap) to the world's name to be displayed in game (e.g. "Town")
+static std::unordered_map<std::string, std::string> worldFilenamesToInGameNames;
 
 void TownStart()
 {
@@ -41,6 +44,21 @@ void TownStart()
 	{
 		MulVertexColours(XMFLOAT4(0.1f, 0.1f, 0.69f, 1.f));
 	}
+}
+
+void WorldFunctions::SetupWorldNames()
+{
+	//CHURCH
+	worldFilenamesToInGameNames.emplace("church_balcony_room.vmap", "Dining Room");
+	worldFilenamesToInGameNames.emplace("church_entrance.vmap", "Entrance Hall");
+	worldFilenamesToInGameNames.emplace("church_foyer.vmap", "Foyer");
+	worldFilenamesToInGameNames.emplace("church_library.vmap", "Library");
+	worldFilenamesToInGameNames.emplace("church_planetarium.vmap", "Planetarium");
+	worldFilenamesToInGameNames.emplace("church_projection_crystal_prayer_room.vmap", "Prayer Room");
+	worldFilenamesToInGameNames.emplace("church_ruins.vmap", "Ruins");
+	worldFilenamesToInGameNames.emplace("church_sanctuary.vmap", "Sanctuary");
+	worldFilenamesToInGameNames.emplace("church_sundial_garden.vmap", "Garden");
+	worldFilenamesToInGameNames.emplace("church_upstairs.vmap", "Main Hall");
 }
 
 void WorldFunctions::SetupWorldStartFunctions()

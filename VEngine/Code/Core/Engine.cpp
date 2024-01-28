@@ -39,7 +39,10 @@ void Engine::Init(int argc, char* argv[])
 	ClearLog();
 	Input::InitKeyMap();
 	PropertyTypes::SetupPropertyTypesVEnum();
+
 	WorldFunctions::SetupWorldStartFunctions();
+	WorldFunctions::SetupWorldNames();
+
 	Camera::SetEditorCameraAsActive();
 
 	auto coreInit = std::async(std::launch::async, []() { Core::Init(); });
