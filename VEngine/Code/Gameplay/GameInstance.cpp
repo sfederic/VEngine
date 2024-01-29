@@ -19,6 +19,9 @@ static bool churchStatueRotateLock = false;
 //TOWN
 static std::string townTimeOfDay = "Night";
 
+//MINES
+static int minesGeneratorOnCount = 0;
+
 //Used when continuing from game save files
 static std::string mapToLoadOnContinue;
 //...
@@ -30,6 +33,10 @@ Properties GameInstance::GetGlobalProps()
 	props.Add("ChurchStatueRotateLock", &churchStatueRotateLock);
 	props.Add("MapToLoadOnContinue", &mapToLoadOnContinue);
 	props.Add("TownTimeOfDay", &townTimeOfDay);
+
+	//MINES
+	props.Add("MinesGeneratorOnCount", &minesGeneratorOnCount);
+
 	return props;
 }
 
