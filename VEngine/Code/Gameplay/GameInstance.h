@@ -21,11 +21,11 @@ namespace GameInstance
 	void ClearHeldPlayerItem();
 
 	template <typename T>
-	T* GetGlobalProp(const std::string name)
+	T& GetGlobalProp(const std::string name)
 	{
 		Properties globalProps = GetGlobalProps();
 		T* data = globalProps.GetData<T>(name);
-		return data;
+		return *data;
 	}
 
 	template <typename T>
