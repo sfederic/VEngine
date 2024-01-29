@@ -678,6 +678,10 @@ void Player::LinkToGridActor()
 
 				SetLinkedGridActor(*gridActor, hit.GetHitPosV());
 			}
+			else //Show a shake as an error if not a grid actor
+			{
+				camera->SetShakeLevel(0.25f);
+			}
 		}
 	}
 }
