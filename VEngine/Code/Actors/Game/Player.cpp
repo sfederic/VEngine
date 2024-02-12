@@ -1223,6 +1223,7 @@ void Player::ResetCameraPosAndTargetToPlayer()
 	nextCameraPosition = cameraStartingLocalPosition;
 	camera->SetTargetActor(this);
 	camera->SetLerpToFocusPoint(false);
+	SetDefaultCameraFOV();
 }
 
 void Player::SetCameraTargetActor(Actor* target)
