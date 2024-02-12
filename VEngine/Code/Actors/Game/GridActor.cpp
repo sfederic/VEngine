@@ -28,7 +28,6 @@ void GridActor::Create()
 	__super::Create();
 
 	mesh->SetRenderStatic(false);
-	isInspectable = false;
 }
 
 bool GridActor::CheckNextRotationBoundsIntersect()
@@ -111,8 +110,7 @@ void GridActor::Inspect()
 {
 	auto player = Player::system.GetOnlyActor();
 	player->SetCameraTargetActor(this);
-	auto nextCameraPos = XMVectorSet(0.f, 0.4f, 0.f, 1.f);
-	player->SetNextCameraPosition(nextCameraPos);
+	player->SetZoomedInCameraFOV();
 }
 
 void GridActor::Start()
