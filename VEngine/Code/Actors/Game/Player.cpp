@@ -592,7 +592,7 @@ void Player::InteractInfoToWidgetCheck()
 			if (!gridActor->interactText.empty())
 			{
 				interactWidget->SetWorldPosition(GetHomogeneousPositionV());
-				interactWidget->interactText = gridActor->interactText;
+				interactWidget->interactText = L"Inspect";
 				interactWidget->AddToViewport();
 			}
 		}
