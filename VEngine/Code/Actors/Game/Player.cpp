@@ -355,8 +355,7 @@ void Player::PrimaryAction()
 		auto boxCastOrigin = center + meshForward;
 		if (SimpleBoxCast(boxCastOrigin, XMFLOAT3(0.25f, 0.25f, 0.25f), hit, false, true))
 		{
-			//@Todo: won't work later on for multiple hit actors
-			hit.hitActor = hit.hitActors.front();
+			hit.hitActor = hit.GetClosestHitActor(center);
 			Log("Player interact: %s", hit.hitActor->GetName().c_str());
 
 			if (DialogueCheck(hit.hitActor)) {}
