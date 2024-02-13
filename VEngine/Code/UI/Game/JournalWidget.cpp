@@ -37,7 +37,8 @@ void JournalWidget::DrawJournalEntriesToGridLayout()
 	const std::vector<Layout> gridLayouts = gridLayout.GetAllLayouts();
 	int gridLayoutIndex = 0;
 
-	for (auto& [title, entry] : JournalSystem::Get().GetJournalEntries())
+	auto& journalEntries = JournalSystem::Get().GetJournalEntries();
+	for (auto& [title, entry] : journalEntries)
 	{
 		const auto& layout = gridLayouts.at(gridLayoutIndex);
 		if (Button(title, layout))
