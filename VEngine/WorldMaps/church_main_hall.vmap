@@ -370,120 +370,6 @@ Trans. Occlude
 UID
 3356131943
 next
-694534500
-Mesh
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-char.vmesh
-Physics Static
-1
-Render Static
-0
-Trans. Occlude
-0
-UID
-2438896967
-next
-457952774
-Mesh
- Enabled
-1
- Pos
-4 -0.5 4
- Rot
--0 0 -0 1
- Scale
-9 1 9
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-node.vmesh
-Physics Static
-1
-Render Static
-1
-Trans. Occlude
-0
-UID
-202606713
-next
 4009287449
 Mesh
  Enabled
@@ -655,6 +541,120 @@ Trans. Occlude
 UID
 2868252779
 next
+694534500
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+char.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
+UID
+2438896967
+next
+457952774
+Mesh
+ Enabled
+1
+ Pos
+4 -0.5 4
+ Rot
+-0 0 -0 1
+ Scale
+9 1 9
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+202606713
+next
 DialogueComponent
 5
 3935116951
@@ -667,17 +667,6 @@ File
 
 UID
 2798026927
-next
-694534500
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-154114629
 next
 4009287449
 Dialogue
@@ -711,6 +700,17 @@ File
 
 UID
 2517942721
+next
+694534500
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+154114629
 next
 InstanceMeshComponent
 1

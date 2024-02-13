@@ -3,6 +3,8 @@ ChurchStatueRotateLock
 ChurchSwordLock
 0
 MapToLoadOnContinue
-church_balcony_room.vmap
+
+MinesGeneratorOnCount
+0
 TownTimeOfDay
 Night
