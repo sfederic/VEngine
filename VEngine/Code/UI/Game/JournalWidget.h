@@ -11,6 +11,7 @@ public:
 
 private:
 	void DrawJournalEntriesToGridLayout();
+	void HandleCloseButton();
 
 	JournalEntry* selectedJournalEntry = nullptr;
 };

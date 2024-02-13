@@ -18,6 +18,7 @@ void JournalWidget::DrawJournalEntriesToGridLayout()
 		const auto emptyLayout = PercentAlignLayout(0.4f, 0.4f, 0.6f, 0.6f);
 		FillRect(emptyLayout);
 		Text("Journal empty.", emptyLayout);
+		HandleCloseButton();
 		return;
 	}
 
@@ -61,5 +62,16 @@ void JournalWidget::DrawJournalEntriesToGridLayout()
 		}
 
 		gridLayoutIndex++;
+	}
+
+	HandleCloseButton();
+}
+
+void JournalWidget::HandleCloseButton()
+{
+	const auto closeButtonLayout = PercentAlignLayout(0.8f, 0.8f, 0.9f, 0.9f);
+	if (Button(L"Close", closeButtonLayout))
+	{
+		this->RemoveFromViewport();
 	}
 }
