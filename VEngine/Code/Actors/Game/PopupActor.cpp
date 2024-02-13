@@ -13,7 +13,7 @@ void PopupActor::Start()
 	__super::Start();
 
 	popupWidget = UISystem::CreateWidget<PopupWidget>();
-	popupWidget->popupText = popupText;
+	popupWidget->SetPopupText(popupText);
 
 	if (displayOnLevelLoad)
 	{
