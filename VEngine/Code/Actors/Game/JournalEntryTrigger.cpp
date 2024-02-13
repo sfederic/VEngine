@@ -5,6 +5,8 @@
 #include "Gameplay/JournalSystem.h"
 #include "Asset/AssetPaths.h"
 #include "Particle/SpriteSheet.h"
+#include "UI/Game/PopupWidget.h"
+#include "UI/UISystem.h"
 
 JournalEntryTrigger::JournalEntryTrigger()
 {
@@ -41,6 +43,10 @@ void JournalEntryTrigger::Tick(float deltaTime)
 
 		journalEntry = JournalSystem::Get().LoadSingleJournalEntryFromFile(
 			AssetBaseFolders::journalEntry + "/" + journalEntryFilename);
+
+		auto popup = UISystem::CreateWidget<PopupWidget>();
+		popup->SetPopupText(journalEntry.title + L" added to journal.");
+		popup->OnceOffAddToViewport(2.5f);
 	}
 }
 
