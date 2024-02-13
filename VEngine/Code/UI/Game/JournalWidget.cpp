@@ -2,8 +2,6 @@
 #include "JournalWidget.h"
 #include "Gameplay/JournalSystem.h"
 #include "UI/GridLayout.h"
-#include "Core/Input.h"
-#include "Core/Core.h"
 
 void JournalWidget::Draw(float deltaTime)
 {

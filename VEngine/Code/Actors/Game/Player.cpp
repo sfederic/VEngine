@@ -1207,8 +1207,11 @@ void Player::JournalWidgetInput()
 	{
 		if (!journalWidget->IsInViewport())
 		{
-			Core::PauseGameWorld();
 			journalWidget->AddToViewport();
+		}
+		else
+		{
+			journalWidget->RemoveFromViewport();
 		}
 	}
 }
