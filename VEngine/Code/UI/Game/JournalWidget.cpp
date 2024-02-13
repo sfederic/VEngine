@@ -30,10 +30,10 @@ void JournalWidget::DrawJournalEntriesToGridLayout()
 		FillRect(entryLayout);
 		Text(selectedJournalEntry->title, entryLayout);
 
-		entryLayout.AddVerticalSpace(30.f);
+		entryLayout.PushDown(50.f);
 		Text(selectedJournalEntry->text, entryLayout);
 
-		entryLayout.AddVerticalSpace(30.f);
+		entryLayout.PushDown(150.f);
 		if (Button("Close", entryLayout))
 		{
 			selectedJournalEntry = nullptr;

@@ -21,6 +21,16 @@ struct Layout
 		rect.right += spacing;
 	}
 
+	void PushDown(float spacing)
+	{
+		rect.top += spacing;
+	}
+
+	void PushRight(float spacing)
+	{
+		rect.right += spacing;
+	}
+
 	void PushToLeft(float spacing = 0.f)
 	{
 		rect.right = rect.left + spacing;
