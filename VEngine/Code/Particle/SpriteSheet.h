@@ -23,7 +23,7 @@ public:
 	void SetLoopAnimation(bool loop) { loopAnimation = loop; }
 	void SetAnimationSpeed(float speed) { animationSpeed = speed; }
 
-	std::string GetTextureFilename() { return textureData.filename; }
+	std::string GetTextureFilename() const { return textureData.filename; }
 	Sprite GetSprite() { return sprite; }
 
 private:
