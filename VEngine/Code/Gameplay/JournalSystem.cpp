@@ -53,7 +53,7 @@ void JournalSystem::LoadJournalEntriesFromFile()
 JournalEntry JournalSystem::LoadSingleJournalEntryFromFile(const std::string filename)
 {
 	Deserialiser d(filename, OpenMode::In);
-	JournalEntry entry = {};
+	JournalEntry entry;
 	Properties entryProps = entry.GetProps();
 	d.Deserialise(entryProps);
 	return entry;
