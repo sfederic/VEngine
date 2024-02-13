@@ -38,11 +38,13 @@ void JournalEntryTrigger::Tick(float deltaTime)
 
 	if (boxTrigger->ContainsTarget() && Input::GetKeyUp("Interact") && !journalEntryAlreadyExists)
 	{
-		Log("Added to Journal");
-		journalEntryAlreadyExists = true;
-
 		journalEntry = JournalSystem::Get().LoadSingleJournalEntryFromFile(
 			AssetBaseFolders::journalEntry + "/" + journalEntryFilename);
+
+		JournalSystem::Get().AddJournalEntry(journalEntry);
+
+		Log("Added to Journal");
+		journalEntryAlreadyExists = true;
 
 		auto popup = UISystem::CreateWidget<PopupWidget>();
 		popup->SetPopupText(journalEntry.title + L" added to journal.");
