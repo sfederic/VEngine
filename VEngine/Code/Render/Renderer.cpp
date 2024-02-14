@@ -9,6 +9,7 @@
 #include "Components/DestructibleMeshComponent.h"
 #include "Components/InstanceMeshComponent.h"
 #include "Components/Lights/DirectionalLightComponent.h"
+#include "Render/Texture2D.h"
 #include "Components/Lights/PointLightComponent.h"
 #include "Components/Lights/SpotLightComponent.h"
 #include "Components/MeshComponent.h"
@@ -34,6 +35,7 @@
 #include "Particle/Polyboard.h"
 #include "Particle/SpriteSheet.h"
 #include "Physics/PhysicsSystem.h"
+#include "Physics/Raycast.h"
 #include "PipelineObjects.h"
 #include "RastStates.h"
 #include "Render/Line.h"
@@ -52,15 +54,11 @@
 #include "ShaderItem.h"
 #include "ShaderSystem.h"
 #include "ShadowMap.h"
-#include "Sprite.h"
-#include "Texture2D.h"
 #include "TextureSystem.h"
 #include "UI/UISystem.h"
 #include "Vertex.h"
-#include <assert.h>
 #include <combaseapi.h>
 #include <cstdint>
-#include <cstdlib>
 #include <d3d11.h>
 #include <d3dcommon.h>
 #include <DirectXCollision.h>
@@ -73,8 +71,6 @@
 #include <dxgi1_6.h>
 #include <dxgicommon.h>
 #include <dxgiformat.h>
-#include <dxgitype.h>
-#include <map>
 #include <memory>
 #include <minwindef.h>
 #include <ScreenGrab.h>

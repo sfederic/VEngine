@@ -1,15 +1,10 @@
 #include "vpch.h"
 #include "PropertiesDock.h"
 #include <qwidget.h>
+#include <qlabel.h>
 #include <qboxlayout.h>
-#include <QDoubleSpinBox>
-#include <QLabel>
-#include <QScrollBar>
 #include <qscrollarea.h>
-#include <QCheckBox>
-#include <QLineEdit>
 #include "Actors/Actor.h"
-#include "Components/Component.h"
 #include "PropertyWidgets/BoolWidget.h" 
 #include "PropertyWidgets/Float2Widget.h"
 #include "PropertyWidgets/Float3Widget.h"

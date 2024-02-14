@@ -1,10 +1,6 @@
 #include "vpch.h"
 #include "EditorMainWindow.h"
 #include "imgui_forward_declare.h"
-#include <QStringList>
-#include <QCloseEvent>
-#include <qdockwidget.h>
-#include <QtWidgets/QMainWindow>
 #include "Core/Core.h"
 #include "RenderViewWidget.h"
 #include "PropertiesDock.h"

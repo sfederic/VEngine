@@ -1,6 +1,5 @@
 #include "vpch.h"
 #include "MaterialSystem.h"
-#include <cassert>
 #include "Material.h"
 #include "Core/Serialiser.h"
 #include "Render/ShaderItem.h"

@@ -1,6 +1,5 @@
 #include "vpch.h"
 #include "Material.h"
-#include "RenderUtils.h"
 #include "Renderer.h"
 #include "ShaderSystem.h"
 #include "TextureSystem.h"

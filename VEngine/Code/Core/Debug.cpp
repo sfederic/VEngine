@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "Debug.h"
 #include <source_location>
+#include <comdef.h>
 
 void HR(HRESULT hr)
 {

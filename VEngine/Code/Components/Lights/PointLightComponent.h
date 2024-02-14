@@ -3,7 +3,6 @@
 #include "Components/SpatialComponent.h"
 #include "Components/ComponentSystem.h"
 #include "Render/LightData.h"
-#include <winnt.h>
 
 class PointLightComponent : public SpatialComponent
 {

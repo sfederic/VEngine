@@ -1,4 +1,5 @@
 #pragma once
+
 #include <xaudio2.h>
 
 //Rough wrapper around IXAudio2SourceVoice to handle deletion and callbacks easier

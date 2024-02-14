@@ -1,19 +1,11 @@
 #include "vpch.h"
 #include "DialogueDock.h"
-#include <fstream>
 #include <qtreewidget.h>
-#include <qstandarditemmodel.h>
+#include <qboxlayout.h>
 #include <qpushbutton.h>
-#include <qlayout.h>
-#include <qlineedit.h>
 #include <qfiledialog.h>
 #include <qcombobox.h>
-#include <qjsonobject.h>
-#include <qjsondocument.h>
 #include "Core/World.h"
-#include "Actors/Actor.h"
-#include "Core/VFunctionSystem.h"
-#include "Core/VString.h"
 #include "Asset/AssetPaths.h"
 #include "Gameplay/ConditionSystem.h"
 

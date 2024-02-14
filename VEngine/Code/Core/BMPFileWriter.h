@@ -5,4 +5,3 @@ namespace BMPFileWriter
 {
 	void GenerateBitmapImage(unsigned char* image, int height, int width, const char* imageFileName);
 };
-

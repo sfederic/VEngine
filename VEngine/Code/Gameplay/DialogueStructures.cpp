@@ -1,6 +1,5 @@
 #include "vpch.h"
 #include "DialogueStructures.h"
-#include <fstream>
 #include <filesystem>
 #include "Core/Log.h"
 #include "Asset/AssetPaths.h"

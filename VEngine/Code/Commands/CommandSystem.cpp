@@ -1,6 +1,5 @@
 #include "vpch.h"
 #include "CommandSystem.h"
-#include "ICommand.h"
 #include "Core/Input.h"
 #include "Editor/Editor.h"
 

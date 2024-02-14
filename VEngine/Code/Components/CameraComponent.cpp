@@ -1,10 +1,8 @@
 #include "vpch.h"
 #include "CameraComponent.h"
-#include <algorithm>
 #include "Core/VMath.h"
 #include "Core/Core.h"
 #include "Render/Renderer.h"
-#include "Editor/Editor.h"
 #include "Core/Camera.h"
 
 CameraComponent::CameraComponent(XMFLOAT3 startPos)

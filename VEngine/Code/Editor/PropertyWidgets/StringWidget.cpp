@@ -1,11 +1,7 @@
 #include "vpch.h"
 #include "StringWidget.h"
-#include "Core/Properties.h"
-#include <QDir>
 #include <filesystem>
-#include <QDirIterator>
-#include <QStringListModel>
-#include <QCompleter>
+#include <qcompleter.h>
 
 StringWidget::StringWidget(Property& value_)
 {

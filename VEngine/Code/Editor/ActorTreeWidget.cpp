@@ -2,7 +2,6 @@
 #include "ActorTreeWidget.h"
 #include <qevent.h>
 #include "Core/World.h"
-#include "Actors/Actor.h"
 
 ActorTreeWidget::ActorTreeWidget(QWidget* parent) : QTreeWidget(parent)
 {

@@ -2,7 +2,6 @@
 #include "DestructibleMeshComponent.h"
 #include "Asset/FBXLoader.h"
 #include "Render/Material.h"
-#include "Render/RenderUtils.h"
 
 DestructibleMeshComponent::DestructibleMeshComponent(const std::string filename_,
 	const std::string textureFilename_,

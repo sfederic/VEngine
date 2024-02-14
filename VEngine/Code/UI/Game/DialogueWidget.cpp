@@ -1,6 +1,5 @@
 #include "vpch.h"
 #include "DialogueWidget.h"
-#include "Core/VString.h"
 
 void DialogueWidget::Draw(float deltaTime)
 {

@@ -3,7 +3,7 @@
 #include "Components/SpatialComponent.h"
 #include "Components/ComponentSystem.h"
 #include "Render/MeshData.h"
-#include "Physics/Raycast.h"
+#include "Physics/HitResult.h"
 
 struct Buffer;
 struct MeshDataProxy;
@@ -34,7 +34,7 @@ public:
 	auto& GetIndices() { return indices; }
 
 	void SetTextureFilename(const std::string_view filename) { textureData.filename = filename; }
-	std::string GetTextureFilename() { return textureData.filename; }
+	std::string GetTextureFilename() const { return textureData.filename; }
 
 protected:
 	void GenerateVertices();

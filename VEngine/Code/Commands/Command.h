@@ -3,7 +3,6 @@
 #include "ICommand.h"
 #include "Core/Property.h"
 #include "Core/World.h"
-#include "Actors/Actor.h"
 
 template <typename T>
 struct Command : ICommand

@@ -2,13 +2,10 @@
 #include "DialogueComponent.h"
 #include "Core/World.h"
 #include "Core/Camera.h"
-#include "Components/WidgetComponent.h"
-#include "UI/Widget.h"
 #include "UI/UISystem.h"
 #include "UI/Game/DialogueWidget.h"
 #include "Core/Log.h"
 #include "Core/VString.h"
-#include "Gameplay/GameUtils.h"
 #include "Gameplay/ConditionSystem.h"
 
 void DialogueComponent::Tick(float deltaTime)

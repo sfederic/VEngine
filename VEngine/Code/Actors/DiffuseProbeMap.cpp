@@ -2,11 +2,8 @@
 #include "DiffuseProbeMap.h"
 #include <filesystem>
 #include <algorithm>
-#include "Core/Debug.h"
 #include "Core/World.h"
 #include "Core/Log.h"
-#include "Components/InstanceMeshComponent.h"
-#include "Render/Material.h"
 #include "Render/RenderUtils.h"
 #include "Render/ShaderData/InstanceData.h"
 
@@ -52,7 +49,7 @@ void DiffuseProbeMap::SetLightProbeData()
 			{
 				LightProbeInstanceData pd;
 				pd.modelMatrix = XMMatrixTranslation((float)x, (float)y, (float)z);
-				
+
 				pd.modelMatrix.r[0].m128_f32[0] = 0.1f;
 				pd.modelMatrix.r[1].m128_f32[1] = 0.1f;
 				pd.modelMatrix.r[2].m128_f32[2] = 0.1f;
@@ -95,7 +92,7 @@ LightProbeInstanceData DiffuseProbeMap::FindClosestProbe(XMVECTOR pos)
 
 	auto ProbeDistCompare = [](const ProbeDist& l, const ProbeDist& r) -> bool {
 		return l.distance < r.distance;
-	};
+		};
 
 	std::sort(probeDistances.begin(), probeDistances.end(), ProbeDistCompare);
 

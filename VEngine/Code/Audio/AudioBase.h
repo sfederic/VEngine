@@ -1,4 +1,5 @@
 #pragma once
+
 #include <xaudio2.h>
 
 //Base class for audio data

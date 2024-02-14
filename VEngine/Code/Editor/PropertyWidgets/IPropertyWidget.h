@@ -2,7 +2,6 @@
 
 #include "Core/Property.h"
 #include "Commands/CommandSystem.h"
-#include "Commands/Command.h"
 
 class IPropertyWidget
 {

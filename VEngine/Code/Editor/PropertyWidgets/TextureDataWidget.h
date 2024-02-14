@@ -2,7 +2,6 @@
 
 #include "IPropertyWidget.h"
 #include <qpushbutton.h>
-#include "Core/Properties.h"
 
 struct TextureData;
 

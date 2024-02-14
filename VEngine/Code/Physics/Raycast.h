@@ -2,7 +2,6 @@
 
 #include <DirectXMath.h>
 #include <DirectXCollision.h>
-#include "Physics/CollisionLayers.h"
 #include "HitResult.h"
 
 bool Raycast(HitResult& hitResult, DirectX::XMVECTOR origin, DirectX::XMVECTOR direction, float range, bool fromScreen = false);

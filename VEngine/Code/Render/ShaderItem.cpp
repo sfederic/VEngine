@@ -1,6 +1,5 @@
 #include "vpch.h"
 #include "ShaderItem.h"
-#include <cassert>
 #include "VertexShader.h"
 #include "PixelShader.h"
 #include "ShaderSystem.h"

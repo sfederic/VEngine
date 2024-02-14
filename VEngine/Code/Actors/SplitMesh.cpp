@@ -1,7 +1,6 @@
 #include "vpch.h"
 #include "SplitMesh.h"
 #include "Components/MeshComponent.h"
-#include "Core/Timer.h"
 #include "Render/Material.h"
 #include "Render/RastStates.h"
 #include "Render/Vertex.h"

@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../WidgetComponent.h"
 #include "Gameplay/DialogueStructures.h"
 

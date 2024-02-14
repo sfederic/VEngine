@@ -5,7 +5,6 @@
 #include <cassert>
 #include <filesystem>
 #include "Core/VMath.h"
-#include "Core/VString.h"
 #include "AssetPaths.h"
 #include "Animation/BoneWeights.h"
 #include "Animation/Animation.h"
