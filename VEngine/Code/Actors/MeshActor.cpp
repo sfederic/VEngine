@@ -1,7 +1,6 @@
 #include "vpch.h"
 #include "MeshActor.h"
 #include "Components/MeshComponent.h"
-#include "Render/Material.h"
 
 MeshActor::MeshActor()
 {

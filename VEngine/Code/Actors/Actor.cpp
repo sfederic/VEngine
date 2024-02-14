@@ -1,6 +1,5 @@
 #include "vpch.h"
 #include "Actor.h"
-#include "Actors/IActorSystem.h"
 #include "Components/SpatialComponent.h"
 #include "Components/MeshComponent.h"
 #include "Components/EmptyComponent.h"
