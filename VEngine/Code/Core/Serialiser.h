@@ -3,9 +3,8 @@
 #include <string>
 #include <unordered_map>
 #include <typeindex>
-#include <sstream>
-#include <functional>
 #include <fstream>
+#include <functional>
 
 struct Properties;
 struct Property;

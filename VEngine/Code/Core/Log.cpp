@@ -1,7 +1,5 @@
 #include "vpch.h"
 #include "Log.h"
-#include <cstdarg>
-#include <fstream>
 #include <chrono>
 #include <vadefs.h>
 #include "Editor/Editor.h"

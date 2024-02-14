@@ -1,12 +1,8 @@
 #include "vpch.h"
 #include "ShaderSystem.h"
 #include <filesystem>
-#include "Core/Input.h"
-#include "Core/Log.h"
 #include "VertexShader.h"
 #include "PixelShader.h"
-#include "ShaderItem.h"
-#include "Core/Profile.h"
 #include "ShaderItem.h"
 
 void CompileAllShadersFromFile();

@@ -3,7 +3,6 @@
 #include <string>
 #include <vector>
 #include <memory>
-#include <dwrite_1.h>
 #include "Layout.h"
 #include "Colours.h"
 #include "Widget.h"

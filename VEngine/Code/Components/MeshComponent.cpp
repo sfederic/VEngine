@@ -3,7 +3,6 @@
 #include <algorithm>
 #include "Core/Camera.h"
 #include "Asset/AssetSystem.h"
-#include "Render/RenderUtils.h"
 #include "Render/Material.h"
 #include "Render/MaterialSystem.h"
 #include "Render/Renderer.h"

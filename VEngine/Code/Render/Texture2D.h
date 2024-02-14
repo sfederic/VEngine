@@ -24,10 +24,10 @@ public:
 
 	void SetWidth(uint32_t width_) { width = width_; }
 	void SetHeight(uint32_t height_) { height = height_; }
-	uint32_t GetWidth() { return width; }
-	uint32_t GetHeight() { return height; }
+	uint32_t GetWidth() const { return width; }
+	uint32_t GetHeight() const { return height; }
 
-	UID GetUID() { return uid; }
+	UID GetUID() const { return uid; }
 	void SetUID(UID uid_) { uid = uid_; }
 
 private:
