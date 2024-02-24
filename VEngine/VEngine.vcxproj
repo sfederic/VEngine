@@ -57,8 +57,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <IncludePath>$(ProjectDir)\Code;$(ProjectDir)\Code\Editor\imgui;$(ProjectDir)\Code\Editor\ImGuizmo;$(ProjectDir)\Code\FbxSdk;$(ProjectDir)\Code\Physx\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)\Libs;$(ProjectDir)\Code\Physx\debug\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)\Code;$(ProjectDir)\Code\Editor\imgui;$(ProjectDir)\Code\Editor\ImGuizmo;$(ProjectDir)\Code\FbxSdk;$(ProjectDir)\Code\Physx;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)\Libs;$(ProjectDir)\Code\Physx\lib\Debug;$(LibraryPath)</LibraryPath>
     <ReferencePath>$(ReferencePath)</ReferencePath>
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
