@@ -23,7 +23,6 @@
 #include "Core/World.h"
 #include "Gameplay/GameUtils.h"
 #include "Console.h"
-#include "Physics/PhysicsSystem.h"
 #include "Render/Texture2D.h"
 #include "Render/MaterialSystem.h"
 #include "Render/Material.h"
@@ -362,19 +361,6 @@ void DebugMenu::RenderSkeletalAnimationMenu()
 				}
 			}
 		}
-	}
-
-	ImGui::End();
-}
-
-void DebugMenu::RenderPhysicsMenu()
-{
-	if (!physicsMenuOpen) return;
-
-	ImGui::Begin("Rigid Bodies");
-
-	for (auto rigidActor : PhysicsSystem::GetRigidActors())
-	{
 	}
 
 	ImGui::End();

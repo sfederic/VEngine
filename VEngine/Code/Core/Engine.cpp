@@ -22,7 +22,6 @@
 #include "Editor/Editor.h"
 #include "Commands/CommandSystem.h"
 #include "Audio/AudioSystem.h"
-#include "Physics/PhysicsSystem.h"
 #include "Gameplay/WorldFunctions.h"
 
 void ClearLog()
@@ -51,7 +50,6 @@ void Engine::Init(int argc, char* argv[])
 	coreInit.wait();
 	auto audioInit = std::async(std::launch::async, []() { AudioSystem::Init(); });
 
-	auto physicsInit = std::async(std::launch::async, []() { PhysicsSystem::Init(); });
 	auto fbxInit = std::async(std::launch::async, []() { FBXLoader::Init(); });
 
 	editor->Init(argc, argv);
@@ -64,7 +62,6 @@ void Engine::Init(int argc, char* argv[])
 	auto uiInit = std::async(std::launch::async, []() { UISystem::Init(Renderer::GetSwapchain()); });
 
 	audioInit.wait();
-	physicsInit.wait();
 	fbxInit.wait();
 	uiInit.wait();
 
@@ -95,7 +92,6 @@ void Engine::TickSystems(float deltaTime)
 	Timer::Tick(deltaTime);
 
 	WorldEditor::Tick();
-	PhysicsSystem::Tick(deltaTime);
 	Renderer::Tick();
 
 	if (Core::gameplayOn && !Core::IsGameWorldPaused())
@@ -151,7 +147,6 @@ void Engine::Render(float deltaTime)
 
 void Engine::Cleanup()
 {
-	PhysicsSystem::Cleanup();
 	ShaderSystem::ClearShaders();
 	debugMenu.Cleanup();
 	UISystem::Cleanup();

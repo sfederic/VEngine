@@ -23,7 +23,6 @@
 #include "UI/Game/MapInfoWidget.h"
 #include "Gameplay/GameInstance.h"
 #include "Gameplay/GameUtils.h"
-#include "Physics/PhysicsSystem.h"
 
 std::string World::worldFilename;
 
@@ -323,7 +322,6 @@ void World::Cleanup()
 	MeshComponent::DestroyDebugMeshes();
 
 	Timer::Cleanup();
-	PhysicsSystem::Reset();
 	AudioSystem::DeleteLoadedAudioAndChannels();
 	TextureSystem::Cleanup();
 	MaterialSystem::Cleanup();

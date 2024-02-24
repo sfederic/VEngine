@@ -656,35 +656,35 @@ void Player::LinkToGridActor()
 			HitResult sameActorHit(this);
 			if (Raycast(sameActorHit, GetPositionV(), -VMath::GlobalUpVector(), 5.f))
 			{
-			if (sameActorHit.hitActor == hitActor)
-			{
-				Camera::GetActiveCamera().SetShakeLevel(0.3f);
-				Log("Cannot link to [%s], player is standing on it.", hit.hitActor->GetName().c_str());
-				return;
-			}
-
-			auto gridActor = dynamic_cast<GridActor*>(hitActor);
-			if (gridActor)
-			{
-				//@Todo: I don't really know what this mesh check is for. Come back to it and maybe delete.
-				for (auto mesh : gridActor->GetComponents<MeshComponent>())
+				if (sameActorHit.hitActor == hitActor)
 				{
-					if (!mesh->canBeLinkedTo)
-					{
-						Log("Cannot link to GridActor via hit mesh [%s]. canBeLinkedTo set to false.", mesh->name.c_str());
-						return;
-					}
+					Camera::GetActiveCamera().SetShakeLevel(0.3f);
+					Log("Cannot link to [%s], player is standing on it.", hit.hitActor->GetName().c_str());
+					return;
 				}
 
-				SetLinkedGridActor(*gridActor, hit.GetHitPosV());
-			}
-			else //Show a shake as an error if not a grid actor
-			{
-				camera->SetShakeLevel(0.25f);
+				auto gridActor = dynamic_cast<GridActor*>(hitActor);
+				if (gridActor)
+				{
+					//@Todo: I don't really know what this mesh check is for. Come back to it and maybe delete.
+					for (auto mesh : gridActor->GetComponents<MeshComponent>())
+					{
+						if (!mesh->canBeLinkedTo)
+						{
+							Log("Cannot link to GridActor via hit mesh [%s]. canBeLinkedTo set to false.", mesh->name.c_str());
+							return;
+						}
+					}
+
+					SetLinkedGridActor(*gridActor, hit.GetHitPosV());
+				}
+				else //Show a shake as an error if not a grid actor
+				{
+					camera->SetShakeLevel(0.25f);
+				}
 			}
 		}
 	}
-}
 }
 
 void Player::MoveLinkedGridActor()

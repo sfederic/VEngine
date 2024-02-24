@@ -7,7 +7,6 @@
 #include "Render/MaterialSystem.h"
 #include "Render/Renderer.h"
 #include "Render/TextureSystem.h"
-#include "Physics/PhysicsSystem.h"
 
 std::unordered_map<std::string, MeshComponent*> debugMeshes;
 
@@ -91,7 +90,6 @@ void MeshComponent::Tick(float deltaTime)
 {
 	if (!isPhysicsStatic)
 	{
-		PhysicsSystem::GetTransformFromPhysicsActor(this);
 	}
 }
 
@@ -112,8 +110,6 @@ void MeshComponent::Create()
 
 void MeshComponent::Destroy()
 {
-	//Erase physics actor
-	PhysicsSystem::ReleasePhysicsActor(this);
 
 	material->Destroy();
 	material = nullptr;
@@ -171,11 +167,9 @@ void MeshComponent::SplitMeshCreate()
 	//but it will cause problems if you want to use raycasts via PhysX.
 	if (meshDataProxy.vertices.size() > 255)
 	{
-		PhysicsSystem::CreatePhysicsActor(this, PhysicsType::Dynamic, GetOwner());
 	}
 	else
 	{
-		PhysicsSystem::CreateConvexPhysicsMesh(this, GetOwner());
 	}
 }
 

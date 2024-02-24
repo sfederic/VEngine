@@ -5,7 +5,6 @@
 #include "Core/World.h"
 #include "Core/Log.h"
 #include "Core/Camera.h"
-#include "Physics/PhysicsSystem.h"
 
 XMMATRIX Actor::GetWorldMatrix()
 {
@@ -418,9 +417,6 @@ void Actor::SetMeshesToDynamicPhysicsState()
 {
 	for (auto mesh : GetComponents<MeshComponent>())
 	{
-		PhysicsSystem::ReleasePhysicsActor(mesh);
-		mesh->isPhysicsStatic = false;
-		PhysicsSystem::CreatePhysicsActor(mesh, PhysicsType::Dynamic, this);
 	}
 }
 
@@ -428,8 +424,5 @@ void Actor::SetMeshesToStaticPhysicsState()
 {
 	for (auto mesh : GetComponents<MeshComponent>())
 	{
-		PhysicsSystem::ReleasePhysicsActor(mesh);
-		mesh->isPhysicsStatic = true;
-		PhysicsSystem::CreatePhysicsActor(mesh, PhysicsType::Static, this);
 	}
 }

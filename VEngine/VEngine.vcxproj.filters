@@ -320,9 +320,6 @@
     <ClCompile Include="Code\Gameplay\GameInstance.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Physics\PhysicsSystem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Components\DestructibleMeshComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1117,9 +1114,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Physics\CollisionLayers.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Physics\PhysicsSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Components\DestructibleMeshComponent.h">

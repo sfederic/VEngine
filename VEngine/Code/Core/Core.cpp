@@ -15,7 +15,6 @@
 #include "WorldEditor.h"
 #include "Render/SpriteSystem.h"
 #include "Editor/Editor.h"
-#include "Physics/PhysicsSystem.h"
 #include "Timer.h"
 
 static bool gameWorldPaused = false;
@@ -134,7 +133,6 @@ void Core::StartGame()
 	gameplayOn = true;
 	initialStartingWorldFromEditor = World::worldFilename;
 
-	PhysicsSystem::Start();
 
 	World::StartAllComponents();
 	World::WakeAndStartAllActors();
@@ -157,7 +155,6 @@ void Core::EndGame()
 
 	UISystem::Reset();
 	SpriteSystem::Reset();
-	PhysicsSystem::Reset();
 	Timer::Cleanup();
 
 	AudioSystem::DeleteLoadedAudioAndChannels();
