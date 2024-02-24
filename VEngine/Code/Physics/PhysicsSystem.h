@@ -6,6 +6,7 @@
 #include <foundation/PxTransform.h>
 #include <PxRigidActor.h>
 #include <memory>
+#include <string>
 #include <DirectXMath.h>
 #include "Core/UID.h"
 

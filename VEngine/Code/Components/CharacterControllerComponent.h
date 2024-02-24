@@ -2,7 +2,7 @@
 
 #include "SpatialComponent.h"
 #include "ComponentSystem.h"
-#include <characterkinematic/PxController.h>
+#include <Physx/characterkinematic/PxController.h>
 
 //Component creates a Character Controller through PhysX
 class CharacterControllerComponent : public SpatialComponent

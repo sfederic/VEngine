@@ -25,7 +25,6 @@ PxDefaultErrorCallback errorCallback;
 
 PxFoundation* foundation = nullptr;
 PxPhysics* physics = nullptr;
-PxCooking* cooking = nullptr;
 PxDefaultCpuDispatcher* dispatcher = nullptr;
 PxScene* scene = nullptr;
 PxMaterial* material = nullptr;
@@ -48,10 +47,6 @@ void PhysicsSystem::Init()
 
 	dispatcher = PxDefaultCpuDispatcherCreate(2);
 	assert(dispatcher);
-
-	//Create cooking objects
-	cooking = PxCreateCooking(PX_PHYSICS_VERSION, *foundation, PxCookingParams(PxTolerancesScale()));
-	assert(cooking);
 
 	//Create scene
 	PxSceneDesc sceneDesc(physics->getTolerancesScale());
@@ -232,59 +227,9 @@ void PhysicsSystem::CreateCharacterController(CharacterControllerComponent* char
 	characterControllerComponent->SetController(controller);
 }
 
-//PhysX says cooking is fairly intensive with larger meshes
-//https://gameworksdocs.nvidia.com/PhysX/4.1/documentation/physxguide/Manual/Geometry.html#convex-mesh-cooking
-//@Todo: look into cooking it outside of runtime
-
-//@Todo: destructible meshes using convex hulls are exploding out based on how close they're starting too each
-//other. Find a way to make this look better, or tighten the convex for destructible cells.
+//@Todo: replace with physx 5.3 cooking code
 void PhysicsSystem::CreateConvexPhysicsMesh(MeshComponent* mesh, Actor* actor)
 {
-	PxConvexMeshDesc convexDesc;
-
-	//@Todo: PhysX says, "The number of vertices and faces of a convex mesh in PhysX is limited to 255",
-	//which is fine for smaller meshes but of course larger meshes are going to stop here.
-	//Figure out some way to make an AABB 'box' where the max points for each coordinate direction (X, Y, Z)
-	//fit snug around the mesh or something or do some research into other methods.
-
-	//PhysX convex mesh can only be 256 vertices per the documentation
-	assert(mesh->meshDataProxy.vertices.size() < 256);
-
-	convexDesc.points.count = mesh->meshDataProxy.vertices.size();
-
-	convexDesc.points.stride = sizeof(PxVec3);
-	convexDesc.points.data = mesh->meshDataProxy.vertices.data();
-	convexDesc.flags = PxConvexFlag::eCOMPUTE_CONVEX;
-
-	PxDefaultMemoryOutputStream buf;
-	PxConvexMeshCookingResult::Enum result;
-	if (!cooking->cookConvexMesh(convexDesc, buf, &result))
-	{
-		throw std::exception("PhysX cooking blew up.");
-	}
-
-	PxDefaultMemoryInputData input(buf.getData(), buf.getSize());
-	PxConvexMesh* convexMesh = physics->createConvexMesh(input);
-
-	PxTransform pxTransform = {};
-	const Transform transform = mesh->GetTransform();
-	ActorToPhysxTransform(transform, pxTransform);
-
-	PxRigidActor* rigidActor = nullptr;
-	rigidActor = physics->createRigidDynamic(pxTransform);
-	assert(rigidActor);
-
-	rigidActor->userData = actor;
-
-	PxConvexMeshGeometry convexGeom(convexMesh);
-	//This flag here is important. Convex hulls are too loose otherwise for DestructibleMesh cells.
-	convexGeom.meshFlags = PxConvexMeshGeometryFlag::eTIGHT_BOUNDS;
-	PxRigidActorExt::createExclusiveShape(*rigidActor, convexGeom, *destructibleMaterial);
-
-	scene->addActor(*rigidActor);
-
-	assert(rigidActorMap.find(mesh->GetUID()) == rigidActorMap.end());
-	rigidActorMap.emplace(mesh->GetUID(), rigidActor);
 }
 
 void PhysicsSystem::CreateConvexPhysicsMeshFromCollisionMesh(MeshComponent* mesh,
