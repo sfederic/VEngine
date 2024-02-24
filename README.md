@@ -18,7 +18,7 @@ DirectXTK (directxtk_desktop_win10) ver. 2021.8.2.1 - https://github.com/microso
 
 ## Third Party Libraries:
 
-* Physx ver 4.1.2 | Place PhysX headers/source into Code/Physx - https://github.com/NVIDIAGameWorks/PhysX (Easier to use https://vcpkg.io/en/index.html to download SDK [package name is physx:x64-windows])
+* Physx ver 5.3.0 | Place PhysX headers/source into Code/Physx - https://github.com/NVIDIAGameWorks/PhysX (Easier to use https://vcpkg.io/en/index.html to download SDK [package name is physx:x64-windows])
 
 * FBXSDK ver. 2020.1 | Place FBXSDK headers/source into Code/FbxSdk - https://www.autodesk.com/developer-network/platform-technologies/fbx-sdk-2020-1
 
