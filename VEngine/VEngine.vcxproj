@@ -406,6 +406,7 @@
     <ClInclude Include="Code\Animation\Joint.h" />
     <ClInclude Include="Code\Render\LightData.h" />
     <ClInclude Include="Code\Render\Line.h" />
+    <ClInclude Include="Code\Render\MeshComponentFramePacket.h" />
     <ClInclude Include="Code\Render\RenderPropertyStructs.h" />
     <ClInclude Include="Code\Render\MeshData.h" />
     <ClInclude Include="Code\Render\MeshDataProxy.h" />
