@@ -983,7 +983,7 @@ void Renderer::RenderLightProbeViews()
 
 	const int previousWiewportWidth = viewport.Width;
 	const int previousWiewportHeight = viewport.Height;
-	ResizeSwapchain(lightProbeTextureWidth, lightProbeTextureHeight);
+	DeferSwapchainResize(lightProbeTextureWidth, lightProbeTextureHeight);
 
 	//Directions match with D3D11_TEXTURECUBE_FACE
 	XMVECTOR faces[6] =
@@ -1165,7 +1165,7 @@ void Renderer::RenderLightProbeViews()
 		mesh->CreateNewVertexBuffer();
 	}*/
 
-	ResizeSwapchain(previousWiewportWidth, previousWiewportHeight);
+	DeferSwapchainResize(previousWiewportWidth, previousWiewportHeight);
 
 	//Set main RTV and DSV back on
 	RenderSetup();
@@ -1807,7 +1807,7 @@ void Renderer::SetViewportWidthHeight(float width, float height)
 	viewport.Height = height;
 }
 
-void Renderer::ResizeSwapchain(int newWidth, int newHeight)
+void Renderer::ResizeSwapchain()
 {
 	if (swapchain == nullptr) return;
 
@@ -1824,14 +1824,8 @@ void Renderer::ResizeSwapchain(int newWidth, int newHeight)
 	UISystem::Cleanup();
 
 	backBuffer->Release();
-	HR(swapchain->ResizeBuffers(swapchainCount, newWidth, newHeight, DXGI_FORMAT_R8G8B8A8_UNORM, 0));
+	HR(swapchain->ResizeBuffers(swapchainCount, viewport.Width, viewport.Height, DXGI_FORMAT_R8G8B8A8_UNORM, 0));
 
-	viewport.Width = newWidth;
-	viewport.Height = newHeight;
-	viewport.MinDepth = 0.0f;
-	viewport.MaxDepth = 1.0f;
-	viewport.TopLeftX = 0;
-	viewport.TopLeftY = 0;
 	context->RSSetViewports(1, &viewport);
 
 	CreateRTVAndDSV();
@@ -1842,6 +1836,16 @@ void Renderer::ResizeSwapchain(int newWidth, int newHeight)
 	UISystem::Init((void*)swapchain);
 
 	shaderMatrices.Create();
+}
+
+void Renderer::DeferSwapchainResize(int newWidth, int newHeight)
+{
+	viewport.Width = newWidth;
+	viewport.Height = newHeight;
+	viewport.MinDepth = 0.0f;
+	viewport.MaxDepth = 1.0f;
+	viewport.TopLeftX = 0;
+	viewport.TopLeftY = 0;
 }
 
 void Renderer::ScreenshotCapture()

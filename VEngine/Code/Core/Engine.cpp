@@ -203,4 +203,5 @@ void RunRendering()
 	Renderer::Tick();
 	Engine::Render(Core::GetDeltaTime());
 	SpriteSystem::Reset();
+	Renderer::ResizeSwapchain();
 }

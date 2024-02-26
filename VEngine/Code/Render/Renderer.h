@@ -42,7 +42,8 @@ namespace Renderer
 	float GetViewportWidth();
 	float GetViewportHeight();
 	void SetViewportWidthHeight(float width, float height);
-	void ResizeSwapchain(int newWidth, int newHeight);
+	void DeferSwapchainResize(int newWidth, int newHeight);
+	void ResizeSwapchain();
 
 	//Write out viewport as image and save to file as an image.
 	//Ref:https://github.com/Microsoft/DirectXTK/wiki/ScreenGrab
