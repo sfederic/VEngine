@@ -2,30 +2,23 @@
 
 #include "Render/RenderPropertyStructs.h"
 #include "Render/ShaderData/MaterialShaderData.h"
+#include "Render/PipelineObjects.h"
+#include "Render/Texture2D.h"
+#include "Render/ShaderItem.h"
 #include <DirectXMath.h>
-
-class Buffer;
-class RastState;
-class Texture2D;
-class ShaderItem;
-class Sampler;
-class BlendState;
 
 struct MeshComponentFramePacket
 {
-	Buffer* vertexBuffer = nullptr;
-
-	RastState* rastState = nullptr;
-	Texture2D* texture = nullptr;
-	ShaderItem* shader = nullptr;
-	Sampler* sampler = nullptr;
-	RastState* rastState = nullptr;
-	BlendState* blendState = nullptr;
-
+	DirectX::XMMATRIX worldMatrix;
+	Buffer vertexBuffer;
+	Texture2D texture;
+	ShaderItem shader;
+	Sampler sampler;
+	RastState rastState;
+	BlendState blendState;
 	TextureData textureData;
-
 	MaterialShaderData materialShaderData;
-
 	DirectX::XMFLOAT2 uvOffsetSpeed = DirectX::XMFLOAT2(0.f, 0.f);
 	float uvRotationSpeed = 0.f;
+	uint32_t vertexCount = 0;
 };

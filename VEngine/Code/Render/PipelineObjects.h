@@ -19,15 +19,14 @@ struct ShaderResourceView
 {
 	ID3D11ShaderResourceView* data = nullptr;
 
-	~ShaderResourceView();
 };
 
 struct Sampler
 {
 	ID3D11SamplerState* data = nullptr;
 
+	Sampler() {}
 	Sampler(ID3D11SamplerState* data_);
-	~Sampler();
 };
 
 struct RastState
@@ -37,7 +36,6 @@ struct RastState
 
 	RastState() {}
 	RastState(std::string name_, ID3D11RasterizerState* data_);
-	~RastState();
 };
 
 struct BlendState
@@ -45,8 +43,8 @@ struct BlendState
 	ID3D11BlendState* data = nullptr;
 	std::string name;
 
+	BlendState() {}
 	BlendState(std::string name_, ID3D11BlendState* data_);
-	~BlendState();
 };
 
 struct MeshBuffers

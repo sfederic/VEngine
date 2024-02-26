@@ -6,12 +6,13 @@
 struct ID3D11Resource;
 struct ID3D11ShaderResourceView;
 
+//@Todo: Removed destructor over render multi thread frame packet.
+//Needs a cleanup function to call from TextureSystem.
 class Texture2D
 {
 public:
 	Texture2D() {}
 	Texture2D(std::string filename_) : filename(filename_) {}
-	~Texture2D();
 
 	std::string GetFilename() { return filename; }
 	void SetFilename(std::string filename_) { filename = filename_; }

@@ -258,7 +258,6 @@
     <ClCompile Include="Code\Actors\SpriteSheetActor.cpp" />
     <ClCompile Include="Code\Actors\DiffuseProbeMap.cpp" />
     <ClCompile Include="Code\Actors\PostProcessVolume.cpp" />
-    <ClCompile Include="Code\Render\Texture2D.cpp" />
     <ClCompile Include="Code\Core\VFunctionSystem.cpp" />
     <ClCompile Include="Code\Core\EditorCamera.cpp" />
     <ClCompile Include="Code\Actors\SkyBox.cpp" />

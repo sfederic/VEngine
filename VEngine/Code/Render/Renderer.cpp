@@ -115,7 +115,7 @@ void RenderLightProbes();
 void PointLightVertexColourMap();
 
 void MapBuffer(ID3D11Resource* resource, const void* src, size_t size);
-void DrawMesh(MeshComponent* mesh);
+void DrawMesh(MeshComponentFramePacket& mesh);
 void DrawMeshInstanced(InstanceMeshComponent* mesh);
 void DrawBoundingBox(MeshComponent* mesh, MeshComponent* boundsMesh);
 
@@ -127,9 +127,9 @@ void SetGeneralShaderResourcesToNull();
 void SetShadowData();
 void SetLightResources();
 void SetShadowResources();
-void SetMatricesFromMesh(MeshComponent* mesh);
-void SetShaderMeshData(MeshComponent* mesh);
-void SetRenderPipelineStates(MeshComponent* mesh);
+void SetMatricesFromMesh(MeshComponentFramePacket& mesh);
+void SetShaderMeshData(MeshComponentFramePacket& mesh);
+void SetRenderPipelineStates(MeshComponentFramePacket& mesh);
 void SetRenderPipelineStatesForShadows(MeshComponent* mesh);
 void SetShaders(ShaderItem* shaderItem);
 void SetRastStateByName(std::string rastStateName);
@@ -143,7 +143,7 @@ void SetVertexBuffer(Buffer& vertexBuffer);
 void SetIndexBuffer(Buffer* indexBuffer);
 void SetSampler(uint32_t shaderRegister, Sampler* sampler);
 void SetShaderResourcePixel(uint32_t shaderRegister, std::string textureName);
-void SetShaderResourceFromMaterial(uint32_t shaderRegister, Material& material);
+void SetShaderResourceFromMaterial(uint32_t shaderRegister, Texture2D& texture);
 void SetLightsConstantBufferData();
 void ClearBounds();
 
@@ -178,6 +178,8 @@ ID3D11RasterizerState* rastStateWireframe;
 ID3D11RasterizerState* rastStateNoBackCull;
 ID3D11RasterizerState* rastStateFrontCull;
 ID3D11RasterizerState* rastStateShadow;
+
+std::vector<MeshComponentFramePacket> gMeshPackets;
 
 //Blendstates
 ID3D11BlendState* nullBlendState = nullptr;
@@ -596,9 +598,9 @@ void SetLightResources()
 	cbLights->SetVSAndPS();
 }
 
-void DrawMesh(MeshComponent* mesh)
+void DrawMesh(MeshComponentFramePacket& mesh)
 {
-	context->Draw(mesh->meshDataProxy.vertices.size(), 0);
+	context->Draw(mesh.vertexCount, 0);
 }
 
 void DrawMeshInstanced(InstanceMeshComponent* mesh)
@@ -631,7 +633,6 @@ void DrawBoundingBox(MeshComponent* mesh, MeshComponent* boundsMesh)
 	cbMatrices->Map(&shaderMatrices);
 	cbMatrices->SetVS();
 
-	DrawMesh(boundsMesh);
 }
 
 //@Todo: can change the input assembly to only take in Line structs to the shader stage. Right now it's taking
@@ -693,14 +694,12 @@ void RenderMeshForShadowPass(MeshComponent* mesh)
 	//Set matrices
 	shaderMatrices.model = mesh->GetWorldMatrix();
 	shaderMatrices.MakeModelViewProjectionMatrix();
-	shaderMatrices.MakeTextureMatrix(mat);
 
 	cbMatrices->Map(&shaderMatrices);
 	cbMatrices->SetVS();
 
 	//Set textures
 	context->PSSetSamplers(0, 1, &mat.sampler->data);
-	SetShaderResourceFromMaterial(0, mat);
 
 	//Draw
 	context->Draw(mesh->meshDataProxy.vertices.size(), 0);
@@ -722,15 +721,12 @@ void RenderInstanceMeshForShadowPass(InstanceMeshComponent& instanceMesh)
 		//Set matrices
 		shaderMatrices.model = instanceData.world;
 		shaderMatrices.MakeModelViewProjectionMatrix();
-		shaderMatrices.MakeTextureMatrix(mat);
 
 		cbMatrices->Map(&shaderMatrices);
 		cbMatrices->SetVS();
 
 		//Set textures
 		context->PSSetSamplers(0, 1, &mat.sampler->data);
-		SetShaderResourceFromMaterial(0, mat);
-
 		//Draw
 		context->Draw(vertexCount, 0);
 	}
@@ -784,7 +780,6 @@ void RenderShadowPass()
 		//Set matrices
 		shaderMatrices.model = mesh->GetWorldMatrix();
 		shaderMatrices.MakeModelViewProjectionMatrix();
-		shaderMatrices.MakeTextureMatrix(mesh->GetMaterial());
 
 		cbMatrices->Map(&shaderMatrices);
 		cbMatrices->SetVS();
@@ -798,7 +793,6 @@ void RenderShadowPass()
 		//Set textures
 		Material& mat = mesh->GetMaterial();
 		context->PSSetSamplers(0, 1, &mat.sampler->data);
-		SetShaderResourceFromMaterial(0, mat);
 
 		//Draw
 		context->Draw(mesh->meshDataProxy.vertices.size(), 0);
@@ -863,9 +857,6 @@ void Renderer::Render()
 	cbTime->Map(&timeData);
 	cbTime->SetVSAndPS();
 
-	SetShadowData();
-	RenderShadowPass();
-
 	if (PostProcessVolume::system.GetNumActors() > 0
 		&& PostProcessVolume::system.GetFirstActor()->IsActive()
 		&& PostProcessVolume::system.GetFirstActor()->IsActiveCameraInsideVolume())
@@ -877,37 +868,19 @@ void Renderer::Render()
 		RenderSetup();
 	}
 
-	SetLightsConstantBufferData();
-
 	RenderMeshComponents();
-	RenderWireframeForVertexPaintingAndPickedActor();
-	RenderDestructibleMeshes();
-	AnimateAndRenderSkeletalMeshes();
-	RenderSocketMeshComponents();
-	RenderInstanceMeshComponents();
-	RenderLightProbes();
-	RenderPolyboards();
-	RenderSpriteSheets();
-	RenderPhysicsMeshes();
-	RenderBounds();
-	RenderLightMeshes();
-	RenderCameraMeshes();
-	RenderCharacterControllers();
-	//RenderDebugLines();
-	RenderPostProcess();
-
-	ClearBounds();
 
 	Profile::End();
 }
 
-void SetMatricesFromMesh(MeshComponent* mesh)
+void SetMatricesFromMesh(MeshComponentFramePacket& mesh)
 {
-	shaderMatrices.model = mesh->GetWorldMatrix();
+	const auto worldMatrix = mesh.worldMatrix;
+	shaderMatrices.model = worldMatrix;
 	shaderMatrices.MakeModelViewProjectionMatrix();
-	shaderMatrices.MakeTextureMatrix(mesh->GetMaterial());
+	shaderMatrices.MakeTextureMatrix(mesh);
 
-	XMMATRIX A = mesh->GetWorldMatrix();
+	XMMATRIX A = worldMatrix;
 	A.r[3] = XMVectorSet(0.0f, 0.0f, 0.0f, 1.0f);
 	XMVECTOR det = XMMatrixDeterminant(A);
 	shaderMatrices.invTranModel = XMMatrixTranspose(XMMatrixInverse(&det, A));
@@ -916,10 +889,10 @@ void SetMatricesFromMesh(MeshComponent* mesh)
 	cbMatrices->SetVS();
 }
 
-void SetShaderMeshData(MeshComponent* mesh)
+void SetShaderMeshData(MeshComponentFramePacket& mesh)
 {
 	ShaderMeshData meshData = {};
-	meshData.position = mesh->GetWorldPosition();
+	XMStoreFloat3(&meshData.position, mesh.worldMatrix.r[3]);
 
 	//@Todo: light probe data should have its own constant buffer, for now in testing, it's part of ShaderMeshData
 	//Set light probe resources
@@ -927,7 +900,7 @@ void SetShaderMeshData(MeshComponent* mesh)
 	{
 		context->PSSetShaderResources(environmentMapTextureRegister, 1, &lightProbeSRV);
 
-		LightProbeInstanceData probeData = DiffuseProbeMap::system.GetFirstActor()->FindClosestProbe(mesh->GetWorldPositionV());
+		LightProbeInstanceData probeData = DiffuseProbeMap::system.GetFirstActor()->FindClosestProbe(mesh.worldMatrix.r[3]);
 		memcpy(meshData.SH, probeData.SH, sizeof(XMFLOAT4) * 9);
 
 		meshData.isDiffuseProbeMapActive = DiffuseProbeMap::system.GetOnlyActor()->IsActive();
@@ -959,31 +932,15 @@ void RenderMeshComponents()
 	SetShadowResources();
 	SetLightResources();
 
-	auto meshes = MeshComponent::SortMeshComponentsByDistance();
-	for (auto mesh : meshes)
+	for (auto& meshPacket : gMeshPackets)
 	{
-		if (!mesh->IsVisible()) { continue; }
-
-		SetRenderPipelineStates(mesh);
+		SetRenderPipelineStates(meshPacket);
 
 		//Constant buffer data
-		SetMatricesFromMesh(mesh);
-		SetShaderMeshData(mesh);
+		SetMatricesFromMesh(meshPacket);
+		SetShaderMeshData(meshPacket);
 
-		DrawMesh(mesh);
-	}
-
-	for (auto& mesh : SliceableMeshComponent::system.GetComponents())
-	{
-		if (!mesh->IsVisible()) { continue; }
-
-		SetRenderPipelineStates(mesh.get());
-
-		//Constant buffer data
-		SetMatricesFromMesh(mesh.get());
-		SetShaderMeshData(mesh.get());
-
-		DrawMesh(mesh.get());
+		DrawMesh(meshPacket);
 	}
 
 	SetGeneralShaderResourcesToNull();
@@ -1003,10 +960,6 @@ void RenderDestructibleMeshes()
 		for (auto meshCell : mesh->meshCells)
 		{
 			if (!meshCell->IsVisible()) { continue; }
-			SetRenderPipelineStates(meshCell);
-			SetMatricesFromMesh(meshCell);
-			SetShaderMeshData(meshCell);
-			DrawMesh(meshCell);
 		}
 	}
 
@@ -1098,8 +1051,6 @@ void Renderer::RenderLightProbeViews()
 
 				context->PSSetSamplers(0, 1, &material.sampler->data);
 
-				SetShaderResourceFromMaterial(0, material);
-
 				context->IASetVertexBuffers(0, 1, &mesh->pso.GetVertexBuffer().data, &stride, &offset);
 
 				cbMaterial->Map(&material.materialShaderData);
@@ -1112,7 +1063,6 @@ void Renderer::RenderLightProbeViews()
 					resultantUpVectors[i]);
 				shaderMatrices.model = mesh->GetWorldMatrix();
 				shaderMatrices.MakeModelViewProjectionMatrix();
-				shaderMatrices.MakeTextureMatrix(mesh->GetMaterial());
 
 				cbMatrices->Map(&shaderMatrices);
 				cbMatrices->SetVS();
@@ -1248,10 +1198,8 @@ void RenderInstanceMeshComponents()
 		//before RenderMeshComponents(). However doing so will render instance meshes seemingly without a 
 		//blend state, even though one appears to be set. HOWEVER, certain instance meshes WILL render as if
 		//with a transparent blend state because you can see them blended though various instance meshes.
-		SetRenderPipelineStates(instanceMesh.get());
 
 		//Update texture matrix
-		shaderMatrices.MakeTextureMatrix(instanceMesh->GetMaterial());
 		cbMatrices->Map(&shaderMatrices);
 		cbMatrices->SetVS();
 
@@ -1319,7 +1267,6 @@ void RenderBounds()
 			cbMatrices->Map(&shaderMatrices);
 			cbMatrices->SetVS();
 
-			DrawMesh(debugBox);
 		}
 	}
 
@@ -1358,7 +1305,6 @@ void RenderBounds()
 			cbMaterial->Map(&materialShaderData);
 			cbMaterial->SetPS();
 
-			DrawMesh(debugBox);
 		}
 	}
 }
@@ -1398,7 +1344,6 @@ void RenderPhysicsMeshes()
 		cbMaterial->Map(&materialShaderData);
 		cbMaterial->SetPS();
 
-		DrawMesh(mesh.get());
 	}
 }
 
@@ -1466,7 +1411,6 @@ void RenderCharacterControllers()
 		cbMatrices->Map(&shaderMatrices);
 		cbMatrices->SetVS();
 
-		DrawMesh(debugCapsule);
 	}
 }
 
@@ -1492,7 +1436,6 @@ void RenderCameraMeshes()
 		cbMatrices->Map(&shaderMatrices);
 		cbMatrices->SetVS();
 
-		DrawMesh(debugCamera);
 	}
 }
 
@@ -1523,7 +1466,6 @@ void RenderLightMeshes()
 		cbMatrices->Map(&shaderMatrices);
 		cbMatrices->SetVS();
 
-		DrawMesh(debugSphere);
 	}
 
 	//POINT LIGHTS
@@ -1536,7 +1478,6 @@ void RenderLightMeshes()
 		cbMatrices->Map(&shaderMatrices);
 		cbMatrices->SetVS();
 
-		DrawMesh(debugIcoSphere);
 	}
 
 	//SPOT LIGHTS
@@ -1549,7 +1490,6 @@ void RenderLightMeshes()
 		cbMatrices->Map(&shaderMatrices);
 		cbMatrices->SetVS();
 
-		DrawMesh(debugCone);
 	}
 }
 
@@ -1653,11 +1593,8 @@ void AnimateAndRenderSkeletalMeshes()
 	{
 		if (!skeletalMesh->IsVisible()) { continue; }
 
-		SetRenderPipelineStates(skeletalMesh.get());
 
 		//Constant buffer data
-		SetMatricesFromMesh(skeletalMesh.get());
-		SetShaderMeshData(skeletalMesh.get());
 
 		if (!skeletalMesh->GetCurrentAnimatonName().empty())
 		{
@@ -1683,8 +1620,6 @@ void AnimateAndRenderSkeletalMeshes()
 				cbSkinningData->SetVS();
 			}
 		}
-
-		DrawMesh(skeletalMesh.get());
 	}
 
 	SetGeneralShaderResourcesToNull();
@@ -1701,14 +1636,9 @@ void RenderSocketMeshComponents()
 	{
 		if (!socketMesh->IsVisible()) { continue; }
 
-		SetRenderPipelineStates(socketMesh.get());
 
 		socketMesh->SetTransformFromLinkedSkeletonJoint();
 
-		SetMatricesFromMesh(socketMesh.get());
-		SetShaderMeshData(socketMesh.get());
-
-		DrawMesh(socketMesh.get());
 	}
 
 	SetGeneralShaderResourcesToNull();
@@ -1978,32 +1908,28 @@ void Renderer::PlayerPhotoCapture(std::wstring outputFilename)
 	Log("Photo taken [%S]", imageFile.c_str());
 }
 
-void SetRenderPipelineStates(MeshComponent* mesh)
+void SetRenderPipelineStates(MeshComponentFramePacket& mesh)
 {
-	Material& material = mesh->GetMaterial();
-	PipelineStateObject& pso = mesh->pso;
-
 	if (Renderer::drawAllAsWireframe)
 	{
 		context->RSSetState(rastStateWireframe);
 	}
-	else if (material.rastState)
+	else
 	{
-		context->RSSetState(material.rastState->data);
+		context->RSSetState(mesh.rastState.data);
 	}
 
 	constexpr FLOAT blendState[4] = { 0.f };
-	context->OMSetBlendState(material.blendState->data, blendState, 0xFFFFFFFF);
+	context->OMSetBlendState(mesh.blendState.data, blendState, 0xFFFFFFFF);
 
-	context->VSSetShader(material.GetVertexShader(), nullptr, 0);
-	context->PSSetShader(material.GetPixelShader(), nullptr, 0);
+	SetShaders(&mesh.shader);
 
-	context->PSSetSamplers(0, 1, &material.sampler->data);
-	SetShaderResourceFromMaterial(0, material);
+	context->PSSetSamplers(0, 1, &mesh.sampler.data);
+	SetShaderResourceFromMaterial(0, mesh.texture);
 
-	SetVertexBuffer(pso.GetVertexBuffer());
+	SetVertexBuffer(mesh.vertexBuffer);
 
-	cbMaterial->Map(&material.materialShaderData);
+	cbMaterial->Map(&mesh.materialShaderData);
 	cbMaterial->SetPS();
 }
 
@@ -2087,14 +2013,14 @@ void SetSampler(uint32_t shaderRegister, Sampler* sampler)
 	context->PSSetSamplers(shaderRegister, 1, &sampler->data);
 }
 
-void SetShaderResourceFromMaterial(uint32_t shaderRegister, Material& material)
+void SetShaderResourceFromMaterial(uint32_t shaderRegister, Texture2D& texture)
 {
 	//Testing code for normal map SRV set
 	/*auto normalMapTexture = textureSystem.FindTexture2D("wall_normal_map.png");
 	auto normalMapSRV = normalMapTexture->GetSRV();
 	context->PSSetShaderResources(normalMapTexureRegister, 1, &normalMapSRV);*/
 
-	auto textureSRV = material.texture->GetSRV();
+	auto textureSRV = texture.GetSRV();
 	context->PSSetShaderResources(shaderRegister, 1, &textureSRV);
 }
 
@@ -2165,11 +2091,6 @@ void RenderWireframeForVertexPaintingAndPickedActor()
 			context->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
 
 			SetVertexBuffer(mesh->pso.GetVertexBuffer());
-
-			SetMatricesFromMesh(mesh);
-			SetShaderMeshData(mesh);
-
-			DrawMesh(mesh);
 		};
 
 	if (!Core::gameplayOn)
@@ -2228,7 +2149,6 @@ void RenderLightProbes()
 	cbMatrices->SetVS();
 
 	auto instanceMesh = probeMap->lightProbesDebugInstanceMesh->instanceMesh;
-	SetRenderPipelineStates(instanceMesh);
 
 	SetBlendStateByName(BlendStates::null);
 
@@ -2236,7 +2156,6 @@ void RenderLightProbes()
 	MapBuffer(probeMap->GetStructuredBuffer(), probeMap->lightProbeData.data(), sizeof(LightProbeInstanceData) * probeMap->lightProbeData.size());
 
 	//Update texture matrix
-	shaderMatrices.MakeTextureMatrix(instanceMesh->GetMaterial());
 	cbMatrices->Map(&shaderMatrices);
 	cbMatrices->SetVS();
 
@@ -2440,4 +2359,9 @@ ID3D11DeviceContext& Renderer::GetDeviceContext()
 Sampler& Renderer::GetDefaultSampler()
 {
 	return *defaultSampler;
+}
+
+void Renderer::PassInMeshComponentFramePackets(std::vector<MeshComponentFramePacket>& meshPackets)
+{
+	gMeshPackets = meshPackets;
 }

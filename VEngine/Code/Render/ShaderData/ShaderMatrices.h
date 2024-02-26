@@ -3,6 +3,7 @@
 #include <DirectXMath.h>
 
 class Material;
+struct MeshComponentFramePacket;
 
 struct ShaderMatrices
 {
@@ -16,6 +17,6 @@ struct ShaderMatrices
 	DirectX::XMMATRIX lightViewProj; //This is for in Shadows.hlsl to push vertex pos into space
 
 	void Create();
-	void MakeTextureMatrix(Material& material);
+	void MakeTextureMatrix(MeshComponentFramePacket& mesh);
 	void MakeModelViewProjectionMatrix();
 };

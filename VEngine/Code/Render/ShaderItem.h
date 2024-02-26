@@ -12,6 +12,7 @@ struct ID3D11PixelShader;
 class ShaderItem
 {
 public:
+	ShaderItem() {}
 	ShaderItem(std::string shaderItemName_,
 		std::wstring vertexShaderFilename_,
 		std::wstring pixelShaderFilename_);

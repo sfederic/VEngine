@@ -380,9 +380,6 @@
     <ClCompile Include="Code\Actors\PostProcessVolume.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Render\Texture2D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\vpch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

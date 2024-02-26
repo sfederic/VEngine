@@ -1,29 +1,37 @@
 #include "vpch.h"
 #include "Engine.h"
-#include <future>
-#include "Core.h"
-#include "Profile.h"
-#include "Input.h"
-#include "Camera.h"
-#include "Timer.h"
-#include "World.h"
-#include "Log.h"
-#include "Core/PropertyTypes.h"
-#include "WorldEditor.h"
-#include "FileSystem.h"
 #include "Asset/FBXLoader.h"
+#include "Audio/AudioSystem.h"
+#include "Commands/CommandSystem.h"
+#include "Components/MeshComponent.h"
+#include "Core/Camera.h"
+#include "Core/Core.h"
+#include "Core/FileSystem.h"
+#include "Core/Input.h"
+#include "Core/Log.h"
+#include "Core/Profile.h"
+#include "Core/PropertyTypes.h"
+#include "Core/Timer.h"
+#include "Core/World.h"
+#include "Core/WorldEditor.h"
+#include "Editor/Console.h"
+#include "Editor/DebugMenu.h"
+#include "Editor/Editor.h"
+#include "Gameplay/WorldFunctions.h"
+#include "Physics/PhysicsSystem.h"
+#include "Render/Material.h"
+#include "Render/MaterialSystem.h"
+#include "Render/MeshComponentFramePacket.h"
 #include "Render/Renderer.h"
 #include "Render/ShaderSystem.h"
-#include "Render/MaterialSystem.h"
 #include "Render/SpriteSystem.h"
 #include "UI/UISystem.h"
-#include "Editor/DebugMenu.h"
-#include "Editor/Console.h"
-#include "Editor/Editor.h"
-#include "Commands/CommandSystem.h"
-#include "Audio/AudioSystem.h"
-#include "Physics/PhysicsSystem.h"
-#include "Gameplay/WorldFunctions.h"
+#include <future>
+#include <thread>
+
+void PackFramePacketData();
+void RunSimulation();
+void RunRendering();
 
 void ClearLog()
 {
@@ -96,7 +104,6 @@ void Engine::TickSystems(float deltaTime)
 
 	WorldEditor::Tick();
 	PhysicsSystem::Tick(deltaTime);
-	Renderer::Tick();
 
 	if (Core::gameplayOn && !Core::IsGameWorldPaused())
 	{
@@ -105,28 +112,15 @@ void Engine::TickSystems(float deltaTime)
 	}
 }
 
-void Engine::ResetSystems()
-{
-	Input::Reset();
-	SpriteSystem::Reset();
-}
-
 void Engine::MainLoop()
 {
 	while (Core::mainLoop)
 	{
-		const float deltaTime = Core::GetDeltaTime();
-		Core::StartTimer();
+		std::thread simulationThread(RunSimulation);
+		std::thread renderThread(RunRendering);
 
-		TickSystems(deltaTime);
-		Render(deltaTime);
-
-		ResetSystems();
-
-		World::DestroyAllDeferredActors();
-		FileSystem::DeferredWorldLoad();
-
-		Core::EndTimer();
+		simulationThread.join();
+		renderThread.join();
 	}
 }
 
@@ -155,4 +149,58 @@ void Engine::Cleanup()
 	ShaderSystem::ClearShaders();
 	debugMenu.Cleanup();
 	UISystem::Cleanup();
+}
+
+void PackFramePacketData()
+{
+	Profile::Start();
+
+	std::vector<MeshComponentFramePacket> meshPackets;
+
+	const auto meshes = MeshComponent::SortMeshComponentsByDistance();
+	for (const auto& mesh : meshes)
+	{
+		if (!mesh->IsVisible() || !mesh->IsActive())
+		{
+			continue;
+		}
+
+		const Material& mat = mesh->GetMaterial();
+
+		MeshComponentFramePacket meshPacket = {};
+		meshPacket.worldMatrix = mesh->GetWorldMatrix();
+		meshPacket.blendState = mesh->GetBlendState();
+		meshPacket.rastState = mesh->GetRastState();
+		meshPacket.vertexBuffer = mesh->GetVertexBuffer();
+		meshPacket.sampler = *mat.sampler;
+		meshPacket.shader = *mat.shader;
+		meshPacket.texture = *mat.texture;
+		meshPacket.materialShaderData = mat.materialShaderData;
+		meshPacket.textureData = mat.textureData;
+		meshPacket.uvOffsetSpeed = mat.uvOffsetSpeed;
+		meshPacket.uvRotationSpeed = mat.uvRotationSpeed;
+		meshPacket.vertexCount = mesh->meshDataProxy.vertices.size();
+
+		meshPackets.emplace_back(meshPacket);
+	}
+
+	Renderer::PassInMeshComponentFramePackets(meshPackets);
+
+	Profile::End();
+}
+
+void RunSimulation()
+{
+	Engine::TickSystems(Core::GetDeltaTime());
+	PackFramePacketData();
+	World::DestroyAllDeferredActors();
+	FileSystem::DeferredWorldLoad();
+	Input::Reset();
+}
+
+void RunRendering()
+{
+	Renderer::Tick();
+	Engine::Render(Core::GetDeltaTime());
+	SpriteSystem::Reset();
 }

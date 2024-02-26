@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include "Render/MeshComponentFramePacket.h"
 
 struct RastState;
 struct Sampler;
@@ -59,4 +60,6 @@ namespace Renderer
 	ID3D11Device& GetDevice();
 	ID3D11DeviceContext& GetDeviceContext();
 	Sampler& GetDefaultSampler();
+
+	void PassInMeshComponentFramePackets(std::vector<MeshComponentFramePacket>& meshPackets);
 };
