@@ -1,14 +1,22 @@
 #pragma once
+
 #include "../Actor.h"
 #include "../ActorSystem.h"
 
-struct BoxTriggerComponent;
+class BoxTriggerComponent;
 
 //Actor to trigger quick player dialogue when player overlaps with trigger.
-struct PlayerDialogueTrigger : Actor
+class PlayerDialogueTrigger : public Actor
 {
+public:
 	ACTOR_SYSTEM(PlayerDialogueTrigger);
 
+	PlayerDialogueTrigger();
+	virtual void Start() override;
+	virtual void Tick(float deltaTime) override;
+	virtual Properties GetProps() override;
+
+private:
 	BoxTriggerComponent* trigger = nullptr;
 
 	//Text to show on overlap
@@ -16,9 +24,4 @@ struct PlayerDialogueTrigger : Actor
 
 	//@Todo: wil need to come back here and fiddle with this bool in props for game saves.
 	bool alreadyActivated = false;
-
-	PlayerDialogueTrigger();
-	virtual void Start() override;
-	virtual void Tick(float deltaTime) override;
-	virtual Properties GetProps() override;
 };
