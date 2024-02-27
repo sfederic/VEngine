@@ -20,7 +20,6 @@
 #include "Render/ShaderItem.h"
 #include "Render/MaterialSystem.h"
 #include "Gameplay/GameInstance.h"
-#include "Gameplay/JournalEntry.h"
 #include "Core/Log.h"
 #include "Asset/AssetPaths.h"
 #include "Asset/AssetFileExtensions.h"
@@ -270,10 +269,6 @@ void AssetDock::ShowContextMenu(const QPoint& point)
 	connect(&newDialogueAction, &QAction::triggered, this, &AssetDock::CreateNewDialogueFile);
 	contextMenu.addAction(&newDialogueAction);
 
-	QAction newJournalEntryAction("New Journal Entry", this);
-	connect(&newJournalEntryAction, &QAction::triggered, this, &AssetDock::CreateNewJournalEntry);
-	contextMenu.addAction(&newJournalEntryAction);
-
 	QAction newActorTemplateAction("New Actor Template", this);
 	connect(&newActorTemplateAction, &QAction::triggered, this, &AssetDock::CreateNewActorTemplateFile);
 	contextMenu.addAction(&newActorTemplateAction);
@@ -390,22 +385,6 @@ void AssetDock::CreateNewDialogueFile()
 
 	//refresh asset items in dock
 	AssetFolderClicked();
-}
-
-void AssetDock::CreateNewJournalEntry()
-{
-	QString journalFileName = QFileDialog::getSaveFileName(nullptr, "Create Journal Entry File",
-		QString::fromStdString(AssetBaseFolders::journalEntry),
-		QString::fromStdString(AssetFileExtensions::journalEntry));
-
-	if (journalFileName.isEmpty()) return;
-
-	Serialiser s(journalFileName.toStdString(), OpenMode::Out);
-	JournalEntry journalEntry;
-	Properties entryProps = journalEntry.GetProps();
-	s.Serialise(entryProps);
-
-	Log("Journal Entry [%s] created.", journalFileName.toStdString().c_str());
 }
 
 void AssetDock::CreateNewActorTemplateFile()

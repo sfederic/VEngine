@@ -21,7 +21,6 @@
 #include "UI/Game/PickupWidget.h"
 #include "UI/Game/InteractWidget.h"
 #include "UI/Game/PlayerHealthWidget.h"
-#include "UI/Game/JournalWidget.h"
 #include "Gameplay/GameUtils.h"
 
 Player::Player()
@@ -72,7 +71,6 @@ void Player::Start()
 	interactWidget = UISystem::CreateWidget<InteractWidget>();
 	healthWidget = UISystem::CreateWidget<PlayerHealthWidget>();
 	pickupWidget = UISystem::CreateWidget<PickupWidget>();
-	journalWidget = UISystem::CreateWidget<JournalWidget>();
 }
 
 void Player::End()
@@ -123,8 +121,6 @@ void Player::Tick(float deltaTime)
 	//Lerp camera position
 	camera->SetLocalPosition(
 		VMath::VectorConstantLerp(camera->GetLocalPositionV(), nextCameraPosition, deltaTime, 14.f));
-
-	JournalWidgetInput();
 }
 
 Properties Player::GetProps()
@@ -656,35 +652,35 @@ void Player::LinkToGridActor()
 			HitResult sameActorHit(this);
 			if (Raycast(sameActorHit, GetPositionV(), -VMath::GlobalUpVector(), 5.f))
 			{
-			if (sameActorHit.hitActor == hitActor)
-			{
-				Camera::GetActiveCamera().SetShakeLevel(0.3f);
-				Log("Cannot link to [%s], player is standing on it.", hit.hitActor->GetName().c_str());
-				return;
-			}
-
-			auto gridActor = dynamic_cast<GridActor*>(hitActor);
-			if (gridActor)
-			{
-				//@Todo: I don't really know what this mesh check is for. Come back to it and maybe delete.
-				for (auto mesh : gridActor->GetComponents<MeshComponent>())
+				if (sameActorHit.hitActor == hitActor)
 				{
-					if (!mesh->canBeLinkedTo)
-					{
-						Log("Cannot link to GridActor via hit mesh [%s]. canBeLinkedTo set to false.", mesh->name.c_str());
-						return;
-					}
+					Camera::GetActiveCamera().SetShakeLevel(0.3f);
+					Log("Cannot link to [%s], player is standing on it.", hit.hitActor->GetName().c_str());
+					return;
 				}
 
-				SetLinkedGridActor(*gridActor, hit.GetHitPosV());
-			}
-			else //Show a shake as an error if not a grid actor
-			{
-				camera->SetShakeLevel(0.25f);
+				auto gridActor = dynamic_cast<GridActor*>(hitActor);
+				if (gridActor)
+				{
+					//@Todo: I don't really know what this mesh check is for. Come back to it and maybe delete.
+					for (auto mesh : gridActor->GetComponents<MeshComponent>())
+					{
+						if (!mesh->canBeLinkedTo)
+						{
+							Log("Cannot link to GridActor via hit mesh [%s]. canBeLinkedTo set to false.", mesh->name.c_str());
+							return;
+						}
+					}
+
+					SetLinkedGridActor(*gridActor, hit.GetHitPosV());
+				}
+				else //Show a shake as an error if not a grid actor
+				{
+					camera->SetShakeLevel(0.25f);
+				}
 			}
 		}
 	}
-}
 }
 
 void Player::MoveLinkedGridActor()
@@ -1199,23 +1195,6 @@ void Player::OnMoveAndRotateEnd()
 bool Player::IsInInteraction() const
 {
 	return inInteraction || inConversation || inInspection;
-}
-
-//Keep this at the end of the Tick() as the JournalWidget pauses the game world, meaning no extra 
-//player tick logic will run after opening this widget.
-void Player::JournalWidgetInput()
-{
-	if (Input::GetKeyUp("OpenJournal"))
-	{
-		if (!journalWidget->IsInViewport())
-		{
-			journalWidget->AddToViewport();
-		}
-		else
-		{
-			journalWidget->RemoveFromViewport();
-		}
-	}
 }
 
 XMVECTOR Player::GetCameraLocalPosition()

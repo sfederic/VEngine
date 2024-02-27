@@ -355,9 +355,6 @@
     <ClCompile Include="Code\Actors\Game\TwinOrientationLock.cpp" />
     <ClCompile Include="Code\Actors\Game\GravityCrystal.cpp" />
     <ClCompile Include="Code\Actors\Game\TimeOfDayWheel.cpp" />
-    <ClCompile Include="Code\Actors\Game\JournalEntryTrigger.cpp" />
-    <ClCompile Include="Code\UI\Game\JournalWidget.cpp" />
-    <ClCompile Include="Code\Gameplay\JournalSystem.cpp" />
     <ClCompile Include="Code\Actors\OcclusionWall.cpp" />
     <ClCompile Include="Code\Actors\Game\MinesGenerator.cpp" />
     <ClInclude Include="Code\Actors\Game\ChurchLockPropActivator.h" />
@@ -399,7 +396,6 @@
     <ClInclude Include="Code\Gameplay\DialogueStructures.h" />
     <ClInclude Include="Code\Gameplay\ForwardFace.h" />
     <ClInclude Include="Code\Gameplay\GridNode.h" />
-    <ClInclude Include="Code\Gameplay\JournalEntry.h" />
     <ClInclude Include="Code\Render\BlendStates.h" />
     <ClInclude Include="Code\Animation\BoneWeights.h" />
     <ClInclude Include="Code\Animation\Animation.h" />
@@ -669,7 +665,6 @@
     <ClInclude Include="Code\Actors\Game\GearSetDoor.h" />
     <ClInclude Include="Code\Actors\Game\WaterValve.h" />
     <ClInclude Include="Code\Actors\Game\Pickup.h" />
-    <ClInclude Include="Code\UI\Game\InteractWidget.h" />
     <ClInclude Include="Code\Actors\Game\OrientationLock.h" />
     <ClInclude Include="Code\Actors\Game\LockedDoor.h" />
     <ClInclude Include="Code\Actors\Game\Minecart.h" />
@@ -746,9 +741,6 @@
     <ClInclude Include="Code\Actors\Game\TwinOrientationLock.h" />
     <ClInclude Include="Code\Actors\Game\GravityCrystal.h" />
     <ClInclude Include="Code\Actors\Game\TimeOfDayWheel.h" />
-    <ClInclude Include="Code\Actors\Game\JournalEntryTrigger.h" />
-    <ClInclude Include="Code\UI\Game\JournalWidget.h" />
-    <ClInclude Include="Code\Gameplay\JournalSystem.h" />
     <ClInclude Include="Code\UI\GridLayout.h" />
     <ClInclude Include="Code\Actors\OcclusionWall.h" />
     <ClInclude Include="Code\Actors\Game\MinesGenerator.h" />

@@ -7,7 +7,6 @@
 struct DialogueComponent;
 struct InteractWidget;
 struct PlayerHealthWidget;
-class JournalWidget;
 class PickupWidget;
 struct GridActor;
 struct Unit;
@@ -26,7 +25,6 @@ public:
 
 	InteractWidget* interactWidget = nullptr;
 	PlayerHealthWidget* healthWidget = nullptr;
-	JournalWidget* journalWidget = nullptr;
 
 	GridActor* gridActorInteractingWith = nullptr;
 
@@ -139,8 +137,6 @@ private:
 	void OnMoveAndRotateEnd();
 
 	bool IsInInteraction() const;
-
-	void JournalWidgetInput();
 
 	bool previousMovementAndRotationStoppedValue = false;
 };
