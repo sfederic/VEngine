@@ -150,7 +150,7 @@ void Player::QuickThought(const std::wstring& text)
 
 bool Player::CheckAttackPositionAgainstUnitDirection(Unit* unit)
 {
-	if (unit->attackDirections == AttackDirection::All)
+	if (unit->attackDirections & AttackDirection::All)
 	{
 		return true;
 	}
