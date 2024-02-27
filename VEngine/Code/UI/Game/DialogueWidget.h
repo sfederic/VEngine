@@ -15,7 +15,6 @@ private:
 	std::wstring currentDialogueText;
 	std::wstring fullDialogueText;
 	float textProgressTimer = 0.f;
+	float removeWidgetTimer = 0.f;
 	int currentDialogueCharIndex = 0;
-
-	bool hasTextScrollFinished = false;
 };

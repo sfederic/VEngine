@@ -19,16 +19,26 @@ void DialogueWidget::Draw(float deltaTime)
 	Image("UI/speech_bubble.png", imageRect);
 
 	Text(currentDialogueText, layout);
+
+	//Check self removal after text has sat at its end for a moment.
+	if (currentDialogueCharIndex >= fullDialogueText.size() - 1)
+	{
+		removeWidgetTimer += deltaTime;
+		if (removeWidgetTimer > 2.f)
+		{
+			removeWidgetTimer = 0.f;
+			currentDialogueCharIndex = 0;
+			fullDialogueText.clear();
+			currentDialogueText.clear();
+			this->RemoveFromViewport();
+		}
+
+		return;
+	}
 }
 
 void DialogueWidget::ProgressCurrentText(float deltaTime)
 {
-	if (currentDialogueCharIndex >= fullDialogueText.size())
-	{
-		hasTextScrollFinished = true;
-		return;
-	}
-
 	textProgressTimer += deltaTime;
 	constexpr float textSpeed = 0.065f;
 	if (textProgressTimer > textSpeed && (currentDialogueCharIndex < fullDialogueText.size() - 1))
