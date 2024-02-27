@@ -7,8 +7,15 @@ class DialogueWidget : public Widget
 {
 public:
 	void Draw(float deltaTime) override;
-	void SetText(std::wstring_view text) { dialogueText = text; }
+	void SetText(std::wstring_view text) { fullDialogueText = text; }
 
 private:
-	std::wstring dialogueText;
+	void ProgressCurrentText(float deltaTime);
+
+	std::wstring currentDialogueText;
+	std::wstring fullDialogueText;
+	float textProgressTimer = 0.f;
+	int currentDialogueCharIndex = 0;
+
+	bool hasTextScrollFinished = false;
 };
