@@ -33,7 +33,7 @@ void NPC::Start()
 		if (isQuickDialogueActive) return;
 
 		spawnTextWidget = UISystem::CreateWidget<DialogueWidget>();
-		spawnTextWidget->dialogueText = spawnText;
+		spawnTextWidget->SetText(spawnText);
 		spawnTextWidget->AddToViewport(5.0f);
 	}
 }
@@ -79,7 +79,7 @@ void NPC::QuickTalkTo()
 
 	isQuickDialogueActive = true;
 
-	dialogueComponent->dialogueWidget->dialogueText = interactText;
+	dialogueComponent->dialogueWidget->SetText(interactText);
 	dialogueComponent->AddToViewport();
 }
 

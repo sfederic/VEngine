@@ -142,7 +142,7 @@ XMVECTOR Player::GetMeshRight()
 
 void Player::QuickThought(const std::wstring& text)
 {
-	dialogueComponent->dialogueWidget->dialogueText = text;
+	dialogueComponent->dialogueWidget->SetText(text);
 	dialogueComponent->AddToViewport();
 
 	Timer::SetTimer(5.0f, std::bind(&DialogueWidget::RemoveFromViewport, dialogueComponent->dialogueWidget));

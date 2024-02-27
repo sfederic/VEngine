@@ -16,8 +16,3 @@ void DialogueWidget::Draw(float deltaTime)
 	Image("UI/speech_bubble.png", imageRect);
 	Text(dialogueText, layout);
 }
-
-void DialogueWidget::SetText(std::wstring text)
-{
-	dialogueText = text;
-}
