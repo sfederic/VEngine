@@ -235,6 +235,8 @@ void FileSystem::LoadWorld(std::string worldName)
 		auto actorSystem = ActorSystemCache::Get().GetSystem(stdSystemName);
 		auto componentSystem = ComponentSystemCache::Get().GetSystem(stdSystemName);
 
+		assert(actorSystem != nullptr || componentSystem != nullptr);
+
 		if (actorSystem)
 		{
 			for (int i = 0; i < numObjectsToSpawn; i++)
@@ -292,8 +294,9 @@ void FileSystem::LoadWorld(std::string worldName)
 		}
 		else
 		{
-			//@Todo: Currently, if a Component class/struct is deleted, this code will work work ok.
-			//But if an Actor class/struct is deleted, this code will loop infinitely.
+			//This will loop over the missing component from an actor.
+			//It won't remove the component from the .vmap file though, subquent 
+			//saves will overite that missing component instead.
 
 			//Get the previous post so subsequent system name reads work
 			std::streampos lastPos = d.is.tellg();
