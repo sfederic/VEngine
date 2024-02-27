@@ -190,25 +190,6 @@ DirectionalLightActor0
 UID
 1207453100
 next
-JournalEntryTrigger
-1
- Enabled
-1
- Position
-0 -0.5 4
- Rotation
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Journal Entry Filename
-docks.journal
-Name
-JournalEntryTrigger0
-UID
-2623625515
-next
 MeshComponent
 10
 2899928961
