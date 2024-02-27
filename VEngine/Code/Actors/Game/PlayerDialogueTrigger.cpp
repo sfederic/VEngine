@@ -23,13 +23,11 @@ void PlayerDialogueTrigger::Tick(float deltaTime)
 {
 	__super::Tick(deltaTime);
 
-	if (trigger->ContainsTarget() && !alreadyActivated)
+	const auto player = Player::system.GetFirstActor();
+	if (trigger->ContainsTarget() && !alreadyActivated && !player->IsInQuickThought())
 	{
-		auto player = Player::system.GetFirstActor();
 		player->QuickThought(playerThoughtText);
-
 		alreadyActivated = true;
-
 		SetActive(false);
 	}
 }

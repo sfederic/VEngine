@@ -1,5 +1,6 @@
 #include "vpch.h"
 #include "DialogueWidget.h"
+#include "Actors/Game/Player.h"
 
 void DialogueWidget::Draw(float deltaTime)
 {
@@ -30,6 +31,7 @@ void DialogueWidget::Draw(float deltaTime)
 			currentDialogueCharIndex = 0;
 			fullDialogueText.clear();
 			currentDialogueText.clear();
+			Player::system.GetOnlyActor()->SetQuickThoughtOff();
 			this->RemoveFromViewport();
 		}
 

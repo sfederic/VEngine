@@ -142,6 +142,8 @@ XMVECTOR Player::GetMeshRight()
 
 void Player::QuickThought(const std::wstring& text)
 {
+	playerInQuickThought = true;
+
 	dialogueComponent->dialogueWidget->SetText(text);
 	dialogueComponent->AddToViewport();
 }
