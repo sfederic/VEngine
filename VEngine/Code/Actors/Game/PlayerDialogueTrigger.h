@@ -17,6 +17,8 @@ public:
 	virtual Properties GetProps() override;
 
 private:
+	void CreateQuickThoughtWidget();
+
 	BoxTriggerComponent* trigger = nullptr;
 
 	//Text to show on overlap

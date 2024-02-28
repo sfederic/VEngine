@@ -3,7 +3,7 @@
 #include "Components/BoxTriggerComponent.h"
 #include "Components/Game/DialogueComponent.h"
 #include "UI/UISystem.h"
-#include "UI/Game/QuickThoughtWidget.h"
+#include "UI/Game/DialogueWidget.h"
 
 PlayerDialogueTrigger::PlayerDialogueTrigger()
 {
@@ -33,7 +33,7 @@ void PlayerDialogueTrigger::Tick(float deltaTime)
 	if (trigger->ContainsTarget() && !alreadyActivated)
 	{
 		alreadyActivated = true;
-		UISystem::CreateWidget<QuickThoughtWidget>()->AddToViewport();
+		CreateQuickThoughtWidget();
 		SetActive(false);
 	}
 }
@@ -44,4 +44,12 @@ Properties PlayerDialogueTrigger::GetProps()
 	props.title = GetTypeName();
 	props.Add("PlayerThoughtText", &playerThoughtText);
 	return props;
+}
+
+void PlayerDialogueTrigger::CreateQuickThoughtWidget()
+{
+	auto widget = UISystem::CreateWidget<DialogueWidget>();
+	widget->SetText(playerThoughtText);
+	widget->DeleteOnTextProgressEnd(true);
+	widget->AddToViewport();
 }

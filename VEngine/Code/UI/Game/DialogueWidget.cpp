@@ -30,7 +30,15 @@ void DialogueWidget::Draw(float deltaTime)
 			currentDialogueCharIndex = 0;
 			fullDialogueText.clear();
 			currentDialogueText.clear();
-			this->RemoveFromViewport();
+
+			if (setToDeleteOnTextProgressEnd)
+			{
+				RemoveFromViewportAndDelete();
+			}
+			else
+			{
+				RemoveFromViewport();
+			}
 		}
 
 		return;

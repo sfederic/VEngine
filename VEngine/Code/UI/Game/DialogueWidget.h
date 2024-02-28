@@ -9,6 +9,9 @@ public:
 	void Draw(float deltaTime) override;
 	void SetText(std::wstring_view text) { fullDialogueText = text; }
 
+	//Some DialogueWidgets will stay with certain actors, other will fire off and delete themselves.
+	void DeleteOnTextProgressEnd(bool setToDelete) { setToDeleteOnTextProgressEnd = setToDelete; }
+
 private:
 	void ProgressCurrentText(float deltaTime);
 
@@ -17,4 +20,5 @@ private:
 	float textProgressTimer = 0.f;
 	float removeWidgetTimer = 0.f;
 	int currentDialogueCharIndex = 0;
+	bool setToDeleteOnTextProgressEnd = false;
 };
