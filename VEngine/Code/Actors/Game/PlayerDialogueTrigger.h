@@ -22,6 +22,5 @@ private:
 	//Text to show on overlap
 	std::wstring playerThoughtText;
 
-	//@Todo: wil need to come back here and fiddle with this bool in props for game saves.
 	bool alreadyActivated = false;
 };
