@@ -2,12 +2,12 @@
 #include "PlayerDialogueTrigger.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Components/Game/DialogueComponent.h"
-#include "Gameplay/GameUtils.h"
-#include "Actors/Game/Player.h"
+#include "UI/UISystem.h"
+#include "UI/Game/QuickThoughtWidget.h"
 
 PlayerDialogueTrigger::PlayerDialogueTrigger()
 {
-	trigger = BoxTriggerComponent::system.Add("Trigger", this);
+	trigger = CreateComponent<BoxTriggerComponent>("Trigger");
 	trigger->renderWireframeColour = XMFLOAT4(0.5f, 0.5f, 1.f, 1.f);
 	rootComponent = trigger;
 }
@@ -16,18 +16,24 @@ void PlayerDialogueTrigger::Start()
 {
 	__super::Start();
 
-	trigger->SetTargetAsPlayer();
+	if (alreadyActivated)
+	{
+		SetActive(false);
+	}
+	else
+	{
+		trigger->SetTargetAsPlayer();
+	}
 }
 
 void PlayerDialogueTrigger::Tick(float deltaTime)
 {
 	__super::Tick(deltaTime);
 
-	const auto player = Player::system.GetFirstActor();
-	if (trigger->ContainsTarget() && !alreadyActivated && !player->IsInQuickThought())
+	if (trigger->ContainsTarget() && !alreadyActivated)
 	{
-		player->QuickThought(playerThoughtText);
 		alreadyActivated = true;
+		UISystem::CreateWidget<QuickThoughtWidget>()->AddToViewport();
 		SetActive(false);
 	}
 }
@@ -35,6 +41,7 @@ void PlayerDialogueTrigger::Tick(float deltaTime)
 Properties PlayerDialogueTrigger::GetProps()
 {
 	auto props = __super::GetProps();
+	props.title = GetTypeName();
 	props.Add("PlayerThoughtText", &playerThoughtText);
 	return props;
 }
