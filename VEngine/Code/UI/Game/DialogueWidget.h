@@ -11,6 +11,7 @@ public:
 
 	//Some DialogueWidgets will stay with certain actors, other will fire off and delete themselves.
 	void DeleteOnTextProgressEnd() { setToDeleteOnTextProgressEnd = true; }
+	void ResetAllValues();
 
 private:
 	void ProgressCurrentText(float deltaTime);

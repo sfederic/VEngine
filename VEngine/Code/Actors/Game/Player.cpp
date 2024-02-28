@@ -507,6 +507,7 @@ bool Player::QuickTalkCheck(Actor* hitActor)
 
 void Player::SetQuickThought(std::wstring_view text)
 {
+	dialogueComponent->dialogueWidget->ResetAllValues();
 	dialogueComponent->dialogueWidget->SetText(text);
 	dialogueComponent->dialogueWidget->DeleteOnTextProgressEnd();
 	dialogueComponent->dialogueWidget->AddToViewport();

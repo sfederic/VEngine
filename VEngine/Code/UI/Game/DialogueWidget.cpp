@@ -26,10 +26,7 @@ void DialogueWidget::Draw(float deltaTime)
 		removeWidgetTimer += deltaTime;
 		if (removeWidgetTimer > 2.f)
 		{
-			removeWidgetTimer = 0.f;
-			currentDialogueCharIndex = 0;
-			fullDialogueText.clear();
-			currentDialogueText.clear();
+			ResetAllValues();
 
 			if (setToDeleteOnTextProgressEnd)
 			{
@@ -43,6 +40,14 @@ void DialogueWidget::Draw(float deltaTime)
 
 		return;
 	}
+}
+
+void DialogueWidget::ResetAllValues()
+{
+	removeWidgetTimer = 0.f;
+	currentDialogueCharIndex = 0;
+	fullDialogueText.clear();
+	currentDialogueText.clear();
 }
 
 void DialogueWidget::ProgressCurrentText(float deltaTime)
