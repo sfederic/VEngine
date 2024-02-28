@@ -44,6 +44,10 @@ protected:
 	bool canBeRotatedYawYAxis = true;
 	bool canBeRotatedPitchXAxis = true;
 
+	//Constrain movement to an axis.
+	bool moveConstrainedToZAxis = false;
+	bool moveConstrainedToXAxis = false;
+
 	//This bool is for rotating grid actors (e.g. actors stuck on walls) on their z-axis. Because the controls for rotation need
 	//to be simple (previous player input had this when holding down shift), some actors will be using this bool
 	//to denote that left and right will rotate along the z-axis instead. 
@@ -137,7 +141,7 @@ public:
 	void RecalcCurrentNodePosition();
 	void RecalcCurrentNodeDontIgnoreThis();
 
-	bool CheckNextNodeMoveIsValid(const XMVECTOR nextMoveCardinalDirection);
+	bool CheckNextNodeMoveIsValid(XMVECTOR nextMoveCardinalDirection);
 
 	//Get forward face in grid terms based on forward vector and current grid position.
 	ForwardFace GetCurrentForwardFace();
@@ -147,8 +151,8 @@ public:
 	//This will pop the grid actor aligned onto the grid in world space if it's out.
 	void RoundPosition();
 
-	XMVECTOR GetNextRot() { return nextRot; }
-	XMVECTOR GetNextPos() { return nextPos; }
+	XMVECTOR GetNextRot() const { return nextRot; }
+	XMVECTOR GetNextPos() const { return nextPos; }
 	void SetNextRot(XMVECTOR rot) { nextRot = rot; }
 	void AddNextRot(XMVECTOR axis, float angle);
 	void SetNextPos(XMVECTOR pos) { nextPos = pos; }

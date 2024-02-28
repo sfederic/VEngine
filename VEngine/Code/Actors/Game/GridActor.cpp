@@ -190,6 +190,8 @@ Properties GridActor::GetProps()
 	props.Add("Move Axis Pos.", &validPositiveMovementAxis);
 	props.Add("Move Axis Neg.", &validNegativeMovementAxis);
 	props.Add("Move Speed", &moveSpeed);
+	props.Add("MoveOnlyZAxis", &moveConstrainedToZAxis);
+	props.Add("MoveOnlyXAxis", &moveConstrainedToXAxis);
 	props.Add("Rotate Speed", &rotateSpeed);
 	props.Add("Can Fall", &canFall);
 	props.Add("BigGridActor", &bigGridActor);
@@ -258,8 +260,10 @@ void GridActor::RecalcCurrentNodeDontIgnoreThis()
 	node->RecalcNodeHeight(hit);
 }
 
-bool GridActor::CheckNextNodeMoveIsValid(const XMVECTOR nextMoveCardinalDirection)
+bool GridActor::CheckNextNodeMoveIsValid(XMVECTOR nextMoveCardinalDirection)
 {
+	VMath::RoundVector(nextMoveCardinalDirection);
+
 	const int nextXIndex = (int)std::round(nextPos.m128_f32[0]);
 	const int nextYIndex = (int)std::round(nextPos.m128_f32[2]);
 
@@ -297,6 +301,28 @@ bool GridActor::CheckNextNodeMoveIsValid(const XMVECTOR nextMoveCardinalDirectio
 		if (fenceHit.GetHitActorAs<FenceActor>())
 		{
 			Log("[%s] hit fence.", GetName().c_str());
+			nextPos = GetPositionV();
+			return false;
+		}
+	}
+
+	//Note that both bools can be set to true, in which case z axis will take precedence.
+	if (moveConstrainedToZAxis)
+	{
+		if (!VMath::VecEqual(nextMoveCardinalDirection, VMath::GlobalForwardVector()) &&
+			!VMath::VecEqual(nextMoveCardinalDirection, -VMath::GlobalForwardVector()))
+		{
+			Log("[%s] constrained to Z axis. Can't be moved in this direction.", GetName().c_str());
+			nextPos = GetPositionV();
+			return false;
+		}
+	}
+	else if (moveConstrainedToXAxis)
+	{
+		if (!VMath::VecEqual(nextMoveCardinalDirection, VMath::GlobalRightVector()) &&
+			!VMath::VecEqual(nextMoveCardinalDirection, -VMath::GlobalRightVector()))
+		{
+			Log("[%s] constrained to X axis. Can't be moved in this direction.", GetName().c_str());
 			nextPos = GetPositionV();
 			return false;
 		}
