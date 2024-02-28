@@ -31,6 +31,8 @@ void DialogueWidget::Draw(float deltaTime)
 			currentDialogueCharIndex = 0;
 			fullDialogueText.clear();
 			currentDialogueText.clear();
+			//@Todo: this is no good. Need a PlayerQuickThoughtWidget else potential NPC dialogue wigdets
+			//will trigger this.
 			Player::system.GetOnlyActor()->SetQuickThoughtOff();
 			this->RemoveFromViewport();
 		}
