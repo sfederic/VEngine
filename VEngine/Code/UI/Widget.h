@@ -40,6 +40,7 @@ public:
 	void AddToViewport(float removeTimer = 0.f);
 	void OnceOffAddToViewport(float removeTimer);
 	void RemoveFromViewport();
+	virtual void OnRemoveFromViewport() {}
 	void RemoveFromViewportAndDelete();
 
 	bool IsInViewport();

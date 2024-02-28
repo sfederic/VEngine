@@ -36,6 +36,7 @@ void Widget::OnceOffAddToViewport(float removeTimer)
 
 void Widget::RemoveFromViewport()
 {
+	OnRemoveFromViewport();
 	UISystem::RemoveWidget(this);
 }
 
