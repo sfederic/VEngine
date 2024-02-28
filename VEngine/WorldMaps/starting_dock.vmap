@@ -36,6 +36,42 @@ Size Y
 UID
 3830146047
 next
+PlayerDialogueTrigger
+2
+ Enabled
+1
+ Position
+0 -0.5 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+PlayerDialogueTrigger0
+PlayerThoughtText
+This boat dock looks pretty cool huh now watch me dance.
+UID
+2447797397
+next
+ Enabled
+1
+ Position
+0 -0.5 5
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+PlayerDialogueTrigger1
+PlayerThoughtText
+This boat dock looks pretty cool huh now watch me dance.
+UID
+996174466
+next
 MeshActor
 9
  Enabled
@@ -762,43 +798,16 @@ Trans. Occlude
 UID
 2349202134
 next
-SpriteSheet
-1
-2623625515
-JournalIcon
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0.994435 0.105351 0
- Scale
-0.5 0.5 0.5
- Visible
-1
-Animation Speed
-40
-Loop Animation
-1
-Sheet Columns
-1
-Sheet Rows
-1
-Texture
-UI/journal_icon.png
-UID
-3400467432
-next
 BoxTriggerComponent
-1
-2623625515
-BoxTrigger
+2
+2447797397
+Trigger
  Enabled
 1
  Pos
-0 -0.5 4
+0 -0.5 1
  Rot
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -808,7 +817,26 @@ Extents
 Offset
 0 0 0
 UID
-3840981936
+1510899732
+next
+996174466
+Trigger
+ Enabled
+1
+ Pos
+0 -0.5 5
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+1034548166
 next
 DialogueComponent
 1
