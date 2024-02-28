@@ -140,14 +140,6 @@ XMVECTOR Player::GetMeshRight()
 	return mesh->GetRightVectorV();
 }
 
-void Player::QuickThought(const std::wstring& text)
-{
-	playerInQuickThought = true;
-
-	dialogueComponent->dialogueWidget->SetText(text);
-	dialogueComponent->AddToViewport();
-}
-
 bool Player::CheckAttackPositionAgainstUnitDirection(Unit* unit)
 {
 	if (unit->attackDirections & AttackDirection::All)

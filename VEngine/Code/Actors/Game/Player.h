@@ -59,11 +59,6 @@ public:
 	XMVECTOR GetMeshForward();
 	XMVECTOR GetMeshRight();
 
-	//Show a dialogue above player when player character is thinking.
-	void QuickThought(const std::wstring& text);
-	bool IsInQuickThought() const { return playerInQuickThought; }
-	void SetQuickThoughtOff() { playerInQuickThought = false; }
-
 	void SetDefaultCameraFOV();
 	void SetZoomedInCameraFOV();
 
