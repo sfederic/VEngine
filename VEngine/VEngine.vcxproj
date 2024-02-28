@@ -558,6 +558,7 @@
     <ClInclude Include="Code\Core\UID.h" />
     <ClInclude Include="Code\UI\Game\DialogueWidget.h" />
     <ClInclude Include="Code\UI\Game\HealthWidget.h" />
+    <ClInclude Include="Code\UI\Game\InteractWidget.h" />
     <ClInclude Include="Code\UI\Game\MapInfoWidget.h" />
     <ClInclude Include="Code\UI\Game\PlayerHealthWidget.h" />
     <ClInclude Include="Code\UI\Game\PopupWidget.h" />
