@@ -85,6 +85,8 @@ public:
 	void SetCameraTargetActor(Actor* target);
 	Actor& GetCameraTargetActor();
 
+	void SetQuickThought(std::wstring_view text);
+
 private:
 	PickupWidget* pickupWidget = nullptr;
 

@@ -10,7 +10,7 @@ public:
 	void SetText(std::wstring_view text) { fullDialogueText = text; }
 
 	//Some DialogueWidgets will stay with certain actors, other will fire off and delete themselves.
-	void DeleteOnTextProgressEnd(bool setToDelete) { setToDeleteOnTextProgressEnd = setToDelete; }
+	void DeleteOnTextProgressEnd() { setToDeleteOnTextProgressEnd = true; }
 
 private:
 	void ProgressCurrentText(float deltaTime);

@@ -1,9 +1,7 @@
 #include "vpch.h"
 #include "PlayerDialogueTrigger.h"
 #include "Components/BoxTriggerComponent.h"
-#include "Components/Game/DialogueComponent.h"
-#include "UI/UISystem.h"
-#include "UI/Game/DialogueWidget.h"
+#include "Actors/Game/Player.h"
 
 PlayerDialogueTrigger::PlayerDialogueTrigger()
 {
@@ -48,8 +46,5 @@ Properties PlayerDialogueTrigger::GetProps()
 
 void PlayerDialogueTrigger::CreateQuickThoughtWidget()
 {
-	auto widget = UISystem::CreateWidget<DialogueWidget>();
-	widget->SetText(playerThoughtText);
-	widget->DeleteOnTextProgressEnd(true);
-	widget->AddToViewport();
+	Player::system.GetOnlyActor()->SetQuickThought(playerThoughtText);
 }

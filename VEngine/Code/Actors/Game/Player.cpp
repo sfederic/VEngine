@@ -505,6 +505,13 @@ bool Player::QuickTalkCheck(Actor* hitActor)
 	return false;
 }
 
+void Player::SetQuickThought(std::wstring_view text)
+{
+	dialogueComponent->dialogueWidget->SetText(text);
+	dialogueComponent->dialogueWidget->DeleteOnTextProgressEnd();
+	dialogueComponent->dialogueWidget->AddToViewport();
+}
+
 bool Player::CombatInteractCheck(Actor* actorToCheck)
 {
 	auto gridActor = dynamic_cast<GridActor*>(actorToCheck);
