@@ -1,6 +1,5 @@
 #include "vpch.h"
 #include "DialogueWidget.h"
-#include "Actors/Game/Player.h"
 
 void DialogueWidget::Draw(float deltaTime)
 {
@@ -31,9 +30,6 @@ void DialogueWidget::Draw(float deltaTime)
 			currentDialogueCharIndex = 0;
 			fullDialogueText.clear();
 			currentDialogueText.clear();
-			//@Todo: this is no good. Need a PlayerQuickThoughtWidget else potential NPC dialogue wigdets
-			//will trigger this.
-			Player::system.GetOnlyActor()->SetQuickThoughtOff();
 			this->RemoveFromViewport();
 		}
 
