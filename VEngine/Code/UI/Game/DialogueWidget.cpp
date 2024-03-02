@@ -54,7 +54,7 @@ void DialogueWidget::ProgressCurrentText(float deltaTime)
 {
 	textProgressTimer += deltaTime;
 	constexpr float textSpeed = 0.065f;
-	if (textProgressTimer > textSpeed && (currentDialogueCharIndex < fullDialogueText.size() - 1))
+	if (textProgressTimer > textSpeed && (currentDialogueCharIndex < fullDialogueText.size()))
 	{
 		textProgressTimer = 0.f;
 		currentDialogueText.push_back(fullDialogueText.at(currentDialogueCharIndex));
