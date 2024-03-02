@@ -39,7 +39,7 @@ void SpriteSystem::Reset()
 	screenSprites.clear();
 }
 
-void SpriteSystem::CreateScreenSprite(Sprite sprite)
+void SpriteSystem::CreateScreenSprite(Sprite& sprite)
 {
 	screenSprites.emplace_back(sprite);
 }
