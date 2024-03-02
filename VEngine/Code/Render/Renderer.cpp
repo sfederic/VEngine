@@ -1791,6 +1791,10 @@ void Renderer::RenderSpritesInScreenSpace()
 		SetSampler(0, &Renderer::GetDefaultSampler());
 		SetShaderResourcePixel(0, sprite.textureFilename);
 
+		MaterialShaderData defaultMaterialShaderData;
+		cbMaterial->Map(&defaultMaterialShaderData);
+		cbMaterial->SetPS();
+
 		SpriteSystem::BuildSpriteQuadForViewportRendering(sprite);
 		SpriteSystem::UpdateAndSetSpriteBuffers();
 

@@ -11,9 +11,6 @@ struct HitResult;
 //Tick()s constantly calling. Essentially would have it so when a target actor enters and exits,
 //and event fires and that's it, like in Unity with OnTriggerEnter() or Unreal.
 
-//@Todo: there's something with a boxtrigger's wireframe colour that's setting certain gameplay widgets
-//as the same colour. I can't figure out what it is at a glance.
-
 class BoxTriggerComponent : public SpatialComponent
 {
 public:
