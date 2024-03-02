@@ -74,9 +74,9 @@ void SpriteSystem::BuildSpriteQuadForViewportRendering(const Sprite& sprite)
 	verts[2].pos = PointToNdc(dst.right, dst.top, sprite.z);
 	verts[3].pos = PointToNdc(dst.right, dst.bottom, sprite.z);
 
-	auto texture = TextureSystem::FindTexture2D(sprite.textureFilename);
-	auto texWidth = texture->GetWidth();
-	auto texHeight = texture->GetHeight();
+	const auto texture = TextureSystem::FindTexture2D(sprite.textureFilename);
+	const auto texWidth = texture->GetWidth();
+	const auto texHeight = texture->GetHeight();
 
 	if (!sprite.useSourceRect)
 	{
@@ -91,13 +91,13 @@ void SpriteSystem::BuildSpriteQuadForViewportRendering(const Sprite& sprite)
 	verts[3].uv = XMFLOAT2((float)src.right / texWidth, (float)src.bottom / texHeight);
 
 	// Quad center point.
-	float tx = 0.5f * (verts[0].pos.x + verts[3].pos.x);
-	float ty = 0.5f * (verts[0].pos.y + verts[1].pos.y);
+	const float tx = 0.5f * (verts[0].pos.x + verts[3].pos.x);
+	const float ty = 0.5f * (verts[0].pos.y + verts[1].pos.y);
 
-	XMVECTOR scaling = XMLoadFloat3(&sprite.transform.scale);
-	XMVECTOR origin = XMVectorSet(tx, ty, 0.0f, 0.0f);
-	XMVECTOR translation = XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f);
-	XMMATRIX T = XMMatrixAffineTransformation2D(scaling, origin, sprite.angle, translation);
+	const XMVECTOR scaling = XMLoadFloat3(&sprite.transform.scale);
+	const XMVECTOR origin = XMVectorSet(tx, ty, 0.0f, 0.0f);
+	const XMVECTOR translation = XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f);
+	const XMMATRIX T = XMMatrixAffineTransformation2D(scaling, origin, sprite.angle, translation);
 
 	// Rotate and scale the quad in NDC space.
 	for (int i = 0; i < 4; i++)
