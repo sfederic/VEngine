@@ -44,16 +44,18 @@ void SpriteSystem::CreateScreenSprite(Sprite& sprite)
 	screenSprites.emplace_back(sprite);
 }
 
-void SpriteSystem::UpdateAndSetSpriteBuffers(ID3D11DeviceContext* context)
+void SpriteSystem::UpdateAndSetSpriteBuffers()
 {
+	ID3D11DeviceContext& context = Renderer::GetDeviceContext();
+
 	//Update vertex buffer
 	D3D11_MAPPED_SUBRESOURCE mappedResource{};
-	HR(context->Map(spriteVertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
+	HR(context.Map(spriteVertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
 	memcpy(mappedResource.pData, &verts, sizeof(verts));
-	context->Unmap(spriteVertexBuffer, 0);
+	context.Unmap(spriteVertexBuffer, 0);
 
-	context->IASetVertexBuffers(0, 1, &spriteVertexBuffer, &Renderer::stride, &Renderer::offset);
-	context->IASetIndexBuffer(spriteIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
+	context.IASetVertexBuffers(0, 1, &spriteVertexBuffer, &Renderer::stride, &Renderer::offset);
+	context.IASetIndexBuffer(spriteIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
 }
 
 std::vector<Sprite>& SpriteSystem::GetScreenSprites()

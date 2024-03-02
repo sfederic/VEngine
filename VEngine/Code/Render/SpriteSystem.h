@@ -3,8 +3,6 @@
 #include "Sprite.h"
 
 struct SpriteSheetEmitter;
-struct ID3D11Buffer;
-struct ID3D11DeviceContext;
 
 //Sprite and text rendering for D3D11
 //RRef:http://www.d3dcoder.net/Data/Resources/SpritesAndText.pdf
@@ -20,6 +18,6 @@ namespace SpriteSystem
 	void BuildSpriteQuadForViewportRendering(const Sprite& sprite);
 	void BuildSpriteQuadForSpriteSheetRendering(const Sprite& sprite);
 	void BuildSpriteQuadForParticleRendering();
-	void UpdateAndSetSpriteBuffers(ID3D11DeviceContext* context);
+	void UpdateAndSetSpriteBuffers();
 	std::vector<Sprite>& GetScreenSprites();
 };

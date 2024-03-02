@@ -1623,7 +1623,7 @@ void RenderSpriteSheets()
 		spriteSheet->UpdateSprite();
 
 		SpriteSystem::BuildSpriteQuadForSpriteSheetRendering(spriteSheet->GetSprite());
-		SpriteSystem::UpdateAndSetSpriteBuffers(context);
+		SpriteSystem::UpdateAndSetSpriteBuffers();
 
 		const XMVECTOR lookAtRotation = VMath::LookAtRotation(Camera::GetActiveCamera().GetWorldPositionV(),
 			spriteSheet->GetWorldPositionV());
@@ -1756,7 +1756,7 @@ void Renderer::RenderParticleEmitters()
 		//Set texture from emitter for every particle
 		SetShaderResourcePixel(0, emitter->GetMaterial().textureData.filename);
 
-		SpriteSystem::UpdateAndSetSpriteBuffers(context);
+		SpriteSystem::UpdateAndSetSpriteBuffers();
 
 		for (auto& particle : emitter->particles)
 		{
@@ -1792,7 +1792,7 @@ void Renderer::RenderSpritesInScreenSpace()
 		SetShaderResourcePixel(0, sprite.textureFilename);
 
 		SpriteSystem::BuildSpriteQuadForViewportRendering(sprite);
-		SpriteSystem::UpdateAndSetSpriteBuffers(context);
+		SpriteSystem::UpdateAndSetSpriteBuffers();
 
 		shaderMatrices.model = XMMatrixIdentity();
 		shaderMatrices.MakeModelViewProjectionMatrix();
