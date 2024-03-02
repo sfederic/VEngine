@@ -4,6 +4,9 @@
 #include "Render/RenderPropertyStructs.h"
 #include "VString.h"
 #include "VEnum.h"
+#include <locale>
+#include <bit>
+#include <codecvt>
 
 using namespace DirectX;
 
@@ -117,6 +120,9 @@ void BinaryDeserialiser::ReadWString(std::wstring* wstr)
 Serialiser::Serialiser(const std::string filename_, const OpenMode mode_) :
 	filename(filename_), mode(mode_)
 {
+	std::locale loc(std::locale::classic(), new std::codecvt_utf8<wchar_t, 0x10ffff, std::little_endian>);
+	ofs.imbue(loc);
+
 	typeToWriteFuncMap.emplace(typeid(bool), [&](Property& prop, std::wstring& name) {
 		ss << name << "\n" << *prop.GetData<bool>() << "\n";
 		});
@@ -156,7 +162,7 @@ Serialiser::Serialiser(const std::string filename_, const OpenMode mode_) :
 
 	typeToWriteFuncMap.emplace(typeid(std::wstring), [&](Property& prop, std::wstring& name) {
 		auto wstr = prop.GetData<std::wstring>();
-		ss << name << "\n" << VString::wstos(wstr->data()).c_str() << "\n";
+		ss << name << "\n" << wstr->data() << "\n";
 		});
 
 	typeToWriteFuncMap.emplace(typeid(TextureData), [&](Property& prop, std::wstring& name) {
@@ -211,16 +217,14 @@ void Serialiser::Serialise(Properties& props)
 
 Deserialiser::Deserialiser(const std::string filename, const OpenMode mode)
 {
+	std::locale loc(std::locale::classic(), new std::codecvt_utf8<wchar_t, 0x10ffff, std::little_endian>);
+	is.imbue(loc);
+
 	is.open(filename.c_str(), (std::ios_base::openmode)mode);
 	if (is.fail())
 	{
 		throw;
 	}
-
-	//@Todo: with wstrings for .vmap text files, reading in wstrings produces junk. Might not be a problem for bianary.
-	//Ref:https://coderedirect.com/questions/456819/is-it-possible-to-set-a-text-file-to-utf-16
-	//std::locale loc(std::locale::classic(), new std::codecvt_utf16<wchar_t, 0x10ffff, std::little_endian>);
-	//ofs.imbue(loc);
 
 	//Setup read map
 	typeToReadFuncMap.emplace(typeid(float), [&](Property& prop) {
@@ -270,7 +274,6 @@ Deserialiser::Deserialiser(const std::string filename, const OpenMode mode)
 		});
 
 	typeToReadFuncMap.emplace(typeid(std::wstring), [&](Property& prop) {
-		//wstring is converted to string on Serialise. Convert back to wstring here.
 		wchar_t propString[512]{};
 		is.getline(propString, 512);
 		auto str = prop.GetData<std::wstring>();
