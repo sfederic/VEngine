@@ -1,11 +1,72 @@
+GridActor
+1
+ Enabled
+1
+ Position
+6 1 1
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+BigGridActor
+0
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+MoveOnlyXAxis
+1
+MoveOnlyZAxis
+1
+Name
+GridActor0
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Roll
+0
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+1090236991
+next
 Player
 1
  Enabled
 1
  Position
-4 1 0
+4 0.999998 1
  Rotation
--0 0.000243867 -0 1
+0 0.707279 0 0.706934
  Scale
 0.999996 1 0.999996
  Visible
@@ -71,7 +132,64 @@ UID
 4223582235
 next
 MeshComponent
-2
+3
+1090236991
+Mesh
+ Enabled
+1
+ Pos
+6 1 1
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+null
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
+UID
+2712656488
+next
 2989755610
 Mesh
  Enabled
@@ -79,7 +197,7 @@ Mesh
  Pos
 0 0 0
  Rot
-0 1.78814e-07 -0 1
+0 3.52156e-08 0 1
  Scale
 1 1 1
  Visible
@@ -187,7 +305,18 @@ UID
 1359728781
 next
 DialogueComponent
+2
+1090236991
+Dialogue
+ Enabled
 1
+ Visible
+1
+File
+
+UID
+2754769642
+next
 2989755610
 Dialogue
  Enabled
@@ -265,7 +394,7 @@ Camera
  Enabled
 1
  Pos
-1.75 1.75 -2.75
+1.25 0.55 -0.75
  Rot
 0 0 0 1
  Scale
@@ -311,9 +440,9 @@ Root
  Enabled
 1
  Pos
-4 1 0
+4 0.999998 1
  Rot
--0 0.000243867 -0 1
+0 0.707279 0 0.706934
  Scale
 0.999996 1 0.999996
  Visible
