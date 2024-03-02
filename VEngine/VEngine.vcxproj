@@ -117,6 +117,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Code\Core\BinaryDeserialiser.cpp" />
+    <ClCompile Include="Code\Core\BinarySerialiser.cpp" />
     <ClCompile Include="Code\Actors\Game\ChurchLockPropActivator.cpp" />
     <ClCompile Include="Code\Actors\Game\GlobalPropSetter.cpp" />
     <ClCompile Include="Code\Actors\Game\ActivateOnGlobalProp.cpp" />
@@ -357,6 +359,9 @@
     <ClCompile Include="Code\Actors\Game\TimeOfDayWheel.cpp" />
     <ClCompile Include="Code\Actors\OcclusionWall.cpp" />
     <ClCompile Include="Code\Actors\Game\MinesGenerator.cpp" />
+    <ClCompile Include="Code\Core\Deserialiser.cpp" />
+    <ClInclude Include="Code\Core\BinaryDeserialiser.h" />
+    <ClInclude Include="Code\Core\BinarySerialiser.h" />
     <ClInclude Include="Code\Actors\Game\ChurchLockPropActivator.h" />
     <ClInclude Include="Code\Actors\Game\GlobalPropSetter.h" />
     <ClInclude Include="Code\Actors\Game\ActivateOnGlobalProp.h" />
@@ -389,6 +394,7 @@
     <ClInclude Include="Code\Asset\VertexColourHeader.h" />
     <ClInclude Include="Code\Components\Game\ConditionComponent.h" />
     <ClInclude Include="Code\Components\Game\DialogueComponent.h" />
+    <ClInclude Include="Code\Core\OpenMode.h" />
     <ClInclude Include="Code\Core\PropertyTypes.h" />
     <ClInclude Include="Code\Core\Win32Keys.h" />
     <ClInclude Include="Code\Gameplay\BattleEnums.h" />
@@ -745,6 +751,7 @@
     <ClInclude Include="Code\UI\GridLayout.h" />
     <ClInclude Include="Code\Actors\OcclusionWall.h" />
     <ClInclude Include="Code\Actors\Game\MinesGenerator.h" />
+    <ClInclude Include="Code\Core\Deserialiser.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
