@@ -9,10 +9,10 @@
 #include "Render/Texture2D.h"
 
 static SystemStates systemState = SystemStates::Unloaded;
-ID3D11Buffer* spriteVertexBuffer = nullptr;
-ID3D11Buffer* spriteIndexBuffer = nullptr;
-Vertex verts[4] = {};
-std::vector<Sprite> screenSprites;
+static ID3D11Buffer* spriteVertexBuffer;
+static ID3D11Buffer* spriteIndexBuffer;
+static Vertex verts[4];
+static std::vector<Sprite> screenSprites;
 
 XMFLOAT3 PointToNdc(int x, int y, float z);
 
