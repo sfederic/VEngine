@@ -266,9 +266,12 @@ void DebugMenu::RenderActorSystemMenu()
 
 	for (auto actorSystem : World::activeActorSystems)
 	{
-		ImGui::Text("%s | ", actorSystem->GetName().c_str());
-		ImGui::SameLine();
-		ImGui::Text("Count: %d", actorSystem->GetNumActors());
+		if (actorSystem->GetNumActors() > 0)
+		{
+			ImGui::Text("%s | ", actorSystem->GetName().c_str());
+			ImGui::SameLine();
+			ImGui::Text("Count: %d", actorSystem->GetNumActors());
+		}
 	}
 
 	ImGui::End();
@@ -282,9 +285,12 @@ void DebugMenu::RenderComponentSystemMenu()
 
 	for (auto componentSystem : World::activeComponentSystems)
 	{
-		ImGui::Text("%s | ", componentSystem->GetName().c_str());
-		ImGui::SameLine();
-		ImGui::Text("Count: %d", componentSystem->GetNumComponents());
+		if (componentSystem->GetNumComponents() > 0)
+		{
+			ImGui::Text("%s | ", componentSystem->GetName().c_str());
+			ImGui::SameLine();
+			ImGui::Text("Count: %d", componentSystem->GetNumComponents());
+		}
 	}
 
 	ImGui::End();
