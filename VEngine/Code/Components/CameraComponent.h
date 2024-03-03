@@ -25,6 +25,7 @@ public:
 	void SetFOV(float fov) { FOV = fov; }
 	void SetShakeLevel(float shake) { shakeLevel = shake; }
 	void SetTargetActor(Actor* actor) { targetActor = actor; }
+	void SetTargetComponent(SpatialComponent* component) { targetComponent = component; }
 	void SetLerpToFocusPoint(bool value);
 
 	Actor& GetTargetActor() { return *targetActor; }
@@ -36,6 +37,7 @@ protected:
 
 	XMVECTOR focusPoint = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 	Actor* targetActor = nullptr;
+	SpatialComponent* targetComponent = nullptr;
 
 	float shakeLevel = 0.f;
 	float FOV = 60.f;

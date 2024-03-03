@@ -24,6 +24,10 @@ XMMATRIX CameraComponent::GetViewMatrix()
 	{
 		focusPoint = targetActor->GetPositionV();
 	}
+	else if (targetComponent)
+	{
+		focusPoint = targetComponent->GetWorldPositionV();
+	}
 	else
 	{
 		focusPoint = worldPos + GetForwardVectorV();
