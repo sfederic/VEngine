@@ -308,7 +308,6 @@ void Renderer::Tick()
 	if (Input::GetKeyUp(Keys::F4))
 	{
 		PointLightVertexColourMap();
-		Log("vertex colour map done");
 	}
 
 	ScreenshotCapture();
@@ -2255,6 +2254,8 @@ void RenderLightProbes()
 
 void PointLightVertexColourMap()
 {
+	const auto startTime = Profile::QuickStart();
+
 	const auto numPointLights = PointLightComponent::system.GetNumComponents();
 	const auto numDirectionalLights = PointLightComponent::system.GetNumComponents();
 
@@ -2381,6 +2382,9 @@ void PointLightVertexColourMap()
 
 		UpdateProgressDialog();
 	}
+
+	const auto endTime = Profile::QuickEnd(startTime);
+	Log("Vertex colour mapping completed in [%f] seconds.", endTime);
 }
 
 RastState* Renderer::GetRastState(std::string rastStateName)
