@@ -53,7 +53,7 @@ void DialogueWidget::ResetAllValues()
 void DialogueWidget::ProgressCurrentText(float deltaTime)
 {
 	textProgressTimer += deltaTime;
-	constexpr float textSpeed = 0.065f;
+	constexpr float textSpeed = 0.05f;
 	if (textProgressTimer > textSpeed && (currentDialogueCharIndex < fullDialogueText.size()))
 	{
 		textProgressTimer = 0.f;
