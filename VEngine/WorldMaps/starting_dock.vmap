@@ -15,6 +15,37 @@ Player0
 UID
 2899928961
 next
+EntranceTrigger
+1
+ Enabled
+1
+ Position
+0 -0.5 13
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Entrance Active
+1
+Level Name
+big_docks.vmap
+Locked Text
+Locked
+Name
+EntranceTrigger0
+Open Audio
+door.wav
+Open Text
+Open
+Tag
+
+UID
+3046343858
+Unlock Audio
+
+next
 Grid
 1
  Enabled
@@ -781,8 +812,23 @@ Trans. Occlude
 UID
 2349202134
 next
-BoxTriggerComponent
+ConditionComponent
 1
+3046343858
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+3322816293
+next
+BoxTriggerComponent
+2
 2447797397
 Trigger
  Enabled
@@ -801,6 +847,25 @@ Offset
 0 0 0
 UID
 1510899732
+next
+3046343858
+Trigger
+ Enabled
+1
+ Pos
+0 -0.5 13
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+3326787170
 next
 DialogueComponent
 1
