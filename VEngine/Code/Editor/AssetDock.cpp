@@ -17,6 +17,7 @@
 #include "Core/WorldEditor.h"
 #include "Render/TextureSystem.h"
 #include "Render/Material.h"
+#include "Render/Renderer.h"
 #include "Render/ShaderItem.h"
 #include "Render/MaterialSystem.h"
 #include "Gameplay/GameInstance.h"
@@ -489,6 +490,8 @@ void AssetDock::ImportMesh()
 		const std::string filename = QFileInfo(filePath).fileName().toStdString();
 		AssetSystem::BuildSingleVMeshFromFBX(filePath.toStdString(), filename);
 		Log("VMesh built from [%s].", filename.c_str());
+
+		Renderer::SetRendererToCaptureMeshIcon(filename);
 	}
 }
 

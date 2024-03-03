@@ -133,18 +133,22 @@ void Engine::MainLoop()
 void Engine::Render(float deltaTime)
 {
 	Renderer::Render();
-	Renderer::RenderParticleEmitters();
 
-	Console::InputTick();
+	if (!Renderer::IsRendererSetToCaptureMeshIcon())
+	{
+		Renderer::RenderParticleEmitters();
 
-	UISystem::BeginDraw();
-	UISystem::DrawAllWidgets(deltaTime);
+		Console::InputTick();
 
-	Renderer::RenderSpritesInScreenSpace();
+		UISystem::BeginDraw();
+		UISystem::DrawAllWidgets(deltaTime);
 
-	Console::Tick();
-	debugMenu.Tick(deltaTime);
-	UISystem::EndDraw();
+		Renderer::RenderSpritesInScreenSpace();
+
+		Console::Tick();
+		debugMenu.Tick(deltaTime);
+		UISystem::EndDraw();
+	}
 
 	Renderer::Present();
 }

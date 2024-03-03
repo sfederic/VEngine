@@ -59,4 +59,10 @@ namespace Renderer
 	ID3D11Device& GetDevice();
 	ID3D11DeviceContext& GetDeviceContext();
 	Sampler& GetDefaultSampler();
+
+	//@Todo: As nice as automatic mesh icon generation is, I feel like it makes the main rendering code 
+	//a bit branchy. It's a big task, but if you could render the mesh to take an icon screenshot of to
+	//a different viewport, it might settle the issue of being too branchy.
+	void SetRendererToCaptureMeshIcon(std::string meshFilename);
+	bool IsRendererSetToCaptureMeshIcon();
 };

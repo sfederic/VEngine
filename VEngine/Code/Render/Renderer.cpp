@@ -111,6 +111,7 @@ void RenderSpriteSheets();
 void RenderPostProcess();
 void RenderWireframeForVertexPaintingAndPickedActor();
 void RenderLightProbes();
+void RenderMeshToCaptureMeshIcon();
 
 void PointLightVertexColourMap();
 
@@ -228,6 +229,9 @@ const int lightProbeTextureHeight = 64;
 
 ShaderMatrices shaderMatrices;
 ShaderLights shaderLights;
+
+static bool captureMeshIconOnCurrentFrame = false;
+static std::string captureMeshIconMeshFilename;
 
 struct DebugBoxData
 {
@@ -861,6 +865,12 @@ void Renderer::Render()
 
 	cbTime->Map(&timeData);
 	cbTime->SetVSAndPS();
+
+	if (captureMeshIconOnCurrentFrame)
+	{
+		RenderMeshToCaptureMeshIcon();
+		return;
+	}
 
 	SetShadowData();
 	RenderShadowPass();
@@ -1851,6 +1861,26 @@ void SetLightsConstantBufferData()
 
 void Renderer::Present()
 {
+	if (captureMeshIconOnCurrentFrame)
+	{
+		debugMenu.debugNotifications.clear();
+
+		ID3D11Texture2D* backBuffer = nullptr;
+		HR(swapchain->GetBuffer(0, IID_PPV_ARGS(&backBuffer)));
+		assert(backBuffer);
+
+		const std::wstring imageFile = L"Icons/MeshIcons/" +
+			VString::stows(captureMeshIconMeshFilename) + L".jpg";
+		HR(SaveWICTextureToFile(context, backBuffer, GUID_ContainerFormatJpeg, imageFile.c_str()));
+
+		Log(L"Mesh Icon created from [%s] mesh.", captureMeshIconMeshFilename.c_str());
+
+		captureMeshIconOnCurrentFrame = false;
+		captureMeshIconMeshFilename.clear();
+
+		return;
+	}
+
 	HR(swapchain->Present(1, 0));
 }
 
@@ -2252,6 +2282,34 @@ void RenderLightProbes()
 	context->DrawInstanced(instanceMesh->meshDataProxy.vertices.size(), probeMap->GetProbeCount(), 0, 0);
 }
 
+void RenderMeshToCaptureMeshIcon()
+{
+	RenderSetup();
+
+	auto mesh = MeshComponent::system.Add("MeshCaptureIcon");
+	mesh->SetMeshFilename(captureMeshIconMeshFilename);
+	mesh->Create();
+
+	auto& previousActiveCamera = Camera::GetActiveCamera();
+
+	auto camera = CameraComponent::system.Add("MeshCaptureCamera");
+	Camera::SetActiveCamera(camera);
+	camera->SetWorldPosition(XMFLOAT3(0.f, 0.f, -2.f));
+	camera->SetTargetComponent(mesh);
+
+	shaderMatrices.view = camera->GetViewMatrix();
+
+	SetRenderPipelineStates(mesh);
+	SetMatricesFromMesh(mesh);
+	SetShaderMeshData(mesh);
+	DrawMesh(mesh);
+
+	mesh->Remove();
+	camera->Remove();
+
+	Camera::SetActiveCamera(&previousActiveCamera);
+}
+
 void PointLightVertexColourMap()
 {
 	const auto startTime = Profile::QuickStart();
@@ -2448,4 +2506,16 @@ ID3D11DeviceContext& Renderer::GetDeviceContext()
 Sampler& Renderer::GetDefaultSampler()
 {
 	return *defaultSampler;
+}
+
+void Renderer::SetRendererToCaptureMeshIcon(std::string meshFilename)
+{
+	//Remember that it needs to be the .vmesh filename, not .fbx
+	captureMeshIconMeshFilename = VString::ReplaceFileExtesnion(meshFilename, ".vmesh");
+	captureMeshIconOnCurrentFrame = true;
+}
+
+bool Renderer::IsRendererSetToCaptureMeshIcon()
+{
+	return captureMeshIconOnCurrentFrame;
 }
