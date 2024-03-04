@@ -1873,7 +1873,7 @@ void Renderer::Present()
 			VString::stows(captureMeshIconMeshFilename) + L".jpg";
 		HR(SaveWICTextureToFile(context, backBuffer, GUID_ContainerFormatJpeg, imageFile.c_str()));
 
-		Log(L"Mesh Icon created from [%s] mesh.", captureMeshIconMeshFilename.c_str());
+		Log("Mesh Icon created from [%s] mesh.", captureMeshIconMeshFilename.c_str());
 
 		captureMeshIconOnCurrentFrame = false;
 		captureMeshIconMeshFilename.clear();
