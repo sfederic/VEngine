@@ -181,8 +181,7 @@ ID3D11RasterizerState* rastStateFrontCull;
 ID3D11RasterizerState* rastStateShadow;
 
 //Blendstates
-ID3D11BlendState* nullBlendState = nullptr;
-ID3D11BlendState* blendStateAlphaToCoverage = nullptr;
+ID3D11BlendState* defaultBlendState = nullptr;
 
 //DXGI
 IDXGISwapChain3* swapchain;
@@ -493,9 +492,8 @@ void CreateBlendStates()
 		alphaToCoverageDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
 		alphaToCoverageDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
 
-		HR(device->CreateBlendState(&alphaToCoverageDesc, &blendStateAlphaToCoverage));
-
-		blendStateMap.emplace(BlendStates::Default, std::make_unique<BlendState>(BlendStates::Default, blendStateAlphaToCoverage));
+		HR(device->CreateBlendState(&alphaToCoverageDesc, &defaultBlendState));
+		blendStateMap.emplace(BlendStates::Default, std::make_unique<BlendState>(BlendStates::Default, defaultBlendState));
 	}
 }
 
@@ -2263,7 +2261,7 @@ void RenderLightProbes()
 	auto instanceMesh = probeMap->lightProbesDebugInstanceMesh->instanceMesh;
 	SetRenderPipelineStates(instanceMesh);
 
-	SetBlendStateByName(BlendStates::null);
+	SetBlendStateByName(BlendStates::Default);
 
 	//Careful with the buffers here, they're not part of the instance mesh, instead they're in the diffuse probe map
 	MapBuffer(probeMap->GetStructuredBuffer(), probeMap->lightProbeData.data(), sizeof(LightProbeInstanceData) * probeMap->lightProbeData.size());

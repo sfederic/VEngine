@@ -24,7 +24,6 @@ void Material::SetupBlendShaderItemsAndRastStateValues()
 	rastStates.Add(RastStates::wireframe);
 	rastStates.Add(RastStates::frontCull);
 
-	blendStates.Add(BlendStates::null);
 	blendStates.Add(BlendStates::Default);
 
 	shaderItemNames.Add(ShaderItems::Animation->GetName());
