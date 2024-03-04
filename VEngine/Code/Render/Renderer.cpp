@@ -474,7 +474,7 @@ void CreateBlendStates()
 	{
 		D3D11_BLEND_DESC nullBlendDesc = {};
 		nullBlendDesc.RenderTarget[0].BlendEnable = false;
-		HR(device->CreateBlendState(&nullBlendDesc, &blendStateAlphaToCoverage));
+		HR(device->CreateBlendState(&nullBlendDesc, &nullBlendState));
 
 		blendStateMap.emplace(BlendStates::null, std::make_unique<BlendState>(BlendStates::null, nullBlendState));
 	}
