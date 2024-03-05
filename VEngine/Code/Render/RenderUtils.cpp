@@ -23,6 +23,8 @@ namespace RenderUtils
 		data.pSysMem = initData;
 
 		HR(Renderer::GetDevice().CreateBuffer(&desc, &data, outputBuffer.ReleaseAndGetAddressOf()));
+
+		SetResourceName(outputBuffer.Get(), "default_buffer_" + std::to_string(GenerateUID()));
 	}
 
 	void CreateDynamicBuffer(uint64_t byteWidth, uint32_t bindFlags, const void* initData, Microsoft::WRL::ComPtr<ID3D11Buffer>& outputBuffer)
@@ -37,6 +39,8 @@ namespace RenderUtils
 		data.pSysMem = initData;
 
 		HR(Renderer::GetDevice().CreateBuffer(&desc, &data, outputBuffer.ReleaseAndGetAddressOf()));
+
+		SetResourceName(outputBuffer.Get(), "dynamic_buffer_" + std::to_string(GenerateUID()));
 	}
 
 	void CreateVertexBuffer(MeshDataProxy& meshData, Microsoft::WRL::ComPtr<ID3D11Buffer>& outputBuffer)
@@ -54,6 +58,8 @@ namespace RenderUtils
 
 		Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> srv;
 		HR(Renderer::GetDevice().CreateShaderResourceView(structuredBuffer, &srvDesc, outputSrv.ReleaseAndGetAddressOf()));
+
+		SetResourceName(outputSrv.Get(), "srv_" + std::to_string(GenerateUID()));
 	}
 
 	void CreateStructuredBuffer(uint32_t byteWidth, uint32_t byteStride, const void* initData, Microsoft::WRL::ComPtr<ID3D11Buffer>& outputBuffer)
@@ -70,6 +76,8 @@ namespace RenderUtils
 		data.pSysMem = initData;
 
 		HR(Renderer::GetDevice().CreateBuffer(&desc, &data, outputBuffer.ReleaseAndGetAddressOf()));
+
+		SetResourceName(outputBuffer.Get(), "structured_buffer_" + std::to_string(GenerateUID()));
 	}
 
 	void CreateSampler(Sampler& sampler)
@@ -81,10 +89,14 @@ namespace RenderUtils
 		sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
 
 		HR(Renderer::GetDevice().CreateSamplerState(&sampDesc, sampler.data.ReleaseAndGetAddressOf()));
+
+		SetResourceName(sampler.data.Get(), "sampler_" + std::to_string(GenerateUID()));
 	}
 
 	void SetResourceName(ID3D11DeviceChild* resource, std::string name)
 	{
+		//@Todo: _DEBUG
+		HR(resource->SetPrivateData(WKPDID_D3DDebugObjectName, name.size(), name.c_str()));
 	}
 
 	void CreateTexture(Texture2D& texture)
