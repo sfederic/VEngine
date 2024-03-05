@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <string>
 #include <wrl.h>
 
 struct ID3D11Buffer;
