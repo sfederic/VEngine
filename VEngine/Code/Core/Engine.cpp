@@ -159,4 +159,6 @@ void Engine::Cleanup()
 	ShaderSystem::ClearShaders();
 	debugMenu.Cleanup();
 	UISystem::Cleanup();
+
+	Renderer::ReportLiveObjectsVerbose();
 }

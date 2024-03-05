@@ -164,6 +164,7 @@ Microsoft::WRL::ComPtr<ID3D11Texture2D> depthStencilBuffer;
 static const int swapchainCount = 2;
 
 Microsoft::WRL::ComPtr<ID3D11Device> device;
+Microsoft::WRL::ComPtr<ID3D11Debug> debugDevice;
 Microsoft::WRL::ComPtr<ID3D11DeviceContext> context;
 
 Microsoft::WRL::ComPtr<ID3D11RenderTargetView> rtvs[swapchainCount];
@@ -342,6 +343,9 @@ void CreateDevice()
 	HR(D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, createDeviceFlags,
 		featureLevels, _countof(featureLevels), D3D11_SDK_VERSION, device.GetAddressOf(),
 		&selectedFeatureLevel, context.GetAddressOf()));
+
+	//Create debug device
+	HR(device->QueryInterface(IID_PPV_ARGS(debugDevice.GetAddressOf())));
 }
 
 void CreateSwapchain(HWND window)
@@ -2497,4 +2501,10 @@ void Renderer::SetRendererToCaptureMeshIcon(std::string meshFilename)
 bool Renderer::IsRendererSetToCaptureMeshIcon()
 {
 	return captureMeshIconOnCurrentFrame;
+}
+
+void Renderer::ReportLiveObjectsVerbose()
+{
+	//@Todo: _DEBUG
+	debugDevice->ReportLiveDeviceObjects(D3D11_RLDO_DETAIL);
 }

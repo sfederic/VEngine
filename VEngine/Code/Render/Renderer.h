@@ -65,4 +65,6 @@ namespace Renderer
 	//a different viewport, it might settle the issue of being too branchy.
 	void SetRendererToCaptureMeshIcon(std::string meshFilename);
 	bool IsRendererSetToCaptureMeshIcon();
+
+	void ReportLiveObjectsVerbose();
 };
