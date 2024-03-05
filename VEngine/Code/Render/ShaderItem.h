@@ -35,6 +35,7 @@ private:
 	std::wstring vertexShaderFilename;
 	std::wstring pixelShaderFilename;
 
+	//Caches of the shaders. These pointers aren't created or released directly, hence not being ComPtrs.
 	ID3D11VertexShader* vertexShader = nullptr;
 	ID3D11PixelShader* pixelShader = nullptr;
 };

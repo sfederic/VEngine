@@ -50,6 +50,6 @@ public:
 	ID3D11VertexShader* GetVertexShader();
 	ID3D11PixelShader* GetPixelShader();
 
-	UID GetUID() { return uid; }
+	UID GetUID() const { return uid; }
 	void SetUID(UID uid_) { uid = uid_; }
 };

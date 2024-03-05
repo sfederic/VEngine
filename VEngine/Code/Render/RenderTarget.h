@@ -1,6 +1,7 @@
 #pragma once
 
 #include <d3d11.h>
+#include <wrl.h>
 
 class RenderTarget
 {
@@ -10,16 +11,16 @@ public:
 	void Create(uint32_t width, uint32_t height);
 	void Recycle();
 
-	auto& GetRTV() { return *rtv; }
-	auto GetRTVAddress() { return &rtv; }
+	auto& GetRTV() { return *rtv.Get(); }
+	auto GetRTVAddress() { return rtv.GetAddressOf(); }
 
-	auto& GetSRV() { return *srv; }
-	auto GetSRVAddress() { return &srv; }
+	auto& GetSRV() { return *srv.Get(); }
+	auto GetSRVAddress() { return srv.GetAddressOf(); }
 
 private:
-	ID3D11Texture2D* texture = nullptr;
-	ID3D11RenderTargetView* rtv = nullptr;
-	ID3D11ShaderResourceView* srv = nullptr;
+	Microsoft::WRL::ComPtr<ID3D11Texture2D> texture;
+	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> rtv;
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> srv;
 
 	DXGI_FORMAT format;
 };

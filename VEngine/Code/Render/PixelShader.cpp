@@ -17,6 +17,5 @@ void PixelShader::Create(const std::wstring filename)
 
 void PixelShader::Reset()
 {
-	shader.Reset();
 	byteCode.clear();
 }

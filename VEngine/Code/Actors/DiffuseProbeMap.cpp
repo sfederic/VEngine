@@ -20,9 +20,9 @@ void DiffuseProbeMap::Create()
 
 	lightProbesDebugInstanceMesh = new DebugLightProbe(probeCount);
 
-	structuredBuffer = RenderUtils::CreateStructuredBuffer(sizeof(LightProbeInstanceData) * probeCount,
-		sizeof(LightProbeInstanceData), lightProbeData.data());
-	srv = RenderUtils::CreateSRVForMeshInstance(structuredBuffer, probeCount);
+	RenderUtils::CreateStructuredBuffer(sizeof(LightProbeInstanceData) * probeCount,
+		sizeof(LightProbeInstanceData), lightProbeData.data(), structuredBuffer);
+	RenderUtils::CreateSRVForMeshInstance(structuredBuffer.Get(), probeCount, srv);
 }
 
 Properties DiffuseProbeMap::GetProps()

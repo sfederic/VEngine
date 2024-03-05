@@ -1,20 +1,15 @@
 #include "vpch.h"
 #include "Texture2D.h"
+#include "RenderUtils.h"
 
 Texture2D::~Texture2D()
 {
-	if (data)
-	{
-		data->Release();
-		data = nullptr;
-	}
-
-	if (srv)
-	{
-		srv->Release();
-		srv = nullptr;
-	}
-
 	width = 0;
 	height = 0;
+}
+
+void Texture2D::SetBufferNames()
+{
+	RenderUtils::SetResourceName(data.Get(), "Resource_" + filename);
+	RenderUtils::SetResourceName(srv.Get(), "SRV_" + filename);
 }

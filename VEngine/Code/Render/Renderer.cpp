@@ -142,7 +142,7 @@ void SetConstantBufferVertex(uint32_t shaderRegister, ID3D11Buffer* constantBuff
 void SetConstantBufferPixel(uint32_t shaderRegister, ID3D11Buffer* constantBuffer);
 void SetVertexBuffer(Buffer& vertexBuffer);
 void SetIndexBuffer(Buffer* indexBuffer);
-void SetSampler(uint32_t shaderRegister, Sampler* sampler);
+void SetSampler(uint32_t shaderRegister, Sampler& sampler);
 void SetShaderResourcePixel(uint32_t shaderRegister, std::string textureName);
 void SetShaderResourceFromMaterial(uint32_t shaderRegister, Material& material);
 void SetLightsConstantBufferData();
@@ -158,44 +158,44 @@ unsigned int Renderer::offset = 0;
 
 DXGI_FORMAT indexBufferFormat = DXGI_FORMAT_R32_UINT;
 
-ID3D11Texture2D* backBuffer;
-ID3D11Texture2D* depthStencilBuffer;
+Microsoft::WRL::ComPtr<ID3D11Texture2D> backBuffer;
+Microsoft::WRL::ComPtr<ID3D11Texture2D> depthStencilBuffer;
 
 static const int swapchainCount = 2;
 
-ID3D11Device* device;
-ID3D11DeviceContext* context;
+Microsoft::WRL::ComPtr<ID3D11Device> device;
+Microsoft::WRL::ComPtr<ID3D11DeviceContext> context;
 
-ID3D11RenderTargetView* rtvs[swapchainCount];
+Microsoft::WRL::ComPtr<ID3D11RenderTargetView> rtvs[swapchainCount];
 
-ID3D11DepthStencilView* dsv;
-ID3D11InputLayout* inputLayout;
+Microsoft::WRL::ComPtr<ID3D11DepthStencilView> dsv;
+Microsoft::WRL::ComPtr<ID3D11InputLayout> inputLayout;
 
 //Rasterizer states
 std::unordered_map<std::string, std::unique_ptr<RastState>> rastStateMap;
 std::unordered_map<std::string, std::unique_ptr<BlendState>> blendStateMap;
-ID3D11RasterizerState* rastStateSolid;
-ID3D11RasterizerState* rastStateWireframe;
-ID3D11RasterizerState* rastStateNoBackCull;
-ID3D11RasterizerState* rastStateFrontCull;
-ID3D11RasterizerState* rastStateShadow;
+Microsoft::WRL::ComPtr<ID3D11RasterizerState> rastStateSolid;
+Microsoft::WRL::ComPtr<ID3D11RasterizerState> rastStateWireframe;
+Microsoft::WRL::ComPtr<ID3D11RasterizerState> rastStateNoBackCull;
+Microsoft::WRL::ComPtr<ID3D11RasterizerState> rastStateFrontCull;
+Microsoft::WRL::ComPtr<ID3D11RasterizerState> rastStateShadow;
 
 //Blendstates
-ID3D11BlendState* defaultBlendState = nullptr;
+Microsoft::WRL::ComPtr<ID3D11BlendState> defaultBlendState;
 
 //DXGI
-IDXGISwapChain3* swapchain;
-IDXGIFactory6* dxgiFactory;
+Microsoft::WRL::ComPtr<IDXGISwapChain3> swapchain;
+Microsoft::WRL::ComPtr<IDXGIFactory6> dxgiFactory;
 
 //Constant buffers and data
-ConstantBuffer<ShaderMatrices>* cbMatrices;
-ConstantBuffer<MaterialShaderData>* cbMaterial;
-ConstantBuffer<ShaderLights>* cbLights;
-ConstantBuffer<ShaderTimeData>* cbTime;
-ConstantBuffer<ShaderMeshData>* cbMeshData;
-ConstantBuffer<ShaderSkinningData>* cbSkinningData;
+ConstantBuffer<ShaderMatrices> cbMatrices;
+ConstantBuffer<MaterialShaderData> cbMaterial;
+ConstantBuffer<ShaderLights> cbLights;
+ConstantBuffer<ShaderTimeData> cbTime;
+ConstantBuffer<ShaderMeshData> cbMeshData;
+ConstantBuffer<ShaderSkinningData> cbSkinningData;
 //ConstantBuffer<ShaderMeshLightMapData>* cbMeshLightMapData;
-ConstantBuffer<ShaderPostProcessData>* cbPostProcess;
+ConstantBuffer<ShaderPostProcessData> cbPostProcess;
 
 //Viewport
 D3D11_VIEWPORT viewport;
@@ -203,12 +203,12 @@ D3D11_VIEWPORT viewport;
 //Shadow maps
 ShadowMap* shadowMap;
 
-Sampler* defaultSampler;
+Sampler defaultSampler;
 
 //Light probe buffers
-ID3D11RenderTargetView* lightProbeRTVs[6]; //Cubemap
-ID3D11ShaderResourceView* lightProbeSRV = nullptr;
-ID3D11Texture2D* lightProbeTexture = nullptr;
+Microsoft::WRL::ComPtr<ID3D11RenderTargetView> lightProbeRTVs[6]; //Cubemap
+Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> lightProbeSRV;
+Microsoft::WRL::ComPtr<ID3D11Texture2D> lightProbeTexture;
 
 //Post process
 RenderTarget postProcessRenderTarget(DXGI_FORMAT_R16G16B16A16_FLOAT);
@@ -242,7 +242,7 @@ struct DebugBoxData
 //Debug object containers
 std::vector<DebugBoxData> debugOrientedBoxesOnTimerToRender;
 std::vector<Vertex> debugLines;
-ID3D11Buffer* debugLinesBuffer;
+Microsoft::WRL::ComPtr<ID3D11Buffer> debugLinesBuffer;
 static const uint64_t debugLinesBufferSize = 32 * 32 * sizeof(Vertex);
 
 void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
@@ -259,7 +259,7 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 
 	ShaderSystem::Init();
 
-	shadowMap = new ShadowMap(device, 2048, 2048);
+	shadowMap = new ShadowMap(device.Get(), 2048, 2048);
 
 	CheckSupportedFeatures();
 
@@ -272,7 +272,7 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 
 	postProcessRenderTarget.Create(viewport.Width, viewport.Height);
 
-	defaultSampler = RenderUtils::CreateSampler();
+	RenderUtils::CreateSampler(defaultSampler);
 
 	SpriteSystem::Init();
 
@@ -320,7 +320,7 @@ void CreateFactory()
 {
 	IDXGIFactory* tempDxgiFactory = nullptr;
 	HR(CreateDXGIFactory(IID_PPV_ARGS(&tempDxgiFactory)));
-	HR(tempDxgiFactory->QueryInterface(&dxgiFactory));
+	HR(tempDxgiFactory->QueryInterface(dxgiFactory.GetAddressOf()));
 	tempDxgiFactory->Release();
 }
 
@@ -340,8 +340,8 @@ void CreateDevice()
 	//HR(dxgiFactory->EnumAdapterByGpuPreference(0, DXGI_GPU_PREFERENCE_HIGH_PERFORMANCE, IID_PPV_ARGS(&adapter)));
 
 	HR(D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, createDeviceFlags,
-		featureLevels, _countof(featureLevels), D3D11_SDK_VERSION, &device,
-		&selectedFeatureLevel, &context));
+		featureLevels, _countof(featureLevels), D3D11_SDK_VERSION, device.GetAddressOf(),
+		&selectedFeatureLevel, context.GetAddressOf()));
 }
 
 void CreateSwapchain(HWND window)
@@ -356,8 +356,8 @@ void CreateSwapchain(HWND window)
 	sd.BufferCount = swapchainCount;
 
 	IDXGISwapChain* tempSwapchain = nullptr;
-	HR(dxgiFactory->CreateSwapChain(device, &sd, &tempSwapchain));
-	HR(tempSwapchain->QueryInterface(&swapchain));
+	HR(dxgiFactory->CreateSwapChain(device.Get(), &sd, &tempSwapchain));
+	HR(tempSwapchain->QueryInterface(swapchain.GetAddressOf()));
 	tempSwapchain->Release();
 
 	dxgiFactory->MakeWindowAssociation(window, DXGI_MWA_NO_WINDOW_CHANGES | DXGI_MWA_NO_ALT_ENTER);
@@ -365,12 +365,12 @@ void CreateSwapchain(HWND window)
 
 void CreateRTVAndDSV()
 {
-	swapchain->GetBuffer(0, IID_PPV_ARGS(&backBuffer));
+	swapchain->GetBuffer(0, IID_PPV_ARGS(backBuffer.GetAddressOf()));
 
 	//Create Render target views
 	for (int i = 0; i < swapchainCount; i++)
 	{
-		HR(device->CreateRenderTargetView(backBuffer, nullptr, &rtvs[i]));
+		HR(device->CreateRenderTargetView(backBuffer.Get(), nullptr, rtvs[i].GetAddressOf()));
 	}
 
 	//Create depth stencil view
@@ -383,9 +383,9 @@ void CreateRTVAndDSV()
 	dsDesc.Width = viewport.Width;
 	dsDesc.Height = viewport.Height;
 
-	HR(device->CreateTexture2D(&dsDesc, nullptr, &depthStencilBuffer));
+	HR(device->CreateTexture2D(&dsDesc, nullptr, depthStencilBuffer.GetAddressOf()));
 	assert(depthStencilBuffer);
-	HR(device->CreateDepthStencilView(depthStencilBuffer, nullptr, &dsv));
+	HR(device->CreateDepthStencilView(depthStencilBuffer.Get(), nullptr, dsv.GetAddressOf()));
 }
 
 void CreateInputLayout()
@@ -408,8 +408,8 @@ void CreateInputLayout()
 
 	VertexShader* shader = ShaderSystem::FindVertexShader(L"Default_vs.cso");
 
-	HR(device->CreateInputLayout(inputDesc, _countof(inputDesc), shader->GetByteCodeData(), shader->GetByteCodeSize(), &inputLayout));
-	context->IASetInputLayout(inputLayout);
+	HR(device->CreateInputLayout(inputDesc, _countof(inputDesc), shader->GetByteCodeData(), shader->GetByteCodeSize(), inputLayout.GetAddressOf()));
+	context->IASetInputLayout(inputLayout.Get());
 }
 
 void CreateRasterizerStates()
@@ -422,36 +422,36 @@ void CreateRasterizerStates()
 
 	//SOLID
 	{
-		HR(device->CreateRasterizerState(&rastDesc, &rastStateSolid));
-
-		rastStateMap.emplace(RastStates::solid, std::make_unique<RastState>(RastStates::solid, rastStateSolid));
+		HR(device->CreateRasterizerState(&rastDesc, rastStateSolid.GetAddressOf()));
+		RenderUtils::SetResourceName(rastStateSolid.Get(), RastStates::solid);
+		rastStateMap.emplace(RastStates::solid, std::make_unique<RastState>(RastStates::solid, rastStateSolid.Get()));
 	}
 
 	//WIREFRAME
 	{
 		rastDesc.FillMode = D3D11_FILL_WIREFRAME;
 		rastDesc.CullMode = D3D11_CULL_NONE;
-		HR(device->CreateRasterizerState(&rastDesc, &rastStateWireframe));
-
-		rastStateMap.emplace(RastStates::wireframe, std::make_unique<RastState>(RastStates::wireframe, rastStateWireframe));
+		HR(device->CreateRasterizerState(&rastDesc, rastStateWireframe.GetAddressOf()));
+		RenderUtils::SetResourceName(rastStateWireframe.Get(), RastStates::wireframe);
+		rastStateMap.emplace(RastStates::wireframe, std::make_unique<RastState>(RastStates::wireframe, rastStateWireframe.Get()));
 	}
 
 	//SOLID, NO BACK CULL
 	{
 		rastDesc.CullMode = D3D11_CULL_NONE;
 		rastDesc.FillMode = D3D11_FILL_SOLID;
-		HR(device->CreateRasterizerState(&rastDesc, &rastStateNoBackCull));
-
-		rastStateMap.emplace(RastStates::noBackCull, std::make_unique<RastState>(RastStates::noBackCull, rastStateNoBackCull));
+		HR(device->CreateRasterizerState(&rastDesc, rastStateNoBackCull.GetAddressOf()));
+		RenderUtils::SetResourceName(rastStateNoBackCull.Get(), RastStates::noBackCull);
+		rastStateMap.emplace(RastStates::noBackCull, std::make_unique<RastState>(RastStates::noBackCull, rastStateNoBackCull.Get()));
 	}
 
 	//FRONT CULL
 	{
 		rastDesc.CullMode = D3D11_CULL_FRONT;
 		rastDesc.FillMode = D3D11_FILL_SOLID;
-		HR(device->CreateRasterizerState(&rastDesc, &rastStateFrontCull));
-
-		rastStateMap.emplace(RastStates::frontCull, std::make_unique<RastState>(RastStates::frontCull, rastStateFrontCull));
+		HR(device->CreateRasterizerState(&rastDesc, rastStateFrontCull.GetAddressOf()));
+		RenderUtils::SetResourceName(rastStateFrontCull.Get(), RastStates::frontCull);
+		rastStateMap.emplace(RastStates::frontCull, std::make_unique<RastState>(RastStates::frontCull, rastStateFrontCull.Get()));
 	}
 
 	//SHADOWS
@@ -461,23 +461,14 @@ void CreateRasterizerStates()
 		rastDesc.DepthBias = 25000;
 		rastDesc.DepthBiasClamp = 0.0f;
 		rastDesc.SlopeScaledDepthBias = 1.0f;
-		HR(device->CreateRasterizerState(&rastDesc, &rastStateShadow));
-
-		rastStateMap.emplace(RastStates::shadow, std::make_unique<RastState>(RastStates::shadow, rastStateShadow));
+		HR(device->CreateRasterizerState(&rastDesc, rastStateShadow.GetAddressOf()));
+		RenderUtils::SetResourceName(rastStateShadow.Get(), RastStates::shadow);
+		rastStateMap.emplace(RastStates::shadow, std::make_unique<RastState>(RastStates::shadow, rastStateShadow.Get()));
 	}
 }
 
 void CreateBlendStates()
 {
-	//NULL BLEND STATE
-	{
-		D3D11_BLEND_DESC nullBlendDesc = {};
-		nullBlendDesc.RenderTarget[0].BlendEnable = false;
-		HR(device->CreateBlendState(&nullBlendDesc, &nullBlendState));
-
-		blendStateMap.emplace(BlendStates::null, std::make_unique<BlendState>(BlendStates::null, nullBlendState));
-	}
-
 	//DEFAULT BLEND STATE
 	{
 		D3D11_BLEND_DESC alphaToCoverageDesc = {};
@@ -492,8 +483,8 @@ void CreateBlendStates()
 		alphaToCoverageDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
 		alphaToCoverageDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
 
-		HR(device->CreateBlendState(&alphaToCoverageDesc, &defaultBlendState));
-		blendStateMap.emplace(BlendStates::Default, std::make_unique<BlendState>(BlendStates::Default, defaultBlendState));
+		HR(device->CreateBlendState(&alphaToCoverageDesc, defaultBlendState.GetAddressOf()));
+		blendStateMap.emplace(BlendStates::Default, std::make_unique<BlendState>(BlendStates::Default, defaultBlendState.Get()));
 	}
 }
 
@@ -510,38 +501,31 @@ void CreateConstantBuffers()
 	//Shader matrix constant buffer
 	shaderMatrices.Create();
 
-	cbMatrices = new ConstantBuffer<ShaderMatrices>(&shaderMatrices, cbMatrixRegister);
-	assert(cbMatrices);
+	cbMatrices.Create(&shaderMatrices, cbMatrixRegister);
 
 	//Material buffer
 	MaterialShaderData materialShaderData = {};
-	cbMaterial = new ConstantBuffer<MaterialShaderData>(&materialShaderData, cbMaterialRegister);
-	assert(cbMaterial);
+	cbMaterial.Create(&materialShaderData, cbMaterialRegister);
 
 	//Lights buffer
 	ShaderLights shaderLights = {};
-	cbLights = new ConstantBuffer<ShaderLights>(&shaderLights, cbLightsRegister);
-	assert(cbLights);
+	cbLights.Create(&shaderLights, cbLightsRegister);
 
 	//Time buffer
 	ShaderTimeData timeData = {};
-	cbTime = new ConstantBuffer<ShaderTimeData>(&timeData, cbTimeRegister);
-	assert(cbTime);
+	cbTime.Create(&timeData, cbTimeRegister);
 
 	//Mesh data buffer
 	ShaderMeshData meshData = {};
-	cbMeshData = new ConstantBuffer<ShaderMeshData>(&meshData, cbMeshDataRegister);
-	assert(cbMeshData);
+	cbMeshData.Create(&meshData, cbMeshDataRegister);
 
 	//Skinning data
 	ShaderSkinningData skinningData = {};
-	cbSkinningData = new ConstantBuffer<ShaderSkinningData>(&skinningData, cbSkinningRegister);
-	assert(cbSkinningData);
+	cbSkinningData.Create(&skinningData, cbSkinningRegister);
 
 	//Post process data
 	ShaderPostProcessData postProcessData = {};
-	cbPostProcess = new ConstantBuffer<ShaderPostProcessData>(&postProcessData, 0);
-	assert(cbPostProcess);
+	cbPostProcess.Create(&postProcessData, 0);
 }
 
 void MapBuffer(ID3D11Resource* resource, const void* src, size_t size)
@@ -594,7 +578,7 @@ void SetShadowData()
 
 void SetLightResources()
 {
-	cbLights->SetVSAndPS();
+	cbLights.SetVSAndPS();
 }
 
 void DrawMesh(MeshComponent* mesh)
@@ -629,8 +613,8 @@ void DrawBoundingBox(MeshComponent* mesh, MeshComponent* boundsMesh)
 	shaderMatrices.model.r[2].m128_f32[2] += 0.01f;
 
 	shaderMatrices.MakeModelViewProjectionMatrix();
-	cbMatrices->Map(&shaderMatrices);
-	cbMatrices->SetVS();
+	cbMatrices.Map(&shaderMatrices);
+	cbMatrices.SetVS();
 
 	DrawMesh(boundsMesh);
 }
@@ -641,22 +625,22 @@ void RenderDebugLines()
 {
 	MaterialShaderData materialShaderData{};
 	materialShaderData.ambient = XMFLOAT4(1.0f, 0.0f, 0.f, 1.0f);
-	cbMaterial->Map(&materialShaderData);
-	cbMaterial->SetPS();
+	cbMaterial.Map(&materialShaderData);
+	cbMaterial.SetPS();
 	SetShaders(ShaderItems::SolidColour);
 
 	D3D11_MAPPED_SUBRESOURCE mappedResource{};
-	HR(context->Map(debugLinesBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
+	HR(context->Map(debugLinesBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
 	memcpy(mappedResource.pData, debugLines.data(), debugLinesBufferSize);
-	context->Unmap(debugLinesBuffer, 0);
+	context->Unmap(debugLinesBuffer.Get(), 0);
 
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
-	context->IASetVertexBuffers(0, 1, &debugLinesBuffer, &Renderer::stride, &Renderer::offset);
+	context->IASetVertexBuffers(0, 1, debugLinesBuffer.GetAddressOf(), &Renderer::stride, &Renderer::offset);
 
 	shaderMatrices.model = XMMatrixIdentity();
 	shaderMatrices.MakeModelViewProjectionMatrix();
-	cbMatrices->Map(&shaderMatrices);
-	cbMatrices->SetVS();
+	cbMatrices.Map(&shaderMatrices);
+	cbMatrices.SetVS();
 
 	context->Draw(debugLines.size(), 0);
 }
@@ -696,11 +680,11 @@ void RenderMeshForShadowPass(MeshComponent* mesh)
 	shaderMatrices.MakeModelViewProjectionMatrix();
 	shaderMatrices.MakeTextureMatrix(mat);
 
-	cbMatrices->Map(&shaderMatrices);
-	cbMatrices->SetVS();
+	cbMatrices.Map(&shaderMatrices);
+	cbMatrices.SetVS();
 
 	//Set textures
-	context->PSSetSamplers(0, 1, &mat.sampler->data);
+	context->PSSetSamplers(0, 1, mat.sampler->data.GetAddressOf());
 	SetShaderResourceFromMaterial(0, mat);
 
 	//Draw
@@ -725,11 +709,11 @@ void RenderInstanceMeshForShadowPass(InstanceMeshComponent& instanceMesh)
 		shaderMatrices.MakeModelViewProjectionMatrix();
 		shaderMatrices.MakeTextureMatrix(mat);
 
-		cbMatrices->Map(&shaderMatrices);
-		cbMatrices->SetVS();
+		cbMatrices.Map(&shaderMatrices);
+		cbMatrices.SetVS();
 
 		//Set textures
-		context->PSSetSamplers(0, 1, &mat.sampler->data);
+		context->PSSetSamplers(0, 1, mat.sampler->data.GetAddressOf());
 		SetShaderResourceFromMaterial(0, mat);
 
 		//Draw
@@ -747,9 +731,9 @@ void RenderShadowPass()
 	}
 
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	context->IASetInputLayout(inputLayout);
+	context->IASetInputLayout(inputLayout.Get());
 
-	shadowMap->BindDsvAndSetNullRenderTarget(context);
+	shadowMap->BindDsvAndSetNullRenderTarget(context.Get());
 
 	for (auto& mesh : MeshComponent::system.GetComponents())
 	{
@@ -772,10 +756,10 @@ void RenderShadowPass()
 			return;
 		}
 
-		context->RSSetState(rastStateMap["shadow"]->data);
+		context->RSSetState(rastStateMap.find(RastStates::shadow)->second->data.Get());
 
 		PipelineStateObject& pso = mesh->pso;
-		context->IASetVertexBuffers(0, 1, &pso.GetVertexBuffer().data, &Renderer::stride, &Renderer::offset);
+		context->IASetVertexBuffers(0, 1, pso.GetVertexBuffer().data.GetAddressOf(), &Renderer::stride, &Renderer::offset);
 
 		ShaderItem* shader = ShaderItems::ShadowAnimation;
 
@@ -787,18 +771,18 @@ void RenderShadowPass()
 		shaderMatrices.MakeModelViewProjectionMatrix();
 		shaderMatrices.MakeTextureMatrix(mesh->GetMaterial());
 
-		cbMatrices->Map(&shaderMatrices);
-		cbMatrices->SetVS();
+		cbMatrices.Map(&shaderMatrices);
+		cbMatrices.SetVS();
 
 		//Set skinning data
 		//The constant buffer set here is working off of the data inputted on animating skeletons
 		ShaderSkinningData skinningData = skeletalMesh->shaderSkinningData;
-		cbSkinningData->Map(&skinningData);
-		cbSkinningData->SetVS();
+		cbSkinningData.Map(&skinningData);
+		cbSkinningData.SetVS();
 
 		//Set textures
 		Material& mat = mesh->GetMaterial();
-		context->PSSetSamplers(0, 1, &mat.sampler->data);
+		context->PSSetSamplers(0, 1, mat.sampler->data.GetAddressOf());
 		SetShaderResourceFromMaterial(0, mat);
 
 		//Draw
@@ -817,12 +801,12 @@ void RenderSetup()
 	const float clearColour[4] = { 0.f, 0.f, 0.f, 1.f };
 	UINT frameIndex = swapchain->GetCurrentBackBufferIndex();
 
-	context->ClearRenderTargetView(rtvs[frameIndex], clearColour);
-	context->ClearDepthStencilView(dsv, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
+	context->ClearRenderTargetView(rtvs[frameIndex].Get(), clearColour);
+	context->ClearDepthStencilView(dsv.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
 
-	context->OMSetRenderTargets(1, &rtvs[frameIndex], dsv);
+	context->OMSetRenderTargets(1, rtvs[frameIndex].GetAddressOf(), dsv.Get());
 
-	context->IASetInputLayout(inputLayout);
+	context->IASetInputLayout(inputLayout.Get());
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }
 
@@ -834,18 +818,18 @@ void RenderPostProcessSetup()
 	UINT frameIndex = swapchain->GetCurrentBackBufferIndex();
 
 	context->ClearRenderTargetView(&postProcessRenderTarget.GetRTV(), clearColour);
-	context->ClearDepthStencilView(dsv, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
+	context->ClearDepthStencilView(dsv.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
 
-	context->OMSetRenderTargets(1, postProcessRenderTarget.GetRTVAddress(), dsv);
+	context->OMSetRenderTargets(1, postProcessRenderTarget.GetRTVAddress(), dsv.Get());
 
-	context->IASetInputLayout(inputLayout);
+	context->IASetInputLayout(inputLayout.Get());
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }
 
 void SetShadowResources()
 {
-	context->PSSetShaderResources(shadowMapTextureResgiter, 1, &shadowMap->depthMapSRV);
-	context->PSSetSamplers(1, 1, &shadowMap->sampler);
+	context->PSSetShaderResources(shadowMapTextureResgiter, 1, shadowMap->depthMapSRV.GetAddressOf());
+	context->PSSetSamplers(1, 1, shadowMap->sampler.GetAddressOf());
 }
 
 void Renderer::Render()
@@ -861,8 +845,8 @@ void Renderer::Render()
 	timeData.deltaTime = Core::GetDeltaTime();
 	timeData.timeSinceStartup = Core::timeSinceStartup;
 
-	cbTime->Map(&timeData);
-	cbTime->SetVSAndPS();
+	cbTime.Map(&timeData);
+	cbTime.SetVSAndPS();
 
 	if (captureMeshIconOnCurrentFrame)
 	{
@@ -919,8 +903,8 @@ void SetMatricesFromMesh(MeshComponent* mesh)
 	XMVECTOR det = XMMatrixDeterminant(A);
 	shaderMatrices.invTranModel = XMMatrixTranspose(XMMatrixInverse(&det, A));
 
-	cbMatrices->Map(&shaderMatrices);
-	cbMatrices->SetVS();
+	cbMatrices.Map(&shaderMatrices);
+	cbMatrices.SetVS();
 }
 
 void SetShaderMeshData(MeshComponent* mesh)
@@ -932,7 +916,7 @@ void SetShaderMeshData(MeshComponent* mesh)
 	//Set light probe resources
 	if (!DiffuseProbeMap::system.GetActors().empty())
 	{
-		context->PSSetShaderResources(environmentMapTextureRegister, 1, &lightProbeSRV);
+		context->PSSetShaderResources(environmentMapTextureRegister, 1, lightProbeSRV.GetAddressOf());
 
 		LightProbeInstanceData probeData = DiffuseProbeMap::system.GetFirstActor()->FindClosestProbe(mesh->GetWorldPositionV());
 		memcpy(meshData.SH, probeData.SH, sizeof(XMFLOAT4) * 9);
@@ -944,8 +928,8 @@ void SetShaderMeshData(MeshComponent* mesh)
 		meshData.isDiffuseProbeMapActive = false;
 	}
 
-	cbMeshData->Map(&meshData);
-	cbMeshData->SetVSAndPS();
+	cbMeshData.Map(&meshData);
+	cbMeshData.SetVSAndPS();
 
 	//Light map data
 	//ShaderMeshLightMapData meshLightMapData;
@@ -1072,21 +1056,21 @@ void Renderer::RenderLightProbeViews()
 		{
 			context->RSSetViewports(1, &viewport);
 			constexpr float clearColour[4] = { 1.f, 1.f, 1.f, 0.f };
-			context->ClearRenderTargetView(lightProbeRTVs[i], clearColour);
-			context->IASetInputLayout(inputLayout);
+			context->ClearRenderTargetView(lightProbeRTVs[i].Get(), clearColour);
+			context->IASetInputLayout(inputLayout.Get());
 			context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-			context->OMSetRenderTargets(1, &lightProbeRTVs[i], nullptr);
+			context->OMSetRenderTargets(1, lightProbeRTVs[i].GetAddressOf(), nullptr);
 
-			context->RSSetState(rastStateMap[RastStates::solid]->data);
+			context->RSSetState(rastStateMap[RastStates::solid]->data.Get());
 
 			SetLightsConstantBufferData();
 
 			//Set lights buffer
-			cbLights->SetPS();
+			cbLights.SetPS();
 
 			//Set shadow resources (not now for lightprobes)
-			//context->PSSetShaderResources(shadowMapTextureResgiter, 1, &shadowMap->depthMapSRV);
-			//context->PSSetSamplers(1, 1, &shadowMap->sampler);
+			//context->PSSetShaderResources(shadowMapTextureResgiter, 1, shadowMap->depthMapSRV.GetAddressOf());
+			//context->PSSetSamplers(1, 1, shadowMap->sampler.GetaddressOf());
 
 			ShaderItem* lightProbeShader = ShaderItems::Default;
 
@@ -1097,20 +1081,20 @@ void Renderer::RenderLightProbeViews()
 				Material& material = mesh->GetMaterial();
 
 				const FLOAT blendState[4] = { 0.f };
-				context->OMSetBlendState(mesh->GetBlendState().data, blendState, 0xFFFFFFFF);
-				context->RSSetState(mesh->GetRastState().data);
+				context->OMSetBlendState(mesh->GetBlendState().data.Get(), blendState, 0xFFFFFFFF);
+				context->RSSetState(mesh->GetRastState().data.Get());
 
 				context->VSSetShader(lightProbeShader->GetVertexShader(), nullptr, 0);
 				context->PSSetShader(lightProbeShader->GetPixelShader(), nullptr, 0);
 
-				context->PSSetSamplers(0, 1, &material.sampler->data);
+				context->PSSetSamplers(0, 1, material.sampler->data.GetAddressOf());
 
 				SetShaderResourceFromMaterial(0, material);
 
-				context->IASetVertexBuffers(0, 1, &mesh->pso.GetVertexBuffer().data, &stride, &offset);
+				context->IASetVertexBuffers(0, 1, mesh->pso.GetVertexBuffer().data.GetAddressOf(), &stride, &offset);
 
-				cbMaterial->Map(&material.materialShaderData);
-				cbMaterial->SetPS();
+				cbMaterial.Map(&material.materialShaderData);
+				cbMaterial.SetPS();
 
 				//Set matrices
 				const auto probePos = XMLoadFloat3(&probeData.position);
@@ -1121,14 +1105,14 @@ void Renderer::RenderLightProbeViews()
 				shaderMatrices.MakeModelViewProjectionMatrix();
 				shaderMatrices.MakeTextureMatrix(mesh->GetMaterial());
 
-				cbMatrices->Map(&shaderMatrices);
-				cbMatrices->SetVS();
+				cbMatrices.Map(&shaderMatrices);
+				cbMatrices.SetVS();
 
 				//Set mesh data to shader
 				ShaderMeshData meshData;
 				XMStoreFloat3(&meshData.position, mesh->GetWorldPositionV());
-				cbMeshData->Map(&meshData);
-				cbMeshData->SetVSAndPS();
+				cbMeshData.Map(&meshData);
+				cbMeshData.SetVSAndPS();
 
 				//Draw
 				context->Draw(mesh->meshDataProxy.vertices.size(), 0);
@@ -1140,7 +1124,7 @@ void Renderer::RenderLightProbeViews()
 
 		//Remember that there are 9 coefficients with 3rd order SH per channel
 		float SH_R[9] = {}, SH_G[9] = {}, SH_B[9] = {};
-		HR(DirectX::SHProjectCubeMap(context, 3, lightProbeTexture, SH_R, SH_G, SH_B));
+		HR(DirectX::SHProjectCubeMap(context.Get(), 3, lightProbeTexture.Get(), SH_R, SH_G, SH_B));
 
 		XMFLOAT4 coefs[9] = {};
 		for (int co_index = 0; co_index < 9; co_index++)
@@ -1244,8 +1228,8 @@ void RenderInstanceMeshComponents()
 	shaderMatrices.model = XMMatrixIdentity();
 	shaderMatrices.MakeModelViewProjectionMatrix();
 
-	cbMatrices->Map(&shaderMatrices);
-	cbMatrices->SetVS();
+	cbMatrices.Map(&shaderMatrices);
+	cbMatrices.SetVS();
 
 	for (auto& instanceMesh : InstanceMeshComponent::system.GetComponents())
 	{
@@ -1259,16 +1243,16 @@ void RenderInstanceMeshComponents()
 
 		//Update texture matrix
 		shaderMatrices.MakeTextureMatrix(instanceMesh->GetMaterial());
-		cbMatrices->Map(&shaderMatrices);
-		cbMatrices->SetVS();
+		cbMatrices.Map(&shaderMatrices);
+		cbMatrices.SetVS();
 
 		//Update instance data and set SRV
-		MapBuffer(instanceMesh->structuredBuffer, instanceMesh->GetInstanceData().data(), sizeof(InstanceData) * instanceMesh->GetInstanceData().size());
-		context->VSSetShaderResources(instanceSRVRegister, 1, &instanceMesh->srv);
-		context->PSSetShaderResources(instanceSRVRegister, 1, &instanceMesh->srv);
+		MapBuffer(instanceMesh->structuredBuffer.Get(), instanceMesh->GetInstanceData().data(), sizeof(InstanceData) * instanceMesh->GetInstanceData().size());
+		context->VSSetShaderResources(instanceSRVRegister, 1, instanceMesh->srv.GetAddressOf());
+		context->PSSetShaderResources(instanceSRVRegister, 1, instanceMesh->srv.GetAddressOf());
 
 		//Set lights buffer
-		cbLights->SetPS();
+		cbLights.SetPS();
 
 		DrawMeshInstanced(instanceMesh.get());
 	}
@@ -1291,8 +1275,8 @@ void RenderBounds()
 
 		//Set debug wireframe material colour
 		materialShaderData.ambient = XMFLOAT4(0.75f, 0.75f, 0.75f, 1.0f);
-		cbMaterial->Map(&materialShaderData);
-		cbMaterial->SetPS();
+		cbMaterial.Map(&materialShaderData);
+		cbMaterial.SetPS();
 
 		for (auto& mesh : MeshComponent::system.GetComponents())
 		{
@@ -1323,8 +1307,8 @@ void RenderBounds()
 			shaderMatrices.model = boundsMatrix;
 
 			shaderMatrices.MakeModelViewProjectionMatrix();
-			cbMatrices->Map(&shaderMatrices);
-			cbMatrices->SetVS();
+			cbMatrices.Map(&shaderMatrices);
+			cbMatrices.SetVS();
 
 			DrawMesh(debugBox);
 		}
@@ -1357,13 +1341,13 @@ void RenderBounds()
 				center);
 
 			shaderMatrices.MakeModelViewProjectionMatrix();
-			cbMatrices->Map(&shaderMatrices);
-			cbMatrices->SetVS();
+			cbMatrices.Map(&shaderMatrices);
+			cbMatrices.SetVS();
 
 			//Set trigger wireframe material colour
 			materialShaderData.ambient = boxTrigger->renderWireframeColour;
-			cbMaterial->Map(&materialShaderData);
-			cbMaterial->SetPS();
+			cbMaterial.Map(&materialShaderData);
+			cbMaterial.SetPS();
 
 			DrawMesh(debugBox);
 		}
@@ -1384,7 +1368,7 @@ void RenderPhysicsMeshes()
 	auto& physicsMeshes = PhysicsSystem::GetAllPhysicsMeshes();
 	for (const auto& [uid, mesh] : physicsMeshes)
 	{
-		context->RSSetState(rastStateMap[RastStates::solid]->data);
+		context->RSSetState(rastStateMap[RastStates::solid]->data.Get());
 
 		auto shaderItem = ShaderSystem::FindShaderItem("SolidColour");
 		context->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
@@ -1397,13 +1381,13 @@ void RenderPhysicsMeshes()
 		assert(originalMesh);
 		shaderMatrices.model = originalMesh->GetWorldMatrix();
 		shaderMatrices.MakeModelViewProjectionMatrix();
-		cbMatrices->Map(&shaderMatrices);
-		cbMatrices->SetVS();
+		cbMatrices.Map(&shaderMatrices);
+		cbMatrices.SetVS();
 
 		MaterialShaderData materialShaderData;
 		materialShaderData.ambient = XMFLOAT4(0.1f, 0.9f, 0.1f, 1.f);
-		cbMaterial->Map(&materialShaderData);
-		cbMaterial->SetPS();
+		cbMaterial.Map(&materialShaderData);
+		cbMaterial.SetPS();
 
 		DrawMesh(mesh.get());
 	}
@@ -1412,7 +1396,6 @@ void RenderPhysicsMeshes()
 void CreateLightProbeBuffers()
 {
 	//Texture
-	if (lightProbeTexture) lightProbeTexture->Release();
 
 	D3D11_TEXTURE2D_DESC texDesc = {};
 	texDesc.Width = lightProbeTextureWidth;
@@ -1425,17 +1408,16 @@ void CreateLightProbeBuffers()
 	texDesc.BindFlags = D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_RENDER_TARGET;
 	texDesc.MiscFlags = D3D11_RESOURCE_MISC_TEXTURECUBE;
 
-	HR(device->CreateTexture2D(&texDesc, 0, &lightProbeTexture));
+	HR(device->CreateTexture2D(&texDesc, 0, lightProbeTexture.GetAddressOf()));
 	assert(lightProbeTexture);
 
 	//SRV
-	if (lightProbeSRV) lightProbeSRV->Release();
 
 	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
 	srvDesc.Format = texDesc.Format;
 	srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURECUBE;
 	srvDesc.TextureCube.MipLevels = 1;
-	HR(device->CreateShaderResourceView(lightProbeTexture, &srvDesc, &lightProbeSRV));
+	HR(device->CreateShaderResourceView(lightProbeTexture.Get(), &srvDesc, lightProbeSRV.GetAddressOf()));
 
 	//RTVs
 	D3D11_RENDER_TARGET_VIEW_DESC rtvDesc = {};
@@ -1445,9 +1427,8 @@ void CreateLightProbeBuffers()
 
 	for (int i = 0; i < 6; i++)
 	{
-		if (lightProbeRTVs[i]) lightProbeRTVs[i]->Release();
 		rtvDesc.Texture2DArray.FirstArraySlice = i;
-		HR(device->CreateRenderTargetView(lightProbeTexture, &rtvDesc, &lightProbeRTVs[i]));
+		HR(device->CreateRenderTargetView(lightProbeTexture.Get(), &rtvDesc, lightProbeRTVs[i].GetAddressOf()));
 	}
 }
 
@@ -1463,15 +1444,15 @@ void RenderCharacterControllers()
 	SetVertexBuffer(debugCapsule->GetVertexBuffer());
 
 	materialShaderData.ambient = XMFLOAT4(1.0f, 0.8f, 0.7f, 1.0f); //Pink
-	cbMaterial->Map(&materialShaderData);
-	cbMaterial->SetPS();
+	cbMaterial.Map(&materialShaderData);
+	cbMaterial.SetPS();
 
 	for (auto& characterController : CharacterControllerComponent::system.GetComponents())
 	{
 		shaderMatrices.model = characterController->GetWorldMatrix();
 		shaderMatrices.MakeModelViewProjectionMatrix();
-		cbMatrices->Map(&shaderMatrices);
-		cbMatrices->SetVS();
+		cbMatrices.Map(&shaderMatrices);
+		cbMatrices.SetVS();
 
 		DrawMesh(debugCapsule);
 	}
@@ -1489,15 +1470,15 @@ void RenderCameraMeshes()
 	SetVertexBuffer(debugCamera->GetVertexBuffer());
 
 	materialShaderData.ambient = XMFLOAT4(1.0f, 0.0f, 0.f, 1.0f); //Make cameras red
-	cbMaterial->Map(&materialShaderData);
-	cbMaterial->SetPS();
+	cbMaterial.Map(&materialShaderData);
+	cbMaterial.SetPS();
 
 	for (auto& camera : CameraComponent::system.GetComponents())
 	{
 		shaderMatrices.model = camera->GetWorldMatrix();
 		shaderMatrices.MakeModelViewProjectionMatrix();
-		cbMatrices->Map(&shaderMatrices);
-		cbMatrices->SetVS();
+		cbMatrices.Map(&shaderMatrices);
+		cbMatrices.SetVS();
 
 		DrawMesh(debugCamera);
 	}
@@ -1517,8 +1498,8 @@ void RenderLightMeshes()
 	//Set debug sphere wireframe material colour
 	MaterialShaderData materialShaderData = {};
 	materialShaderData.ambient = XMFLOAT4(1.f, 1.f, 0.f, 1.0f);
-	cbMaterial->Map(&materialShaderData);
-	cbMaterial->SetPS();
+	cbMaterial.Map(&materialShaderData);
+	cbMaterial.SetPS();
 
 	//DIRECTIONAL LIGHTS
 	SetVertexBuffer(debugSphere->GetVertexBuffer());
@@ -1527,8 +1508,8 @@ void RenderLightMeshes()
 	{
 		shaderMatrices.model = directionalLight->GetWorldMatrix();
 		shaderMatrices.MakeModelViewProjectionMatrix();
-		cbMatrices->Map(&shaderMatrices);
-		cbMatrices->SetVS();
+		cbMatrices.Map(&shaderMatrices);
+		cbMatrices.SetVS();
 
 		DrawMesh(debugSphere);
 	}
@@ -1540,8 +1521,8 @@ void RenderLightMeshes()
 	{
 		shaderMatrices.model = pointLight->GetWorldMatrix();
 		shaderMatrices.MakeModelViewProjectionMatrix();
-		cbMatrices->Map(&shaderMatrices);
-		cbMatrices->SetVS();
+		cbMatrices.Map(&shaderMatrices);
+		cbMatrices.SetVS();
 
 		DrawMesh(debugIcoSphere);
 	}
@@ -1553,8 +1534,8 @@ void RenderLightMeshes()
 	{
 		shaderMatrices.model = spotLight->GetWorldMatrix();
 		shaderMatrices.MakeModelViewProjectionMatrix();
-		cbMatrices->Map(&shaderMatrices);
-		cbMatrices->SetVS();
+		cbMatrices.Map(&shaderMatrices);
+		cbMatrices.SetVS();
 
 		DrawMesh(debugCone);
 	}
@@ -1568,8 +1549,8 @@ void RenderPolyboards()
 	shaderMatrices.model = XMMatrixIdentity();
 	shaderMatrices.MakeModelViewProjectionMatrix();
 
-	cbMatrices->Map(&shaderMatrices);
-	cbMatrices->SetVS();
+	cbMatrices.Map(&shaderMatrices);
+	cbMatrices.SetVS();
 
 	SetBlendStateByName(BlendStates::Default);
 	SetRastStateByName(RastStates::noBackCull);
@@ -1581,24 +1562,24 @@ void RenderPolyboards()
 
 		polyboard->CalcVertices();
 
-		context->PSSetSamplers(0, 1, &Renderer::GetDefaultSampler().data);
+		context->PSSetSamplers(0, 1, Renderer::GetDefaultSampler().data.GetAddressOf());
 
 		SetShaderResourcePixel(0, polyboard->GetTextureFilename());
 
 		//VERTEX MAP
 		{
 			D3D11_MAPPED_SUBRESOURCE mappedResource = {};
-			HR(context->Map(polyboard->GetVertexBuffer().data, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
+			HR(context->Map(polyboard->GetVertexBuffer().data.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
 			memcpy(mappedResource.pData, polyboard->GetVertices().data(), sizeof(Vertex) * polyboard->GetVertices().size());
-			context->Unmap(polyboard->GetVertexBuffer().data, 0);
+			context->Unmap(polyboard->GetVertexBuffer().data.Get(), 0);
 		}
 
 		//INDEX MAP
 		{
 			D3D11_MAPPED_SUBRESOURCE mappedResource = {};
-			HR(context->Map(polyboard->GetIndexBuffer().data, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
+			HR(context->Map(polyboard->GetIndexBuffer().data.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
 			memcpy(mappedResource.pData, polyboard->GetIndices().data(), sizeof(MeshData::indexDataType) * polyboard->GetIndices().size());
-			context->Unmap(polyboard->GetIndexBuffer().data, 0);
+			context->Unmap(polyboard->GetIndexBuffer().data.Get(), 0);
 		}
 
 		SetVertexBuffer(polyboard->GetVertexBuffer());
@@ -1624,7 +1605,7 @@ void RenderSpriteSheets()
 		SetRastStateByName(RastStates::noBackCull);
 		SetShaders(ShaderItems::DefaultClip);
 
-		SetSampler(0, &Renderer::GetDefaultSampler());
+		SetSampler(0, Renderer::GetDefaultSampler());
 		SetShaderResourcePixel(0, spriteSheet->GetTextureFilename());
 
 		spriteSheet->UpdateSprite();
@@ -1639,8 +1620,8 @@ void RenderSpriteSheets()
 		shaderMatrices.model = spriteSheet->GetWorldMatrix();
 		shaderMatrices.MakeModelViewProjectionMatrix();
 
-		cbMatrices->Map(&shaderMatrices);
-		cbMatrices->SetVS();
+		cbMatrices.Map(&shaderMatrices);
+		cbMatrices.SetVS();
 
 		context->DrawIndexed(6, 0, 0);
 	}
@@ -1686,8 +1667,8 @@ void AnimateAndRenderSkeletalMeshes()
 
 				//Update skinning constant buffers
 				ShaderSkinningData& skinningData = skeletalMesh->shaderSkinningData;
-				cbSkinningData->Map(&skinningData);
-				cbSkinningData->SetVS();
+				cbSkinningData.Map(&skinningData);
+				cbSkinningData.SetVS();
 			}
 		}
 
@@ -1742,23 +1723,23 @@ void Renderer::RenderParticleEmitters()
 
 		if (drawAllAsWireframe)
 		{
-			context->RSSetState(rastStateWireframe);
+			context->RSSetState(rastStateWireframe.Get());
 		}
 		else
 		{
-			context->RSSetState(rastStateMap["nobackcull"]->data);
+			context->RSSetState(rastStateMap["nobackcull"]->data.Get());
 		}
 
 		SetBlendStateByName(BlendStates::Default);
 
 		SetShaders(emitter->GetMaterial().shader);
 
-		context->PSSetSamplers(0, 1, &Renderer::GetDefaultSampler().data);
+		context->PSSetSamplers(0, 1, Renderer::GetDefaultSampler().data.GetAddressOf());
 
 		MaterialShaderData materialShaderData;
 		materialShaderData = emitter->GetMaterial().materialShaderData;
-		cbMaterial->Map(&materialShaderData);
-		cbMaterial->SetPS();
+		cbMaterial.Map(&materialShaderData);
+		cbMaterial.SetPS();
 
 		//Set texture from emitter for every particle
 		SetShaderResourcePixel(0, emitter->GetMaterial().textureData.filename);
@@ -1775,8 +1756,8 @@ void Renderer::RenderParticleEmitters()
 			shaderMatrices.model = particle.transform.GetAffine();
 			shaderMatrices.MakeModelViewProjectionMatrix();
 
-			cbMatrices->Map(&shaderMatrices);
-			cbMatrices->SetVS();
+			cbMatrices.Map(&shaderMatrices);
+			cbMatrices.SetVS();
 
 			//Note: Apparently using DrawInstanced() degrades performance when the vertex count it really low
 			//and DrawIndexed is actually faster.
@@ -1795,20 +1776,20 @@ void Renderer::RenderSpritesInScreenSpace()
 	{
 		SetRastStateByName(RastStates::solid);
 		SetShaders(ShaderItems::UI);
-		SetSampler(0, &Renderer::GetDefaultSampler());
+		SetSampler(0, Renderer::GetDefaultSampler());
 		SetShaderResourcePixel(0, sprite.textureFilename);
 
 		MaterialShaderData defaultMaterialShaderData;
-		cbMaterial->Map(&defaultMaterialShaderData);
-		cbMaterial->SetPS();
+		cbMaterial.Map(&defaultMaterialShaderData);
+		cbMaterial.SetPS();
 
 		SpriteSystem::BuildSpriteQuadForViewportRendering(sprite);
 		SpriteSystem::UpdateAndSetSpriteBuffers();
 
 		shaderMatrices.model = XMMatrixIdentity();
 		shaderMatrices.MakeModelViewProjectionMatrix();
-		cbMatrices->Map(&shaderMatrices);
-		cbMatrices->SetVS();
+		cbMatrices.Map(&shaderMatrices);
+		cbMatrices.SetVS();
 
 		context->DrawIndexed(6, 0, 0);
 	}
@@ -1851,8 +1832,8 @@ void SetLightsConstantBufferData()
 
 	XMStoreFloat4(&shaderLights.eyePosition, Camera::GetActiveCamera().GetWorldPositionV());
 
-	cbLights->Map(&shaderLights);
-	cbLights->SetVSAndPS();
+	cbLights.Map(&shaderLights);
+	cbLights.SetVSAndPS();
 
 	Profile::End();
 }
@@ -1863,13 +1844,13 @@ void Renderer::Present()
 	{
 		debugMenu.debugNotifications.clear();
 
-		ID3D11Texture2D* backBuffer = nullptr;
-		HR(swapchain->GetBuffer(0, IID_PPV_ARGS(&backBuffer)));
+		Microsoft::WRL::ComPtr<ID3D11Texture2D> backBuffer;
+		HR(swapchain->GetBuffer(0, IID_PPV_ARGS(backBuffer.GetAddressOf())));
 		assert(backBuffer);
 
 		const std::wstring imageFile = L"Icons/MeshIcons/" +
 			VString::stows(captureMeshIconMeshFilename) + L".jpg";
-		HR(SaveWICTextureToFile(context, backBuffer, GUID_ContainerFormatJpeg, imageFile.c_str()));
+		HR(SaveWICTextureToFile(context.Get(), backBuffer.Get(), GUID_ContainerFormatJpeg, imageFile.c_str()));
 
 		Log("Mesh Icon created from [%s] mesh.", captureMeshIconMeshFilename.c_str());
 
@@ -1884,7 +1865,7 @@ void Renderer::Present()
 
 void* Renderer::GetSwapchain()
 {
-	return swapchain;
+	return swapchain.Get();
 }
 
 float Renderer::GetAspectRatio()
@@ -1917,14 +1898,14 @@ void Renderer::ResizeSwapchain(int newWidth, int newHeight)
 	// Release all outstanding references to the swap chain's buffers.
 	for (int rtvIndex = 0; rtvIndex < swapchainCount; rtvIndex++)
 	{
-		rtvs[rtvIndex]->Release();
+		rtvs[rtvIndex].Reset();
 	}
 
-	dsv->Release();
+	dsv.Reset();
 
 	UISystem::Cleanup();
 
-	backBuffer->Release();
+	backBuffer.Reset();
 	HR(swapchain->ResizeBuffers(swapchainCount, newWidth, newHeight, DXGI_FORMAT_R8G8B8A8_UNORM, 0));
 
 	viewport.Width = newWidth;
@@ -1940,7 +1921,7 @@ void Renderer::ResizeSwapchain(int newWidth, int newHeight)
 	postProcessRenderTarget.Recycle();
 	postProcessRenderTarget.Create(viewport.Width, viewport.Height);
 
-	UISystem::Init((void*)swapchain);
+	UISystem::Init((void*)swapchain.Get());
 
 	shaderMatrices.Create();
 }
@@ -1952,14 +1933,14 @@ void Renderer::ScreenshotCapture()
 		//Clear previous notification so nothing appears in the screenshot.
 		debugMenu.debugNotifications.clear();
 
-		ID3D11Texture2D* backBuffer = nullptr;
-		HR(swapchain->GetBuffer(0, IID_PPV_ARGS(&backBuffer)));
+		Microsoft::WRL::ComPtr<ID3D11Texture2D> backBuffer;
+		HR(swapchain->GetBuffer(0, IID_PPV_ARGS(backBuffer.GetAddressOf())));
 		assert(backBuffer);
 
 		//Use a generated UID so that filenames are unique
 		UID imageFileID = GenerateUID();
 		std::wstring imageFile = L"Screenshots/" + std::to_wstring(imageFileID) + L".jpg";
-		HR(SaveWICTextureToFile(context, backBuffer, GUID_ContainerFormatJpeg, imageFile.c_str()));
+		HR(SaveWICTextureToFile(context.Get(), backBuffer.Get(), GUID_ContainerFormatJpeg, imageFile.c_str()));
 		debugMenu.AddNotification(L"Screen shot taken.");
 	}
 }
@@ -1974,25 +1955,25 @@ void Renderer::MeshIconImageCapture()
 	{
 		MeshComponent* mesh = meshComponents.front();
 
-		ID3D11Texture2D* backBuffer = nullptr;
-		HR(swapchain->GetBuffer(0, IID_PPV_ARGS(&backBuffer)));
+		Microsoft::WRL::ComPtr<ID3D11Texture2D> backBuffer;
+		HR(swapchain->GetBuffer(0, IID_PPV_ARGS(backBuffer.GetAddressOf())));
 		assert(backBuffer);
 
 		const std::wstring imageFile = L"Icons/MeshIcons/" +
 			VString::stows(mesh->meshComponentData.filename) + L".jpg";
-		HR(SaveWICTextureToFile(context, backBuffer, GUID_ContainerFormatJpeg, imageFile.c_str()));
+		HR(SaveWICTextureToFile(context.Get(), backBuffer.Get(), GUID_ContainerFormatJpeg, imageFile.c_str()));
 		debugMenu.AddNotification(L"Mesh Icon created.");
 	}
 }
 
 void Renderer::MapIconImageCapture()
 {
-	ID3D11Texture2D* backBuffer = nullptr;
-	HR(swapchain->GetBuffer(0, IID_PPV_ARGS(&backBuffer)));
+	Microsoft::WRL::ComPtr<ID3D11Texture2D> backBuffer;
+	HR(swapchain->GetBuffer(0, IID_PPV_ARGS(backBuffer.GetAddressOf())));
 	assert(backBuffer);
 
 	const std::wstring imageFile = L"Icons/MapIcons/" + VString::stows(World::worldFilename) + L".jpg";
-	HR(SaveWICTextureToFile(context, backBuffer, GUID_ContainerFormatJpeg, imageFile.c_str()));
+	HR(SaveWICTextureToFile(context.Get(), backBuffer.Get(), GUID_ContainerFormatJpeg, imageFile.c_str()));
 	debugMenu.AddNotification(L"Map Icon created.");
 }
 
@@ -2000,12 +1981,12 @@ void Renderer::PlayerPhotoCapture(std::wstring outputFilename)
 {
 	debugMenu.debugNotifications.clear();
 
-	ID3D11Texture2D* backBuffer = nullptr;
-	HR(swapchain->GetBuffer(0, IID_PPV_ARGS(&backBuffer)));
+	Microsoft::WRL::ComPtr<ID3D11Texture2D> backBuffer;
+	HR(swapchain->GetBuffer(0, IID_PPV_ARGS(backBuffer.GetAddressOf())));
 	assert(backBuffer);
 
 	std::wstring imageFile = L"Textures/" + outputFilename;
-	HR(SaveWICTextureToFile(context, backBuffer, GUID_ContainerFormatJpeg, imageFile.c_str()));
+	HR(SaveWICTextureToFile(context.Get(), backBuffer.Get(), GUID_ContainerFormatJpeg, imageFile.c_str()));
 	Log("Photo taken [%S]", imageFile.c_str());
 }
 
@@ -2016,31 +1997,31 @@ void SetRenderPipelineStates(MeshComponent* mesh)
 
 	if (Renderer::drawAllAsWireframe)
 	{
-		context->RSSetState(rastStateWireframe);
+		context->RSSetState(rastStateWireframe.Get());
 	}
 	else if (material.rastState)
 	{
-		context->RSSetState(material.rastState->data);
+		context->RSSetState(material.rastState->data.Get());
 	}
 
 	constexpr FLOAT blendState[4] = { 0.f };
-	context->OMSetBlendState(material.blendState->data, blendState, 0xFFFFFFFF);
+	context->OMSetBlendState(material.blendState->data.Get(), blendState, 0xFFFFFFFF);
 
 	context->VSSetShader(material.GetVertexShader(), nullptr, 0);
 	context->PSSetShader(material.GetPixelShader(), nullptr, 0);
 
-	context->PSSetSamplers(0, 1, &material.sampler->data);
+	context->PSSetSamplers(0, 1, material.sampler->data.GetAddressOf());
 	SetShaderResourceFromMaterial(0, material);
 
 	SetVertexBuffer(pso.GetVertexBuffer());
 
-	cbMaterial->Map(&material.materialShaderData);
-	cbMaterial->SetPS();
+	cbMaterial.Map(&material.materialShaderData);
+	cbMaterial.SetPS();
 }
 
 void SetRenderPipelineStatesForShadows(MeshComponent* mesh)
 {
-	context->RSSetState(rastStateShadow);
+	context->RSSetState(rastStateShadow.Get());
 
 	ShaderItem* shader = ShaderItems::Shadow;
 
@@ -2048,7 +2029,7 @@ void SetRenderPipelineStatesForShadows(MeshComponent* mesh)
 	context->PSSetShader(shader->GetPixelShader(), nullptr, 0);
 
 	PipelineStateObject& pso = mesh->pso;
-	context->IASetVertexBuffers(0, 1, &pso.GetVertexBuffer().data, &Renderer::stride, &Renderer::offset);
+	context->IASetVertexBuffers(0, 1, pso.GetVertexBuffer().data.GetAddressOf(), &Renderer::stride, &Renderer::offset);
 }
 
 void SetShaders(ShaderItem* shaderItem)
@@ -2061,30 +2042,30 @@ void SetRastStateByName(std::string rastStateName)
 {
 	if (Renderer::drawAllAsWireframe)
 	{
-		context->RSSetState(rastStateWireframe);
+		context->RSSetState(rastStateWireframe.Get());
 		return;
 	}
 
 	auto& rastState = rastStateMap.find(rastStateName)->second;
-	context->RSSetState(rastState->data);
+	context->RSSetState(rastState->data.Get());
 }
 
 void SetRastState(RastState& rastState)
 {
-	context->RSSetState(rastState.data);
+	context->RSSetState(rastState.data.Get());
 }
 
 void SetBlendStateByName(std::string blendStateName)
 {
 	auto& blendState = blendStateMap.find(blendStateName)->second;
 	const float factor[4] = {};
-	context->OMSetBlendState(blendState->data, factor, 0xFFFFFFFF);
+	context->OMSetBlendState(blendState->data.Get(), factor, 0xFFFFFFFF);
 }
 
 void SetBlendState(BlendState& blendState)
 {
 	const float factor[4] = {};
-	context->OMSetBlendState(blendState.data, factor, 0xFFFFFFFF);
+	context->OMSetBlendState(blendState.data.Get(), factor, 0xFFFFFFFF);
 }
 
 void SetConstantBufferVertexPixel(uint32_t shaderRegister, ID3D11Buffer* constantBuffer)
@@ -2105,17 +2086,17 @@ void SetConstantBufferPixel(uint32_t shaderRegister, ID3D11Buffer* constantBuffe
 
 void SetVertexBuffer(Buffer& vertexBuffer)
 {
-	context->IASetVertexBuffers(0, 1, &vertexBuffer.data, &Renderer::stride, &Renderer::offset);
+	context->IASetVertexBuffers(0, 1, vertexBuffer.data.GetAddressOf(), &Renderer::stride, &Renderer::offset);
 }
 
 void SetIndexBuffer(Buffer* indexBuffer)
 {
-	context->IASetIndexBuffer(indexBuffer->data, indexBufferFormat, 0);
+	context->IASetIndexBuffer(indexBuffer->data.Get(), indexBufferFormat, 0);
 }
 
-void SetSampler(uint32_t shaderRegister, Sampler* sampler)
+void SetSampler(uint32_t shaderRegister, Sampler& sampler)
 {
-	context->PSSetSamplers(shaderRegister, 1, &sampler->data);
+	context->PSSetSamplers(shaderRegister, 1, sampler.data.GetAddressOf());
 }
 
 void SetShaderResourceFromMaterial(uint32_t shaderRegister, Material& material)
@@ -2123,7 +2104,7 @@ void SetShaderResourceFromMaterial(uint32_t shaderRegister, Material& material)
 	//Testing code for normal map SRV set
 	/*auto normalMapTexture = textureSystem.FindTexture2D("wall_normal_map.png");
 	auto normalMapSRV = normalMapTexture->GetSRV();
-	context->PSSetShaderResources(normalMapTexureRegister, 1, &normalMapSRV);*/
+	context->PSSetShaderResources(normalMapTexureRegister, 1, normalMapSRV.GetAddressOf());*/
 
 	auto textureSRV = material.texture->GetSRV();
 	context->PSSetShaderResources(shaderRegister, 1, &textureSRV);
@@ -2148,7 +2129,7 @@ void RenderPostProcess()
 	ID3D11ShaderResourceView* nullSRV = nullptr;
 	ID3D11UnorderedAccessView* nullUAV = nullptr;
 
-	context->RSSetState(rastStateMap[RastStates::solid]->data);
+	context->RSSetState(rastStateMap[RastStates::solid]->data.Get());
 
 	context->IASetInputLayout(nullptr);
 	context->IASetVertexBuffers(0, 0, nullptr, nullptr, nullptr);
@@ -2158,17 +2139,17 @@ void RenderPostProcess()
 
 	//Set constant buffer data
 	ShaderPostProcessData postProcessData = postProcessVolume->GetPostProcessData();
-	cbPostProcess->Map(&postProcessData);
-	cbPostProcess->SetPS();
+	cbPostProcess.Map(&postProcessData);
+	cbPostProcess.SetPS();
 
 	context->PSSetShaderResources(0, 1, postProcessRenderTarget.GetSRVAddress());
-	SetSampler(0, &Renderer::GetDefaultSampler());
+	SetSampler(0, Renderer::GetDefaultSampler());
 
 	UINT frameIndex = swapchain->GetCurrentBackBufferIndex();
-	context->OMSetRenderTargets(1, &rtvs[frameIndex], dsv);
+	context->OMSetRenderTargets(1, rtvs[frameIndex].GetAddressOf(), dsv.Get());
 
 	const float clearColour[4] = { 0.f, 0.f, 0.f, 0.f };
-	context->ClearRenderTargetView(rtvs[frameIndex], clearColour);
+	context->ClearRenderTargetView(rtvs[frameIndex].Get(), clearColour);
 
 	//@Todo: there's an idea from the old post processing code that I liked.
 	//Basically instead of drawing a stupid quad and rendering a texture onto it, copy to the backbuffer like below:
@@ -2184,12 +2165,12 @@ void RenderWireframeForVertexPaintingAndPickedActor()
 {
 	const auto wireframeRender = [&](MeshComponent* mesh)
 		{
-			context->RSSetState(rastStateWireframe);
+			context->RSSetState(rastStateWireframe.Get());
 
 			MaterialShaderData materialShaderData;
 			materialShaderData.ambient = XMFLOAT4(1.f, 0.f, 1.f, 1.f);
-			cbMaterial->Map(&materialShaderData);
-			cbMaterial->SetPS();
+			cbMaterial.Map(&materialShaderData);
+			cbMaterial.SetPS();
 
 			ShaderItem* shaderItem = ShaderSystem::FindShaderItem(ShaderItems::SolidColour->GetName());
 			context->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
@@ -2255,8 +2236,8 @@ void RenderLightProbes()
 	shaderMatrices.model = XMMatrixIdentity();
 	shaderMatrices.MakeModelViewProjectionMatrix();
 
-	cbMatrices->Map(&shaderMatrices);
-	cbMatrices->SetVS();
+	cbMatrices.Map(&shaderMatrices);
+	cbMatrices.SetVS();
 
 	auto instanceMesh = probeMap->lightProbesDebugInstanceMesh->instanceMesh;
 	SetRenderPipelineStates(instanceMesh);
@@ -2268,14 +2249,14 @@ void RenderLightProbes()
 
 	//Update texture matrix
 	shaderMatrices.MakeTextureMatrix(instanceMesh->GetMaterial());
-	cbMatrices->Map(&shaderMatrices);
-	cbMatrices->SetVS();
+	cbMatrices.Map(&shaderMatrices);
+	cbMatrices.SetVS();
 
 	ID3D11ShaderResourceView* srv = probeMap->GetSRV();
 	context->VSSetShaderResources(lightProbeInstanceDataRegister, 1, &srv);
 	context->PSSetShaderResources(lightProbeInstanceDataRegister, 1, &srv);
 
-	cbLights->SetPS();
+	cbLights.SetPS();
 
 	context->DrawInstanced(instanceMesh->meshDataProxy.vertices.size(), probeMap->GetProbeCount(), 0, 0);
 }
@@ -2493,17 +2474,17 @@ void Renderer::AddDebugLine(Line& line)
 
 ID3D11Device& Renderer::GetDevice()
 {
-	return *device;
+	return *device.Get();
 }
 
 ID3D11DeviceContext& Renderer::GetDeviceContext()
 {
-	return *context;
+	return *context.Get();
 }
 
 Sampler& Renderer::GetDefaultSampler()
 {
-	return *defaultSampler;
+	return defaultSampler;
 }
 
 void Renderer::SetRendererToCaptureMeshIcon(std::string meshFilename)

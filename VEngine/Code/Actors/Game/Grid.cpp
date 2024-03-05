@@ -101,10 +101,10 @@ void Grid::RecalcAllNodes(HitResult& hit)
 	nodeMesh->SetInstanceCount(meshInstanceCount);
 
 	//Re-setup shader buffers
-	nodeMesh->structuredBuffer = RenderUtils::CreateStructuredBuffer(sizeof(InstanceData) * meshInstanceCount,
-		sizeof(InstanceData), nodeMesh->GetInstanceData().data());
+	RenderUtils::CreateStructuredBuffer(sizeof(InstanceData) * meshInstanceCount,
+		sizeof(InstanceData), nodeMesh->GetInstanceData().data(), nodeMesh->structuredBuffer);
 
-	nodeMesh->srv = RenderUtils::CreateSRVForMeshInstance(nodeMesh->structuredBuffer, meshInstanceCount);
+	RenderUtils::CreateSRVForMeshInstance(nodeMesh->structuredBuffer.Get(), meshInstanceCount, nodeMesh->srv);
 
 	const XMMATRIX rootWorldMatrix = rootComponent->GetWorldMatrix();
 	XMVECTOR rayOrigin = XMVectorZero();

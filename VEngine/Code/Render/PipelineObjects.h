@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <wrl.h>
 
 struct ID3D11Buffer;
 struct ID3D11ShaderResourceView;
@@ -12,41 +13,33 @@ struct MeshDataProxy;
 
 struct Buffer
 {
-	ID3D11Buffer* data = nullptr;
+	Microsoft::WRL::ComPtr<ID3D11Buffer> data;
 };
 
 struct ShaderResourceView
 {
-	ID3D11ShaderResourceView* data = nullptr;
-
-	~ShaderResourceView();
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> data;
 };
 
 struct Sampler
 {
-	ID3D11SamplerState* data = nullptr;
-
-	Sampler(ID3D11SamplerState* data_);
-	~Sampler();
+	Microsoft::WRL::ComPtr<ID3D11SamplerState> data;
 };
 
 struct RastState
 {
-	ID3D11RasterizerState* data = nullptr;
+	Microsoft::WRL::ComPtr<ID3D11RasterizerState> data;
 	std::string name;
 
-	RastState() {}
 	RastState(std::string name_, ID3D11RasterizerState* data_);
-	~RastState();
 };
 
 struct BlendState
 {
-	ID3D11BlendState* data = nullptr;
+	Microsoft::WRL::ComPtr<ID3D11BlendState> data;
 	std::string name;
 
 	BlendState(std::string name_, ID3D11BlendState* data_);
-	~BlendState();
 };
 
 struct MeshBuffers

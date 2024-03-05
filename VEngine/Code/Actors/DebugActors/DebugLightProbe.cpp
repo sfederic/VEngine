@@ -7,8 +7,4 @@ DebugLightProbe::DebugLightProbe(int probeCount)
 	instanceMesh = new InstanceMeshComponent(probeCount, "ico_sphere.vmesh", "test.png", ShaderItems::LightProbe);
 	instanceMesh->SetCollisionLayer(CollisionLayers::Editor);
 	instanceMesh->Create();
-
-	//Don't need these, DiffuseProbeMap has its own D3D objects
-	instanceMesh->srv->Release();
-	instanceMesh->structuredBuffer->Release();
 }

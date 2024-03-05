@@ -2,6 +2,7 @@
 
 #include "Components/MeshComponent.h"
 #include "Render/ShaderData/InstanceData.h"
+#include <wrl.h>
 
 struct ID3D11Buffer;
 struct ID3D11ShaderResourceView;
@@ -12,15 +13,14 @@ class InstanceMeshComponent : public MeshComponent
 public:
 	COMPONENT_SYSTEM(InstanceMeshComponent);
 
-	ID3D11Buffer* structuredBuffer = nullptr;
-	ID3D11ShaderResourceView* srv = nullptr;
+	Microsoft::WRL::ComPtr<ID3D11Buffer> structuredBuffer;
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> srv;
 
 	InstanceMeshComponent() {}
 	InstanceMeshComponent(uint32_t meshInstanceRenderCount_,
 		const std::string filename,
 		const std::string textureFilename,
 		ShaderItem* shaderItem);
-	~InstanceMeshComponent();
 
 	void Create() override;
 	Properties GetProps() override;

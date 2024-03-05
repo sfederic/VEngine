@@ -18,13 +18,10 @@ void RenderTarget::Create(uint32_t width, uint32_t height)
 	HR(Renderer::GetDevice().CreateTexture2D(&desc, nullptr, &texture));
 	assert(texture);
 
-	HR(Renderer::GetDevice().CreateRenderTargetView(texture, nullptr, &rtv));
-	HR(Renderer::GetDevice().CreateShaderResourceView(texture, nullptr, &srv));
+	HR(Renderer::GetDevice().CreateRenderTargetView(texture.Get(), nullptr, rtv.GetAddressOf()));
+	HR(Renderer::GetDevice().CreateShaderResourceView(texture.Get(), nullptr, srv.GetAddressOf()));
 }
 
 void RenderTarget::Recycle()
 {
-	texture->Release();
-	rtv->Release();
-	srv->Release();
 }

@@ -49,11 +49,11 @@ void Polyboard::GenerateVertices()
 		vertices.emplace_back(Vertex());
 	}
 
-	vertexBuffer->data = RenderUtils::CreateDynamicBuffer(sizeof(Vertex) * 256,
-		D3D11_BIND_VERTEX_BUFFER, vertices.data());
+	RenderUtils::CreateDynamicBuffer(sizeof(Vertex) * 256,
+		D3D11_BIND_VERTEX_BUFFER, vertices.data(), vertexBuffer->data);
 
-	indexBuffer->data = RenderUtils::CreateDynamicBuffer(256 * sizeof(MeshData::indexDataType),
-		D3D11_BIND_INDEX_BUFFER, indices.data());
+	RenderUtils::CreateDynamicBuffer(256 * sizeof(MeshData::indexDataType),
+		D3D11_BIND_INDEX_BUFFER, indices.data(), indexBuffer->data);
 }
 
 void Polyboard::CalcVertices()

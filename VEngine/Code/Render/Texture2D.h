@@ -2,6 +2,7 @@
 
 #include <string>
 #include <Core/UID.h>
+#include <wrl.h>
 
 struct ID3D11Resource;
 struct ID3D11ShaderResourceView;
@@ -16,11 +17,9 @@ public:
 	std::string GetFilename() { return filename; }
 	void SetFilename(std::string filename_) { filename = filename_; }
 
-	void SetTextureData(ID3D11Resource* data_) { data = data_; }
-	ID3D11Resource* GetTextureData() { return data; }
+	ID3D11Resource* GetTextureData() { return data.Get(); }
 
-	void SetSRV(ID3D11ShaderResourceView* srv_) { srv = srv_; }
-	ID3D11ShaderResourceView* GetSRV() { return srv; }
+	ID3D11ShaderResourceView* GetSRV() { return srv.Get(); }
 
 	void SetWidth(uint32_t width_) { width = width_; }
 	void SetHeight(uint32_t height_) { height = height_; }
@@ -30,13 +29,15 @@ public:
 	UID GetUID() const { return uid; }
 	void SetUID(UID uid_) { uid = uid_; }
 
+	void SetBufferNames();
+
+	Microsoft::WRL::ComPtr<ID3D11Resource> data;
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> srv;
+
 private:
 	UID uid = 0;
 
 	std::string filename;
-
-	ID3D11Resource* data = nullptr;
-	ID3D11ShaderResourceView* srv = nullptr;
 
 	uint32_t width = 0;
 	uint32_t height = 0;

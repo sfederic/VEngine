@@ -12,10 +12,8 @@
 
 namespace RenderUtils
 {
-	ID3D11Buffer* CreateDefaultBuffer(uint64_t byteWidth, uint32_t bindFlags, const void* initData)
+	void CreateDefaultBuffer(uint64_t byteWidth, uint32_t bindFlags, const void* initData, Microsoft::WRL::ComPtr<ID3D11Buffer>& outputBuffer)
 	{
-		ID3D11Buffer* buffer = nullptr;
-
 		D3D11_BUFFER_DESC desc = {};
 		desc.ByteWidth = byteWidth;
 		desc.BindFlags = bindFlags;
@@ -24,15 +22,11 @@ namespace RenderUtils
 		D3D11_SUBRESOURCE_DATA data = {};
 		data.pSysMem = initData;
 
-		HR(Renderer::GetDevice().CreateBuffer(&desc, &data, &buffer));
-
-		return buffer;
+		HR(Renderer::GetDevice().CreateBuffer(&desc, &data, outputBuffer.ReleaseAndGetAddressOf()));
 	}
 
-	ID3D11Buffer* CreateDynamicBuffer(uint64_t byteWidth, uint32_t bindFlags, const void* initData)
+	void CreateDynamicBuffer(uint64_t byteWidth, uint32_t bindFlags, const void* initData, Microsoft::WRL::ComPtr<ID3D11Buffer>& outputBuffer)
 	{
-		ID3D11Buffer* buffer;
-
 		D3D11_BUFFER_DESC desc = {};
 		desc.ByteWidth = RenderUtils::CalcBufferByteSize(byteWidth);
 		desc.BindFlags = bindFlags;
@@ -42,35 +36,28 @@ namespace RenderUtils
 		D3D11_SUBRESOURCE_DATA data = {};
 		data.pSysMem = initData;
 
-		HR(Renderer::GetDevice().CreateBuffer(&desc, &data, &buffer));
-		assert(buffer);
-
-		return buffer;
+		HR(Renderer::GetDevice().CreateBuffer(&desc, &data, outputBuffer.ReleaseAndGetAddressOf()));
 	}
 
-	ID3D11Buffer* CreateVertexBuffer(MeshDataProxy& meshData)
+	void CreateVertexBuffer(MeshDataProxy& meshData, Microsoft::WRL::ComPtr<ID3D11Buffer>& outputBuffer)
 	{
-		return CreateDefaultBuffer(meshData.GetVerticesByteWidth(),
-			D3D11_BIND_VERTEX_BUFFER, meshData.vertices.data());
+		CreateDefaultBuffer(meshData.GetVerticesByteWidth(),
+			D3D11_BIND_VERTEX_BUFFER, meshData.vertices.data(), outputBuffer);
 	}
 
-	ID3D11ShaderResourceView* CreateSRVForMeshInstance(ID3D11Buffer* structuredBuffer, uint32_t numBufferElements)
+	void CreateSRVForMeshInstance(ID3D11Buffer* structuredBuffer, uint32_t numBufferElements, Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>& outputSrv)
 	{
 		D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
 		srvDesc.Format = DXGI_FORMAT_UNKNOWN;
 		srvDesc.ViewDimension = D3D11_SRV_DIMENSION_BUFFEREX;
 		srvDesc.BufferEx.NumElements = numBufferElements;
 
-		ID3D11ShaderResourceView* srv = nullptr;
-		HR(Renderer::GetDevice().CreateShaderResourceView(structuredBuffer, &srvDesc, &srv));
-
-		return srv;
+		Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> srv;
+		HR(Renderer::GetDevice().CreateShaderResourceView(structuredBuffer, &srvDesc, outputSrv.ReleaseAndGetAddressOf()));
 	}
 
-	ID3D11Buffer* CreateStructuredBuffer(uint32_t byteWidth, uint32_t byteStride, const void* initData)
+	void CreateStructuredBuffer(uint32_t byteWidth, uint32_t byteStride, const void* initData, Microsoft::WRL::ComPtr<ID3D11Buffer>& outputBuffer)
 	{
-		ID3D11Buffer* buffer;
-
 		D3D11_BUFFER_DESC desc = {};
 		desc.ByteWidth = byteWidth;
 		desc.Usage = D3D11_USAGE_DYNAMIC;
@@ -82,12 +69,10 @@ namespace RenderUtils
 		D3D11_SUBRESOURCE_DATA data = {};
 		data.pSysMem = initData;
 
-		HR(Renderer::GetDevice().CreateBuffer(&desc, &data, &buffer));
-
-		return buffer;
+		HR(Renderer::GetDevice().CreateBuffer(&desc, &data, outputBuffer.ReleaseAndGetAddressOf()));
 	}
 
-	Sampler* CreateSampler()
+	void CreateSampler(Sampler& sampler)
 	{
 		D3D11_SAMPLER_DESC sampDesc = {};
 		sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
@@ -95,11 +80,11 @@ namespace RenderUtils
 		sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
 		sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
 
-		ID3D11SamplerState* samplerState;
-		HR(Renderer::GetDevice().CreateSamplerState(&sampDesc, &samplerState));
+		HR(Renderer::GetDevice().CreateSamplerState(&sampDesc, sampler.data.ReleaseAndGetAddressOf()));
+	}
 
-		auto sampler = new Sampler(samplerState);
-		return sampler;
+	void SetResourceName(ID3D11DeviceChild* resource, std::string name)
+	{
 	}
 
 	void CreateTexture(Texture2D& texture)
@@ -119,8 +104,8 @@ namespace RenderUtils
 
 		assert(std::filesystem::exists(path) && "Texture file doesn't exist");
 
-		ID3D11Resource* resource = nullptr;
-		ID3D11ShaderResourceView* srv = nullptr;
+		Microsoft::WRL::ComPtr<ID3D11Resource> resource;
+		Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> srv;
 
 		//SRBG
 		//HR(DirectX::CreateWICTextureFromFileEx(&Renderer::GetDevice(), &Renderer::GetDeviceContext(),
@@ -130,25 +115,27 @@ namespace RenderUtils
 		//	WIC_LOADER_FORCE_SRGB,
 		//	&resource, &srv));
 
-		HR(DirectX::CreateWICTextureFromFile(&Renderer::GetDevice(), path.c_str(), &resource, &srv));
+		HR(DirectX::CreateWICTextureFromFile(&Renderer::GetDevice(), path.c_str(), resource.GetAddressOf(), srv.GetAddressOf()));
 
 		assert(resource);
 		assert(srv);
 
-		texture.SetTextureData(resource);
-		texture.SetSRV(srv);
+		texture.data = resource;
+		texture.srv = srv;
 		texture.SetUID(GenerateUID());
 
 		//CreateWICTextureFromFile() doesn't like ID3D11Texture2D, so casting down here
 		//to get the texture Desc.
-		ID3D11Texture2D* textureResource = nullptr;
-		HR(resource->QueryInterface(&textureResource));
+		Microsoft::WRL::ComPtr<ID3D11Texture2D> textureResource;
+		HR(resource->QueryInterface(textureResource.GetAddressOf()));
 
 		D3D11_TEXTURE2D_DESC texDesc = {};
 		textureResource->GetDesc(&texDesc);
 
 		texture.SetWidth(texDesc.Width);
 		texture.SetHeight(texDesc.Height);
+
+		texture.SetBufferNames();
 	}
 
 	UINT CalcBufferByteSize(UINT byteSize)

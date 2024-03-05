@@ -9,8 +9,8 @@
 #include "Render/Texture2D.h"
 
 static SystemStates systemState = SystemStates::Unloaded;
-static ID3D11Buffer* spriteVertexBuffer;
-static ID3D11Buffer* spriteIndexBuffer;
+static Microsoft::WRL::ComPtr<ID3D11Buffer> spriteVertexBuffer;
+static Microsoft::WRL::ComPtr<ID3D11Buffer> spriteIndexBuffer;
 static Vertex verts[4];
 static std::vector<Sprite> screenSprites;
 
@@ -18,8 +18,8 @@ XMFLOAT3 PointToNdc(int x, int y, float z);
 
 void SpriteSystem::Init()
 {
-	spriteVertexBuffer = RenderUtils::CreateDynamicBuffer(4 * sizeof(Vertex),
-		D3D11_BIND_VERTEX_BUFFER, &verts[0]);
+	RenderUtils::CreateDynamicBuffer(4 * sizeof(Vertex),
+		D3D11_BIND_VERTEX_BUFFER, &verts[0], spriteVertexBuffer);
 
 	//Always a quad, for now
 	MeshData::indexDataType spriteIndices[]
@@ -28,8 +28,8 @@ void SpriteSystem::Init()
 		2, 3, 0
 	};
 
-	spriteIndexBuffer = RenderUtils::CreateDefaultBuffer(6 * sizeof(MeshData::indexDataType),
-		D3D11_BIND_INDEX_BUFFER, &spriteIndices[0]);
+	RenderUtils::CreateDefaultBuffer(6 * sizeof(MeshData::indexDataType),
+		D3D11_BIND_INDEX_BUFFER, &spriteIndices[0], spriteIndexBuffer);
 }
 
 void SpriteSystem::Reset()
@@ -50,12 +50,12 @@ void SpriteSystem::UpdateAndSetSpriteBuffers()
 
 	//Update vertex buffer
 	D3D11_MAPPED_SUBRESOURCE mappedResource{};
-	HR(context.Map(spriteVertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
+	HR(context.Map(spriteVertexBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
 	memcpy(mappedResource.pData, &verts, sizeof(verts));
-	context.Unmap(spriteVertexBuffer, 0);
+	context.Unmap(spriteVertexBuffer.Get(), 0);
 
-	context.IASetVertexBuffers(0, 1, &spriteVertexBuffer, &Renderer::stride, &Renderer::offset);
-	context.IASetIndexBuffer(spriteIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
+	context.IASetVertexBuffers(0, 1, spriteVertexBuffer.GetAddressOf(), &Renderer::stride, &Renderer::offset);
+	context.IASetIndexBuffer(spriteIndexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
 }
 
 std::vector<Sprite>& SpriteSystem::GetScreenSprites()

@@ -14,12 +14,6 @@ InstanceMeshComponent::InstanceMeshComponent(uint32_t meshInstanceRenderCount_,
 	instanceData.resize(meshInstanceRenderCount);
 }
 
-InstanceMeshComponent::~InstanceMeshComponent()
-{
-	if (structuredBuffer) structuredBuffer->Release();
-	if (srv) srv->Release();
-}
-
 void InstanceMeshComponent::Create()
 {
 	MeshComponent::Create();
@@ -38,10 +32,10 @@ void InstanceMeshComponent::Create()
 	}
 
 	//Setup shader buffers
-	structuredBuffer = RenderUtils::CreateStructuredBuffer(sizeof(InstanceData) * meshCount,
-		sizeof(InstanceData), instanceData.data());
+	RenderUtils::CreateStructuredBuffer(sizeof(InstanceData) * meshCount,
+		sizeof(InstanceData), instanceData.data(), structuredBuffer);
 
-	srv = RenderUtils::CreateSRVForMeshInstance(structuredBuffer, meshCount);
+	RenderUtils::CreateSRVForMeshInstance(structuredBuffer.Get(), meshCount, srv);
 }
 
 void InstanceMeshComponent::SetInstanceCount(uint32_t count)
@@ -71,10 +65,10 @@ void InstanceMeshComponent::ReleaseBuffers()
 {
 	if (structuredBuffer)
 	{
-		structuredBuffer->Release();
+		structuredBuffer.Reset();
 	}
 	if (srv)
 	{
-		srv->Release();
+		srv.Reset();
 	}
 }

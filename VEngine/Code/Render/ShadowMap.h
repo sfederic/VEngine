@@ -1,6 +1,7 @@
 #pragma once
 
 #include <DirectXMath.h>
+#include <wrl.h>
 
 using namespace DirectX;
 
@@ -29,12 +30,11 @@ private:
 	int height = 0;
 
 public:
-	ID3D11ShaderResourceView* depthMapSRV = nullptr;;
-	ID3D11DepthStencilView* depthMapDSV = nullptr;
-	ID3D11SamplerState* sampler = nullptr;
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> depthMapSRV;
+	Microsoft::WRL::ComPtr<ID3D11DepthStencilView> depthMapDSV;
+	Microsoft::WRL::ComPtr<ID3D11SamplerState> sampler;
 
 	ShadowMap(ID3D11Device* device, int width_, int height_);
-	~ShadowMap();
 	void BindDsvAndSetNullRenderTarget(ID3D11DeviceContext* dc);
 
 	XMMATRIX GetDirectionalLightOrthoMatrix(DirectionalLightComponent* directionalLight);

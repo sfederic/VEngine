@@ -4,6 +4,7 @@
 #include "ActorSystem.h"
 #include "Render/ShaderData/InstanceData.h"
 #include "Actors/DebugActors/DebugLightProbe.h"
+#include <wrl.h>
 
 class InstanceMeshComponent;
 struct InstanceData;
@@ -53,12 +54,12 @@ public:
 	LightProbeInstanceData FindClosestProbe(XMVECTOR pos);
 	void WriteProbeDataToFile();
 
-	ID3D11Buffer* GetStructuredBuffer() { return structuredBuffer; }
-	ID3D11ShaderResourceView* GetSRV() { return srv; }
+	ID3D11Buffer* GetStructuredBuffer() { return structuredBuffer.Get(); }
+	ID3D11ShaderResourceView* GetSRV() { return srv.Get(); }
 
 private:
-	ID3D11Buffer* structuredBuffer = nullptr;
-	ID3D11ShaderResourceView* srv = nullptr;
+	Microsoft::WRL::ComPtr<ID3D11Buffer> structuredBuffer;
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> srv = nullptr;
 
 	void ReadProbeDataFromFile();
 	void SetLightProbeData();

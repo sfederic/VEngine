@@ -27,8 +27,8 @@ ShadowMap::ShadowMap(ID3D11Device* device, int width_, int height_)
 	texDesc.CPUAccessFlags = 0;
 	texDesc.MiscFlags = 0;
 
-	ID3D11Texture2D* depthMap = nullptr;
-	HR(device->CreateTexture2D(&texDesc, 0, &depthMap));
+	Microsoft::WRL::ComPtr<ID3D11Texture2D> depthMap;
+	HR(device->CreateTexture2D(&texDesc, 0, depthMap.GetAddressOf()));
 
 	D3D11_DEPTH_STENCIL_VIEW_DESC dsvDesc = {};
 	dsvDesc.Flags = 0;
@@ -37,7 +37,7 @@ ShadowMap::ShadowMap(ID3D11Device* device, int width_, int height_)
 	dsvDesc.Texture2D.MipSlice = 0;
 
 	assert(depthMap);
-	HR(device->CreateDepthStencilView(depthMap, &dsvDesc, &depthMapDSV));
+	HR(device->CreateDepthStencilView(depthMap.Get(), &dsvDesc, depthMapDSV.GetAddressOf()));
 
 	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
 	srvDesc.Format = DXGI_FORMAT_R24_UNORM_X8_TYPELESS;
@@ -45,7 +45,7 @@ ShadowMap::ShadowMap(ID3D11Device* device, int width_, int height_)
 	srvDesc.Texture2D.MipLevels = texDesc.MipLevels;
 	srvDesc.Texture2D.MostDetailedMip = 0;
 	assert(depthMap);
-	HR(device->CreateShaderResourceView(depthMap, &srvDesc, &depthMapSRV));
+	HR(device->CreateShaderResourceView(depthMap.Get(), &srvDesc, depthMapSRV.GetAddressOf()));
 
 	D3D11_SAMPLER_DESC sd = {};
 	sd.Filter = D3D11_FILTER_COMPARISON_MIN_MAG_MIP_LINEAR;
@@ -58,16 +58,7 @@ ShadowMap::ShadowMap(ID3D11Device* device, int width_, int height_)
 	sd.BorderColor[3] = 1.f;
 	sd.ComparisonFunc = D3D11_COMPARISON_LESS;
 
-	HR(device->CreateSamplerState(&sd, &sampler));
-
-	depthMap->Release();
-}
-
-ShadowMap::~ShadowMap()
-{
-	sampler->Release();
-	depthMapDSV->Release();
-	depthMapSRV->Release();
+	HR(device->CreateSamplerState(&sd, sampler.GetAddressOf()));
 }
 
 void ShadowMap::BindDsvAndSetNullRenderTarget(ID3D11DeviceContext* dc)
@@ -82,8 +73,8 @@ void ShadowMap::BindDsvAndSetNullRenderTarget(ID3D11DeviceContext* dc)
 	dc->RSSetViewports(1, &viewport);
 
 	ID3D11RenderTargetView* nullRTV = nullptr;
-	dc->OMSetRenderTargets(1, &nullRTV, depthMapDSV);
-	dc->ClearDepthStencilView(depthMapDSV, D3D11_CLEAR_DEPTH, 1.0f, 0);
+	dc->OMSetRenderTargets(1, &nullRTV, depthMapDSV.Get());
+	dc->ClearDepthStencilView(depthMapDSV.Get(), D3D11_CLEAR_DEPTH, 1.0f, 0);
 }
 
 XMMATRIX ShadowMap::GetDirectionalLightOrthoMatrix(DirectionalLightComponent* directionalLight)
