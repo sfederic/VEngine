@@ -14,30 +14,27 @@ public:
 	Texture2D(std::string filename_) : filename(filename_) {}
 	~Texture2D();
 
-	std::string GetFilename() { return filename; }
-	void SetFilename(std::string filename_) { filename = filename_; }
+	void Create();
 
-	ID3D11Resource* GetTextureData() { return data.Get(); }
+	auto GetFilename() { return filename; }
 
-	ID3D11ShaderResourceView* GetSRV() { return srv.Get(); }
+	auto GetTextureData() { return data.Get(); }
+	auto GetSRV() { return srv.Get(); }
 
-	void SetWidth(uint32_t width_) { width = width_; }
-	void SetHeight(uint32_t height_) { height = height_; }
-	uint32_t GetWidth() const { return width; }
-	uint32_t GetHeight() const { return height; }
+	auto GetWidth() const { return width; }
+	auto GetHeight() const { return height; }
 
-	UID GetUID() const { return uid; }
-	void SetUID(UID uid_) { uid = uid_; }
+	auto GetUID() const { return uid; }
 
 	void SetBufferNames();
+
+private:
+	std::string filename;
 
 	Microsoft::WRL::ComPtr<ID3D11Resource> data;
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> srv;
 
-private:
 	UID uid = 0;
-
-	std::string filename;
 
 	uint32_t width = 0;
 	uint32_t height = 0;

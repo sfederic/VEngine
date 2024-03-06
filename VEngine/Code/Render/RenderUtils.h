@@ -20,7 +20,6 @@ namespace RenderUtils
 	void CreateVertexBuffer(MeshDataProxy& meshData, Microsoft::WRL::ComPtr<ID3D11Buffer>& outputBuffer);
 	void CreateSRVForMeshInstance(ID3D11Buffer* structuredBuffer, uint32_t numBufferElements, Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>& outputSrv);
 	void CreateStructuredBuffer(uint32_t byteWidth, uint32_t byteStride, const void* initData, Microsoft::WRL::ComPtr<ID3D11Buffer>& outputBuffer);
-	void CreateTexture(Texture2D& texture);
 	UINT CalcBufferByteSize(UINT byteSize);
 	void CreateSampler(Sampler& sampler);
 	void SetResourceName(ID3D11DeviceChild* resource, std::string name);

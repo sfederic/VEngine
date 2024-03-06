@@ -3,10 +3,7 @@
 #include "Texture2D.h"
 #include "PipelineObjects.h"
 #include "Core/Debug.h"
-#include <WICTextureLoader.h>
-#include <filesystem>
 #include "Core/VString.h"
-#include "Asset/AssetPaths.h"
 #include "MeshDataProxy.h"
 #include "Renderer.h"
 
@@ -97,57 +94,6 @@ namespace RenderUtils
 	{
 		//@Todo: _DEBUG
 		HR(resource->SetPrivateData(WKPDID_D3DDebugObjectName, name.size(), name.c_str()));
-	}
-
-	void CreateTexture(Texture2D& texture)
-	{
-		std::wstring path;
-
-		if (texture.GetFilename().empty())
-		{
-			//Set default texture if filename empty
-			texture.SetFilename("test.png");
-			path = VString::stows(AssetBaseFolders::texture + texture.GetFilename());
-		}
-		else
-		{
-			path = VString::stows(AssetBaseFolders::texture + texture.GetFilename());
-		}
-
-		assert(std::filesystem::exists(path) && "Texture file doesn't exist");
-
-		Microsoft::WRL::ComPtr<ID3D11Resource> resource;
-		Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> srv;
-
-		//SRBG
-		//HR(DirectX::CreateWICTextureFromFileEx(&Renderer::GetDevice(), &Renderer::GetDeviceContext(),
-		//	path.c_str(),
-		//	0,
-		//	D3D11_USAGE_DEFAULT, D3D11_BIND_SHADER_RESOURCE, 0, 0,
-		//	WIC_LOADER_FORCE_SRGB,
-		//	&resource, &srv));
-
-		HR(DirectX::CreateWICTextureFromFile(&Renderer::GetDevice(), path.c_str(), resource.GetAddressOf(), srv.GetAddressOf()));
-
-		assert(resource);
-		assert(srv);
-
-		texture.data = resource;
-		texture.srv = srv;
-		texture.SetUID(GenerateUID());
-
-		//CreateWICTextureFromFile() doesn't like ID3D11Texture2D, so casting down here
-		//to get the texture Desc.
-		Microsoft::WRL::ComPtr<ID3D11Texture2D> textureResource;
-		HR(resource->QueryInterface(textureResource.GetAddressOf()));
-
-		D3D11_TEXTURE2D_DESC texDesc = {};
-		textureResource->GetDesc(&texDesc);
-
-		texture.SetWidth(texDesc.Width);
-		texture.SetHeight(texDesc.Height);
-
-		texture.SetBufferNames();
 	}
 
 	UINT CalcBufferByteSize(UINT byteSize)

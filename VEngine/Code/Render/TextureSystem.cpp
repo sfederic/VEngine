@@ -8,7 +8,7 @@
 #include "Asset/AssetPaths.h"
 
 static SystemStates systemState = SystemStates::Unloaded;
-std::unordered_map<std::string, std::unique_ptr<Texture2D>> texture2DMap;
+static std::unordered_map<std::string, std::unique_ptr<Texture2D>> texture2DMap;
 std::wstring TextureSystem::selectedTextureInEditor;
 
 Texture2D* TextureSystem::FindTexture2D(std::string textureFilename)
@@ -31,7 +31,7 @@ Texture2D* TextureSystem::FindTexture2D(std::string textureFilename)
 
 		if (systemState == SystemStates::Loaded)
 		{
-			RenderUtils::CreateTexture(*texture.get());
+			texture->Create();
 		}
 
 		return texture.get();
@@ -47,9 +47,9 @@ void TextureSystem::RemoveTexture(std::string textureName)
 
 void TextureSystem::CreateAllTextures()
 {
-	for (auto& textureIt : texture2DMap)
+	for (auto& [name, texture] : texture2DMap)
 	{
-		RenderUtils::CreateTexture(*textureIt.second.get());
+		texture->Create();
 	}
 
 	systemState = SystemStates::Loaded;
