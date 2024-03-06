@@ -283,6 +283,50 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 	//debugLines.clear();
 }
 
+void Renderer::Cleanup()
+{
+	backBuffer.Reset();
+	depthStencilBuffer.Reset();
+
+	device.Reset();
+	context.Reset();
+
+	for (int i = 0; i < swapchainCount; i++)
+	{
+		rtvs[i].Reset();
+	}
+
+	dsv.Reset();
+	inputLayout.Reset();
+
+	rastStateMap.clear();
+	blendStateMap.clear();
+
+	rastStateSolid.Reset();
+	rastStateWireframe.Reset();
+	rastStateNoBackCull.Reset();
+	rastStateFrontCull.Reset();
+	rastStateShadow.Reset();
+
+	defaultBlendState.Reset();
+
+	swapchain.Reset();
+	dxgiFactory.Reset();
+
+	delete shadowMap;
+
+	for (int i = 0; i < 6; i++)
+	{
+		lightProbeRTVs[i].Reset();
+	}
+	lightProbeSRV.Reset();
+	lightProbeTexture.Reset();
+
+	debugLinesBuffer.Reset();
+
+	ReportLiveObjectsVerbose();
+}
+
 void Renderer::Tick()
 {
 	//BOUNDING BOXES HOTKEY

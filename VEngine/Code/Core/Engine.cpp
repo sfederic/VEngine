@@ -160,5 +160,5 @@ void Engine::Cleanup()
 	debugMenu.Cleanup();
 	UISystem::Cleanup();
 
-	Renderer::ReportLiveObjectsVerbose();
+	Renderer::Cleanup();
 }

@@ -24,6 +24,7 @@ namespace Renderer
 	extern unsigned int offset;
 
 	void Init(void* window, int viewportWidth, int viewportHeight);
+	void Cleanup();
 	void Tick();
 
 	void Present();
