@@ -3,8 +3,6 @@
 #include "RenderUtils.h"
 #include "Core/Debug.h"
 #include <wrl.h>
-#include <exception>
-
 
 struct ID3D11Buffer;
 
