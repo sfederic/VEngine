@@ -3,6 +3,8 @@
 #include "Components/SpatialComponent.h"
 #include "Components/ComponentSystem.h"
 #include "Render/MeshData.h"
+#include "Render/VertexBuffer.h"
+#include "Render/IndexBuffer.h"
 #include "Physics/HitResult.h"
 
 struct Buffer;
@@ -27,8 +29,8 @@ public:
 	bool RaycastFromStartToEndPoints(HitResult& hit);
 	void SetDestroyTimer(float timerMax);
 
-	Buffer& GetVertexBuffer() { return *vertexBuffer; }
-	Buffer& GetIndexBuffer() { return *indexBuffer; }
+	VertexBuffer& GetVertexBuffer() { return vertexBuffer; }
+	IndexBuffer& GetIndexBuffer() { return indexBuffer; }
 
 	auto& GetVertices() { return vertices; }
 	auto& GetIndices() { return indices; }
@@ -41,8 +43,8 @@ protected:
 
 	TextureData textureData;
 
-	Buffer* vertexBuffer = nullptr;
-	Buffer* indexBuffer = nullptr;
+	VertexBuffer vertexBuffer;
+	IndexBuffer indexBuffer;
 
 	std::vector<Vertex> vertices;
 	std::vector<MeshData::indexDataType> indices;

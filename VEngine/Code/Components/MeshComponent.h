@@ -2,12 +2,14 @@
 
 #include "SpatialComponent.h"
 #include "ComponentSystem.h"
-#include "Render/PipelineObjects.h"
 #include "Render/ShaderItem.h"
+#include "Render/VertexBuffer.h"
 #include "Render/MeshDataProxy.h"
 
 class Material;
-struct Skeleton;
+class Skeleton;
+class RastState;
+class BlendState;
 
 class MeshComponent : public SpatialComponent
 {
@@ -24,7 +26,7 @@ public:
 	MeshComponentData meshComponentData;
 
 	MeshDataProxy meshDataProxy;
-	PipelineStateObject pso;
+	VertexBuffer vertexBuffer;
 
 	bool castsShadow = true;
 
@@ -78,7 +80,7 @@ public:
 	void SetUVRotationSpeed(float speed);
 	void SetUVOffsetSpeed(XMFLOAT2 speed);
 
-	Buffer& GetVertexBuffer();
+	VertexBuffer& GetVertexBuffer();
 	void CreateVertexBuffer();
 	void CreateNewVertexBuffer();
 
@@ -97,7 +99,7 @@ public:
 	bool IntersectsWithAnyBoundingBoxInWorld();
 
 	void SetRenderStatic(bool renderStatic) { isRenderStatic = renderStatic; }
-	bool IsRenderStatic() { return isRenderStatic; }
+	bool IsRenderStatic() const { return isRenderStatic; }
 
 private:
 	std::string collisionMeshFilename;

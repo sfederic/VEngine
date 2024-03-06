@@ -17,7 +17,7 @@ struct MeshDataProxy
 
 	Skeleton* skeleton = nullptr;
 
-	auto GetVerticesByteWidth()
+	auto GetVerticesByteWidth() const
 	{
 		return (sizeof(Vertex) * vertices.size());
 	}

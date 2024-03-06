@@ -5,6 +5,7 @@
 #include "Render/Renderer.h"
 #include "Render/Line.h"
 #include "Render/RastStates.h"
+#include "Render/RastState.h"
 #include "Editor/Editor.h"
 #include "Core/VMath.h"
 #include "Core/Core.h"
@@ -176,7 +177,7 @@ bool RaycastTriangleIntersect(HitResult& hitResult)
 			const XMMATRIX meshWorldMatrix = mesh.GetWorldMatrix();
 
 			bool ignoreBackFacHits = hitResult.ignoreBackFaceHits;
-			if (mesh.GetRastState().name == RastStates::noBackCull)
+			if (mesh.GetRastState().GetName() == RastStates::noBackCull)
 			{
 				ignoreBackFacHits = false;
 			}

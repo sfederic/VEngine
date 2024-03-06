@@ -10,7 +10,10 @@
 #include "Core/Log.h"
 #include "ShaderItem.h"
 #include "RastStates.h"
+#include "RastState.h"
 #include "BlendStates.h"
+#include "BlendState.h"
+#include "Sampler.h"
 
 static VEnum rastStates;
 static VEnum blendStates;

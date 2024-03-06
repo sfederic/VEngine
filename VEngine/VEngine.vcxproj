@@ -117,6 +117,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Code\Render\BlendState.cpp" />
+    <ClCompile Include="Code\Render\VertexBuffer.cpp" />
     <ClCompile Include="Code\Core\BinaryDeserialiser.cpp" />
     <ClCompile Include="Code\Core\BinarySerialiser.cpp" />
     <ClCompile Include="Code\Actors\Game\ChurchLockPropActivator.cpp" />
@@ -196,7 +198,6 @@
     <ClCompile Include="Code\Editor\PropertyWidgets\StringWidget.cpp" />
     <ClCompile Include="Code\Gameplay\GameInstance.cpp" />
     <ClCompile Include="Code\Core\Properties.cpp" />
-    <ClCompile Include="Code\Render\PipelineObjects.cpp" />
     <ClCompile Include="Code\Core\UID.cpp" />
     <ClCompile Include="Code\Core\VEnum.cpp" />
     <ClCompile Include="Code\UI\Game\DialogueWidget.cpp" />
@@ -360,6 +361,12 @@
     <ClCompile Include="Code\Actors\OcclusionWall.cpp" />
     <ClCompile Include="Code\Actors\Game\MinesGenerator.cpp" />
     <ClCompile Include="Code\Core\Deserialiser.cpp" />
+    <ClCompile Include="Code\Render\RastState.cpp" />
+    <ClCompile Include="Code\Render\Sampler.cpp" />
+    <ClCompile Include="Code\Render\IndexBuffer.cpp" />
+    <ClCompile Include="Code\Render\ShaderResourceView.cpp" />
+    <ClInclude Include="Code\Render\BlendState.h" />
+    <ClInclude Include="Code\Render\VertexBuffer.h" />
     <ClInclude Include="Code\Core\BinaryDeserialiser.h" />
     <ClInclude Include="Code\Core\BinarySerialiser.h" />
     <ClInclude Include="Code\Actors\Game\ChurchLockPropActivator.h" />
@@ -578,7 +585,6 @@
     <ClCompile Include="Code\Core\World.cpp" />
     <ClCompile Include="Code\Core\WorldEditor.cpp" />
     <ClCompile Include="Code\Core\Profile.cpp" />
-    <ClInclude Include="Code\Render\PipelineObjects.h" />
     <ClInclude Include="Code\Core\Profile.h" />
     <ClInclude Include="Code\Core\Properties.h" />
     <ClCompile Include="Code\Render\Renderer.cpp" />
@@ -752,6 +758,10 @@
     <ClInclude Include="Code\Actors\OcclusionWall.h" />
     <ClInclude Include="Code\Actors\Game\MinesGenerator.h" />
     <ClInclude Include="Code\Core\Deserialiser.h" />
+    <ClInclude Include="Code\Render\RastState.h" />
+    <ClInclude Include="Code\Render\Sampler.h" />
+    <ClInclude Include="Code\Render\IndexBuffer.h" />
+    <ClInclude Include="Code\Render\ShaderResourceView.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />

@@ -1,10 +1,10 @@
 #include "vpch.h"
 #include "RenderUtils.h"
 #include "Texture2D.h"
-#include "PipelineObjects.h"
 #include "Core/Debug.h"
 #include "Core/VString.h"
 #include "MeshDataProxy.h"
+#include "MeshData.h"
 #include "Renderer.h"
 
 namespace RenderUtils
@@ -46,6 +46,12 @@ namespace RenderUtils
 			D3D11_BIND_VERTEX_BUFFER, meshData.vertices.data(), outputBuffer);
 	}
 
+	void CreateIndexBuffer(std::vector<MeshData::indexDataType>& indices, Microsoft::WRL::ComPtr<ID3D11Buffer>& outputBuffer)
+	{
+		CreateDefaultBuffer(sizeof(MeshData::indexDataType) * indices.size(),
+			D3D11_BIND_INDEX_BUFFER, indices.data(), outputBuffer);
+	}
+
 	void CreateSRVForMeshInstance(ID3D11Buffer* structuredBuffer, uint32_t numBufferElements, Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>& outputSrv)
 	{
 		D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
@@ -77,7 +83,7 @@ namespace RenderUtils
 		SetResourceName(outputBuffer.Get(), "structured_buffer_" + std::to_string(GenerateUID()));
 	}
 
-	void CreateSampler(Sampler& sampler)
+	void CreateSamplerState(D3D11_SAMPLER_DESC samplerDesc, Microsoft::WRL::ComPtr<ID3D11SamplerState>& samplerState)
 	{
 		D3D11_SAMPLER_DESC sampDesc = {};
 		sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
@@ -85,9 +91,19 @@ namespace RenderUtils
 		sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
 		sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
 
-		HR(Renderer::GetDevice().CreateSamplerState(&sampDesc, sampler.data.ReleaseAndGetAddressOf()));
+		HR(Renderer::GetDevice().CreateSamplerState(&sampDesc, samplerState.ReleaseAndGetAddressOf()));
 
-		SetResourceName(sampler.data.Get(), "sampler_" + std::to_string(GenerateUID()));
+		SetResourceName(samplerState.Get(), "sampler_" + std::to_string(GenerateUID()));
+	}
+
+	void CreateBlendState(D3D11_BLEND_DESC blendDesc, Microsoft::WRL::ComPtr<ID3D11BlendState>& blendState)
+	{
+		HR(Renderer::GetDevice().CreateBlendState(&blendDesc, blendState.ReleaseAndGetAddressOf()));
+	}
+
+	void CreateRastState(D3D11_RASTERIZER_DESC rastDesc, Microsoft::WRL::ComPtr<ID3D11RasterizerState>& rastState)
+	{
+		HR(Renderer::GetDevice().CreateRasterizerState(&rastDesc, rastState.ReleaseAndGetAddressOf()));
 	}
 
 	void SetResourceName(ID3D11DeviceChild* resource, std::string name)

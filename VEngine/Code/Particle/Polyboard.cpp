@@ -2,16 +2,12 @@
 #include "Polyboard.h"
 #include "Core/Camera.h"
 #include "Render/RenderUtils.h"
-#include "Render/PipelineObjects.h"
 #include "Physics/Raycast.h"
 
 Polyboard::Polyboard()
 {
 	startPoint = XMFLOAT3(0.f, 0.f, 0.f);
 	endPoint = XMFLOAT3(0.f, 0.f, 0.f);
-
-	vertexBuffer = new Buffer();
-	indexBuffer = new Buffer();
 
 	textureData.filename = "Particle/beam_blue.png";
 }
@@ -49,11 +45,9 @@ void Polyboard::GenerateVertices()
 		vertices.emplace_back(Vertex());
 	}
 
-	RenderUtils::CreateDynamicBuffer(sizeof(Vertex) * 256,
-		D3D11_BIND_VERTEX_BUFFER, vertices.data(), vertexBuffer->data);
-
-	RenderUtils::CreateDynamicBuffer(256 * sizeof(MeshData::indexDataType),
-		D3D11_BIND_INDEX_BUFFER, indices.data(), indexBuffer->data);
+	//@Todo: this won't work because there's no default buffer size cap. wasn't good in the first place anyway
+	vertexBuffer.CreateDynamic(vertices);
+	indexBuffer.CreateDynamic(indices);
 }
 
 void Polyboard::CalcVertices()

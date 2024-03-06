@@ -36,9 +36,13 @@
 #include "Particle/SpriteSheet.h"
 #include "Physics/PhysicsSystem.h"
 #include "Physics/Raycast.h"
-#include "PipelineObjects.h"
 #include "RastStates.h"
 #include "Render/Line.h"
+#include "Render/Sampler.h"
+#include "Render/RastState.h"
+#include "Render/BlendState.h"
+#include "Render/VertexBuffer.h"
+#include "Render/IndexBuffer.h"
 #include "Render/RenderTarget.h"
 #include "Render/ShaderData/InstanceData.h"
 #include "Render/ShaderData/ShaderLights.h"
@@ -140,8 +144,8 @@ void SetBlendState(BlendState& blendState);
 void SetConstantBufferVertexPixel(uint32_t shaderRegister, ID3D11Buffer* constantBuffer);
 void SetConstantBufferVertex(uint32_t shaderRegister, ID3D11Buffer* constantBuffer);
 void SetConstantBufferPixel(uint32_t shaderRegister, ID3D11Buffer* constantBuffer);
-void SetVertexBuffer(Buffer& vertexBuffer);
-void SetIndexBuffer(Buffer* indexBuffer);
+void SetVertexBuffer(VertexBuffer& vertexBuffer);
+void SetIndexBuffer(IndexBuffer& indexBuffer);
 void SetSampler(uint32_t shaderRegister, Sampler& sampler);
 void SetShaderResourcePixel(uint32_t shaderRegister, std::string textureName);
 void SetShaderResourceFromMaterial(uint32_t shaderRegister, Material& material);
@@ -175,14 +179,6 @@ Microsoft::WRL::ComPtr<ID3D11InputLayout> inputLayout;
 //Rasterizer states
 std::unordered_map<std::string, std::unique_ptr<RastState>> rastStateMap;
 std::unordered_map<std::string, std::unique_ptr<BlendState>> blendStateMap;
-Microsoft::WRL::ComPtr<ID3D11RasterizerState> rastStateSolid;
-Microsoft::WRL::ComPtr<ID3D11RasterizerState> rastStateWireframe;
-Microsoft::WRL::ComPtr<ID3D11RasterizerState> rastStateNoBackCull;
-Microsoft::WRL::ComPtr<ID3D11RasterizerState> rastStateFrontCull;
-Microsoft::WRL::ComPtr<ID3D11RasterizerState> rastStateShadow;
-
-//Blendstates
-Microsoft::WRL::ComPtr<ID3D11BlendState> defaultBlendState;
 
 //DXGI
 Microsoft::WRL::ComPtr<IDXGISwapChain3> swapchain;
@@ -273,7 +269,7 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 
 	postProcessRenderTarget.Create(viewport.Width, viewport.Height);
 
-	RenderUtils::CreateSampler(defaultSampler);
+	defaultSampler.Create(D3D11_SAMPLER_DESC());
 
 	SpriteSystem::Init();
 
@@ -301,14 +297,6 @@ void Renderer::Cleanup()
 
 	rastStateMap.clear();
 	blendStateMap.clear();
-
-	rastStateSolid.Reset();
-	rastStateWireframe.Reset();
-	rastStateNoBackCull.Reset();
-	rastStateFrontCull.Reset();
-	rastStateShadow.Reset();
-
-	defaultBlendState.Reset();
 
 	swapchain.Reset();
 	dxgiFactory.Reset();
@@ -470,36 +458,28 @@ void CreateRasterizerStates()
 
 	//SOLID
 	{
-		HR(device->CreateRasterizerState(&rastDesc, rastStateSolid.GetAddressOf()));
-		RenderUtils::SetResourceName(rastStateSolid.Get(), RastStates::solid);
-		rastStateMap.emplace(RastStates::solid, std::make_unique<RastState>(RastStates::solid, rastStateSolid.Get()));
+		rastStateMap.emplace(RastStates::solid, std::make_unique<RastState>(RastStates::solid, rastDesc));
 	}
 
 	//WIREFRAME
 	{
 		rastDesc.FillMode = D3D11_FILL_WIREFRAME;
 		rastDesc.CullMode = D3D11_CULL_NONE;
-		HR(device->CreateRasterizerState(&rastDesc, rastStateWireframe.GetAddressOf()));
-		RenderUtils::SetResourceName(rastStateWireframe.Get(), RastStates::wireframe);
-		rastStateMap.emplace(RastStates::wireframe, std::make_unique<RastState>(RastStates::wireframe, rastStateWireframe.Get()));
+		rastStateMap.emplace(RastStates::wireframe, std::make_unique<RastState>(RastStates::wireframe, rastDesc));
 	}
 
 	//SOLID, NO BACK CULL
 	{
 		rastDesc.CullMode = D3D11_CULL_NONE;
 		rastDesc.FillMode = D3D11_FILL_SOLID;
-		HR(device->CreateRasterizerState(&rastDesc, rastStateNoBackCull.GetAddressOf()));
-		RenderUtils::SetResourceName(rastStateNoBackCull.Get(), RastStates::noBackCull);
-		rastStateMap.emplace(RastStates::noBackCull, std::make_unique<RastState>(RastStates::noBackCull, rastStateNoBackCull.Get()));
+		rastStateMap.emplace(RastStates::noBackCull, std::make_unique<RastState>(RastStates::noBackCull, rastDesc));
 	}
 
 	//FRONT CULL
 	{
 		rastDesc.CullMode = D3D11_CULL_FRONT;
 		rastDesc.FillMode = D3D11_FILL_SOLID;
-		HR(device->CreateRasterizerState(&rastDesc, rastStateFrontCull.GetAddressOf()));
-		RenderUtils::SetResourceName(rastStateFrontCull.Get(), RastStates::frontCull);
-		rastStateMap.emplace(RastStates::frontCull, std::make_unique<RastState>(RastStates::frontCull, rastStateFrontCull.Get()));
+		rastStateMap.emplace(RastStates::frontCull, std::make_unique<RastState>(RastStates::frontCull, rastDesc));
 	}
 
 	//SHADOWS
@@ -509,9 +489,7 @@ void CreateRasterizerStates()
 		rastDesc.DepthBias = 25000;
 		rastDesc.DepthBiasClamp = 0.0f;
 		rastDesc.SlopeScaledDepthBias = 1.0f;
-		HR(device->CreateRasterizerState(&rastDesc, rastStateShadow.GetAddressOf()));
-		RenderUtils::SetResourceName(rastStateShadow.Get(), RastStates::shadow);
-		rastStateMap.emplace(RastStates::shadow, std::make_unique<RastState>(RastStates::shadow, rastStateShadow.Get()));
+		rastStateMap.emplace(RastStates::shadow, std::make_unique<RastState>(RastStates::shadow, rastDesc));
 	}
 }
 
@@ -531,8 +509,7 @@ void CreateBlendStates()
 		alphaToCoverageDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
 		alphaToCoverageDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
 
-		HR(device->CreateBlendState(&alphaToCoverageDesc, defaultBlendState.GetAddressOf()));
-		blendStateMap.emplace(BlendStates::Default, std::make_unique<BlendState>(BlendStates::Default, defaultBlendState.Get()));
+		blendStateMap.emplace(BlendStates::Default, std::make_unique<BlendState>(BlendStates::Default, alphaToCoverageDesc));
 	}
 }
 
@@ -732,7 +709,7 @@ void RenderMeshForShadowPass(MeshComponent* mesh)
 	cbMatrices.SetVS();
 
 	//Set textures
-	context->PSSetSamplers(0, 1, mat.sampler->data.GetAddressOf());
+	context->PSSetSamplers(0, 1, mat.sampler->GetDataAddress());
 	SetShaderResourceFromMaterial(0, mat);
 
 	//Draw
@@ -761,7 +738,7 @@ void RenderInstanceMeshForShadowPass(InstanceMeshComponent& instanceMesh)
 		cbMatrices.SetVS();
 
 		//Set textures
-		context->PSSetSamplers(0, 1, mat.sampler->data.GetAddressOf());
+		context->PSSetSamplers(0, 1, mat.sampler->GetDataAddress());
 		SetShaderResourceFromMaterial(0, mat);
 
 		//Draw
@@ -804,10 +781,9 @@ void RenderShadowPass()
 			return;
 		}
 
-		context->RSSetState(rastStateMap.find(RastStates::shadow)->second->data.Get());
+		context->RSSetState(rastStateMap.find(RastStates::shadow)->second->GetData());
 
-		PipelineStateObject& pso = mesh->pso;
-		context->IASetVertexBuffers(0, 1, pso.GetVertexBuffer().data.GetAddressOf(), &Renderer::stride, &Renderer::offset);
+		context->IASetVertexBuffers(0, 1, mesh->GetVertexBuffer().GetDataAddress(), &Renderer::stride, &Renderer::offset);
 
 		ShaderItem* shader = ShaderItems::ShadowAnimation;
 
@@ -830,7 +806,7 @@ void RenderShadowPass()
 
 		//Set textures
 		Material& mat = mesh->GetMaterial();
-		context->PSSetSamplers(0, 1, mat.sampler->data.GetAddressOf());
+		context->PSSetSamplers(0, 1, mat.sampler->GetDataAddress());
 		SetShaderResourceFromMaterial(0, mat);
 
 		//Draw
@@ -1109,7 +1085,7 @@ void Renderer::RenderLightProbeViews()
 			context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 			context->OMSetRenderTargets(1, lightProbeRTVs[i].GetAddressOf(), nullptr);
 
-			context->RSSetState(rastStateMap[RastStates::solid]->data.Get());
+			context->RSSetState(rastStateMap.find(RastStates::solid)->second->GetData());
 
 			SetLightsConstantBufferData();
 
@@ -1129,17 +1105,17 @@ void Renderer::RenderLightProbeViews()
 				Material& material = mesh->GetMaterial();
 
 				const FLOAT blendState[4] = { 0.f };
-				context->OMSetBlendState(mesh->GetBlendState().data.Get(), blendState, 0xFFFFFFFF);
-				context->RSSetState(mesh->GetRastState().data.Get());
+				context->OMSetBlendState(mesh->GetBlendState().GetData(), blendState, 0xFFFFFFFF);
+				context->RSSetState(mesh->GetRastState().GetData());
 
 				context->VSSetShader(lightProbeShader->GetVertexShader(), nullptr, 0);
 				context->PSSetShader(lightProbeShader->GetPixelShader(), nullptr, 0);
 
-				context->PSSetSamplers(0, 1, material.sampler->data.GetAddressOf());
+				context->PSSetSamplers(0, 1, material.sampler->GetDataAddress());
 
 				SetShaderResourceFromMaterial(0, material);
 
-				context->IASetVertexBuffers(0, 1, mesh->pso.GetVertexBuffer().data.GetAddressOf(), &stride, &offset);
+				context->IASetVertexBuffers(0, 1, mesh->GetVertexBuffer().GetDataAddress(), &stride, &offset);
 
 				cbMaterial.Map(&material.materialShaderData);
 				cbMaterial.SetPS();
@@ -1416,7 +1392,7 @@ void RenderPhysicsMeshes()
 	auto& physicsMeshes = PhysicsSystem::GetAllPhysicsMeshes();
 	for (const auto& [uid, mesh] : physicsMeshes)
 	{
-		context->RSSetState(rastStateMap[RastStates::solid]->data.Get());
+		context->RSSetState(rastStateMap.find(RastStates::solid)->second->GetData());
 
 		auto shaderItem = ShaderSystem::FindShaderItem("SolidColour");
 		context->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
@@ -1610,28 +1586,28 @@ void RenderPolyboards()
 
 		polyboard->CalcVertices();
 
-		context->PSSetSamplers(0, 1, Renderer::GetDefaultSampler().data.GetAddressOf());
+		context->PSSetSamplers(0, 1, Renderer::GetDefaultSampler().GetDataAddress());
 
 		SetShaderResourcePixel(0, polyboard->GetTextureFilename());
 
 		//VERTEX MAP
 		{
 			D3D11_MAPPED_SUBRESOURCE mappedResource = {};
-			HR(context->Map(polyboard->GetVertexBuffer().data.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
+			HR(context->Map(polyboard->GetVertexBuffer().GetData(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
 			memcpy(mappedResource.pData, polyboard->GetVertices().data(), sizeof(Vertex) * polyboard->GetVertices().size());
-			context->Unmap(polyboard->GetVertexBuffer().data.Get(), 0);
+			context->Unmap(polyboard->GetVertexBuffer().GetData(), 0);
 		}
 
 		//INDEX MAP
 		{
 			D3D11_MAPPED_SUBRESOURCE mappedResource = {};
-			HR(context->Map(polyboard->GetIndexBuffer().data.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
+			HR(context->Map(polyboard->GetIndexBuffer().GetData(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
 			memcpy(mappedResource.pData, polyboard->GetIndices().data(), sizeof(MeshData::indexDataType) * polyboard->GetIndices().size());
-			context->Unmap(polyboard->GetIndexBuffer().data.Get(), 0);
+			context->Unmap(polyboard->GetIndexBuffer().GetData(), 0);
 		}
 
 		SetVertexBuffer(polyboard->GetVertexBuffer());
-		SetIndexBuffer(&polyboard->GetIndexBuffer());
+		SetIndexBuffer(polyboard->GetIndexBuffer());
 
 		context->DrawIndexed(polyboard->GetIndices().size(), 0, 0);
 	}
@@ -1771,18 +1747,18 @@ void Renderer::RenderParticleEmitters()
 
 		if (drawAllAsWireframe)
 		{
-			context->RSSetState(rastStateWireframe.Get());
+			context->RSSetState(rastStateMap.find(RastStates::wireframe)->second->GetData());
 		}
 		else
 		{
-			context->RSSetState(rastStateMap["nobackcull"]->data.Get());
+			context->RSSetState(rastStateMap.find(RastStates::noBackCull)->second->GetData());
 		}
 
 		SetBlendStateByName(BlendStates::Default);
 
 		SetShaders(emitter->GetMaterial().shader);
 
-		context->PSSetSamplers(0, 1, Renderer::GetDefaultSampler().data.GetAddressOf());
+		context->PSSetSamplers(0, 1, Renderer::GetDefaultSampler().GetDataAddress());
 
 		MaterialShaderData materialShaderData;
 		materialShaderData = emitter->GetMaterial().materialShaderData;
@@ -2041,27 +2017,26 @@ void Renderer::PlayerPhotoCapture(std::wstring outputFilename)
 void SetRenderPipelineStates(MeshComponent* mesh)
 {
 	Material& material = mesh->GetMaterial();
-	PipelineStateObject& pso = mesh->pso;
 
 	if (Renderer::drawAllAsWireframe)
 	{
-		context->RSSetState(rastStateWireframe.Get());
+		context->RSSetState(rastStateMap.find(RastStates::wireframe)->second->GetData());
 	}
 	else if (material.rastState)
 	{
-		context->RSSetState(material.rastState->data.Get());
+		context->RSSetState(material.rastState->GetData());
 	}
 
 	constexpr FLOAT blendState[4] = { 0.f };
-	context->OMSetBlendState(material.blendState->data.Get(), blendState, 0xFFFFFFFF);
+	context->OMSetBlendState(material.blendState->GetData(), blendState, 0xFFFFFFFF);
 
 	context->VSSetShader(material.GetVertexShader(), nullptr, 0);
 	context->PSSetShader(material.GetPixelShader(), nullptr, 0);
 
-	context->PSSetSamplers(0, 1, material.sampler->data.GetAddressOf());
+	context->PSSetSamplers(0, 1, material.sampler->GetDataAddress());
 	SetShaderResourceFromMaterial(0, material);
 
-	SetVertexBuffer(pso.GetVertexBuffer());
+	SetVertexBuffer(mesh->GetVertexBuffer());
 
 	cbMaterial.Map(&material.materialShaderData);
 	cbMaterial.SetPS();
@@ -2069,15 +2044,14 @@ void SetRenderPipelineStates(MeshComponent* mesh)
 
 void SetRenderPipelineStatesForShadows(MeshComponent* mesh)
 {
-	context->RSSetState(rastStateShadow.Get());
+	context->RSSetState(rastStateMap.find(RastStates::shadow)->second->GetData());
 
 	ShaderItem* shader = ShaderItems::Shadow;
 
 	context->VSSetShader(shader->GetVertexShader(), nullptr, 0);
 	context->PSSetShader(shader->GetPixelShader(), nullptr, 0);
 
-	PipelineStateObject& pso = mesh->pso;
-	context->IASetVertexBuffers(0, 1, pso.GetVertexBuffer().data.GetAddressOf(), &Renderer::stride, &Renderer::offset);
+	context->IASetVertexBuffers(0, 1, mesh->GetVertexBuffer().GetDataAddress(), &Renderer::stride, &Renderer::offset);
 }
 
 void SetShaders(ShaderItem* shaderItem)
@@ -2090,30 +2064,30 @@ void SetRastStateByName(std::string rastStateName)
 {
 	if (Renderer::drawAllAsWireframe)
 	{
-		context->RSSetState(rastStateWireframe.Get());
+		context->RSSetState(rastStateMap.find(RastStates::wireframe)->second->GetData());
 		return;
 	}
 
 	auto& rastState = rastStateMap.find(rastStateName)->second;
-	context->RSSetState(rastState->data.Get());
+	context->RSSetState(rastState->GetData());
 }
 
 void SetRastState(RastState& rastState)
 {
-	context->RSSetState(rastState.data.Get());
+	context->RSSetState(rastState.GetData());
 }
 
 void SetBlendStateByName(std::string blendStateName)
 {
 	auto& blendState = blendStateMap.find(blendStateName)->second;
 	const float factor[4] = {};
-	context->OMSetBlendState(blendState->data.Get(), factor, 0xFFFFFFFF);
+	context->OMSetBlendState(blendState->GetData(), factor, 0xFFFFFFFF);
 }
 
 void SetBlendState(BlendState& blendState)
 {
 	const float factor[4] = {};
-	context->OMSetBlendState(blendState.data.Get(), factor, 0xFFFFFFFF);
+	context->OMSetBlendState(blendState.GetData(), factor, 0xFFFFFFFF);
 }
 
 void SetConstantBufferVertexPixel(uint32_t shaderRegister, ID3D11Buffer* constantBuffer)
@@ -2132,19 +2106,19 @@ void SetConstantBufferPixel(uint32_t shaderRegister, ID3D11Buffer* constantBuffe
 	context->PSSetConstantBuffers(shaderRegister, 1, &constantBuffer);
 }
 
-void SetVertexBuffer(Buffer& vertexBuffer)
+void SetVertexBuffer(VertexBuffer& vertexBuffer)
 {
-	context->IASetVertexBuffers(0, 1, vertexBuffer.data.GetAddressOf(), &Renderer::stride, &Renderer::offset);
+	context->IASetVertexBuffers(0, 1, vertexBuffer.GetDataAddress(), &Renderer::stride, &Renderer::offset);
 }
 
-void SetIndexBuffer(Buffer* indexBuffer)
+void SetIndexBuffer(IndexBuffer& indexBuffer)
 {
-	context->IASetIndexBuffer(indexBuffer->data.Get(), indexBufferFormat, 0);
+	context->IASetIndexBuffer(indexBuffer.GetData(), indexBufferFormat, 0);
 }
 
 void SetSampler(uint32_t shaderRegister, Sampler& sampler)
 {
-	context->PSSetSamplers(shaderRegister, 1, sampler.data.GetAddressOf());
+	context->PSSetSamplers(shaderRegister, 1, sampler.GetDataAddress());
 }
 
 void SetShaderResourceFromMaterial(uint32_t shaderRegister, Material& material)
@@ -2177,7 +2151,7 @@ void RenderPostProcess()
 	ID3D11ShaderResourceView* nullSRV = nullptr;
 	ID3D11UnorderedAccessView* nullUAV = nullptr;
 
-	context->RSSetState(rastStateMap[RastStates::solid]->data.Get());
+	context->RSSetState(rastStateMap.find(RastStates::solid)->second->GetData());
 
 	context->IASetInputLayout(nullptr);
 	context->IASetVertexBuffers(0, 0, nullptr, nullptr, nullptr);
@@ -2213,7 +2187,7 @@ void RenderWireframeForVertexPaintingAndPickedActor()
 {
 	const auto wireframeRender = [&](MeshComponent* mesh)
 		{
-			context->RSSetState(rastStateWireframe.Get());
+			context->RSSetState(rastStateMap.find(RastStates::wireframe)->second->GetData());
 
 			MaterialShaderData materialShaderData;
 			materialShaderData.ambient = XMFLOAT4(1.f, 0.f, 1.f, 1.f);
@@ -2224,7 +2198,7 @@ void RenderWireframeForVertexPaintingAndPickedActor()
 			context->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
 			context->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
 
-			SetVertexBuffer(mesh->pso.GetVertexBuffer());
+			SetVertexBuffer(mesh->GetVertexBuffer());
 
 			SetMatricesFromMesh(mesh);
 			SetShaderMeshData(mesh);
@@ -2474,12 +2448,12 @@ void PointLightVertexColourMap()
 
 RastState* Renderer::GetRastState(std::string rastStateName)
 {
-	return rastStateMap[rastStateName].get();
+	return rastStateMap.find(rastStateName)->second.get();
 }
 
 BlendState* Renderer::GetBlendState(std::string blendStateName)
 {
-	return blendStateMap[blendStateName].get();
+	return blendStateMap.find(blendStateName)->second.get();
 }
 
 void Renderer::AddDebugDrawOrientedBox(DirectX::BoundingOrientedBox& orientedBox, bool clear)

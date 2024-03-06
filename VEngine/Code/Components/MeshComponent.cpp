@@ -118,7 +118,7 @@ void MeshComponent::Destroy()
 	material->Destroy();
 	material = nullptr;
 
-	pso.Destroy();
+	vertexBuffer.Destroy();
 }
 
 static void ReassignMesh(void* data)
@@ -160,7 +160,7 @@ void MeshComponent::SplitMeshCreate()
 
 	material->Create();
 
-	pso.Create(meshDataProxy);
+	vertexBuffer.CreateDefault(meshDataProxy);
 
 	//Make sure bounds setup is before physics actor creation
 	BoundingBox bb;
@@ -260,20 +260,20 @@ void MeshComponent::SetUVOffsetSpeed(XMFLOAT2 speed)
 	material->uvOffsetSpeed = speed;
 }
 
-Buffer& MeshComponent::GetVertexBuffer()
+VertexBuffer& MeshComponent::GetVertexBuffer()
 {
-	return pso.GetVertexBuffer();
+	return vertexBuffer;
 }
 
 void MeshComponent::CreateVertexBuffer()
 {
-	pso.Create(meshDataProxy);
+	vertexBuffer.CreateDefault(meshDataProxy);
 }
 
 void MeshComponent::CreateNewVertexBuffer()
 {
-	pso.Destroy();
-	pso.Create(meshDataProxy);
+	vertexBuffer.Destroy();
+	vertexBuffer.CreateDefault(meshDataProxy);
 }
 
 std::vector<Vertex>& MeshComponent::GetAllVertices()
