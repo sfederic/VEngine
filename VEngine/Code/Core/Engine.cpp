@@ -25,7 +25,7 @@
 #include "Physics/PhysicsSystem.h"
 #include "Gameplay/WorldFunctions.h"
 
-void ClearLog()
+static void ClearLog()
 {
 	std::ofstream ofs;
 	ofs.open("Log.txt", std::ofstream::out | std::ofstream::trunc);
