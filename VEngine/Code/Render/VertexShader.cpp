@@ -16,5 +16,6 @@ void VertexShader::Create(const std::wstring filename)
 
 void VertexShader::Reset()
 {
+	shader.Reset();
 	byteCode.clear();
 }
