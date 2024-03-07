@@ -7,9 +7,9 @@
 
 void CompileAllShadersFromFile();
 
-std::unordered_map<std::wstring, std::unique_ptr<VertexShader>> vertexShaders;
-std::unordered_map<std::wstring, std::unique_ptr<PixelShader>> pixelShaders;
-std::unordered_map<std::string, std::shared_ptr<ShaderItem>> shaderItems;
+static std::unordered_map<std::wstring, std::unique_ptr<VertexShader>> vertexShaders;
+static std::unordered_map<std::wstring, std::unique_ptr<PixelShader>> pixelShaders;
+static std::unordered_map<std::string, std::unique_ptr<ShaderItem>> shaderItems;
 
 void ShaderSystem::Init()
 {
