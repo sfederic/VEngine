@@ -10,11 +10,11 @@ class InstanceMeshComponent;
 
 class MeshParticleEmitter : public Actor
 {
-public: 
+public:
 	ACTOR_SYSTEM(MeshParticleEmitter);
 
 	MeshParticleEmitter(std::string textureFilename = "test.png", ShaderItem* shaderItem = ShaderItems::Instance);
-
+	void Create() override;
 	void Tick(float deltaTime) override;
 	Properties GetProps() override;
 

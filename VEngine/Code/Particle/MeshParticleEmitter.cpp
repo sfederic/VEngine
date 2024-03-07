@@ -11,6 +11,11 @@ MeshParticleEmitter::MeshParticleEmitter(std::string textureFilename, ShaderItem
 	rootComponent = instanceMesh;
 }
 
+void MeshParticleEmitter::Create()
+{
+	instanceMesh->ignoreGridRaycasts = true;
+}
+
 void MeshParticleEmitter::Tick(float deltaTime)
 {
 	spawnTimer += deltaTime;
