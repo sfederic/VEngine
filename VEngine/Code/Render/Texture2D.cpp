@@ -58,6 +58,6 @@ void Texture2D::Create()
 
 void Texture2D::SetBufferNames()
 {
-	RenderUtils::SetResourceName(data.Get(), "Resource_" + filename);
-	RenderUtils::SetResourceName(srv.Get(), "SRV_" + filename);
+	RenderUtils::SetResourceName(data.Get(), "resource_" + filename + std::to_string(GenerateUID()));
+	RenderUtils::SetResourceName(srv.Get(), "srv_" + filename + std::to_string(GenerateUID()));
 }
