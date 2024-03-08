@@ -295,8 +295,8 @@ void FileSystem::LoadWorld(std::string worldName)
 		else
 		{
 			//This will loop over the missing component from an actor.
-			//It won't remove the component from the .vmap file though, subquent 
-			//saves will overite that missing component instead.
+			//It won't remove the component from the .vmap file though, subsequent 
+			//saves will overwrite that missing component instead.
 
 			//Get the previous post so subsequent system name reads work
 			std::streampos lastPos = d.is.tellg();
