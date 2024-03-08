@@ -30,7 +30,7 @@ EntranceTrigger
 Entrance Active
 1
 Level Name
-
+market_1.vmap
 Locked Text
 Locked
 Name
@@ -49,7 +49,7 @@ next
  Enabled
 1
  Position
-2 2 9
+2 0 9
  Rotation
 -0 0 -0 1
  Scale
@@ -59,7 +59,7 @@ next
 Entrance Active
 1
 Level Name
-
+market_3.vmap
 Locked Text
 Locked
 Name
@@ -1666,25 +1666,6 @@ UID
 next
 BoxTriggerComponent
 3
-2037346385
-BoxTrigger
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Extents
-1 1 1
-Offset
-0 0 0
-UID
-814155752
-next
 3612567817
 Trigger
  Enabled
@@ -1709,7 +1690,7 @@ Trigger
  Enabled
 1
  Pos
-2 2 9
+2 0 9
  Rot
 -0 0 -0 1
  Scale
@@ -1722,6 +1703,25 @@ Offset
 0 0 0
 UID
 800433153
+next
+2037346385
+BoxTrigger
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+1 1 1
+Offset
+0 0 0
+UID
+814155752
 next
 DialogueComponent
 3

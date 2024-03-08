@@ -209,7 +209,7 @@ EntranceTrigger
 Entrance Active
 1
 Level Name
-
+market_4.vmap
 Locked Text
 Locked
 Name
@@ -238,7 +238,7 @@ next
 Entrance Active
 1
 Level Name
-
+market_5.vmap
 Locked Text
 Locked
 Name
@@ -296,7 +296,7 @@ next
 Entrance Active
 1
 Level Name
-
+market_2.vmap
 Locked Text
 Locked
 Name
@@ -754,6 +754,63 @@ Trans. Occlude
 0
 UID
 3230279783
+next
+1164128619
+Mesh
+ Enabled
+1
+ Pos
+5 0 2
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+vase.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
+UID
+982518190
 next
 90475027
 Mesh
@@ -1895,63 +1952,6 @@ Trans. Occlude
 UID
 842230187
 next
-1164128619
-Mesh
- Enabled
-1
- Pos
-5 0 2
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-default
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-vase.vmesh
-Physics Static
-1
-Render Static
-0
-Trans. Occlude
-0
-UID
-982518190
-next
 ConditionComponent
 4
 4143031183
@@ -2108,17 +2108,6 @@ File
 UID
 502432438
 next
-90475027
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-3941718444
-next
 1164128619
 Dialogue
  Enabled
@@ -2129,6 +2118,17 @@ File
 
 UID
 2096360530
+next
+90475027
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+3941718444
 next
 InstanceMeshComponent
 1

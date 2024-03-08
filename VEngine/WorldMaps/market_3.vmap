@@ -30,7 +30,7 @@ EntranceTrigger
 Entrance Active
 1
 Level Name
-
+market_2.vmap
 Locked Text
 Locked
 Name
@@ -59,9 +59,9 @@ next
 Entrance Active
 1
 Level Name
-
+market_4.vmap
 Locked Text
-Locked
+
 Name
 EntranceTrigger1
 Open Audio
