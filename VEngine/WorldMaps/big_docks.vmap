@@ -1,20 +1,3 @@
-ParticleSystem
-1
- Enabled
-1
- Position
--0 0 1
- Rotation
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Name
-ParticleSystem0
-UID
-1064678413
-next
 GridActor
 15
  Enabled
@@ -1217,23 +1200,6 @@ Name
 DirectionalLightActor0
 UID
 1433463866
-next
-SpriteSheetActor
-1
- Enabled
-1
- Position
-1 1 -0
- Rotation
--0.00294535 0.802992 0.00396849 0.595969
- Scale
-1 1 1
- Visible
-1
-Name
-SpriteSheetActor0
-UID
-322603348
 next
 MeshComponent
 28
@@ -2861,33 +2827,6 @@ Condition Arg
 UID
 3549132282
 next
-SpriteSheet
-1
-322603348
-SpriteSheet
- Enabled
-1
- Pos
-1 1 -0
- Rot
--0.00294535 0.802992 0.00396849 0.595969
- Scale
-1 1 1
- Visible
-1
-Animation Speed
-40
-Loop Animation
-1
-Sheet Columns
-4
-Sheet Rows
-4
-Texture
-Sprites/fire_sheet.png
-UID
-882535275
-next
 BoxTriggerComponent
 3
 4207043753
@@ -3229,67 +3168,6 @@ LightEnabled
 1
 UID
 1372434311
-next
-ParticleEmitter
-1
-1064678413
-Emitter
- Enabled
-1
- Pos
--0 0 1
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-default
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-DefaultClip
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-P_Lifetime
-1 1
-P_MaxDirection
-0 1 0
-P_MinDirection
-0 1 0
-P_MoveSpeed
-1 1
-P_RotateSpeed
-0 0
-P_Rotation
-0 0
-P_SpawnRadius
-0 1
-P_SpawnRate
-0 0.5
-UID
-3685206383
 next
 EmptyComponent
 1

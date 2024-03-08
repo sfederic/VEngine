@@ -3,7 +3,7 @@ GridActor
  Enabled
 1
  Position
-6 1 1
+2 -0 3
  Rotation
 0 0 0 1
  Scale
@@ -41,9 +41,9 @@ Move Axis Pos.
 Move Speed
 12
 MoveOnlyXAxis
-1
+0
 MoveOnlyZAxis
-1
+0
 Name
 GridActor0
 Obstacle
@@ -57,24 +57,24 @@ Rotate Speed
 Rotate Yaw
 1
 UID
-1090236991
+2364973632
 next
 Player
 1
  Enabled
 1
  Position
-4 0.999998 1
+2 0 2
  Rotation
-0 0.707279 0 0.706934
+-0 0 -0 1
  Scale
-0.999996 1 0.999996
+1 1 1
  Visible
 1
 Name
 Player0
 UID
-2989755610
+2648484807
 next
 Grid
 1
@@ -91,54 +91,54 @@ Grid
 Name
 Grid0
 Size X
-10
+5
 Size Y
-10
+5
 UID
-3559791811
+2372383453
 next
 MeshActor
 1
  Enabled
 1
  Position
-4.5 -1 4.5
+2 -0.5 2
  Rotation
--0 0 -0 1
+0 0 0 1
  Scale
-5 5 5
+5 1 5
  Visible
 1
 Name
-MeshActor1
+MeshActor0
 UID
-1373377342
+2445382612
 next
-PointLightActor
+DirectionalLightActor
 1
  Enabled
 1
  Position
-4 4 3
+0 5 0
  Rotation
--0 0 -0 1
+0.707107 0 0 0.707107
  Scale
 1 1 1
  Visible
 1
 Name
-PointLightActor0
+DirectionalLightActor0
 UID
-4223582235
+1507480294
 next
 MeshComponent
 3
-1090236991
+2648484807
 Mesh
  Enabled
 1
  Pos
-6 1 1
+0 0 0
  Rot
 0 0 0 1
  Scale
@@ -154,64 +154,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cube.vmesh
-Physics Static
-1
-Render Static
-0
-Trans. Occlude
-0
-UID
-2712656488
-next
-2989755610
-Mesh
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 3.52156e-08 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -245,18 +188,18 @@ Render Static
 Trans. Occlude
 0
 UID
-1379992538
+3827874047
 next
-1373377342
+2445382612
 Mesh
  Enabled
 1
  Pos
-4.5 -1 4.5
+2 -0.5 2
  Rot
--0 0 -0 1
+0 0 0 1
  Scale
-5 5 5
+5 1 5
  Visible
 1
 Casts Shadow
@@ -268,7 +211,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -280,7 +223,7 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-Floors/floor_09.jpg
+test.png
 M_Use Texture
 1
 M_UvOffset
@@ -294,7 +237,7 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-catacombs_033.vmesh
+node.vmesh
 Physics Static
 1
 Render Static
@@ -302,11 +245,68 @@ Render Static
 Trans. Occlude
 0
 UID
-1359728781
+546228180
+next
+2364973632
+Mesh
+ Enabled
+1
+ Pos
+2 -0 3
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
+UID
+3206685348
 next
 DialogueComponent
 2
-1090236991
+2648484807
 Dialogue
  Enabled
 1
@@ -315,9 +315,9 @@ Dialogue
 File
 
 UID
-2754769642
+1181958515
 next
-2989755610
+2364973632
 Dialogue
  Enabled
 1
@@ -326,11 +326,11 @@ Dialogue
 File
 
 UID
-3787082410
+938035251
 next
 InstanceMeshComponent
 1
-3559791811
+2372383453
 NodeMesh
  Enabled
 1
@@ -341,7 +341,7 @@ NodeMesh
  Scale
 1 1 1
  Visible
-0
+1
 Casts Shadow
 1
 Grid Ignore
@@ -385,16 +385,16 @@ Render Static
 Trans. Occlude
 0
 UID
-1619077807
+3459060522
 next
 CameraComponent
 1
-2989755610
+2648484807
 Camera
  Enabled
 1
  Pos
-1.25 0.55 -0.75
+1.75 1.75 -2.75
  Rot
 0 0 0 1
  Scale
@@ -408,18 +408,18 @@ Far Z
 Near Z
 0.01
 UID
-4271484372
+699646363
 next
-PointLightComponent
+DirectionalLightComponent
 1
-4223582235
-PointLight
+1507480294
+DirectionalLight
  Enabled
 1
  Pos
-4 4 3
+0 5 0
  Rot
--0 0 -0 1
+0.707107 0 0 0.707107
  Scale
 1 1 1
  Visible
@@ -427,27 +427,27 @@ PointLight
 Colour
 1 1 1 1
 Intensity
-25
+1
 LightEnabled
 1
 UID
-3346583480
+1528672348
 next
 EmptyComponent
 1
-2989755610
+2648484807
 Root
  Enabled
 1
  Pos
-4 0.999998 1
+2 0 2
  Rot
-0 0.707279 0 0.706934
+-0 0 -0 1
  Scale
-0.999996 1 0.999996
+1 1 1
  Visible
 1
 UID
-1187633019
+2554421347
 next
 end
