@@ -729,6 +729,35 @@ void Player::MoveLinkedGridActor()
 				if (linkedGridActor->CheckNextNodeMoveIsValid(-GetForwardVectorV()))
 				{
 					linkedGridActor->OnLinkMove();
+
+					//Backwards linked grid actor movement needs to be able to rotate the player and camera
+					//to face the new positional orientation of the linked grid actor. This eases up the
+					//camera controls a bit and keeps the controller/keyboard input constant.
+
+					//@Todo: I'd like this "is vector left or right of" code to be a VMath function.
+					const auto delta = XMVector3Normalize(linkedGridActor->GetPositionV() - GetPositionV());
+					const auto cross = XMVector3Cross(delta, GetForwardVectorV());
+
+					float rotationIncrementAngle = 0.f;
+					if (cross.m128_f32[1] > 0.f) //GridActor is to the right
+					{
+						rotationIncrementAngle = -90.f;
+					}
+					else //GridActor is to the left
+					{
+						rotationIncrementAngle = 90.f;
+					}
+
+					const float angleBetweenGridActorAndPlayer =
+						XMConvertToDegrees(XMVector3AngleBetweenNormals(
+							XMVector3Normalize(linkedGridActor->GetPositionV() - GetPositionV()),
+							GetForwardVectorV()).m128_f32[0]);
+					Log("angle %f", angleBetweenGridActorAndPlayer);
+					if (angleBetweenGridActorAndPlayer > 89.f)
+					{
+						const float angle = DirectX::XMConvertToRadians(rotationIncrementAngle);
+						nextRot = XMQuaternionMultiply(nextRot, DirectX::XMQuaternionRotationAxis(VMath::GlobalUpVector(), angle));
+					}
 				}
 			}
 			else
