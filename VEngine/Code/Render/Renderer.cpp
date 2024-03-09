@@ -2316,12 +2316,6 @@ void PointLightVertexColourMap()
 	const auto numPointLights = PointLightComponent::system.GetNumComponents();
 	const auto numDirectionalLights = PointLightComponent::system.GetNumComponents();
 
-	QProgressDialog progress("Mapping vertex colours from lights", QString(), 0, numPointLights + numDirectionalLights);
-	progress.setWindowModality(Qt::WindowModal);
-	progress.show();
-
-	uint32_t lightIndex = 0;
-
 	for (auto& pointLight : PointLightComponent::system.GetComponents())
 	{
 		for (auto& mesh : MeshComponent::system.GetComponents())
