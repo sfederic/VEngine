@@ -84,8 +84,6 @@
 #include <vector>
 #include <WinCodec.h> //For GUID_ContainerFormatJpeg
 #include <windef.h>
-#include <QProgressDialog>
-#include <QApplication>
 
 void CreateFactory();
 void CreateDevice();
@@ -2324,13 +2322,6 @@ void PointLightVertexColourMap()
 
 	uint32_t lightIndex = 0;
 
-	auto UpdateProgressDialog = [&]()
-		{
-			QApplication::processEvents();
-			progress.setValue(lightIndex);
-			lightIndex++;
-		};
-
 	for (auto& pointLight : PointLightComponent::system.GetComponents())
 	{
 		for (auto& mesh : MeshComponent::system.GetComponents())
@@ -2387,8 +2378,6 @@ void PointLightVertexColourMap()
 
 			mesh->CreateNewVertexBuffer();
 		}
-
-		UpdateProgressDialog();
 	}
 
 	//This gives like an ambient occlusion effect
@@ -2438,8 +2427,6 @@ void PointLightVertexColourMap()
 
 			mesh->CreateNewVertexBuffer();
 		}
-
-		UpdateProgressDialog();
 	}
 
 	const auto endTime = Profile::QuickEnd(startTime);
