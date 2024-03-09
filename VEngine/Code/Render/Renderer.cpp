@@ -2353,15 +2353,17 @@ void PointLightVertexColourMap()
 				const auto rayOrigin = worldSpaceVertexPos + (normal * 0.1f);
 				if (!Raycast(hit, rayOrigin, pointLight->GetWorldPositionV()))
 				{
-					auto colour = pointLight->GetLightData().colour;
+					const auto colour = pointLight->GetLightData().colour;
+					const float originalAlpha = colour.w;
 					auto lightColour = XMLoadFloat4(&colour);
 					auto vertColour = XMLoadFloat4(&vertex.colour);
 					lightColour *= dot / XM_PI;
 
-					float len = XMVector3Length(rayOrigin - pointLight->GetWorldPositionV()).m128_f32[0];
-					float falloff = pointLight->GetLightData().intensity / std::max(len, 0.01f);
+					const float len = XMVector3Length(rayOrigin - pointLight->GetWorldPositionV()).m128_f32[0];
+					const float falloff = pointLight->GetLightData().intensity / std::max(len, 0.01f);
 
 					vertColour = lightColour * falloff;
+					vertColour.m128_f32[3] = originalAlpha;
 					XMStoreFloat4(&vertex.colour, vertColour);
 				}
 				else
@@ -2375,7 +2377,7 @@ void PointLightVertexColourMap()
 	}
 
 	//This gives like an ambient occlusion effect
-	//@Todo: code between lights here can be condensed 
+	//@Todo: code between lights here can be condensed/consolidated
 	for (auto& dLight : DirectionalLightComponent::system.GetComponents())
 	{
 		for (auto& mesh : MeshComponent::system.GetComponents())
@@ -2410,11 +2412,13 @@ void PointLightVertexColourMap()
 				const auto rayOrigin = worldSpaceVertexPos + (normal * 0.1f);
 				if (Raycast(hit, rayOrigin, -dLightDirection, 50.f))
 				{
-					auto colour = dLight->GetLightData().colour;
+					const auto colour = dLight->GetLightData().colour;
+					const float originalAlpha = colour.w;
 					auto lightColour = XMLoadFloat4(&colour);
 					auto vertColour = XMLoadFloat4(&vertex.colour);
 					lightColour *= dot;
 					vertColour = lightColour;
+					vertColour.m128_f32[3] = originalAlpha; //Set alpha back to original value
 					XMStoreFloat4(&vertex.colour, vertColour);
 				}
 			}
