@@ -115,7 +115,7 @@ void RenderWireframeForVertexPaintingAndPickedActor();
 void RenderLightProbes();
 void RenderMeshToCaptureMeshIcon();
 
-void PointLightVertexColourMap();
+void VertexColourLightBake();
 
 void MapBuffer(ID3D11Resource* resource, const void* src, size_t size);
 void DrawMesh(MeshComponent* mesh);
@@ -341,7 +341,7 @@ void Renderer::Tick()
 
 	if (Input::GetKeyUp(Keys::F4))
 	{
-		PointLightVertexColourMap();
+		VertexColourLightBake();
 	}
 
 	ScreenshotCapture();
@@ -2309,26 +2309,59 @@ void RenderMeshToCaptureMeshIcon()
 	Camera::SetActiveCamera(&previousActiveCamera);
 }
 
-void PointLightVertexColourMap()
+void VertexColourLightBake()
 {
 	const auto startTime = Profile::QuickStart();
+	Log("Vertex colour baking starting.");
 
-	const auto numPointLights = PointLightComponent::system.GetNumComponents();
-	const auto numDirectionalLights = PointLightComponent::system.GetNumComponents();
-
-	for (auto& pointLight : PointLightComponent::system.GetComponents())
+	for (const auto& mesh : MeshComponent::system.GetComponents())
 	{
-		for (auto& mesh : MeshComponent::system.GetComponents())
+		//Skipping baking vertex colours to non-static meshes
+		if (!mesh->IsRenderStatic())
 		{
-			if (!mesh->IsRenderStatic())
+			continue;
+		}
+
+		const auto meshWorldMatrix = mesh->GetWorldMatrix();
+		auto& vertices = mesh->GetAllVertices();
+
+		for (auto& dLight : DirectionalLightComponent::system.GetComponents())
+		{
+			for (auto& vertex : vertices)
 			{
-				continue;
+				const auto vertexPos = XMLoadFloat3(&vertex.pos);
+				const auto worldSpaceVertexPos = XMVector3TransformCoord(vertexPos, meshWorldMatrix);
+
+				HitResult hit;
+				hit.actorsToIgnore.emplace_back(dLight->GetOwner());
+				hit.componentsToIgnore.emplace_back(dLight.get());
+				hit.ignoreBackFaceHits = false;
+
+				auto normal = XMLoadFloat3(&vertex.normal);
+				normal = XMVector3TransformNormal(normal, meshWorldMatrix);
+				normal = XMVector3Normalize(normal);
+
+				const auto dLightDirection = dLight->GetForwardVectorV();
+				float dot = XMVector3Dot(normal, dLightDirection).m128_f32[0];
+				dot = std::clamp(dot, 0.1f, 1.f);
+
+				const auto rayOrigin = worldSpaceVertexPos + (normal * 0.1f);
+				if (Raycast(hit, rayOrigin, -dLightDirection, 50.f))
+				{
+					const auto colour = dLight->GetLightData().colour;
+					const float originalAlpha = colour.w;
+					auto lightColour = XMLoadFloat4(&colour);
+					auto vertColour = XMLoadFloat4(&vertex.colour);
+					lightColour *= dot;
+					vertColour = lightColour;
+					vertColour.m128_f32[3] = originalAlpha; //Set alpha back to original value
+					XMStoreFloat4(&vertex.colour, vertColour);
+				}
 			}
+		}
 
-			const auto meshWorldMatrix = mesh->GetWorldMatrix();
-
-			auto& vertices = mesh->GetAllVertices();
-
+		for (auto& pointLight : PointLightComponent::system.GetComponents())
+		{
 			for (auto& vertex : vertices)
 			{
 				const auto vertexPos = XMLoadFloat3(&vertex.pos);
@@ -2366,69 +2399,14 @@ void PointLightVertexColourMap()
 					vertColour.m128_f32[3] = originalAlpha;
 					XMStoreFloat4(&vertex.colour, vertColour);
 				}
-				else
-				{
-					vertex.colour = XMFLOAT4(0.1f, 0.1f, 0.1f, 1.f);
-				}
 			}
-
-			mesh->CreateNewVertexBuffer();
 		}
-	}
 
-	//This gives like an ambient occlusion effect
-	//@Todo: code between lights here can be condensed/consolidated
-	for (auto& dLight : DirectionalLightComponent::system.GetComponents())
-	{
-		for (auto& mesh : MeshComponent::system.GetComponents())
-		{
-			if (!mesh->IsRenderStatic())
-			{
-				continue;
-			}
-
-			const auto meshWorldMatrix = mesh->GetWorldMatrix();
-
-			auto& vertices = mesh->GetAllVertices();
-
-			for (auto& vertex : vertices)
-			{
-				const auto vertexPos = XMLoadFloat3(&vertex.pos);
-				const auto worldSpaceVertexPos = XMVector3TransformCoord(vertexPos, meshWorldMatrix);
-
-				HitResult hit;
-				hit.actorsToIgnore.emplace_back(dLight->GetOwner());
-				hit.componentsToIgnore.emplace_back(dLight.get());
-				hit.ignoreBackFaceHits = false;
-
-				auto normal = XMLoadFloat3(&vertex.normal);
-				normal = XMVector3TransformNormal(normal, meshWorldMatrix);
-				normal = XMVector3Normalize(normal);
-
-				const auto dLightDirection = dLight->GetForwardVectorV();
-				float dot = XMVector3Dot(normal, dLightDirection).m128_f32[0];
-				dot = std::clamp(dot, 0.1f, 1.f);
-
-				const auto rayOrigin = worldSpaceVertexPos + (normal * 0.1f);
-				if (Raycast(hit, rayOrigin, -dLightDirection, 50.f))
-				{
-					const auto colour = dLight->GetLightData().colour;
-					const float originalAlpha = colour.w;
-					auto lightColour = XMLoadFloat4(&colour);
-					auto vertColour = XMLoadFloat4(&vertex.colour);
-					lightColour *= dot;
-					vertColour = lightColour;
-					vertColour.m128_f32[3] = originalAlpha; //Set alpha back to original value
-					XMStoreFloat4(&vertex.colour, vertColour);
-				}
-			}
-
-			mesh->CreateNewVertexBuffer();
-		}
+		mesh->CreateNewVertexBuffer();
 	}
 
 	const auto endTime = Profile::QuickEnd(startTime);
-	Log("Vertex colour mapping completed in [%f] seconds.", endTime);
+	Log("Vertex colour baking completed in [%f] seconds.", endTime);
 }
 
 RastState* Renderer::GetRastState(std::string rastStateName)
