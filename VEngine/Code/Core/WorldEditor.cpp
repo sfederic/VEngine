@@ -716,6 +716,7 @@ void QuickTextureChangeMenu()
 			QFileDialog dialog;
 			dialog.setFileMode(QFileDialog::AnyFile);
 
+			//@Todo: Qt5 and Win11/10 still fucks up here from time to time using native file dialog
 			const QString filePath = dialog.getOpenFileName(nullptr, "Set Texture",
 				QString::fromStdString(AssetBaseFolders::texture), nullptr, nullptr);
 			if (!filePath.isEmpty())
