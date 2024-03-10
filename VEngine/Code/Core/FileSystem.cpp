@@ -23,6 +23,7 @@
 #include "Profile.h"
 #include "UI/UISystem.h"
 #include "UI/ScreenFadeWidget.h"
+#include <Asset/AssetPaths.h>
 
 static std::string defferedWorldLoadFilename;
 static std::string previousWorldMovedFromFilename;
@@ -202,7 +203,7 @@ void FileSystem::LoadWorld(std::string worldName)
 
 	World::worldFilename = worldName;
 
-	std::string path = "WorldMaps/" + worldName;
+	std::string path = AssetBaseFolders::worldMap + worldName;
 
 	if (GameInstance::useGameSaves)
 	{
