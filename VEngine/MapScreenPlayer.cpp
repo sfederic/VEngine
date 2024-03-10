@@ -7,7 +7,6 @@
 
 MapScreenPlayer::MapScreenPlayer()
 {
-	//Give the camera a pivot to rotate around.
 	SetEmptyRootComponent();
 
 	camera = CreateComponent<CameraComponent>("Camera");
@@ -16,10 +15,8 @@ MapScreenPlayer::MapScreenPlayer()
 
 void MapScreenPlayer::Create()
 {
-	//@Todo: rotation needs work. Need another object as the root to act as the main pivot for camera panning.
-	//e.g. static root -> camera pivot -> camera
-	camera->SetLocalPosition(0.f, 3.f, -3.f);
-	auto rot = VMath::LookAtRotation(XMVectorSet(0.f, 0.f, 0.f, 1.f), camera->GetWorldPositionV());
+	camera->SetLocalPosition(3.f, 3.f, -3.f);
+	auto rot = VMath::LookAtRotation(rootComponent->GetWorldPositionV(), camera->GetWorldPositionV());
 	camera->SetWorldRotation(rot);
 }
 
@@ -45,26 +42,28 @@ Properties MapScreenPlayer::GetProps()
 void MapScreenPlayer::HandleInput(float deltaTime)
 {
 	const float moveSpeed = 10.f * deltaTime;
+	const float rotateSpeed = 75.f * deltaTime;
+
+	const XMVECTOR forwardMovementVector = DirectX::XMVector3Cross(
+		camera->GetRightVectorV(), VMath::GlobalUpVector());
 
 	if (Input::GetKeyHeld(Keys::W))
 	{
-		AddPositionV(GetForwardVectorV() * moveSpeed);
+		AddPositionV(forwardMovementVector * moveSpeed);
 	}
 	else if (Input::GetKeyHeld(Keys::S))
 	{
-		AddPositionV(-GetForwardVectorV() * moveSpeed);
+		AddPositionV(-forwardMovementVector * moveSpeed);
 	}
 
 	if (Input::GetKeyHeld(Keys::A))
 	{
-		AddPositionV(-GetRightVectorV() * moveSpeed);
+		AddPositionV(-camera->GetRightVectorV() * moveSpeed);
 	}
 	else if (Input::GetKeyHeld(Keys::D))
 	{
-		AddPositionV(GetRightVectorV() * moveSpeed);
+		AddPositionV(camera->GetRightVectorV() * moveSpeed);
 	}
-
-	const float rotateSpeed = 75.f * deltaTime;
 
 	if (Input::GetKeyHeld(Keys::Right))
 	{
@@ -77,10 +76,10 @@ void MapScreenPlayer::HandleInput(float deltaTime)
 
 	if (Input::GetKeyHeld(Keys::Up))
 	{
-		AddRotation(GetRightVectorV(), rotateSpeed);
+		AddRotation(camera->GetRightVectorV(), rotateSpeed);
 	}
 	else if (Input::GetKeyHeld(Keys::Down))
 	{
-		AddRotation(GetRightVectorV(), -rotateSpeed);
+		AddRotation(camera->GetRightVectorV(), -rotateSpeed);
 	}
 }
