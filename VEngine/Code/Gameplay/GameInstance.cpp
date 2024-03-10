@@ -1,7 +1,7 @@
 #include "vpch.h"
 #include "GameInstance.h"
 
-std::string GameInstance::startingMap = "test.vmap";
+std::string GameInstance::startingMap = "test_map_screen.vmap";
 std::string GameInstance::previousMapMovedFrom = startingMap;
 
 bool GameInstance::useGameSaves = false;
