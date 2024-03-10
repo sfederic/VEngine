@@ -1,19 +1,19 @@
-DirectionalLightActor
+Player
 1
  Enabled
 1
  Position
-4 5 0
+0 0 0
  Rotation
-0.382684 4.77965e-08 6.29251e-09 0.923879
+-0 0 -0 1
  Scale
-0.999994 0.999996 0.999998
+1 1 1
  Visible
 1
 Name
-DirectionalLightActor0
+Player0
 UID
-3262537305
+939666051
 next
 Grid
 1
@@ -53,12 +53,29 @@ st_murond_temple0
 UID
 4182287254
 next
-Player
+DirectionalLightActor
 1
  Enabled
 1
  Position
-0 0 0
+4 5 0
+ Rotation
+0.382684 4.77965e-08 6.29251e-09 0.923879
+ Scale
+0.999994 0.999996 0.999998
+ Visible
+1
+Name
+DirectionalLightActor0
+UID
+3262537305
+next
+PointLightActor
+1
+ Enabled
+1
+ Position
+5 0 13
  Rotation
 -0 0 -0 1
  Scale
@@ -66,32 +83,125 @@ Player
  Visible
 1
 Name
-Player0
+PointLightActor0
 UID
-939666051
+3425922242
 next
-CameraComponent
-1
+MeshComponent
+2
 939666051
-Camera
+Mesh
  Enabled
 1
  Pos
-2.5 2.5 -3.5
+0 0 0
  Rot
 0 0 0 1
  Scale
 1 1 1
  Visible
 1
-FOV
-60
-Far Z
-1000
-Near Z
-0.01
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+char.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
 UID
-2149592079
+1084857963
+next
+4182287254
+Mesh
+ Enabled
+1
+ Pos
+4.5 -1 4.5
+ Rot
+0 1 0 1.56958e-07
+ Scale
+5 5 5
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+vagrant_map.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+st_murond_temple.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+1734297201
 next
 DialogueComponent
 1
@@ -105,46 +215,6 @@ File
 
 UID
 2436495488
-next
-DirectionalLightComponent
-1
-3262537305
-DirectionalLight
- Enabled
-1
- Pos
-4 5 0
- Rot
-0.382684 4.77965e-08 6.29251e-09 0.923879
- Scale
-0.999994 0.999996 0.999998
- Visible
-1
-Colour
-1 1 1 1
-Intensity
-3.3
-LightEnabled
-1
-UID
-2871284960
-next
-EmptyComponent
-1
-939666051
-Root
- Enabled
-1
- Pos
-0 0 0
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-UID
-3796878020
 next
 InstanceMeshComponent
 1
@@ -205,120 +275,90 @@ Trans. Occlude
 UID
 2539415576
 next
-MeshComponent
-2
-4182287254
-Mesh
- Enabled
+CameraComponent
 1
- Pos
-4.5 -1 4.5
- Rot
-0 1 0 1.56958e-07
- Scale
-5 5 5
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-vagrant_map.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-st_murond_temple.vmesh
-Physics Static
-1
-Render Static
-1
-Trans. Occlude
-0
-UID
-1734297201
-next
 939666051
-Mesh
+Camera
  Enabled
 1
  Pos
-0 0 0
+2.5 2.5 -3.5
  Rot
 0 0 0 1
  Scale
 1 1 1
  Visible
 1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-char.vmesh
-Physics Static
-1
-Render Static
-0
-Trans. Occlude
-0
+FOV
+60
+Far Z
+1000
+Near Z
+0.01
 UID
-1084857963
+2149592079
+next
+DirectionalLightComponent
+1
+3262537305
+DirectionalLight
+ Enabled
+1
+ Pos
+4 5 0
+ Rot
+0.382684 4.77965e-08 6.29251e-09 0.923879
+ Scale
+0.999994 0.999996 0.999998
+ Visible
+1
+Colour
+1 1 1 1
+Intensity
+3.3
+LightEnabled
+1
+UID
+2871284960
+next
+PointLightComponent
+1
+3425922242
+PointLight
+ Enabled
+1
+ Pos
+5 0 13
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Colour
+0 1 1 1
+Intensity
+25
+LightEnabled
+1
+UID
+4069906755
+next
+EmptyComponent
+1
+939666051
+Root
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+3796878020
 next
 end
