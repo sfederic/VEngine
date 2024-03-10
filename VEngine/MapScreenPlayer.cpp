@@ -16,7 +16,11 @@ MapScreenPlayer::MapScreenPlayer()
 
 void MapScreenPlayer::Create()
 {
-	camera->SetLocalPosition(0.f, 0.f, -3.f);
+	//@Todo: rotation needs work. Need another object as the root to act as the main pivot for camera panning.
+	//e.g. static root -> camera pivot -> camera
+	camera->SetLocalPosition(0.f, 3.f, -3.f);
+	auto rot = VMath::LookAtRotation(XMVectorSet(0.f, 0.f, 0.f, 1.f), camera->GetWorldPositionV());
+	camera->SetWorldRotation(rot);
 }
 
 void MapScreenPlayer::Start()
@@ -40,7 +44,7 @@ Properties MapScreenPlayer::GetProps()
 
 void MapScreenPlayer::HandleInput(float deltaTime)
 {
-	const float moveSpeed = 15.f * deltaTime;
+	const float moveSpeed = 10.f * deltaTime;
 
 	if (Input::GetKeyHeld(Keys::W))
 	{
@@ -60,7 +64,7 @@ void MapScreenPlayer::HandleInput(float deltaTime)
 		AddPositionV(GetRightVectorV() * moveSpeed);
 	}
 
-	const float rotateSpeed = 25.f * deltaTime;
+	const float rotateSpeed = 75.f * deltaTime;
 
 	if (Input::GetKeyHeld(Keys::Right))
 	{
