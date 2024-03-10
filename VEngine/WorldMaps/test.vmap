@@ -3,9 +3,9 @@ GridActor
  Enabled
 1
  Position
-2 -0 3
+2 2 5
  Rotation
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -64,7 +64,7 @@ Player
  Enabled
 1
  Position
-2 0 2
+2 0 0
  Rotation
 -0 0 -0 1
  Scale
@@ -97,8 +97,48 @@ Size Y
 UID
 2372383453
 next
-MeshActor
+PlayerCameraTrigger
 1
+ Enabled
+1
+ Position
+2 0 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+PlayerCameraTrigger0
+NewLocalCameraPos
+1 1 -1
+NewTargetActor
+GridActor0
+UID
+2408927694
+next
+PlayerDialogueTrigger
+1
+ Enabled
+1
+ Position
+2 0 1
+ Rotation
+-0 0 -0 1
+ Scale
+1.1 1 1
+ Visible
+1
+Name
+PlayerDialogueTrigger0
+PlayerThoughtText
+What's that up there?
+UID
+922399385
+next
+MeshActor
+2
  Enabled
 1
  Position
@@ -113,6 +153,21 @@ Name
 MeshActor0
 UID
 2445382612
+next
+ Enabled
+1
+ Position
+2 1.5 7
+ Rotation
+-0 0 -0 1
+ Scale
+5 1 5
+ Visible
+1
+Name
+MeshActor1
+UID
+1504220962
 next
 DirectionalLightActor
 1
@@ -132,7 +187,64 @@ UID
 1507480294
 next
 MeshComponent
-3
+4
+2364973632
+Mesh
+ Enabled
+1
+ Pos
+2 2 5
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
+UID
+3206685348
+next
 2648484807
 Mesh
  Enabled
@@ -247,16 +359,16 @@ Trans. Occlude
 UID
 546228180
 next
-2364973632
+1504220962
 Mesh
  Enabled
 1
  Pos
-2 -0 3
+2 1.5 7
  Rot
-0 0 0 1
+-0 0 -0 1
  Scale
-1 1 1
+5 1 5
  Visible
 1
 Casts Shadow
@@ -294,29 +406,58 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-cube.vmesh
+node.vmesh
 Physics Static
 1
 Render Static
-0
+1
 Trans. Occlude
 0
 UID
-3206685348
+1708319737
+next
+BoxTriggerComponent
+2
+2408927694
+BoxTrigger
+ Enabled
+1
+ Pos
+2 0 1
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+484839325
+next
+922399385
+Trigger
+ Enabled
+1
+ Pos
+2 0 1
+ Rot
+-0 0 -0 1
+ Scale
+1.1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+1731671724
 next
 DialogueComponent
 2
-2648484807
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-1181958515
-next
 2364973632
 Dialogue
  Enabled
@@ -327,6 +468,17 @@ File
 
 UID
 938035251
+next
+2648484807
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+1181958515
 next
 InstanceMeshComponent
 1
@@ -440,7 +592,7 @@ Root
  Enabled
 1
  Pos
-2 0 2
+2 0 0
  Rot
 -0 0 -0 1
  Scale
