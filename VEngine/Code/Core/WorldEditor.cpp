@@ -1,5 +1,6 @@
 #include "vpch.h"
 #include "WorldEditor.h"
+#include <filesystem>
 #include <QFileDialog>
 #include <QDesktopServices>
 #include "Physics/Raycast.h"
@@ -669,7 +670,15 @@ void LoadWorldOnEntranceTriggerClick(Actor* pickedActor)
 		auto entranceTrigger = dynamic_cast<EntranceTrigger*>(pickedActor);
 		if (entranceTrigger)
 		{
-			FileSystem::LoadWorld(entranceTrigger->GetLevelToMoveTo());
+			const auto levelFilePath = AssetBaseFolders::worldMap + entranceTrigger->GetLevelToMoveTo();
+			if (std::filesystem::exists(levelFilePath))
+			{
+				FileSystem::LoadWorld(entranceTrigger->GetLevelToMoveTo());
+			}
+			else
+			{
+				Log("Entrance trigger world filename [%s] not found.", levelFilePath.c_str());
+			}
 		}
 	}
 }
