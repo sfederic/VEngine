@@ -2,6 +2,7 @@
 
 #include <map>
 #include <vector>
+#include <cassert>
 #include "Property.h"
 #include "Render/RenderPropertyStructs.h"
 
@@ -25,11 +26,11 @@ struct Properties
 	{
 		Property prop = {};
 
-		if (typeid(T) == typeid(std::string)) 
+		if (typeid(T) == typeid(std::string))
 		{
 			auto str = reinterpret_cast<std::string*>(data);
 			prop.size = str->size();
-		} 
+		}
 		else if (typeid(T) == typeid(std::wstring))
 		{
 			auto str = reinterpret_cast<std::wstring*>(data);
@@ -45,7 +46,7 @@ struct Properties
 			auto meshComponentData = reinterpret_cast<MeshComponentData*>(data);
 			prop.size = meshComponentData->filename.size() * sizeof(char);
 		}
-		else 
+		else
 		{
 			prop.size = sizeof(T);
 		}
