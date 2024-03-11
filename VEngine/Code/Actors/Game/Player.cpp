@@ -756,7 +756,6 @@ void Player::MoveLinkedGridActor()
 						XMConvertToDegrees(XMVector3AngleBetweenNormals(
 							XMVector3Normalize(linkedGridActor->GetPositionV() - GetPositionV()),
 							GetForwardVectorV()).m128_f32[0]);
-					Log("angle %f", angleBetweenGridActorAndPlayer);
 					if (angleBetweenGridActorAndPlayer > 89.f)
 					{
 						const float angle = DirectX::XMConvertToRadians(rotationIncrementAngle);
