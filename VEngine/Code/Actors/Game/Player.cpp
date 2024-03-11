@@ -648,14 +648,14 @@ void Player::LinkToGridActor()
 			assert(hitActor);
 
 			//This raycast is to make sure the player is not standing on the same actor it's linking to
-				//to avoid potentially rotating the linked actor and the player being stuck in mid-air.
+			//to avoid potentially rotating the linked actor and the player being stuck in mid-air.
 			HitResult sameActorHit(this);
 			if (Raycast(sameActorHit, GetPositionV(), -VMath::GlobalUpVector(), 5.f))
 			{
 				if (sameActorHit.hitActor == hitActor)
 				{
 					Camera::GetActiveCamera().SetShakeLevel(0.3f);
-					Log("Cannot link to [%s], player is standing on it.", hit.hitActor->GetName().c_str());
+					Log("Cannot link to [%s], player is standing on it.", sameActorHit.hitActor->GetName().c_str());
 					return;
 				}
 
