@@ -49,4 +49,5 @@ void FireSource::Douse()
 	__super::Douse();
 	fireSprite->SetActive(false);
 	GameUtils::SpawnParticleEmitter("Particle/smoke.png", GetPositionV(), 1.5f);
+	Remove();
 }
