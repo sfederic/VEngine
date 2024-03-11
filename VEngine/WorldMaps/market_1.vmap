@@ -1,5 +1,5 @@
 GridActor
-3
+2
  Enabled
 1
  Position
@@ -118,6 +118,86 @@ Rotate Yaw
 UID
 2662506024
 next
+Player
+1
+ Enabled
+1
+ Position
+7 0 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+Player0
+UID
+90475027
+next
+Bucket
+2
+ Enabled
+1
+ Position
+5 0 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+BigGridActor
+0
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+1
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+IsFilled
+1
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+MoveOnlyXAxis
+0
+MoveOnlyZAxis
+0
+Name
+Bucket1
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Roll
+0
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+4130627888
+next
  Enabled
 1
  Position
@@ -139,7 +219,7 @@ DisableGridInteract
 Health
 1
 Ignore Rotate Check
-0
+1
 Inspect
 0
 Interact
@@ -148,6 +228,8 @@ Interact Text
 
 InteractKnownText
 
+IsFilled
+1
 Link Movement
 1
 Link Rotation
@@ -163,7 +245,7 @@ MoveOnlyXAxis
 MoveOnlyZAxis
 0
 Name
-GridActor2
+Bucket1669700301
 Obstacle
 1
 Rotate Pitch
@@ -175,24 +257,7 @@ Rotate Speed
 Rotate Yaw
 1
 UID
-1164128619
-next
-Player
-1
- Enabled
-1
- Position
-8 0 0
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Name
-Player0
-UID
-90475027
+2467544847
 next
 EntranceTrigger
 4
@@ -366,7 +431,7 @@ UID
 2536065588
 next
 MeshActor
-17
+16
  Enabled
 1
  Position
@@ -607,21 +672,6 @@ MeshActor3234758392
 UID
 1449689153
 next
- Enabled
-1
- Position
-5 0.5 2
- Rotation
--0 0.707107 -0 0.707107
- Scale
-2 1 1
- Visible
-1
-Name
-MeshActor16
-UID
-448432761
-next
 DirectionalLightActor
 1
  Enabled
@@ -639,8 +689,128 @@ DirectionalLightActor0
 UID
 1951849144
 next
+FireSource
+2
+ Enabled
+1
+ Position
+8 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+BigGridActor
+0
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+MoveOnlyXAxis
+0
+MoveOnlyZAxis
+0
+Name
+FireSource0
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Roll
+0
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+3857218504
+next
+ Enabled
+1
+ Position
+7 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+BigGridActor
+0
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+MoveOnlyXAxis
+0
+MoveOnlyZAxis
+0
+Name
+FireSource1
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Roll
+0
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+1850310179
+next
 MeshComponent
-23
+27
 1682249674
 Mesh
  Enabled
@@ -755,22 +925,22 @@ Trans. Occlude
 UID
 3230279783
 next
-1164128619
+3857218504
 Mesh
  Enabled
 1
  Pos
-5 0 2
+8 0 4
  Rot
 -0 0 -0 1
  Scale
 1 1 1
  Visible
-1
+0
 Casts Shadow
 1
 Grid Ignore
-0
+1
 Grid Obst.
 0
 M_Ambient
@@ -802,7 +972,7 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-vase.vmesh
+node.vmesh
 Physics Static
 1
 Render Static
@@ -810,7 +980,7 @@ Render Static
 Trans. Occlude
 0
 UID
-982518190
+1201875129
 next
 90475027
 Mesh
@@ -868,6 +1038,120 @@ Trans. Occlude
 0
 UID
 44435752
+next
+4130627888
+Mesh
+ Enabled
+1
+ Pos
+5 0 1
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+barrel_texture.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+hollow_barrel.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
+UID
+3587434071
+next
+4130627888
+WaterMesh
+ Enabled
+1
+ Pos
+0 0.35 0
+ Rot
+0 0 0 1
+ Scale
+0.75 0.75 0.75
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+water.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+2712152351
 next
 1925774093
 Mesh
@@ -1895,22 +2179,22 @@ Trans. Occlude
 UID
 3853207909
 next
-448432761
+1850310179
 Mesh
  Enabled
 1
  Pos
-5 0.5 2
+7 0 4
  Rot
--0 0.707107 -0 0.707107
+-0 0 -0 1
  Scale
-2 1 1
+1 1 1
  Visible
-1
+0
 Casts Shadow
 1
 Grid Ignore
-0
+1
 Grid Obst.
 0
 M_Ambient
@@ -1942,7 +2226,121 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-market_store_tent.vmesh
+node.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
+UID
+1664229863
+next
+2467544847
+Mesh
+ Enabled
+1
+ Pos
+5 0 2
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+barrel_texture.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+hollow_barrel.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
+UID
+3373009215
+next
+2467544847
+WaterMesh
+ Enabled
+1
+ Pos
+0 0.35 0
+ Rot
+0 0 0 1
+ Scale
+0.75 0.75 0.75
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+water.jpg
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
 Physics Static
 1
 Render Static
@@ -1950,7 +2348,7 @@ Render Static
 Trans. Occlude
 0
 UID
-842230187
+2418588087
 next
 ConditionComponent
 4
@@ -2006,8 +2404,60 @@ Condition Arg
 UID
 2028249057
 next
-BoxTriggerComponent
+SpriteSheet
+2
+3857218504
+FireSprite
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+-0.0427742 0.954815 0.239746 0.170353
+ Scale
+1 1 1
+ Visible
+1
+Animation Speed
+40
+Loop Animation
+1
+Sheet Columns
 4
+Sheet Rows
+4
+Texture
+Sprites/fire_sheet.png
+UID
+2804919706
+next
+1850310179
+FireSprite
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+-0.0633819 0.934257 0.211411 0.280094
+ Scale
+1 1 1
+ Visible
+1
+Animation Speed
+40
+Loop Animation
+1
+Sheet Columns
+4
+Sheet Rows
+4
+Texture
+Sprites/fire_sheet.png
+UID
+3014891568
+next
+BoxTriggerComponent
+6
 4143031183
 Trigger
  Enabled
@@ -2084,8 +2534,46 @@ Offset
 UID
 427750055
 next
+3857218504
+FireTrigger
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+1 1 1
+Offset
+0 0 0
+UID
+1866737687
+next
+1850310179
+FireTrigger
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+1 1 1
+Offset
+0 0 0
+UID
+3959026712
+next
 DialogueComponent
-4
+7
 1682249674
 Dialogue
  Enabled
@@ -2108,7 +2596,7 @@ File
 UID
 502432438
 next
-1164128619
+1850310179
 Dialogue
  Enabled
 1
@@ -2117,7 +2605,7 @@ Dialogue
 File
 
 UID
-2096360530
+1988641780
 next
 90475027
 Dialogue
@@ -2129,6 +2617,39 @@ File
 
 UID
 3941718444
+next
+4130627888
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+1237951468
+next
+3857218504
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+1535207019
+next
+2467544847
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+3775002512
 next
 InstanceMeshComponent
 1
@@ -2242,7 +2763,7 @@ Root
  Enabled
 1
  Pos
-8 0 0
+7 0 0
  Rot
 -0 0 -0 1
  Scale
