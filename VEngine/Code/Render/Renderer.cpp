@@ -1642,6 +1642,10 @@ void RenderSpriteSheets()
 		shaderMatrices.model = spriteSheet->GetWorldMatrix();
 		shaderMatrices.MakeModelViewProjectionMatrix();
 
+		MaterialShaderData defaultShaderMaterial = {};
+		cbMaterial.Map(&defaultShaderMaterial);
+		cbMaterial.SetPS();
+
 		cbMatrices.Map(&shaderMatrices);
 		cbMatrices.SetVS();
 
