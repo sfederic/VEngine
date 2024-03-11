@@ -2,7 +2,6 @@
 #include "WaterSource.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Components/MeshComponent.h"
-#include "Render/RastStates.h"
 
 WaterSource::WaterSource()
 {
@@ -17,11 +16,9 @@ void WaterSource::Create()
 	canBeMovedInLink = false;
 	canBeRotatedInLink = false;
 
-	mesh->SetMeshFilename("plane.vmesh");
-	mesh->SetRastState(RastStates::noBackCull);
-	mesh->SetTexture("water.jpg");
-	mesh->SetUVOffsetSpeed(XMFLOAT2(0.f, 0.25f));
-	mesh->SetCollisionLayer(CollisionLayers::Editor);
+	mesh->SetMeshFilename("cube.vmesh");
+	mesh->ignoreGridRaycasts = true;
+	mesh->SetVisibility(false);
 }
 
 void WaterSource::Start()
