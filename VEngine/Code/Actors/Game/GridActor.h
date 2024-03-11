@@ -138,6 +138,8 @@ public:
 
 	//returns the node the gridactor is currently on.
 	GridNode* GetCurrentNode();
+	void DisableCurrentNode();
+	void EnableCurrentNode();
 	void RecalcCurrentNodePosition();
 	void RecalcCurrentNodeDontIgnoreThis();
 

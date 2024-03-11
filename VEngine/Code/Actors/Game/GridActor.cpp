@@ -246,6 +246,18 @@ GridNode* GridActor::GetCurrentNode()
 	return node;
 }
 
+void GridActor::DisableCurrentNode()
+{
+	auto node = GetCurrentNode();
+	node->Hide();
+}
+
+void GridActor::EnableCurrentNode()
+{
+	auto node = GetCurrentNode();
+	node->Show();
+}
+
 void GridActor::RecalcCurrentNodePosition()
 {
 	auto node = GetCurrentNode();
