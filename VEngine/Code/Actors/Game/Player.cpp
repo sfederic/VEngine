@@ -644,40 +644,39 @@ void Player::LinkToGridActor()
 		const auto end = playerPos + (GetMeshForward() * 5.f);
 		if (OrientedBoxCast(hit, playerPos, end, XMFLOAT2(0.25f, 0.25f), false, false))
 		{
-			auto hitActor = hit.GetClosestHitActor(playerPos);
-			assert(hitActor);
+			auto closestActorToLinkTo = hit.GetClosestHitActorAs<GridActor>(playerPos);
+			if (closestActorToLinkTo == nullptr)
+			{
+				return;
+			}
 
 			//This raycast is to make sure the player is not standing on the same actor it's linking to
 			//to avoid potentially rotating the linked actor and the player being stuck in mid-air.
 			HitResult sameActorHit(this);
 			if (Raycast(sameActorHit, GetPositionV(), -VMath::GlobalUpVector(), 5.f))
 			{
-				if (sameActorHit.hitActor == hitActor)
+				auto gridActorUnderneathPlayer = sameActorHit.GetHitActorAs<GridActor>();
+				if (gridActorUnderneathPlayer)
 				{
-					Camera::GetActiveCamera().SetShakeLevel(0.3f);
-					Log("Cannot link to [%s], player is standing on it.", sameActorHit.hitActor->GetName().c_str());
-					return;
-				}
+					if (gridActorUnderneathPlayer == closestActorToLinkTo)
+					{
+						Camera::GetActiveCamera().SetShakeLevel(0.3f);
+						Log("Cannot link to [%s], player is standing on it.", gridActorUnderneathPlayer->GetName().c_str());
+						return;
+					}
 
-				auto gridActor = dynamic_cast<GridActor*>(hitActor);
-				if (gridActor)
-				{
-					//@Todo: I don't really know what this mesh check is for. Come back to it and maybe delete.
-					for (auto mesh : gridActor->GetComponents<MeshComponent>())
+					for (auto mesh : closestActorToLinkTo->GetComponents<MeshComponent>())
 					{
 						if (!mesh->canBeLinkedTo)
 						{
+							Camera::GetActiveCamera().SetShakeLevel(0.3f);
 							Log("Cannot link to GridActor via hit mesh [%s]. canBeLinkedTo set to false.", mesh->name.c_str());
 							return;
 						}
 					}
+				}
 
-					SetLinkedGridActor(*gridActor, hit.GetHitPosV());
-				}
-				else //Show a shake as an error if not a grid actor
-				{
-					camera->SetShakeLevel(0.25f);
-				}
+				SetLinkedGridActor(*closestActorToLinkTo, hit.GetHitPosV());
 			}
 		}
 	}
