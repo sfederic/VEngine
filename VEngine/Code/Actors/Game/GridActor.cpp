@@ -294,6 +294,16 @@ bool GridActor::CheckNextNodeMoveIsValid(XMVECTOR nextMoveCardinalDirection)
 		return false;
 	}
 
+	//Check if player is standing on next node
+	auto player = Player::system.GetOnlyActor();
+	int playerGridX, playerGridY;
+	player->GetGridIndices(playerGridX, playerGridY);
+	if (nextNode->Equals(playerGridX, playerGridY))
+	{
+		nextPos = currentPos;
+		return false;
+	}
+
 	//Fence check
 	HitResult fenceHit(this);
 	if (Raycast(fenceHit, GetPositionV(), nextMoveCardinalDirection, 1.0f))
