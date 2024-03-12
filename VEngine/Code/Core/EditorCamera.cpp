@@ -97,8 +97,6 @@ void EditorCamera::MouseMove(int x, int y)
 	{
 		//Arcball camera movement
 		//REF:https://asliceofrendering.com/camera/2019/11/30/ArcballCamera/
-		//@Todo: sort of works, but keeps resetting the camera's lookat direction when you release the arcball keys
-		//because the rotation isn't updated below, only the position.
 
 		arcBallMovementOn = true;
 
@@ -117,7 +115,8 @@ void EditorCamera::MouseMove(int x, int y)
 		yRot = XMMatrixRotationY(dx);
 		pos = XMVector3Transform(pos - pivot, yRot) + pivot;
 
-		SetLocalPosition(pos);
+		SetWorldPosition(pos);
+		SetWorldRotation(VMath::LookAtRotation(pivot, pos));
 	}
 	else if (Input::GetMouseRightDown())
 	{
