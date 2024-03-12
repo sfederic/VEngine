@@ -32,7 +32,7 @@ void Polyboard::Tick(float deltaTime)
 Properties Polyboard::GetProps()
 {
 	auto props = __super::GetProps();
-	props.title = "Polyboard";
+	props.title = GetTypeName();
 	return props;
 }
 
@@ -45,9 +45,9 @@ void Polyboard::GenerateVertices()
 		vertices.emplace_back(Vertex());
 	}
 
-	//@Todo: this won't work because there's no default buffer size cap. wasn't good in the first place anyway
-	vertexBuffer.CreateDynamic(vertices);
-	indexBuffer.CreateDynamic(indices);
+	constexpr uint32_t cappedBufferSize = 512;
+	vertexBuffer.CreateDynamicCapped(vertices, cappedBufferSize);
+	indexBuffer.CreateDynamicCapped(indices, cappedBufferSize);
 }
 
 void Polyboard::CalcVertices()
