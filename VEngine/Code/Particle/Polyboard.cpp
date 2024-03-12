@@ -34,6 +34,7 @@ Properties Polyboard::GetProps()
 {
 	auto props = __super::GetProps();
 	props.title = GetTypeName();
+	props.Add("End Point", &endPoint);
 	return props;
 }
 
