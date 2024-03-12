@@ -9,7 +9,7 @@ void IndexBuffer::CreateDefault(std::vector<MeshData::indexDataType>& indices)
 
 void IndexBuffer::CreateDynamic(std::vector<MeshData::indexDataType>& indices)
 {
-	RenderUtils::CreateDynamicBuffer(sizeof(Vertex) * indices.size(),
+	RenderUtils::CreateDynamicBuffer(sizeof(MeshData::indexDataType) * indices.size(),
 		D3D11_BIND_INDEX_BUFFER, indices.data(), data);
 }
 
