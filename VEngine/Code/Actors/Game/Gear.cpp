@@ -80,6 +80,13 @@ void Gear::OnRotationEnd()
 	previouslyCascadedGears.clear();
 }
 
+Properties Gear::GetProps()
+{
+	auto props = __super::GetProps();
+	props.title = GetTypeName();
+	return props;
+}
+
 bool Gear::Intersects(const DirectX::BoundingOrientedBox& bob)
 {
 	return rootComponent->GetBoundsInWorldSpace().Intersects(bob);

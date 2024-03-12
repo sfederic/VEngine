@@ -14,6 +14,7 @@ public:
 	void Create() override;
 	void OnLinkRotate() override;
 	void OnRotationEnd() override;
+	Properties GetProps() override;
 
 	bool Intersects(const DirectX::BoundingOrientedBox& bob);
 	bool CheckIfPreviousGear(Gear* gear);
