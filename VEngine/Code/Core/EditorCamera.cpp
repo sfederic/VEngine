@@ -109,8 +109,6 @@ void EditorCamera::MouseMove(int x, int y)
 
 		auto pivot = pickedActor->GetPositionV();
 
-		focusPoint = pivot;
-
 		XMMATRIX xRot = XMMatrixIdentity();
 		xRot = XMMatrixRotationX(dy);
 		pos = XMVector3Transform(pos - pivot, xRot) + pivot;
