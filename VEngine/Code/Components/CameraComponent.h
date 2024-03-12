@@ -35,7 +35,6 @@ protected:
 	void ZoomTo(Actor* actor);
 	void Move(float d, XMVECTOR axis);
 
-	XMVECTOR focusPoint = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 	Actor* targetActor = nullptr;
 	SpatialComponent* targetComponent = nullptr;
 

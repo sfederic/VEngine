@@ -76,20 +76,14 @@ void EditorCamera::Tick(float deltaTime)
 
 XMMATRIX EditorCamera::GetViewMatrix()
 {
-	XMVECTOR forward = GetForwardVectorV();
-	XMVECTOR position = GetWorldPositionV();
-
-	XMMATRIX view = XMMatrixIdentity();
-
-	XMVECTOR focus = position + forward;
-
+	const auto worldMatrix = GetWorldMatrix();
+	const auto pos = GetWorldPositionV();
+	auto focus = pos + GetForwardVectorV();
 	if (arcBallMovementOn && WorldEditor::GetPickedActor())
 	{
 		focus = WorldEditor::GetPickedActor()->GetPositionV();
 	}
-
-	view = XMMatrixLookAtLH(position, focus, VMath::GlobalUpVector());
-	return view;
+	return DirectX::XMMatrixLookAtLH(pos, focus, VMath::GlobalUpVector());
 }
 
 void EditorCamera::MouseMove(int x, int y)

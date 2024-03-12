@@ -13,30 +13,19 @@ CameraComponent::CameraComponent(XMFLOAT3 startPos)
 
 XMMATRIX CameraComponent::GetViewMatrix()
 {
-	XMVECTOR worldPos = GetWorldPositionV();
+	const auto worldMatrix = GetWorldMatrix();
+	const auto pos = GetWorldPositionV();
+	auto focus = pos + GetForwardVectorV();
 
-	if (lerpToFocusPoint && targetActor)
+	if (targetActor != nullptr)
 	{
-		lerpToFocusPointPercent += Core::GetDeltaTime() * 0.5f;
-		focusPoint = XMVectorLerp(focusPoint, targetActor->GetPositionV(), lerpToFocusPointPercent);
-	}
-	else if (targetActor)
-	{
-		focusPoint = targetActor->GetPositionV();
-	}
-	else if (targetComponent)
-	{
-		focusPoint = targetComponent->GetWorldPositionV();
-	}
-	else
-	{
-		focusPoint = worldPos + GetForwardVectorV();
+		focus = targetActor->GetPositionV();
 	}
 
-	XMMATRIX view = XMMatrixLookAtLH(worldPos, focusPoint, GetUpVectorV());
+	auto view = DirectX::XMMatrixLookAtLH(pos, focus, VMath::GlobalUpVector());
 
 	//Camera translation shaking
-	XMVECTOR shakeVector = Shake();
+	const auto shakeVector = Shake();
 	view.r[3] += shakeVector;
 
 	return view;
