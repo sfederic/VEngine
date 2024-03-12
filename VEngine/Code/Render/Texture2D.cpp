@@ -58,6 +58,9 @@ void Texture2D::Create()
 
 void Texture2D::SetBufferNames()
 {
-	RenderUtils::SetResourceName(data.Get(), "resource_" + filename + std::to_string(GenerateUID()));
-	RenderUtils::SetResourceName(srv.Get(), "srv_" + filename + std::to_string(GenerateUID()));
+	// @Todo: come back these if you need buffer names again. Keep hitting
+	// D3D11 WARNING: ID3D11ShaderResourceView1::SetPrivateData: Existing private data of same name with different size found! [ STATE_SETTING WARNING #55: SETPRIVATEDATA_CHANGINGPARAMS]
+	// even though the names should be different.
+	//RenderUtils::SetResourceName(data.Get(), "resource_" + filename + std::to_string(GenerateUID()));
+	//RenderUtils::SetResourceName(srv.Get(), "srv_" + filename + std::to_string(GenerateUID()));
 }
