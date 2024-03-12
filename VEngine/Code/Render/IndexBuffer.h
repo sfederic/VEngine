@@ -10,6 +10,7 @@ class IndexBuffer
 public:
 	void CreateDefault(std::vector<MeshData::indexDataType>& indices);
 	void CreateDynamic(std::vector<MeshData::indexDataType>& indices);
+	void CreateDynamicCapped(std::vector<MeshData::indexDataType>& indexData, uint32_t cappedSize);
 	void Destroy();
 
 	auto GetDataAddress() { return data.GetAddressOf(); }

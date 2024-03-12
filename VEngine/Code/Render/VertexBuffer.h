@@ -12,6 +12,7 @@ class VertexBuffer
 public:
 	void CreateDefault(MeshDataProxy& meshDataProxy);
 	void CreateDynamic(std::vector<Vertex>& vertices);
+	void CreateDynamicCapped(std::vector<Vertex>& vertexData, uint32_t cappedSize);
 	void Destroy();
 
 	auto GetDataAddress() { return data.GetAddressOf(); }
