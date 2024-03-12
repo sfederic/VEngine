@@ -28,7 +28,7 @@ void DiffuseProbeMap::Create()
 Properties DiffuseProbeMap::GetProps()
 {
 	auto props = __super::GetProps();
-	props.title = "DiffuseProbeMap";
+	props.title = GetTypeName();
 	props.Add("Size X", &sizeX);
 	props.Add("Size Y", &sizeY);
 	props.Add("Size Z", &sizeZ);

@@ -16,6 +16,6 @@ SkyBox::SkyBox()
 Properties SkyBox::GetProps()
 {
 	auto props = __super::GetProps();
-	props.title = "SkyBox";
+	props.title = GetTypeName();
 	return props;
 }

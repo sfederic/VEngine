@@ -4,11 +4,13 @@
 
 PointLightActor::PointLightActor()
 {
-    pointLight = PointLightComponent::system.Add("PointLight", this);
-    rootComponent = pointLight;
+	pointLight = PointLightComponent::system.Add("PointLight", this);
+	rootComponent = pointLight;
 }
 
 Properties PointLightActor::GetProps()
 {
-    return Actor::GetProps();
+	auto props = __super::GetProps();
+	props.title = GetTypeName();
+	return props;
 }

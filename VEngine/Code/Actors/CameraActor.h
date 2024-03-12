@@ -11,7 +11,7 @@ public:
 	ACTOR_SYSTEM(CameraActor);
 
 	CameraActor();
-	Properties GetProps() override { return __super::GetProps(); }
+	Properties GetProps() override;
 
 private:
 	CameraComponent* camera = nullptr;

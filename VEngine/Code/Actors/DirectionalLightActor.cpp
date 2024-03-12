@@ -10,7 +10,7 @@ DirectionalLightActor::DirectionalLightActor()
 
 Properties DirectionalLightActor::GetProps()
 {
-	auto props = Actor::GetProps();
-	props.title = "DirectionalLightActor";
+	auto props = __super::GetProps();
+	props.title = GetTypeName();
 	return props;
 }
