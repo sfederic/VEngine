@@ -1,8 +1,9 @@
 #include "vpch.h"
 #include "Polyboard.h"
 #include "Core/Camera.h"
-#include "Render/RenderUtils.h"
 #include "Physics/Raycast.h"
+
+static constexpr uint32_t cappedBufferSize = 512;
 
 Polyboard::Polyboard()
 {
@@ -45,7 +46,6 @@ void Polyboard::GenerateVertices()
 		vertices.emplace_back(Vertex());
 	}
 
-	constexpr uint32_t cappedBufferSize = 512;
 	vertexBuffer.CreateDynamicCapped(vertices, cappedBufferSize);
 	indexBuffer.CreateDynamicCapped(indices, cappedBufferSize);
 }
@@ -115,6 +115,9 @@ void Polyboard::CalcVertices()
 		indices.emplace_back(3 + (2 * i));
 		indices.emplace_back(1 + (2 * i));
 	}
+
+	assert(vertices.size() < cappedBufferSize);
+	assert(indices.size() < cappedBufferSize);
 }
 
 void Polyboard::SetStartPoint(const XMVECTOR start)
@@ -127,7 +130,7 @@ void Polyboard::SetEndPoint(const XMVECTOR end)
 	DirectX::XMStoreFloat3(&endPoint, end);
 }
 
-bool Polyboard::RaycastFromStartToEndPoints(HitResult& hit)
+bool Polyboard::RaycastFromStartToEndPoints(HitResult& hit) const
 {
 	return Raycast(hit, XMLoadFloat3(&startPoint), XMLoadFloat3(&endPoint));
 }

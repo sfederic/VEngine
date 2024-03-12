@@ -7,9 +7,6 @@
 #include "Render/IndexBuffer.h"
 #include "Physics/HitResult.h"
 
-struct Buffer;
-struct MeshDataProxy;
-
 //Taken from 'Mathematics for 3D Game Programming and Computer Graphics', Chapter 9.3.3: Polyboards.
 //Polyboard is a line of 'planes' facing the camera for line-like effects (beams, lightning, etc.)
 class Polyboard : public SpatialComponent
@@ -26,28 +23,28 @@ public:
 
 	void SetStartPoint(const XMVECTOR start);
 	void SetEndPoint(const XMVECTOR end);
-	bool RaycastFromStartToEndPoints(HitResult& hit);
+	bool RaycastFromStartToEndPoints(HitResult& hit) const;
 	void SetDestroyTimer(float timerMax);
 
-	VertexBuffer& GetVertexBuffer() { return vertexBuffer; }
-	IndexBuffer& GetIndexBuffer() { return indexBuffer; }
+	auto& GetVertexBuffer() { return vertexBuffer; }
+	auto& GetIndexBuffer() { return indexBuffer; }
 
 	auto& GetVertices() { return vertices; }
 	auto& GetIndices() { return indices; }
 
 	void SetTextureFilename(const std::string_view filename) { textureData.filename = filename; }
-	std::string GetTextureFilename() const { return textureData.filename; }
+	auto GetTextureFilename() const { return textureData.filename; }
 
 protected:
 	void GenerateVertices();
 
 	TextureData textureData;
 
-	VertexBuffer vertexBuffer;
-	IndexBuffer indexBuffer;
-
 	std::vector<Vertex> vertices;
 	std::vector<MeshData::indexDataType> indices;
+
+	VertexBuffer vertexBuffer;
+	IndexBuffer indexBuffer;
 
 	XMFLOAT3 startPoint;
 	XMFLOAT3 endPoint;
