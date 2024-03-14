@@ -1,16 +1,14 @@
 #pragma once
-#include "../Actor.h"
-#include "../ActorSystem.h"
 
-struct MeshComponent;
+#include "GridActor.h"
 
 //Level fence obstacle that player and units can't move through
-struct FenceActor : Actor
+class FenceActor : public GridActor
 {
+public:
 	ACTOR_SYSTEM(FenceActor);
 
-	MeshComponent* mesh = nullptr;
-
 	FenceActor();
-	virtual Properties GetProps() override;
+	void Create() override;
+	Properties GetProps() override;
 };
