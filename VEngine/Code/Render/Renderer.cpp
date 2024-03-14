@@ -1070,7 +1070,7 @@ void Renderer::RenderLightProbeViews()
 
 	int probeIndex = 0;
 
-	for (auto& probeData : diffuseProbeMap->lightProbeData)
+	for (auto& probeData : diffuseProbeMap->GetLightProbeData())
 	{
 		const XMMATRIX probeMatrix = probeData.modelMatrix;
 
@@ -1162,8 +1162,8 @@ void Renderer::RenderLightProbeViews()
 	}
 
 	//Remap probe data to structured buffer
-	MapBuffer(diffuseProbeMap->GetStructuredBuffer(), diffuseProbeMap->lightProbeData.data(),
-		sizeof(LightProbeInstanceData) * diffuseProbeMap->lightProbeData.size());
+	MapBuffer(diffuseProbeMap->GetStructuredBuffer(), diffuseProbeMap->GetLightProbeData().data(),
+		sizeof(LightProbeInstanceData) * diffuseProbeMap->GetLightProbeData().size());
 
 	//@Todo: Store SH into vertex colour data for static meshes
 	/*for (auto& mesh : MeshComponent::system.GetComponents())
@@ -2263,13 +2263,13 @@ void RenderLightProbes()
 	cbMatrices.Map(&shaderMatrices);
 	cbMatrices.SetVS();
 
-	auto instanceMesh = probeMap->lightProbesDebugInstanceMesh->instanceMesh;
+	auto instanceMesh = probeMap->GetInstanceMesh();
 	SetRenderPipelineStates(instanceMesh);
 
 	SetBlendStateByName(BlendStates::Default);
 
 	//Careful with the buffers here, they're not part of the instance mesh, instead they're in the diffuse probe map
-	MapBuffer(probeMap->GetStructuredBuffer(), probeMap->lightProbeData.data(), sizeof(LightProbeInstanceData) * probeMap->lightProbeData.size());
+	MapBuffer(probeMap->GetStructuredBuffer(), probeMap->GetLightProbeData().data(), sizeof(LightProbeInstanceData) * probeMap->GetLightProbeData().size());
 
 	//Update texture matrix
 	shaderMatrices.MakeTextureMatrix(instanceMesh->GetMaterial());

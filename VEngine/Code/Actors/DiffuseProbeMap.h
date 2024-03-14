@@ -38,14 +38,6 @@ class DiffuseProbeMap : public Actor
 public:
 	ACTOR_SYSTEM(DiffuseProbeMap);
 
-	DebugLightProbe* lightProbesDebugInstanceMesh = nullptr;
-
-	std::vector<LightProbeInstanceData> lightProbeData;
-
-	int sizeX = 1;
-	int sizeY = 1;
-	int sizeZ = 1;
-
 	DiffuseProbeMap();
 	void Create() override;
 	Properties GetProps() override;
@@ -57,11 +49,22 @@ public:
 	ID3D11Buffer* GetStructuredBuffer() { return structuredBuffer.Get(); }
 	ID3D11ShaderResourceView* GetSRV() { return srv.Get(); }
 
-private:
-	Microsoft::WRL::ComPtr<ID3D11Buffer> structuredBuffer;
-	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> srv;
+	auto GetInstanceMesh() { return lightProbesDebugInstanceMesh->instanceMesh; }
+	auto& GetLightProbeData() { return lightProbeData; }
 
+private:
 	void ReadProbeDataFromFile();
 	void SetLightProbeData();
 	std::string GetWorldNameAsFilename();
+
+	Microsoft::WRL::ComPtr<ID3D11Buffer> structuredBuffer;
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> srv;
+
+	DebugLightProbe* lightProbesDebugInstanceMesh = nullptr;
+
+	std::vector<LightProbeInstanceData> lightProbeData;
+
+	int sizeX = 1;
+	int sizeY = 1;
+	int sizeZ = 1;
 };
