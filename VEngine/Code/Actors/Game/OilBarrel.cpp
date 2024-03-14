@@ -64,7 +64,7 @@ void OilBarrel::SpillOil()
 			oilSlick->CreateAllComponents();
 
 			const float randYAxisAngle = VMath::RandomRange(0.f, 360.f);
-			oilSlick->mesh->AddLocalRotation(VMath::GlobalUpVector(), randYAxisAngle);
+			oilSlick->GetMesh().AddLocalRotation(VMath::GlobalUpVector(), randYAxisAngle);
 
 			//Remember to call start else nextPos and nextRot setup will get skipped.
 			oilSlick->Start();

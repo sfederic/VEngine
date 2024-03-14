@@ -392,7 +392,7 @@ bool Player::DialogueCheck(Actor* hitActor)
 		NPC* npc = dynamic_cast<NPC*>(hitActor);
 		if (npc)
 		{
-			currentlyActiveDialogueComponent = npc->dialogueComponent;
+			currentlyActiveDialogueComponent = npc->GetDialogueComponent();
 			if (currentlyActiveDialogueComponent->dialogue.filename.empty())
 			{
 				return false;
@@ -543,9 +543,9 @@ bool Player::InteractCheck(Actor* hitActor)
 
 				gridActor->Inspect();
 
-				if (!gridActor->interactText.empty())
+				if (!gridActor->GetInteractText().empty())
 				{
-					interactWidget->interactText = gridActor->interactText;
+					interactWidget->interactText = gridActor->GetInteractText();
 					interactWidget->AddToViewport();
 				}
 
@@ -585,7 +585,7 @@ void Player::InteractInfoToWidgetCheck()
 		auto gridActor = hit.GetHitActorAs<GridActor>();
 		if (gridActor)
 		{
-			if (!gridActor->interactText.empty())
+			if (!gridActor->GetInteractText().empty())
 			{
 				interactWidget->SetWorldPosition(GetHomogeneousPositionV());
 				interactWidget->interactText = L"Inspect";

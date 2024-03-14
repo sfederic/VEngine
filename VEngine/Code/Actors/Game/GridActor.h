@@ -15,11 +15,26 @@ class GridActor : public Actor
 public:
 	ACTOR_SYSTEM(GridActor);
 
+protected:
+	std::wstring interactText;
+	std::wstring interactKnownText;
+
 	MeshComponent* mesh = nullptr;
 	HealthWidget* healthWidget = nullptr;
 	DialogueComponent* dialogueComponent = nullptr;
 
-protected:
+	//For any grid actor that will move/rotate another grid actor on a player's link, 
+	//this is the actor the player's camera will focus on instead of itself.
+	Actor* actorForPlayerFocusOnLink = nullptr;
+
+	//These two are all the axis valid axis a GridActor can move on.
+	//1 or -1 denotes a valid direction (based on the axis type), 0 denotes it can't move in that cardinal direction.
+	XMFLOAT2 validPositiveMovementAxis = XMFLOAT2(1.f, 1.f);
+	XMFLOAT2 validNegativeMovementAxis = XMFLOAT2(1.f, 1.f);
+
+	XMVECTOR nextPos = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+	XMVECTOR nextRot = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+
 	float moveSpeed = 12.f;
 	float rotateSpeed = 12.f;
 
@@ -48,6 +63,10 @@ protected:
 	bool moveConstrainedToZAxis = false;
 	bool moveConstrainedToXAxis = false;
 
+	//This bool is to denote larger grid actors that need multiple or all nodes on the grid recalculated
+	//every time this particular grid actor is moved or rotated.
+	bool bigGridActor = false;
+
 	//This bool is for rotating grid actors (e.g. actors stuck on walls) on their z-axis. Because the controls for rotation need
 	//to be simple (previous player input had this when holding down shift), some actors will be using this bool
 	//to denote that left and right will rotate along the z-axis instead. 
@@ -63,20 +82,9 @@ protected:
 	bool isRotating = false;
 	bool isMoving = true;
 
-	//These two are all the axis valid axis a GridActor can move on.
-	//1 or -1 denotes a valid direction (based on the axis type), 0 denotes it can't move in that cardinal direction.
-	XMFLOAT2 validPositiveMovementAxis = XMFLOAT2(1.f, 1.f);
-	XMFLOAT2 validNegativeMovementAxis = XMFLOAT2(1.f, 1.f);
-
-	XMVECTOR nextPos = XMVectorSet(0.f, 0.f, 0.f, 1.f);
-	XMVECTOR nextRot = XMVectorSet(0.f, 0.f, 0.f, 1.f);
-
 	void SetPlayerFocusGridActor(Actor* focusActor) { actorForPlayerFocusOnLink = focusActor; }
 
 public:
-	std::wstring interactText;
-	std::wstring interactKnownText;
-
 	//Physical interaction, moves/activates actor
 	bool isInteractable = true;
 
@@ -174,27 +182,19 @@ public:
 	bool CanBeRotatedRollZAxis() const { return canBeRotatedRollZAxis; }
 
 	void SetCanFall(bool fall) { canFall = fall; }
-	bool GetCanFall() { return canFall; }
+	bool GetCanFall() const { return canFall; }
 
 	void CheckIfSubmerged();
-
 	void DisableAllInteractivity();
-
 	auto GetPlayerFocusActor() { return actorForPlayerFocusOnLink; }
-
-	bool IsInspectable() { return isInspectable; }
+	bool IsInspectable() const { return isInspectable; }
+	auto GetInteractText() { return interactText; }
+	auto& GetMesh() { return *mesh; }
+	auto GetDialogueComponent() { return dialogueComponent; }
 
 private:
 	void SpawnDustSpriteSheet();
 
 	void CheckSetIsMoving();
 	void CheckSetIsRotating();
-
-	//For any grid actor that will move/rotate another grid actor on a player's link, 
-	//this is the actor the player's camera will focus on instead of itself.
-	Actor* actorForPlayerFocusOnLink = nullptr;
-
-	//This bool is to denote larger grid actors that need multiple or all nodes on the grid recalculated
-	//every time this particular grid actor is moved or rotated.
-	bool bigGridActor = false;
 };
