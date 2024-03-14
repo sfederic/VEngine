@@ -139,6 +139,67 @@ Rotate Yaw
 UID
 3463267382
 next
+FenceActor
+1
+ Enabled
+1
+ Position
+2 -0 4
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+BigGridActor
+0
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+0
+Link Rotation
+0
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+MoveOnlyXAxis
+0
+MoveOnlyZAxis
+0
+Name
+FenceActor0
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Roll
+0
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+1066689179
+next
 Grid
 1
  Enabled
@@ -439,7 +500,7 @@ UID
 1447177167
 next
 MeshComponent
-14
+15
 2673813428
 Mesh
  Enabled
@@ -1238,6 +1299,63 @@ Trans. Occlude
 UID
 572449115
 next
+1066689179
+Mesh
+ Enabled
+1
+ Pos
+2 -0 4
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+nobackcull
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test_fence.vmesh
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+plane.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+641355350
+next
 Polyboard
 1
 4253979167
@@ -1266,7 +1384,7 @@ FireSprite
  Pos
 0 0 0
  Rot
--0.0113287 0.988661 0.103613 0.108097
+-0.00652685 0.993019 0.0969777 0.0668328
  Scale
 1 1 1
  Visible
@@ -1325,7 +1443,7 @@ UID
 3344409944
 next
 DialogueComponent
-5
+6
 2673813428
 Dialogue
  Enabled
@@ -1380,6 +1498,17 @@ File
 
 UID
 540277689
+next
+1066689179
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+157475455
 next
 InstanceMeshComponent
 1
