@@ -59,7 +59,7 @@ public:
 
 private:
 	Microsoft::WRL::ComPtr<ID3D11Buffer> structuredBuffer;
-	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> srv = nullptr;
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> srv;
 
 	void ReadProbeDataFromFile();
 	void SetLightProbeData();

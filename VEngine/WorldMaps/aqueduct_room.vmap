@@ -550,8 +550,88 @@ DirectionalLightActor0
 UID
 1122188067
 next
+DiffuseProbeMap
+1
+ Enabled
+1
+ Position
+0 1 0
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+DiffuseProbeMap0
+Size X
+7
+Size Y
+5
+Size Z
+17
+UID
+2459236355
+next
 MeshComponent
 30
+3893847023
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+char.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
+UID
+3839367250
+next
 231175086
 Mesh
  Enabled
@@ -573,7 +653,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -630,7 +710,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -687,7 +767,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -744,7 +824,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -801,7 +881,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -858,7 +938,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -915,7 +995,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -972,7 +1052,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1029,7 +1109,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1086,7 +1166,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1143,7 +1223,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1200,7 +1280,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1257,7 +1337,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1314,7 +1394,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1371,7 +1451,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1428,7 +1508,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1485,7 +1565,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1542,7 +1622,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1599,7 +1679,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1656,7 +1736,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1713,7 +1793,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1770,7 +1850,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1827,7 +1907,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1884,7 +1964,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1941,7 +2021,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1998,7 +2078,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -2055,7 +2135,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -2112,7 +2192,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -2169,7 +2249,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -2204,63 +2284,6 @@ Trans. Occlude
 0
 UID
 4253676260
-next
-3893847023
-Mesh
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-char.vmesh
-Physics Static
-1
-Render Static
-0
-Trans. Occlude
-0
-UID
-3839367250
 next
 ConditionComponent
 2
@@ -2449,7 +2472,7 @@ UID
 1852829273
 next
 EmptyComponent
-1
+2
 3893847023
 Root
  Enabled
@@ -2464,5 +2487,20 @@ Root
 1
 UID
 3676332495
+next
+2459236355
+Root
+ Enabled
+1
+ Pos
+0 1 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+685884956
 next
 end

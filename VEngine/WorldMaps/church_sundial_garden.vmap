@@ -1,19 +1,19 @@
-DirectionalLightActor
+Player
 1
  Enabled
 1
  Position
-0 5 0
+0 0 0
  Rotation
-0.169525 0.213317 -0.0376136 0.961427
+-0 0 -0 1
  Scale
-0.999999 0.999999 0.999999
+1 1 1
  Visible
 1
 Name
-DirectionalLightActor0
+Player0
 UID
-103456265
+728839379
 next
 EntranceTrigger
 1
@@ -369,22 +369,1259 @@ ico_sphere19
 UID
 555447912
 next
-Player
+DirectionalLightActor
+1
+ Enabled
+1
+ Position
+0 5 0
+ Rotation
+0.169525 0.213317 -0.0376136 0.961427
+ Scale
+0.999999 0.999999 0.999999
+ Visible
+1
+Name
+DirectionalLightActor0
+UID
+103456265
+next
+DiffuseProbeMap
 1
  Enabled
 1
  Position
 0 0 0
  Rotation
--0 0 -0 1
+0 0 0 1
  Scale
 1 1 1
  Visible
 1
 Name
-Player0
+DiffuseProbeMap0
+Size X
+7
+Size Y
+3
+Size Z
+7
 UID
+806422214
+next
+MeshComponent
+21
+3385308324
+Mesh
+ Enabled
+1
+ Pos
+4 -0.5 4
+ Rot
+-0 0 -0 1
+ Scale
+9 1 9
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Floors/grass02.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+3022743679
+next
+1963065372
+Mesh
+ Enabled
+1
+ Pos
+4 -0.4 4
+ Rot
+-0 0 -0 1
+ Scale
+2 0.1 2
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cylinder.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+934410716
+next
+431230518
+Mesh
+ Enabled
+1
+ Pos
+4 0 3
+ Rot
+0.5 0.5 -0.5 -0.5
+ Scale
+1.5 1.5 0.25
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+halfcube.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+1159294027
+next
+2215963743
+Mesh
+ Enabled
+1
+ Pos
+1 0 8
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Foliage/bush.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+ico_sphere.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+2091359638
+next
+2572696328
+Mesh
+ Enabled
+1
+ Pos
+8 0 8
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Foliage/bush.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+ico_sphere.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+1001144817
+next
+2289116868
+Mesh
+ Enabled
+1
+ Pos
+8 0 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Foliage/bush.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+ico_sphere.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+213212081
+next
+3573219339
+Mesh
+ Enabled
+1
+ Pos
+8 0 2
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Foliage/bush.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+ico_sphere.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+920059107
+next
+1261881861
+Mesh
+ Enabled
+1
+ Pos
+8 0 3
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Foliage/bush.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+ico_sphere.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+114013656
+next
+3702528651
+Mesh
+ Enabled
+1
+ Pos
+8 0 4
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Foliage/bush.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+ico_sphere.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+4264126248
+next
+1957874634
+Mesh
+ Enabled
+1
+ Pos
+8 0 5
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Foliage/bush.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+ico_sphere.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+2814461614
+next
+242777810
+Mesh
+ Enabled
+1
+ Pos
+8 0 6
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Foliage/bush.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+ico_sphere.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+3347323482
+next
+583891427
+Mesh
+ Enabled
+1
+ Pos
+8 0 7
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Foliage/bush.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+ico_sphere.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+1891903823
+next
+2793702426
+Mesh
+ Enabled
+1
+ Pos
+8 0 1
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Foliage/bush.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+ico_sphere.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+1026109316
+next
+3741656372
+Mesh
+ Enabled
+1
+ Pos
+0 0 8
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Foliage/bush.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+ico_sphere.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+3004668913
+next
+1983290172
+Mesh
+ Enabled
+1
+ Pos
+2 0 8
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Foliage/bush.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+ico_sphere.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+2507697353
+next
+4101340612
+Mesh
+ Enabled
+1
+ Pos
+3 0 8
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Foliage/bush.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+ico_sphere.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+1635955771
+next
+3789545571
+Mesh
+ Enabled
+1
+ Pos
+4 0 8
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Foliage/bush.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+ico_sphere.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+3193243923
+next
+3877892060
+Mesh
+ Enabled
+1
+ Pos
+5 0 8
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Foliage/bush.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+ico_sphere.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+1802701639
+next
+1921286496
+Mesh
+ Enabled
+1
+ Pos
+6 0 8
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Foliage/bush.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+ico_sphere.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+1679048956
+next
+555447912
+Mesh
+ Enabled
+1
+ Pos
+7 0 8
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Foliage/bush.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+ico_sphere.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+1836469508
+next
 728839379
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+char.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
+UID
+190022034
+next
+ConditionComponent
+1
+2732380893
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+2756369540
 next
 BoxTriggerComponent
 1
@@ -407,44 +1644,6 @@ Offset
 UID
 2239951208
 next
-CameraComponent
-1
-728839379
-Camera
- Enabled
-1
- Pos
-1.75 1.75 -2.75
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-FOV
-60
-Far Z
-1000
-Near Z
-0.01
-UID
-3681661738
-next
-ConditionComponent
-1
-2732380893
-Condition
- Enabled
-1
- Visible
-1
-Condition
-
-Condition Arg
-
-UID
-2756369540
-next
 DialogueComponent
 1
 728839379
@@ -457,44 +1656,6 @@ File
 
 UID
 2129808797
-next
-DirectionalLightComponent
-1
-103456265
-DirectionalLight
- Enabled
-1
- Pos
-0 5 0
- Rot
-0.169525 0.213317 -0.0376136 0.961427
- Scale
-0.999999 0.999999 0.999999
- Visible
-1
-Colour
-1 1 1 1
-LightEnabled
-1
-UID
-2836954195
-next
-EmptyComponent
-1
-728839379
-Root
- Enabled
-1
- Pos
-0 0 0
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-UID
-2409187796
 next
 InstanceMeshComponent
 1
@@ -546,1117 +1707,80 @@ M_UvScale
 1 1
 Mesh
 node.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
 UID
 3090439001
 next
-MeshComponent
-21
-3385308324
-Mesh
- Enabled
+CameraComponent
 1
- Pos
-4 -0.5 4
- Rot
--0 0 -0 1
- Scale
-9 1 9
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Floors/grass02.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-node.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-3022743679
-next
-1963065372
-Mesh
- Enabled
-1
- Pos
-4 -0.4 4
- Rot
--0 0 -0 1
- Scale
-2 0.1 2
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cylinder.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-934410716
-next
-431230518
-Mesh
- Enabled
-1
- Pos
-4 0 3
- Rot
-0.5 0.5 -0.5 -0.5
- Scale
-1.5 1.5 0.25
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-halfcube.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-1159294027
-next
-2215963743
-Mesh
- Enabled
-1
- Pos
-1 0 8
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Foliage/bush.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-ico_sphere.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-2091359638
-next
-2572696328
-Mesh
- Enabled
-1
- Pos
-8 0 8
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Foliage/bush.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-ico_sphere.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-1001144817
-next
-2289116868
-Mesh
- Enabled
-1
- Pos
-8 0 0
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Foliage/bush.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-ico_sphere.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-213212081
-next
-3573219339
-Mesh
- Enabled
-1
- Pos
-8 0 2
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Foliage/bush.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-ico_sphere.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-920059107
-next
-1261881861
-Mesh
- Enabled
-1
- Pos
-8 0 3
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Foliage/bush.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-ico_sphere.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-114013656
-next
-3702528651
-Mesh
- Enabled
-1
- Pos
-8 0 4
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Foliage/bush.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-ico_sphere.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-4264126248
-next
-1957874634
-Mesh
- Enabled
-1
- Pos
-8 0 5
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Foliage/bush.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-ico_sphere.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-2814461614
-next
-242777810
-Mesh
- Enabled
-1
- Pos
-8 0 6
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Foliage/bush.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-ico_sphere.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-3347323482
-next
-583891427
-Mesh
- Enabled
-1
- Pos
-8 0 7
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Foliage/bush.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-ico_sphere.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-1891903823
-next
-2793702426
-Mesh
- Enabled
-1
- Pos
-8 0 1
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Foliage/bush.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-ico_sphere.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-1026109316
-next
-3741656372
-Mesh
- Enabled
-1
- Pos
-0 0 8
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Foliage/bush.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-ico_sphere.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-3004668913
-next
-1983290172
-Mesh
- Enabled
-1
- Pos
-2 0 8
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Foliage/bush.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-ico_sphere.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-2507697353
-next
-4101340612
-Mesh
- Enabled
-1
- Pos
-3 0 8
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Foliage/bush.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-ico_sphere.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-1635955771
-next
-3789545571
-Mesh
- Enabled
-1
- Pos
-4 0 8
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Foliage/bush.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-ico_sphere.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-3193243923
-next
-3877892060
-Mesh
- Enabled
-1
- Pos
-5 0 8
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Foliage/bush.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-ico_sphere.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-1802701639
-next
-1921286496
-Mesh
- Enabled
-1
- Pos
-6 0 8
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Foliage/bush.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-ico_sphere.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-1679048956
-next
-555447912
-Mesh
- Enabled
-1
- Pos
-7 0 8
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Foliage/bush.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-ico_sphere.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-1836469508
-next
 728839379
-Mesh
+Camera
+ Enabled
+1
+ Pos
+1.75 1.75 -2.75
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+FOV
+60
+Far Z
+1000
+Near Z
+0.01
+UID
+3681661738
+next
+DirectionalLightComponent
+1
+103456265
+DirectionalLight
+ Enabled
+1
+ Pos
+0 5 0
+ Rot
+0.169525 0.213317 -0.0376136 0.961427
+ Scale
+0.999999 0.999999 0.999999
+ Visible
+1
+Colour
+1 1 1 1
+Intensity
+1
+LightEnabled
+1
+UID
+2836954195
+next
+EmptyComponent
+2
+728839379
+Root
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+2409187796
+next
+806422214
+Root
  Enabled
 1
  Pos
@@ -1667,47 +1791,7 @@ Mesh
 1 1 1
  Visible
 1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-char.vmesh
-Static
-1
-Trans. Occlude
-0
 UID
-190022034
+1338527257
 next
 end
