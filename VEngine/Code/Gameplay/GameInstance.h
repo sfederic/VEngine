@@ -2,6 +2,7 @@
 
 #include <string>
 #include "Core/Properties.h"
+#include "Core/Log.h"
 
 //Instance holding data over the entirety of the game.
 //GameInstance is also used as a global save file of sorts, separate from .vmaps.
@@ -21,11 +22,17 @@ namespace GameInstance
 	void ClearHeldPlayerItem();
 
 	template <typename T>
-	T& GetGlobalProp(const std::string name)
+	T* GetGlobalProp(const std::string name)
 	{
 		Properties globalProps = GetGlobalProps();
-		T* data = globalProps.GetData<T>(name);
-		return *data;
+		if (globalProps.Find(name))
+		{
+			T* data = globalProps.GetData<T>(name);
+			return data;
+		}
+
+		Log("Global property [%s] not found.", name.c_str());
+		return nullptr;
 	}
 
 	template <typename T>

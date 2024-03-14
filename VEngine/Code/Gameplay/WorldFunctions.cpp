@@ -27,20 +27,24 @@ void TownStart()
 			}
 		};
 
-	const auto& timeOfDay = GameInstance::GetGlobalProp<std::string>("TownTimeOfDay");
-	if (timeOfDay == "Morning")
+	std::string* timeOfDay = GameInstance::GetGlobalProp<std::string>("TownTimeOfDay");
+	if (timeOfDay == nullptr)
+	{
+		return;
+	}
+	if (*timeOfDay == "Morning")
 	{
 		MulVertexColours(XMFLOAT4(0.3f, 0.3f, 0.88f, 1.f));
 	}
-	else if (timeOfDay == "Day")
+	else if (*timeOfDay == "Day")
 	{
 		MulVertexColours(XMFLOAT4(0.77f, 0.77f, 0.77f, 1.f));
 	}
-	else if (timeOfDay == "Sunset")
+	else if (*timeOfDay == "Sunset")
 	{
 		MulVertexColours(XMFLOAT4(0.77f, 0.1f, 0.1f, 1.f));
 	}
-	else if (timeOfDay == "Night")
+	else if (*timeOfDay == "Night")
 	{
 		MulVertexColours(XMFLOAT4(0.1f, 0.1f, 0.69f, 1.f));
 	}

@@ -20,10 +20,13 @@ void ActivateOnGlobalProp::Start()
 
 	if (propertyType.Compare(PropertyTypes::Bool))
 	{
-		bool& value = GameInstance::GetGlobalProp<bool>(propertyName);
-		if (value == true)
+		bool* value = GameInstance::GetGlobalProp<bool>(propertyName);
+		if (value != nullptr)
 		{
-			Activate();
+			if (*value == true)
+			{
+				Activate();
+			}
 		}
 	}
 }
