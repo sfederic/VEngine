@@ -639,6 +639,9 @@ void Player::LinkToGridActor()
 	}
 	else if (!isInputLinkedToGridActor && Input::GetKeyUp("Link")) //Raycast forward
 	{
+		//Remove interact widget
+		interactWidget->RemoveFromViewport();
+
 		HitResult hit(this);
 		const auto playerPos = GetPositionV();
 		const auto end = playerPos + (GetMeshForward() * 5.f);
