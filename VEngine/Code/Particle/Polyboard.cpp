@@ -16,6 +16,8 @@ Polyboard::Polyboard()
 void Polyboard::Create()
 {
 	GenerateVertices();
+
+	SetCollisionLayer(CollisionLayers::Editor);
 }
 
 void Polyboard::Tick(float deltaTime)
