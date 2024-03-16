@@ -40,9 +40,11 @@ public:
 
 	DiffuseProbeMap();
 	void Create() override;
+	void PostCreate() override;
 	Properties GetProps() override;
 
 	uint32_t GetProbeCount();
+	LightProbeInstanceData GetProbeByIndex(int index);
 	LightProbeInstanceData FindClosestProbe(XMVECTOR pos);
 	void WriteProbeDataToFile();
 
@@ -56,6 +58,8 @@ private:
 	void ReadProbeDataFromFile();
 	void SetLightProbeData();
 	std::string GetWorldNameAsFilename();
+
+	void AssignStaticMeshesLightProbeIndex();
 
 	Microsoft::WRL::ComPtr<ID3D11Buffer> structuredBuffer;
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> srv;

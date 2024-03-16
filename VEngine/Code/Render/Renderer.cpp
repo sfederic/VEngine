@@ -940,7 +940,17 @@ void SetShaderMeshData(MeshComponent* mesh)
 	{
 		context->PSSetShaderResources(environmentMapTextureRegister, 1, lightProbeSRV.GetAddressOf());
 
-		LightProbeInstanceData probeData = DiffuseProbeMap::system.GetFirstActor()->FindClosestProbe(mesh->GetWorldPositionV());
+		const auto lightProbeMap = DiffuseProbeMap::system.GetFirstActor();
+		LightProbeInstanceData probeData;
+		if (mesh->IsRenderStatic())
+		{
+			probeData = lightProbeMap->GetProbeByIndex(mesh->cachedLightProbeMapIndex);
+		}
+		else
+		{
+			probeData = lightProbeMap->FindClosestProbe(mesh->GetWorldPositionV());
+		}
+
 		memcpy(meshData.SH, probeData.SH, sizeof(XMFLOAT4) * 9);
 
 		meshData.isDiffuseProbeMapActive = DiffuseProbeMap::system.GetOnlyActor()->IsActive();

@@ -4,6 +4,7 @@
 #include <algorithm>
 #include "Core/World.h"
 #include "Core/Log.h"
+#include "Components/MeshComponent.h"
 #include "Render/RenderUtils.h"
 #include "Render/ShaderData/InstanceData.h"
 
@@ -23,6 +24,13 @@ void DiffuseProbeMap::Create()
 	RenderUtils::CreateStructuredBuffer(sizeof(LightProbeInstanceData) * probeCount,
 		sizeof(LightProbeInstanceData), lightProbeData.data(), structuredBuffer);
 	RenderUtils::CreateSRVForMeshInstance(structuredBuffer.Get(), probeCount, srv);
+}
+
+void DiffuseProbeMap::PostCreate()
+{
+	__super::PostCreate();
+
+	AssignStaticMeshesLightProbeIndex();
 }
 
 Properties DiffuseProbeMap::GetProps()
@@ -69,6 +77,11 @@ void DiffuseProbeMap::SetLightProbeData()
 uint32_t DiffuseProbeMap::GetProbeCount()
 {
 	return sizeX * sizeY * sizeZ;
+}
+
+LightProbeInstanceData DiffuseProbeMap::GetProbeByIndex(int index)
+{
+	return lightProbeData.at(index);
 }
 
 LightProbeInstanceData DiffuseProbeMap::FindClosestProbe(XMVECTOR pos)
@@ -157,4 +170,17 @@ std::string DiffuseProbeMap::GetWorldNameAsFilename()
 	std::string worldName = VString::GetSubStringBeforeFoundOffset(World::worldFilename, "."); //trim .vmap
 	std::string filename = "LightProbeData/" + worldName + ".probedata";
 	return filename;
+}
+
+void DiffuseProbeMap::AssignStaticMeshesLightProbeIndex()
+{
+	auto& meshes = MeshComponent::system.GetComponents();
+	for (auto& mesh : meshes)
+	{
+		if (mesh->IsRenderStatic())
+		{
+			auto lightProbe = FindClosestProbe(mesh->GetWorldPositionV());
+			mesh->cachedLightProbeMapIndex = lightProbe.index;
+		}
+	}
 }

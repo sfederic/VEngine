@@ -20,6 +20,7 @@ public:
 	static void CreateDebugMeshes();
 	static void DestroyDebugMeshes();
 	static MeshComponent* GetDebugMesh(std::string name);
+	static const int INVALID_LIGHT_PROBE_INDEX = -1;
 
 	static std::vector<MeshComponent*> SortMeshComponentsByDistance();
 
@@ -27,6 +28,10 @@ public:
 
 	MeshDataProxy meshDataProxy;
 	VertexBuffer vertexBuffer;
+
+	//Cached indexes into the diffuse light probe map for static meshes, so that they're not constantly
+	//searching out their closest light probe to take data from.
+	int cachedLightProbeMapIndex = INVALID_LIGHT_PROBE_INDEX;
 
 	bool castsShadow = true;
 
