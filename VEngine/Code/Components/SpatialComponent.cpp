@@ -58,7 +58,7 @@ void SpatialComponent::UpdateTransform(XMMATRIX parentWorld)
 Properties SpatialComponent::GetProps()
 {
 	auto props = __super::GetProps();
-	props.title = "SpatialComponent";
+	props.title = GetTypeName();
 	props.Add(" Pos", &transform.position);
 	props.Add(" Rot", &transform.rotation);
 	props.Add(" Scale", &transform.scale);

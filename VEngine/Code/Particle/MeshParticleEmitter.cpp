@@ -87,6 +87,6 @@ Properties MeshParticleEmitter::GetProps()
 	auto particleDataProps = particleData.GetProps();
 	props.Merge(particleDataProps);
 
-	props.title = "MeshParticleEmitter";
+	props.title = GetTypeName();
 	return props;
 }

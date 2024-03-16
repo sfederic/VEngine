@@ -130,7 +130,7 @@ static void ReassignMesh(void* data)
 Properties MeshComponent::GetProps()
 {
 	auto props = __super::GetProps();
-	props.title = "MeshComponent";
+	props.title = GetTypeName();
 
 	props.Add("Mesh", &meshComponentData).change = ReassignMesh;
 	props.Add("Casts Shadow", &castsShadow);

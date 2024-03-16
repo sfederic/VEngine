@@ -9,7 +9,7 @@
 Properties SkeletalMeshComponent::GetProps()
 {
 	auto props = __super::GetProps();
-	props.title = "SkeletonMeshComponent";
+	props.title = GetTypeName();
 	return props;
 }
 

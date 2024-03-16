@@ -92,7 +92,7 @@ void CameraComponent::SetAsActiveCamera()
 Properties CameraComponent::GetProps()
 {
 	auto props = __super::GetProps();
-	props.title = "CameraComponent";
+	props.title = GetTypeName();
 	props.Add("FOV", &FOV);
 	props.Add("Near Z", &nearZ);
 	props.Add("Far Z", &farZ);

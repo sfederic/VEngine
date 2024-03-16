@@ -112,7 +112,7 @@ void EntranceTrigger::Tick(float deltaTime)
 Properties EntranceTrigger::GetProps()
 {
 	auto props = Actor::GetProps();
-	props.title = "EntranceTrigger";
+	props.title = GetTypeName();
 	props.Add("Level Name", &levelToMoveTo).autoCompletePath = "/WorldMaps/";
 	props.Add("Entrance Active", &isEntranceActive);
 	props.Add("Open Text", &openText);

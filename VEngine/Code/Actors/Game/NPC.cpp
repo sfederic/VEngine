@@ -63,7 +63,7 @@ void NPC::Tick(float deltaTime)
 Properties NPC::GetProps()
 {
 	Properties props = __super::GetProps();
-	props.title = "NPC";
+	props.title = GetTypeName();
 	props.Add("Spawn Text", &spawnText);
 	props.Add("Target Node X", &nodeToMoveToXIndex);
 	props.Add("Target Node Y", &nodeToMoveToYIndex);

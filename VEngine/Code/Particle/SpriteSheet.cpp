@@ -12,7 +12,7 @@ void SpriteSheet::Create()
 {
 	sprite.useSourceRect = true;
 	sprite.textureFilename = textureData.filename;
-	
+
 	auto texture = TextureSystem::FindTexture2D(textureData.filename);
 
 	int w = texture->GetWidth() / numSheetColumns;
@@ -56,7 +56,7 @@ void SpriteSheet::Tick(float deltaTime)
 Properties SpriteSheet::GetProps()
 {
 	auto props = __super::GetProps();
-	props.title = "SpriteSheet";
+	props.title = GetTypeName();
 	props.Add("Texture", &textureData);
 	props.Add("Sheet Rows", &numSheetRows);
 	props.Add("Sheet Columns", &numSheetColumns);

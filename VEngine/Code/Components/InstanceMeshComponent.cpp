@@ -57,7 +57,7 @@ void InstanceMeshComponent::SetInstanceData(std::vector<InstanceData>& instanceD
 Properties InstanceMeshComponent::GetProps()
 {
 	Properties props = MeshComponent::GetProps();
-	props.title = "InstanceMeshComponent";
+	props.title = GetTypeName();
 	return props;
 }
 

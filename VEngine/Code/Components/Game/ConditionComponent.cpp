@@ -9,7 +9,7 @@ ConditionComponent::ConditionComponent()
 Properties ConditionComponent::GetProps()
 {
 	auto props = __super::GetProps();
-	props.title = "ConditionComponent";
+	props.title = GetTypeName();
 	props.Add("Condition", &condition);
 	props.Add("Condition Arg", &conditionArg);
 	return props;

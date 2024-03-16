@@ -40,7 +40,7 @@ void RotatorSwitch::Tick(float deltaTime)
 Properties RotatorSwitch::GetProps()
 {
 	auto props = __super::GetProps();
-	props.title = "RotatorSwitch";
+	props.title = GetTypeName();
 	props.Add("Actor to Rotate", &actorToRotateName);
 	props.Add("Rotation Axis", &rotationAxis);
 	props.Add("Rotation Increment", &rotationIncrement);
