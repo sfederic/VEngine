@@ -63,6 +63,10 @@ void QtEditor::Tick()
 
 void QtEditor::SetMousePos()
 {
+	//@Todo: Tried moving Qt from 5.15 to 6.6.2 and this one mapFromGlobal line fucked the whole thing up.
+	//It was like an incorrect offset, almost like a pixel scaling issue that just wouldn't work.
+	//I tried code to make sure the Qt render viewport and the Renderer d3d11 viewport were equal, also
+	//code to make sure pixel dpi was ok across Qt, but those didn't work.
 	const QPoint mousePos = mainWindow->renderView->mapFromGlobal(QCursor::pos());
 	SetViewportMousePositions(mousePos.x(), mousePos.y());
 }
