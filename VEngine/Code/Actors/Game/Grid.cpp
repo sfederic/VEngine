@@ -52,7 +52,7 @@ void Grid::Tick(float deltaTime)
 Properties Grid::GetProps()
 {
 	auto props = __super::GetProps();
-	props.title = "BattleNode";
+	props.title = GetTypeName();
 	props.Add("Size X", &sizeX);
 	props.Add("Size Y", &sizeY);
 	return props;
