@@ -130,6 +130,20 @@ void DiffuseProbeMap::WriteProbeDataToFile()
 	Log("[%s] binary probe data file created.", filename.c_str());
 }
 
+void DiffuseProbeMap::DeleteLightProbeDataFile()
+{
+	const std::string filename = GetWorldNameAsFilename();
+	if (std::filesystem::exists(filename))
+	{
+		std::filesystem::remove(filename);
+		Log("Deleted light probe file [%s].", filename.c_str());
+	}
+	else
+	{
+		Log("No [%s] light probe file to delete.", filename.c_str());
+	}
+}
+
 void DiffuseProbeMap::ReadProbeDataFromFile()
 {
 	std::string filename = GetWorldNameAsFilename();

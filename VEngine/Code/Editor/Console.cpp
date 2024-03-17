@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "Console.h"
 #include <dwrite.h>
+#include "Actors/DiffuseProbeMap.h"
 #include "Components/MeshComponent.h"
 #include "Core/Input.h"
 #include "Core/Log.h"
@@ -195,6 +196,19 @@ void Console::Init()
 			Log("Reset UIDs of %d components.", components.size());
 			},
 			"Resets all component UIDs in world."));
+
+	executeMap.emplace(L"DELPROBE",
+		std::make_pair([]() {
+			auto probeMap = DiffuseProbeMap::system.GetFirstActor();
+			if (probeMap)
+			{
+				probeMap->DeleteLightProbeDataFile();
+			}
+			else
+			{
+				Log("No DiffuseLightMap in level.");
+			}
+			}, "Deletes this world's light probe data file."));
 
 	executeMap.emplace(L"TEXOFF",
 		std::make_pair([]() {

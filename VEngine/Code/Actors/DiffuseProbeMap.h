@@ -54,6 +54,8 @@ public:
 	auto GetInstanceMesh() { return lightProbesDebugInstanceMesh->instanceMesh; }
 	auto& GetLightProbeData() { return lightProbeData; }
 
+	void DeleteLightProbeDataFile();
+
 private:
 	void ReadProbeDataFromFile();
 	void SetLightProbeData();
