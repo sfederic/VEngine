@@ -1,3 +1,20 @@
+Player
+1
+ Enabled
+1
+ Position
+2 0 1
+ Rotation
+0 5.06639e-07 0 -0.999998
+ Scale
+1 1 1
+ Visible
+1
+Name
+Player0
+UID
+2130618174
+next
 Grid
 1
  Enabled
@@ -231,31 +248,14 @@ node13
 UID
 3542750051
 next
-Player
-1
- Enabled
-1
- Position
-2 0 1
- Rotation
-0 5.06639e-07 0 -0.999998
- Scale
-1 1 1
- Visible
-1
-Name
-Player0
-UID
-2130618174
-next
 PointLightActor
 1
  Enabled
 1
  Position
-2 -0 2
+5 0 2
  Rotation
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -265,69 +265,39 @@ PointLightActor0
 UID
 504056988
 next
-CameraComponent
+DiffuseProbeMap
 1
-2130618174
-Camera
  Enabled
 1
- Pos
-1.75 1.75 -2.75
- Rot
-0 0 0 1
+ Position
+0 0 0
+ Rotation
+-0 0 -0 1
  Scale
 1 1 1
  Visible
 1
-FOV
-60
-Far Z
-1000
-Near Z
-0.01
+Name
+DiffuseProbeMap0
+Size X
+5
+Size Y
+2
+Size Z
+5
 UID
-1236042248
+3442478750
 next
-DialogueComponent
-1
+MeshComponent
+15
 2130618174
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-938403783
-next
-EmptyComponent
-1
-2130618174
-Root
- Enabled
-1
- Pos
-2 0 1
- Rot
-0 5.06639e-07 0 -0.999998
- Scale
-1 1 1
- Visible
-1
-UID
-3092749618
-next
-InstanceMeshComponent
-1
-201678567
-NodeMesh
+Mesh
  Enabled
 1
  Pos
 0 0 0
  Rot
-0 0 0 1
+0 1.2815e-06 0 -1
  Scale
 1 1 1
  Visible
@@ -347,7 +317,7 @@ M_Metallic
 M_Rast State
 solid
 M_Shader
-Instance
+Default
 M_Smoothness
 0
 M_Specular
@@ -367,16 +337,16 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-node.vmesh
-Static
+char.vmesh
+Physics Static
 1
+Render Static
+0
 Trans. Occlude
 0
 UID
-2641014842
+2108166279
 next
-MeshComponent
-15
 553639516
 Mesh
  Enabled
@@ -398,7 +368,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -425,7 +395,9 @@ M_UvScale
 1 1
 Mesh
 node.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -453,7 +425,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -480,7 +452,9 @@ M_UvScale
 1 1
 Mesh
 barrel.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -508,7 +482,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -535,7 +509,9 @@ M_UvScale
 1 1
 Mesh
 barrel.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -590,7 +566,9 @@ M_UvScale
 1 1
 Mesh
 cube.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 1
@@ -618,7 +596,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -645,7 +623,9 @@ M_UvScale
 1 1
 Mesh
 cube.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -673,7 +653,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -700,7 +680,9 @@ M_UvScale
 1 1
 Mesh
 cube.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -728,7 +710,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -755,7 +737,9 @@ M_UvScale
 1 1
 Mesh
 barrel.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -783,7 +767,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -810,7 +794,9 @@ M_UvScale
 1 1
 Mesh
 cube.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -838,7 +824,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -865,7 +851,9 @@ M_UvScale
 1 1
 Mesh
 cube.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -893,7 +881,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -920,7 +908,9 @@ M_UvScale
 1 1
 Mesh
 cube.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -948,7 +938,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -975,7 +965,9 @@ M_UvScale
 1 1
 Mesh
 node.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1003,7 +995,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1030,7 +1022,9 @@ M_UvScale
 1 1
 Mesh
 node.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1058,7 +1052,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1085,7 +1079,9 @@ M_UvScale
 1 1
 Mesh
 node.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -1113,7 +1109,7 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1140,21 +1136,38 @@ M_UvScale
 1 1
 Mesh
 node.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
 UID
 1877118452
 next
+DialogueComponent
+1
 2130618174
-Mesh
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+938403783
+next
+InstanceMeshComponent
+1
+201678567
+NodeMesh
  Enabled
 1
  Pos
 0 0 0
  Rot
-0 1.2815e-06 0 -1
+0 0 0 1
  Scale
 1 1 1
  Visible
@@ -1168,13 +1181,13 @@ Grid Obst.
 M_Ambient
 1 1 1 1
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
 solid
 M_Shader
-Default
+Instance
 M_Smoothness
 0
 M_Specular
@@ -1194,13 +1207,38 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-char.vmesh
-Static
+node.vmesh
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
 UID
-2108166279
+2641014842
+next
+CameraComponent
+1
+2130618174
+Camera
+ Enabled
+1
+ Pos
+1.75 1.75 -2.75
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+FOV
+60
+Far Z
+1000
+Near Z
+0.01
+UID
+1236042248
 next
 PointLightComponent
 1
@@ -1209,9 +1247,9 @@ PointLight
  Enabled
 1
  Pos
-2 -0 2
+5 0 2
  Rot
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -1219,10 +1257,42 @@ PointLight
 Colour
 1 1 1 1
 Intensity
-25
+33
 LightEnabled
 1
 UID
 294694811
+next
+EmptyComponent
+2
+2130618174
+Root
+ Enabled
+1
+ Pos
+2 0 1
+ Rot
+0 5.06639e-07 0 -0.999998
+ Scale
+1 1 1
+ Visible
+1
+UID
+3092749618
+next
+3442478750
+Root
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+2921884749
 next
 end
