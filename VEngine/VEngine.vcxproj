@@ -117,6 +117,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Code\Editor\AssetIconListWidget.cpp" />
     <ClCompile Include="Code\Render\BlendState.cpp" />
     <ClCompile Include="Code\Render\VertexBuffer.cpp" />
     <ClCompile Include="Code\Core\BinaryDeserialiser.cpp" />
@@ -365,6 +366,7 @@
     <ClCompile Include="Code\Render\Sampler.cpp" />
     <ClCompile Include="Code\Render\IndexBuffer.cpp" />
     <ClCompile Include="Code\Render\ShaderResourceView.cpp" />
+    <ClInclude Include="Code\Editor\AssetIconListWidget.h" />
     <ClInclude Include="Code\Render\BlendState.h" />
     <ClInclude Include="Code\Render\VertexBuffer.h" />
     <ClInclude Include="Code\Core\BinaryDeserialiser.h" />

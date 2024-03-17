@@ -11,6 +11,7 @@
 #include <qlistwidget.h>
 #include <qboxlayout.h>
 #include <qlineedit.h>
+#include "Editor/AssetIconListWidget.h"
 #include "Core/FileSystem.h"
 #include "Asset/AssetSystem.h"
 #include "Actors/MeshActor.h"
@@ -81,15 +82,13 @@ AssetDock::AssetDock() : QDockWidget("Assets")
 		assetTreeView->hideColumn(i);
 	}
 
-	assetIcons = new QListWidget();
-	assetIcons->setIconSize(QSize(75, 75));
-	assetIcons->setViewMode(QListView::ViewMode::IconMode);
-	connect(assetIcons, &QListWidget::clicked, this, &AssetDock::AssetItemClicked);
-	connect(assetIcons, &QListWidget::doubleClicked, this, &AssetDock::OpenAssetItemInDefaultProgram);
+	assetIconListWidget = new AssetIconListWidget();
+	connect(assetIconListWidget, &QListWidget::clicked, this, &AssetDock::AssetItemClicked);
+	connect(assetIconListWidget, &QListWidget::doubleClicked, this, &AssetDock::OpenAssetItemInDefaultProgram);
 
 	QHBoxLayout* assetHBox = new QHBoxLayout();
 	assetHBox->addWidget(assetTreeView);
-	assetHBox->addWidget(assetIcons);
+	assetHBox->addWidget(assetIconListWidget);
 
 	//Setup search bar
 	assetFilterLineEdit = new QLineEdit();
@@ -145,7 +144,7 @@ void AssetDock::AssetItemClicked()
 	QModelIndex index = assetTreeView->currentIndex();
 	QString path = fileSystemModel->filePath(index);
 
-	QString assetName = assetIcons->currentItem()->text();
+	QString assetName = assetIconListWidget->currentItem()->text();
 	QString fullPath = path + "/" + assetName;
 
 	auto fileExtension = std::filesystem::path(fullPath.toStdString()).extension();
@@ -190,7 +189,7 @@ void AssetDock::OpenAssetItemInDefaultProgram()
 	QModelIndex index = assetTreeView->currentIndex();
 	QString path = fileSystemModel->filePath(index);
 
-	QString assetName = assetIcons->currentItem()->text();
+	QString assetName = assetIconListWidget->currentItem()->text();
 	QString fullPath = path + "/" + assetName;
 
 	auto fileExtension = std::filesystem::path(fullPath.toStdString()).extension();
@@ -208,7 +207,7 @@ void AssetDock::AssetFolderClicked()
 	QDir directory(folderPath);
 	QFileInfoList fileInfoList = directory.entryInfoList(QDir::NoDotAndDotDot | QDir::AllEntries);
 
-	assetIcons->clear();
+	assetIconListWidget->clear();
 
 	for (QFileInfo& fileInfo : fileInfoList)
 	{
@@ -254,7 +253,7 @@ void AssetDock::AssetFolderClicked()
 		QListWidgetItem* item = new QListWidgetItem(icon, fileInfo.fileName());
 		item->setToolTip(fileInfo.fileName());
 		item->setSizeHint(QSize(150, 100));
-		assetIcons->addItem(item);
+		assetIconListWidget->addItem(item);
 	}
 }
 
@@ -289,9 +288,9 @@ void AssetDock::FilterAssets()
 {
 	QString filterText = assetFilterLineEdit->text().toLower();
 
-	for (int i = 0; i < assetIcons->count(); i++)
+	for (int i = 0; i < assetIconListWidget->count(); i++)
 	{
-		QListWidgetItem* item = assetIcons->item(i);
+		QListWidgetItem* item = assetIconListWidget->item(i);
 		if (item->text().toLower().contains(filterText))
 		{
 			item->setHidden(false);

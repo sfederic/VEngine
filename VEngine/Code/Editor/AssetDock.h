@@ -9,6 +9,7 @@ class QListWidget;
 class QPushButton;
 class QLineEdit;
 class Material;
+class AssetIconListWidget;
 
 class AssetDock : public QDockWidget
 {
@@ -46,7 +47,7 @@ private:
 
 	QFileSystemModel* fileSystemModel = nullptr;
 	QTreeView* assetTreeView = nullptr;
-	QListWidget* assetIcons = nullptr;
+	AssetIconListWidget* assetIconListWidget = nullptr;
 	QLineEdit* assetFilterLineEdit = nullptr;
 	QPushButton* importMeshButton = nullptr;
 	QPushButton* importAnimButton = nullptr;
