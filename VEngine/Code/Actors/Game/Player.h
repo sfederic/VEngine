@@ -7,7 +7,6 @@
 struct DialogueComponent;
 struct InteractWidget;
 struct PlayerHealthWidget;
-class PickupWidget;
 struct GridActor;
 struct Unit;
 struct MeshComponent;
@@ -75,10 +74,6 @@ public:
 
 	void SetNextPosAndRotToCurrent();
 
-	void SetPickupWidgetIconFilename(std::string_view filename);
-	void AddPickupWidgetToViewport();
-	void RemovePickupWidgetFromViewport();
-
 	void SetNextCameraPosition(XMVECTOR pos) { nextCameraPosition = pos; }
 	XMVECTOR GetCameraLocalPosition();
 	void ResetCameraPosAndTargetToPlayer();
@@ -88,8 +83,6 @@ public:
 	void SetQuickThought(std::wstring_view text);
 
 private:
-	PickupWidget* pickupWidget = nullptr;
-
 	XMVECTOR nextCameraPosition = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 	XMVECTOR cameraLinkActiveLocalPosition = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 	XMVECTOR cameraStartingLocalPosition = XMVectorSet(1.75f, 1.75f, -2.75f, 1.f);
@@ -128,8 +121,6 @@ private:
 
 	void HighlightLinkableGridActor();
 	GridActor* highlightedGridActor = nullptr;
-
-	void OverlapPickupGridActor();
 
 	void ResetHighlightedActor();
 

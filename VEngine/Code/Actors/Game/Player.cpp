@@ -10,7 +10,6 @@
 #include "Actors/Game/NPC.h"
 #include "Actors/Game/InspectionTrigger.h"
 #include "Actors/Game/FenceActor.h"
-#include "Actors/Game/Pickup.h"
 #include "Actors/Game/PlayerCameraTrigger.h"
 #include "Grid.h"
 #include "GridActor.h"
@@ -18,7 +17,6 @@
 #include "Components/MeshComponent.h"
 #include "UI/UISystem.h"
 #include "UI/Game/DialogueWidget.h"
-#include "UI/Game/PickupWidget.h"
 #include "UI/Game/InteractWidget.h"
 #include "UI/Game/PlayerHealthWidget.h"
 #include "Gameplay/GameUtils.h"
@@ -70,7 +68,6 @@ void Player::Start()
 	//Setup widgets
 	interactWidget = UISystem::CreateWidget<InteractWidget>();
 	healthWidget = UISystem::CreateWidget<PlayerHealthWidget>();
-	pickupWidget = UISystem::CreateWidget<PickupWidget>();
 }
 
 void Player::End()
@@ -93,8 +90,6 @@ void Player::Tick(float deltaTime)
 	{
 		//GameUtils::TriggerGameOver();
 	}
-
-	OverlapPickupGridActor();
 
 	OnMoveAndRotateEnd();
 
@@ -259,32 +254,6 @@ void Player::HighlightLinkableGridActor()
 	else
 	{
 		ResetHighlightedActor();
-	}
-}
-
-void Player::OverlapPickupGridActor()
-{
-	if (Input::GetKeyUp(Keys::E))
-	{
-		const auto center = GetPositionV() + GetMeshForward();
-		HitResult hit(this);
-		if (SimpleBoxCast(center, XMFLOAT3(0.45f, 0.45f, 0.45f), hit, true, true))
-		{
-			for (auto hitActor : hit.hitActors)
-			{
-				auto pickup = dynamic_cast<Pickup*>(hitActor);
-				if (pickup)
-				{
-					interactWidget->interactText = L"Pick up";
-					interactWidget->AddToViewport();
-				}
-			}
-		}
-		else
-		{
-			interactWidget->interactText.clear();
-			interactWidget->RemoveFromViewport();
-		}
 	}
 }
 
@@ -1162,21 +1131,6 @@ void Player::SetNextPosAndRotToCurrent()
 {
 	nextPos = GetPositionV();
 	nextRot = GetRotationV();
-}
-
-void Player::SetPickupWidgetIconFilename(std::string_view filename)
-{
-	pickupWidget->SetItemIconFilename(filename);
-}
-
-void Player::AddPickupWidgetToViewport()
-{
-	pickupWidget->AddToViewport();
-}
-
-void Player::RemovePickupWidgetFromViewport()
-{
-	pickupWidget->RemoveFromViewport();
 }
 
 GridNode* Player::GetCurrentNode()
