@@ -1,6 +1,9 @@
 #include "vpch.h"
 #include "Burnable.h"
 #include "Gameplay/GameUtils.h"
+#include "Core/Timer.h"
+#include "Core/VMath.h"
+#include "Core/Core.h"
 #include "Player.h"
 
 Properties Burnable::GetProps()
@@ -12,7 +15,25 @@ Properties Burnable::GetProps()
 
 void Burnable::Burn()
 {
-	GameUtils::SpawnSpriteSheet("Sprites/fire_sheet.png", GetPositionV(), false, 4, 4);
+	if (onFire)
+	{
+		burnSpriteTimer += Core::GetDeltaTime();
+		if (burnSpriteTimer > 0.1f)
+		{
+			burnSpriteTimer = 0.f;
+			const auto randomDirection = GetPositionV() + VMath::RandomUnitDirectionVector();
+			GameUtils::SpawnSpriteSheet("Sprites/fire_sheet.png", randomDirection, false, 4, 4);
+		}
+
+		return;
+	}
+
+	Timer::SetTimer(2.f, std::bind(&Burnable::BurnDelay, this));
+	onFire = true;
+}
+
+void Burnable::BurnDelay()
+{
 	Player::system.GetOnlyActor()->ResetLinkedGridActorIfThis(this);
 	Remove();
 }
