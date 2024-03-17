@@ -10,7 +10,6 @@ public:
 	Properties GetProps() override;
 
 	void Burn() override;
-	void Interact() override { Burn(); }//@Todo: think about deleting this. here for testing.
 
 private:
 	void HitNearbyExplodables();
