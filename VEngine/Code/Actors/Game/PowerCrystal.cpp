@@ -14,7 +14,7 @@ void PowerCrystal::Create()
 
 	SetMeshFilename("crystal.vmesh");
 
-	effectTrigger->SetExtents(0.5f, 0.5f, 0.5f);
+	effectTrigger->SetExtents(1.f, 1.f, 1.f);
 }
 
 void PowerCrystal::Tick(float deltaTime)
