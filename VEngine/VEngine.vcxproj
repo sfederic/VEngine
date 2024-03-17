@@ -285,8 +285,6 @@
     <ClCompile Include="Code\UI\Game\InteractWidget.cpp" />
     <ClCompile Include="Code\Actors\Game\OrientationLock.cpp" />
     <ClCompile Include="Code\Actors\Game\LockedDoor.cpp" />
-    <ClCompile Include="Code\Actors\Game\Minecart.cpp" />
-    <ClCompile Include="Code\Actors\Game\MinecartTrack.cpp" />
     <ClCompile Include="Code\Actors\Game\Explosive.cpp" />
     <ClCompile Include="Code\Actors\Game\Explodable.cpp" />
     <ClCompile Include="Code\Actors\Game\Weight.cpp" />
@@ -315,7 +313,6 @@
     <ClCompile Include="Code\Actors\Game\PressurePipe.cpp" />
     <ClCompile Include="Code\Actors\Game\GridActorBasket.cpp" />
     <ClCompile Include="Code\Actors\Game\OrientationTrigger.cpp" />
-    <ClCompile Include="Code\Actors\Game\MineCrane.cpp" />
     <ClCompile Include="Code\Actors\Game\CrystalPlacement.cpp" />
     <ClCompile Include="Code\Actors\Game\GridActorOffsetMesh.cpp" />
     <ClCompile Include="Code\Actors\Game\IncrementalRotator.cpp" />
@@ -682,8 +679,6 @@
     <ClInclude Include="Code\Actors\Game\Pickup.h" />
     <ClInclude Include="Code\Actors\Game\OrientationLock.h" />
     <ClInclude Include="Code\Actors\Game\LockedDoor.h" />
-    <ClInclude Include="Code\Actors\Game\Minecart.h" />
-    <ClInclude Include="Code\Actors\Game\MinecartTrack.h" />
     <ClInclude Include="Code\Actors\Game\Explosive.h" />
     <ClInclude Include="Code\Actors\Game\Explodable.h" />
     <ClInclude Include="Code\Actors\Game\Weight.h" />
@@ -712,7 +707,6 @@
     <ClInclude Include="Code\Actors\Game\PressurePipe.h" />
     <ClInclude Include="Code\Actors\Game\GridActorBasket.h" />
     <ClInclude Include="Code\Actors\Game\OrientationTrigger.h" />
-    <ClInclude Include="Code\Actors\Game\MineCrane.h" />
     <ClInclude Include="Code\Actors\Game\CrystalPlacement.h" />
     <ClInclude Include="Code\Actors\Game\GridActorOffsetMesh.h" />
     <ClInclude Include="Code\Actors\Game\IncrementalRotator.h" />
