@@ -1040,9 +1040,9 @@ void RenderDestructibleMeshes()
 
 void Renderer::RenderLightProbeViews()
 {
-	auto startTime = Profile::QuickStart();
+	const auto startTime = Profile::QuickStart();
 
-	auto diffuseProbeMap = DiffuseProbeMap::system.GetFirstActor();
+	const auto diffuseProbeMap = DiffuseProbeMap::system.GetFirstActor();
 	if (diffuseProbeMap == nullptr)
 	{
 		Log("No diffuse probe map in level to render probes from.");
@@ -1051,12 +1051,14 @@ void Renderer::RenderLightProbeViews()
 
 	Log("Diffuse light probe map bake started...");
 
-	const int previousWiewportWidth = viewport.Width;
-	const int previousWiewportHeight = viewport.Height;
+	const int previousViewportWidth = viewport.Width;
+	const int previousViewportHeight = viewport.Height;
 	ResizeSwapchain(lightProbeTextureWidth, lightProbeTextureHeight);
 
+	constexpr int textureCubeFaces = 6;
+
 	//Directions match with D3D11_TEXTURECUBE_FACE
-	XMVECTOR faces[6] =
+	const XMVECTOR faces[textureCubeFaces] =
 	{
 		XMVectorSet(1.f, 0.f, 0.f, 0.f), //+X
 		XMVectorSet(-1.f, 0.f, 0.f, 0.f), //-X
@@ -1066,7 +1068,7 @@ void Renderer::RenderLightProbeViews()
 		XMVectorSet(0.f, 0.f, -1.f, 0.f), //-Z
 	};
 
-	XMVECTOR resultantUpVectors[6] =
+	const XMVECTOR resultantUpVectors[textureCubeFaces] =
 	{
 		XMVectorSet(0.f, 1.f, 0.f, 0.f),
 		XMVectorSet(0.f, 1.f, 0.f, 0.f),
@@ -1084,7 +1086,7 @@ void Renderer::RenderLightProbeViews()
 	{
 		const XMMATRIX probeMatrix = probeData.modelMatrix;
 
-		for (int i = 0; i < 6; i++)
+		for (int i = 0; i < textureCubeFaces; i++)
 		{
 			context->RSSetViewports(1, &viewport);
 			constexpr float clearColour[4] = { 1.f, 1.f, 1.f, 0.f };
@@ -1175,7 +1177,7 @@ void Renderer::RenderLightProbeViews()
 	MapBuffer(diffuseProbeMap->GetStructuredBuffer(), diffuseProbeMap->GetLightProbeData().data(),
 		sizeof(LightProbeInstanceData) * diffuseProbeMap->GetLightProbeData().size());
 
-	//@Todo: Store SH into vertex colour data for static meshes
+	//@Todo: Store SH into vertex colour data for static meshes 
 	/*for (auto& mesh : MeshComponent::system.GetComponents())
 	{
 		if(!mesh->IsRenderStatic()) continue;
@@ -1238,15 +1240,15 @@ void Renderer::RenderLightProbeViews()
 		mesh->CreateNewVertexBuffer();
 	}*/
 
-	ResizeSwapchain(previousWiewportWidth, previousWiewportHeight);
+	ResizeSwapchain(previousViewportWidth, previousViewportHeight);
 
 	//Set main RTV and DSV back on
 	RenderSetup();
 
 	diffuseProbeMap->WriteProbeDataToFile();
 
-	double endTime = Profile::QuickEnd(startTime);
-	Log("Light probe bake took [%f]sec.", endTime);
+	const auto endTime = Profile::QuickEnd(startTime);
+	Log("Light probe bake took [%f] seconds.", endTime);
 }
 
 void RenderInstanceMeshComponents()
