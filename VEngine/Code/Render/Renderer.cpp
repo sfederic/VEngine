@@ -1089,7 +1089,7 @@ void Renderer::RenderLightProbeViews()
 		for (int i = 0; i < textureCubeFaces; i++)
 		{
 			context->RSSetViewports(1, &viewport);
-			constexpr float clearColour[4] = { 1.f, 1.f, 1.f, 0.f };
+			constexpr float clearColour[4] = { 0.f, 0.f, 0.f, 0.f };
 			context->ClearRenderTargetView(lightProbeRTVs[i].Get(), clearColour);
 			context->IASetInputLayout(inputLayout.Get());
 			context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
