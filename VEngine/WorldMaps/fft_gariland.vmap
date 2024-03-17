@@ -1,3 +1,20 @@
+Player
+1
+ Enabled
+1
+ Position
+0 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+Player0
+UID
+883065704
+next
 Grid
 1
  Enabled
@@ -36,12 +53,12 @@ gariland0
 UID
 4289428982
 next
-Player
+DirectionalLightActor
 1
  Enabled
 1
  Position
-0 0 0
+-0 -0 3
  Rotation
 0 0 0 1
  Scale
@@ -49,32 +66,125 @@ Player
  Visible
 1
 Name
-Player0
+DirectionalLightActor0
 UID
-883065704
+2919336627
 next
-CameraComponent
-1
-883065704
-Camera
+MeshComponent
+2
+4289428982
+Mesh
  Enabled
 1
  Pos
-1.75 1.75 -2.75
+4.5 -1.5 4.5
+ Rot
+0 1 0 -1.56958e-07
+ Scale
+5 5 5
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+gariland.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+676357071
+next
+883065704
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
  Rot
 0 0 0 1
  Scale
 1 1 1
  Visible
 1
-FOV
-60
-Far Z
-1000
-Near Z
-0.01
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+char.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
 UID
-1109373464
+3324051566
 next
 DialogueComponent
 1
@@ -88,23 +198,6 @@ File
 
 UID
 3185044497
-next
-EmptyComponent
-1
-883065704
-Root
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-UID
-4060868346
 next
 InstanceMeshComponent
 1
@@ -165,67 +258,56 @@ Trans. Occlude
 UID
 3319783864
 next
-MeshComponent
-2
-4289428982
-Mesh
+CameraComponent
+1
+883065704
+Camera
  Enabled
 1
  Pos
-4.5 -1.5 4.5
+1.75 1.75 -2.75
  Rot
-0 1 0 -1.56958e-07
+0 0 0 1
  Scale
-5 5 5
+1 1 1
  Visible
 1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-gariland.vmesh
-Physics Static
-1
-Render Static
-1
-Trans. Occlude
-0
+FOV
+60
+Far Z
+1000
+Near Z
+0.01
 UID
-676357071
+1109373464
 next
+DirectionalLightComponent
+1
+2919336627
+DirectionalLight
+ Enabled
+1
+ Pos
+-0 -0 3
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Colour
+1 1 1 1
+Intensity
+1
+LightEnabled
+1
+UID
+3158960211
+next
+EmptyComponent
+1
 883065704
-Mesh
+Root
  Enabled
 1
  Pos
@@ -236,49 +318,7 @@ Mesh
 1 1 1
  Visible
 1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-char.vmesh
-Physics Static
-1
-Render Static
-0
-Trans. Occlude
-0
 UID
-3324051566
+4060868346
 next
 end
