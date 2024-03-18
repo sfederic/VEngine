@@ -84,8 +84,6 @@ DiffuseProbeMap
 1
 Name
 DiffuseProbeMap0
-ReadProbeDataOnLoad
-0
 Size X
 1
 Size Y
@@ -181,13 +179,13 @@ M_Metallic
 M_Rast State
 solid
 M_Shader
-Default
+ScreenSpaceTexture
 M_Smoothness
 0
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+demons_gate.png
 M_Use Texture
 1
 M_UvOffset
