@@ -332,7 +332,6 @@
     <ClCompile Include="Code\Actors\Game\MultiOrientationTriggerLock.cpp" />
     <ClCompile Include="Code\Actors\Game\WaterVolumeValve.cpp" />
     <ClCompile Include="Code\Actors\Game\WorldResetter.cpp" />
-    <ClCompile Include="Code\Actors\Game\CrystalLight.cpp" />
     <ClCompile Include="Code\Actors\Game\LookingGlass.cpp" />
     <ClCompile Include="Code\Actors\Game\InvisibleGridActor.cpp" />
     <ClCompile Include="Code\Actors\Game\PowerCrystalLampPost.cpp" />
@@ -721,7 +720,6 @@
     <ClInclude Include="Code\Actors\Game\MultiOrientationTriggerLock.h" />
     <ClInclude Include="Code\Actors\Game\WaterVolumeValve.h" />
     <ClInclude Include="Code\Actors\Game\WorldResetter.h" />
-    <ClInclude Include="Code\Actors\Game\CrystalLight.h" />
     <ClInclude Include="Code\Actors\Game\LookingGlass.h" />
     <ClInclude Include="Code\Actors\Game\InvisibleGridActor.h" />
     <ClInclude Include="Code\Actors\Game\PowerCrystalLampPost.h" />

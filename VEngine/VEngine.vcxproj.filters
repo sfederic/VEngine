@@ -749,9 +749,6 @@
     <ClCompile Include="Code\Actors\Game\WorldResetter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\CrystalLight.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Actors\Game\LookingGlass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1623,9 +1620,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\WorldResetter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Actors\Game\CrystalLight.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\LookingGlass.h">
