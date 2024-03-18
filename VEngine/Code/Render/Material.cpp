@@ -42,6 +42,7 @@ void Material::SetupBlendShaderItemsAndRastStateValues()
 	shaderItemNames.Add(ShaderItems::Unlit->GetName());
 	shaderItemNames.Add(ShaderItems::Water->GetName());
 	shaderItemNames.Add(ShaderItems::Floating->GetName());
+	shaderItemNames.Add(ShaderItems::ScreenSpaceTexture->GetName());
 }
 
 Material::Material(std::string textureFilename_, ShaderItem* shaderItem)

@@ -60,4 +60,5 @@ struct ShaderItems
 	inline static ShaderItem* Water;
 	inline static ShaderItem* Floating;
 	inline static ShaderItem* Outline;
+	inline static ShaderItem* ScreenSpaceTexture;
 };

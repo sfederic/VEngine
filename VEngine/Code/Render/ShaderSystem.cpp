@@ -29,6 +29,7 @@ void ShaderSystem::Init()
 	ShaderItems::Water = new ShaderItem("Water", L"Water_vs.cso", L"Default_ps.cso");
 	ShaderItems::Floating = new ShaderItem("Floating", L"Floating_vs.cso", L"Default_ps.cso");
 	ShaderItems::Outline = new ShaderItem("Outline", L"Outline_vs.cso", L"SolidColour_ps.cso");
+	ShaderItems::ScreenSpaceTexture = new ShaderItem("ScreenSpaceTexture", L"Default_vs.cso", L"ScreenSpaceTexture_ps.cso");
 }
 
 VertexShader* ShaderSystem::FindVertexShader(const std::wstring& filename)
