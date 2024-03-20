@@ -42,12 +42,13 @@ struct VS_OUT
 };
 
 Texture2D defaultTexture : register(t0);
-Texture2D shadowMap : register(t1);
-Texture2D reflectionMap : register(t2);
-StructuredBuffer<InstanceData> instanceData : register(t3);
-TextureCube environmentMap : register(t4);
-Texture2D normalMap : register(t5);
-StructuredBuffer<LightProbeInstanceData> lightProbeInstanceData : register(t6);
+Texture2D secondaryTexture : register(t1);
+Texture2D shadowMap : register(t2);
+Texture2D reflectionMap : register(t3);
+StructuredBuffer<InstanceData> instanceData : register(t4);
+TextureCube environmentMap : register(t5);
+Texture2D normalMap : register(t6);
+StructuredBuffer<LightProbeInstanceData> lightProbeInstanceData : register(t7);
 
 SamplerState defaultSampler : register(s0);
 SamplerComparisonState shadowSampler : register(s1);

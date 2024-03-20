@@ -23,13 +23,15 @@ private:
 public:
 	static void SetupBlendShaderItemsAndRastStateValues();
 
-	Texture2D* texture = nullptr;
+	Texture2D* defaultTexture = nullptr;
+	Texture2D* secondaryTexture = nullptr;
 	ShaderItem* shader = nullptr;
 	Sampler* sampler = nullptr;
 	RastState* rastState = nullptr;
 	BlendState* blendState = nullptr;
 
-	TextureData textureData;
+	TextureData defaultTextureData;
+	TextureData secondaryTextureData;
 	VEnum shaderItemValue;
 
 	DirectX::XMFLOAT2 uvOffsetSpeed = DirectX::XMFLOAT2(0.f, 0.f);

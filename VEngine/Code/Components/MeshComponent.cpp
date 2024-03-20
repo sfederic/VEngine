@@ -200,13 +200,13 @@ void MeshComponent::SetBlendState(const std::string newBlendState)
 
 void MeshComponent::SetTexture(const std::string newTextureName)
 {
-	material->texture = TextureSystem::FindTexture2D(newTextureName);
-	material->textureData.filename = newTextureName;
+	material->defaultTexture = TextureSystem::FindTexture2D(newTextureName);
+	material->defaultTextureData.filename = newTextureName;
 }
 
 std::string MeshComponent::GetTextureFilename()
 {
-	return material->textureData.filename;
+	return material->defaultTextureData.filename;
 }
 
 void MeshComponent::SetShaderItem(ShaderItem* shaderItem)

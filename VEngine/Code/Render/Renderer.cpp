@@ -146,7 +146,7 @@ void SetVertexBuffer(VertexBuffer& vertexBuffer);
 void SetIndexBuffer(IndexBuffer& indexBuffer);
 void SetSampler(uint32_t shaderRegister, Sampler& sampler);
 void SetShaderResourcePixel(uint32_t shaderRegister, std::string textureName);
-void SetShaderResourceFromMaterial(uint32_t shaderRegister, Material& material);
+void SetShaderResourceFromMaterial(Material& material);
 void SetLightsConstantBufferData();
 void ClearBounds();
 
@@ -211,12 +211,15 @@ RenderTarget postProcessRenderTarget(DXGI_FORMAT_R16G16B16A16_FLOAT);
 //Quality = 0 and Count = 1 are the 'default'
 DXGI_SAMPLE_DESC sampleDesc;
 
-const int shadowMapTextureResgiter = 1;
-const int reflectionTextureResgiter = 2;
-const int instanceSRVRegister = 3;
-const int environmentMapTextureRegister = 4;
-const int normalMapTexureRegister = 5;
-const int lightProbeInstanceDataRegister = 6;
+//Make sure these match up with the register definitions in Commmon.hlsli
+const int defaultTextureRegister = 0;
+const int secondaryTextureRegister = 1;
+const int shadowMapTextureRegister = 2;
+const int reflectionTextureRegister = 3;
+const int instanceSRVRegister = 4;
+const int environmentMapTextureRegister = 5;
+const int normalMapTextureRegister = 6;
+const int lightProbeInstanceDataRegister = 7;
 
 const int lightProbeTextureWidth = 64;
 const int lightProbeTextureHeight = 64;
@@ -569,8 +572,8 @@ void SetGeneralShaderResourcesToNull()
 {
 	//Set to null to remove warnings
 	ID3D11ShaderResourceView* nullSRV = nullptr;
-	context->PSSetShaderResources(shadowMapTextureResgiter, 1, &nullSRV);
-	context->PSSetShaderResources(reflectionTextureResgiter, 1, &nullSRV);
+	context->PSSetShaderResources(shadowMapTextureRegister, 1, &nullSRV);
+	context->PSSetShaderResources(reflectionTextureRegister, 1, &nullSRV);
 }
 
 void SetShadowData()
@@ -708,7 +711,7 @@ void RenderMeshForShadowPass(MeshComponent* mesh)
 
 	//Set textures
 	context->PSSetSamplers(0, 1, mat.sampler->GetDataAddress());
-	SetShaderResourceFromMaterial(0, mat);
+	SetShaderResourceFromMaterial(mat);
 
 	//Draw
 	context->Draw(mesh->meshDataProxy.vertices.size(), 0);
@@ -737,7 +740,7 @@ void RenderInstanceMeshForShadowPass(InstanceMeshComponent& instanceMesh)
 
 		//Set textures
 		context->PSSetSamplers(0, 1, mat.sampler->GetDataAddress());
-		SetShaderResourceFromMaterial(0, mat);
+		SetShaderResourceFromMaterial(mat);
 
 		//Draw
 		context->Draw(vertexCount, 0);
@@ -805,7 +808,7 @@ void RenderShadowPass()
 		//Set textures
 		Material& mat = mesh->GetMaterial();
 		context->PSSetSamplers(0, 1, mat.sampler->GetDataAddress());
-		SetShaderResourceFromMaterial(0, mat);
+		SetShaderResourceFromMaterial(mat);
 
 		//Draw
 		context->Draw(mesh->meshDataProxy.vertices.size(), 0);
@@ -850,7 +853,7 @@ void RenderPostProcessSetup()
 
 void SetShadowResources()
 {
-	context->PSSetShaderResources(shadowMapTextureResgiter, 1, shadowMap->depthMapSRV.GetAddressOf());
+	context->PSSetShaderResources(shadowMapTextureRegister, 1, shadowMap->depthMapSRV.GetAddressOf());
 	context->PSSetSamplers(1, 1, shadowMap->sampler.GetAddressOf());
 }
 
@@ -1123,7 +1126,7 @@ void Renderer::RenderLightProbeViews()
 
 				context->PSSetSamplers(0, 1, material.sampler->GetDataAddress());
 
-				SetShaderResourceFromMaterial(0, material);
+				SetShaderResourceFromMaterial(material);
 
 				context->IASetVertexBuffers(0, 1, mesh->GetVertexBuffer().GetDataAddress(), &stride, &offset);
 
@@ -1717,7 +1720,7 @@ void Renderer::RenderParticleEmitters()
 		cbMaterial.SetPS();
 
 		//Set texture from emitter for every particle
-		SetShaderResourcePixel(0, emitter->GetMaterial().textureData.filename);
+		SetShaderResourcePixel(0, emitter->GetMaterial().defaultTextureData.filename);
 
 		SpriteSystem::UpdateAndSetSpriteBuffers();
 
@@ -1985,7 +1988,7 @@ void SetRenderPipelineStates(MeshComponent* mesh)
 	context->PSSetShader(material.GetPixelShader(), nullptr, 0);
 
 	context->PSSetSamplers(0, 1, material.sampler->GetDataAddress());
-	SetShaderResourceFromMaterial(0, material);
+	SetShaderResourceFromMaterial(material);
 
 	SetVertexBuffer(mesh->GetVertexBuffer());
 
@@ -2072,15 +2075,18 @@ void SetSampler(uint32_t shaderRegister, Sampler& sampler)
 	context->PSSetSamplers(shaderRegister, 1, sampler.GetDataAddress());
 }
 
-void SetShaderResourceFromMaterial(uint32_t shaderRegister, Material& material)
+void SetShaderResourceFromMaterial(Material& material)
 {
 	//Testing code for normal map SRV set
 	/*auto normalMapTexture = textureSystem.FindTexture2D("wall_normal_map.png");
 	auto normalMapSRV = normalMapTexture->GetSRV();
 	context->PSSetShaderResources(normalMapTexureRegister, 1, normalMapSRV.GetAddressOf());*/
 
-	auto textureSRV = material.texture->GetSRV();
-	context->PSSetShaderResources(shaderRegister, 1, &textureSRV);
+	auto defaultTextureSRV = material.defaultTexture->GetSRV();
+	context->PSSetShaderResources(defaultTextureRegister, 1, &defaultTextureSRV);
+
+	auto secondaryTextureSRV = material.secondaryTexture->GetSRV();
+	context->PSSetShaderResources(secondaryTextureRegister, 1, &secondaryTextureSRV);
 }
 
 void SetShaderResourcePixel(uint32_t shaderRegister, std::string textureName)

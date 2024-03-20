@@ -47,7 +47,7 @@ void Material::SetupBlendShaderItemsAndRastStateValues()
 
 Material::Material(std::string textureFilename_, ShaderItem* shaderItem)
 {
-	textureData.filename = textureFilename_;
+	defaultTextureData.filename = textureFilename_;
 
 	rastStateValue = rastStates;
 	blendStateValue = blendStates;
@@ -58,7 +58,9 @@ Material::Material(std::string textureFilename_, ShaderItem* shaderItem)
 
 void Material::Create()
 {
-	texture = TextureSystem::FindTexture2D(textureData.filename);
+	defaultTexture = TextureSystem::FindTexture2D(defaultTextureData.filename);
+	secondaryTexture = TextureSystem::FindTexture2D(secondaryTextureData.filename);
+
 	sampler = &Renderer::GetDefaultSampler();
 	rastState = Renderer::GetRastState(rastStateValue.GetValue());
 	blendState = Renderer::GetBlendState(blendStateValue.GetValue());
@@ -87,7 +89,25 @@ static void ReassignTexture(void* data)
 	auto meshes = WorldEditor::GetPickedActor()->GetComponents<MeshComponent>();
 	for (auto mesh : meshes)
 	{
-		mesh->GetMaterial().texture = swapTexture;
+		mesh->GetMaterial().defaultTexture = swapTexture;
+	}
+}
+
+static void ReassignTextureSecondary(void* data)
+{
+	auto textureData = (TextureData*)data;
+
+	auto swapTexture = TextureSystem::FindTexture2D(textureData->filename);
+	if (swapTexture == nullptr)
+	{
+		Log("%s wasn't found on texture change.", textureData->filename);
+		return;
+	}
+
+	auto meshes = WorldEditor::GetPickedActor()->GetComponents<MeshComponent>();
+	for (auto mesh : meshes)
+	{
+		mesh->GetMaterial().secondaryTexture = swapTexture;
 	}
 }
 
@@ -154,8 +174,12 @@ Properties Material::GetProps()
 {
 	Properties props("Material");
 
-	//Prop names using 'M_' notation here becauase they merge with MeshComponent props
-	props.Add("M_Texture", &textureData).change = ReassignTexture;
+	//Prop names are using 'M_' notation here because they merge with MeshComponent props
+	//and need them sorted by key (alphabetically) via std::map.
+
+	props.Add("M_Texture", &defaultTextureData).change = ReassignTexture;
+	props.Add("M_Texture2", &secondaryTextureData).change = ReassignTextureSecondary;
+
 	props.Add("M_Use Texture", &materialShaderData.useTexture);
 	props.Add("M_Shader", &shaderItemValue).change = ReassignShader;
 	props.Add("M_Rast State", &rastStateValue).change = ReassignRastState;
@@ -169,6 +193,7 @@ Properties Material::GetProps()
 	props.Add("M_Specular", &materialShaderData.specular);
 	props.Add("M_Smoothness", &materialShaderData.smoothness);
 	props.Add("M_Metallic", &materialShaderData.metallic);
+
 	return props;
 }
 
