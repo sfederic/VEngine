@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "Console.h"
 #include <dwrite.h>
+#include <filesystem>
 #include "Actors/DiffuseProbeMap.h"
 #include "Components/MeshComponent.h"
 #include "Core/Input.h"
@@ -20,11 +21,29 @@ bool Console::bConsoleActive;
 
 std::wstring consoleString;
 
+static void RunWorldLoadTest()
+{
+	for (auto& entry : std::filesystem::directory_iterator("WorldMaps"))
+	{
+		std::string filename = entry.path().filename().string();
+		if (entry.path().filename().extension() == ".vmap") //Skip over binary folder and files
+		{
+			Log("Starting world load for [%s].", filename.c_str());
+			FileSystem::LoadWorld(filename);
+			Log("World load [%s] success.", filename.c_str());
+		}
+	}
+}
+
 void Console::Init()
 {
 	//NOTE: command strings need to be uppercase with WndProc
 
 	//Debug Menu Commands
+
+	executeMap.emplace(L"WORLDLOADTEST",
+		std::make_pair([]() { RunWorldLoadTest(); },
+			"Load every world in the world maps folder in sequence."));
 
 	executeMap.emplace(L"LS",
 		std::make_pair([]() { debugMenu.consoleCommandsMenuOpen = !debugMenu.consoleCommandsMenuOpen; },
