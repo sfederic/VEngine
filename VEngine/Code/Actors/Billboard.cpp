@@ -6,25 +6,25 @@
 
 Billboard::Billboard()
 {
-    mesh = CreateComponent<MeshComponent>("Mesh");
-    rootComponent = mesh;
+	mesh = CreateComponent<MeshComponent>("Mesh");
+	rootComponent = mesh;
 }
 
 void Billboard::Create()
 {
-    mesh->SetMeshFilename("plane.vmesh");
-    mesh->SetRastState(RastStates::noBackCull);
-    mesh->SetShaderItem(ShaderItems::Unlit);
+	mesh->SetMeshFilename("plane.vmesh");
+	mesh->SetRastState(RastStates::noBackCull);
+	mesh->SetShaderItem("Unlit");
 }
 
 void Billboard::Tick(float deltaTime)
 {
-    auto transform = GetTransform();
-    VMath::RotateTowardsCamera(transform);
-    SetTransform(transform);
+	auto transform = GetTransform();
+	VMath::RotateTowardsCamera(transform);
+	SetTransform(transform);
 }
 
 Properties Billboard::GetProps()
 {
-    return __super::GetProps();
+	return __super::GetProps();
 }

@@ -13,7 +13,7 @@ class ParticleEmitter : public SpatialComponent
 public:
 	COMPONENT_SYSTEM(ParticleEmitter);
 
-	ParticleEmitter(std::string textureFilename = "test.png", ShaderItem* shaderItem = ShaderItems::DefaultClip);
+	ParticleEmitter(std::string textureFilename = "test.png", std::string shaderItemName = "DefaultClip");
 	void Create() override;
 	void Destroy() override;
 	void Start() override;

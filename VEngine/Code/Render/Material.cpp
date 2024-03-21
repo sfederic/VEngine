@@ -29,23 +29,13 @@ void Material::SetupBlendShaderItemsAndRastStateValues()
 
 	blendStates.Add(BlendStates::Default);
 
-	shaderItemNames.Add(ShaderItems::Animation->GetName());
-	shaderItemNames.Add(ShaderItems::Default->GetName());
-	shaderItemNames.Add(ShaderItems::DefaultClip->GetName());
-	shaderItemNames.Add(ShaderItems::Instance->GetName());
-	shaderItemNames.Add(ShaderItems::LightProbe->GetName());
-	shaderItemNames.Add(ShaderItems::PostProcess->GetName());
-	shaderItemNames.Add(ShaderItems::Shadow->GetName());
-	shaderItemNames.Add(ShaderItems::ShadowAnimation->GetName());
-	shaderItemNames.Add(ShaderItems::SolidColour->GetName());
-	shaderItemNames.Add(ShaderItems::UI->GetName());
-	shaderItemNames.Add(ShaderItems::Unlit->GetName());
-	shaderItemNames.Add(ShaderItems::Water->GetName());
-	shaderItemNames.Add(ShaderItems::Floating->GetName());
-	shaderItemNames.Add(ShaderItems::ScreenSpaceTexture->GetName());
+	for (const auto shaderItem : ShaderSystem::GetAllShaderItems())
+	{
+		shaderItemNames.Add(shaderItem->GetName());
+	}
 }
 
-Material::Material(std::string textureFilename_, ShaderItem* shaderItem)
+Material::Material(std::string textureFilename_, std::string shaderItemName)
 {
 	defaultTextureData.filename = textureFilename_;
 
@@ -53,7 +43,7 @@ Material::Material(std::string textureFilename_, ShaderItem* shaderItem)
 	blendStateValue = blendStates;
 
 	shaderItemValue = shaderItemNames;
-	shaderItemValue.SetValue(shaderItem->GetName());
+	shaderItemValue.SetValue(shaderItemName);
 }
 
 void Material::Create()

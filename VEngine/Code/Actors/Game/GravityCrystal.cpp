@@ -37,7 +37,7 @@ void GravityCrystal::Tick(float deltaTime)
 
 			for (auto mesh : actor->GetComponents<MeshComponent>())
 			{
-				mesh->SetShaderItem(ShaderItems::Floating);
+				mesh->SetShaderItem("Floating");
 			}
 
 			actor->RecalcCurrentNodeDontIgnoreThis();
@@ -57,7 +57,7 @@ void GravityCrystal::Tick(float deltaTime)
 
 			for (auto mesh : actor->GetComponents<MeshComponent>())
 			{
-				mesh->SetShaderItem(ShaderItems::Default);
+				mesh->SetShaderItem("Default");
 			}
 
 			actor->RecalcCurrentNodeDontIgnoreThis();

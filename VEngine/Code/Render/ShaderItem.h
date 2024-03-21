@@ -19,7 +19,7 @@ public:
 	auto GetVertexShader() { return vertexShader; }
 	auto GetPixelShader() { return pixelShader; }
 
-	auto GetName() { return shaderItemName; }
+	auto GetName() const { return shaderItemName; }
 
 	auto GetVertexShaderFilename() { return vertexShaderFilename; }
 	auto GetPixelShaderFilename() { return pixelShaderFilename; }
@@ -38,27 +38,4 @@ private:
 	//Caches of the shaders. These pointers aren't created or released directly, hence not being ComPtrs.
 	ID3D11VertexShader* vertexShader = nullptr;
 	ID3D11PixelShader* pixelShader = nullptr;
-};
-
-//@Todo: adding new shaders and shader pairs to the engine is really slow and bad.
-//Need some sort of automated visual studio step or an offline compile that iterates through directories
-//and builds up a data structure.
-
-struct ShaderItems
-{
-	inline static ShaderItem* Default;
-	inline static ShaderItem* DefaultClip;
-	inline static ShaderItem* Unlit;
-	inline static ShaderItem* Animation;
-	inline static ShaderItem* Shadow;
-	inline static ShaderItem* ShadowAnimation;
-	inline static ShaderItem* Instance;
-	inline static ShaderItem* LightProbe;
-	inline static ShaderItem* SolidColour;
-	inline static ShaderItem* UI;
-	inline static ShaderItem* PostProcess;
-	inline static ShaderItem* Water;
-	inline static ShaderItem* Floating;
-	inline static ShaderItem* Outline;
-	inline static ShaderItem* ScreenSpaceTexture;
 };

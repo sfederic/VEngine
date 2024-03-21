@@ -14,10 +14,10 @@ void MaterialSystem::Init()
 	Material::SetupBlendShaderItemsAndRastStateValues();
 }
 
-Material& MaterialSystem::CreateMaterial(std::string textureFilename, ShaderItem* shaderItem)
+Material& MaterialSystem::CreateMaterial(std::string textureFilename, std::string shaderItemName)
 {
 	auto uid = GenerateUID();
-	materials.emplace(uid, std::make_unique<Material>(textureFilename, shaderItem));
+	materials.emplace(uid, std::make_unique<Material>(textureFilename, shaderItemName));
 	auto& material = materials.find(uid)->second;
 	material->SetUID(uid);
 	return *material;
@@ -43,7 +43,7 @@ Material MaterialSystem::LoadMaterialFromFile(const std::string filename)
 {
 	const std::string filepath = "Materials/" + filename;
 
-	auto material = Material("test.png", ShaderItems::Default);
+	auto material = Material("test.png", "Default");
 	auto materialProps = material.GetProps();
 
 	Deserialiser d(filepath, OpenMode::In);

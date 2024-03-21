@@ -20,7 +20,7 @@ public:
 	InstanceMeshComponent(uint32_t meshInstanceRenderCount_,
 		const std::string filename,
 		const std::string textureFilename,
-		ShaderItem* shaderItem);
+		const std::string shaderItemName);
 
 	void Create() override;
 	Properties GetProps() override;

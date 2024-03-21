@@ -134,6 +134,7 @@ void SetMatricesFromMesh(MeshComponent* mesh);
 void SetShaderMeshData(MeshComponent* mesh);
 void SetRenderPipelineStates(MeshComponent* mesh);
 void SetRenderPipelineStatesForShadows(MeshComponent* mesh);
+void SetShaders(std::string shaderItemName);
 void SetShaders(ShaderItem* shaderItem);
 void SetRastStateByName(std::string rastStateName);
 void SetRastState(RastState& rastState);
@@ -653,7 +654,7 @@ void RenderDebugLines()
 	materialShaderData.ambient = XMFLOAT4(1.0f, 0.0f, 0.f, 1.0f);
 	cbMaterial.Map(&materialShaderData);
 	cbMaterial.SetPS();
-	SetShaders(ShaderItems::SolidColour);
+	SetShaders("SolidColour");
 
 	D3D11_MAPPED_SUBRESOURCE mappedResource{};
 	HR(context->Map(debugLinesBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
@@ -786,7 +787,7 @@ void RenderShadowPass()
 
 		context->IASetVertexBuffers(0, 1, mesh->GetVertexBuffer().GetDataAddress(), &Renderer::stride, &Renderer::offset);
 
-		ShaderItem* shader = ShaderItems::ShadowAnimation;
+		ShaderItem* shader = ShaderSystem::FindShaderItem("ShadowAnimation");
 
 		context->VSSetShader(shader->GetVertexShader(), nullptr, 0);
 		context->PSSetShader(shader->GetPixelShader(), nullptr, 0);
@@ -1109,7 +1110,7 @@ void Renderer::RenderLightProbeViews()
 			//context->PSSetShaderResources(shadowMapTextureResgiter, 1, shadowMap->depthMapSRV.GetAddressOf());
 			//context->PSSetSamplers(1, 1, shadowMap->sampler.GetaddressOf());
 
-			ShaderItem* lightProbeShader = ShaderItems::Default;
+			ShaderItem* lightProbeShader = ShaderSystem::FindShaderItem("Default");
 
 			for (auto& mesh : MeshComponent::system.GetComponents())
 			{
@@ -1243,7 +1244,7 @@ void RenderBounds()
 	if (Renderer::drawBoundingBoxes)
 	{
 		SetRastStateByName(RastStates::wireframe);
-		SetShaders(ShaderItems::SolidColour);
+		SetShaders("SolidColour");
 
 		SetVertexBuffer(debugBox->GetVertexBuffer());
 
@@ -1292,7 +1293,7 @@ void RenderBounds()
 	if (Renderer::drawTriggers)
 	{
 		SetRastStateByName(RastStates::wireframe);
-		SetShaders(ShaderItems::SolidColour);
+		SetShaders("SolidColour");
 
 		SetVertexBuffer(debugBox->GetVertexBuffer());
 
@@ -1414,7 +1415,7 @@ void RenderCharacterControllers()
 	MaterialShaderData materialShaderData;
 
 	SetRastStateByName(RastStates::wireframe);
-	SetShaders(ShaderItems::SolidColour);
+	SetShaders("SolidColour");
 	SetVertexBuffer(debugCapsule->GetVertexBuffer());
 
 	materialShaderData.ambient = XMFLOAT4(1.0f, 0.8f, 0.7f, 1.0f); //Pink
@@ -1440,7 +1441,7 @@ void RenderCameraMeshes()
 	MaterialShaderData materialShaderData;
 
 	SetRastStateByName(RastStates::wireframe);
-	SetShaders(ShaderItems::SolidColour);
+	SetShaders("SolidColour");
 	SetVertexBuffer(debugCamera->GetVertexBuffer());
 
 	materialShaderData.ambient = XMFLOAT4(1.0f, 0.0f, 0.f, 1.0f); //Make cameras red
@@ -1467,7 +1468,7 @@ void RenderLightMeshes()
 	auto debugCone = MeshComponent::GetDebugMesh("DebugCone");
 
 	SetRastStateByName(RastStates::wireframe);
-	SetShaders(ShaderItems::SolidColour);
+	SetShaders("SolidColour");
 
 	//Set debug sphere wireframe material colour
 	MaterialShaderData materialShaderData = {};
@@ -1528,7 +1529,7 @@ void RenderPolyboards()
 
 	SetBlendStateByName(BlendStates::Default);
 	SetRastStateByName(RastStates::noBackCull);
-	SetShaders(ShaderItems::DefaultClip);
+	SetShaders("DefaultClip");
 
 	for (auto polyboard : World::GetAllComponentsOfType<Polyboard>())
 	{
@@ -1577,7 +1578,7 @@ void RenderSpriteSheets()
 		}
 
 		SetRastStateByName(RastStates::noBackCull);
-		SetShaders(ShaderItems::DefaultClip);
+		SetShaders("DefaultClip");
 
 		SetSampler(0, Renderer::GetDefaultSampler());
 		SetShaderResourcePixel(0, spriteSheet->GetTextureFilename());
@@ -1630,7 +1631,7 @@ void AnimateAndRenderSkeletalMeshes()
 			if (skeletalMesh->HasJoints())
 			{
 				//Set shader for skeletal animation
-				ShaderItem* shaderItem = ShaderItems::Animation;
+				ShaderItem* shaderItem = ShaderSystem::FindShaderItem("Animation");
 				context->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
 				context->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
 
@@ -1710,7 +1711,7 @@ void Renderer::RenderParticleEmitters()
 
 		SetBlendStateByName(BlendStates::Default);
 
-		SetShaders(emitter->GetMaterial().shader);
+		SetShaders(emitter->GetMaterial().shader->GetName());
 
 		context->PSSetSamplers(0, 1, Renderer::GetDefaultSampler().GetDataAddress());
 
@@ -1753,7 +1754,7 @@ void Renderer::RenderSpritesInScreenSpace()
 	for (const auto& sprite : SpriteSystem::GetScreenSprites())
 	{
 		SetRastStateByName(RastStates::solid);
-		SetShaders(ShaderItems::UI);
+		SetShaders("UI");
 		SetSampler(0, Renderer::GetDefaultSampler());
 		SetShaderResourcePixel(0, sprite.textureFilename);
 
@@ -2000,7 +2001,7 @@ void SetRenderPipelineStatesForShadows(MeshComponent* mesh)
 {
 	context->RSSetState(rastStateMap.find(RastStates::shadow)->second->GetData());
 
-	ShaderItem* shader = ShaderItems::Shadow;
+	ShaderItem* shader = ShaderSystem::FindShaderItem("Shadow");
 
 	context->VSSetShader(shader->GetVertexShader(), nullptr, 0);
 	context->PSSetShader(shader->GetPixelShader(), nullptr, 0);
@@ -2010,6 +2011,13 @@ void SetRenderPipelineStatesForShadows(MeshComponent* mesh)
 
 void SetShaders(ShaderItem* shaderItem)
 {
+	context->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
+	context->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
+}
+
+void SetShaders(const std::string shaderItemName)
+{
+	ShaderItem* shaderItem = ShaderSystem::FindShaderItem(shaderItemName);
 	context->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
 	context->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
 }
@@ -2114,7 +2122,7 @@ void RenderPostProcess()
 	context->IASetVertexBuffers(0, 0, nullptr, nullptr, nullptr);
 	context->IASetIndexBuffer(nullptr, DXGI_FORMAT_UNKNOWN, 0);
 
-	SetShaders(ShaderItems::PostProcess);
+	SetShaders("PostProcess");
 
 	//Set constant buffer data
 	ShaderPostProcessData postProcessData = postProcessVolume->GetPostProcessData();
@@ -2151,7 +2159,7 @@ void RenderWireframeForVertexPaintingAndPickedActor()
 			cbMaterial.Map(&materialShaderData);
 			cbMaterial.SetPS();
 
-			ShaderItem* shaderItem = ShaderSystem::FindShaderItem(ShaderItems::SolidColour->GetName());
+			ShaderItem* shaderItem = ShaderSystem::FindShaderItem("SolidColour");
 			context->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
 			context->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
 

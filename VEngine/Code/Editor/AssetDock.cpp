@@ -433,7 +433,7 @@ void AssetDock::CreateNewActorTemplateFile()
 void AssetDock::CreateNewMaterialFile()
 {
 	//Create empty material
-	auto material = Material("test.png", ShaderItems::Default);
+	auto material = Material("test.png", "Default");
 	SerialiseMaterialPropsToFile(material);
 }
 

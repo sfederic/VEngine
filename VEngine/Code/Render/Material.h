@@ -42,7 +42,7 @@ public:
 	VEnum rastStateValue;
 	VEnum blendStateValue;
 
-	Material(std::string textureFilename_, ShaderItem* shaderItem);
+	Material(std::string textureFilename_, std::string shaderItemName);
 
 	virtual void Create();
 	virtual void Destroy();

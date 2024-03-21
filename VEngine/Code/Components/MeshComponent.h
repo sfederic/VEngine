@@ -51,7 +51,7 @@ public:
 	MeshComponent();
 	MeshComponent(const std::string filename_,
 		const std::string textureFilename_,
-		ShaderItem* shaderItem = ShaderItems::Default);
+		std::string shaderItemName = "Default");
 	virtual void Tick(float deltaTime) override;
 	virtual void Create() override;
 	virtual void Destroy() override;
@@ -71,7 +71,7 @@ public:
 	void SetTexture(const std::string newTextureName);
 	std::string GetTextureFilename();
 
-	void SetShaderItem(ShaderItem* shaderItem);
+	void SetShaderItem(std::string shaderItemName);
 
 	void SetAmbientColour(XMFLOAT3 ambientColour);
 	XMFLOAT3 GetAmbientColour();

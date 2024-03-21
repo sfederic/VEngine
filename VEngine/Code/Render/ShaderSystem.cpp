@@ -11,25 +11,30 @@ static std::unordered_map<std::wstring, std::unique_ptr<VertexShader>> vertexSha
 static std::unordered_map<std::wstring, std::unique_ptr<PixelShader>> pixelShaders;
 static std::unordered_map<std::string, std::unique_ptr<ShaderItem>> shaderItems;
 
+static void CreateShaderItem(std::string name, std::wstring vertexShader, std::wstring pixelShader)
+{
+	shaderItems.emplace(name, std::make_unique<ShaderItem>(name, vertexShader, pixelShader));
+}
+
 void ShaderSystem::Init()
 {
 	CompileAllShadersFromFile();
 
-	ShaderItems::Default = new ShaderItem("Default", L"Default_vs.cso", L"Default_ps.cso");
-	ShaderItems::DefaultClip = new ShaderItem("DefaultClip", L"Default_vs.cso", L"TextureClip_ps.cso");
-	ShaderItems::Unlit = new ShaderItem("Unlit", L"Default_vs.cso", L"TextureClip_ps.cso");
-	ShaderItems::Animation = new ShaderItem("Animation", L"Animation_vs.cso", L"Default_ps.cso");
-	ShaderItems::Shadow = new ShaderItem("Shadow", L"Shadows_vs.cso", L"Shadows_ps.cso");
-	ShaderItems::ShadowAnimation = new ShaderItem("ShadowAnimation", L"ShadowAnimation_vs.cso", L"Shadows_ps.cso");
-	ShaderItems::Instance = new ShaderItem("Instance", L"Instance_vs.cso", L"Instance_ps.cso");
-	ShaderItems::LightProbe = new ShaderItem("LightProbe", L"LightProbe_vs.cso", L"LightProbe_ps.cso");
-	ShaderItems::SolidColour = new ShaderItem("SolidColour", L"Default_vs.cso", L"SolidColour_ps.cso");
-	ShaderItems::UI = new ShaderItem("UI", L"UI_vs.cso", L"TextureClip_ps.cso");
-	ShaderItems::PostProcess = new ShaderItem("PostProcess", L"PostProcess_vs.cso", L"PostProcess_ps.cso");
-	ShaderItems::Water = new ShaderItem("Water", L"Water_vs.cso", L"Default_ps.cso");
-	ShaderItems::Floating = new ShaderItem("Floating", L"Floating_vs.cso", L"Default_ps.cso");
-	ShaderItems::Outline = new ShaderItem("Outline", L"Outline_vs.cso", L"SolidColour_ps.cso");
-	ShaderItems::ScreenSpaceTexture = new ShaderItem("ScreenSpaceTexture", L"Default_vs.cso", L"ScreenSpaceTexture_ps.cso");
+	CreateShaderItem("Default", L"Default_vs.cso", L"Default_ps.cso");
+	CreateShaderItem("DefaultClip", L"Default_vs.cso", L"TextureClip_ps.cso");
+	CreateShaderItem("Unlit", L"Default_vs.cso", L"TextureClip_ps.cso");
+	CreateShaderItem("Animation", L"Animation_vs.cso", L"Default_ps.cso");
+	CreateShaderItem("Shadow", L"Shadows_vs.cso", L"Shadows_ps.cso");
+	CreateShaderItem("ShadowAnimation", L"ShadowAnimation_vs.cso", L"Shadows_ps.cso");
+	CreateShaderItem("Instance", L"Instance_vs.cso", L"Instance_ps.cso");
+	CreateShaderItem("LightProbe", L"LightProbe_vs.cso", L"LightProbe_ps.cso");
+	CreateShaderItem("SolidColour", L"Default_vs.cso", L"SolidColour_ps.cso");
+	CreateShaderItem("UI", L"UI_vs.cso", L"TextureClip_ps.cso");
+	CreateShaderItem("PostProcess", L"PostProcess_vs.cso", L"PostProcess_ps.cso");
+	CreateShaderItem("Water", L"Water_vs.cso", L"Default_ps.cso");
+	CreateShaderItem("Floating", L"Floating_vs.cso", L"Default_ps.cso");
+	CreateShaderItem("Outline", L"Outline_vs.cso", L"SolidColour_ps.cso");
+	CreateShaderItem("ScreenSpaceTexture", L"Default_vs.cso", L"ScreenSpaceTexture_ps.cso");
 }
 
 VertexShader* ShaderSystem::FindVertexShader(const std::wstring& filename)
@@ -42,17 +47,19 @@ PixelShader* ShaderSystem::FindPixelShader(const std::wstring& filename)
 	return pixelShaders.find(filename)->second.get();
 }
 
-void ShaderSystem::AddShaderItem(ShaderItem* shaderItem)
-{
-	const auto shaderItemName = shaderItem->GetName();
-	//Duplicate shader item name
-	assert(shaderItems.find(shaderItemName) == shaderItems.end());
-	shaderItems.emplace(shaderItemName, shaderItem);
-}
-
 ShaderItem* ShaderSystem::FindShaderItem(const std::string& shaderItemName)
 {
 	return shaderItems.find(shaderItemName)->second.get();
+}
+
+std::vector<ShaderItem*> ShaderSystem::GetAllShaderItems()
+{
+	std::vector<ShaderItem*> output;
+	for (auto& [name, shaderItem] : shaderItems)
+	{
+		output.push_back(shaderItem.get());
+	}
+	return output;
 }
 
 bool ShaderSystem::DoesShaderItemExist(std::string shaderItemName)

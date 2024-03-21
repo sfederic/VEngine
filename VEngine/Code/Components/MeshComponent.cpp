@@ -76,15 +76,15 @@ std::vector<MeshComponent*> MeshComponent::SortMeshComponentsByDistance()
 
 MeshComponent::MeshComponent()
 {
-	material = &MaterialSystem::CreateMaterial("test.png", ShaderItems::Default);
+	material = &MaterialSystem::CreateMaterial("test.png", "Default");
 }
 
 MeshComponent::MeshComponent(const std::string filename_,
 	const std::string textureFilename_,
-	ShaderItem* shaderItem)
+	std::string shaderItemName)
 {
 	meshComponentData.filename = filename_;
-	material = &MaterialSystem::CreateMaterial(textureFilename_, shaderItem);
+	material = &MaterialSystem::CreateMaterial(textureFilename_, shaderItemName);
 }
 
 void MeshComponent::Tick(float deltaTime)
@@ -209,9 +209,9 @@ std::string MeshComponent::GetTextureFilename()
 	return material->defaultTextureData.filename;
 }
 
-void MeshComponent::SetShaderItem(ShaderItem* shaderItem)
+void MeshComponent::SetShaderItem(std::string shaderItemName)
 {
-	material->shaderItemValue.SetValue(shaderItem->GetName());
+	material->shaderItemValue.SetValue(shaderItemName);
 }
 
 void MeshComponent::SetAmbientColour(XMFLOAT3 ambientColour)

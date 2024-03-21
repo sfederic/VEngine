@@ -11,8 +11,6 @@ ShaderItem::ShaderItem(std::string shaderItemName_,
 	pixelShaderFilename(pixelShaderFilename_),
 	vertexShaderFilename(vertexShaderFilename_)
 {
-	ShaderSystem::AddShaderItem(this);
-
 	vertexShader = ShaderSystem::FindVertexShader(vertexShaderFilename)->GetShader();
 	pixelShader = ShaderSystem::FindPixelShader(pixelShaderFilename)->GetShader();
 }

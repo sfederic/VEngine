@@ -4,9 +4,9 @@
 #include "Render/Material.h"
 #include "Render/MaterialSystem.h"
 
-ParticleEmitter::ParticleEmitter(std::string textureFilename, ShaderItem* shaderItem)
+ParticleEmitter::ParticleEmitter(std::string textureFilename, std::string shaderItemName)
 {
-	material = &MaterialSystem::CreateMaterial(textureFilename, shaderItem);
+	material = &MaterialSystem::CreateMaterial(textureFilename, shaderItemName);
 }
 
 void ParticleEmitter::Create()

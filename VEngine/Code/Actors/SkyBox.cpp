@@ -5,7 +5,7 @@
 
 SkyBox::SkyBox()
 {
-	auto mesh = CreateComponent("Skybox", MeshComponent("sky_cylinder.vmesh", "sky.jpg", ShaderItems::Unlit));
+	auto mesh = CreateComponent("Skybox", MeshComponent("sky_cylinder.vmesh", "sky.jpg", "Unlit"));
 	mesh->SetCollisionLayer(CollisionLayers::Editor); //Make sure actors in-game can't interact with skyboxes' bounds.
 	mesh->SetRastState(RastStates::noBackCull);
 
