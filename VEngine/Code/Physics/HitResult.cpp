@@ -68,3 +68,26 @@ void HitResult::AddAllRenderStaticMeshesToIgnore()
 		}
 	}
 }
+
+std::vector<Vertex> HitResult::GetHitVertexFromHitActorMesh()
+{
+	std::vector<Vertex> outputVerts;
+
+	const auto meshes = hitActor->GetComponents<MeshComponent>();
+	for (const auto mesh : meshes)
+	{
+		const auto& meshVerts = mesh->GetAllVertices();
+		for (const auto meshVertIndex : vertIndexesOfHitTriangleFace)
+		{
+			if (meshVertIndex > meshVerts.size())
+			{
+				throw new std::exception("something wong.");
+			}
+
+			const auto& meshVert = meshVerts.at(meshVertIndex);
+			outputVerts.emplace_back(meshVert);
+		}
+	}
+
+	return outputVerts;
+}

@@ -3,6 +3,7 @@
 #include <vector>
 #include <DirectXMath.h>
 #include "CollisionLayers.h"
+#include "Render/Vertex.h"
 
 class Actor;
 class SpatialComponent;
@@ -84,4 +85,6 @@ struct HitResult
 	//Result is in world space.
 	DirectX::XMVECTOR GetHitPosV() const { return XMLoadFloat3(&hitPos); }
 	DirectX::XMVECTOR GetNormalV() const { return XMLoadFloat3(&hitNormal); }
+
+	std::vector<Vertex> GetHitVertexFromHitActorMesh();
 };
