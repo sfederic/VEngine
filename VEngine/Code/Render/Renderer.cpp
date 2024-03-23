@@ -2281,6 +2281,12 @@ void VertexColourLightBake()
 	const auto startTime = Profile::QuickStart();
 	Log("Vertex colour baking starting.");
 
+	const auto staticMeshes = MeshComponent::GetAllStaticMeshes();
+
+	HitResult vertexRayHit;
+	vertexRayHit.AddAllRenderStaticMeshesToIgnore();
+	vertexRayHit.ignoreBackFaceHits = false;
+
 	for (const auto& mesh : MeshComponent::system.GetComponents())
 	{
 		//Skipping baking vertex colours to non-static meshes
@@ -2294,15 +2300,13 @@ void VertexColourLightBake()
 
 		for (auto& dLight : DirectionalLightComponent::system.GetComponents())
 		{
+			vertexRayHit.actorsToIgnore.emplace_back(dLight->GetOwner());
+			vertexRayHit.componentsToIgnore.emplace_back(dLight.get());
+
 			for (auto& vertex : vertices)
 			{
 				const auto vertexPos = XMLoadFloat3(&vertex.pos);
 				const auto worldSpaceVertexPos = XMVector3TransformCoord(vertexPos, meshWorldMatrix);
-
-				HitResult hit;
-				hit.actorsToIgnore.emplace_back(dLight->GetOwner());
-				hit.componentsToIgnore.emplace_back(dLight.get());
-				hit.ignoreBackFaceHits = false;
 
 				auto normal = XMLoadFloat3(&vertex.normal);
 				normal = XMVector3TransformNormal(normal, meshWorldMatrix);
@@ -2313,7 +2317,7 @@ void VertexColourLightBake()
 				dot = std::clamp(dot, 0.1f, 1.f);
 
 				const auto rayOrigin = worldSpaceVertexPos + (normal * 0.1f);
-				if (Raycast(hit, rayOrigin, -dLightDirection, 50.f))
+				if (Raycast(vertexRayHit, rayOrigin, -dLightDirection, 50.f))
 				{
 					const auto colour = dLight->GetLightData().colour;
 					const float originalAlpha = colour.w;
@@ -2334,11 +2338,8 @@ void VertexColourLightBake()
 				const auto vertexPos = XMLoadFloat3(&vertex.pos);
 				const auto worldSpaceVertexPos = XMVector3TransformCoord(vertexPos, meshWorldMatrix);
 
-				HitResult hit;
-				hit.actorsToIgnore.emplace_back(pointLight->GetOwner());
-				hit.componentsToIgnore.emplace_back(pointLight.get());
-				hit.AddAllRenderStaticMeshesToIgnore();
-				hit.ignoreBackFaceHits = false;
+				vertexRayHit.actorsToIgnore.emplace_back(pointLight->GetOwner());
+				vertexRayHit.componentsToIgnore.emplace_back(pointLight.get());
 
 				auto normal = XMLoadFloat3(&vertex.normal);
 				normal = XMVector3TransformNormal(normal, meshWorldMatrix);
@@ -2351,7 +2352,7 @@ void VertexColourLightBake()
 
 				//@Todo: needs work if you want to use this. vertex colours aren't being multiplied properly.
 				const auto rayOrigin = worldSpaceVertexPos + (normal * 0.1f);
-				if (!Raycast(hit, rayOrigin, pointLight->GetWorldPositionV()))
+				if (!Raycast(vertexRayHit, rayOrigin, pointLight->GetWorldPositionV()))
 				{
 					const auto colour = pointLight->GetLightData().colour;
 					const float originalAlpha = colour.w;
