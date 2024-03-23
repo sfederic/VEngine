@@ -2324,7 +2324,7 @@ void VertexColourLightBake()
 					auto lightColour = XMLoadFloat4(&colour);
 					auto vertColour = XMLoadFloat4(&vertex.colour);
 					lightColour *= dot;
-					vertColour = lightColour;
+					vertColour *= lightColour;
 					vertColour.m128_f32[3] = originalAlpha; //Set alpha back to original value
 					XMStoreFloat4(&vertex.colour, vertColour);
 				}
@@ -2350,7 +2350,6 @@ void VertexColourLightBake()
 				float dot = XMVector3Dot(normal, vertexToLightDirection).m128_f32[0];
 				dot = std::clamp(dot, 0.1f, 1.f);
 
-				//@Todo: needs work if you want to use this. vertex colours aren't being multiplied properly.
 				const auto rayOrigin = worldSpaceVertexPos + (normal * 0.1f);
 				if (!Raycast(vertexRayHit, rayOrigin, pointLight->GetWorldPositionV()))
 				{
@@ -2363,7 +2362,7 @@ void VertexColourLightBake()
 					const float len = XMVector3Length(rayOrigin - pointLight->GetWorldPositionV()).m128_f32[0];
 					const float falloff = pointLight->GetLightData().intensity / std::max(len, 0.01f);
 
-					vertColour = lightColour * falloff;
+					vertColour *= lightColour * falloff;
 					vertColour.m128_f32[3] = originalAlpha;
 					XMStoreFloat4(&vertex.colour, vertColour);
 				}
