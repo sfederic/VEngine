@@ -20,7 +20,7 @@ public:
 	static void CreateDebugMeshes();
 	static void DestroyDebugMeshes();
 	static MeshComponent* GetDebugMesh(std::string name);
-
+	static std::vector<MeshComponent*> GetAllStaticMeshes();
 	static std::vector<MeshComponent*> SortMeshComponentsByDistance();
 
 	MeshComponentData meshComponentData;
@@ -62,7 +62,7 @@ public:
 	void SplitMeshCreate();
 
 	void SetMeshFilename(std::string_view meshFilename);
-	auto GetMeshFilename() { return meshComponentData.filename; }
+	auto GetMeshFilename() const { return meshComponentData.filename; }
 
 	//Material set functions
 	void SetRastState(const std::string newRastStateName);

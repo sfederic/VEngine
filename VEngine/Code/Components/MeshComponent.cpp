@@ -42,6 +42,19 @@ MeshComponent* MeshComponent::GetDebugMesh(std::string name)
 	return debugMeshes.find(name)->second;
 }
 
+std::vector<MeshComponent*> MeshComponent::GetAllStaticMeshes()
+{
+	std::vector<MeshComponent*> meshes;
+	for (auto& mesh : MeshComponent::system.GetComponents())
+	{
+		if (mesh->IsRenderStatic())
+		{
+			meshes.push_back(mesh.get());
+		}
+	}
+	return meshes;
+}
+
 std::vector<MeshComponent*> MeshComponent::SortMeshComponentsByDistance()
 {
 	struct MeshPack
