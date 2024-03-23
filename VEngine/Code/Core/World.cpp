@@ -293,6 +293,25 @@ void World::ClearAllActorsFromWorld()
 	actorNameMap.clear();
 }
 
+void World::DestroyAllActorsAndComponentsInWorld()
+{
+	for (auto componentSystem : activeComponentSystems)
+	{
+		componentSystem->DestroyAll();
+		componentSystem->Cleanup();
+	}
+
+	for (auto actorSystem : activeActorSystems)
+	{
+		actorSystem->DestroyAll();
+		actorSystem->Cleanup();
+	}
+
+	ClearAllActorsFromWorld();
+
+	editor->UpdateWorldList();
+}
+
 bool World::CheckIfActorExistsInWorld(std::string actorName)
 {
 	return actorNameMap.find(actorName) != actorNameMap.end();

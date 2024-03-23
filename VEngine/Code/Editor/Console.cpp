@@ -41,6 +41,12 @@ void Console::Init()
 
 	//Debug Menu Commands
 
+	executeMap.emplace(L"CLEAR",
+		std::make_pair([]() {
+			World::DestroyAllActorsAndComponentsInWorld();
+			},
+			"Deletes all actors and components in world."));
+
 	executeMap.emplace(L"WORLDLOADTEST",
 		std::make_pair([]() { RunWorldLoadTest(); },
 			"Load every world in the world maps folder in sequence."));

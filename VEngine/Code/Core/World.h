@@ -59,6 +59,7 @@ namespace World
 	void RemoveActorFromWorld(std::string actorName);
 
 	void ClearAllActorsFromWorld();
+	void DestroyAllActorsAndComponentsInWorld();
 
 	bool CheckIfActorExistsInWorld(std::string actorName);
 	bool CheckIfActorExistsInWorld(UID actorUID);
