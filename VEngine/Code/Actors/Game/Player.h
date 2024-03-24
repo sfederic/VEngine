@@ -38,6 +38,7 @@ public:
 	XMVECTOR nextRot = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 
 	MeshComponent* mesh = nullptr;
+	MeshComponent* linkEffectMesh = nullptr;
 	CameraComponent* camera = nullptr;
 
 	int healthPoints = 3;

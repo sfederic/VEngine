@@ -36,6 +36,8 @@ Player::Player()
 
 	dialogueComponent = DialogueComponent::system.Add("Dialogue", this);
 
+	linkEffectMesh = CreateComponent<MeshComponent>("LinkEffectMesh");
+
 	camera->SetLocalPosition(cameraStartingLocalPosition);
 }
 
@@ -44,6 +46,14 @@ void Player::Create()
 	__super::Create();
 
 	mesh->SetRenderStatic(false);
+
+	linkEffectMesh->SetActive(false);
+	linkEffectMesh->SetMeshFilename("cube.vmesh");
+	linkEffectMesh->SetTexture("UI/spellbinding_circle.png");
+	linkEffectMesh->SetUVOffsetSpeed(XMFLOAT2(0.15f, 0.1f));
+	linkEffectMesh->SetUVRotationSpeed(0.1f);
+	linkEffectMesh->SetCollisionLayer(CollisionLayers::None);
+	linkEffectMesh->SetAlpha(0.5f);
 
 	cameraLinkActiveLocalPosition = XMVectorSet(1.25f, 0.55f, -0.75f, 1.f);
 
@@ -116,6 +126,11 @@ void Player::Tick(float deltaTime)
 	//Lerp camera position
 	camera->SetLocalPosition(
 		VMath::VectorConstantLerp(camera->GetLocalPositionV(), nextCameraPosition, deltaTime, 14.f));
+
+	if (linkedGridActor)
+	{
+		linkEffectMesh->SetWorldPosition(linkedGridActor->GetPositionV());
+	}
 }
 
 Properties Player::GetProps()
@@ -1088,6 +1103,13 @@ void Player::SetLinkedGridActor(GridActor& gridActor)
 	nextRot = lookAtRotation;
 	SetRotation(lookAtRotation);
 	mesh->SetWorldRotation(lookAtRotation);
+
+	linkEffectMesh->SetActive(true);
+	const auto linkedGridActorMesh = linkedGridActor->GetFirstComponentOfTypeAllowNull<MeshComponent>();
+	assert(linkedGridActorMesh);
+	const auto linkedGridActorMeshBoundsExtents = linkedGridActorMesh->GetBoundsExtents();
+	linkEffectMesh->SetWorldScale(linkedGridActorMeshBoundsExtents * 2.1f);
+	linkEffectMesh->SetWorldPosition(linkedGridActor->GetPositionV());
 }
 
 void Player::ResetLinkedGridActor()
@@ -1110,6 +1132,8 @@ void Player::ResetLinkedGridActor()
 		nextCameraPosition = cameraStartingLocalPosition;
 		camera->SetTargetActor(this);
 	}
+
+	linkEffectMesh->SetActive(false);
 }
 
 void Player::ResetLinkedGridActorIfThis(GridActor* gridActor)
