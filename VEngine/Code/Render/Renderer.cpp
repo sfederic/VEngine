@@ -693,7 +693,7 @@ void CheckSupportedFeatures()
 
 void RenderMeshForShadowPass(MeshComponent* mesh)
 {
-	if (!mesh->castsShadow || !mesh->IsVisible())
+	if (!mesh->castsShadow || !mesh->IsVisible() || !mesh->IsActive())
 	{
 		return;
 	}
@@ -778,7 +778,7 @@ void RenderShadowPass()
 	{
 		SkeletalMeshComponent* mesh = skeletalMesh.get();
 
-		if (!mesh->castsShadow || !mesh->IsVisible())
+		if (!mesh->castsShadow || !mesh->IsVisible() || !mesh->IsActive())
 		{
 			return;
 		}
@@ -989,7 +989,10 @@ void RenderMeshComponents()
 	auto meshes = MeshComponent::SortMeshComponentsByDistance();
 	for (auto mesh : meshes)
 	{
-		if (!mesh->IsVisible()) { continue; }
+		if (!mesh->IsVisible() || !mesh->IsActive())
+		{
+			continue;
+		}
 
 		SetRenderPipelineStates(mesh);
 
@@ -1002,7 +1005,10 @@ void RenderMeshComponents()
 
 	for (auto& mesh : SliceableMeshComponent::system.GetComponents())
 	{
-		if (!mesh->IsVisible()) { continue; }
+		if (!mesh->IsVisible() || !mesh->IsActive())
+		{
+			continue;
+		}
 
 		SetRenderPipelineStates(mesh.get());
 
@@ -1029,7 +1035,11 @@ void RenderDestructibleMeshes()
 	{
 		for (auto meshCell : mesh->meshCells)
 		{
-			if (!meshCell->IsVisible()) { continue; }
+			if (!meshCell->IsVisible() || !meshCell->IsActive())
+			{
+				continue;
+			}
+
 			SetRenderPipelineStates(meshCell);
 			SetMatricesFromMesh(meshCell);
 			SetShaderMeshData(meshCell);
@@ -1114,7 +1124,10 @@ void Renderer::RenderLightProbeViews()
 
 			for (auto& mesh : MeshComponent::system.GetComponents())
 			{
-				if (!mesh->IsVisible()) { continue; }
+				if (!mesh->IsVisible() || !mesh->IsActive())
+				{
+					continue;
+				}
 
 				Material& material = mesh->GetMaterial();
 
@@ -1208,7 +1221,10 @@ void RenderInstanceMeshComponents()
 
 	for (auto& instanceMesh : InstanceMeshComponent::system.GetComponents())
 	{
-		if (!instanceMesh->IsVisible()) continue;
+		if (!instanceMesh->IsVisible() || !instanceMesh->IsActive())
+		{
+			continue;
+		}
 
 		//@Todo: instance meshes won't render behind transparent objects unless RenderInstanceMeshes() is called
 		//before RenderMeshComponents(). However doing so will render instance meshes seemingly without a 
@@ -1299,7 +1315,7 @@ void RenderBounds()
 
 		for (auto& boxTrigger : BoxTriggerComponent::system.GetComponents())
 		{
-			if (!boxTrigger->IsVisible())
+			if (!boxTrigger->IsVisible() || !boxTrigger->IsActive())
 			{
 				continue;
 			}
