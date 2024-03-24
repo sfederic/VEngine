@@ -130,6 +130,7 @@ void Player::Tick(float deltaTime)
 	if (linkedGridActor)
 	{
 		linkEffectMesh->SetWorldPosition(linkedGridActor->GetPositionV());
+		linkEffectMesh->SetWorldRotation(linkedGridActor->GetRotationV());
 	}
 }
 
@@ -1104,12 +1105,18 @@ void Player::SetLinkedGridActor(GridActor& gridActor)
 	SetRotation(lookAtRotation);
 	mesh->SetWorldRotation(lookAtRotation);
 
+	//LINK EFFECT MESH LOGIC
 	linkEffectMesh->SetActive(true);
+
 	const auto linkedGridActorMesh = linkedGridActor->GetFirstComponentOfTypeAllowNull<MeshComponent>();
 	assert(linkedGridActorMesh);
-	const auto linkedGridActorMeshBoundsExtents = linkedGridActorMesh->GetBoundsExtents();
-	linkEffectMesh->SetWorldScale(linkedGridActorMeshBoundsExtents * 2.1f);
+
+	linkEffectMesh->SetWorldScale(linkedGridActorMesh->GetWorldScaleV() * 1.1f);
 	linkEffectMesh->SetWorldPosition(linkedGridActor->GetPositionV());
+
+	//Set mesh to same as linked actor's.
+	linkEffectMesh->SetMeshFilename(linkedGridActorMesh->GetMeshFilename());
+	linkEffectMesh->ReCreate();
 }
 
 void Player::ResetLinkedGridActor()
