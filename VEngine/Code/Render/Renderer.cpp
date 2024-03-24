@@ -2279,7 +2279,6 @@ void RenderMeshToCaptureMeshIcon()
 void VertexColourLightBake()
 {
 	const auto startTime = Profile::QuickStart();
-	Log("Vertex colour baking starting.");
 
 	const auto staticMeshes = MeshComponent::GetAllStaticMeshes();
 
