@@ -62,12 +62,12 @@ public:
 	XMVECTOR GetUpVectorV();
 
 	BoundingOrientedBox GetBoundsInWorldSpace();
-	BoundingOrientedBox GetBounds() { return boundingBox; }
-	XMVECTOR GetBoundsExtents() { return XMLoadFloat3(&boundingBox.Extents); }
-	XMVECTOR GetBoundsCenter() { return XMLoadFloat3(&boundingBox.Center); }
+	BoundingOrientedBox GetBounds() const { return boundingBox; }
+	XMVECTOR GetBoundsExtents() const { return XMLoadFloat3(&boundingBox.Extents); }
+	XMVECTOR GetBoundsCenter() const { return XMLoadFloat3(&boundingBox.Center); }
 	void SetBoundsExtents(XMFLOAT3 extents) { boundingBox.Extents = extents; }
 
-	auto GetTransform() { return transform; }
+	auto GetTransform() const { return transform; }
 	void SetTransform(const Transform& transform_) { transform = transform_; }
 
 	auto GetParent() { return parent; }
@@ -77,7 +77,7 @@ public:
 	void AddChild(SpatialComponent* component);
 	void RemoveChild(SpatialComponent* component);
 
-	auto GetCollisionLayer() { return layer; }
+	auto GetCollisionLayer() const { return layer; }
 	void SetCollisionLayer(CollisionLayers layer_) { layer = layer_; }
 
 protected:
