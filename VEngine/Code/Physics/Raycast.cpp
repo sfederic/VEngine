@@ -19,7 +19,7 @@
 
 using namespace DirectX;
 
-bool IsIgnoredActor(Actor* actor, HitResult& hitResult)
+static bool IsIgnoredActor(Actor* actor, HitResult& hitResult)
 {
 	for (auto actorToIgnore : hitResult.actorsToIgnore)
 	{
@@ -32,7 +32,7 @@ bool IsIgnoredActor(Actor* actor, HitResult& hitResult)
 	return false;
 }
 
-bool IsIgnoredSpatialComponent(SpatialComponent* component, HitResult& hitResult)
+static bool IsIgnoredSpatialComponent(SpatialComponent* component, HitResult& hitResult)
 {
 	for (auto componentToIgnore : hitResult.componentsToIgnore)
 	{
@@ -370,6 +370,11 @@ bool OrientedBoxCast(HitResult& hit, BoundingOrientedBox& boundsInWorldSpace, bo
 
 	for (auto actor : World::GetAllActorsInWorld())
 	{
+		if (!actor->IsActive())
+		{
+			continue;
+		}
+
 		if (IsIgnoredActor(actor, hit))
 		{
 			continue;
@@ -377,6 +382,22 @@ bool OrientedBoxCast(HitResult& hit, BoundingOrientedBox& boundsInWorldSpace, bo
 
 		for (auto mesh : actor->GetComponents<MeshComponent>())
 		{
+			if (!mesh->IsActive())
+			{
+				continue;
+			}
+
+			if (mesh->GetCollisionLayer() == CollisionLayers::None ||
+				mesh->GetCollisionLayer() == hit.ignoreLayer)
+			{
+				continue;
+			}
+
+			if (IsIgnoredSpatialComponent(mesh, hit))
+			{
+				continue;
+			}
+
 			const auto meshBoundsInWorld = mesh->GetBoundsInWorldSpace();
 			if (boundsInWorldSpace.Intersects(meshBoundsInWorld))
 			{
