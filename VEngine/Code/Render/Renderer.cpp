@@ -1604,9 +1604,12 @@ void RenderSpriteSheets()
 		SpriteSystem::BuildSpriteQuadForSpriteSheetRendering(spriteSheet->GetSprite());
 		SpriteSystem::UpdateAndSetSpriteBuffers();
 
-		const XMVECTOR lookAtRotation = VMath::LookAtRotation(Camera::GetActiveCamera().GetWorldPositionV(),
-			spriteSheet->GetWorldPositionV());
-		spriteSheet->SetWorldRotation(lookAtRotation);
+		if (!spriteSheet->IsUsingOwnRotation())
+		{
+			const XMVECTOR lookAtRotation = VMath::LookAtRotation(Camera::GetActiveCamera().GetWorldPositionV(),
+				spriteSheet->GetWorldPositionV());
+			spriteSheet->SetWorldRotation(lookAtRotation);
+		}
 
 		shaderMatrices.model = spriteSheet->GetWorldMatrix();
 		shaderMatrices.MakeModelViewProjectionMatrix();

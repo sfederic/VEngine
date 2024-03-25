@@ -26,6 +26,9 @@ public:
 	std::string GetTextureFilename() const { return textureData.filename; }
 	Sprite GetSprite() { return sprite; }
 
+	void SetUseOwnRotation(bool value) { ignoreCameraUseOwnRotation = value; }
+	bool IsUsingOwnRotation() const { return ignoreCameraUseOwnRotation; }
+
 private:
 	Sprite sprite;
 
@@ -41,4 +44,5 @@ private:
 	int currentSheetColumn = 0;
 
 	bool loopAnimation = true;
+	bool ignoreCameraUseOwnRotation = false;
 };
