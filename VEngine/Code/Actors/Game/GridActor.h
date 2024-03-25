@@ -35,6 +35,8 @@ protected:
 	XMVECTOR nextPos = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 	XMVECTOR nextRot = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 
+	XMVECTOR nextMoveCardinalDirection = XMVectorZero();
+
 	float moveSpeed = 12.f;
 	float rotateSpeed = 12.f;
 
@@ -151,7 +153,7 @@ public:
 	void RecalcCurrentNodePosition();
 	void RecalcCurrentNodeDontIgnoreThis();
 
-	bool CheckNextNodeMoveIsValid(XMVECTOR nextMoveCardinalDirection);
+	bool CheckNextNodeMoveIsValid(const XMVECTOR nextMoveDirection);
 
 	//Get forward face in grid terms based on forward vector and current grid position.
 	ForwardFace GetCurrentForwardFace();

@@ -357,6 +357,7 @@
     <ClCompile Include="Code\Render\Sampler.cpp" />
     <ClCompile Include="Code\Render\IndexBuffer.cpp" />
     <ClCompile Include="Code\Render\ShaderResourceView.cpp" />
+    <ClCompile Include="Code\Actors\Game\FuseGridActor.cpp" />
     <ClInclude Include="Code\Editor\AssetIconListWidget.h" />
     <ClInclude Include="Code\Render\BlendState.h" />
     <ClInclude Include="Code\Render\VertexBuffer.h" />
@@ -746,6 +747,7 @@
     <ClInclude Include="Code\Render\Sampler.h" />
     <ClInclude Include="Code\Render\IndexBuffer.h" />
     <ClInclude Include="Code\Render\ShaderResourceView.h" />
+    <ClInclude Include="Code\Actors\Game\FuseGridActor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />

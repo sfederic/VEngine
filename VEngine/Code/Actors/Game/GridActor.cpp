@@ -37,6 +37,7 @@ bool GridActor::CheckNextRotationBoundsIntersect()
 		return false;
 	}
 
+	//@Todo: this code needs to box cast for each mesh component this actor has.
 	BoundingOrientedBox nextRotBounds = mesh->GetBoundsInWorldSpace();
 	XMStoreFloat4(&nextRotBounds.Orientation, nextRot);
 	nextRotBounds.Extents.x -= 0.15f;
@@ -272,8 +273,10 @@ void GridActor::RecalcCurrentNodeDontIgnoreThis()
 	node->RecalcNodeHeight(hit);
 }
 
-bool GridActor::CheckNextNodeMoveIsValid(XMVECTOR nextMoveCardinalDirection)
+bool GridActor::CheckNextNodeMoveIsValid(const XMVECTOR nextMoveDirection)
 {
+	nextMoveCardinalDirection = nextMoveDirection;
+
 	VMath::RoundVector(nextMoveCardinalDirection);
 
 	const int nextXIndex = (int)std::round(nextPos.m128_f32[0]);

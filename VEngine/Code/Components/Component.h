@@ -15,7 +15,7 @@ public:
 	virtual void Create() {};
 
 	//Remove the component from its parent ComponentSystem. Remove() is always defined in 
-	//COMPONENT_SYSTEM macro and doesn't need to be added explicity.
+	//COMPONENT_SYSTEM macro and doesn't need to be added explicitly.
 	virtual void Remove() = 0;
 
 	virtual Properties GetProps();
@@ -26,27 +26,27 @@ public:
 	void AddTag(const std::string& tag);
 	bool HasTag(const std::string& tag);
 
-	bool IsActive() { return active; }
+	bool IsActive() const { return active; }
 	void SetActive(bool newActive) { active = newActive; }
 	void ToggleActive() { active = !active; }
 
-	int GetIndex() { return index; }
+	int GetIndex() const { return index; }
 	void SetIndex(int newIndex) { index = newIndex; }
 
 	void SetComponentSystem(IComponentSystem* componentSystem_) { componentSystem = componentSystem_; }
 
-	UID GetUID() { return uid; }
+	UID GetUID() const { return uid; }
 	void SetUID(UID uid_) { uid = uid_; }
 
-	UID GetOwnerUID() { return ownerUID; }
+	UID GetOwnerUID() const { return ownerUID; }
 	void SetOwnerUID(UID ownerUID_) { ownerUID = ownerUID_; }
 
 	Actor* GetOwner();
 
-	bool IsTickEnabled() { return tickEnabled; }
+	bool IsTickEnabled() const { return tickEnabled; }
 	void SetTickEnabled(bool newTickState) { tickEnabled = newTickState; }
 
-	bool IsVisible() { return visible; }
+	bool IsVisible() const { return visible; }
 	void SetVisibility(bool isVisible) { visible = isVisible; }
 	void ToggleVisibility() { visible = !visible; }
 
