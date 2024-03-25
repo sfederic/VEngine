@@ -3,9 +3,9 @@ Player
  Enabled
 1
  Position
-0 0 0
+1 0 0
  Rotation
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -13,7 +13,7 @@ Player
 Name
 Player0
 UID
-1295726154
+2893925674
 next
 Grid
 1
@@ -22,7 +22,7 @@ Grid
  Position
 0 0 0
  Rotation
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -34,7 +34,7 @@ Size X
 Size Y
 5
 UID
-2082410986
+415899018
 next
 MeshActor
 1
@@ -51,7 +51,7 @@ MeshActor
 Name
 MeshActor0
 UID
-1732887604
+2309730527
 next
 DirectionalLightActor
 1
@@ -68,34 +68,190 @@ DirectionalLightActor
 Name
 DirectionalLightActor0
 UID
-2149321853
+1557020267
 next
-DiffuseProbeMap
-1
+FuseGridActor
+3
  Enabled
 1
  Position
-1 -0 -0
+1 -0 3
  Rotation
 0 0 0 1
  Scale
 1 1 1
  Visible
 1
+BigGridActor
+0
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+MoveOnlyXAxis
+0
+MoveOnlyZAxis
+0
 Name
-DiffuseProbeMap0
-Size X
+FuseGridActor0
+Obstacle
 1
-Size Y
+Rotate Pitch
 1
-Size Z
+Rotate Roll
+0
+Rotate Speed
+12
+Rotate Yaw
 1
 UID
-1505827100
+1479597930
+next
+ Enabled
+1
+ Position
+3 0 3
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+BigGridActor
+0
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+MoveOnlyXAxis
+0
+MoveOnlyZAxis
+0
+Name
+FuseGridActor1
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Roll
+0
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+3901590607
+next
+ Enabled
+1
+ Position
+4 0 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+BigGridActor
+0
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+MoveOnlyXAxis
+0
+MoveOnlyZAxis
+0
+Name
+FuseGridActor2
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Roll
+0
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+1279004098
 next
 MeshComponent
-2
-1295726154
+6
+2893925674
 Mesh
  Enabled
 1
@@ -129,6 +285,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -150,9 +308,68 @@ Render Static
 Trans. Occlude
 0
 UID
-1030879692
+3495200981
 next
-1732887604
+2893925674
+LinkEffectMesh
+ Enabled
+0
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 0.5
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+UI/spellbinding_circle.png
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0.15 0.1
+M_UvRotation
+0
+M_UvRotationSpeed
+0.1
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+1818992293
+next
+2309730527
 Mesh
  Enabled
 1
@@ -179,13 +396,15 @@ M_Metallic
 M_Rast State
 solid
 M_Shader
-ScreenSpaceTexture
+Default
 M_Smoothness
 0
 M_Specular
 1 1 1 1
 M_Texture
-demons_gate.png
+test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -207,11 +426,188 @@ Render Static
 Trans. Occlude
 0
 UID
-3338992051
+2349291456
+next
+1479597930
+Mesh
+ Enabled
+1
+ Pos
+1 -0 3
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
+UID
+1599351449
+next
+3901590607
+Mesh
+ Enabled
+1
+ Pos
+3 0 3
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
+UID
+1733349122
+next
+1279004098
+Mesh
+ Enabled
+1
+ Pos
+4 0 2
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
+UID
+2696399263
 next
 DialogueComponent
-1
-1295726154
+4
+2893925674
 Dialogue
  Enabled
 1
@@ -220,18 +616,51 @@ Dialogue
 File
 
 UID
-2364749822
+837426728
+next
+1479597930
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+3021275275
+next
+3901590607
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+2379554831
+next
+1279004098
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+3991919400
 next
 InstanceMeshComponent
 1
-2082410986
+415899018
 NodeMesh
  Enabled
 1
  Pos
 0 0 0
  Rot
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -258,6 +687,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -279,11 +710,11 @@ Render Static
 Trans. Occlude
 0
 UID
-2252301903
+74672305
 next
 CameraComponent
 1
-1295726154
+2893925674
 Camera
  Enabled
 1
@@ -302,11 +733,11 @@ Far Z
 Near Z
 0.01
 UID
-1387457647
+2995615041
 next
 DirectionalLightComponent
 1
-2149321853
+1557020267
 DirectionalLight
  Enabled
 1
@@ -325,38 +756,23 @@ Intensity
 LightEnabled
 1
 UID
-784881353
+1453845392
 next
 EmptyComponent
-2
-1295726154
+1
+2893925674
 Root
  Enabled
 1
  Pos
-0 0 0
+1 0 0
  Rot
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
 1
 UID
-2722277904
-next
-1505827100
-Root
- Enabled
-1
- Pos
-1 -0 -0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-UID
-4101406178
+3582778013
 next
 end
