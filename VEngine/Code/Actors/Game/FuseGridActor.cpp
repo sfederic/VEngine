@@ -1,10 +1,10 @@
 #include "vpch.h"
 #include "FuseGridActor.h"
-#include "Physics/Raycast.h"
-#include "Components/SpatialComponent.h"
 #include "Components/MeshComponent.h"
-#include "Particle/SpriteSheet.h"
+#include "Core/VMath.h"
 #include "Gameplay/GameUtils.h"
+#include "Particle/SpriteSheet.h"
+#include "Physics/Raycast.h"
 
 void FuseGridActor::OnLinkMove()
 {
@@ -17,6 +17,9 @@ void FuseGridActor::OnLinkMove()
 		if (hitFusedActor)
 		{
 			auto& fuseSprite = GameUtils::SpawnSpriteSheet("Sprites/blue_explosion.png", hit.GetHitPosV(), false, 5, 5, 25.f);
+			fuseSprite.SetUseOwnRotation(true);
+			const auto fuseSpriteRotation = VMath::LookAtRotation(hit.GetHitPosV(), GetPositionV());
+			fuseSprite.SetWorldRotation(fuseSpriteRotation);
 
 			for (auto hitFusedMesh : hitFusedActor->GetComponents<MeshComponent>())
 			{
