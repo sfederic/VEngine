@@ -109,6 +109,10 @@ public:
 	virtual void OnRotationEnd() {}
 	virtual void OnMoveEnd() {}
 
+	//When the player's facing vector is point towwards this grid actor. Think of it as a 3D "mouse-over".
+	virtual void OnPlayerLinkHover() {}
+	virtual void OnPlayerLinkHoverOff() {}
+
 	virtual void OnLinkMove();
 
 	virtual void Interact() {}

@@ -845,6 +845,12 @@
     <ClCompile Include="MeshEffect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\UI\Game\InputIconWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Actors\Game\InputTutorialGridActor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\main.cpp">
@@ -1734,6 +1740,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MeshEffect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\UI\Game\InputIconWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Actors\Game\InputTutorialGridActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
