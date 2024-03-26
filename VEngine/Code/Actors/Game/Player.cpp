@@ -127,11 +127,7 @@ void Player::Tick(float deltaTime)
 	camera->SetLocalPosition(
 		VMath::VectorConstantLerp(camera->GetLocalPositionV(), nextCameraPosition, deltaTime, 14.f));
 
-	if (linkedGridActor)
-	{
-		linkEffectMesh->SetWorldPosition(linkedGridActor->GetPositionV());
-		linkEffectMesh->SetWorldRotation(linkedGridActor->GetRotationV());
-	}
+	UpdateLinkEffectMeshPositionAndRotation();
 }
 
 Properties Player::GetProps()
@@ -257,9 +253,11 @@ void Player::HighlightLinkableGridActor()
 				return;
 			}
 
-			for (auto mesh : highlightedGridActor->GetComponents<MeshComponent>())
+			//@Todo: what about multiple meshes?
+			auto highlightedMesh = highlightedGridActor->GetFirstComponentOfTypeAllowNull<MeshComponent>();
+			if (highlightedMesh)
 			{
-				mesh->SetAmbientColour(XMFLOAT3(0.9f, 0.3f, 0.1f));
+				EnableLinkEffectMesh(highlightedMesh);
 			}
 		}
 		else
@@ -1105,18 +1103,9 @@ void Player::SetLinkedGridActor(GridActor& gridActor)
 	SetRotation(lookAtRotation);
 	mesh->SetWorldRotation(lookAtRotation);
 
-	//LINK EFFECT MESH LOGIC
-	linkEffectMesh->SetActive(true);
-
 	const auto linkedGridActorMesh = linkedGridActor->GetFirstComponentOfTypeAllowNull<MeshComponent>();
 	assert(linkedGridActorMesh);
-
-	linkEffectMesh->SetWorldScale(linkedGridActorMesh->GetWorldScaleV() * 1.1f);
-	linkEffectMesh->SetWorldPosition(linkedGridActor->GetPositionV());
-
-	//Set mesh to same as linked actor's.
-	linkEffectMesh->SetMeshFilename(linkedGridActorMesh->GetMeshFilename());
-	linkEffectMesh->ReCreate();
+	EnableLinkEffectMesh(linkedGridActorMesh);
 }
 
 void Player::ResetLinkedGridActor()
@@ -1191,6 +1180,8 @@ void Player::ResetHighlightedActor()
 
 	highlightedGridActor->OnPlayerLinkHoverOff();
 
+	linkEffectMesh->SetActive(false);
+
 	highlightedGridActor = nullptr;
 }
 
@@ -1211,6 +1202,26 @@ void Player::OnMoveAndRotateEnd()
 bool Player::IsInInteraction() const
 {
 	return inInteraction || inConversation || inInspection;
+}
+
+void Player::EnableLinkEffectMesh(MeshComponent* mesh)
+{
+	linkEffectMesh->SetActive(true);
+
+	linkEffectMesh->SetWorldScale(mesh->GetWorldScaleV() * 1.1f);
+	linkEffectMesh->SetWorldPosition(mesh->GetWorldPositionV());
+
+	linkEffectMesh->SetMeshFilename(mesh->GetMeshFilename());
+	linkEffectMesh->ReCreate();
+}
+
+void Player::UpdateLinkEffectMeshPositionAndRotation()
+{
+	if (linkedGridActor)
+	{
+		linkEffectMesh->SetWorldPosition(linkedGridActor->GetPositionV());
+		linkEffectMesh->SetWorldRotation(linkedGridActor->GetRotationV());
+	}
 }
 
 XMVECTOR Player::GetCameraLocalPosition()

@@ -129,6 +129,9 @@ private:
 
 	bool IsInInteraction() const;
 
+	void EnableLinkEffectMesh(MeshComponent* mesh);
+	void UpdateLinkEffectMeshPositionAndRotation();
+
 	bool previousMovementAndRotationStoppedValue = false;
 
 	bool playerInQuickThought = false;
