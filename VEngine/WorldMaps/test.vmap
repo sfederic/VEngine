@@ -75,13 +75,17 @@ InputTutorialGridActor
  Enabled
 1
  Position
-2 0 3
+1 -0 3
  Rotation
--0 0 -0 1
+0 0 0 1
  Scale
 1 1 1
  Visible
 1
+Audio LinkMove
+cloth_heavy.wav
+Audio LinkRotate
+chainmail1.wav
 BigGridActor
 0
 Can Fall
@@ -129,7 +133,7 @@ Rotate Speed
 Rotate Yaw
 1
 UID
-2982282001
+3392979094
 next
 MeshComponent
 4
@@ -310,14 +314,14 @@ Trans. Occlude
 UID
 2349291456
 next
-2982282001
+3392979094
 Mesh
  Enabled
 1
  Pos
-2 0 3
+1 -0 3
  Rot
--0 0 -0 1
+0 0 0 1
  Scale
 1 1 1
  Visible
@@ -367,7 +371,7 @@ Render Static
 Trans. Occlude
 0
 UID
-2541308369
+1683168668
 next
 DialogueComponent
 2
@@ -382,7 +386,7 @@ File
 UID
 837426728
 next
-2982282001
+3392979094
 Dialogue
  Enabled
 1
@@ -391,7 +395,7 @@ Dialogue
 File
 
 UID
-4011929762
+1674355485
 next
 InstanceMeshComponent
 1
