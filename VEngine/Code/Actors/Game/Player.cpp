@@ -50,10 +50,7 @@ void Player::Create()
 	linkEffectMesh->SetActive(false);
 	linkEffectMesh->SetMeshFilename("cube.vmesh");
 	linkEffectMesh->SetTexture("UI/spellbinding_circle.png");
-	linkEffectMesh->SetUVOffsetSpeed(XMFLOAT2(0.15f, 0.1f));
-	linkEffectMesh->SetUVRotationSpeed(0.1f);
 	linkEffectMesh->SetCollisionLayer(CollisionLayers::None);
-	linkEffectMesh->SetAlpha(0.5f);
 
 	cameraLinkActiveLocalPosition = XMVectorSet(1.25f, 0.55f, -0.75f, 1.f);
 
@@ -257,7 +254,7 @@ void Player::HighlightLinkableGridActor()
 			auto highlightedMesh = highlightedGridActor->GetFirstComponentOfTypeAllowNull<MeshComponent>();
 			if (highlightedMesh)
 			{
-				EnableLinkEffectMesh(highlightedMesh);
+				EnableLinkEffectMeshForHover(highlightedMesh);
 			}
 		}
 		else
@@ -1105,7 +1102,7 @@ void Player::SetLinkedGridActor(GridActor& gridActor)
 
 	const auto linkedGridActorMesh = linkedGridActor->GetFirstComponentOfTypeAllowNull<MeshComponent>();
 	assert(linkedGridActorMesh);
-	EnableLinkEffectMesh(linkedGridActorMesh);
+	EnableLinkEffectMeshForSelect(linkedGridActorMesh);
 }
 
 void Player::ResetLinkedGridActor()
@@ -1204,9 +1201,26 @@ bool Player::IsInInteraction() const
 	return inInteraction || inConversation || inInspection;
 }
 
-void Player::EnableLinkEffectMesh(MeshComponent* mesh)
+void Player::EnableLinkEffectMeshForHover(MeshComponent* mesh)
 {
 	linkEffectMesh->SetActive(true);
+
+	linkEffectMesh->SetUVOffsetSpeed(XMFLOAT2(0.075f, 0.05f));
+	linkEffectMesh->SetUVRotationSpeed(0.05f);
+
+	linkEffectMesh->SetWorldScale(mesh->GetWorldScaleV() * 1.1f);
+	linkEffectMesh->SetWorldPosition(mesh->GetWorldPositionV());
+
+	linkEffectMesh->SetMeshFilename(mesh->GetMeshFilename());
+	linkEffectMesh->ReCreate();
+}
+
+void Player::EnableLinkEffectMeshForSelect(MeshComponent* mesh)
+{
+	linkEffectMesh->SetActive(true);
+
+	linkEffectMesh->SetUVOffsetSpeed(XMFLOAT2(0.15f, 0.1f));
+	linkEffectMesh->SetUVRotationSpeed(0.1f);
 
 	linkEffectMesh->SetWorldScale(mesh->GetWorldScaleV() * 1.1f);
 	linkEffectMesh->SetWorldPosition(mesh->GetWorldPositionV());

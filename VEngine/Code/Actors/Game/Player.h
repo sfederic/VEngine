@@ -129,7 +129,10 @@ private:
 
 	bool IsInInteraction() const;
 
-	void EnableLinkEffectMesh(MeshComponent* mesh);
+	//Link effect logic to use on grid actor link select hover.
+	void EnableLinkEffectMeshForHover(MeshComponent* mesh);
+	//Link effect logic to use on grid actor link select.
+	void EnableLinkEffectMeshForSelect(MeshComponent* mesh);
 	void UpdateLinkEffectMeshPositionAndRotation();
 
 	bool previousMovementAndRotationStoppedValue = false;
