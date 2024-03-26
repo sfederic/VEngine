@@ -8,13 +8,15 @@ struct Sprite
 {
 	Transform transform;
 
+	std::string textureFilename;
+
 	//Source Rect is the size of the texture to itself (note that you could render half a texture for example).
 	VRect srcRect;
 
 	//Destination Rect is the pixel dimensions and positions to render the texture at.
 	VRect dstRect;
 
-	std::string textureFilename;
+	XMFLOAT4 colour = XMFLOAT4(1.f, 1.f, 1.f, 1.f);
 
 	float angle = 0.f;
 	float z = 0.f;

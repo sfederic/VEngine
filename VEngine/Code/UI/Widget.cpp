@@ -142,20 +142,22 @@ bool Widget::Button(const std::string text, Layout layout, float lineWidth, Text
 	return Button(VString::stows(text), layout, lineWidth, textAlign, textColor, textOpacity);
 }
 
-void Widget::Image(std::string_view filename, Layout layout)
+void Widget::Image(std::string_view filename, Layout layout, float alpha)
 {
 	Sprite sprite = {};
 	sprite.textureFilename = filename;
 	sprite.dstRect = { (long)layout.rect.left, (long)layout.rect.top, (long)layout.rect.right, (long)layout.rect.bottom };
 	sprite.srcRect = { 0, 0, (long)layout.rect.right, (long)layout.rect.bottom };
+	sprite.colour.w = alpha;
 
 	SpriteSystem::CreateScreenSprite(sprite);
 }
 
-Layout Widget::ImageAsOriginalSize(std::string_view textureFilename, long x, long y)
+Layout Widget::ImageAsOriginalSize(std::string_view textureFilename, long x, long y, float alpha)
 {
 	Sprite sprite = {};
 	sprite.textureFilename = textureFilename;
+	sprite.colour.w = alpha;
 
 	const auto texture = TextureSystem::FindTexture2D(sprite.textureFilename);
 	const auto texWidth = texture->GetWidth();
@@ -174,22 +176,24 @@ Layout Widget::ImageAsOriginalSize(std::string_view textureFilename, long x, lon
 	return imageLayout;
 }
 
-void Widget::Image(std::string_view filename, int x, int y, int w, int h)
+void Widget::Image(std::string_view filename, int x, int y, int w, int h, float alpha)
 {
 	Sprite sprite = {};
 	sprite.textureFilename = filename;
 	sprite.dstRect = { x, y, x + w, y + h };
 	sprite.srcRect = { 0, 0, w, h };
+	sprite.colour.w = alpha;
 
 	SpriteSystem::CreateScreenSprite(sprite);
 }
 
-bool Widget::ImageButton(std::string_view filename, Layout layout)
+bool Widget::ImageButton(std::string_view filename, Layout layout, float alpha)
 {
 	Sprite sprite = {};
 	sprite.textureFilename = filename;
 	sprite.dstRect = { (long)layout.rect.left, (long)layout.rect.top, (long)layout.rect.right, (long)layout.rect.bottom };
 	sprite.srcRect = { 0, 0, (long)layout.rect.right, (long)layout.rect.bottom };
+	sprite.colour.w = alpha;
 
 	SpriteSystem::CreateScreenSprite(sprite);
 

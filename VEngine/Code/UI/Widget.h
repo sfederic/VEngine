@@ -65,10 +65,10 @@ protected:
 	bool Button(const std::string text, Layout layout, float lineWidth = 1.0f,
 		TextAlign textAlign = TextAlign::Center, D2D1_COLOR_F textColor = { 0.f, 0.f, 0.f, 1.f }, float textOpacity = 1.0f);
 
-	void Image(std::string_view filename, Layout layout);
-	Layout ImageAsOriginalSize(std::string_view textureFilename, long x, long y);
-	void Image(std::string_view filename, int x, int y, int w, int h);
-	bool ImageButton(std::string_view filename, Layout layout);
+	void Image(std::string_view filename, Layout layout, float alpha = 1.f);
+	Layout ImageAsOriginalSize(std::string_view textureFilename, long x, long y, float alpha = 1.f);
+	void Image(std::string_view filename, int x, int y, int w, int h, float alpha = 1.f);
+	bool ImageButton(std::string_view filename, Layout layout, float alpha = 1.f);
 
 	void Rect(Layout layout);
 	void FillRect(Layout layout, D2D1_COLOR_F color = { 0.5f, 0.5f, 0.5f, 1.f }, float opacity = 1.0f);
