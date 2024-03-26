@@ -239,14 +239,14 @@ void Player::HighlightLinkableGridActor()
 	const auto end = playerPos + (GetMeshForward() * 5.f);
 	if (OrientedBoxCast(hit, playerPos, end, XMFLOAT2(0.25f, 0.25f), false, false))
 	{
-		auto hitActor = hit.GetClosestHitActor(playerPos);
-
 		ResetHighlightedActor();
 
-		auto gridActor = dynamic_cast<GridActor*>(hitActor);
+		auto gridActor = hit.GetClosestHitActorAs<GridActor>(playerPos);
 		if (gridActor)
 		{
 			highlightedGridActor = gridActor;
+
+			gridActor->OnPlayerLinkHover();
 
 			if (gridActor->IsLinked())
 			{
@@ -1188,6 +1188,8 @@ void Player::ResetHighlightedActor()
 	{
 		mesh->SetAmbientColour(XMFLOAT3(1.f, 1.f, 1.f));
 	}
+
+	highlightedGridActor->OnPlayerLinkHoverOff();
 
 	highlightedGridActor = nullptr;
 }
