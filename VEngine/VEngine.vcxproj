@@ -336,7 +336,6 @@
     <ClCompile Include="Code\Actors\Game\InvisibleGridActor.cpp" />
     <ClCompile Include="Code\Actors\Game\PowerCrystalLampPost.cpp" />
     <ClCompile Include="Code\Actors\Game\PowerCrystalSlot.cpp" />
-    <ClCompile Include="Code\Actors\Game\Magnet.cpp" />
     <ClCompile Include="Code\Physics\HitResult.cpp" />
     <ClCompile Include="Code\Actors\Game\PlayerCameraTrigger.cpp" />
     <ClCompile Include="Code\Actors\EmptyActor.cpp" />
@@ -726,7 +725,6 @@
     <ClInclude Include="Code\Actors\Game\InvisibleGridActor.h" />
     <ClInclude Include="Code\Actors\Game\PowerCrystalLampPost.h" />
     <ClInclude Include="Code\Actors\Game\PowerCrystalSlot.h" />
-    <ClInclude Include="Code\Actors\Game\Magnet.h" />
     <ClInclude Include="Code\Physics\HitResult.h" />
     <ClInclude Include="Code\Actors\Game\PlayerCameraTrigger.h" />
     <ClInclude Include="Code\Actors\EmptyActor.h" />

@@ -761,9 +761,6 @@
     <ClCompile Include="Code\Actors\Game\PowerCrystalSlot.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\Magnet.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Physics\HitResult.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1641,9 +1638,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Gameplay\BattleEnums.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Actors\Game\Magnet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Physics\HitResult.h">
