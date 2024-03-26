@@ -67,6 +67,7 @@ void GridActor::OnLinkRotate()
 {
 	isRotating = true;
 	SpawnDustSpriteSheet();
+	GameUtils::PlayAudioOneShot(linkRotateAudio);
 }
 
 void GridActor::CheckSetIsMoving()
@@ -105,6 +106,7 @@ void GridActor::OnLinkMove()
 {
 	isMoving = true;
 	SpawnDustSpriteSheet();
+	GameUtils::PlayAudioOneShot(linkMoveAudio);
 }
 
 void GridActor::Inspect()
@@ -174,6 +176,7 @@ Properties GridActor::GetProps()
 {
 	auto props = __super::GetProps();
 	props.title = GetTypeName();
+
 	props.Add("Destruct", &isDestructible);
 	props.Add("Health", &health);
 	props.Add("Interact", &isInteractable);
@@ -196,6 +199,10 @@ Properties GridActor::GetProps()
 	props.Add("Rotate Speed", &rotateSpeed);
 	props.Add("Can Fall", &canFall);
 	props.Add("BigGridActor", &bigGridActor);
+
+	props.Add("Audio LinkMove", &linkMoveAudio).autoCompletePath = "/Audio/";
+	props.Add("Audio LinkRotate", &linkRotateAudio).autoCompletePath = "/Audio/";
+
 	return props;
 }
 

@@ -19,6 +19,9 @@ protected:
 	std::wstring interactText;
 	std::wstring interactKnownText;
 
+	std::string linkMoveAudio = "cloth_heavy.wav";
+	std::string linkRotateAudio = "chainmail1.wav";
+
 	MeshComponent* mesh = nullptr;
 	HealthWidget* healthWidget = nullptr;
 	DialogueComponent* dialogueComponent = nullptr;
