@@ -7,4 +7,7 @@ class InputIconWidget : public Widget
 {
 public:
 	void Draw(float deltaTime) override;
+
+private:
+	float alpha = 0.5f;
 };
