@@ -1103,6 +1103,8 @@ void Player::SetLinkedGridActor(GridActor& gridActor)
 	const auto linkedGridActorMesh = linkedGridActor->GetFirstComponentOfTypeAllowNull<MeshComponent>();
 	assert(linkedGridActorMesh);
 	EnableLinkEffectMeshForSelect(linkedGridActorMesh);
+
+	GameUtils::PlayAudioOneShot("confirm.wav");
 }
 
 void Player::ResetLinkedGridActor()
@@ -1127,6 +1129,8 @@ void Player::ResetLinkedGridActor()
 	}
 
 	linkEffectMesh->SetActive(false);
+
+	GameUtils::PlayAudioOneShot("cursor.wav");
 }
 
 void Player::ResetLinkedGridActorIfThis(GridActor* gridActor)
