@@ -16,10 +16,13 @@ void FuseGridActor::OnLinkMove()
 		auto hitFusedActor = hit.GetHitActorAs<FuseGridActor>();
 		if (hitFusedActor)
 		{
+			GameUtils::PlayAudioOneShot("equip.wav");
+
 			auto& fuseSprite = GameUtils::SpawnSpriteSheet("Sprites/blue_explosion.png", hit.GetHitPosV(), false, 5, 5, 25.f);
 			fuseSprite.SetUseOwnRotation(true);
 			const auto fuseSpriteRotation = VMath::LookAtRotation(hit.GetHitPosV(), GetPositionV());
 			fuseSprite.SetWorldRotation(fuseSpriteRotation);
+			fuseSprite.SetWorldScale(1.5f);
 
 			for (auto hitFusedMesh : hitFusedActor->GetComponents<MeshComponent>())
 			{
