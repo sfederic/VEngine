@@ -32,6 +32,8 @@ void FuseGridActor::OnLinkMove()
 			}
 
 			hitFusedActor->Remove();
+
+			SetNextPos(GetPositionV());
 		}
 	}
 }
