@@ -660,12 +660,12 @@ void Player::LinkToGridActor()
 						}
 					}
 				}
+			}
 
 				SetLinkedGridActor(*closestActorToLinkTo);
 			}
 		}
 	}
-}
 
 void Player::MoveLinkedGridActor()
 {
