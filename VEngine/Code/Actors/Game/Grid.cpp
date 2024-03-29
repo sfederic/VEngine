@@ -31,6 +31,9 @@ void Grid::Create()
 	__super::Create();
 
 	nodeMesh->SetBlendState(BlendStates::Default);
+
+	//Make sure actors can't interact with grid nodes via ray/box casts.
+	nodeMesh->SetCollisionLayer(CollisionLayers::None);
 }
 
 void Grid::Tick(float deltaTime)
