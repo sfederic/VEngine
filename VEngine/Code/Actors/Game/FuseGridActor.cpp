@@ -29,10 +29,7 @@ void FuseGridActor::OnLinkMove()
 				auto newMesh = CreateComponent<MeshComponent>(std::to_string((unsigned int)GenerateUID()));
 				newMesh->SetMeshFilename(hitFusedMesh->GetMeshFilename());
 
-				//Trying to give the effect like how the player's link preview look.
-				newMesh->SetTexture("UI/spellbinding_circle.png");
-				newMesh->SetUVOffsetSpeed(XMFLOAT2(0.075f, 0.05f));
-				newMesh->SetUVRotationSpeed(0.05f);
+				GameUtils::SetLinkedMeshEffect(newMesh);
 
 				newMesh->Create();
 

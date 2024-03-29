@@ -10,6 +10,7 @@
 #include "Particle/ParticleEmitter.h"
 #include "Particle/Polyboard.h"
 #include "Asset/AssetFileExtensions.h"
+#include "Components/MeshComponent.h"
 
 namespace GameUtils
 {
@@ -113,5 +114,12 @@ namespace GameUtils
 	{
 		auto player = Player::system.GetFirstActor();
 		player->SetActive(false);
+	}
+
+	void SetLinkedMeshEffect(MeshComponent* mesh)
+	{
+		mesh->SetTexture("UI/spellbinding_circle.png");
+		mesh->SetUVOffsetSpeed(XMFLOAT2(0.075f, 0.05f));
+		mesh->SetUVRotationSpeed(0.05f);
 	}
 }

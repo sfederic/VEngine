@@ -3,6 +3,7 @@
 #include "Physics/Raycast.h"
 #include "Components/MeshComponent.h"
 #include "Core/Log.h"
+#include "Gameplay/GameUtils.h"
 
 void SnapshotCrystal::Create()
 {

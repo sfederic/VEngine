@@ -10,6 +10,7 @@ class SpriteSheet;
 class BoxTriggerComponent;
 class CameraComponent;
 class Polyboard;
+class MeshComponent;
 class ParticleEmitter;
 
 //Utility functions for in-game stuff
@@ -42,4 +43,7 @@ namespace GameUtils
 	void LoadWorldAndMoveToEntranceTrigger();
 
 	void DisablePlayer();
+
+	//GAME SPECIFIC FUNCTIONS
+	void SetLinkedMeshEffect(MeshComponent* mesh);
 };
