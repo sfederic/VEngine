@@ -10,6 +10,8 @@ void SnapshotCrystal::Create()
 
 	projectionMesh->SetVisibility(false);
 	projectionMesh->SetActive(false);
+
+	interactText = L"Create Snapshot";
 }
 
 void SnapshotCrystal::Interact()
