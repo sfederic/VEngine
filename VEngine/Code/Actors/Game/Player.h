@@ -5,12 +5,11 @@
 #include <set>
 
 struct DialogueComponent;
-struct InteractWidget;
+class InteractWidget;
 struct PlayerHealthWidget;
-struct GridActor;
-struct Unit;
-struct MeshComponent;
-struct CameraComponent;
+class GridActor;
+class MeshComponent;
+class CameraComponent;
 struct GridNode;
 class Unit;
 
