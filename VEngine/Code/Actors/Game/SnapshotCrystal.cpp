@@ -3,6 +3,7 @@
 #include "Physics/Raycast.h"
 #include "Components/MeshComponent.h"
 #include "Core/Log.h"
+#include "Grid.h"
 
 void SnapshotCrystal::Create()
 {
@@ -22,6 +23,10 @@ void SnapshotCrystal::Interact()
 	projectionMesh->ToggleVisibility();
 
 	SetProjectionMeshFromFacingGridActor();
+
+	//Because the projection mesh isn't a grid actor, reset the whole grid on Interact so that
+	//the nodes line up on the new mesh.
+	Grid::system.GetOnlyActor()->Awake();
 }
 
 void SnapshotCrystal::SetProjectionMeshFromFacingGridActor()
