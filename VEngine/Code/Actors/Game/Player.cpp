@@ -219,6 +219,7 @@ void Player::HighlightLinkableGridActor()
 {
 	if (!CheckIfMovementAndRotationStopped())
 	{
+		linkEffectMesh->SetActive(false);
 		return;
 	}
 	if (isInputLinkedToGridActor)
@@ -264,6 +265,7 @@ void Player::HighlightLinkableGridActor()
 	}
 	else
 	{
+		linkEffectMesh->SetActive(false);
 		ResetHighlightedActor();
 	}
 }
@@ -1127,8 +1129,6 @@ void Player::ResetLinkedGridActor()
 		nextCameraPosition = cameraStartingLocalPosition;
 		camera->SetTargetActor(this);
 	}
-
-	linkEffectMesh->SetActive(false);
 
 	GameUtils::PlayAudioOneShot("cursor.wav");
 }
