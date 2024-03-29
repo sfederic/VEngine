@@ -198,7 +198,10 @@ public:
 	auto GetPlayerFocusActor() { return actorForPlayerFocusOnLink; }
 	bool IsInspectable() const { return isInspectable; }
 	auto GetInteractText() { return interactText; }
+
+	//Note that this is the main mesh of the grid actor. Any link effects need to use this mesh.
 	auto& GetMesh() { return *mesh; }
+
 	auto GetDialogueComponent() { return dialogueComponent; }
 
 private:
