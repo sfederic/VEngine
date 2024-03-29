@@ -3,7 +3,7 @@
 
 void InteractWidget::Draw(float deltaTime)
 {
-	auto layout = CenterLayoutOnScreenSpaceCoords(150.f, 100.f);
+	const auto layout = CenterLayoutOnScreenSpaceCoords(80.f, 40.f);
 	FillRect(layout);
 	Text(interactText, layout);
 }
