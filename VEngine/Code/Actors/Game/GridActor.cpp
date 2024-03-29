@@ -37,7 +37,6 @@ bool GridActor::CheckNextRotationBoundsIntersect()
 		return false;
 	}
 
-	//@Todo: this code needs to box cast for each mesh component this actor has.
 	BoundingOrientedBox nextRotBounds = mesh->GetBoundsInWorldSpace();
 	XMStoreFloat4(&nextRotBounds.Orientation, nextRot);
 	nextRotBounds.Extents.x -= 0.15f;
