@@ -36,6 +36,7 @@ void FuseGridActor::OnLinkMove()
 
 			hitFusedActor->Remove();
 
+			//Reset this actor's next position so that moving into the fuse actor creates a LEGO-like 'click'.
 			SetNextPos(GetPositionV());
 		}
 	}
