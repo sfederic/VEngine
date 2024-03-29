@@ -251,12 +251,7 @@ void Player::HighlightLinkableGridActor()
 				return;
 			}
 
-			//@Todo: what about multiple meshes?
-			auto highlightedMesh = highlightedGridActor->GetFirstComponentOfTypeAllowNull<MeshComponent>();
-			if (highlightedMesh)
-			{
-				EnableLinkEffectMeshForHover(highlightedMesh);
-			}
+			EnableLinkEffectMeshForHover(&highlightedGridActor->GetMesh());
 		}
 		else
 		{
@@ -662,10 +657,10 @@ void Player::LinkToGridActor()
 				}
 			}
 
-				SetLinkedGridActor(*closestActorToLinkTo);
-			}
+			SetLinkedGridActor(*closestActorToLinkTo);
 		}
 	}
+}
 
 void Player::MoveLinkedGridActor()
 {
@@ -1102,9 +1097,7 @@ void Player::SetLinkedGridActor(GridActor& gridActor)
 	SetRotation(lookAtRotation);
 	mesh->SetWorldRotation(lookAtRotation);
 
-	const auto linkedGridActorMesh = linkedGridActor->GetFirstComponentOfTypeAllowNull<MeshComponent>();
-	assert(linkedGridActorMesh);
-	EnableLinkEffectMeshForSelect(linkedGridActorMesh);
+	EnableLinkEffectMeshForSelect(&gridActor.GetMesh());
 
 	GameUtils::PlayAudioOneShot("confirm.wav");
 }
