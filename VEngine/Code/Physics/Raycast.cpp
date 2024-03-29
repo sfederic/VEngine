@@ -45,6 +45,17 @@ static bool IsIgnoredSpatialComponent(SpatialComponent* component, HitResult& hi
 	return false;
 }
 
+static bool CollisionLayerCheck(CollisionLayers collisionLayer, CollisionLayers hitResultIgnoreLayer)
+{
+	if (collisionLayer == CollisionLayers::None ||
+		collisionLayer == hitResultIgnoreLayer)
+	{
+		return false;
+	}
+
+	return true;
+}
+
 bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float range, bool fromScreen)
 {
 	hitResult.origin = origin;
@@ -77,8 +88,7 @@ bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float ra
 				return;
 			}
 
-			if (spatialComponent->GetCollisionLayer() == CollisionLayers::None ||
-				spatialComponent->GetCollisionLayer() == hitResult.ignoreLayer)
+			if (!CollisionLayerCheck(spatialComponent->GetCollisionLayer(), hitResult.ignoreLayer))
 			{
 				return;
 			}
@@ -387,8 +397,7 @@ bool OrientedBoxCast(HitResult& hit, BoundingOrientedBox& boundsInWorldSpace, bo
 				continue;
 			}
 
-			if (mesh->GetCollisionLayer() == CollisionLayers::None ||
-				mesh->GetCollisionLayer() == hit.ignoreLayer)
+			if (!CollisionLayerCheck(mesh->GetCollisionLayer(), hit.ignoreLayer))
 			{
 				continue;
 			}
@@ -440,6 +449,16 @@ bool OrientedBoxCast(HitResult& hitResult, XMVECTOR origin, XMVECTOR end, XMFLOA
 
 		for (auto mesh : actor->GetComponents<MeshComponent>())
 		{
+			if (!mesh->IsActive())
+			{
+				continue;
+			}
+
+			if (!CollisionLayerCheck(mesh->GetCollisionLayer(), hitResult.ignoreLayer))
+			{
+				continue;
+			}
+
 			const auto meshBoundsInWorld = mesh->GetBoundsInWorldSpace();
 			if (boundingOrientedBox.Intersects(meshBoundsInWorld))
 			{
@@ -474,6 +493,16 @@ bool SimpleBoxCast(XMVECTOR center, XMFLOAT3 extents, HitResult& hit, bool drawD
 
 		for (auto mesh : actor->GetComponents<MeshComponent>())
 		{
+			if (!mesh->IsActive())
+			{
+				continue;
+			}
+
+			if (!CollisionLayerCheck(mesh->GetCollisionLayer(), hit.ignoreLayer))
+			{
+				continue;
+			}
+
 			const BoundingOrientedBox meshWorldBounds = mesh->GetBoundsInWorldSpace();
 
 			if (boundingBox.Intersects(meshWorldBounds))
