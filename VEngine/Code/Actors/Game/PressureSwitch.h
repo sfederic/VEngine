@@ -14,10 +14,14 @@ public:
 
 	PressureSwitch();
 	void Create() override;
+	void Start() override;
 	void Tick(float deltaTime) override;
 	Properties GetProps() override;
 
 private:
+	std::string actorToActivateName;
+	Actor* actorToActivate = nullptr;
+
 	MeshComponent* switchMesh = nullptr;
 	BoxTriggerComponent* switchTrigger = nullptr;
 
