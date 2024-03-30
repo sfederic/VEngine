@@ -3,9 +3,9 @@ GridActor
  Enabled
 1
  Position
-1 0 4
+1 0 3
  Rotation
--0 0 -0 1
+0 0 0 1
  Scale
 1 1 1
  Visible
@@ -61,14 +61,14 @@ Rotate Speed
 Rotate Yaw
 1
 UID
-2766370053
+1407075740
 next
 Player
 1
  Enabled
 1
  Position
-2 0 0
+1 0 2
  Rotation
 -0 0 -0 1
  Scale
@@ -135,18 +135,18 @@ DirectionalLightActor0
 UID
 1557020267
 next
-SnapshotCrystal
+WaterSource
 1
  Enabled
 1
  Position
-1 0 1
+4 0 3
  Rotation
--0 0 -0 1
+0 0 0 1
  Scale
 1 1 1
  Visible
-1
+0
 Audio LinkMove
 cloth_heavy.wav
 Audio LinkRotate
@@ -168,13 +168,13 @@ Inspect
 Interact
 1
 Interact Text
-Create Snapshot
+
 InteractKnownText
 
 Link Movement
-1
+0
 Link Rotation
-1
+0
 Move Axis Neg.
 1 1
 Move Axis Pos.
@@ -186,7 +186,7 @@ MoveOnlyXAxis
 MoveOnlyZAxis
 0
 Name
-SnapshotCrystal0
+WaterSource0
 Obstacle
 1
 Rotate Pitch
@@ -198,18 +198,39 @@ Rotate Speed
 Rotate Yaw
 1
 UID
-2881448752
+4018190447
+next
+PressureSwitch
+1
+ Enabled
+1
+ Position
+2 0.33 3
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Actor To Activate
+WaterSource0
+Name
+PressureSwitch0
+Switch Active
+0
+UID
+2337395392
 next
 MeshComponent
 6
-2766370053
+1407075740
 Mesh
  Enabled
 1
  Pos
-1 0 4
+1 0 3
  Rot
--0 0 -0 1
+0 0 0 1
  Scale
 1 1 1
  Visible
@@ -259,7 +280,7 @@ Render Static
 Trans. Occlude
 0
 UID
-3077143282
+119637662
 next
 2893925674
 Mesh
@@ -323,13 +344,13 @@ next
 2893925674
 LinkEffectMesh
  Enabled
-0
+1
  Pos
-0 0 0
+1 0 3
  Rot
 0 0 0 1
  Scale
-1 1 1
+1.1 1.1 1.1
  Visible
 1
 Casts Shadow
@@ -359,11 +380,11 @@ M_Texture2
 M_Use Texture
 1
 M_UvOffset
-0 0
+5.551 3.70067
 M_UvOffsetSpeed
 0.15 0.1
 M_UvRotation
-0
+222.104
 M_UvRotationSpeed
 0.1
 M_UvScale
@@ -438,71 +459,12 @@ Trans. Occlude
 UID
 2349291456
 next
-2881448752
+4018190447
 Mesh
  Enabled
 1
  Pos
-1 0 1
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-default
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Texture2
-
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-crystal.vmesh
-Physics Static
-1
-Render Static
-0
-Trans. Occlude
-0
-UID
-3762739484
-next
-2881448752
-TestMesh
- Enabled
-0
- Pos
-0 0 2
+4 0 3
  Rot
 0 0 0 1
  Scale
@@ -512,11 +474,11 @@ TestMesh
 Casts Shadow
 1
 Grid Ignore
-0
+1
 Grid Obst.
 0
 M_Ambient
-0 0 1 0.4
+1 1 1 1
 M_Blend State
 default
 M_Metallic
@@ -550,16 +512,75 @@ cube.vmesh
 Physics Static
 1
 Render Static
+0
+Trans. Occlude
+0
+UID
+835700359
+next
+2337395392
+SwitchMesh
+ Enabled
+1
+ Pos
+0 -0.5 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+step_small.vmesh
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
 UID
-1464178303
+2471539060
 next
-SpotLightComponent
-1
-2881448752
-SpotLight
+BoxTriggerComponent
+2
+4018190447
+BoxTrigger
  Enabled
 1
  Pos
@@ -569,21 +590,36 @@ SpotLight
  Scale
 1 1 1
  Visible
-1
-Colour
-0 0 1 1
-Intensity
-50
-LightEnabled
-1
-Spot Angle
-70
+0
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
 UID
-3281678771
+3440348579
+next
+2337395392
+SwitchTrigger
+ Enabled
+1
+ Pos
+2 0.33 3
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+576926419
 next
 DialogueComponent
 3
-2766370053
+1407075740
 Dialogue
  Enabled
 1
@@ -592,7 +628,7 @@ Dialogue
 File
 
 UID
-550770262
+959307180
 next
 2893925674
 Dialogue
@@ -605,16 +641,16 @@ File
 UID
 837426728
 next
-2881448752
+4018190447
 Dialogue
  Enabled
 1
  Visible
-1
+0
 File
 
 UID
-143502267
+2843969719
 next
 InstanceMeshComponent
 1
@@ -629,7 +665,7 @@ NodeMesh
  Scale
 1 1 1
  Visible
-1
+0
 Casts Shadow
 1
 Grid Ignore
@@ -684,7 +720,7 @@ Camera
  Enabled
 1
  Pos
-1.75 1.75 -2.75
+1.25 0.55 -0.75
  Rot
 0 0 0 1
  Scale
@@ -730,7 +766,7 @@ Root
  Enabled
 1
  Pos
-2 0 0
+1 0 2
  Rot
 -0 0 -0 1
  Scale
