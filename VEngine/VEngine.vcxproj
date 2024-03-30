@@ -321,7 +321,6 @@
     <ClCompile Include="Code\Actors\PersistentAudioActor.cpp" />
     <ClCompile Include="Code\Actors\Game\EntranceInteractTrigger.cpp" />
     <ClCompile Include="Code\Actors\Game\SawBlade.cpp" />
-    <ClCompile Include="Code\Actors\Game\BucketPressurePlate.cpp" />
     <ClCompile Include="Code\Actors\Game\SnapshotCrystal.cpp" />
     <ClCompile Include="Code\Actors\Game\Pulley.cpp" />
     <ClCompile Include="Code\Actors\Game\Winch.cpp" />
@@ -714,7 +713,6 @@
     <ClInclude Include="Code\Actors\PersistentAudioActor.h" />
     <ClInclude Include="Code\Actors\Game\EntranceInteractTrigger.h" />
     <ClInclude Include="Code\Actors\Game\SawBlade.h" />
-    <ClInclude Include="Code\Actors\Game\BucketPressurePlate.h" />
     <ClInclude Include="Code\Actors\Game\SnapshotCrystal.h" />
     <ClInclude Include="Code\Actors\Game\Pulley.h" />
     <ClInclude Include="Code\Actors\Game\Winch.h" />
