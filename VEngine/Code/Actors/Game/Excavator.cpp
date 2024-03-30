@@ -33,7 +33,7 @@ void Excavator::Dig()
 {
 	HitResult hit(this);
 	const XMVECTOR center = GetPositionV() + GetForwardVectorV();
-	SimpleBoxCast(center, XMFLOAT3(0.5f, 0.5f, 0.5f), hit, false, false);
+	Physics::SimpleBoxCast(center, XMFLOAT3(0.5f, 0.5f, 0.5f), hit, false, false);
 	for (auto actor : hit.hitActors)
 	{
 		auto mineable = dynamic_cast<Mineable*>(actor);

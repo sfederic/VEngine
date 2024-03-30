@@ -11,7 +11,7 @@ void FuseGridActor::OnLinkMove()
 	__super::OnLinkMove();
 
 	HitResult hit(this);
-	if (Raycast(hit, GetPositionV(), nextMoveCardinalDirection, 1.f))
+	if (Physics::Raycast(hit, GetPositionV(), nextMoveCardinalDirection, 1.f))
 	{
 		auto hitFusedActor = hit.GetHitActorAs<FuseGridActor>();
 		if (hitFusedActor)

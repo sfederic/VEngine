@@ -2336,7 +2336,7 @@ void VertexColourLightBake()
 				dot = std::clamp(dot, 0.1f, 1.f);
 
 				const auto rayOrigin = worldSpaceVertexPos + (normal * 0.1f);
-				if (Raycast(vertexRayHit, rayOrigin, -dLightDirection, 50.f))
+				if (Physics::Raycast(vertexRayHit, rayOrigin, -dLightDirection, 50.f))
 				{
 					const auto colour = dLight->GetLightData().colour;
 					const float originalAlpha = colour.w;
@@ -2370,7 +2370,7 @@ void VertexColourLightBake()
 				dot = std::clamp(dot, 0.1f, 1.f);
 
 				const auto rayOrigin = worldSpaceVertexPos + (normal * 0.1f);
-				if (!Raycast(vertexRayHit, rayOrigin, pointLight->GetWorldPositionV()))
+				if (!Physics::Raycast(vertexRayHit, rayOrigin, pointLight->GetWorldPositionV()))
 				{
 					const auto colour = pointLight->GetLightData().colour;
 					const float originalAlpha = colour.w;

@@ -46,7 +46,7 @@ void OilBarrel::SpillOil()
 		hit.IgnorePlayer();
 
 		const XMVECTOR raycastOrigin = GetPositionV() + GetUpVectorV();
-		if (Raycast(hit, raycastOrigin, -VMath::GlobalUpVector(), 100.f))
+		if (Physics::Raycast(hit, raycastOrigin, -VMath::GlobalUpVector(), 100.f))
 		{
 			Transform t;
 			t.position = hit.hitPos;

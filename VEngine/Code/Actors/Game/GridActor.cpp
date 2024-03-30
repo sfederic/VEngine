@@ -43,7 +43,7 @@ bool GridActor::CheckNextRotationBoundsIntersect()
 	nextRotBounds.Extents.y -= 0.15f;
 	nextRotBounds.Extents.z -= 0.15f;
 	HitResult hit(this);
-	return OrientedBoxCast(hit, nextRotBounds, true, true);
+	return Physics::OrientedBoxCast(hit, nextRotBounds, true, true);
 }
 
 void GridActor::OnLinkActivate()
@@ -153,7 +153,7 @@ void GridActor::Tick(float deltaTime)
 	if (canFall)
 	{
 		HitResult hit(this);
-		if (!Raycast(hit, GetPositionV(), -VMath::GlobalUpVector(), 0.75f))
+		if (!Physics::Raycast(hit, GetPositionV(), -VMath::GlobalUpVector(), 0.75f))
 		{
 			inFall = true;
 			constexpr float fallSpeed = 2.f;
@@ -327,7 +327,7 @@ bool GridActor::CheckNextNodeMoveIsValid(const XMVECTOR nextMoveDirection)
 
 	//Fence check
 	HitResult fenceHit(this);
-	if (Raycast(fenceHit, GetPositionV(), nextMoveCardinalDirection, 1.0f))
+	if (Physics::Raycast(fenceHit, GetPositionV(), nextMoveCardinalDirection, 1.0f))
 	{
 		if (fenceHit.GetHitActorAs<FenceActor>())
 		{
@@ -454,7 +454,7 @@ void GridActor::CheckIfSubmerged()
 
 			HitResult hit(this);
 			//Make sure nothing is above this actor and make sure the water's plane mesh has no backside
-			if (!Raycast(hit, GetPositionV(), VMath::GlobalUpVector(), 10.f))
+			if (!Physics::Raycast(hit, GetPositionV(), VMath::GlobalUpVector(), 10.f))
 			{
 				nextPos.m128_f32[1] = waterVolume->GetPosition().y;
 				return;

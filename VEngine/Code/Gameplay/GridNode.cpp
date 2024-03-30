@@ -48,7 +48,7 @@ void GridNode::RecalcNodeHeight(HitResult& hitResult)
 	hitResult.AddActorsToIgnore(waterVolumes);
 	hitResult.actorsToIgnore.emplace_back(Player::system.GetOnlyActor());
 
-	if (Raycast(hitResult, origin, -VMath::GlobalUpVector(), 40.f))
+	if (Physics::Raycast(hitResult, origin, -VMath::GlobalUpVector(), 40.f))
 	{
 		for (auto mesh : hitResult.hitActor->GetComponents<MeshComponent>())
 		{

@@ -20,7 +20,7 @@ void Weight::Tick(float deltaTime)
 void Weight::CrushBreakableGridActorUnderneath()
 {
 	HitResult hit(this);
-	if (Raycast(hit, GetPositionV(), -VMath::GlobalUpVector(), 2.f))
+	if (Physics::Raycast(hit, GetPositionV(), -VMath::GlobalUpVector(), 2.f))
 	{
 		auto crushable = hit.GetHitActorAs<Crushable>();
 		if (crushable)

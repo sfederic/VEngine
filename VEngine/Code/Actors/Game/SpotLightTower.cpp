@@ -30,7 +30,7 @@ void SpotLightTower::Tick(float deltaTime)
 void SpotLightTower::IlluminateGridActors()
 {
 	HitResult hit(this);
-	if (Raycast(hit, spotLight->GetWorldPositionV(), spotLight->GetForwardVectorV(), lightRange))
+	if (Physics::Raycast(hit, spotLight->GetWorldPositionV(), spotLight->GetForwardVectorV(), lightRange))
 	{
 		auto actor = hit.GetHitActorAs<IlluminatedGridActor>();
 		if (actor)

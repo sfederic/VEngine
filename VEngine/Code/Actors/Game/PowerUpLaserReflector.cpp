@@ -63,7 +63,7 @@ void PowerUpLaserReflector::CascadeLaser()
 	if (reflectedLaser->IsActive())
 	{
 		HitResult hit(this);
-		if (Raycast(hit, GetPositionV(), GetRightVectorV(), 10.f))
+		if (Physics::Raycast(hit, GetPositionV(), GetRightVectorV(), 10.f))
 		{
 			reflectedLaser->SetEndPoint(hit.GetHitPosV());
 

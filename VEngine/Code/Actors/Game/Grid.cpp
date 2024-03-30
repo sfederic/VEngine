@@ -167,7 +167,7 @@ void Grid::RecalcAllNodes(HitResult& hit)
 			hit.hitComponents.clear();
 
 			//raycast against the world to set node position
-			if (Raycast(hit, rayOrigin, -VMath::GlobalUpVector(), 40.0f))
+			if (Physics::Raycast(hit, rayOrigin, -VMath::GlobalUpVector(), 40.0f))
 			{
 				//Position the node at the raycast's hitpos
 				XMFLOAT3 hitPos = hit.hitPos;

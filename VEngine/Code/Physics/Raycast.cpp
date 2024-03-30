@@ -56,7 +56,7 @@ static bool CollisionLayerCheck(CollisionLayers collisionLayer, CollisionLayers 
 	return true;
 }
 
-bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float range, bool fromScreen)
+bool Physics::Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float range, bool fromScreen)
 {
 	hitResult.origin = origin;
 	hitResult.direction = direction;
@@ -171,14 +171,14 @@ bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction, float ra
 	return false;
 }
 
-bool Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR end)
+bool Physics::Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR end)
 {
 	XMVECTOR direction = XMVector3Normalize(end - origin);
 	float range = XMVector3Length(end - origin).m128_f32[0] + 0.1f;
 	return Raycast(hitResult, origin, direction, range, false);
 }
 
-bool RaycastTriangleIntersect(HitResult& hitResult)
+bool Physics::RaycastTriangleIntersect(HitResult& hitResult)
 {
 	std::vector<HitResult> hitResults;
 
@@ -343,7 +343,7 @@ bool RaycastTriangleIntersect(HitResult& hitResult)
 	return false;
 }
 
-bool RaycastFromScreen(HitResult& hitResult)
+bool Physics::RaycastFromScreen(HitResult& hitResult)
 {
 	const int sx = editor->GetViewportMouseX();
 	const int sy = editor->GetViewportMouseY();
@@ -361,7 +361,7 @@ bool RaycastFromScreen(HitResult& hitResult)
 	return Raycast(hitResult, hitResult.origin, hitResult.direction, range, true);
 }
 
-void DrawDebugLine(XMVECTOR start, XMVECTOR end)
+void Physics::DrawDebugLine(XMVECTOR start, XMVECTOR end)
 {
 	Line line;
 	XMStoreFloat3(&line.p1, start);
@@ -371,7 +371,7 @@ void DrawDebugLine(XMVECTOR start, XMVECTOR end)
 }
 
 //@Todo: can consolidate the two orientedboxcast functions here
-bool OrientedBoxCast(HitResult& hit, BoundingOrientedBox& boundsInWorldSpace, bool drawDebug, bool clearDebugDrawWithTimer)
+bool Physics::OrientedBoxCast(HitResult& hit, BoundingOrientedBox& boundsInWorldSpace, bool drawDebug, bool clearDebugDrawWithTimer)
 {
 	if (drawDebug)
 	{
@@ -419,7 +419,7 @@ bool OrientedBoxCast(HitResult& hit, BoundingOrientedBox& boundsInWorldSpace, bo
 	return hit.hitActors.size();
 }
 
-bool OrientedBoxCast(HitResult& hitResult, XMVECTOR origin, XMVECTOR end, XMFLOAT2 extents, bool drawDebug, bool clearDebugDrawWithTimer)
+bool Physics::OrientedBoxCast(HitResult& hitResult, XMVECTOR origin, XMVECTOR end, XMFLOAT2 extents, bool drawDebug, bool clearDebugDrawWithTimer)
 {
 	XMVECTOR orientationV = VMath::LookAtRotation(end, origin);
 
@@ -471,7 +471,7 @@ bool OrientedBoxCast(HitResult& hitResult, XMVECTOR origin, XMVECTOR end, XMFLOA
 	return hitResult.hitActors.size();
 }
 
-bool SimpleBoxCast(XMVECTOR center, XMFLOAT3 extents, HitResult& hit, bool drawDebug, bool clearDebugDrawWithTimer)
+bool Physics::SimpleBoxCast(XMVECTOR center, XMFLOAT3 extents, HitResult& hit, bool drawDebug, bool clearDebugDrawWithTimer)
 {
 	XMFLOAT3 centerFloat3;
 	XMStoreFloat3(&centerFloat3, center);

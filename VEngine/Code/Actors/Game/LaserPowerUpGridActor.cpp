@@ -35,7 +35,7 @@ void LaserPowerUpGridActor::PowerUpHitRaycastActor()
 	const auto pos = GetPositionV();
 	const auto end = pos + (GetForwardVectorV() * 10.f);
 	HitResult hit(this);
-	if (Raycast(hit, GetPositionV(), end))
+	if (Physics::Raycast(hit, GetPositionV(), end))
 	{
 		laser->SetEndPoint(hit.GetHitPosV());
 

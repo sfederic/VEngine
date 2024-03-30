@@ -29,7 +29,7 @@ void SnapshotCrystal::Interact()
 void SnapshotCrystal::SetProjectionMeshFromFacingGridActor()
 {
 	HitResult hit(this);
-	if (Raycast(hit, GetPositionV(), GetForwardVectorV(), 10.f))
+	if (Physics::Raycast(hit, GetPositionV(), GetForwardVectorV(), 10.f))
 	{
 		auto gridActor = hit.GetHitActorAs<GridActor>();
 		if (gridActor)

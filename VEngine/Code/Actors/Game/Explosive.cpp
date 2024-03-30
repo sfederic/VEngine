@@ -37,7 +37,7 @@ void Explosive::Burn()
 void Explosive::HitNearbyExplodables()
 {
 	HitResult explosionHit(this);
-	SimpleBoxCast(GetPositionV(), XMFLOAT3(1.f, 1.f, 1.f), explosionHit, true, true);
+	Physics::SimpleBoxCast(GetPositionV(), XMFLOAT3(1.f, 1.f, 1.f), explosionHit, true, true);
 	for (auto actor : explosionHit.hitActors)
 	{
 		auto explodable = dynamic_cast<Explodable*>(actor);

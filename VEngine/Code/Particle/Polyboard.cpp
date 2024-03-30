@@ -135,7 +135,7 @@ void Polyboard::SetEndPoint(const XMVECTOR end)
 
 bool Polyboard::RaycastFromStartToEndPoints(HitResult& hit) const
 {
-	return Raycast(hit, XMLoadFloat3(&startPoint), XMLoadFloat3(&endPoint));
+	return Physics::Raycast(hit, XMLoadFloat3(&startPoint), XMLoadFloat3(&endPoint));
 }
 
 void Polyboard::SetDestroyTimer(float timerMax)

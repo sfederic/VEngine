@@ -69,7 +69,7 @@ void Bucket::EmptyWater()
 			//Box cast to check actors hit by water
 			HitResult boxHit(this);
 			const XMVECTOR origin = GetPositionV() + GetUpVectorV();
-			if (SimpleBoxCast(origin, XMFLOAT3(0.5f, 0.5f, 0.5f), boxHit, false, false))
+			if (Physics::SimpleBoxCast(origin, XMFLOAT3(0.5f, 0.5f, 0.5f), boxHit, false, false))
 			{
 				for (auto actor : boxHit.hitActors)
 				{
@@ -83,7 +83,7 @@ void Bucket::EmptyWater()
 
 			//Ray cast to spawn water puddle mesh
 			HitResult rayHit(this);
-			if (Raycast(rayHit, origin, -VMath::GlobalUpVector(), 10.f))
+			if (Physics::Raycast(rayHit, origin, -VMath::GlobalUpVector(), 10.f))
 			{
 				Transform t;
 				t.position = rayHit.hitPos;

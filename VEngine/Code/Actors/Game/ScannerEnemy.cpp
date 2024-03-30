@@ -58,7 +58,7 @@ void ScannerEnemy::ScanForPlayer(float deltaTime)
 		scanLaser->SetEndPoint(end);
 
 		HitResult hit(this);
-		if (Raycast(hit, start, end))
+		if (Physics::Raycast(hit, start, end))
 		{
 			scanLaser->SetEndPoint(hit.GetHitPosV());
 
@@ -83,7 +83,7 @@ void ScannerEnemy::ScanForPlayer(float deltaTime)
 		scanLaser->SetEndPoint(playerPos);
 
 		HitResult hit(this);
-		if (Raycast(hit, start, playerPos))
+		if (Physics::Raycast(hit, start, playerPos))
 		{
 			auto player = hit.GetHitActorAs<Player>();
 			if (!player)

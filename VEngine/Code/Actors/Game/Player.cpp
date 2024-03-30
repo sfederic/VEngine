@@ -231,7 +231,7 @@ void Player::HighlightLinkableGridActor()
 	HitResult hit(this);
 	const auto playerPos = GetPositionV();
 	const auto end = playerPos + (GetMeshForward() * 5.f);
-	if (OrientedBoxCast(hit, playerPos, end, XMFLOAT2(0.25f, 0.25f), false, false))
+	if (Physics::OrientedBoxCast(hit, playerPos, end, XMFLOAT2(0.25f, 0.25f), false, false))
 	{
 		ResetHighlightedActor();
 
@@ -318,7 +318,7 @@ void Player::PrimaryAction()
 		auto meshForward = mesh->GetForwardVectorV();
 		auto center = GetPositionV();
 		auto boxCastOrigin = center + meshForward;
-		if (SimpleBoxCast(boxCastOrigin, XMFLOAT3(0.25f, 0.25f, 0.25f), hit, false, true))
+		if (Physics::SimpleBoxCast(boxCastOrigin, XMFLOAT3(0.25f, 0.25f, 0.25f), hit, false, true))
 		{
 			hit.hitActor = hit.GetClosestHitActor(center);
 			Log("Player interact: %s", hit.hitActor->GetName().c_str());
@@ -395,7 +395,7 @@ void Player::MakeOccludingMeshBetweenCameraAndPlayerTransparent()
 	const auto cameraToPlayerDir = XMVector3Normalize(camera->GetWorldPositionV() - GetPositionV());
 	const auto start = GetPositionV() + cameraToPlayerDir;
 	HitResult hit(this);
-	if (OrientedBoxCast(hit, start, camera->GetWorldPositionV(), XMFLOAT2(0.25f, 0.25f), true, false))
+	if (Physics::OrientedBoxCast(hit, start, camera->GetWorldPositionV(), XMFLOAT2(0.25f, 0.25f), true, false))
 	{
 		for (Actor* actor : hit.hitActors)
 		{
@@ -548,7 +548,7 @@ bool Player::InteractCheck(Actor* hitActor)
 void Player::InteractInfoToWidgetCheck()
 {
 	HitResult hit(this);
-	if (Raycast(hit, GetPositionV(), GetMeshForward(), 1.f))
+	if (Physics::Raycast(hit, GetPositionV(), GetMeshForward(), 1.f))
 	{
 		auto npc = hit.GetHitActorAs<NPC>();
 		if (npc)
@@ -622,7 +622,7 @@ void Player::LinkToGridActor()
 		HitResult hit(this);
 		const auto playerPos = GetPositionV();
 		const auto end = playerPos + (GetMeshForward() * 5.f);
-		if (OrientedBoxCast(hit, playerPos, end, XMFLOAT2(0.25f, 0.25f), false, false))
+		if (Physics::OrientedBoxCast(hit, playerPos, end, XMFLOAT2(0.25f, 0.25f), false, false))
 		{
 			auto closestActorToLinkTo = hit.GetClosestHitActorAs<GridActor>(playerPos);
 			if (closestActorToLinkTo == nullptr)
@@ -633,7 +633,7 @@ void Player::LinkToGridActor()
 			//This raycast is to make sure the player is not standing on the same actor it's linking to
 			//to avoid potentially rotating the linked actor and the player being stuck in mid-air.
 			HitResult sameActorHit(this);
-			if (Raycast(sameActorHit, GetPositionV(), -VMath::GlobalUpVector(), 5.f))
+			if (Physics::Raycast(sameActorHit, GetPositionV(), -VMath::GlobalUpVector(), 5.f))
 			{
 				auto gridActorUnderneathPlayer = sameActorHit.GetHitActorAs<GridActor>();
 				if (gridActorUnderneathPlayer)
@@ -977,7 +977,7 @@ void Player::CheckNextMoveNode(const XMVECTOR previousPos)
 
 	//FENCE RAYCAST CHECK
 	HitResult fenceHit(this);
-	if (Raycast(fenceHit, GetPositionV(), nextPos))
+	if (Physics::Raycast(fenceHit, GetPositionV(), nextPos))
 	{
 		if (dynamic_cast<FenceActor*>(fenceHit.hitActor))
 		{

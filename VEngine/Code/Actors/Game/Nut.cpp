@@ -29,7 +29,7 @@ void Nut::OnLinkRotateRight()
 void Nut::CheckIfConnectedToBolt(const XMVECTOR moveDirection)
 {
 	HitResult hit(this);
-	if (SimpleBoxCast(GetPositionV(), XMFLOAT3(0.5f, 0.5f, 0.5f), hit, false, false))
+	if (Physics::SimpleBoxCast(GetPositionV(), XMFLOAT3(0.5f, 0.5f, 0.5f), hit, false, false))
 	{
 		for (auto actor : hit.hitActors)
 		{

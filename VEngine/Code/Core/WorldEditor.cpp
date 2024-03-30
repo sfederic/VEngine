@@ -105,7 +105,7 @@ void HandleActorPicking()
 	if (Input::GetMouseLeftUp())
 	{
 		HitResult hit;
-		if (RaycastFromScreen(hit))
+		if (Physics::RaycastFromScreen(hit))
 		{
 			//@Todo: move all these 'placement' blocks into functions
 
@@ -330,7 +330,7 @@ void SpawnActorOnClick()
 		if (spawnSystem)
 		{
 			HitResult hit;
-			if (RaycastFromScreen(hit))
+			if (Physics::RaycastFromScreen(hit))
 			{
 				Transform transform;
 				XMStoreFloat3(&transform.position, hit.GetHitPosV());
@@ -392,7 +392,7 @@ void VertexPainting()
 		if (Input::GetMouseLeftDown() && Input::GetKeyHeld(Keys::Ctrl)) //Set colour of hit vertex to paint colour
 		{
 			HitResult hit;
-			if (RaycastFromScreen(hit))
+			if (Physics::RaycastFromScreen(hit))
 			{
 				if (WorldEditor::vertexPaintLockActor != nullptr)
 				{
@@ -416,7 +416,7 @@ void VertexPainting()
 		else if (Input::GetMouseLeftDown()) //Paint
 		{
 			HitResult hit;
-			if (RaycastFromScreen(hit))
+			if (Physics::RaycastFromScreen(hit))
 			{
 				if (WorldEditor::vertexPaintLockActor != nullptr)
 				{
@@ -471,7 +471,7 @@ void UVPainting()
 	if (leftClick)
 	{
 		HitResult hit;
-		if (RaycastFromScreen(hit))
+		if (Physics::RaycastFromScreen(hit))
 		{
 			if (hit.hitActor != WorldEditor::GetPickedActor()) return;
 

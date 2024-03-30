@@ -105,7 +105,7 @@ XMFLOAT3 BoxTriggerComponent::GetExtents() const
 
 bool BoxTriggerComponent::QuickInPlaceBoxCast(HitResult& hitResult, bool drawDebug)
 {
-	return SimpleBoxCast(GetWorldPositionV(), boundingBox.Extents, hitResult, drawDebug, true);
+	return Physics::SimpleBoxCast(GetWorldPositionV(), boundingBox.Extents, hitResult, drawDebug, true);
 }
 
 void BoxTriggerComponent::SetTriggerEnterCallback(std::function<void()> callback)

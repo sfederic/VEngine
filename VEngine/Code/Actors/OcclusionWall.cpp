@@ -20,7 +20,7 @@ void OcclusionWall::Tick(float deltaTime)
 	auto player = Player::system.GetOnlyActor();
 	const auto cameraToPlayerDir = XMVector3Normalize(cam.GetWorldPositionV() - player->GetPositionV());
 	const auto start = player->GetPositionV() + cameraToPlayerDir;
-	if (OrientedBoxCast(hit, start, cam.GetWorldPositionV(), XMFLOAT2(0.25f, 0.25f), false, false))
+	if (Physics::OrientedBoxCast(hit, start, cam.GetWorldPositionV(), XMFLOAT2(0.25f, 0.25f), false, false))
 	{
 		auto hitActor = hit.FindHitActor(this);
 		if (hitActor == this)

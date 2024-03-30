@@ -25,7 +25,7 @@ void Drill::OnLinkRotate()
 void Drill::DrillThroughBelowGridActor()
 {
 	HitResult hit(this);
-	if (Raycast(hit, GetPositionV(), GetForwardVectorV(), 1.5f))
+	if (Physics::Raycast(hit, GetPositionV(), GetForwardVectorV(), 1.5f))
 	{
 		auto actor = hit.GetHitActorAs<GridActor>();
 		if (actor)
