@@ -1,5 +1,5 @@
 GridActor
-24
+23
  Enabled
 1
  Position
@@ -1263,7 +1263,7 @@ next
  Enabled
 1
  Position
-2 1 10
+2 0 10
  Rotation
 0 1 0 1.56958e-07
  Scale
@@ -1326,7 +1326,7 @@ next
  Enabled
 1
  Position
-3 1 10
+3 0 10
  Rotation
 0 1 0 1.56958e-07
  Scale
@@ -1389,7 +1389,7 @@ next
  Enabled
 1
  Position
-4 1 10
+4 0 10
  Rotation
 0 1 0 1.56958e-07
  Scale
@@ -1449,69 +1449,6 @@ Rotate Yaw
 UID
 4291204589
 next
- Enabled
-1
- Position
-3 0 8
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Audio LinkMove
-cloth_heavy.wav
-Audio LinkRotate
-chainmail1.wav
-BigGridActor
-1
-Can Fall
-1
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-0
-Inspect
-0
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Move Speed
-12
-MoveOnlyXAxis
-0
-MoveOnlyZAxis
-0
-Name
-GridActor23
-Obstacle
-1
-Rotate Pitch
-1
-Rotate Roll
-0
-Rotate Speed
-12
-Rotate Yaw
-1
-UID
-215228894
-next
 Player
 1
  Enabled
@@ -1550,8 +1487,27 @@ Size Y
 UID
 2864225896
 next
+DebugNoteActor
+1
+ Enabled
+1
+ Position
+3 0 9
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+DebugNoteActor0
+Note Text
+Was thinking about a puzle here, rearranging the seats to the "left hand of the Goddess" or something
+UID
+2545864027
+next
 MeshActor
-3
+2
  Enabled
 1
  Position
@@ -1570,32 +1526,17 @@ next
  Enabled
 1
  Position
-3 -0.5 9
+3 -0.49 4.5
  Rotation
 -0 0 -0 1
  Scale
-3.5 1 3
+3 1 9
  Visible
 1
 Name
-MeshActor5
+MeshActor1
 UID
-3404116688
-next
- Enabled
-1
- Position
-3 0 10
- Rotation
--0 0 -0 1
- Scale
-7 1 1
- Visible
-1
-Name
-MeshActor6
-UID
-1279411073
+4145855531
 next
 DirectionalLightActor
 1
@@ -1615,7 +1556,7 @@ UID
 446310382
 next
 MeshComponent
-29
+27
 2971298003
 Mesh
  Enabled
@@ -2801,7 +2742,7 @@ Mesh
  Enabled
 1
  Pos
-2 1 10
+2 0 10
  Rot
 0 1 0 1.56958e-07
  Scale
@@ -2860,7 +2801,7 @@ Mesh
  Enabled
 1
  Pos
-3 1 10
+3 0 10
  Rot
 0 1 0 1.56958e-07
  Scale
@@ -2919,7 +2860,7 @@ Mesh
  Enabled
 1
  Pos
-4 1 10
+4 0 10
  Rot
 0 1 0 1.56958e-07
  Scale
@@ -2972,65 +2913,6 @@ Trans. Occlude
 0
 UID
 913247587
-next
-215228894
-Mesh
- Enabled
-1
- Pos
-3 0 8
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-default
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Texture2
-
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-coffin_1.vmesh
-Physics Static
-1
-Render Static
-0
-Trans. Occlude
-0
-UID
-1820027714
 next
 1608418331
 Mesh
@@ -3209,16 +3091,16 @@ Trans. Occlude
 UID
 2453315946
 next
-3404116688
+4145855531
 Mesh
  Enabled
 1
  Pos
-3 -0.5 9
+3 -0.49 4.5
  Rot
 -0 0 -0 1
  Scale
-3.5 1 3
+3 1 9
  Visible
 1
 Casts Shadow
@@ -3242,13 +3124,13 @@ M_Smoothness
 M_Specular
 1 1 1 1
 M_Texture
-test.png
+Floors/carpet.jpg
 M_Texture2
 
 M_Use Texture
 1
 M_UvOffset
-0 0
+1 1
 M_UvOffsetSpeed
 0 0
 M_UvRotation
@@ -3256,9 +3138,9 @@ M_UvRotation
 M_UvRotationSpeed
 0
 M_UvScale
-1 1
+1 3
 Mesh
-steps_single_long.vmesh
+node.vmesh
 Physics Static
 1
 Render Static
@@ -3266,69 +3148,10 @@ Render Static
 Trans. Occlude
 0
 UID
-2644949866
-next
-1279411073
-Mesh
- Enabled
-1
- Pos
-3 0 10
- Rot
--0 0 -0 1
- Scale
-7 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-default
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Texture2
-
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cube.vmesh
-Physics Static
-1
-Render Static
-1
-Trans. Occlude
-0
-UID
-969731359
+1052202723
 next
 DialogueComponent
-25
+24
 2971298003
 Dialogue
  Enabled
@@ -3582,17 +3405,6 @@ File
 UID
 3618370023
 next
-215228894
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-49511344
-next
 1608418331
 Dialogue
  Enabled
@@ -3712,7 +3524,7 @@ UID
 3420083326
 next
 EmptyComponent
-1
+2
 1608418331
 Root
  Enabled
@@ -3727,5 +3539,20 @@ Root
 1
 UID
 2816086021
+next
+2545864027
+Root
+ Enabled
+1
+ Pos
+3 0 9
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+1154689026
 next
 end
