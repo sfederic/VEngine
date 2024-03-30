@@ -360,6 +360,7 @@
     <ClCompile Include="Code\Actors\Game\InputTutorialGridActor.cpp" />
     <ClCompile Include="Code\Particle\MeshEffect.cpp" />
     <ClCompile Include="Code\Actors\Game\TeleportGridActor.cpp" />
+    <ClCompile Include="Code\Actors\Game\PressureSwitch.cpp" />
     <ClInclude Include="Code\Actors\Game\TeleportGridActor.h" />
     <ClInclude Include="Code\Editor\AssetIconListWidget.h" />
     <ClInclude Include="Code\Render\BlendState.h" />
@@ -752,6 +753,7 @@
     <ClInclude Include="Code\UI\Game\InputIconWidget.h" />
     <ClInclude Include="Code\Actors\Game\InputTutorialGridActor.h" />
     <ClInclude Include="Code\Particle\MeshEffect.h" />
+    <ClInclude Include="Code\Actors\Game\PressureSwitch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
