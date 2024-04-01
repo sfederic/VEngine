@@ -17,7 +17,7 @@ void PressureSwitch::Create()
 {
 	__super::Create();
 
-	switchMesh->SetMeshFilename("step_small.vmesh");
+	switchMesh->SetMeshFilename("pressure_switch.vmesh");
 	switchMesh->SetLocalPosition(0.f, -0.5f, 0.f);
 }
 
@@ -25,23 +25,26 @@ void PressureSwitch::Start()
 {
 	__super::Start();
 
-	actorToActivate = World::GetActorByName(actorToActivateName);
+	actorToActivate = World::GetActorByNameAllowNull(actorToActivateName);
 }
 
 void PressureSwitch::Tick(float deltaTime)
 {
 	__super::Tick(deltaTime);
 
-	auto containedGridActors = switchTrigger->GetAllContainedActors<GridActor>();
+	if (actorToActivate)
+	{
+		auto containedGridActors = switchTrigger->GetAllContainedActors<GridActor>();
 		switchActive = containedGridActors.size() >= numOfActorsToActivateSwitch;
 
-	if (switchActive)
-	{
-		actorToActivate->Activate();
-	}
-	else
-	{
-		actorToActivate->Deactivate();
+		if (switchActive)
+		{
+			actorToActivate->Activate();
+		}
+		else
+		{
+			actorToActivate->Deactivate();
+		}
 	}
 }
 
