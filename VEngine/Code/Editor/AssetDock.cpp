@@ -491,6 +491,8 @@ void AssetDock::ImportMesh()
 		Log("VMesh built from [%s].", filename.c_str());
 
 		Renderer::SetRendererToCaptureMeshIcon(filename);
+
+		editor->RefreshAssetList();
 	}
 }
 
@@ -512,6 +514,8 @@ void AssetDock::ImportAnim()
 		const std::string filename = QFileInfo(filePath).fileName().toStdString();
 		AssetSystem::BuildSingleVAnimFromFBX(filePath.toStdString(), filename);
 		Log("VAnim built from [%s].", filename.c_str());
+
+		editor->RefreshAssetList();
 	}
 }
 
