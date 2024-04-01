@@ -1210,6 +1210,7 @@ void Player::EnableLinkEffectMeshForHover(MeshComponent* mesh)
 
 	linkEffectMesh->SetWorldScale(mesh->GetWorldScaleV() * 1.1f);
 	linkEffectMesh->SetWorldPosition(mesh->GetWorldPositionV());
+	linkEffectMesh->SetWorldRotation(mesh->GetWorldRotationV());
 
 	linkEffectMesh->SetMeshFilename(mesh->GetMeshFilename());
 	linkEffectMesh->ReCreate();
