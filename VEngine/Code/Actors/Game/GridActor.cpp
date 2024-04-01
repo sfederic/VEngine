@@ -153,7 +153,7 @@ void GridActor::Tick(float deltaTime)
 	if (canFall)
 	{
 		HitResult hit(this);
-		if (!Physics::Raycast(hit, GetPositionV(), -VMath::GlobalUpVector(), 0.75f))
+		if (!Physics::Raycast(hit, GetPositionV(), -VMath::GlobalUpVector(), 1.f))
 		{
 			inFall = true;
 			constexpr float fallSpeed = 2.f;
