@@ -35,6 +35,7 @@ void ShaderSystem::Init()
 	CreateShaderItem("Floating", L"Floating_vs.cso", L"Default_ps.cso");
 	CreateShaderItem("Outline", L"Outline_vs.cso", L"SolidColour_ps.cso");
 	CreateShaderItem("ScreenSpaceTexture", L"Default_vs.cso", L"ScreenSpaceTexture_ps.cso");
+	CreateShaderItem("Grass", L"Grass_vs.cso", L"Default_ps.cso");
 }
 
 VertexShader* ShaderSystem::FindVertexShader(const std::wstring& filename)
