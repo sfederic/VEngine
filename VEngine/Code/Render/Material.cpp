@@ -28,6 +28,7 @@ void Material::SetupBlendShaderItemsAndRastStateValues()
 	rastStates.Add(RastStates::frontCull);
 
 	blendStates.Add(BlendStates::Default);
+	blendStates.Add(BlendStates::Transparent);
 
 	for (const auto shaderItem : ShaderSystem::GetAllShaderItems())
 	{

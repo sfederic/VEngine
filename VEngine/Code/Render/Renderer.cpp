@@ -497,7 +497,12 @@ void CreateRasterizerStates()
 
 void CreateBlendStates()
 {
-	//DEFAULT BLEND STATE
+	//DEFAULT NULL BLEND STATE
+	{
+		blendStateMap.emplace(BlendStates::Default, std::make_unique<NullBlendState>(BlendStates::Default));
+	}
+
+	//TRANSPARENT BLEND STATE
 	{
 		D3D11_BLEND_DESC alphaToCoverageDesc = {};
 		//MSAA has to be set for AlphaToCoverage to work.
@@ -511,7 +516,7 @@ void CreateBlendStates()
 		alphaToCoverageDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
 		alphaToCoverageDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
 
-		blendStateMap.emplace(BlendStates::Default, std::make_unique<BlendState>(BlendStates::Default, alphaToCoverageDesc));
+		blendStateMap.emplace(BlendStates::Transparent, std::make_unique<BlendState>(BlendStates::Transparent, alphaToCoverageDesc));
 	}
 }
 
