@@ -11,7 +11,7 @@ DebugNoteActor::DebugNoteActor()
 void DebugNoteActor::Start()
 {
 	noteWidget = UISystem::CreateWidget<DebugNoteWidget>();
-	noteWidget->noteText = noteText;
+	noteWidget->SetNoteText(noteText);
 	noteWidget->AddToViewport();
 }
 

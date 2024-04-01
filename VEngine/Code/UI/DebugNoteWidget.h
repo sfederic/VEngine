@@ -1,10 +1,14 @@
 #pragma once
+
 #include "Widget.h"
 
 //Displays a note in world position. Mainly used for debugging notes in levels, not for actual gameplay.
-struct DebugNoteWidget : Widget
+class DebugNoteWidget : public Widget
 {
-	std::wstring noteText;
+public:
+	void Draw(float deltaTime) override;
+	void SetNoteText(std::wstring_view text) { noteText = text; }
 
-	virtual void Draw(float deltaTime) override;
+private:
+	std::wstring noteText;
 };
