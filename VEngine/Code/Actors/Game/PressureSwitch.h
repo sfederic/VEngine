@@ -25,5 +25,8 @@ private:
 	MeshComponent* switchMesh = nullptr;
 	BoxTriggerComponent* switchTrigger = nullptr;
 
+	//The amount of actors needed in the trigger to offset the switch.
+	int numOfActorsToActivateSwitch = 1;
+
 	bool switchActive = false;
 };

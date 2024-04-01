@@ -33,7 +33,7 @@ void PressureSwitch::Tick(float deltaTime)
 	__super::Tick(deltaTime);
 
 	auto containedGridActors = switchTrigger->GetAllContainedActors<GridActor>();
-	switchActive = containedGridActors.size() > 0;
+		switchActive = containedGridActors.size() >= numOfActorsToActivateSwitch;
 
 	if (switchActive)
 	{
@@ -51,5 +51,6 @@ Properties PressureSwitch::GetProps()
 	props.title = GetTypeName();
 	props.Add("Switch Active", &switchActive);
 	props.Add("Actor To Activate", &actorToActivateName);
+	props.Add("Num Actors Needed", &numOfActorsToActivateSwitch);
 	return props;
 }
