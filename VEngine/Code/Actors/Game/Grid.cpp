@@ -30,7 +30,7 @@ void Grid::Create()
 {
 	__super::Create();
 
-	nodeMesh->SetBlendState(BlendStates::Default);
+	nodeMesh->SetBlendState(BlendStates::Transparent);
 
 	//Make sure actors can't interact with grid nodes via ray/box casts.
 	nodeMesh->SetCollisionLayer(CollisionLayers::None);
