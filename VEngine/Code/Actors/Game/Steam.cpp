@@ -1,6 +1,8 @@
 #include "vpch.h"
 #include "Steam.h"
 #include "Particle/ParticleEmitter.h"
+#include "Components/MeshComponent.h"
+#include "Gameplay/GridNode.h"
 
 Steam::Steam()
 {
@@ -8,11 +10,23 @@ Steam::Steam()
 	rootComponent->AddChild(steamEmitter);
 }
 
+void Steam::Start()
+{
+	__super::Start();
+
+	SetCurrentNodeState();
+}
+
 void Steam::Create()
 {
 	__super::Create();
 
 	steamEmitter->SetTexture("Particle/smoke.png");
+
+	mesh->SetVisibility(false);
+	mesh->SetActive(false);
+	mesh->ignoreGridRaycasts = true;
+	mesh->canBeLinkedTo = false;
 }
 
 Properties Steam::GetProps()
@@ -25,9 +39,26 @@ Properties Steam::GetProps()
 void Steam::Enable()
 {
 	SetActive(true);
+	SetCurrentNodeState();
 }
 
 void Steam::Disable()
 {
 	SetActive(false);
+	SetCurrentNodeState();
+}
+
+void Steam::SetCurrentNodeState()
+{
+	auto node = GetCurrentNode();
+
+	//Don't get confused here. If the steam is On, hide the node.
+	if (IsActive())
+	{
+		node->Hide();
+	}
+	else
+	{
+		node->Show();
+	}
 }
