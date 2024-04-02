@@ -81,3 +81,8 @@ Properties ParticleEmitter::GetProps()
 
 	return props;
 }
+
+void ParticleEmitter::SetTexture(std::string_view textureFilename)
+{
+	material->defaultTextureData.filename = textureFilename;
+}

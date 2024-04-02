@@ -22,6 +22,8 @@ public:
 
 	Material& GetMaterial() { return *material; }
 
+	void SetTexture(std::string_view textureFilename);
+
 	std::vector<Particle> particles;
 
 	ParticleData particleData;
