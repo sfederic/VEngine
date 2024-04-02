@@ -12,7 +12,7 @@ struct Transform
 	DirectX::XMFLOAT3 scale;
 
 	Transform();
-	DirectX::XMMATRIX GetAffine();
-	DirectX::XMMATRIX GetAffineRotationOrigin(DirectX::XMVECTOR rotOrigin);
+	DirectX::XMMATRIX GetAffine() const;
+	DirectX::XMMATRIX GetAffineRotationOrigin(DirectX::XMVECTOR rotOrigin) const;
 	void Decompose(DirectX::XMMATRIX m);
 };

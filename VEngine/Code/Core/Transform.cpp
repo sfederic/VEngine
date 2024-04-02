@@ -12,7 +12,7 @@ Transform::Transform()
 	local = XMMatrixIdentity();
 }
 
-XMMATRIX Transform::GetAffine()
+XMMATRIX Transform::GetAffine() const
 {
 	return XMMatrixAffineTransformation(
 		XMLoadFloat3(&scale),
@@ -23,7 +23,7 @@ XMMATRIX Transform::GetAffine()
 }
 
 //Helps with rotating child actors around their parent using Quaternions
-XMMATRIX Transform::GetAffineRotationOrigin(XMVECTOR rotOrigin)
+XMMATRIX Transform::GetAffineRotationOrigin(XMVECTOR rotOrigin) const
 {
 	return XMMatrixAffineTransformation(
 		XMLoadFloat3(&scale),
