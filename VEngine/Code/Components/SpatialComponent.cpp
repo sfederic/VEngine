@@ -45,16 +45,6 @@ XMMATRIX SpatialComponent::GetParentWorldMatrix(XMMATRIX parentWorld) const
 	return world;
 }
 
-void SpatialComponent::UpdateTransform(XMMATRIX parentWorld)
-{
-	XMMATRIX world = transform.GetAffine() * parentWorld;
-	for (SpatialComponent* child : children)
-	{
-		child->UpdateTransform(world);
-	}
-	transform.world = world;
-}
-
 Properties SpatialComponent::GetProps()
 {
 	auto props = __super::GetProps();
@@ -91,25 +81,21 @@ XMVECTOR SpatialComponent::GetLocalPositionV() const
 void SpatialComponent::SetLocalPosition(float x, float y, float z)
 {
 	transform.position = XMFLOAT3(x, y, z);
-	UpdateTransform();
 }
 
 void SpatialComponent::SetLocalPosition(XMFLOAT3 newPosition)
 {
 	transform.position = newPosition;
-	UpdateTransform();
 }
 
 void SpatialComponent::SetLocalPosition(XMVECTOR newPosition)
 {
 	XMStoreFloat3(&transform.position, newPosition);
-	UpdateTransform();
 }
 
 void SpatialComponent::SetWorldPosition(XMFLOAT3 position)
 {
 	SetWorldPosition(XMLoadFloat3(&position));
-	UpdateTransform();
 }
 
 void SpatialComponent::SetWorldPosition(XMVECTOR position)
@@ -168,25 +154,21 @@ XMVECTOR SpatialComponent::GetWorldScaleV() const
 void SpatialComponent::SetLocalScale(float uniformScale)
 {
 	transform.scale = XMFLOAT3(uniformScale, uniformScale, uniformScale);
-	UpdateTransform();
 }
 
 void SpatialComponent::SetLocalScale(float x, float y, float z)
 {
 	transform.scale = XMFLOAT3(x, y, z);
-	UpdateTransform();
 }
 
 void SpatialComponent::SetLocalScale(XMFLOAT3 newScale)
 {
 	transform.scale = newScale;
-	UpdateTransform();
 }
 
 void SpatialComponent::SetLocalScale(XMVECTOR newScale)
 {
 	XMStoreFloat3(&transform.scale, newScale);
-	UpdateTransform();
 }
 
 void SpatialComponent::SetWorldScale(float uniformScale)
@@ -238,7 +220,6 @@ XMVECTOR SpatialComponent::GetWorldRotationV() const
 void SpatialComponent::SetLocalRotation(float x, float y, float z, float w)
 {
 	transform.rotation = XMFLOAT4(x, y, z, w);
-	UpdateTransform();
 }
 
 XMFLOAT4 SpatialComponent::GetLocalRotation() const
@@ -249,13 +230,11 @@ XMFLOAT4 SpatialComponent::GetLocalRotation() const
 void SpatialComponent::SetLocalRotation(XMFLOAT4 newRotation)
 {
 	transform.rotation = newRotation;
-	UpdateTransform();
 }
 
 void SpatialComponent::SetLocalRotation(XMVECTOR newRotation)
 {
 	XMStoreFloat4(&transform.rotation, newRotation);
-	UpdateTransform();
 }
 
 XMFLOAT3 SpatialComponent::GetForwardVector() const

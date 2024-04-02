@@ -8,7 +8,6 @@ Transform::Transform()
 	scale = XMFLOAT3(1.f, 1.f, 1.f);
 	rotation = XMFLOAT4(0.f, 0.f, 0.f, 1.f);
 	position = XMFLOAT3(0.f, 0.f, 0.f);
-	world = XMMatrixIdentity();
 }
 
 XMMATRIX Transform::GetAffine() const

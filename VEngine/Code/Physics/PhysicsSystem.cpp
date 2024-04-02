@@ -277,7 +277,6 @@ void PhysicsSystem::GetTransformFromPhysicsActor(MeshComponent* mesh)
 	PhysxToActorTransform(transform, pxTransform);
 
 	mesh->SetTransform(transform);
-	mesh->UpdateTransform();
 }
 
 std::unordered_map<UID, std::unique_ptr<MeshComponent>>& PhysicsSystem::GetAllPhysicsMeshes()

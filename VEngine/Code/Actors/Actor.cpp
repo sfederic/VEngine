@@ -13,32 +13,6 @@ XMMATRIX Actor::GetWorldMatrix() const
 	return rootComponent->GetWorldMatrix();
 }
 
-void Actor::UpdateTransform(const XMMATRIX parentWorld)
-{
-	XMMATRIX world = GetTransformMatrix() * parentWorld;
-
-	for (Actor* child : children)
-	{
-		child->UpdateTransform(world);
-	}
-
-	auto rootTransform = rootComponent->GetTransform();
-	rootTransform.world = world;
-	rootComponent->SetTransform(rootTransform);
-}
-
-XMMATRIX Actor::GetTransformMatrix() const
-{
-	XMVECTOR rotationOffset = XMVectorSet(0.f, 0.f, 0.f, 1.f);
-
-	if (parent)
-	{
-		rotationOffset = parent->rootComponent->GetLocalPositionV();
-	}
-
-	return rootComponent->GetTransform().GetAffineRotationOrigin(rotationOffset);
-}
-
 XMFLOAT3 Actor::GetPosition() const
 {
 	return rootComponent->GetWorldPosition();
@@ -127,37 +101,37 @@ Transform Actor::GetTransform() const
 XMFLOAT3 Actor::GetForwardVector() const
 {
 	XMFLOAT3 forward;
-	XMStoreFloat3(&forward, XMVector3Normalize(rootComponent->GetTransform().world.r[2]));
+	XMStoreFloat3(&forward, XMVector3Normalize(rootComponent->GetWorldMatrix().r[2]));
 	return forward;
 }
 
 XMVECTOR Actor::GetForwardVectorV() const
 {
-	return XMVector3Normalize(rootComponent->GetTransform().world.r[2]);
+	return XMVector3Normalize(rootComponent->GetWorldMatrix().r[2]);
 }
 
 XMFLOAT3 Actor::GetRightVector() const
 {
 	XMFLOAT3 right;
-	XMStoreFloat3(&right, XMVector3Normalize(rootComponent->GetTransform().world.r[0]));
+	XMStoreFloat3(&right, XMVector3Normalize(rootComponent->GetWorldMatrix().r[0]));
 	return right;
 }
 
 XMVECTOR Actor::GetRightVectorV() const
 {
-	return XMVector3Normalize(rootComponent->GetTransform().world.r[0]);
+	return XMVector3Normalize(rootComponent->GetWorldMatrix().r[0]);
 }
 
 XMFLOAT3 Actor::GetUpVector() const
 {
 	XMFLOAT3 up;
-	XMStoreFloat3(&up, XMVector3Normalize(rootComponent->GetTransform().world.r[1]));
+	XMStoreFloat3(&up, XMVector3Normalize(rootComponent->GetWorldMatrix().r[1]));
 	return up;
 }
 
 XMVECTOR Actor::GetUpVectorV() const
 {
-	return XMVector3Normalize(rootComponent->GetTransform().world.r[1]);
+	return XMVector3Normalize(rootComponent->GetWorldMatrix().r[1]);
 }
 
 Properties Actor::GetProps()

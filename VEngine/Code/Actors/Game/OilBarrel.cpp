@@ -59,7 +59,6 @@ void OilBarrel::SpillOil()
 			}
 
 			auto oilSlick = OilSlick::system.Add(t);
-			oilSlick->UpdateTransform(XMMatrixIdentity());
 			oilSlick->Create();
 			oilSlick->CreateAllComponents();
 

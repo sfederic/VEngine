@@ -8,7 +8,6 @@
 CameraComponent::CameraComponent(XMFLOAT3 startPos)
 {
 	SetLocalPosition(startPos);
-	UpdateTransform();
 }
 
 XMMATRIX CameraComponent::GetViewMatrix()

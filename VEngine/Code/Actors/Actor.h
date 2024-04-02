@@ -20,8 +20,6 @@ public:
 	Actor() {}
 
 	DirectX::XMMATRIX GetWorldMatrix() const;
-	void UpdateTransform(const DirectX::XMMATRIX parentWorld);
-	DirectX::XMMATRIX GetTransformMatrix() const;
 	void SetTransform(const Transform transform);
 	Transform GetTransform() const;
 

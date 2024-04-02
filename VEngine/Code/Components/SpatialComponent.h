@@ -17,7 +17,6 @@ public:
 	Properties GetProps() override;
 
 	XMMATRIX GetWorldMatrix() const;
-	void UpdateTransform(XMMATRIX parentWorld = XMMatrixIdentity());
 
 	XMFLOAT3 GetLocalPosition() const;
 	XMVECTOR GetLocalPositionV() const;

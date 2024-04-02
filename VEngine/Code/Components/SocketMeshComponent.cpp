@@ -17,5 +17,4 @@ void SocketMeshComponent::SetTransformFromLinkedSkeletonJoint()
 {
 	XMMATRIX jointMatrix = linkedSkeletalMesh->shaderSkinningData.skinningMatrices[jointIndex];
 	transform.Decompose(jointMatrix * linkedSkeletalMesh->GetWorldMatrix());
-	UpdateTransform();
 }
