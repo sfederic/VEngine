@@ -127,6 +127,7 @@ public:
 	template <typename T>
 	T* CreateComponent(std::string componentName, T component = T())
 	{
+		static_assert(std::is_convertible<T*, Component*>::value, "Derived must inherit Component");
 		return T::system.Add(componentName, this, std::move(component));
 	}
 
