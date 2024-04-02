@@ -14,6 +14,7 @@ public:
 	Properties GetProps() override;
 
 	void OnLinkRotate() override;
+	void OnLinkDeactivate() override;
 
 private:
 	void EnableDisableSteam();

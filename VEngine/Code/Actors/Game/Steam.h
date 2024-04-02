@@ -18,9 +18,8 @@ public:
 
 	void Enable();
 	void Disable();
-
-private:
 	void SetCurrentNodeState();
 
+private:
 	ParticleEmitter* steamEmitter = nullptr;
 };

@@ -42,6 +42,18 @@ void SteamValve::OnLinkRotate()
 	EnableDisableSteam();
 }
 
+void SteamValve::OnLinkDeactivate()
+{
+	//Careful with this call here. The parent function is calling Grid::RecalcAllNodes(), meaning
+	//the steam actor's current node has to be reset again.
+	__super::OnLinkDeactivate();
+
+	if (steam)
+	{
+		steam->SetCurrentNodeState();
+	}
+}
+
 void SteamValve::EnableDisableSteam()
 {
 	if (steam)
