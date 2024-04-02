@@ -1234,8 +1234,9 @@ void Player::UpdateLinkEffectMeshPositionAndRotation()
 {
 	if (linkedGridActor)
 	{
-		linkEffectMesh->SetWorldPosition(linkedGridActor->GetPositionV());
-		linkEffectMesh->SetWorldRotation(linkedGridActor->GetRotationV());
+		auto& linkedMesh = linkedGridActor->GetMesh();
+		linkEffectMesh->SetWorldPosition(linkedMesh.GetWorldPositionV());
+		linkEffectMesh->SetWorldRotation(linkedMesh.GetWorldRotationV());
 	}
 }
 
