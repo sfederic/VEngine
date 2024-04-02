@@ -7,7 +7,7 @@
 #include "Core/Camera.h"
 #include "Physics/PhysicsSystem.h"
 
-XMMATRIX Actor::GetWorldMatrix()
+XMMATRIX Actor::GetWorldMatrix() const
 {
 	//@Todo: this isn't going over actor parents and children
 	return rootComponent->GetWorldMatrix();
@@ -27,7 +27,7 @@ void Actor::UpdateTransform(const XMMATRIX parentWorld)
 	rootComponent->SetTransform(rootTransform);
 }
 
-XMMATRIX Actor::GetTransformMatrix()
+XMMATRIX Actor::GetTransformMatrix() const
 {
 	XMVECTOR rotationOffset = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 
@@ -39,12 +39,12 @@ XMMATRIX Actor::GetTransformMatrix()
 	return rootComponent->GetTransform().GetAffineRotationOrigin(rotationOffset);
 }
 
-XMFLOAT3 Actor::GetPosition()
+XMFLOAT3 Actor::GetPosition() const
 {
 	return rootComponent->GetWorldPosition();
 }
 
-XMVECTOR Actor::GetPositionV()
+XMVECTOR Actor::GetPositionV() const
 {
 	XMFLOAT3 pos = GetPosition();
 	return XMLoadFloat3(&pos);
@@ -52,7 +52,7 @@ XMVECTOR Actor::GetPositionV()
 
 //This is mainly used for Widgets rendering to screen-space.
 //Because the W component is needed as-is, there's no Float3 function for this yet.
-XMVECTOR Actor::GetHomogeneousPositionV()
+XMVECTOR Actor::GetHomogeneousPositionV() const
 {
 	auto& activeCamera = Camera::GetActiveCamera();
 	XMMATRIX view = activeCamera.GetViewMatrix();
@@ -62,23 +62,23 @@ XMVECTOR Actor::GetHomogeneousPositionV()
 	return mvp.r[3];
 }
 
-XMFLOAT3 Actor::GetScale()
+XMFLOAT3 Actor::GetScale() const
 {
 	return rootComponent->GetWorldScale();
 }
 
-XMVECTOR Actor::GetScaleV()
+XMVECTOR Actor::GetScaleV() const
 {
 	XMFLOAT3 scale = GetScale();
 	return XMLoadFloat3(&scale);
 }
 
-XMFLOAT4 Actor::GetRotation()
+XMFLOAT4 Actor::GetRotation() const
 {
 	return rootComponent->GetWorldRotation();
 }
 
-XMVECTOR Actor::GetRotationV()
+XMVECTOR Actor::GetRotationV() const
 {
 	XMFLOAT4 rotation = GetRotation();
 	return XMLoadFloat4(&rotation);
@@ -119,43 +119,43 @@ void Actor::SetTransform(const Transform transform)
 	rootComponent->SetTransform(transform);
 }
 
-Transform Actor::GetTransform()
+Transform Actor::GetTransform() const
 {
 	return rootComponent->GetTransform();
 }
 
-XMFLOAT3 Actor::GetForwardVector()
+XMFLOAT3 Actor::GetForwardVector() const
 {
 	XMFLOAT3 forward;
 	XMStoreFloat3(&forward, XMVector3Normalize(rootComponent->GetTransform().world.r[2]));
 	return forward;
 }
 
-XMVECTOR Actor::GetForwardVectorV()
+XMVECTOR Actor::GetForwardVectorV() const
 {
 	return XMVector3Normalize(rootComponent->GetTransform().world.r[2]);
 }
 
-XMFLOAT3 Actor::GetRightVector()
+XMFLOAT3 Actor::GetRightVector() const
 {
 	XMFLOAT3 right;
 	XMStoreFloat3(&right, XMVector3Normalize(rootComponent->GetTransform().world.r[0]));
 	return right;
 }
 
-XMVECTOR Actor::GetRightVectorV()
+XMVECTOR Actor::GetRightVectorV() const
 {
 	return XMVector3Normalize(rootComponent->GetTransform().world.r[0]);
 }
 
-XMFLOAT3 Actor::GetUpVector()
+XMFLOAT3 Actor::GetUpVector() const
 {
 	XMFLOAT3 up;
 	XMStoreFloat3(&up, XMVector3Normalize(rootComponent->GetTransform().world.r[1]));
 	return up;
 }
 
-XMVECTOR Actor::GetUpVectorV()
+XMVECTOR Actor::GetUpVectorV() const
 {
 	return XMVector3Normalize(rootComponent->GetTransform().world.r[1]);
 }

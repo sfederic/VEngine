@@ -19,21 +19,21 @@ class Actor
 public:
 	Actor() {}
 
-	DirectX::XMMATRIX GetWorldMatrix();
+	DirectX::XMMATRIX GetWorldMatrix() const;
 	void UpdateTransform(const DirectX::XMMATRIX parentWorld);
-	DirectX::XMMATRIX GetTransformMatrix();
+	DirectX::XMMATRIX GetTransformMatrix() const;
 	void SetTransform(const Transform transform);
-	Transform GetTransform();
+	Transform GetTransform() const;
 
-	DirectX::XMFLOAT3 GetPosition();
-	DirectX::XMVECTOR GetPositionV();
-	DirectX::XMVECTOR GetHomogeneousPositionV();
+	DirectX::XMFLOAT3 GetPosition() const;
+	DirectX::XMVECTOR GetPositionV() const;
+	DirectX::XMVECTOR GetHomogeneousPositionV() const;
 
-	DirectX::XMFLOAT3 GetScale();
-	DirectX::XMVECTOR GetScaleV();
+	DirectX::XMFLOAT3 GetScale() const;
+	DirectX::XMVECTOR GetScaleV() const;
 
-	DirectX::XMFLOAT4 GetRotation();
-	DirectX::XMVECTOR GetRotationV();
+	DirectX::XMFLOAT4 GetRotation() const;
+	DirectX::XMVECTOR GetRotationV() const;
 
 	void SetPosition(const DirectX::XMVECTOR position);
 	void SetPosition(const DirectX::XMFLOAT3 position);
@@ -44,12 +44,12 @@ public:
 	void AddRotation(DirectX::XMVECTOR direction, float angle);
 
 	//All vector functions return in world space, not local.
-	DirectX::XMFLOAT3 GetForwardVector();
-	DirectX::XMVECTOR GetForwardVectorV();
-	DirectX::XMFLOAT3 GetRightVector();
-	DirectX::XMVECTOR GetRightVectorV();
-	DirectX::XMFLOAT3 GetUpVector();
-	DirectX::XMVECTOR GetUpVectorV();
+	DirectX::XMFLOAT3 GetForwardVector() const;
+	DirectX::XMVECTOR GetForwardVectorV() const;
+	DirectX::XMFLOAT3 GetRightVector() const;
+	DirectX::XMVECTOR GetRightVectorV() const;
+	DirectX::XMFLOAT3 GetUpVector() const;
+	DirectX::XMVECTOR GetUpVectorV() const;
 
 	virtual Properties GetProps() = 0;
 	std::vector<Properties> GetAllProps();
