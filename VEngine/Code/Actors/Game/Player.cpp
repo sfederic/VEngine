@@ -630,6 +630,26 @@ void Player::LinkToGridActor()
 				return;
 			}
 
+			const auto CanBeLinkedToMeshCheck = [&]() -> bool
+				{
+					for (auto mesh : closestActorToLinkTo->GetComponents<MeshComponent>())
+					{
+						if (!mesh->canBeLinkedTo)
+						{
+							Camera::GetActiveCamera().SetShakeLevel(0.3f);
+							Log("Cannot link to GridActor via hit mesh [%s]. canBeLinkedTo set to false.", mesh->name.c_str());
+							return false;
+						}
+					}
+
+					return true;
+				};
+
+			if (!CanBeLinkedToMeshCheck())
+			{
+				return;
+			}
+
 			//This raycast is to make sure the player is not standing on the same actor it's linking to
 			//to avoid potentially rotating the linked actor and the player being stuck in mid-air.
 			HitResult sameActorHit(this);
@@ -645,14 +665,9 @@ void Player::LinkToGridActor()
 						return;
 					}
 
-					for (auto mesh : closestActorToLinkTo->GetComponents<MeshComponent>())
+					if (!CanBeLinkedToMeshCheck())
 					{
-						if (!mesh->canBeLinkedTo)
-						{
-							Camera::GetActiveCamera().SetShakeLevel(0.3f);
-							Log("Cannot link to GridActor via hit mesh [%s]. canBeLinkedTo set to false.", mesh->name.c_str());
-							return;
-						}
+						return;
 					}
 				}
 			}
