@@ -2,6 +2,7 @@
 #include "SteamValve.h"
 #include "Gameplay/GameUtils.h"
 #include "Particle/ParticleEmitter.h"
+#include "Steam.h"
 
 void SteamValve::Create()
 {
@@ -19,8 +20,8 @@ void SteamValve::Start()
 {
 	__super::Start();
 
-	steamEmitter = GameUtils::SpawnParticleEmitter("Particle/smoke.png", GetPositionV());
-	steamEmitter->SetActive(isValveOn);
+	steam = World::GetActorByNameAndLogCast<Steam>(steamName);
+	EnableDisableSteam();
 }
 
 Properties SteamValve::GetProps()
@@ -28,6 +29,7 @@ Properties SteamValve::GetProps()
 	auto props = __super::GetProps();
 	props.title = GetTypeName();
 	props.Add("Valve On", &isValveOn);
+	props.Add("Steam", &steamName);
 	return props;
 }
 
@@ -36,5 +38,21 @@ void SteamValve::OnLinkRotate()
 	__super::OnLinkRotate();
 
 	isValveOn = !isValveOn;
-	steamEmitter->SetActive(isValveOn);
+
+	EnableDisableSteam();
+}
+
+void SteamValve::EnableDisableSteam()
+{
+	if (steam)
+	{
+		if (isValveOn)
+		{
+			steam->Enable();
+		}
+		else
+		{
+			steam->Disable();
+		}
+	}
 }

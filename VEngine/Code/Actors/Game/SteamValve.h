@@ -2,7 +2,7 @@
 
 #include "GridActor.h"
 
-class ParticleEmitter;
+class Steam;
 
 class SteamValve : public GridActor
 {
@@ -16,6 +16,9 @@ public:
 	void OnLinkRotate() override;
 
 private:
-	ParticleEmitter* steamEmitter = nullptr;
+	void EnableDisableSteam();
+
+	std::string steamName;
+	Steam* steam = nullptr;
 	bool isValveOn = true;
 };
