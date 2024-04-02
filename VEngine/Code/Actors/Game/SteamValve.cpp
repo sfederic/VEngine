@@ -7,6 +7,11 @@ void SteamValve::Create()
 {
 	__super::Create();
 
+	ignoreRotationValidCheck = true;
+	canBeMovedInLink = false;
+
+	rotateSpeed = 2.f;
+
 	SetMeshFilename("gear.vmesh");
 }
 
