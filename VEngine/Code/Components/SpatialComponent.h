@@ -16,13 +16,13 @@ public:
 
 	Properties GetProps() override;
 
-	XMMATRIX GetWorldMatrix();
+	XMMATRIX GetWorldMatrix() const;
 	void UpdateTransform(XMMATRIX parentWorld = XMMatrixIdentity());
 
-	XMFLOAT3 GetLocalPosition();
-	XMVECTOR GetLocalPositionV();
-	XMFLOAT3 GetWorldPosition();
-	XMVECTOR GetWorldPositionV();
+	XMFLOAT3 GetLocalPosition() const;
+	XMVECTOR GetLocalPositionV() const;
+	XMFLOAT3 GetWorldPosition() const;
+	XMVECTOR GetWorldPositionV() const;
 	void SetLocalPosition(float x, float y, float z);
 	void SetLocalPosition(XMFLOAT3 newPosition);
 	void SetLocalPosition(XMVECTOR newPosition);
@@ -31,10 +31,10 @@ public:
 	void AddLocalPosition(XMVECTOR offset);
 	void AddWorldPosition(XMVECTOR offset);
 
-	XMFLOAT3 GetLocalScale();
-	XMVECTOR GetLocalScaleV();
-	XMFLOAT3 GetWorldScale();
-	XMVECTOR GetWorldScaleV();
+	XMFLOAT3 GetLocalScale() const;
+	XMVECTOR GetLocalScaleV() const;
+	XMFLOAT3 GetWorldScale() const;
+	XMVECTOR GetWorldScaleV() const;
 	void SetLocalScale(float uniformScale);
 	void SetLocalScale(float x, float y, float z);
 	void SetLocalScale(XMFLOAT3 newScale);
@@ -43,10 +43,10 @@ public:
 	void SetWorldScale(float uniformScale);
 	void SetWorldScale(XMVECTOR scale);
 
-	XMFLOAT4 GetLocalRotation();
-	XMVECTOR GetLocalRotationV();
-	XMFLOAT4 GetWorldRotation();
-	XMVECTOR GetWorldRotationV();
+	XMFLOAT4 GetLocalRotation() const;
+	XMVECTOR GetLocalRotationV() const;
+	XMFLOAT4 GetWorldRotation() const;
+	XMVECTOR GetWorldRotationV() const;
 	void SetLocalRotation(float x, float y, float z, float w);
 	void SetLocalRotation(XMFLOAT4 newRotation);
 	void SetLocalRotation(XMVECTOR newRotation);
@@ -54,12 +54,12 @@ public:
 	void AddLocalRotation(XMVECTOR vector, float angle);
 	void AddWorldRotation(XMVECTOR vector, float angle);
 
-	XMFLOAT3 GetForwardVector();
-	XMVECTOR GetForwardVectorV();
-	XMFLOAT3 GetRightVector();
-	XMVECTOR GetRightVectorV();
-	XMFLOAT3 GetUpVector();
-	XMVECTOR GetUpVectorV();
+	XMFLOAT3 GetForwardVector() const;
+	XMVECTOR GetForwardVectorV() const;
+	XMFLOAT3 GetRightVector() const;
+	XMVECTOR GetRightVectorV() const;
+	XMFLOAT3 GetUpVector() const;
+	XMVECTOR GetUpVectorV() const;
 
 	BoundingOrientedBox GetBoundsInWorldSpace();
 	BoundingOrientedBox GetBounds() const { return boundingBox; }
@@ -92,5 +92,5 @@ protected:
 	CollisionLayers layer = CollisionLayers::All;
 
 private:
-	XMMATRIX GetParentWorldMatrix(XMMATRIX parentWorld);
+	XMMATRIX GetParentWorldMatrix(XMMATRIX parentWorld) const;
 };

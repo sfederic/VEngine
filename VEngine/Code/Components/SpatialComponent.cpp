@@ -25,7 +25,7 @@ void SpatialComponent::RemoveChild(SpatialComponent* component)
 	throw new std::exception("child not found");
 }
 
-XMMATRIX SpatialComponent::GetWorldMatrix()
+XMMATRIX SpatialComponent::GetWorldMatrix() const
 {
 	XMMATRIX parentWorld = XMMatrixIdentity();
 	if (parent)
@@ -35,7 +35,7 @@ XMMATRIX SpatialComponent::GetWorldMatrix()
 	return GetParentWorldMatrix(parentWorld);
 }
 
-XMMATRIX SpatialComponent::GetParentWorldMatrix(XMMATRIX parentWorld)
+XMMATRIX SpatialComponent::GetParentWorldMatrix(XMMATRIX parentWorld) const
 {
 	XMMATRIX world = transform.GetAffine() * parentWorld;
 	for (SpatialComponent* child : children)
@@ -65,24 +65,24 @@ Properties SpatialComponent::GetProps()
 	return props;
 }
 
-XMFLOAT3 SpatialComponent::GetLocalPosition()
+XMFLOAT3 SpatialComponent::GetLocalPosition() const
 {
 	return transform.position;
 }
 
-XMFLOAT3 SpatialComponent::GetWorldPosition()
+XMFLOAT3 SpatialComponent::GetWorldPosition() const
 {
 	XMFLOAT3 pos;
 	XMStoreFloat3(&pos, GetWorldPositionV());
 	return pos;
 }
 
-XMVECTOR SpatialComponent::GetWorldPositionV()
+XMVECTOR SpatialComponent::GetWorldPositionV() const
 {
 	return GetWorldMatrix().r[3];
 }
 
-XMVECTOR SpatialComponent::GetLocalPositionV()
+XMVECTOR SpatialComponent::GetLocalPositionV() const
 {
 	XMVECTOR position = XMLoadFloat3(&transform.position);
 	return position;
@@ -135,24 +135,24 @@ void SpatialComponent::AddWorldPosition(XMVECTOR offset)
 	SetWorldPosition(GetWorldPositionV() + offset);
 }
 
-XMFLOAT3 SpatialComponent::GetLocalScale()
+XMFLOAT3 SpatialComponent::GetLocalScale() const
 {
 	return transform.scale;
 }
 
-XMVECTOR SpatialComponent::GetLocalScaleV()
+XMVECTOR SpatialComponent::GetLocalScaleV() const
 {
 	return XMLoadFloat3(&transform.scale);
 }
 
-XMFLOAT3 SpatialComponent::GetWorldScale()
+XMFLOAT3 SpatialComponent::GetWorldScale() const
 {
 	XMFLOAT3 scale;
 	XMStoreFloat3(&scale, GetWorldScaleV());
 	return scale;
 }
 
-XMVECTOR SpatialComponent::GetWorldScaleV()
+XMVECTOR SpatialComponent::GetWorldScaleV() const
 {
 	XMVECTOR relativeScale = GetLocalScaleV();
 
@@ -207,19 +207,19 @@ void SpatialComponent::SetWorldScale(XMVECTOR scale)
 	SetLocalScale(relativeScale);
 }
 
-XMVECTOR SpatialComponent::GetLocalRotationV()
+XMVECTOR SpatialComponent::GetLocalRotationV() const
 {
 	return XMLoadFloat4(&transform.rotation);
 }
 
-XMFLOAT4 SpatialComponent::GetWorldRotation()
+XMFLOAT4 SpatialComponent::GetWorldRotation() const
 {
 	XMFLOAT4 rot;
 	XMStoreFloat4(&rot, GetWorldRotationV());
 	return rot;
 }
 
-XMVECTOR SpatialComponent::GetWorldRotationV()
+XMVECTOR SpatialComponent::GetWorldRotationV() const
 {
 	XMVECTOR relativeRotation = GetLocalRotationV();
 
@@ -241,7 +241,7 @@ void SpatialComponent::SetLocalRotation(float x, float y, float z, float w)
 	UpdateTransform();
 }
 
-XMFLOAT4 SpatialComponent::GetLocalRotation()
+XMFLOAT4 SpatialComponent::GetLocalRotation() const
 {
 	return transform.rotation;
 }
@@ -258,26 +258,26 @@ void SpatialComponent::SetLocalRotation(XMVECTOR newRotation)
 	UpdateTransform();
 }
 
-XMFLOAT3 SpatialComponent::GetForwardVector()
+XMFLOAT3 SpatialComponent::GetForwardVector() const
 {
 	XMFLOAT3 forward;
 	XMStoreFloat3(&forward, XMVector3Normalize(GetWorldMatrix().r[2]));
 	return forward;
 }
 
-XMVECTOR SpatialComponent::GetForwardVectorV()
+XMVECTOR SpatialComponent::GetForwardVectorV() const
 {
 	return XMVector3Normalize(GetWorldMatrix().r[2]);
 }
 
-XMFLOAT3 SpatialComponent::GetRightVector()
+XMFLOAT3 SpatialComponent::GetRightVector() const
 {
 	XMFLOAT3 right;
 	XMStoreFloat3(&right, XMVector3Normalize(GetWorldMatrix().r[0]));
 	return right;
 }
 
-XMVECTOR SpatialComponent::GetRightVectorV()
+XMVECTOR SpatialComponent::GetRightVectorV() const
 {
 	return XMVector3Normalize(GetWorldMatrix().r[0]);
 }
@@ -312,14 +312,14 @@ void SpatialComponent::AddWorldRotation(XMVECTOR vector, float angle)
 	SetWorldRotation(newRotation);
 }
 
-XMFLOAT3 SpatialComponent::GetUpVector()
+XMFLOAT3 SpatialComponent::GetUpVector() const
 {
 	XMFLOAT3 up;
 	XMStoreFloat3(&up, XMVector3Normalize(GetWorldMatrix().r[1]));
 	return up;
 }
 
-XMVECTOR SpatialComponent::GetUpVectorV()
+XMVECTOR SpatialComponent::GetUpVectorV() const
 {
 	return XMVector3Normalize(GetWorldMatrix().r[1]);
 }
