@@ -11,6 +11,7 @@ public:
 	ACTOR_SYSTEM(Steam);
 
 	Steam();
+	void Create() override;
 	Properties GetProps() override;
 
 	void Enable();

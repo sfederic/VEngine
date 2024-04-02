@@ -8,6 +8,13 @@ Steam::Steam()
 	rootComponent->AddChild(steamEmitter);
 }
 
+void Steam::Create()
+{
+	__super::Create();
+
+	steamEmitter->SetTexture("Particle/smoke.png");
+}
+
 Properties Steam::GetProps()
 {
 	auto props = __super::GetProps();
