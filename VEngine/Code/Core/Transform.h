@@ -5,7 +5,6 @@
 struct Transform
 {
 	DirectX::XMMATRIX world;
-	DirectX::XMMATRIX local;
 
 	DirectX::XMFLOAT4 rotation; //Quaternion
 	DirectX::XMFLOAT3 position;

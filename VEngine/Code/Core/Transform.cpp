@@ -9,7 +9,6 @@ Transform::Transform()
 	rotation = XMFLOAT4(0.f, 0.f, 0.f, 1.f);
 	position = XMFLOAT3(0.f, 0.f, 0.f);
 	world = XMMatrixIdentity();
-	local = XMMatrixIdentity();
 }
 
 XMMATRIX Transform::GetAffine() const
