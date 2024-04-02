@@ -134,6 +134,8 @@ private:
 	void EnableLinkEffectMeshForSelect(MeshComponent* mesh);
 	void UpdateLinkEffectMeshPositionAndRotation();
 
+	bool CheckIfMeshCanBeLinkedTo(GridActor* gridActorToLinkTo);
+
 	bool previousMovementAndRotationStoppedValue = false;
 
 	bool playerInQuickThought = false;

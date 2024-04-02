@@ -251,6 +251,11 @@ void Player::HighlightLinkableGridActor()
 				return;
 			}
 
+			if (!CheckIfMeshCanBeLinkedTo(gridActor))
+			{
+				return;
+			}
+
 			EnableLinkEffectMeshForHover(&highlightedGridActor->GetMesh());
 		}
 		else
@@ -630,22 +635,7 @@ void Player::LinkToGridActor()
 				return;
 			}
 
-			const auto CanBeLinkedToMeshCheck = [&]() -> bool
-				{
-					for (auto mesh : closestActorToLinkTo->GetComponents<MeshComponent>())
-					{
-						if (!mesh->canBeLinkedTo)
-						{
-							Camera::GetActiveCamera().SetShakeLevel(0.3f);
-							Log("Cannot link to GridActor via hit mesh [%s]. canBeLinkedTo set to false.", mesh->name.c_str());
-							return false;
-						}
-					}
-
-					return true;
-				};
-
-			if (!CanBeLinkedToMeshCheck())
+			if (!CheckIfMeshCanBeLinkedTo(closestActorToLinkTo))
 			{
 				return;
 			}
@@ -665,7 +655,7 @@ void Player::LinkToGridActor()
 						return;
 					}
 
-					if (!CanBeLinkedToMeshCheck())
+					if (!CheckIfMeshCanBeLinkedTo(closestActorToLinkTo))
 					{
 						return;
 					}
@@ -1253,6 +1243,22 @@ void Player::UpdateLinkEffectMeshPositionAndRotation()
 		linkEffectMesh->SetWorldPosition(linkedMesh.GetWorldPositionV());
 		linkEffectMesh->SetWorldRotation(linkedMesh.GetWorldRotationV());
 	}
+}
+
+bool Player::CheckIfMeshCanBeLinkedTo(GridActor* gridActorToLinkTo)
+{
+	//There should really only ever be one mesh here anyway, but we'll see how it goes.
+	for (auto mesh : gridActorToLinkTo->GetComponents<MeshComponent>())
+	{
+		if (!mesh->canBeLinkedTo)
+		{
+			Camera::GetActiveCamera().SetShakeLevel(0.3f);
+			Log("Cannot link to GridActor via hit mesh [%s]. canBeLinkedTo set to false.", mesh->name.c_str());
+			return false;
+		}
+	}
+
+	return true;
 }
 
 XMVECTOR Player::GetCameraLocalPosition()
