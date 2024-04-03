@@ -2,12 +2,16 @@
 #include "Steam.h"
 #include "Particle/ParticleEmitter.h"
 #include "Components/MeshComponent.h"
+#include "Components/AudioComponent.h"
 #include "Gameplay/GridNode.h"
 
 Steam::Steam()
 {
 	steamEmitter = CreateComponent<ParticleEmitter>("SteamEmitter");
 	rootComponent->AddChild(steamEmitter);
+
+	steamAudio = CreateComponent<AudioComponent>("SteamAudio");
+	rootComponent->AddChild(steamAudio);
 }
 
 void Steam::Start()
@@ -22,6 +26,8 @@ void Steam::Create()
 	__super::Create();
 
 	steamEmitter->SetTexture("Particle/smoke.png");
+
+	steamAudio->SetAudioFilename("steam.wav");
 
 	mesh->SetVisibility(false);
 	mesh->SetActive(false);

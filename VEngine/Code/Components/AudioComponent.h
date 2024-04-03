@@ -20,6 +20,8 @@ public:
 	void Start() override;
 	Properties GetProps() override;
 
+	void SetAudioFilename(std::string_view filename) { audioFilename = filename; }
+
 	void SetToFadeIn() { fade = FadeValue::In; }
 	void SetToFadeOut() { fade = FadeValue::Out; }
 
