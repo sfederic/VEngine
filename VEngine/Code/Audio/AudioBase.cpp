@@ -7,5 +7,6 @@ AudioBase::AudioBase()
 
 AudioBase::~AudioBase()
 {
+	//@Todo: don't trust this raw delete, or the destructor.
 	delete buffer.pAudioData;
 }
