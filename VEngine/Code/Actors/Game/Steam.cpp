@@ -46,12 +46,14 @@ Properties Steam::GetProps()
 void Steam::Enable()
 {
 	SetActive(true);
+	steamAudio->Play();
 	SetCurrentNodeState();
 }
 
 void Steam::Disable()
 {
 	SetActive(false);
+	steamAudio->Stop();
 	SetCurrentNodeState();
 }
 
