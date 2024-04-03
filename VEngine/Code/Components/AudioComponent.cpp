@@ -39,10 +39,6 @@ void AudioComponent::Tick(float deltaTime)
 	channel->SetVolume(volume);
 }
 
-void AudioComponent::Create()
-{
-}
-
 Properties AudioComponent::GetProps()
 {
 	auto props = __super::GetProps();

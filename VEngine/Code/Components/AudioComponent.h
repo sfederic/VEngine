@@ -18,7 +18,6 @@ public:
 	AudioComponent();
 	void Tick(float deltaTime) override;
 	void Start() override;
-	void Create() override;
 	Properties GetProps() override;
 
 	void SetToFadeIn() { fade = FadeValue::In; }
@@ -28,9 +27,9 @@ public:
 	void Stop();
 
 	void SetVolume(float volume_) { volume = volume_; }
-	auto GetVolume() { return volume; }
+	auto GetVolume() const { return volume; }
 
-	auto GetChannelID() { return channelID; }
+	auto GetChannelID() const { return channelID; }
 
 protected:
 	std::string audioFilename;
