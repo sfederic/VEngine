@@ -21,7 +21,8 @@ bool UnlockEntrance(std::string arg)
 bool PlaySong(std::string arg)
 {
 	AudioSystem::MuteAllAudio();
-	AudioSystem::PlayAudio(arg, true);
+	auto channelID = AudioSystem::LoadAudio(arg, true);
+	AudioSystem::PlayAudio(channelID);
 	return true;
 }
 

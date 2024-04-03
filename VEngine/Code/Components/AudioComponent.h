@@ -16,8 +16,8 @@ public:
 	};
 
 	AudioComponent();
-	void Tick(float deltaTime) override;
 	void Start() override;
+	void Tick(float deltaTime) override;
 	Properties GetProps() override;
 
 	void SetAudioFilename(std::string_view filename) { audioFilename = filename; }

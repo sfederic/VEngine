@@ -56,7 +56,8 @@ namespace GameUtils
 
 	void PlayAudioOneShot(const std::string audioFilename)
 	{
-		AudioSystem::PlayAudio(audioFilename);
+		auto channelID = AudioSystem::LoadAudio(audioFilename);
+		AudioSystem::PlayAudio(channelID);
 	}
 
 	void SaveGameWorldState()

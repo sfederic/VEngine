@@ -11,9 +11,11 @@ AudioComponent::AudioComponent()
 
 void AudioComponent::Start()
 {
-	if (playOnStart && !audioFilename.empty())
+	channelID = AudioSystem::LoadAudio(audioFilename, loop);
+
+	if (playOnStart)
 	{
-		channelID = AudioSystem::PlayAudio(audioFilename, loop);
+		AudioSystem::PlayAudio(channelID);
 	}
 }
 
@@ -55,7 +57,9 @@ Properties AudioComponent::GetProps()
 
 void AudioComponent::Play()
 {
-	channelID = AudioSystem::PlayAudio(audioFilename);
+	auto channel = AudioSystem::GetChannel(channelID);
+	//@Todo: this is still not right. The audio channel is only paused, not restarted.
+	channel->sourceVoice->Start();
 }
 
 void AudioComponent::Stop()

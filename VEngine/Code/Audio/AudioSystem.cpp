@@ -157,12 +157,12 @@ void AudioSystem::FadeInAllAudio()
 	}
 }
 
-uint64_t AudioSystem::PlayAudio(const std::string filename, bool loopAudio)
+uint64_t AudioSystem::LoadAudio(const std::string filename, bool loopAudio)
 {
 	auto audioIt = loadedAudioMap.find(filename);
 	if (audioIt == loadedAudioMap.end())
 	{
-		LoadAudio(filename);
+		InnerLoadAudio(filename);
 
 		//Do a second check if audio can't be loaded.
 		audioIt = loadedAudioMap.find(filename);
@@ -195,7 +195,13 @@ uint64_t AudioSystem::PlayAudio(const std::string filename, bool loopAudio)
 	return nextChannelID;
 }
 
-void AudioSystem::LoadAudio(const std::string filename)
+void AudioSystem::PlayAudio(uint64_t channelID)
+{
+	auto channel = GetChannel(channelID);
+	channel->sourceVoice->Start();
+}
+
+void AudioSystem::InnerLoadAudio(const std::string filename)
 {
 	std::string path = "Audio/" + filename;
 	if (!std::filesystem::exists(path))
