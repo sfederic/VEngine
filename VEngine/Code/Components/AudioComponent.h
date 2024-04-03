@@ -22,6 +22,8 @@ public:
 
 	void SetAudioFilename(std::string_view filename) { audioFilename = filename; }
 
+	void SetLoop(bool value) { loop = value; }
+
 	void SetToFadeIn() { fade = FadeValue::In; }
 	void SetToFadeOut() { fade = FadeValue::Out; }
 

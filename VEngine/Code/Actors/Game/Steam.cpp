@@ -28,6 +28,7 @@ void Steam::Create()
 	steamEmitter->SetTexture("Particle/smoke.png");
 
 	steamAudio->SetAudioFilename("steam.wav");
+	steamAudio->SetLoop(true);
 
 	mesh->SetVisibility(false);
 	mesh->SetActive(false);
