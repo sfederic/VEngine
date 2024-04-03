@@ -2,6 +2,7 @@
 #include "AudioComponent.h"
 #include "Audio/AudioSystem.h"
 #include "Audio/AudioChannel.h"
+#include "Actors/Game/Player.h"
 
 AudioComponent::AudioComponent()
 {
@@ -46,6 +47,7 @@ Properties AudioComponent::GetProps()
 	props.Add("Audio Filename", &audioFilename).autoCompletePath = "/Audio/";
 	props.Add("Play On Start", &playOnStart);
 	props.Add("Volume", &volume);
+	props.Add("Volume Radius", &volumeRadius);
 	props.Add("Pitch", &pitch);
 	props.Add("Loop", &loop);
 	return props;
@@ -60,4 +62,9 @@ void AudioComponent::Stop()
 {
 	auto channel = AudioSystem::GetChannel(channelID);
 	channel->sourceVoice->Stop();
+}
+
+void AudioComponent::SetVolumeToPlayerPositionAgainstRadius()
+{
+	const auto playerPos = Player::system.GetOnlyActor()->GetPositionV();
 }

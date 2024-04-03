@@ -31,7 +31,11 @@ public:
 
 	auto GetChannelID() const { return channelID; }
 
+	auto GetVolumeRadius() const { return volumeRadius; }
+
 protected:
+	void SetVolumeToPlayerPositionAgainstRadius();
+
 	std::string audioFilename;
 
 	FadeValue fade = FadeValue::None;
@@ -39,6 +43,7 @@ protected:
 	uint64_t channelID = 0;
 
 	float volume = 1.0f;
+	float volumeRadius = 5.f;
 	float pitch = 1.0f;
 
 	bool playOnStart = true;
