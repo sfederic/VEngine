@@ -10,6 +10,7 @@
 #include "Components/InstanceMeshComponent.h"
 #include "Components/Lights/DirectionalLightComponent.h"
 #include "Render/Texture2D.h"
+#include "Components/AudioComponent.h"
 #include "Components/Lights/PointLightComponent.h"
 #include "Components/Lights/SpotLightComponent.h"
 #include "Components/MeshComponent.h"
@@ -108,6 +109,7 @@ void RenderPhysicsMeshes();
 void RenderCharacterControllers();
 void RenderCameraMeshes();
 void RenderLightMeshes();
+void RenderAudioComponents();
 void RenderPolyboards();
 void RenderSpriteSheets();
 void RenderPostProcess();
@@ -913,6 +915,7 @@ void Renderer::Render()
 	RenderPhysicsMeshes();
 	RenderBounds();
 	RenderLightMeshes();
+	RenderAudioComponents();
 	RenderCameraMeshes();
 	RenderCharacterControllers();
 	//RenderDebugLines();
@@ -1534,6 +1537,41 @@ void RenderLightMeshes()
 		cbMatrices.SetVS();
 
 		DrawMesh(debugCone);
+	}
+}
+
+void RenderAudioComponents()
+{
+	SetRastStateByName(RastStates::wireframe);
+	SetShaders("SolidColour");
+
+	//Set debug sphere wireframe material colour
+	MaterialShaderData materialShaderData;
+	materialShaderData.ambient = XMFLOAT4(0.3f, 0.4f, 0.55f, 1.0f);
+	cbMaterial.Map(&materialShaderData);
+	cbMaterial.SetPS();
+
+	const auto debugIcoSphere = MeshComponent::GetDebugMesh("DebugIcoSphere");
+	SetVertexBuffer(debugIcoSphere->GetVertexBuffer());
+
+	for (const auto& audioComponent : AudioComponent::system.GetComponents())
+	{
+		shaderMatrices.model = XMMatrixIdentity();
+
+		//Only want the world position of the AudioComponent.
+		shaderMatrices.model.r[3] = audioComponent->GetWorldPositionV();
+
+		//Up scale by volume radius
+		const float volumeRadius = audioComponent->GetVolumeRadius();
+		shaderMatrices.model.r[0].m128_f32[0] *= volumeRadius;
+		shaderMatrices.model.r[1].m128_f32[1] *= volumeRadius;
+		shaderMatrices.model.r[2].m128_f32[2] *= volumeRadius;
+
+		shaderMatrices.MakeModelViewProjectionMatrix();
+		cbMatrices.Map(&shaderMatrices);
+		cbMatrices.SetVS();
+
+		DrawMesh(debugIcoSphere);
 	}
 }
 
