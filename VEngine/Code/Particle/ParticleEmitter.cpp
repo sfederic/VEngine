@@ -82,6 +82,18 @@ Properties ParticleEmitter::GetProps()
 	return props;
 }
 
+void ParticleEmitter::SetAlpha(float alpha)
+{
+	auto& material = GetMaterial();
+	material.materialShaderData.ambient.w = alpha;
+}
+
+float ParticleEmitter::GetAlpha()
+{
+	auto& material = GetMaterial();
+	return material.materialShaderData.ambient.w;
+}
+
 void ParticleEmitter::SetTexture(std::string_view textureFilename)
 {
 	material->defaultTextureData.filename = textureFilename;

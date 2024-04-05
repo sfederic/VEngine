@@ -21,6 +21,8 @@ public:
 	Properties GetProps() override;
 
 	Material& GetMaterial() { return *material; }
+	void SetAlpha(float alpha);
+	float GetAlpha();
 
 	void SetTexture(std::string_view textureFilename);
 
