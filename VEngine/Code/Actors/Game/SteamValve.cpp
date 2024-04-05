@@ -33,9 +33,9 @@ Properties SteamValve::GetProps()
 	return props;
 }
 
-void SteamValve::OnLinkRotate()
+void SteamValve::OnRotationEnd()
 {
-	__super::OnLinkRotate();
+	__super::OnRotationEnd();
 
 	isValveOn = !isValveOn;
 

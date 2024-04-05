@@ -13,7 +13,7 @@ public:
 	void Start() override;
 	Properties GetProps() override;
 
-	void OnLinkRotate() override;
+	void OnRotationEnd() override;
 	void OnLinkDeactivate() override;
 
 private:
