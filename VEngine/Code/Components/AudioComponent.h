@@ -47,8 +47,10 @@ protected:
 	uint64_t channelID = 0;
 
 	float volume = 1.0f;
-	float volumeAttenuation = 5.f;
 	float pitch = 1.0f;
+
+	float volumeAttenuation = 5.f;
+	bool enableSpatialVolume = false;
 
 	bool playOnStart = true;
 	bool loop = true;
