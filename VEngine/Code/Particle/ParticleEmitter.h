@@ -8,6 +8,9 @@
 
 class Material;
 
+//@Todo: want an effect with particles where there closer it gets to the end of its lifetime, 
+//the more its alpha value fades out. Maybe can do the same for particles spawning.
+
 class ParticleEmitter : public SpatialComponent
 {
 public:
