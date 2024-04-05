@@ -76,6 +76,7 @@ void GridActor::CheckSetIsMoving()
 		if (CheckMovementAndRotationStopped())
 		{
 			isMoving = false;
+			OnMoveEnd();
 		}
 	}
 }
@@ -97,6 +98,8 @@ void GridActor::CheckSetIsRotating()
 				//or something. Best I can do here is limit it with a bool for big Grid Actors.
 				grid->RecalcAllNodes(hit);
 			}
+
+			OnRotationEnd();
 		}
 	}
 }
