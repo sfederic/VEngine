@@ -37,6 +37,8 @@ void AudioComponent::Tick(float deltaTime)
 		break;
 	}
 
+	SetVolumeToPlayerPositionAgainstRadius();
+
 	//@Todo: Ideally you want these as Property Changed events, but it's fine for now.
 	channel->SetPitch(pitch);
 	channel->SetVolume(volume);
@@ -49,7 +51,7 @@ Properties AudioComponent::GetProps()
 	props.Add("Audio Filename", &audioFilename).autoCompletePath = "/Audio/";
 	props.Add("Play On Start", &playOnStart);
 	props.Add("Volume", &volume);
-	props.Add("Volume Radius", &volumeRadius);
+	props.Add("Volume Attenuation", &volumeAttenuation);
 	props.Add("Pitch", &pitch);
 	props.Add("Loop", &loop);
 	return props;
@@ -71,4 +73,6 @@ void AudioComponent::Stop()
 void AudioComponent::SetVolumeToPlayerPositionAgainstRadius()
 {
 	const auto playerPos = Player::system.GetOnlyActor()->GetPositionV();
+	const float length = XMVector3Length(playerPos - GetWorldPositionV()).m128_f32[0];
+	volume = (1.0f / length) * volumeAttenuation;
 }

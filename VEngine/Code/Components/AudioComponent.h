@@ -35,7 +35,7 @@ public:
 
 	auto GetChannelID() const { return channelID; }
 
-	auto GetVolumeRadius() const { return volumeRadius; }
+	auto GetVolumeAttenuation() const { return volumeAttenuation; }
 
 protected:
 	void SetVolumeToPlayerPositionAgainstRadius();
@@ -47,7 +47,7 @@ protected:
 	uint64_t channelID = 0;
 
 	float volume = 1.0f;
-	float volumeRadius = 5.f;
+	float volumeAttenuation = 5.f;
 	float pitch = 1.0f;
 
 	bool playOnStart = true;
