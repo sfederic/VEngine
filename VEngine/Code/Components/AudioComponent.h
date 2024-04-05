@@ -35,7 +35,8 @@ public:
 
 	auto GetChannelID() const { return channelID; }
 
-	auto GetVolumeAttenuation() const { return volumeAttenuation; }
+	float GetVolumeAttenuation() const { return volumeAttenuation; }
+	bool IsSpatialAudioEnabled() const { return enableSpatialVolume; }
 
 protected:
 	void SetVolumeToPlayerPositionAgainstRadius();

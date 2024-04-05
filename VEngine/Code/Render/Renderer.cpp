@@ -1556,13 +1556,19 @@ void RenderAudioComponents()
 
 	for (const auto& audioComponent : AudioComponent::system.GetComponents())
 	{
+		//Don't render the debug mesh for attenuation visualisation if spatial audio isn't enabled.
+		if (!audioComponent->IsSpatialAudioEnabled())
+		{
+			return;
+		}
+
 		shaderMatrices.model = XMMatrixIdentity();
 
 		//Only want the world position of the AudioComponent.
 		shaderMatrices.model.r[3] = audioComponent->GetWorldPositionV();
 
-		//Up scale by volume radius
-		const float volumeRadius = audioComponent->GetVolumeRadius();
+		//Up scale by volume "radius"
+		const float volumeRadius = audioComponent->GetVolumeAttenuation();
 		shaderMatrices.model.r[0].m128_f32[0] *= volumeRadius;
 		shaderMatrices.model.r[1].m128_f32[1] *= volumeRadius;
 		shaderMatrices.model.r[2].m128_f32[2] *= volumeRadius;
