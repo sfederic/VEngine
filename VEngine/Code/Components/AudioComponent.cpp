@@ -51,7 +51,7 @@ Properties AudioComponent::GetProps()
 	props.Add("Audio Filename", &audioFilename).autoCompletePath = "/Audio/";
 	props.Add("Play On Start", &playOnStart);
 	props.Add("Volume", &volume);
-	props.Add("Enable Spatial Volume", &enableSpatialVolume);
+	props.Add("Enable Spatial Volume", &spatialVolumeEnabled);
 	props.Add("Volume Attenuation", &volumeAttenuation);
 	props.Add("Pitch", &pitch);
 	props.Add("Loop", &loop);
@@ -73,7 +73,7 @@ void AudioComponent::Stop()
 
 void AudioComponent::SetVolumeToPlayerPositionAgainstRadius()
 {
-	if (enableSpatialVolume)
+	if (spatialVolumeEnabled)
 	{
 		const auto playerPos = Player::system.GetOnlyActor()->GetPositionV();
 		const float length = XMVector3Length(playerPos - GetWorldPositionV()).m128_f32[0];
