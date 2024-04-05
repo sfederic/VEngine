@@ -1777,7 +1777,7 @@ void Renderer::RenderParticleEmitters()
 			context->RSSetState(rastStateMap.find(RastStates::noBackCull)->second->GetData());
 		}
 
-		SetBlendStateByName(BlendStates::Default);
+		SetBlendStateByName(BlendStates::Transparent);
 
 		SetShaders(emitter->GetMaterial().shader->GetName());
 
