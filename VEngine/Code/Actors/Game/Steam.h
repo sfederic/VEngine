@@ -13,8 +13,9 @@ public:
 	ACTOR_SYSTEM(Steam);
 
 	Steam();
-	void Start() override;
 	void Create() override;
+	void Start() override;
+	void Tick(float deltaTime) override;
 	Properties GetProps() override;
 
 	void Enable();
@@ -24,4 +25,9 @@ public:
 private:
 	ParticleEmitter* steamEmitter = nullptr;
 	AudioComponent* steamAudio = nullptr;
+
+	float originalStartingSpawnRate = 0.f;
+
+	//Use this when turning off steam so it gradually turns off by lowering the emitter spawn rate.
+	bool lowerParticleDensity = false;
 };
