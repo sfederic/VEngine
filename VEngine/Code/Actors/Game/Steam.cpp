@@ -100,8 +100,7 @@ void Steam::SetCurrentNodeState()
 {
 	auto node = GetCurrentNode();
 
-	//Don't get confused here. If the steam is On, hide the node.
-	if (IsActive())
+	if (!lowerParticleDensity) //Using this bool is not proper with the namaing, but serves the same purpose.
 	{
 		node->Hide();
 	}

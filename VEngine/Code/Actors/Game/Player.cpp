@@ -943,7 +943,7 @@ void Player::CheckNextMoveNode(const XMVECTOR previousPos)
 	int nextYIndex = (int)std::round(nextPos.m128_f32[2]);
 
 	//Keep the call here so playerunit can face walls and holes on input.
-d	mesh->SetWorldRotation(VMath::LookAtRotation(nextPos, previousPos));
+	mesh->SetWorldRotation(VMath::LookAtRotation(nextPos, previousPos));
 	//Put this here so that quick turns with the mesh with invalid grid node check will still
 	//highlight linkable actors. It might mess some stuff up, keep an eye on this bool set.
 	previousMovementAndRotationStoppedValue = false;
