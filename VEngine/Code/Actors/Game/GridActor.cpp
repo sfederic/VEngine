@@ -50,8 +50,15 @@ void GridActor::OnLinkActivate()
 {
 	isLinked = true;
 
-	//Reset grid nodes with this actor being ignored.
-	Grid::system.GetOnlyActor()->RecalcNodesToIgnoreLinkedGridActor(this);
+	if (bigGridActor)
+	{
+		Grid::system.GetOnlyActor()->RecalcNodesToIgnoreLinkedGridActor(this);
+	}
+	else
+	{
+		HitResult hit(this);
+		GetCurrentNode()->RecalcNodeHeight(hit);
+	}
 }
 
 void GridActor::OnLinkDeactivate()
