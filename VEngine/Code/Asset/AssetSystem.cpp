@@ -18,6 +18,7 @@
 #include "Asset/VertexColourHeader.h"
 #include "Render/MeshData.h"
 #include "Render/Vertex.h"
+#include "Render/Renderer.h"
 
 struct FBXFileInfo
 {
@@ -63,6 +64,7 @@ void AssetSystem::BuildAllVMeshDataFromFBXImport()
 	for (const auto& fileInfo : fbxFileInfos)
 	{
 		AssetSystem::BuildSingleVMeshFromFBX(fileInfo.filepath, fileInfo.filename);
+		Renderer::SetRendererToCaptureMeshIcon(fileInfo.filename);
 		numberOfMeshFilesBuilt++;
 	}
 
