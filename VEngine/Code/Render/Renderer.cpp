@@ -2345,15 +2345,13 @@ void RenderMeshToCaptureMeshIcon()
 	Camera::SetActiveCamera(&previousActiveCamera);
 }
 
+//Don't actually want to use usual light calculations with vertex colour baking.
+//Because the pixel shaders are already adding colour to meshes, instead, vertex colour baking can be used
+//like a more coarse ambient occlusion, only considering raycast hits from the light source.
+//@Todo: still has the problem of multiple lights in the secen overwriting vertex colour data.
 void VertexColourLightBake()
 {
 	const auto startTime = Profile::QuickStart();
-
-	const auto staticMeshes = MeshComponent::GetAllStaticMeshes();
-
-	HitResult vertexRayHit;
-	vertexRayHit.AddAllRenderStaticMeshesToIgnore();
-	vertexRayHit.ignoreBackFaceHits = false;
 
 	for (const auto& mesh : MeshComponent::system.GetComponents())
 	{
@@ -2366,11 +2364,8 @@ void VertexColourLightBake()
 		const auto meshWorldMatrix = mesh->GetWorldMatrix();
 		auto& vertices = mesh->GetAllVertices();
 
-		for (auto& dLight : DirectionalLightComponent::system.GetComponents())
+		for (const auto& dLight : DirectionalLightComponent::system.GetComponents())
 		{
-			vertexRayHit.actorsToIgnore.emplace_back(dLight->GetOwner());
-			vertexRayHit.componentsToIgnore.emplace_back(dLight.get());
-
 			for (auto& vertex : vertices)
 			{
 				const auto vertexPos = XMLoadFloat3(&vertex.pos);
@@ -2380,59 +2375,51 @@ void VertexColourLightBake()
 				normal = XMVector3TransformNormal(normal, meshWorldMatrix);
 				normal = XMVector3Normalize(normal);
 
-				const auto dLightDirection = dLight->GetForwardVectorV();
-				float dot = XMVector3Dot(normal, dLightDirection).m128_f32[0];
-				dot = std::clamp(dot, 0.1f, 1.f);
+				HitResult vertexRayHit;
+				vertexRayHit.AddAllRenderStaticMeshesToIgnore();
+				vertexRayHit.ignoreBackFaceHits = false;
+				vertexRayHit.ignoreLayer = CollisionLayers::Editor;
 
 				const auto rayOrigin = worldSpaceVertexPos + (normal * 0.1f);
+				const auto dLightDirection = dLight->GetForwardVectorV();
 				if (!Physics::Raycast(vertexRayHit, rayOrigin, -dLightDirection, 50.f))
+
 				{
-					const auto colour = dLight->GetLightData().colour;
-					const float originalAlpha = colour.w;
-					auto lightColour = XMLoadFloat4(&colour);
-					auto vertColour = XMLoadFloat4(&vertex.colour);
-					lightColour *= dot;
-					vertColour *= lightColour;
-					vertColour.m128_f32[3] = originalAlpha; //Set alpha back to original value
-					XMStoreFloat4(&vertex.colour, vertColour);
+					vertex.colour = XMFLOAT4(1.f, 1.f, 1.f, 1.f);
+				}
+				else
+				{
+					vertex.colour = XMFLOAT4(0.3f, 0.3f, 0.3f, 1.f);
 				}
 			}
 		}
 
-		for (auto& pointLight : PointLightComponent::system.GetComponents())
+		for (const auto& pointLight : PointLightComponent::system.GetComponents())
 		{
 			for (auto& vertex : vertices)
 			{
 				const auto vertexPos = XMLoadFloat3(&vertex.pos);
 				const auto worldSpaceVertexPos = XMVector3TransformCoord(vertexPos, meshWorldMatrix);
 
-				vertexRayHit.actorsToIgnore.emplace_back(pointLight->GetOwner());
-				vertexRayHit.componentsToIgnore.emplace_back(pointLight.get());
-
 				auto normal = XMLoadFloat3(&vertex.normal);
 				normal = XMVector3TransformNormal(normal, meshWorldMatrix);
 				normal = XMVector3Normalize(normal);
 
+				HitResult vertexRayHit;
+				vertexRayHit.AddAllRenderStaticMeshesToIgnore();
+				vertexRayHit.ignoreBackFaceHits = false;
+				vertexRayHit.ignoreLayer = CollisionLayers::Editor;
+
 				const auto vertexToLightDirection =
 					XMVector3Normalize(pointLight->GetWorldPositionV() - worldSpaceVertexPos);
-				float dot = XMVector3Dot(normal, vertexToLightDirection).m128_f32[0];
-				dot = std::clamp(dot, 0.1f, 1.f);
-
 				const auto rayOrigin = worldSpaceVertexPos + (normal * 0.1f);
 				if (!Physics::Raycast(vertexRayHit, rayOrigin, pointLight->GetWorldPositionV()))
 				{
-					const auto colour = pointLight->GetLightData().colour;
-					const float originalAlpha = colour.w;
-					auto lightColour = XMLoadFloat4(&colour);
-					auto vertColour = XMLoadFloat4(&vertex.colour);
-					lightColour *= dot / XM_PI;
-
-					const float len = XMVector3Length(rayOrigin - pointLight->GetWorldPositionV()).m128_f32[0];
-					const float falloff = pointLight->GetLightData().intensity / std::max(len, 0.01f);
-
-					vertColour *= lightColour * falloff;
-					vertColour.m128_f32[3] = originalAlpha;
-					XMStoreFloat4(&vertex.colour, vertColour);
+					vertex.colour = XMFLOAT4(1.f, 1.f, 1.f, 1.f);
+				}
+				else
+				{
+					vertex.colour = XMFLOAT4(0.3f, 0.3f, 0.3f, 1.f);
 				}
 			}
 		}
