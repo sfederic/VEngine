@@ -107,7 +107,7 @@ void GridActor::CheckSetIsRotating()
 			if (bigGridActor)
 			{
 				auto grid = Grid::system.GetOnlyActor();
-				HitResult hit;
+				HitResult hit(this);
 				//@Todo: don't love this call here because of performance. recalcing nodes isn't
 				//toooo slow, but would still be nicer with some sort of boxcast intersecting with node tiles
 				//or something. Best I can do here is limit it with a bool for big Grid Actors.
