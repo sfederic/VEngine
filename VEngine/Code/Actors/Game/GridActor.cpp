@@ -69,7 +69,7 @@ void GridActor::OnLinkDeactivate()
 	if (bigGridActor)
 	{
 		//Make sure to include this actor again so that nodes get placed on top of it.
-		Grid::system.GetOnlyActor()->RecalcAllNodes(hit);
+		Grid::system.GetOnlyActor()->RecalcAllNodes(hit, true);
 	}
 	else
 	{
@@ -111,7 +111,7 @@ void GridActor::CheckSetIsRotating()
 				//@Todo: don't love this call here because of performance. recalcing nodes isn't
 				//toooo slow, but would still be nicer with some sort of boxcast intersecting with node tiles
 				//or something. Best I can do here is limit it with a bool for big Grid Actors.
-				grid->RecalcAllNodes(hit);
+				grid->RecalcAllNodes(hit, true);
 			}
 
 			OnRotationEnd();

@@ -23,7 +23,7 @@ void Grid::Awake()
 	__super::Awake();
 
 	HitResult hit(this);
-	RecalcAllNodes(hit);
+	RecalcAllNodes(hit, false);
 }
 
 void Grid::Create()
@@ -92,8 +92,21 @@ std::vector<GridNode*> Grid::GetAllNodes()
 	return outNodes;
 }
 
-void Grid::RecalcAllNodes(HitResult& hit)
+void Grid::RecalcAllNodes(HitResult& hit, bool preserveNodeScaleValues)
 {
+	XMFLOAT3 previousNodeScaleValue = XMFLOAT3(0.f, 0.f, 0.f);
+	if (preserveNodeScaleValues)
+	{
+		if (!nodeMesh->GetInstanceData().empty())
+		{
+			//All the nodes should have uniform scale. Getting first value should suffice.
+			auto& nodeInstanceData = nodeMesh->GetInstanceData().at(0);
+			previousNodeScaleValue.x = nodeInstanceData.world.r[0].m128_f32[0];
+			previousNodeScaleValue.y = nodeInstanceData.world.r[1].m128_f32[1];
+			previousNodeScaleValue.z = nodeInstanceData.world.r[2].m128_f32[2];
+		}
+	}
+
 	nodeMesh->ReleaseBuffers();
 
 	//Set the mesh count as 1 and empty the data just to put dummy data into the buffers
@@ -183,10 +196,19 @@ void Grid::RecalcAllNodes(HitResult& hit)
 				instanceData.world = VMath::MakeRotationFromYAxis(hit.GetNormalV());
 				instanceData.world.r[3] = hitPosVector;
 
-				//Scale the node down to nothing so that nodes are 'hidden' on world load
-				instanceData.world.r[0].m128_f32[0] = 0.f;
-				instanceData.world.r[1].m128_f32[1] = 0.f;
-				instanceData.world.r[2].m128_f32[2] = 0.f;
+				if (preserveNodeScaleValues)
+				{
+					instanceData.world.r[0].m128_f32[0] = previousNodeScaleValue.x;
+					instanceData.world.r[1].m128_f32[1] = previousNodeScaleValue.y;
+					instanceData.world.r[2].m128_f32[2] = previousNodeScaleValue.z;
+				}
+				else
+				{
+					//Scale the node down to nothing so that nodes are 'hidden' on world load
+					instanceData.world.r[0].m128_f32[0] = 0.f;
+					instanceData.world.r[1].m128_f32[1] = 0.f;
+					instanceData.world.r[2].m128_f32[2] = 0.f;
+				}
 
 				node.active = true;
 
@@ -226,7 +248,7 @@ void Grid::RecalcNodesToIgnoreLinkedGridActor(GridActor* gridActorToIgnore)
 	{
 		hit.componentsToIgnore.emplace_back(mesh);
 	}
-	RecalcAllNodes(hit);
+	RecalcAllNodes(hit, true);
 }
 
 GridNode* Grid::GetNodeLimit(int x, int y)

@@ -61,7 +61,10 @@ public:
 
 	std::vector<GridNode*> GetAllNodes();
 
-	void RecalcAllNodes(HitResult& hit);
+	//With 'preserveNodeScaleValues', what happens is that when the grid buffers are recreated,
+	//the individual node lerp values are reset because the original vectors are reset. 
+	//Use this bool to keep that original lerped value after recreating buffers.
+	void RecalcAllNodes(HitResult& hit, bool preserveNodeScaleValues);
 
 	//This function exists to make the grid rules clearer. The intent is when you link to a grid actor,
 	//you want its own nodes to be recalced so that grid actors bigger than 1x1 aren't moving to their 
