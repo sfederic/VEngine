@@ -1176,15 +1176,8 @@ void Player::ResetHighlightedActor()
 		return;
 	}
 
-	for (auto mesh : highlightedGridActor->GetComponents<MeshComponent>())
-	{
-		mesh->SetAmbientColour(XMFLOAT3(1.f, 1.f, 1.f));
-	}
-
 	highlightedGridActor->OnPlayerLinkHoverOff();
-
 	linkEffectMesh->SetActive(false);
-
 	highlightedGridActor = nullptr;
 }
 
