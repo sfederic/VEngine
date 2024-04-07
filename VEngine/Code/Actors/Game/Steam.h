@@ -29,5 +29,5 @@ private:
 	float originalStartingSpawnRate = 0.f;
 
 	//Use this when turning off steam so it gradually turns off by lowering the emitter spawn rate.
-	bool lowerParticleDensity = false;
+	bool steamEnabled = false;
 };

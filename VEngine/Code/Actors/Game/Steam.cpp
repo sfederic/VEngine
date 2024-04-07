@@ -28,7 +28,7 @@ void Steam::Tick(float deltaTime)
 	__super::Tick(deltaTime);
 
 	//Lower the steam particle spawn rate 
-	if (lowerParticleDensity)
+	if (steamEnabled)
 	{
 		steamEmitter->particleData.spawnRate.y += deltaTime * 5.5f;
 
@@ -84,14 +84,14 @@ void Steam::Enable()
 	steamEmitter->particleData.spawnRate.y = originalStartingSpawnRate;
 	steamEmitter->SetActive(true);
 
-	lowerParticleDensity = false;
+	steamEnabled = false;
 	steamAudio->Play();
 	SetCurrentNodeState();
 }
 
 void Steam::Disable()
 {
-	lowerParticleDensity = true;
+	steamEnabled = true;
 	steamAudio->Stop();
 	SetCurrentNodeState();
 }
@@ -100,7 +100,7 @@ void Steam::SetCurrentNodeState()
 {
 	auto node = GetCurrentNode();
 
-	if (!lowerParticleDensity) //Using this bool is not proper with the namaing, but serves the same purpose.
+	if (!steamEnabled)
 	{
 		node->Hide();
 	}
