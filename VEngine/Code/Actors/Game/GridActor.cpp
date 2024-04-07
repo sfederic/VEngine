@@ -65,8 +65,16 @@ void GridActor::OnLinkDeactivate()
 {
 	isLinked = false;
 
-	//Reset grid nodes. Include this actor again.
-	Grid::system.GetOnlyActor()->Awake();
+	HitResult hit;
+	if (bigGridActor)
+	{
+		//Make sure to include this actor again so that nodes get placed on top of it.
+		Grid::system.GetOnlyActor()->RecalcAllNodes(hit);
+	}
+	else
+	{
+		GetCurrentNode()->RecalcNodeHeight(hit);
+	}
 }
 
 void GridActor::OnLinkRotate()
