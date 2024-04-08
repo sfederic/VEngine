@@ -1171,14 +1171,13 @@ void Player::SetGridIndices()
 
 void Player::ResetHighlightedActor()
 {
-	if (highlightedGridActor == nullptr)
-	{
-		return;
-	}
-
-	highlightedGridActor->OnPlayerLinkHoverOff();
 	linkEffectMesh->SetActive(false);
+
+	if (highlightedGridActor != nullptr)
+	{
+	highlightedGridActor->OnPlayerLinkHoverOff();
 	highlightedGridActor = nullptr;
+}
 }
 
 //@Todo: this function actually fires twice, once when the movement/rotation begins, and once when it ends.
