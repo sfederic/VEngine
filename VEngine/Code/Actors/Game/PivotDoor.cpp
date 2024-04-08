@@ -27,3 +27,10 @@ void PivotDoor::Create()
 	canBeRotatedPitchXAxis = false;
 	canBeRotatedYawYAxis = true;
 }
+
+Properties PivotDoor::GetProps()
+{
+	auto props = __super::GetProps();
+	props.title = GetTypeName();
+	return props;
+}
