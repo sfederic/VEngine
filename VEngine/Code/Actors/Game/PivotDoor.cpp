@@ -17,4 +17,8 @@ void PivotDoor::Create()
 	mesh->SetLocalScale(0.5f, 0.75f, 1.f);
 	mesh->SetMeshFilename("plane.vmesh");
 	mesh->SetRastState(RastStates::noBackCull);
+
+	linkRotateAudio = "door.wav";
+
+	rotateSpeed = 2.5f;
 }
