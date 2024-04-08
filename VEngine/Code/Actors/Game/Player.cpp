@@ -16,6 +16,7 @@
 #include "Components/Game/DialogueComponent.h"
 #include "Components/MeshComponent.h"
 #include "Render/RastState.h"
+#include "Render/BlendStates.h"
 #include "UI/UISystem.h"
 #include "UI/Game/DialogueWidget.h"
 #include "UI/Game/InteractWidget.h"
@@ -51,10 +52,14 @@ void Player::Create()
 
 	mesh->SetRenderStatic(false);
 
-	linkEffectMesh->SetActive(false);
+	linkEffectMesh->SetActive(true);
 	linkEffectMesh->SetMeshFilename("cube.vmesh");
 	linkEffectMesh->SetTexture("UI/spellbinding_circle.png");
 	linkEffectMesh->SetCollisionLayer(CollisionLayers::None);
+	linkEffectMesh->SetShaderItem("DefaultClip");
+	linkEffectMesh->SetBlendState(BlendStates::Transparent);
+	linkEffectMesh->SetAlpha(0.f);
+	linkEffectMesh->castsShadow = false;
 
 	cameraLinkActiveLocalPosition = XMVectorSet(1.25f, 0.55f, -0.75f, 1.f);
 
@@ -128,7 +133,7 @@ void Player::Tick(float deltaTime)
 	camera->SetLocalPosition(
 		VMath::VectorConstantLerp(camera->GetLocalPositionV(), nextCameraPosition, deltaTime, 14.f));
 
-	UpdateLinkEffectMeshPositionAndRotation();
+	UpdateLinkEffectMesh();
 }
 
 Properties Player::GetProps()
@@ -223,7 +228,6 @@ void Player::HighlightLinkableGridActor()
 {
 	if (!CheckIfMovementAndRotationStopped())
 	{
-		linkEffectMesh->SetActive(false);
 		return;
 	}
 	if (isInputLinkedToGridActor)
@@ -261,15 +265,18 @@ void Player::HighlightLinkableGridActor()
 			}
 
 			EnableLinkEffectMeshForHover(&highlightedGridActor->GetMesh());
+
+			previousHighlightedGridActor = highlightedGridActor;
 		}
 		else
 		{
+			linkEffectMeshSetAlpha = false;
 			ResetHighlightedActor();
 		}
 	}
 	else
 	{
-		linkEffectMesh->SetActive(false);
+		linkEffectMeshSetAlpha = false;
 		ResetHighlightedActor();
 	}
 }
@@ -620,6 +627,7 @@ void Player::LinkToGridActor()
 	{
 		if (Input::GetKeyUp("Unlink"))
 		{
+			linkEffectMeshSetAlpha = false;
 			ResetLinkedGridActor();
 		}
 	}
@@ -1188,8 +1196,6 @@ void Player::SetGridIndices()
 
 void Player::ResetHighlightedActor()
 {
-	linkEffectMesh->SetActive(false);
-
 	if (highlightedGridActor != nullptr)
 	{
 		highlightedGridActor->OnPlayerLinkHoverOff();
@@ -1218,7 +1224,13 @@ bool Player::IsInInteraction() const
 
 void Player::EnableLinkEffectMeshForHover(MeshComponent* mesh)
 {
-	linkEffectMesh->SetActive(true);
+	linkEffectMeshSetAlpha = true;
+	linkEffectMesh->SetVisibility(true);
+
+	if (previousHighlightedGridActor != highlightedGridActor)
+	{
+		linkEffectMesh->SetAlpha(0.f);
+	}
 
 	linkEffectMesh->SetUVOffsetSpeed(XMFLOAT2(0.075f, 0.05f));
 	linkEffectMesh->SetUVRotationSpeed(0.05f);
@@ -1237,7 +1249,8 @@ void Player::EnableLinkEffectMeshForHover(MeshComponent* mesh)
 
 void Player::EnableLinkEffectMeshForSelect(MeshComponent* mesh)
 {
-	linkEffectMesh->SetActive(true);
+	linkEffectMeshSetAlpha = true;
+	linkEffectMesh->SetVisibility(true);
 
 	linkEffectMesh->SetUVOffsetSpeed(XMFLOAT2(0.15f, 0.1f));
 	linkEffectMesh->SetUVRotationSpeed(0.1f);
@@ -1251,8 +1264,31 @@ void Player::EnableLinkEffectMeshForSelect(MeshComponent* mesh)
 	linkEffectMesh->ReCreate();
 }
 
-void Player::UpdateLinkEffectMeshPositionAndRotation()
+void Player::UpdateLinkEffectMesh()
 {
+	if (linkEffectMeshSetAlpha)
+	{
+		float alpha = linkEffectMesh->GetAlpha();
+		alpha += Core::GetDeltaTime() * 2.f;
+		if (alpha < 1.f)
+		{
+			linkEffectMesh->SetAlpha(alpha);
+		}
+	}
+	else
+	{
+		float alpha = linkEffectMesh->GetAlpha();
+		alpha -= Core::GetDeltaTime() * 2.f;
+		if (alpha > 0.f)
+		{
+			linkEffectMesh->SetAlpha(alpha);
+		}
+		else
+		{
+			linkEffectMesh->SetVisibility(false);
+		}
+	}
+
 	if (linkedGridActor)
 	{
 		auto& linkedMesh = linkedGridActor->GetMesh();

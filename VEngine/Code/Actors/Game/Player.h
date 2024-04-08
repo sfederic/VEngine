@@ -121,6 +121,7 @@ private:
 
 	void HighlightLinkableGridActor();
 	GridActor* highlightedGridActor = nullptr;
+	GridActor* previousHighlightedGridActor = nullptr;
 
 	void ResetHighlightedActor();
 
@@ -132,7 +133,8 @@ private:
 	void EnableLinkEffectMeshForHover(MeshComponent* mesh);
 	//Link effect logic to use on grid actor link select.
 	void EnableLinkEffectMeshForSelect(MeshComponent* mesh);
-	void UpdateLinkEffectMeshPositionAndRotation();
+	void UpdateLinkEffectMesh();
+	bool linkEffectMeshSetAlpha = false;
 
 	bool CheckIfMeshCanBeLinkedTo(GridActor* gridActorToLinkTo);
 
