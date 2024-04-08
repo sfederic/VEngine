@@ -19,6 +19,11 @@ void PivotDoor::Create()
 	mesh->SetRastState(RastStates::noBackCull);
 
 	linkRotateAudio = "door.wav";
-
 	rotateSpeed = 2.5f;
+
+	canBeMovedInLink = false;
+
+	canBeRotatedRollZAxis = false;
+	canBeRotatedPitchXAxis = false;
+	canBeRotatedYawYAxis = true;
 }
