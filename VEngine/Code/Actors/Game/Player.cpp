@@ -21,6 +21,9 @@
 #include "UI/Game/PlayerHealthWidget.h"
 #include "Gameplay/GameUtils.h"
 
+//Distance the player can ray/box cast to a grid actor to link to.
+constexpr float linkDistance = 5.f;
+
 Player::Player()
 {
 	SetEmptyRootComponent();
@@ -230,7 +233,7 @@ void Player::HighlightLinkableGridActor()
 
 	HitResult hit(this);
 	const auto playerPos = GetPositionV();
-	const auto end = playerPos + (GetMeshForward() * 5.f);
+	const auto end = playerPos + (GetMeshForward() * linkDistance);
 	if (Physics::OrientedBoxCast(hit, playerPos, end, XMFLOAT2(0.25f, 0.25f), false, false))
 	{
 		ResetHighlightedActor();
@@ -1133,6 +1136,19 @@ void Player::ResetLinkedGridActor()
 	}
 
 	GameUtils::PlayAudioOneShot("cursor.wav");
+
+	//Check if still looking toward grid actor to keep link effect mesh active.
+	const auto playerPos = GetPositionV();
+	const auto end = playerPos + (GetMeshForward() * linkDistance);
+	HitResult reenableLinkEffectMeshHit(this);
+	if (Physics::OrientedBoxCast(reenableLinkEffectMeshHit, playerPos, end, XMFLOAT2(0.25f, 0.25f), false, false))
+	{
+		auto gridActor = reenableLinkEffectMeshHit.GetClosestHitActorAs<GridActor>(playerPos);
+		if (gridActor)
+		{
+			EnableLinkEffectMeshForHover(&gridActor->GetMesh());
+		}
+	}
 }
 
 void Player::ResetLinkedGridActorIfThis(GridActor* gridActor)
@@ -1175,9 +1191,9 @@ void Player::ResetHighlightedActor()
 
 	if (highlightedGridActor != nullptr)
 	{
-	highlightedGridActor->OnPlayerLinkHoverOff();
-	highlightedGridActor = nullptr;
-}
+		highlightedGridActor->OnPlayerLinkHoverOff();
+		highlightedGridActor = nullptr;
+	}
 }
 
 //@Todo: this function actually fires twice, once when the movement/rotation begins, and once when it ends.
