@@ -15,6 +15,7 @@
 #include "GridActor.h"
 #include "Components/Game/DialogueComponent.h"
 #include "Components/MeshComponent.h"
+#include "Render/RastState.h"
 #include "UI/UISystem.h"
 #include "UI/Game/DialogueWidget.h"
 #include "UI/Game/InteractWidget.h"
@@ -1225,6 +1226,10 @@ void Player::EnableLinkEffectMeshForHover(MeshComponent* mesh)
 	linkEffectMesh->SetWorldScale(mesh->GetWorldScaleV() * 1.1f);
 	linkEffectMesh->SetWorldPosition(mesh->GetWorldPositionV());
 	linkEffectMesh->SetWorldRotation(mesh->GetWorldRotationV());
+
+	//Make sure the rast state is copied too because grid actors like doors that don't have their backs culled
+	//will only show one side of the link effect mesh.
+	linkEffectMesh->SetRastState(mesh->GetRastState().GetName());
 
 	linkEffectMesh->SetMeshFilename(mesh->GetMeshFilename());
 	linkEffectMesh->ReCreate();
