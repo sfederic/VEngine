@@ -506,6 +506,16 @@ void Player::SetQuickThought(std::wstring_view text)
 	dialogueComponent->dialogueWidget->AddToViewport();
 }
 
+void Player::SetLinkEffectMeshForTransformativeGridActors(MeshComponent& mesh)
+{
+	linkEffectMesh->SetVisibility(true);
+	linkEffectMesh->SetWorldScale(mesh.GetWorldScaleV() * 1.1f);
+	linkEffectMesh->SetWorldPosition(mesh.GetWorldPositionV());
+	linkEffectMesh->SetRastState(mesh.GetRastState().GetName());
+	linkEffectMesh->SetMeshFilename(mesh.GetMeshFilename());
+	linkEffectMesh->ReCreate();
+}
+
 bool Player::CombatInteractCheck(Actor* actorToCheck)
 {
 	auto gridActor = dynamic_cast<GridActor*>(actorToCheck);

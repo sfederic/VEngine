@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "TransformativeGridActor.h"
 #include "Components/MeshComponent.h"
+#include "Player.h"
 
 void TransformativeGridActor::Create()
 {
@@ -20,7 +21,11 @@ Properties TransformativeGridActor::GetProps()
 void TransformativeGridActor::OnLinkMove()
 {
 	__super::OnLinkMove();
+
 	ChangeMeshShape();
+
+	//Player's link effect mesh needs to be reset to reflect the changes in this actor.
+	Player::system.GetOnlyActor()->SetLinkEffectMeshForTransformativeGridActors(*mesh);
 }
 
 void TransformativeGridActor::ChangeMeshShape()

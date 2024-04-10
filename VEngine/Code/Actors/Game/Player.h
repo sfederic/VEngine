@@ -82,6 +82,8 @@ public:
 
 	void SetQuickThought(std::wstring_view text);
 
+	void SetLinkEffectMeshForTransformativeGridActors(MeshComponent& mesh);
+
 private:
 	XMVECTOR nextCameraPosition = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 	XMVECTOR cameraLinkActiveLocalPosition = XMVectorSet(0.f, 0.f, 0.f, 1.f);
