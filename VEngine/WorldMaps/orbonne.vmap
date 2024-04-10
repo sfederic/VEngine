@@ -53,25 +53,72 @@ orbonne0
 UID
 1833442153
 next
-PointLightActor
+DirectionalLightActor
 1
  Enabled
 1
  Position
-3 3 5
+4 5 -1
  Rotation
--0 0 -0 1
+0.382683 0 -0 0.92388
  Scale
 1 1 1
  Visible
 1
 Name
-PointLightActor0
+DirectionalLightActor0
 UID
-3196032271
+2857264652
+next
+Grass
+3
+ Enabled
+1
+ Position
+2 1 6
+ Rotation
+0 0 1 -0.000244162
+ Scale
+0.500001 0.500001 0.5
+ Visible
+1
+Name
+Grass1
+UID
+354127675
+next
+ Enabled
+1
+ Position
+4.5 0.5 4
+ Rotation
+0.707107 -0.000172644 -0.707107 0.000172644
+ Scale
+0.500013 0.500013 0.5
+ Visible
+1
+Name
+Grass2166138122
+UID
+2247015510
+next
+ Enabled
+1
+ Position
+1 1 4
+ Rotation
+0.707107 -0.000172644 -0.707107 0.000172644
+ Scale
+0.5 0.5 0.5
+ Visible
+1
+Name
+Grass2
+UID
+2667483756
 next
 MeshComponent
-3
+6
 522107442
 Mesh
  Enabled
@@ -134,7 +181,7 @@ next
 522107442
 LinkEffectMesh
  Enabled
-0
+1
  Pos
 0 0 0
  Rot
@@ -144,21 +191,21 @@ LinkEffectMesh
  Visible
 1
 Casts Shadow
-1
+0
 Grid Ignore
 0
 Grid Obst.
 0
 M_Ambient
-1 1 1 1
+1 1 1 0
 M_Blend State
-default
+transparent
 M_Metallic
 0
 M_Rast State
 solid
 M_Shader
-Default
+DefaultClip
 M_Smoothness
 0
 M_Specular
@@ -248,6 +295,183 @@ Trans. Occlude
 0
 UID
 3697741230
+next
+354127675
+Mesh
+ Enabled
+1
+ Pos
+2 1 6
+ Rot
+0 0 1 -0.000244162
+ Scale
+0.500001 0.500001 0.5
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+nobackcull
+M_Shader
+Grass
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Foliage/grass_blades.png
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+plane.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+777659425
+next
+2247015510
+Mesh
+ Enabled
+1
+ Pos
+4.5 0.5 4
+ Rot
+0.707107 -0.000172644 -0.707107 0.000172644
+ Scale
+0.500013 0.500013 0.5
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+nobackcull
+M_Shader
+Grass
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Foliage/grass_blades.png
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+plane.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+1767963498
+next
+2667483756
+Mesh
+ Enabled
+1
+ Pos
+1 1 4
+ Rot
+0.707107 -0.000172644 -0.707107 0.000172644
+ Scale
+0.5 0.5 0.5
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+nobackcull
+M_Shader
+Grass
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Foliage/grass_blades.png
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+plane.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+2352798805
 next
 DialogueComponent
 1
@@ -346,28 +570,28 @@ Near Z
 UID
 2497109566
 next
-PointLightComponent
+DirectionalLightComponent
 1
-3196032271
-PointLight
+2857264652
+DirectionalLight
  Enabled
 1
  Pos
-3 3 5
+4 5 -1
  Rot
--0 0 -0 1
+0.382683 0 -0 0.92388
  Scale
 1 1 1
  Visible
 1
 Colour
-0.1 1 1 1
+1 1 1 1
 Intensity
-25
+1
 LightEnabled
 1
 UID
-1059399472
+2577510077
 next
 EmptyComponent
 1
