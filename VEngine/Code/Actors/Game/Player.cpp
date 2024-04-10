@@ -509,7 +509,7 @@ void Player::SetQuickThought(std::wstring_view text)
 void Player::SetLinkEffectMeshForTransformativeGridActors(MeshComponent& mesh)
 {
 	linkEffectMesh->SetVisibility(true);
-	linkEffectMesh->SetWorldScale(mesh.GetWorldScaleV() * 1.1f);
+	linkEffectMesh->SetWorldScale(mesh.GetWorldScaleV() * 1.05f);
 	linkEffectMesh->SetWorldPosition(mesh.GetWorldPositionV());
 	linkEffectMesh->SetRastState(mesh.GetRastState().GetName());
 	linkEffectMesh->SetMeshFilename(mesh.GetMeshFilename());
@@ -1245,7 +1245,7 @@ void Player::EnableLinkEffectMeshForHover(MeshComponent* mesh)
 	linkEffectMesh->SetUVOffsetSpeed(XMFLOAT2(0.075f, 0.05f));
 	linkEffectMesh->SetUVRotationSpeed(0.05f);
 
-	linkEffectMesh->SetWorldScale(mesh->GetWorldScaleV() * 1.1f);
+	linkEffectMesh->SetWorldScale(mesh->GetWorldScaleV() * 1.05f);
 	linkEffectMesh->SetWorldPosition(mesh->GetWorldPositionV());
 	linkEffectMesh->SetWorldRotation(mesh->GetWorldRotationV());
 
@@ -1265,7 +1265,7 @@ void Player::EnableLinkEffectMeshForSelect(MeshComponent* mesh)
 	linkEffectMesh->SetUVOffsetSpeed(XMFLOAT2(0.15f, 0.1f));
 	linkEffectMesh->SetUVRotationSpeed(0.1f);
 
-	linkEffectMesh->SetWorldScale(mesh->GetWorldScaleV() * 1.1f);
+	linkEffectMesh->SetWorldScale(mesh->GetWorldScaleV() * 1.05f);
 	linkEffectMesh->SetWorldPosition(mesh->GetWorldPositionV());
 
 	linkEffectMesh->SetRastState(mesh->GetRastState().GetName());
