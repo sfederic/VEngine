@@ -363,6 +363,7 @@
     <ClCompile Include="Code\Actors\Game\PressureSwitch.cpp" />
     <ClCompile Include="Code\Actors\Game\PivotDoor.cpp" />
     <ClCompile Include="Code\Actors\Game\Steam.cpp" />
+    <ClCompile Include="Code\Actors\Game\Grass.cpp" />
     <ClInclude Include="Code\Actors\Game\TeleportGridActor.h" />
     <ClInclude Include="Code\Editor\AssetIconListWidget.h" />
     <ClInclude Include="Code\Render\BlendState.h" />
@@ -758,6 +759,7 @@
     <ClInclude Include="Code\Actors\Game\PressureSwitch.h" />
     <ClInclude Include="Code\Actors\Game\PivotDoor.h" />
     <ClInclude Include="Code\Actors\Game\Steam.h" />
+    <ClInclude Include="Code\Actors\Game\Grass.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
