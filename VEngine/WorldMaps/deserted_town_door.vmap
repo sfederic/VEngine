@@ -1,3 +1,131 @@
+GridActor
+2
+ Enabled
+1
+ Position
+2 0 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Audio LinkMove
+cloth_heavy.wav
+Audio LinkRotate
+chainmail1.wav
+BigGridActor
+0
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+MoveOnlyXAxis
+0
+MoveOnlyZAxis
+0
+Name
+GridActor0
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Roll
+0
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+1954064500
+next
+ Enabled
+1
+ Position
+0 0 1
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Audio LinkMove
+cloth_heavy.wav
+Audio LinkRotate
+chainmail1.wav
+BigGridActor
+0
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+MoveOnlyXAxis
+0
+MoveOnlyZAxis
+0
+Name
+GridActor1
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Roll
+0
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+2740675247
+next
 Player
 1
  Enabled
@@ -339,7 +467,66 @@ UID
 1816117813
 next
 MeshComponent
-7
+9
+1954064500
+Mesh
+ Enabled
+1
+ Pos
+2 0 2
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
+UID
+2189165344
+next
 4057284704
 Mesh
  Enabled
@@ -402,7 +589,7 @@ next
 4057284704
 LinkEffectMesh
  Enabled
-0
+1
  Pos
 1 0.25 3.4
  Rot
@@ -412,21 +599,21 @@ LinkEffectMesh
  Visible
 1
 Casts Shadow
-1
+0
 Grid Ignore
 0
 Grid Obst.
 0
 M_Ambient
-1 1 1 1
+1 1 1 0
 M_Blend State
-default
+transparent
 M_Metallic
 0
 M_Rast State
 solid
 M_Shader
-Default
+DefaultClip
 M_Smoothness
 0
 M_Specular
@@ -753,6 +940,65 @@ Trans. Occlude
 UID
 2490187884
 next
+2740675247
+Mesh
+ Enabled
+1
+ Pos
+0 0 1
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
+UID
+3756459594
+next
 ConditionComponent
 2
 3325677210
@@ -822,7 +1068,18 @@ UID
 2907086982
 next
 DialogueComponent
-4
+6
+1954064500
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+2924763241
+next
 4057284704
 Dialogue
  Enabled
@@ -866,6 +1123,17 @@ File
 
 UID
 4252820626
+next
+2740675247
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+1897527020
 next
 InstanceMeshComponent
 1
