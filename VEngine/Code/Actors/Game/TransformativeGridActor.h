@@ -9,6 +9,7 @@ public:
 	ACTOR_SYSTEM(TransformativeGridActor);
 
 	void Create() override;
+	void Tick(float deltaTime) override;
 	Properties GetProps() override;
 
 	void OnLinkMove() override;
@@ -18,5 +19,8 @@ private:
 
 	std::string originalMeshFilename = "cube.vmesh";
 	std::string changeMeshFilename = "barrel.vmesh";
-	bool changeMeshActive;
+	bool changeMeshActive = false;
+
+	bool scalingDown = false;
+	bool scalingUp = false;
 };
