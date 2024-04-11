@@ -740,9 +740,6 @@
     <ClCompile Include="Code\Actors\Game\MultiOrientationTriggerLock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\WaterVolumeValve.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Actors\Game\WorldResetter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1635,9 +1632,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\MultiOrientationTriggerLock.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Actors\Game\WaterVolumeValve.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\WorldResetter.h">

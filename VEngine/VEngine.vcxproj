@@ -329,7 +329,6 @@
     <ClCompile Include="Code\Actors\Game\InspectionActor.cpp" />
     <ClCompile Include="Code\Actors\Game\InspectionTrigger.cpp" />
     <ClCompile Include="Code\Actors\Game\MultiOrientationTriggerLock.cpp" />
-    <ClCompile Include="Code\Actors\Game\WaterVolumeValve.cpp" />
     <ClCompile Include="Code\Actors\Game\WorldResetter.cpp" />
     <ClCompile Include="Code\Actors\Game\LookingGlass.cpp" />
     <ClCompile Include="Code\Actors\Game\InvisibleGridActor.cpp" />
@@ -726,7 +725,6 @@
     <ClInclude Include="Code\Actors\Game\InspectionActor.h" />
     <ClInclude Include="Code\Actors\Game\InspectionTrigger.h" />
     <ClInclude Include="Code\Actors\Game\MultiOrientationTriggerLock.h" />
-    <ClInclude Include="Code\Actors\Game\WaterVolumeValve.h" />
     <ClInclude Include="Code\Actors\Game\WorldResetter.h" />
     <ClInclude Include="Code\Actors\Game\LookingGlass.h" />
     <ClInclude Include="Code\Actors\Game\InvisibleGridActor.h" />
