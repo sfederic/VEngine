@@ -461,6 +461,8 @@ bool GridActor::IsNextMoveAxisValid(XMVECTOR direction)
 	return true;
 }
 
+//@Todo: this code should be moved to WaterVolume. Come back to it if water puzzles pick up in quantity.
+//Also it doesn't work too well in its current state. The Grid actor sits on top of the water.
 void GridActor::CheckIfSubmerged()
 {
 	for (auto& waterVolume : WaterVolume::system.GetActors())
@@ -470,12 +472,16 @@ void GridActor::CheckIfSubmerged()
 		{
 			isSubmerged = true;
 
+			//Grab the backside hit of the water volume and set the grid actor's position to that hit pos.
 			HitResult hit(this);
-			//Make sure nothing is above this actor and make sure the water's plane mesh has no backside
-			if (!Physics::Raycast(hit, GetPositionV(), VMath::GlobalUpVector(), 10.f))
+			hit.ignoreBackFaceHits = false;
+			if (Physics::Raycast(hit, GetPositionV(), VMath::GlobalUpVector(), 15.f))
 			{
-				nextPos.m128_f32[1] = waterVolume->GetPosition().y;
-				return;
+				if (hit.GetHitActorAs<WaterVolume>())
+				{
+					SetNextPos(hit.GetHitPosV());
+					return;
+				}
 			}
 		}
 	}
