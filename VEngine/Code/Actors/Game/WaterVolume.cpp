@@ -3,14 +3,14 @@
 #include "GridActor.h"
 #include "Components/MeshComponent.h"
 #include "Components/BoxTriggerComponent.h"
-#include "Core/VMath.h"
+#include "Render/BlendStates.h"
 
 WaterVolume::WaterVolume()
 {
 	SetEmptyRootComponent();
 
-	waterSurface = CreateComponent<MeshComponent>("WaterSurfaceMesh");
-	rootComponent->AddChild(waterSurface);
+	waterMesh = CreateComponent<MeshComponent>("WaterMesh");
+	rootComponent->AddChild(waterMesh);
 
 	waterVolumeTrigger = CreateComponent<BoxTriggerComponent>("VolumeTrigger");
 	rootComponent->AddChild(waterVolumeTrigger);
@@ -20,22 +20,15 @@ void WaterVolume::Create()
 {
 	__super::Create();
 
-	waterSurface->ignoreGridRaycasts = true;
-	waterSurface->SetMeshFilename("node.vmesh");
-	waterSurface->SetTexture("water.jpg");
-
-	//Set just below the mesh representing the surface
-	waterVolumeTrigger->SetLocalPosition(0.f, -0.5f, 0.f);
+	waterMesh->ignoreGridRaycasts = true;
+	waterMesh->SetMeshFilename("cube.vmesh");
+	waterMesh->SetTexture("water.jpg");
+	waterMesh->SetBlendState(BlendStates::Transparent);
 }
 
 void WaterVolume::Tick(float deltaTime)
 {
 	__super::Tick(deltaTime);
-
-	//@Todo: Testing code for raising water levels
-	auto targetPos = GetPositionV();
-	targetPos.m128_f32[1] = yPointToRaiseTo;
-	SetPosition(VMath::VectorConstantLerp(GetPositionV(), targetPos, deltaTime, 1.0f));
 
 	DouseGridActorsInWaterVolume();
 }
@@ -44,7 +37,6 @@ Properties WaterVolume::GetProps()
 {
 	auto props = __super::GetProps();
 	props.title = GetTypeName();
-	props.Add("Raise Y Point", &yPointToRaiseTo);
 	return props;
 }
 

@@ -96,13 +96,6 @@ void Bucket::EmptyWater()
 				auto& waterSplashSprite = GameUtils::SpawnSpriteSheet(
 					"Sprites/water_splash.png", puddle->GetWorldPositionV(), false, 2, 4);
 				waterSplashSprite.SetWorldScale(0.5f);
-
-				//Handle water volumes
-				auto waterVolume = rayHit.GetHitActorAs<WaterVolume>();
-				if (waterVolume)
-				{
-					waterVolume->IncreaseYPointToRaiseTo(0.2f);
-				}
 			}
 		}
 	}
