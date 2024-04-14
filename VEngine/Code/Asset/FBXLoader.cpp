@@ -6,6 +6,7 @@
 #include <filesystem>
 #include "Core/VMath.h"
 #include "AssetPaths.h"
+#include "AssetFileExtensions.h"
 #include "Animation/BoneWeights.h"
 #include "Animation/Animation.h"
 #include "Animation/AnimFrame.h"
@@ -13,6 +14,7 @@
 #include "Animation/Skeleton.h"
 #include "Render/Vertex.h"
 #include "Render/MeshData.h"
+#include "Render/Material.h"
 
 using namespace fbxsdk;
 
@@ -20,12 +22,14 @@ FbxManager* manager;
 FbxIOSettings* ioSetting;
 FbxImporter* importer;
 
-void ProcessAllChildNodes(FbxNode* node, MeshData& meshData);
+void ProcessAllChildNodes(std::string fbxFilename, FbxNode* node, MeshData& meshData);
 void ProcessSkeletonNodes(FbxNode* node, Skeleton& skeleton, int parentIndex);
 
 void ReadNormal(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, XMFLOAT3& outNormal);
 void ReadUVs(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, XMFLOAT2& outUVs);
 void ReadVertexColours(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, XMFLOAT4& outColour);
+
+XMFLOAT4 FBXDouble3ToXMFloat3(const fbxsdk::FbxDouble3& fbxDouble);
 
 std::vector<XMFLOAT3> ProcessControlPoints(FbxMesh* currMesh);
 
@@ -55,6 +59,9 @@ void FBXLoader::ImportAsMesh(std::string filepath, MeshData& meshData)
 	//This never seemed to do anything, left it here for future reference
 	//scene->GetGlobalSettings().SetAxisSystem(FbxAxisSystem::DirectX);
 
+	const std::string meshFilename =
+		VString::GetSubStringAtFoundOffset(filepath, AssetBaseFolders::fbxFiles);
+
 	FbxNode* rootNode = scene->GetRootNode();
 	int childNodeCount = rootNode->GetChildCount();
 
@@ -67,7 +74,7 @@ void FBXLoader::ImportAsMesh(std::string filepath, MeshData& meshData)
 	//Go through all nodes
 	for (int i = 0; i < childNodeCount; i++)
 	{
-		ProcessAllChildNodes(rootNode->GetChild(i), meshData);
+		ProcessAllChildNodes(meshFilename, rootNode->GetChild(i), meshData);
 	}
 
 	scene->Destroy();
@@ -238,13 +245,13 @@ std::map<std::string, Animation> FBXLoader::ImportAsAnimation(const std::string 
 	return skeleton.GetAnimations();
 }
 
-void ProcessAllChildNodes(FbxNode* node, MeshData& meshData)
+void ProcessAllChildNodes(std::string fbxFilename, FbxNode* node, MeshData& meshData)
 {
 	//Recursion for dealing with nodes in the heirarchy.
 	int childNodeCount = node->GetChildCount();
 	for (int i = 0; i < childNodeCount; i++)
 	{
-		ProcessAllChildNodes(node->GetChild(i), meshData);
+		ProcessAllChildNodes(fbxFilename, node->GetChild(i), meshData);
 	}
 
 	FbxScene* scene = node->GetScene();
@@ -316,15 +323,42 @@ void ProcessAllChildNodes(FbxNode* node, MeshData& meshData)
 			}
 		}
 
-		//@Todo: materials for fbx files. Would need to figure out a workflow from Blender's materials
-		//Material 
-		//int materialCount = node->GetMaterialCount();
-		//for (int materialIndex = 0; materialIndex < materialCount; materialIndex++)
-		//{
-		//	FbxSurfacePhong* material = (FbxSurfacePhong*)node->GetMaterial(materialIndex);
-		//	FbxClassId surfaceID = material->GetClassId();
-		//	FbxDouble3 ambient = material->Ambient.Get();
-		//}
+		//Materials
+		const int materialCount = node->GetMaterialCount();
+		for (int materialIndex = 0; materialIndex < materialCount; materialIndex++)
+		{
+			FbxSurfacePhong* FBXMaterial = (FbxSurfacePhong*)node->GetMaterial(materialIndex);
+			const FbxClassId surfaceID = FBXMaterial->GetClassId();
+			const FbxDouble3 specular = FBXMaterial->Specular.Get();
+
+			MaterialShaderData shaderData;
+			shaderData.ambient = FBXDouble3ToXMFloat3(FBXMaterial->Ambient.Get());
+			shaderData.emissive = FBXDouble3ToXMFloat3(FBXMaterial->Emissive.Get());
+			shaderData.diffuse = FBXDouble3ToXMFloat3(FBXMaterial->Diffuse.Get());
+			shaderData.specular = FBXDouble3ToXMFloat3(FBXMaterial->Specular.Get());
+			//@Todo: No idea how to get metallic & roughness GGX material data from blender.
+			//(Don't think PBR material export values exist in FBX SDK. Maybe you'd have to define your
+			//own user values in DCC? Here's some dudes talking about it.
+			//https://forums.autodesk.com/t5/fbx-forum/pbr-materials/td-p/7418493)
+			//@Todo: textures (really just texture filenames)
+			//@Todo: No idea how transparency applies to each material per colour property in DCC.
+
+			Material engineMaterial("test.png", "Default");
+			engineMaterial.materialShaderData = shaderData;
+
+			const std::string materialName =
+				AssetBaseFolders::material +
+				VString::GetSubStringBeforeFoundOffset(fbxFilename, ".fbx") +
+				FBXMaterial->GetName() +
+				AssetFileExtensions::material;
+			assert(!std::filesystem::exists(materialName));
+
+			Serialiser s(materialName, OpenMode::Out);
+			Properties materialProps = engineMaterial.GetProps();
+			s.Serialise(materialProps);
+
+			Log("Material file [%s] created from mesh import [%s].", materialName.c_str(), fbxFilename.c_str());
+		}
 
 		//Array setup
 		int numVerts = mesh->GetControlPointsCount();
@@ -492,10 +526,13 @@ void FBXLoader::ImportFracturedMesh(std::string filename, std::vector<MeshData>&
 
 	meshDatas.resize(childNodeCount);
 
+	const std::string meshFilename =
+		VString::GetSubStringAtFoundOffset(filepath, AssetBaseFolders::mesh);
+
 	//Go through all cells nodes
 	for (int i = 0; i < childNodeCount; i++)
 	{
-		ProcessAllChildNodes(rootNode->GetChild(i), meshDatas[i]);
+		ProcessAllChildNodes(meshFilename, rootNode->GetChild(i), meshDatas[i]);
 	}
 
 	scene->Destroy();
@@ -671,6 +708,11 @@ void ReadVertexColours(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounte
 
 		break;
 	}
+}
+
+XMFLOAT4 FBXDouble3ToXMFloat3(const fbxsdk::FbxDouble3& fbxDouble)
+{
+	return XMFLOAT4(fbxDouble.mData[0], fbxDouble.mData[1], fbxDouble.mData[2], 1.f);
 }
 
 std::vector<XMFLOAT3> ProcessControlPoints(FbxMesh* currMesh)
