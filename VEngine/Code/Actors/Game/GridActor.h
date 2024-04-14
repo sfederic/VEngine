@@ -205,7 +205,7 @@ public:
 	auto GetDialogueComponent() { return dialogueComponent; }
 
 private:
-	void SpawnDustSpriteSheet();
+	void SpawnDustSpriteSheet() const;
 
 	void CheckSetIsMoving();
 	void CheckSetIsRotating();

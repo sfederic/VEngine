@@ -39,7 +39,7 @@ bool GridActor::CheckNextRotationBoundsIntersect()
 
 	BoundingOrientedBox nextRotBounds = mesh->GetBoundsInWorldSpace();
 	XMStoreFloat4(&nextRotBounds.Orientation, nextRot);
-	//Lower extents so the actor isn't hitting thigns like the floor.
+	//Lower extents so the actor isn't hitting things like the floor.
 	nextRotBounds.Extents.x -= 0.15f;
 	nextRotBounds.Extents.y -= 0.15f;
 	nextRotBounds.Extents.z -= 0.15f;
@@ -181,6 +181,8 @@ void GridActor::Tick(float deltaTime)
 			HitResult nodeHit;
 			GetCurrentNode()->RecalcNodeHeight(nodeHit);
 			nextPos.m128_f32[1] = std::round(nextPos.m128_f32[1]);
+
+			SpawnDustSpriteSheet();
 		}
 	}
 
@@ -499,7 +501,7 @@ void GridActor::DisableAllInteractivity()
 	ignoreRotationValidCheck = true;
 }
 
-void GridActor::SpawnDustSpriteSheet()
+void GridActor::SpawnDustSpriteSheet() const
 {
 	XMVECTOR spawnPos = GetPositionV();
 	spawnPos.m128_f32[1] -= 0.25f;
