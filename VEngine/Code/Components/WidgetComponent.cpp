@@ -2,18 +2,6 @@
 #include "WidgetComponent.h"
 #include "UI/Widget.h"
 
-void WidgetComponent::Tick(float deltaTime)
-{
-}
-
-void WidgetComponent::Start()
-{
-}
-
-void WidgetComponent::Create()
-{
-}
-
 void WidgetComponent::Destroy()
 {
 	widget->Destroy();
