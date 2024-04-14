@@ -863,6 +863,9 @@
     <ClCompile Include="Code\Actors\Game\TransformativeGridActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Components\SphereTriggerComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\main.cpp">
@@ -1770,6 +1773,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\TransformativeGridActor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Components\SphereTriggerComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
