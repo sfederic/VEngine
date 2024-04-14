@@ -108,6 +108,9 @@ public:
 private:
 	std::string collisionMeshFilename;
 
+	//@Todo: eventually would like multiple materials per mesh. Blender can assign materials based on selected
+	//faces of the mesh, figure out how that translates to imported FBX files and work from there. This sort
+	//of change would also need a Material editor widget to trim down the properties dock.
 	Material* material = nullptr;
 
 	bool isRenderStatic = true;
