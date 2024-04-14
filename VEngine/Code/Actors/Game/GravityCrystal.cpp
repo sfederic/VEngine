@@ -16,7 +16,7 @@ void GravityCrystal::Create()
 
 	SetMeshFilename("crystal.vmesh");
 
-	gravityInfluenceTrigger->SetExtents(2.f, 1.f, 2.f);
+	gravityInfluenceTrigger->SetExtents(1.f, 1.f, 1.f);
 }
 
 void GravityCrystal::Tick(float deltaTime)
