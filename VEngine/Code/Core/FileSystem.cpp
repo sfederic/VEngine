@@ -23,7 +23,7 @@
 #include "Profile.h"
 #include "UI/UISystem.h"
 #include "UI/ScreenFadeWidget.h"
-#include <Asset/AssetPaths.h>
+#include <Asset/AssetBaseFolders.h>
 
 static std::string defferedWorldLoadFilename;
 static std::string previousWorldMovedFromFilename;

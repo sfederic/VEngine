@@ -1,6 +1,6 @@
 #include "vpch.h"
 #include "Texture2D.h"
-#include "Asset/AssetPaths.h"
+#include "Asset/AssetBaseFolders.h"
 #include "Core/Debug.h"
 #include "Render/RenderUtils.h"
 #include "Render/Renderer.h"

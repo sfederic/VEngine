@@ -2,7 +2,7 @@
 #include "TextureDataWidget.h"
 #include <qfiledialog.h>
 #include "Core/VString.h"
-#include "Asset/AssetPaths.h"
+#include "Asset/AssetBaseFolders.h"
 #include "Render/RenderPropertyStructs.h"
 
 TextureDataWidget::TextureDataWidget(Property& prop_)

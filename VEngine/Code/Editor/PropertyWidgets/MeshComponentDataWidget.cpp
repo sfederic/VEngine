@@ -3,7 +3,7 @@
 #include <qfiledialog.h>
 #include "Core/VString.h"
 #include "Render/RenderPropertyStructs.h"
-#include "Asset/AssetPaths.h"
+#include "Asset/AssetBaseFolders.h"
 
 MeshComponentDataWidget::MeshComponentDataWidget(Property& prop_)
 {

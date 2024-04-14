@@ -437,7 +437,7 @@
     <ClInclude Include="Code\Actors\AnimCube.h" />
     <ClInclude Include="Code\Actors\CameraActor.h" />
     <ClInclude Include="Code\Asset\AssetFileExtensions.h" />
-    <ClInclude Include="Code\Asset\AssetPaths.h" />
+    <ClInclude Include="Code\Asset\AssetBaseFolders.h" />
     <ClInclude Include="Code\Core\Camera.h" />
     <ClInclude Include="Code\Editor\ImGuizmo\ImSequencer.h" />
     <ClInclude Include="Code\Gameplay\GameplayTags.h" />

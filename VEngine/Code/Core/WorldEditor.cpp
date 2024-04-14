@@ -17,7 +17,7 @@
 #include "Editor/DebugMenu.h"
 #include "Core.h"
 #include "Core/Log.h"
-#include "Asset/AssetPaths.h"
+#include "Asset/AssetBaseFolders.h"
 #include "Render/TextureSystem.h"
 #include "Render/Texture2D.h"
 #include "Render/Material.h"

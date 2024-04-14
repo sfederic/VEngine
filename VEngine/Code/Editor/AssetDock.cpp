@@ -23,7 +23,7 @@
 #include "Render/MaterialSystem.h"
 #include "Gameplay/GameInstance.h"
 #include "Core/Log.h"
-#include "Asset/AssetPaths.h"
+#include "Asset/AssetBaseFolders.h"
 #include "Asset/AssetFileExtensions.h"
 #include "Components/MeshComponent.h"
 

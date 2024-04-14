@@ -5,7 +5,7 @@
 #include "Render/RenderUtils.h"
 #include "Render/Texture2D.h"
 #include "Core/Log.h"
-#include "Asset/AssetPaths.h"
+#include "Asset/AssetBaseFolders.h"
 
 static SystemStates systemState = SystemStates::Unloaded;
 static std::unordered_map<std::string, std::unique_ptr<Texture2D>> texture2DMap;

@@ -6,7 +6,7 @@
 #include <qfiledialog.h>
 #include <qcombobox.h>
 #include "Core/World.h"
-#include "Asset/AssetPaths.h"
+#include "Asset/AssetBaseFolders.h"
 #include "Gameplay/ConditionSystem.h"
 
 //columns for QTreeWidget

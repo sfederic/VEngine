@@ -2,7 +2,7 @@
 #include "DialogueStructures.h"
 #include <filesystem>
 #include "Core/Log.h"
-#include "Asset/AssetPaths.h"
+#include "Asset/AssetBaseFolders.h"
 
 void Dialogue::LoadFromFile()
 {
