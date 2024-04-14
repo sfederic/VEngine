@@ -55,6 +55,9 @@ std::vector<MeshComponent*> MeshComponent::GetAllStaticMeshes()
 	return meshes;
 }
 
+//@Todo: this is still not a great solution for transparency. Lot of meshes are overlapping their transparency
+//based on distance. Look into some helpful add-on solution, maybe even something dirty like:
+//"If multiple meshes have same world position, bring transparent blend state actors to front."
 std::vector<MeshComponent*> MeshComponent::SortMeshComponentsByDistance()
 {
 	struct MeshPack
