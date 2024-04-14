@@ -39,6 +39,7 @@ bool GridActor::CheckNextRotationBoundsIntersect()
 
 	BoundingOrientedBox nextRotBounds = mesh->GetBoundsInWorldSpace();
 	XMStoreFloat4(&nextRotBounds.Orientation, nextRot);
+	//Lower extents so the actor isn't hitting thigns like the floor.
 	nextRotBounds.Extents.x -= 0.15f;
 	nextRotBounds.Extents.y -= 0.15f;
 	nextRotBounds.Extents.z -= 0.15f;
