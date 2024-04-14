@@ -507,5 +507,4 @@ void GridActor::SpawnDustSpriteSheet() const
 	spawnPos.m128_f32[1] -= 0.25f;
 	auto& sprite = GameUtils::SpawnSpriteSheet("Sprites/dust.png", spawnPos, false, 3, 2);
 	sprite.SetAnimationSpeed(15.f);
-	sprite.SetWorldScale(0.5f);
 }
