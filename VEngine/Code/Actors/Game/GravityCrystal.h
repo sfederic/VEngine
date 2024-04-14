@@ -2,6 +2,9 @@
 
 #include "GridActor.h"
 
+class BoxTriggerComponent;
+class MeshComponent;
+
 class GravityCrystal : public GridActor
 {
 public:
@@ -12,7 +15,7 @@ public:
 	void Tick(float deltaTime);
 
 private:
-	class BoxTriggerComponent* gravityInfluenceTrigger = nullptr;
-
 	std::set<GridActor*> previouslyContainedActors;
+	BoxTriggerComponent* gravityInfluenceTrigger = nullptr;
+	MeshComponent* gravityFieldMesh = nullptr;
 };
