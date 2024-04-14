@@ -28,7 +28,7 @@ void GravityCrystal::Tick(float deltaTime)
 	{
 		if (actor->GetCanFall())
 		{
-			previouslyContained.emplace(actor);
+			previouslyContainedActors.emplace(actor);
 
 			actor->SetCanFall(false);
 
@@ -44,7 +44,7 @@ void GravityCrystal::Tick(float deltaTime)
 		}
 	}
 
-	for (auto actorIt = previouslyContained.begin(); actorIt != previouslyContained.end();)
+	for (auto actorIt = previouslyContainedActors.begin(); actorIt != previouslyContainedActors.end();)
 	{
 		auto actor = (*actorIt);
 
@@ -55,17 +55,12 @@ void GravityCrystal::Tick(float deltaTime)
 			const auto nextPos = actor->GetPositionV() - VMath::GlobalUpVector();
 			actor->SetNextPos(nextPos);
 
-			for (auto mesh : actor->GetComponents<MeshComponent>())
-			{
-				mesh->SetShaderItem("Default");
-			}
-
 			actor->RecalcCurrentNodeDontIgnoreThis();
 
-			previouslyContained.erase(actor);
+			previouslyContainedActors.erase(actor);
 
 			//This is fucking stupid. The std::set iterator crashes if you erase in the for loop like this.
-			if (previouslyContained.size() == 0)
+			if (previouslyContainedActors.size() == 0)
 			{
 				return;
 			}

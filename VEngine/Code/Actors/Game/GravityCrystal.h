@@ -14,5 +14,5 @@ public:
 private:
 	class BoxTriggerComponent* gravityInfluenceTrigger = nullptr;
 
-	std::set<GridActor*> previouslyContained;
+	std::set<GridActor*> previouslyContainedActors;
 };
