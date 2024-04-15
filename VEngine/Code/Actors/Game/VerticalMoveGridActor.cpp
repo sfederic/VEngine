@@ -8,6 +8,8 @@ void VerticalMoveGridActor::Create()
 
 	canBeRotatedRollZAxis = false;
 	canBeRotatedPitchXAxis = false;
+
+	canFall = false;
 }
 
 void VerticalMoveGridActor::OnLinkMoveForward()
@@ -16,6 +18,8 @@ void VerticalMoveGridActor::OnLinkMoveForward()
 
 	ResetNextPos();
 	AddNextPosition(VMath::GlobalUpVector());
+
+	RecalcCurrentNodeDontIgnoreThis();
 }
 
 void VerticalMoveGridActor::OnLinkMoveBack()
@@ -24,6 +28,8 @@ void VerticalMoveGridActor::OnLinkMoveBack()
 
 	ResetNextPos();
 	AddNextPosition(-VMath::GlobalUpVector());
+
+	RecalcCurrentNodeDontIgnoreThis();
 }
 
 void VerticalMoveGridActor::OnLinkMoveLeft()
