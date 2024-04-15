@@ -741,7 +741,7 @@ void Player::MoveLinkedGridActor()
 				if (linkedGridActor->CheckNextNodeMoveIsValid(-GetForwardVectorV()))
 				{
 					linkedGridActor->OnLinkMove();
-					linkedGridActor->OnLinkMoveForward();
+					linkedGridActor->OnLinkMoveBack();
 
 					//Backwards linked grid actor movement needs to be able to rotate the player and camera
 					//to face the new positional orientation of the linked grid actor. This eases up the
