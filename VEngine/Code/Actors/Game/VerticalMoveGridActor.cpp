@@ -12,12 +12,20 @@ void VerticalMoveGridActor::Create()
 	canFall = false;
 }
 
+Properties VerticalMoveGridActor::GetProps()
+{
+	auto props = __super::GetProps();
+	props.title = GetTypeName();
+	props.Add("Movement Increment", &movementIncrement);
+	return props;
+}
+
 void VerticalMoveGridActor::OnLinkMoveForward()
 {
 	__super::OnLinkMoveForward();
 
 	ResetNextPos();
-	AddNextPosition(VMath::GlobalUpVector());
+	AddNextPosition(VMath::GlobalUpVector() * movementIncrement);
 
 	RecalcCurrentNodeDontIgnoreThis();
 }
@@ -27,7 +35,7 @@ void VerticalMoveGridActor::OnLinkMoveBack()
 	__super::OnLinkMoveBack();
 
 	ResetNextPos();
-	AddNextPosition(-VMath::GlobalUpVector());
+	AddNextPosition(-VMath::GlobalUpVector() * movementIncrement);
 
 	RecalcCurrentNodeDontIgnoreThis();
 }
