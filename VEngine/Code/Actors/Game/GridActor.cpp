@@ -432,6 +432,11 @@ void GridActor::AddNextRot(XMVECTOR axis, float angle)
 	SetNextRot(newRotation);
 }
 
+void GridActor::ResetNextPos()
+{
+	nextPos = GetPositionV();
+}
+
 void GridActor::SetMeshFilename(std::string_view filename)
 {
 	mesh->SetMeshFilename(filename);
