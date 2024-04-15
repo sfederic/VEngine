@@ -117,6 +117,10 @@ public:
 	virtual void OnPlayerLinkHoverOff() {}
 
 	virtual void OnLinkMove();
+	virtual void OnLinkMoveForward() {}
+	virtual void OnLinkMoveBack() {}
+	virtual void OnLinkMoveLeft() {}
+	virtual void OnLinkMoveRight() {}
 
 	virtual void Interact() {}
 
