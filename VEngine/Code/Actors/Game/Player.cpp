@@ -1001,14 +1001,17 @@ void Player::CheckNextMoveNode(const XMVECTOR previousPos)
 		return;
 	}
 
+	//@Todo: Re-think about bringing this code back in. It can serve as a soft lock in certain gameplay
+	//scenarios like if a player gets stuck on a really high pillar. If the game needs this code, 
+	//could use a WorldResetter bound to input instead of being an interactive actor.
 	//Check if drop is too high for player
-	const float nextNodeAndPlayerPosHeightDifference = GetPosition().y - nextNode->worldPosition.y;
-	if (nextNodeAndPlayerPosHeightDifference > Grid::maxPlayerDropHeight)
-	{
-		Log("Node [x:%d, y:%d] too low to drop down to.", nextXIndex, nextYIndex);
-		nextPos = previousPos;
-		return;
-	}
+	//const float nextNodeAndPlayerPosHeightDifference = GetPosition().y - nextNode->worldPosition.y;
+	//if (nextNodeAndPlayerPosHeightDifference > Grid::maxPlayerDropHeight)
+	//{
+	//	Log("Node [x:%d, y:%d] too low to drop down to.", nextXIndex, nextYIndex);
+	//	nextPos = previousPos;
+	//	return;
+	//}
 
 	//FENCE RAYCAST CHECK
 	HitResult fenceHit(this);
