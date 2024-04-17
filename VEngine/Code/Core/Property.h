@@ -31,6 +31,8 @@ struct Property
 	//hide property in UI and skips over copying properties across to new props
 	bool hide = false;
 
+	bool useActorsAutoComplete = false;
+
 	template <typename T>
 	T* GetData()
 	{

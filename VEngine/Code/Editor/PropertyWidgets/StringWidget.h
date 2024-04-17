@@ -13,5 +13,6 @@ struct StringWidget : public QLineEdit, IPropertyWidget
 	virtual void ResetValue() override;
 
 private:
-	void SetAutoComplete(const std::string& directoryPath);
+	void SetDirectoryFilenamesAutoComplete(const std::string& directoryPath);
+	void SetActorWorldListAutoComplete();
 };
