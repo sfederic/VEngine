@@ -1,0 +1,699 @@
+GridActor
+1
+ Enabled
+1
+ Position
+5 0.5 5
+ Rotation
+0 0 0 1
+ Scale
+5 5 5
+ Visible
+1
+Audio LinkMove
+cloth_heavy.wav
+Audio LinkRotate
+chainmail1.wav
+BigGridActor
+0
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+1
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+0
+Link Rotation
+0
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+MoveOnlyXAxis
+0
+MoveOnlyZAxis
+0
+Name
+OuterSphere
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Roll
+0
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+2347280417
+next
+Player
+1
+ Enabled
+1
+ Position
+5 0 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+Player0
+UID
+3197033582
+next
+Grid
+1
+ Enabled
+1
+ Position
+0 0 0
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+Grid0
+Size X
+11
+Size Y
+11
+UID
+3153593468
+next
+DebugNoteActor
+1
+ Enabled
+1
+ Position
+7 -0 4
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+DebugNoteActor0
+Note Text
+This map doesn't work because player will link to the outer sphere, but the idea is there. You'd need another Actor type to pull it off.
+UID
+2225890785
+next
+MeshActor
+1
+ Enabled
+1
+ Position
+5 -0.5 5
+ Rotation
+-0 0 -0 1
+ Scale
+11 1 11
+ Visible
+1
+Name
+MeshActor0
+UID
+501156602
+next
+DirectionalLightActor
+1
+ Enabled
+1
+ Position
+0 5 0
+ Rotation
+0.707107 0 0 0.707107
+ Scale
+1 1 1
+ Visible
+1
+Name
+DirectionalLightActor0
+UID
+3922801516
+next
+IncrementalRotator
+1
+ Enabled
+1
+ Position
+5 0.5 5
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Actor To Rotate
+OuterSphere
+Audio LinkMove
+cloth_heavy.wav
+Audio LinkRotate
+chainmail1.wav
+BigGridActor
+0
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+1
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+MoveOnlyXAxis
+0
+MoveOnlyZAxis
+0
+Name
+InnerSphere
+Obstacle
+1
+Rotate Direction
+0 1 0
+Rotate Pitch
+1
+Rotate Roll
+0
+Rotate Speed
+12
+Rotate Yaw
+1
+Rotation Increment
+90
+UID
+1603069830
+next
+MeshComponent
+5
+2347280417
+Mesh
+ Enabled
+1
+ Pos
+5 0.5 5
+ Rot
+0 0 0 1
+ Scale
+5 5 5
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+1
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+nobackcull
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+sphere.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
+UID
+3833090897
+next
+3197033582
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+char.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
+UID
+1568471337
+next
+3197033582
+LinkEffectMesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+0
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 0
+M_Blend State
+transparent
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+DefaultClip
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+UI/spellbinding_circle.png
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+743082655
+next
+501156602
+Mesh
+ Enabled
+1
+ Pos
+5 -0.5 5
+ Rot
+-0 0 -0 1
+ Scale
+11 1 11
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+4181267278
+next
+1603069830
+Mesh
+ Enabled
+1
+ Pos
+5 0.5 5
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+sphere.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
+UID
+640938457
+next
+DialogueComponent
+3
+2347280417
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+1866989244
+next
+3197033582
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+1240271527
+next
+1603069830
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+1624204246
+next
+InstanceMeshComponent
+1
+3153593468
+NodeMesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_Blend State
+transparent
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Instance
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+1537081362
+next
+CameraComponent
+1
+3197033582
+Camera
+ Enabled
+1
+ Pos
+1.75 1.75 -2.75
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+FOV
+60
+Far Z
+1000
+Near Z
+0.01
+UID
+1268981865
+next
+DirectionalLightComponent
+1
+3922801516
+DirectionalLight
+ Enabled
+1
+ Pos
+0 5 0
+ Rot
+0.707107 0 0 0.707107
+ Scale
+1 1 1
+ Visible
+1
+Colour
+1 1 1 1
+Intensity
+1
+LightEnabled
+1
+UID
+2702040041
+next
+EmptyComponent
+2
+3197033582
+Root
+ Enabled
+1
+ Pos
+5 0 2
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+3574829870
+next
+2225890785
+Root
+ Enabled
+1
+ Pos
+7 -0 4
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+2182169517
+next
+end
