@@ -641,9 +641,8 @@ void Player::LinkToGridActor()
 			ResetLinkedGridActor();
 		}
 	}
-	else if (!isInputLinkedToGridActor && Input::GetKeyUp("Link")) //Raycast forward
+	else if (!isInputLinkedToGridActor && Input::GetKeyUp("Link"))
 	{
-		//Remove interact widget
 		interactWidget->RemoveFromViewport();
 
 		HitResult hit(this);
