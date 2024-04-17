@@ -43,6 +43,6 @@ Properties PowerCrystalSlot::GetProps()
 {
 	auto props = __super::GetProps();
 	props.title = GetTypeName();
-	props.Add("PowerUp Actor", &powerUpActorName);
+	props.Add("PowerUp Actor", &powerUpActorName).useActorsAutoComplete = true;
 	return props;
 }

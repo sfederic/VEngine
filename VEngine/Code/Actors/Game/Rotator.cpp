@@ -41,7 +41,7 @@ Properties Rotator::GetProps()
 {
 	auto props = __super::GetProps();
 	props.title = GetTypeName();
-	props.Add("Linked Actor", &actorNameToRotate);
+	props.Add("Linked Actor", &actorNameToRotate).useActorsAutoComplete = true;
 	return props;
 }
 

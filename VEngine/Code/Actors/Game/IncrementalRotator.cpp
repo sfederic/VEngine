@@ -27,7 +27,7 @@ Properties IncrementalRotator::GetProps()
 {
 	auto props = __super::GetProps();
 	props.title = GetTypeName();
-	props.Add("Actor To Rotate", &actorNameToRotate);
+	props.Add("Actor To Rotate", &actorNameToRotate).useActorsAutoComplete = true;
 	props.Add("Rotation Increment", &rotationIncrement);
 	props.Add("Rotate Direction", &rotateDirection);
 	return props;

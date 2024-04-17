@@ -19,7 +19,7 @@ Properties Winch::GetProps()
 {
 	auto props = __super::GetProps();
 	props.title = GetTypeName();
-	props.Add("Linked Actor", &linkedActorName);
+	props.Add("Linked Actor", &linkedActorName).useActorsAutoComplete = true;
 	props.Add("Move Direction", &moveDirection);
 	props.Add("Move Increment", &moveIncrement);
 	return props;

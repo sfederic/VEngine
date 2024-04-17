@@ -44,7 +44,7 @@ Properties PlayerCameraTrigger::GetProps()
 	auto props = __super::GetProps();
 	props.title = GetTypeName();
 	props.Add("NewLocalCameraPos", &newLocalCameraPos);
-	props.Add("NewTargetActor", &newTargetActorName);
+	props.Add("NewTargetActor", &newTargetActorName).useActorsAutoComplete = true;
 	return props;
 }
 

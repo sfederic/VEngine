@@ -27,7 +27,7 @@ Properties Pulley::GetProps()
 {
 	auto props = __super::GetProps();
 	props.title = GetTypeName();
-	props.Add("Pull Actor", &pullActorName);
+	props.Add("Pull Actor", &pullActorName).useActorsAutoComplete = true;
 	props.Add("Pull Increment", &pullIncrement);
 	props.Add("Pull Direction", &pullDirection);
 	props.Add("Pull Min", &pullMin);

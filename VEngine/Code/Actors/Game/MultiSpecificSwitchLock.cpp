@@ -31,11 +31,11 @@ Properties MultiSpecificSwitchLock::GetProps()
 {
 	auto props = __super::GetProps();
 	props.title = GetTypeName();
-	props.Add("Switch Actor 0", &switchActorName0);
-	props.Add("Switch Actor 1", &switchActorName1);
-	props.Add("Switch Actor 2", &switchActorName2);
-	props.Add("Switch Actor 3", &switchActorName3);
-	props.Add("Switch Activate", &actorToActivateName);
+	props.Add("Switch Actor 0", &switchActorName0).useActorsAutoComplete = true;
+	props.Add("Switch Actor 1", &switchActorName1).useActorsAutoComplete = true;
+	props.Add("Switch Actor 2", &switchActorName2).useActorsAutoComplete = true;
+	props.Add("Switch Actor 3", &switchActorName3).useActorsAutoComplete = true;
+	props.Add("Switch Activate", &actorToActivateName).useActorsAutoComplete = true;
 	return props;
 }
 

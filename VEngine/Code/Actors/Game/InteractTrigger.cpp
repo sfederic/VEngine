@@ -87,7 +87,7 @@ Properties InteractTrigger::GetProps()
 	props.Add("Interact Text", &interactText);
 	props.Add("Overlap Text", &overlapText);
 	props.Add("Interact Known", &interactKnown);
-	props.Add("TargetActorName", &targetActorName);
+	props.Add("TargetActorName", &targetActorName).useActorsAutoComplete = true;
 	props.Add("SoundEffect", &soundEffect);
 	return props;
 }

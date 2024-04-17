@@ -21,8 +21,8 @@ Properties TwinOrientationLock::GetProps()
 {
 	auto props = __super::GetProps();
 	props.title = GetTypeName();
-	props.Add("Actor0", &actorName0);
-	props.Add("Actor1", &actorName1);
+	props.Add("Actor0", &actorName0).useActorsAutoComplete = true;
+	props.Add("Actor1", &actorName1).useActorsAutoComplete = true;
 	props.Add("Orientation0", &orientation0);
 	props.Add("Orientation1", &orientation1);
 	return props;

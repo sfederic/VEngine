@@ -32,11 +32,11 @@ Properties MultiOrientationLock::GetProps()
 {
 	auto props = __super::GetProps();
 	props.title = GetTypeName();
-	props.Add("Lock Actor 0", &lockActorName0);
-	props.Add("Lock Actor 1", &lockActorName1);
-	props.Add("Lock Actor 2", &lockActorName2);
-	props.Add("Lock Actor 3", &lockActorName3);
-	props.Add("Actor Activate", &actorToActivate);
+	props.Add("Lock Actor 0", &lockActorName0).useActorsAutoComplete = true;
+	props.Add("Lock Actor 1", &lockActorName1).useActorsAutoComplete = true;
+	props.Add("Lock Actor 2", &lockActorName2).useActorsAutoComplete = true;
+	props.Add("Lock Actor 3", &lockActorName3).useActorsAutoComplete = true;
+	props.Add("Actor Activate", &actorToActivate).useActorsAutoComplete = true;
 	return props;
 }
 
