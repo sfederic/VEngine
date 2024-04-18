@@ -1203,8 +1203,11 @@ void Player::ResetLinkedGridActor()
 		if (gridActor)
 		{
 			EnableLinkEffectMeshForHover(&gridActor->GetMesh());
+			return;
 		}
 	}
+
+	linkEffectMesh->SetVisibility(false);
 }
 
 void Player::ResetLinkedGridActorIfThis(GridActor* gridActor)
