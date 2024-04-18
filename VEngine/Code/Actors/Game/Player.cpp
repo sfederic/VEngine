@@ -721,7 +721,13 @@ void Player::MoveLinkedGridActor()
 				if (linkedGridActor->CheckNextNodeMoveIsValid(GetForwardVectorV()))
 				{
 					linkedGridActor->OnLinkMove();
-					linkedGridActor->OnLinkMoveForward();
+
+					//There are some GridActors that destroy themselves on move. Re-check for nullptr.
+					//This check is in all movement and rotation virtual calls on a GridActor from player.
+					if (linkedGridActor)
+					{
+						linkedGridActor->OnLinkMoveForward();
+					}
 				}
 			}
 			else
@@ -740,6 +746,12 @@ void Player::MoveLinkedGridActor()
 				if (linkedGridActor->CheckNextNodeMoveIsValid(-GetForwardVectorV()))
 				{
 					linkedGridActor->OnLinkMove();
+
+					if (linkedGridActor == nullptr)
+					{
+						return;
+					}
+
 					linkedGridActor->OnLinkMoveBack();
 
 					//Backwards linked grid actor movement needs to be able to rotate the player and camera
@@ -787,7 +799,10 @@ void Player::MoveLinkedGridActor()
 				if (linkedGridActor->CheckNextNodeMoveIsValid(-GetRightVectorV()))
 				{
 					linkedGridActor->OnLinkMove();
-					linkedGridActor->OnLinkMoveLeft();
+					if (linkedGridActor)
+					{
+						linkedGridActor->OnLinkMoveLeft();
+					}
 				}
 			}
 			else
@@ -806,7 +821,10 @@ void Player::MoveLinkedGridActor()
 				if (linkedGridActor->CheckNextNodeMoveIsValid(GetRightVectorV()))
 				{
 					linkedGridActor->OnLinkMove();
-					linkedGridActor->OnLinkMoveRight();
+					if (linkedGridActor)
+					{
+						linkedGridActor->OnLinkMoveRight();
+					}
 				}
 			}
 			else
@@ -849,7 +867,10 @@ void Player::RotateLinkedGridActor()
 				if (!linkedGridActor->CheckNextRotationBoundsIntersect())
 				{
 					linkedGridActor->OnLinkRotate();
-					linkedGridActor->OnLinkRotateRight();
+					if (linkedGridActor)
+					{
+						linkedGridActor->OnLinkRotateRight();
+					}
 				}
 				else
 				{
@@ -864,7 +885,11 @@ void Player::RotateLinkedGridActor()
 				if (!linkedGridActor->CheckNextRotationBoundsIntersect())
 				{
 					linkedGridActor->OnLinkRotate();
-					linkedGridActor->OnLinkRotateRight();
+
+					if (linkedGridActor)
+					{
+						linkedGridActor->OnLinkRotateRight();
+					}
 				}
 				else
 				{
@@ -885,7 +910,10 @@ void Player::RotateLinkedGridActor()
 				if (!linkedGridActor->CheckNextRotationBoundsIntersect())
 				{
 					linkedGridActor->OnLinkRotate();
-					linkedGridActor->OnLinkRotateLeft();
+					if (linkedGridActor)
+					{
+						linkedGridActor->OnLinkRotateLeft();
+					}
 				}
 				else
 				{
@@ -900,7 +928,10 @@ void Player::RotateLinkedGridActor()
 				if (!linkedGridActor->CheckNextRotationBoundsIntersect())
 				{
 					linkedGridActor->OnLinkRotate();
-					linkedGridActor->OnLinkRotateLeft();
+					if (linkedGridActor)
+					{
+						linkedGridActor->OnLinkRotateLeft();
+					}
 				}
 				else
 				{
