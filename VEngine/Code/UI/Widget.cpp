@@ -79,8 +79,7 @@ void Widget::GetScreenSpaceCoords(int& sx, int& sy)
 	VMath::HomogenousWorldPosToScreenSpaceCoords(worldPosition, sx, sy);
 }
 
-void Widget::Text(const std::wstring text, Layout layout, TextAlign align,
-	D2D1_COLOR_F color, float opacity)
+void Widget::Text(const std::wstring text, Layout layout, TextAlign align, D2D1_COLOR_F color, float opacity)
 {
 	DWRITE_TEXT_ALIGNMENT endAlignment{};
 
@@ -103,7 +102,7 @@ void Widget::Text(const std::wstring text, Layout layout, TextAlign align,
 		break;
 	}
 
-	UISystem::TextDraw(text, layout);
+	UISystem::TextDraw(text, layout, endAlignment, color, opacity);
 }
 
 void Widget::Text(const std::string text, Layout layout, TextAlign align, D2D1_COLOR_F color, float opacity)
