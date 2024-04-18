@@ -15,14 +15,14 @@ void WindowGridActor::OnLinkMove()
 {
 	__super::OnLinkMove();
 
-	Player::system.GetOnlyActor()->ResetLinkedGridActorIfThis(this);
-	Remove();
+	DeferDestroy();
+	Player::system.GetOnlyActor()->ResetLinkedGridActor();
 }
 
 void WindowGridActor::OnLinkRotate()
 {
 	__super::OnLinkRotate();
 
-	Player::system.GetOnlyActor()->ResetLinkedGridActorIfThis(this);
-	Remove();
+	DeferDestroy();
+	Player::system.GetOnlyActor()->ResetLinkedGridActor();
 }
