@@ -178,6 +178,7 @@ std::vector<Properties> Actor::GetAllProps()
 
 void Actor::DeferDestroy()
 {
+	deferredForDestroy = true;
 	actorSystem->DeferActorForDestroy(actorSystemIndex);
 }
 

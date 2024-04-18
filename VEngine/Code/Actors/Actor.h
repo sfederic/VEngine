@@ -203,6 +203,8 @@ public:
 	virtual void Activate() {}
 	virtual void Deactivate() {}
 
+	bool FlaggedForDeferredDestroy() const { return deferredForDestroy; }
+
 protected:
 	std::string name;
 	//@Todo: think about removing children. It's not used anywhere and doesn't fit into the engine.
