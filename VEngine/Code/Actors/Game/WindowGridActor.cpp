@@ -1,12 +1,19 @@
 #include "vpch.h"
 #include "WindowGridActor.h"
 #include "Player.h"
+#include "Render/RastStates.h"
+#include "Render/BlendStates.h"
+#include "Components/MeshComponent.h"
 
 void WindowGridActor::Create()
 {
 	__super::Create();
 
 	SetMeshFilename("plane.vmesh");
+
+	mesh->SetRastState(RastStates::noBackCull);
+	mesh->SetBlendState(BlendStates::Transparent);
+	mesh->SetAlpha(0.5f);
 }
 
 //@Todo: some sort of visual effect for the glass breaking. Sprite sheet? Particles? PhysX?
