@@ -21,6 +21,11 @@ using namespace DirectX;
 
 static bool IsIgnoredActor(Actor* actor, HitResult& hitResult)
 {
+	if (actor->FlaggedForDeferredDestroy())
+	{
+		return true;
+	}
+
 	for (auto actorToIgnore : hitResult.actorsToIgnore)
 	{
 		if (actor == actorToIgnore)
