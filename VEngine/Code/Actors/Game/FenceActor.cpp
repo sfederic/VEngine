@@ -12,7 +12,7 @@ FenceActor::FenceActor()
 void FenceActor::Create()
 {
 	mesh->SetMeshFilename("plane.vmesh");
-	mesh->SetTexture("test_fence.vmesh");
+	mesh->SetTexture("fence01.png");
 	mesh->SetRastState(RastStates::noBackCull);
 }
 
