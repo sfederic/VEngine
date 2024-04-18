@@ -11,6 +11,8 @@ void WindowGridActor::Create()
 
 	SetMeshFilename("plane.vmesh");
 
+	canFall = false;
+
 	mesh->SetRastState(RastStates::noBackCull);
 	mesh->SetBlendState(BlendStates::Transparent);
 	mesh->SetAlpha(0.5f);
