@@ -139,8 +139,7 @@ void World::CreateDefaultMapActors()
 	dlight->Create();
 	dlight->CreateAllComponents();
 	//Set light pointing down because shadows looks nice.
-	dlight->SetRotation(
-		VMath::LookAtRotation(dlight->GetPositionV() - VMath::GlobalUpVector(), dlight->GetPositionV()));
+	dlight->SetRotation(XMVectorSet(0.354f, 0.354f, -0.14f, 0.853f));
 	dlight->SetPosition(XMVectorSet(0.f, 5.f, 0.f, 1.f));
 
 	auto grid = Grid::system.Add();
