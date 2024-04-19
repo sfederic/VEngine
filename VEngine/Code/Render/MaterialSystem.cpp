@@ -11,7 +11,7 @@ std::string MaterialSystem::selectedMaterialInEditor;
 
 void MaterialSystem::Init()
 {
-	Material::SetupBlendShaderItemsAndRastStateValues();
+	Material::InitEnumValues();
 }
 
 Material& MaterialSystem::CreateMaterial(std::string textureFilename, std::string shaderItemName)

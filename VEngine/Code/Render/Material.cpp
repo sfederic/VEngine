@@ -14,12 +14,14 @@
 #include "BlendStates.h"
 #include "BlendState.h"
 #include "Sampler.h"
+#include "Audio/MaterialAudioType.h"
 
 static VEnum rastStates;
 static VEnum blendStates;
 static VEnum shaderItemNames;
+static VEnum materialAudioTypes;
 
-void Material::SetupBlendShaderItemsAndRastStateValues()
+void Material::InitEnumValues()
 {
 	rastStates.Add(RastStates::solid);
 	rastStates.Add(RastStates::noBackCull);
@@ -34,6 +36,11 @@ void Material::SetupBlendShaderItemsAndRastStateValues()
 	{
 		shaderItemNames.Add(shaderItem->GetName());
 	}
+
+	materialAudioTypes.Add(MaterialAudioType::Default);
+	materialAudioTypes.Add(MaterialAudioType::Grass);
+	materialAudioTypes.Add(MaterialAudioType::Metal);
+	materialAudioTypes.Add(MaterialAudioType::Wood);
 }
 
 Material::Material(std::string textureFilename_, std::string shaderItemName)
@@ -42,6 +49,8 @@ Material::Material(std::string textureFilename_, std::string shaderItemName)
 
 	rastStateValue = rastStates;
 	blendStateValue = blendStates;
+
+	audioTypeValue = materialAudioTypes;
 
 	shaderItemValue = shaderItemNames;
 	shaderItemValue.SetValue(shaderItemName);
@@ -175,6 +184,7 @@ Properties Material::GetProps()
 	props.Add("M_Shader", &shaderItemValue).change = ReassignShader;
 	props.Add("M_Rast State", &rastStateValue).change = ReassignRastState;
 	props.Add("M_Blend State", &blendStateValue).change = ReassignBlendState;
+	props.Add("M_AudioType", &audioTypeValue);
 	props.Add("M_UvOffset", &materialShaderData.uvOffset);
 	props.Add("M_UvOffsetSpeed", &uvOffsetSpeed);
 	props.Add("M_UvScale", &materialShaderData.uvScale);

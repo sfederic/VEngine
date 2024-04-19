@@ -18,12 +18,14 @@ struct ID3D11PixelShader;
 class Material
 {
 public:
-	static void SetupBlendShaderItemsAndRastStateValues();
+	static void InitEnumValues();
 
 	MaterialShaderData materialShaderData;
 
 	VEnum rastStateValue;
 	VEnum blendStateValue;
+
+	VEnum audioTypeValue;
 
 	VEnum shaderItemValue;
 	TextureData defaultTextureData;
