@@ -183,6 +183,8 @@ void GridActor::Tick(float deltaTime)
 			nextPos.m128_f32[1] = std::round(nextPos.m128_f32[1]);
 
 			SpawnDustSpriteSheet();
+
+			GameUtils::PlayAudioOneShot("step.wav");
 		}
 	}
 
