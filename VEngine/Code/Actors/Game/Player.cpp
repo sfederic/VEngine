@@ -7,6 +7,7 @@
 #include "Core/Log.h"
 #include "Core/Timer.h"
 #include "Physics/Raycast.h"
+#include "Audio/MaterialAudioType.h"
 #include "Actors/Game/NPC.h"
 #include "Actors/Game/InspectionTrigger.h"
 #include "Actors/Game/FenceActor.h"
@@ -17,6 +18,7 @@
 #include "Components/MeshComponent.h"
 #include "Render/RastState.h"
 #include "Render/BlendStates.h"
+#include "Render/Material.h"
 #include "UI/UISystem.h"
 #include "UI/Game/DialogueWidget.h"
 #include "UI/Game/InteractWidget.h"
@@ -1055,6 +1057,8 @@ void Player::CheckNextMoveNode(const XMVECTOR previousPos)
 	}
 
 	nextPos = XMLoadFloat3(&nextNode->worldPosition);
+
+	PlayFootstepAudio();
 }
 
 bool Player::CheckIfMovementAndRotationStopped()
@@ -1344,6 +1348,24 @@ void Player::UpdateLinkEffectMesh()
 		auto& linkedMesh = linkedGridActor->GetMesh();
 		linkEffectMesh->SetWorldPosition(linkedMesh.GetWorldPositionV());
 		linkEffectMesh->SetWorldRotation(linkedMesh.GetWorldRotationV());
+	}
+}
+
+void Player::PlayFootstepAudio() const
+{
+	HitResult footStepHit((Actor*)this);
+	if (Physics::Raycast(footStepHit, GetPositionV(), -VMath::GlobalUpVector(), 2.f))
+	{
+		auto meshes = footStepHit.hitActor->GetComponents<MeshComponent>();
+		for (auto mesh : meshes)
+		{
+			auto& material = mesh->GetMaterial();
+			const auto audioTypeValue = material.audioTypeValue.GetValue();
+			if (audioTypeValue == MaterialAudioType::Default)
+			{
+				GameUtils::PlayAudioOneShot("step.wav");
+			}
+		}
 	}
 }
 

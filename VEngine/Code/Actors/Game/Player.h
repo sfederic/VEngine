@@ -138,6 +138,8 @@ private:
 	void UpdateLinkEffectMesh();
 	bool linkEffectMeshSetAlpha = false;
 
+	void PlayFootstepAudio() const;
+
 	bool CheckIfMeshCanBeLinkedTo(GridActor* gridActorToLinkTo);
 
 	bool previousMovementAndRotationStoppedValue = false;
