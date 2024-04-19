@@ -17,11 +17,17 @@ struct ID3D11PixelShader;
 
 class Material
 {
-private:
-	UID uid = 0;
-
 public:
 	static void SetupBlendShaderItemsAndRastStateValues();
+
+	MaterialShaderData materialShaderData;
+
+	VEnum rastStateValue;
+	VEnum blendStateValue;
+
+	VEnum shaderItemValue;
+	TextureData defaultTextureData;
+	TextureData secondaryTextureData;
 
 	Texture2D* defaultTexture = nullptr;
 	Texture2D* secondaryTexture = nullptr;
@@ -30,17 +36,8 @@ public:
 	RastState* rastState = nullptr;
 	BlendState* blendState = nullptr;
 
-	TextureData defaultTextureData;
-	TextureData secondaryTextureData;
-	VEnum shaderItemValue;
-
 	DirectX::XMFLOAT2 uvOffsetSpeed = DirectX::XMFLOAT2(0.f, 0.f);
 	float uvRotationSpeed = 0.f;
-
-	MaterialShaderData materialShaderData;
-
-	VEnum rastStateValue;
-	VEnum blendStateValue;
 
 	Material(std::string textureFilename_, std::string shaderItemName);
 
@@ -54,4 +51,7 @@ public:
 
 	UID GetUID() const { return uid; }
 	void SetUID(UID uid_) { uid = uid_; }
+
+private:
+	UID uid = 0;
 };
