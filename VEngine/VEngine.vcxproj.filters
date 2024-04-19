@@ -1790,6 +1790,9 @@
     <ClInclude Include="Code\Actors\Game\WindowGridActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Code\Audio\MaterialAudioType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

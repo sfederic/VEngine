@@ -368,6 +368,7 @@
     <ClCompile Include="Code\Actors\Game\VerticalMoveGridActor.cpp" />
     <ClCompile Include="Code\Actors\Game\WindowGridActor.cpp" />
     <ClInclude Include="Code\Actors\Game\TeleportGridActor.h" />
+    <ClInclude Include="Code\Audio\MaterialAudioType.h" />
     <ClInclude Include="Code\Editor\AssetIconListWidget.h" />
     <ClInclude Include="Code\Render\BlendState.h" />
     <ClInclude Include="Code\Render\VertexBuffer.h" />
