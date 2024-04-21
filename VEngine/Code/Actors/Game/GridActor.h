@@ -9,6 +9,8 @@ struct HealthWidget;
 struct GridNode;
 struct DialogueComponent;
 
+//@Todo: SkeletalMeshGridActor
+
 //Base struct for every interactive actor that is placed in the level
 class GridActor : public Actor
 {
