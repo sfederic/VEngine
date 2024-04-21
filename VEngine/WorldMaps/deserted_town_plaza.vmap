@@ -747,6 +747,73 @@ DirectionalLightActor0
 UID
 1808886197
 next
+TransformativeGridActor
+1
+ Enabled
+1
+ Position
+2 -0 1
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Audio LinkMove
+cloth_heavy.wav
+Audio LinkRotate
+chainmail1.wav
+BigGridActor
+0
+Can Fall
+1
+Change Mesh
+barrel.vmesh
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+MoveOnlyXAxis
+0
+MoveOnlyZAxis
+0
+Name
+TransformativeGridActor0
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Roll
+0
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+2989270833
+next
 WindowGridActor
 2
  Enabled
@@ -876,7 +943,7 @@ UID
 2599254058
 next
 MeshComponent
-23
+24
 1358942934
 Mesh
  Enabled
@@ -897,6 +964,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -956,6 +1025,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1015,6 +1086,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1074,6 +1147,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1133,6 +1208,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1192,6 +1269,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1251,6 +1330,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 0
+M_AudioType
+Default
 M_Blend State
 transparent
 M_Metallic
@@ -1310,6 +1391,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1369,6 +1452,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1428,6 +1513,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1487,6 +1574,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1546,6 +1635,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1605,6 +1696,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1664,6 +1757,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1723,6 +1818,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1782,6 +1879,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1841,6 +1940,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1900,6 +2001,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1959,6 +2062,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -2018,6 +2123,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -2077,6 +2184,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -2136,6 +2245,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 0.5
+M_AudioType
+Default
 M_Blend State
 transparent
 M_Metallic
@@ -2195,6 +2306,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 0.5
+M_AudioType
+Default
 M_Blend State
 transparent
 M_Metallic
@@ -2234,8 +2347,69 @@ Trans. Occlude
 UID
 3038688533
 next
+2989270833
+Mesh
+ Enabled
+1
+ Pos
+2 -0 1
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_AudioType
+Default
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
+UID
+3844726598
+next
 DialogueComponent
-11
+12
 1358942934
 Dialogue
  Enabled
@@ -2357,6 +2531,17 @@ File
 UID
 2844997694
 next
+2989270833
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+2095789168
+next
 InstanceMeshComponent
 1
 2069360024
@@ -2379,6 +2564,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 transparent
 M_Metallic
