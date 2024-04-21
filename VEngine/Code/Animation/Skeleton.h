@@ -20,5 +20,7 @@ public:
 
 private:
 	std::vector<Joint> joints;
+
+	//@Todo: need a "PLayAnimationOneShot" equivalent for animations on skeletal meshes. i.e. no looping.
 	std::map<std::string, Animation> animations;
 };
