@@ -144,7 +144,6 @@ private:
 
 	//Cute little hop animation when jumping off higher nodes. Think like Pokémon Blue when you jump.
 	void CuteHopToLowerNode(const XMFLOAT3 nextNodePos);
-	void CantJumpUpHop();
 	XMVECTOR nextHopPos = XMVectorZero();
 	bool inHop = false;
 

@@ -1043,7 +1043,6 @@ void Player::CheckNextMoveNode(const XMVECTOR previousPos)
 	{
 		Log("Node [x:%d, y:%d] too high to move to.", nextXIndex, nextYIndex);
 		nextPos = previousPos;
-		CantJumpUpHop();
 		return;
 	}
 
@@ -1400,15 +1399,6 @@ void Player::CuteHopToLowerNode(const XMFLOAT3 nextNodePos)
 		nextHopPos.m128_f32[1] += GetPosition().y + 0.1f;
 		//@Todo: hop audio.
 	}
-}
-
-//@Todo: might delete this. see how it goes. It looks janky.
-void Player::CantJumpUpHop()
-{
-	inHop = true;
-	nextHopPos = GetPositionV();
-	nextHopPos.m128_f32[1] += 0.25f;
-	//@Todo: hop audio
 }
 
 XMVECTOR Player::GetCameraLocalPosition()
