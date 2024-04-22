@@ -1,194 +1,3 @@
-GridActor
-3
- Enabled
-1
- Position
-3.5 2 3
- Rotation
--0.499914 0.500086 -0.499914 0.500086
- Scale
-0.999995 0.999995 2
- Visible
-1
-Audio LinkMove
-cloth_heavy.wav
-Audio LinkRotate
-chainmail1.wav
-BigGridActor
-0
-Can Fall
-0
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-0
-Inspect
-0
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Move Speed
-12
-MoveOnlyXAxis
-0
-MoveOnlyZAxis
-0
-Name
-GridActor0
-Obstacle
-1
-Rotate Pitch
-1
-Rotate Roll
-0
-Rotate Speed
-12
-Rotate Yaw
-1
-UID
-1563664881
-next
- Enabled
-1
- Position
-3 3 6.5
- Rotation
--0.499914 0.500086 -0.499914 0.500086
- Scale
-1 1 3.00007
- Visible
-1
-Audio LinkMove
-cloth_heavy.wav
-Audio LinkRotate
-chainmail1.wav
-BigGridActor
-0
-Can Fall
-0
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-0
-Inspect
-0
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Move Speed
-12
-MoveOnlyXAxis
-0
-MoveOnlyZAxis
-0
-Name
-GridActor1
-Obstacle
-1
-Rotate Pitch
-1
-Rotate Roll
-0
-Rotate Speed
-12
-Rotate Yaw
-1
-UID
-849976170
-next
- Enabled
-1
- Position
-5.5 3 4
- Rotation
--0.706985 0.707229 5.75917e-08 3.2166e-07
- Scale
-0.999999 0.999999 1.99999
- Visible
-1
-Audio LinkMove
-cloth_heavy.wav
-Audio LinkRotate
-chainmail1.wav
-BigGridActor
-0
-Can Fall
-0
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-0
-Inspect
-0
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Move Speed
-12
-MoveOnlyXAxis
-0
-MoveOnlyZAxis
-0
-Name
-GridActor2
-Obstacle
-1
-Rotate Pitch
-1
-Rotate Roll
-0
-Rotate Speed
-12
-Rotate Yaw
-1
-UID
-689865981
-next
 Player
 1
  Enabled
@@ -228,7 +37,7 @@ UID
 3964732725
 next
 MeshActor
-13
+14
  Enabled
 1
  Position
@@ -424,6 +233,21 @@ MeshActor12
 UID
 1382125593
 next
+ Enabled
+1
+ Position
+0.5 0.5 4.5
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+MeshActor2466535271
+UID
+3720816044
+next
 DirectionalLightActor
 1
  Enabled
@@ -442,17 +266,17 @@ UID
 1719523727
 next
 MeshComponent
-18
-1563664881
+16
+1382125593
 Mesh
  Enabled
 1
  Pos
-3.5 2 3
+0.5 0.5 16.5
  Rot
--0.499914 0.500086 -0.499914 0.500086
+-0 0 -0 1
  Scale
-0.999995 0.999995 2
+1 1 1
  Visible
 1
 Casts Shadow
@@ -463,14 +287,16 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
-default
+transparent
 M_Metallic
 0
 M_Rast State
 solid
 M_Shader
-Grass
+Default
 M_Smoothness
 0
 M_Specular
@@ -492,26 +318,26 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-girder.vmesh
+scaffold.vmesh
 Physics Static
 1
 Render Static
-0
+1
 Trans. Occlude
-0
+1
 UID
-3556134149
+1080700569
 next
-849976170
+2971776320
 Mesh
  Enabled
 1
  Pos
-3 3 6.5
+0.5 0.5 14.5
  Rot
--0.499914 0.500086 -0.499914 0.500086
+-0 0 -0 1
  Scale
-1 1 3.00007
+1 1 1
  Visible
 1
 Casts Shadow
@@ -522,14 +348,16 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
-default
+transparent
 M_Metallic
 0
 M_Rast State
 solid
 M_Shader
-Grass
+Default
 M_Smoothness
 0
 M_Specular
@@ -551,15 +379,76 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-girder.vmesh
+scaffold.vmesh
 Physics Static
 1
 Render Static
-0
+1
 Trans. Occlude
-0
+1
 UID
-322344603
+3303567305
+next
+421588385
+Mesh
+ Enabled
+1
+ Pos
+0.5 0.5 12.5
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_AudioType
+Default
+M_Blend State
+transparent
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+scaffold.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+1
+UID
+3895909755
 next
 2559344868
 Mesh
@@ -581,6 +470,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -623,7 +514,7 @@ next
 2559344868
 LinkEffectMesh
  Enabled
-0
+1
  Pos
 0 0 0
  Rot
@@ -633,21 +524,23 @@ LinkEffectMesh
  Visible
 1
 Casts Shadow
-1
+0
 Grid Ignore
 0
 Grid Obst.
 0
 M_Ambient
-1 1 1 1
+1 1 1 0
+M_AudioType
+Default
 M_Blend State
-default
+transparent
 M_Metallic
 0
 M_Rast State
 solid
 M_Shader
-Default
+DefaultClip
 M_Smoothness
 0
 M_Specular
@@ -699,6 +592,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -758,6 +653,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -817,6 +714,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -876,6 +775,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -935,6 +836,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 transparent
 M_Metallic
@@ -994,6 +897,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 transparent
 M_Metallic
@@ -1053,6 +958,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 transparent
 M_Metallic
@@ -1112,6 +1019,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 transparent
 M_Metallic
@@ -1171,6 +1080,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 transparent
 M_Metallic
@@ -1230,6 +1141,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 transparent
 M_Metallic
@@ -1269,12 +1182,12 @@ Trans. Occlude
 UID
 4048042385
 next
-421588385
+3720816044
 Mesh
  Enabled
 1
  Pos
-0.5 0.5 12.5
+0.5 0.5 4.5
  Rot
 -0 0 -0 1
  Scale
@@ -1289,6 +1202,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 transparent
 M_Metallic
@@ -1326,209 +1241,10 @@ Render Static
 Trans. Occlude
 1
 UID
-3895909755
-next
-2971776320
-Mesh
- Enabled
-1
- Pos
-0.5 0.5 14.5
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-transparent
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Texture2
-
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-scaffold.vmesh
-Physics Static
-1
-Render Static
-1
-Trans. Occlude
-1
-UID
-3303567305
-next
-1382125593
-Mesh
- Enabled
-1
- Pos
-0.5 0.5 16.5
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-transparent
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Texture2
-
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-scaffold.vmesh
-Physics Static
-1
-Render Static
-1
-Trans. Occlude
-1
-UID
-1080700569
-next
-689865981
-Mesh
- Enabled
-1
- Pos
-5.5 3 4
- Rot
--0.706985 0.707229 5.75917e-08 3.2166e-07
- Scale
-0.999999 0.999999 1.99999
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-default
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Grass
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Texture2
-
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-girder.vmesh
-Physics Static
-1
-Render Static
-0
-Trans. Occlude
-0
-UID
-1129926138
+936829757
 next
 DialogueComponent
-4
-1563664881
-Dialogue
- Enabled
 1
- Visible
-1
-File
-
-UID
-4009407566
-next
-849976170
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-2241882378
-next
 2559344868
 Dialogue
  Enabled
@@ -1539,17 +1255,6 @@ File
 
 UID
 1658909796
-next
-689865981
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-3813347002
 next
 InstanceMeshComponent
 1
@@ -1573,6 +1278,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 transparent
 M_Metallic

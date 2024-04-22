@@ -10,6 +10,12 @@ GridActor
 0.99998 0.99998 1
  Visible
 1
+Audio LinkMove
+cloth_heavy.wav
+Audio LinkRotate
+chainmail1.wav
+BigGridActor
+0
 Can Fall
 0
 Destruct
@@ -38,6 +44,10 @@ Move Axis Pos.
 1 1
 Move Speed
 12
+MoveOnlyXAxis
+0
+MoveOnlyZAxis
+0
 Name
 GridActor0
 Obstacle
@@ -63,6 +73,12 @@ next
 0.999953 0.999953 1
  Visible
 1
+Audio LinkMove
+cloth_heavy.wav
+Audio LinkRotate
+chainmail1.wav
+BigGridActor
+0
 Can Fall
 0
 Destruct
@@ -91,6 +107,10 @@ Move Axis Pos.
 1 1
 Move Speed
 12
+MoveOnlyXAxis
+0
+MoveOnlyZAxis
+0
 Name
 GridActor1
 Obstacle
@@ -116,6 +136,12 @@ next
 0.999982 0.999982 1
  Visible
 1
+Audio LinkMove
+cloth_heavy.wav
+Audio LinkRotate
+chainmail1.wav
+BigGridActor
+0
 Can Fall
 0
 Destruct
@@ -144,6 +170,10 @@ Move Axis Pos.
 1 1
 Move Speed
 12
+MoveOnlyXAxis
+0
+MoveOnlyZAxis
+0
 Name
 GridActor2
 Obstacle
@@ -169,6 +199,12 @@ next
 1 1 1
  Visible
 1
+Audio LinkMove
+cloth_heavy.wav
+Audio LinkRotate
+chainmail1.wav
+BigGridActor
+0
 Can Fall
 1
 Destruct
@@ -197,6 +233,10 @@ Move Axis Pos.
 1 1
 Move Speed
 12
+MoveOnlyXAxis
+0
+MoveOnlyZAxis
+0
 Name
 GridActor3
 Obstacle
@@ -282,7 +322,7 @@ UID
 2162834595
 next
 DebugNoteActor
-1
+2
  Enabled
 1
  Position
@@ -299,6 +339,23 @@ Note Text
 Needs to be spaced out more. Rough, but workable. Probably for instance of good puzzle design.
 UID
 1811566436
+next
+ Enabled
+1
+ Position
+3 -0 3
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+DebugNoteActor1
+Note Text
+The idea here is good, but the level is way to cramped
+UID
+1376771867
 next
 MeshActor
 17
@@ -618,6 +675,12 @@ Pulley
 1 1 1
  Visible
 1
+Audio LinkMove
+cloth_heavy.wav
+Audio LinkRotate
+chainmail1.wav
+BigGridActor
+0
 Can Fall
 1
 Destruct
@@ -646,6 +709,10 @@ Move Axis Pos.
 1 1
 Move Speed
 12
+MoveOnlyXAxis
+0
+MoveOnlyZAxis
+0
 Name
 Pulley0
 Obstacle
@@ -683,6 +750,12 @@ next
 1 1 1
  Visible
 1
+Audio LinkMove
+cloth_heavy.wav
+Audio LinkRotate
+chainmail1.wav
+BigGridActor
+0
 Can Fall
 0
 Destruct
@@ -711,6 +784,10 @@ Move Axis Pos.
 1 1
 Move Speed
 12
+MoveOnlyXAxis
+0
+MoveOnlyZAxis
+0
 Name
 Pulley1
 Obstacle
@@ -748,6 +825,12 @@ next
 1 1 1
  Visible
 1
+Audio LinkMove
+cloth_heavy.wav
+Audio LinkRotate
+chainmail1.wav
+BigGridActor
+0
 Can Fall
 1
 Destruct
@@ -776,6 +859,10 @@ Move Axis Pos.
 1 1
 Move Speed
 12
+MoveOnlyXAxis
+0
+MoveOnlyZAxis
+0
 Name
 Pulley2
 Obstacle
@@ -804,7 +891,7 @@ UID
 824483236
 next
 MeshComponent
-27
+28
 3550600464
 Mesh
  Enabled
@@ -825,8 +912,10 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -839,6 +928,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -882,8 +973,10 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -896,6 +989,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -939,8 +1034,10 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -953,6 +1050,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -996,8 +1095,10 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1010,6 +1111,8 @@ M_Specular
 1 1 1 1
 M_Texture
 crate.jpg
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1053,8 +1156,10 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1067,6 +1172,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1090,6 +1197,67 @@ Trans. Occlude
 UID
 751493480
 next
+4117603623
+LinkEffectMesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+0
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 0
+M_AudioType
+Default
+M_Blend State
+transparent
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+DefaultClip
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+UI/spellbinding_circle.png
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+1160972459
+next
 4289927535
 Mesh
  Enabled
@@ -1110,8 +1278,10 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1124,6 +1294,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1167,8 +1339,10 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1181,6 +1355,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1224,8 +1400,10 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1238,6 +1416,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1281,8 +1461,10 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1295,6 +1477,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1338,8 +1522,10 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1352,6 +1538,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1395,8 +1583,10 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1409,6 +1599,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1452,8 +1644,10 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1466,6 +1660,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1509,8 +1705,10 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1523,6 +1721,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1566,8 +1766,10 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1580,6 +1782,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1623,8 +1827,10 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1637,6 +1843,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1680,8 +1888,10 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1694,6 +1904,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1737,8 +1949,10 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1751,6 +1965,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1794,8 +2010,10 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1808,6 +2026,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1851,8 +2071,10 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1865,6 +2087,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1908,8 +2132,10 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1922,6 +2148,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1965,8 +2193,10 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -1979,6 +2209,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -2022,8 +2254,10 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -2036,6 +2270,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -2079,8 +2315,10 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -2093,6 +2331,8 @@ M_Specular
 1 1 1 1
 M_Texture
 chain.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -2136,8 +2376,10 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -2150,6 +2392,8 @@ M_Specular
 1 1 1 1
 M_Texture
 chain.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -2193,8 +2437,10 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -2207,6 +2453,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -2250,8 +2498,10 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -2264,6 +2514,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -2307,8 +2559,10 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -2321,6 +2575,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -2492,8 +2748,10 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
-default
+transparent
 M_Metallic
 0
 M_Rast State
@@ -2506,6 +2764,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -2576,7 +2836,7 @@ UID
 1167135555
 next
 EmptyComponent
-2
+3
 4117603623
 Root
  Enabled
@@ -2606,5 +2866,20 @@ Root
 1
 UID
 1188501135
+next
+1376771867
+Root
+ Enabled
+1
+ Pos
+3 -0 3
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+457753285
 next
 end

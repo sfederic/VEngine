@@ -1,41 +1,3 @@
-DirectionalLightActor
-1
- Enabled
-1
- Position
-0 5 0
- Rotation
-0.707107 0 0 0.707107
- Scale
-1 1 1
- Visible
-1
-Name
-DirectionalLightActor0
-UID
-1023908213
-next
-Grid
-1
- Enabled
-1
- Position
-0 0 0
- Rotation
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Name
-Grid0
-Size X
-3
-Size Y
-11
-UID
-1951957521
-next
 GridActor
 1
  Enabled
@@ -48,6 +10,12 @@ GridActor
 3 3 0.1
  Visible
 1
+Audio LinkMove
+cloth_heavy.wav
+Audio LinkRotate
+chainmail1.wav
+BigGridActor
+0
 Can Fall
 0
 Destruct
@@ -76,35 +44,24 @@ Move Axis Pos.
 1 1
 Move Speed
 12
+MoveOnlyXAxis
+0
+MoveOnlyZAxis
+0
 Name
 GridActor0
 Obstacle
 1
 Rotate Pitch
 1
+Rotate Roll
+0
 Rotate Speed
 12
 Rotate Yaw
 1
 UID
 2244072650
-next
-MeshActor
-1
- Enabled
-1
- Position
-1 -0.5 5
- Rotation
--0 0 -0 1
- Scale
-3 1 11
- Visible
-1
-Name
-node0
-UID
-228654721
 next
 Player
 1
@@ -123,150 +80,82 @@ Player0
 UID
 3236304612
 next
-CameraComponent
+Grid
 1
-3236304612
-Camera
  Enabled
 1
- Pos
-1.75 1.75 -2.75
- Rot
+ Position
+0 0 0
+ Rotation
 0 0 0 1
  Scale
 1 1 1
  Visible
 1
-FOV
-60
-Far Z
-1000
-Near Z
-0.01
+Name
+Grid0
+Size X
+3
+Size Y
+11
 UID
-3732185834
+1951957521
 next
-DialogueComponent
-2
-2244072650
-Dialogue
+DebugNoteActor
+1
  Enabled
 1
+ Position
+1 -0 3
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
  Visible
 1
-File
-
+Name
+DebugNoteActor0
+Note Text
+Like this idea as a bigger entrance. 
 UID
-3998325372
+1296515861
 next
-3236304612
-Dialogue
+MeshActor
+1
  Enabled
 1
+ Position
+1 -0.5 5
+ Rotation
+-0 0 -0 1
+ Scale
+3 1 11
  Visible
 1
-File
-
+Name
+node0
 UID
-1061149673
+228654721
 next
-DirectionalLightComponent
+DirectionalLightActor
 1
-1023908213
-DirectionalLight
  Enabled
 1
- Pos
+ Position
 0 5 0
- Rot
+ Rotation
 0.707107 0 0 0.707107
  Scale
 1 1 1
  Visible
 1
-Colour
-1 1 1 1
-LightEnabled
-1
+Name
+DirectionalLightActor0
 UID
-348240242
-next
-EmptyComponent
-1
-3236304612
-Root
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-UID
-2912122333
-next
-InstanceMeshComponent
-1
-1951957521
-NodeMesh
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-default
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Instance
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-node.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-468004478
+1023908213
 next
 MeshComponent
-3
+4
 2244072650
 Mesh
  Enabled
@@ -287,8 +176,10 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -301,6 +192,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -315,8 +208,10 @@ M_UvScale
 1 1
 Mesh
 cube.vmesh
-Static
+Physics Static
 1
+Render Static
+0
 Trans. Occlude
 0
 UID
@@ -342,8 +237,10 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -356,6 +253,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -370,7 +269,9 @@ M_UvScale
 1 1
 Mesh
 node.vmesh
-Static
+Physics Static
+1
+Render Static
 1
 Trans. Occlude
 0
@@ -397,8 +298,10 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
-null
+default
 M_Metallic
 0
 M_Rast State
@@ -411,6 +314,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -425,11 +330,239 @@ M_UvScale
 1 1
 Mesh
 char.vmesh
-Static
+Physics Static
 1
+Render Static
+0
 Trans. Occlude
 0
 UID
 2557920880
+next
+3236304612
+LinkEffectMesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+0
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 0
+M_AudioType
+Default
+M_Blend State
+transparent
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+DefaultClip
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+UI/spellbinding_circle.png
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+214756086
+next
+DialogueComponent
+2
+2244072650
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+3998325372
+next
+3236304612
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+1061149673
+next
+InstanceMeshComponent
+1
+1951957521
+NodeMesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_AudioType
+Default
+M_Blend State
+transparent
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Instance
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+468004478
+next
+CameraComponent
+1
+3236304612
+Camera
+ Enabled
+1
+ Pos
+1.75 1.75 -2.75
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+FOV
+60
+Far Z
+1000
+Near Z
+0.01
+UID
+3732185834
+next
+DirectionalLightComponent
+1
+1023908213
+DirectionalLight
+ Enabled
+1
+ Pos
+0 5 0
+ Rot
+0.707107 0 0 0.707107
+ Scale
+1 1 1
+ Visible
+1
+Colour
+1 1 1 1
+Intensity
+1
+LightEnabled
+1
+UID
+348240242
+next
+EmptyComponent
+2
+3236304612
+Root
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+2912122333
+next
+1296515861
+Root
+ Enabled
+1
+ Pos
+1 -0 3
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+4243081287
 next
 end
