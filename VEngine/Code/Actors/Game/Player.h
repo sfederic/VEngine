@@ -142,6 +142,11 @@ private:
 
 	bool CheckIfMeshCanBeLinkedTo(GridActor* gridActorToLinkTo);
 
+	//Cute little hop animation when jumping off higher nodes. Think like Pokémon Blue when you jump.
+	void CuteHopToLowerNode(const XMFLOAT3 nextNodePos);
+	XMVECTOR nextHopPos = XMVectorZero();
+	bool inHop = false;
+
 	bool previousMovementAndRotationStoppedValue = false;
 
 	bool playerInQuickThought = false;

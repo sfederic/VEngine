@@ -128,7 +128,20 @@ void Player::Tick(float deltaTime)
 	dialogueComponent->SetPosition(GetHomogeneousPositionV());
 
 	//Lerp actor position and rotation
-	SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextPos, deltaTime, moveSpeed));
+	if (inHop)
+	{
+		SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextHopPos, deltaTime, moveSpeed));
+
+		if (VMath::VecEqual(GetPositionV(), nextHopPos))
+		{
+			inHop = false;
+		}
+	}
+	else
+	{
+		SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextPos, deltaTime, moveSpeed));
+	}
+
 	SetRotation(VMath::QuatConstantLerp(GetRotationV(), nextRot, deltaTime, rotateSpeed));
 
 	//Lerp camera position
@@ -1044,9 +1057,11 @@ void Player::CheckNextMoveNode(const XMVECTOR previousPos)
 		}
 	}
 
-	nextPos = XMLoadFloat3(&nextNode->worldPosition);
+	CuteHopToLowerNode(nextNode->worldPosition);
 
 	PlayFootstepAudio();
+
+	nextPos = XMLoadFloat3(&nextNode->worldPosition);
 }
 
 bool Player::CheckIfMovementAndRotationStopped()
@@ -1371,6 +1386,19 @@ bool Player::CheckIfMeshCanBeLinkedTo(GridActor* gridActorToLinkTo)
 	}
 
 	return true;
+}
+
+void Player::CuteHopToLowerNode(const XMFLOAT3 nextNodePos)
+{
+	const float nextPosYDifference = GetPosition().y - nextNodePos.y;
+	constexpr float hopHeight = 0.9f;
+	if (nextPosYDifference > hopHeight)
+	{
+		inHop = true;
+		nextHopPos = XMLoadFloat3(&nextNodePos);
+		nextHopPos.m128_f32[1] += GetPosition().y + (hopHeight / 3.f);
+		//@Todo: hop audio.
+	}
 }
 
 XMVECTOR Player::GetCameraLocalPosition()
