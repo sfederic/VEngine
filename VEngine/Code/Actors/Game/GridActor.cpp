@@ -157,6 +157,16 @@ void GridActor::Tick(float deltaTime)
 	CheckSetIsMoving();
 	CheckSetIsRotating();
 
+	if (setNodeRecalcAfterFall)
+	{
+		if (VMath::VecEqual(GetPositionV(), nextPos))
+		{
+			HitResult nodeHit;
+			GetCurrentNode()->RecalcNodeHeight(nodeHit);
+			setNodeRecalcAfterFall = false;
+		}
+	}
+
 	SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextPos, deltaTime, moveSpeed));
 	SetRotation(VMath::QuatConstantLerp(GetRotationV(), nextRot, deltaTime, rotateSpeed));
 
@@ -169,7 +179,7 @@ void GridActor::Tick(float deltaTime)
 	if (canFall)
 	{
 		HitResult hit(this);
-		if (!Physics::Raycast(hit, GetPositionV(), -VMath::GlobalUpVector(), 0.5f))
+		if (!Physics::Raycast(hit, GetPositionV(), -VMath::GlobalUpVector(), 1.f))
 		{
 			inFall = true;
 			constexpr float fallSpeed = 2.f;
@@ -178,8 +188,8 @@ void GridActor::Tick(float deltaTime)
 		else if (inFall)
 		{
 			inFall = false;
-			HitResult nodeHit;
-			GetCurrentNode()->RecalcNodeHeight(nodeHit);
+			setNodeRecalcAfterFall = true;
+
 			nextPos.m128_f32[1] = std::round(nextPos.m128_f32[1]);
 
 			SpawnDustSpriteSheet();
