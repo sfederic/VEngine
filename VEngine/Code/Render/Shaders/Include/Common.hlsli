@@ -128,6 +128,8 @@ cbuffer cbTime : register(b4)
 	float timeSinceStartup;
 }
 
+//@Todo: constant buffer for camera world pos and camera forward vector. Can probably merge in eyePosition too.
+
 cbuffer cbMeshData : register(b5)
 {
     float4 SH[9]; //Spherical Harmonics for probe linked to mesh
