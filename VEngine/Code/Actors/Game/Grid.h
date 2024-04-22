@@ -21,7 +21,6 @@ public:
 	ACTOR_SYSTEM(Grid);
 
 	inline static float maxHeightMove = 1.1f;
-	inline static float maxPlayerDropHeight = 1.9f;
 
 private:
 	struct GridRow
