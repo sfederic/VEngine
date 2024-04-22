@@ -1043,6 +1043,7 @@ void Player::CheckNextMoveNode(const XMVECTOR previousPos)
 	{
 		Log("Node [x:%d, y:%d] too high to move to.", nextXIndex, nextYIndex);
 		nextPos = previousPos;
+		CantJumpUpHop();
 		return;
 	}
 
@@ -1071,7 +1072,7 @@ bool Player::CheckIfMovementAndRotationStopped()
 
 void Player::MovementInput(float deltaTime)
 {
-	if (IsInInteraction())
+	if (IsInInteraction() || inHop)
 	{
 		return;
 	}
@@ -1107,7 +1108,7 @@ void Player::MovementInput(float deltaTime)
 
 void Player::RotationInput(float deltaTime)
 {
-	if (IsInInteraction())
+	if (IsInInteraction() || inHop)
 	{
 		return;
 	}
@@ -1396,9 +1397,18 @@ void Player::CuteHopToLowerNode(const XMFLOAT3 nextNodePos)
 	{
 		inHop = true;
 		nextHopPos = XMLoadFloat3(&nextNodePos);
-		nextHopPos.m128_f32[1] += GetPosition().y + (hopHeight / 3.f);
+		nextHopPos.m128_f32[1] += GetPosition().y + 0.1f;
 		//@Todo: hop audio.
 	}
+}
+
+//@Todo: might delete this. see how it goes. It looks janky.
+void Player::CantJumpUpHop()
+{
+	inHop = true;
+	nextHopPos = GetPositionV();
+	nextHopPos.m128_f32[1] += 0.25f;
+	//@Todo: hop audio
 }
 
 XMVECTOR Player::GetCameraLocalPosition()
