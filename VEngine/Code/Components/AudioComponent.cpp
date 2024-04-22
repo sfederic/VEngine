@@ -78,5 +78,9 @@ void AudioComponent::SetVolumeToPlayerPositionAgainstRadius()
 		const auto playerPos = Player::system.GetOnlyActor()->GetPositionV();
 		const float length = XMVector3Length(playerPos - GetWorldPositionV()).m128_f32[0];
 		volume = (1.0f / length) * volumeAttenuation;
+
+		//@Todo: find a max value for volume. Was hitting 'inf' crashes before when setting volume.
+		//Maybe max should be 1.0f, don't know.
+		volume = std::clamp(volume, 0.f, 5.f);
 	}
 }
