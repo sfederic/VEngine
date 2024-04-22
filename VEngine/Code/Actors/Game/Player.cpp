@@ -1396,7 +1396,7 @@ void Player::CuteHopToLowerNode(const XMFLOAT3 nextNodePos)
 	{
 		inHop = true;
 		nextHopPos = XMLoadFloat3(&nextNodePos);
-		nextHopPos.m128_f32[1] += GetPosition().y + 0.1f;
+		nextHopPos.m128_f32[1] += nextPosYDifference + 0.2f;
 		//@Todo: hop audio.
 	}
 }
