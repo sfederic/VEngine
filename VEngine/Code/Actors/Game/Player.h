@@ -146,6 +146,7 @@ private:
 	void CuteHopToLowerNode(const XMFLOAT3 nextNodePos);
 	XMVECTOR nextHopPos = XMVectorZero();
 	bool inHop = false;
+	bool hopLanding = false;
 
 	bool previousMovementAndRotationStoppedValue = false;
 

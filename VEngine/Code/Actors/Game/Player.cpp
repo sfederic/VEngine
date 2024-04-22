@@ -135,11 +135,18 @@ void Player::Tick(float deltaTime)
 		if (VMath::VecEqual(GetPositionV(), nextHopPos))
 		{
 			inHop = false;
+			hopLanding = true;
 		}
 	}
 	else
 	{
 		SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextPos, deltaTime, moveSpeed));
+
+		if (hopLanding && VMath::VecEqual(GetPositionV(), nextPos))
+		{
+			GameUtils::PlayAudioOneShot("jumpland.wav");
+			hopLanding = false;
+		}
 	}
 
 	SetRotation(VMath::QuatConstantLerp(GetRotationV(), nextRot, deltaTime, rotateSpeed));
