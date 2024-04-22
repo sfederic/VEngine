@@ -1392,12 +1392,15 @@ void Player::CuteHopToLowerNode(const XMFLOAT3 nextNodePos)
 {
 	const float nextPosYDifference = GetPosition().y - nextNodePos.y;
 	constexpr float hopHeight = 0.9f;
+
 	if (nextPosYDifference > hopHeight)
 	{
 		inHop = true;
+
 		nextHopPos = XMLoadFloat3(&nextNodePos);
 		nextHopPos.m128_f32[1] += nextPosYDifference + 0.2f;
-		//@Todo: hop audio.
+
+		GameUtils::PlayAudioOneShot("jumpland.wav");
 	}
 }
 
