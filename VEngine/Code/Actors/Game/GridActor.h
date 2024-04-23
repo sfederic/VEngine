@@ -217,6 +217,8 @@ private:
 	void CheckSetIsMoving();
 	void CheckSetIsRotating();
 
+	void FallCheck(float deltaTime);
+
 	//Because the grid actor's next position lerp needs to be done before the current node is recaled,
 	//this bool is set while the actor is falling, THEN recalcs the current node when the lerp is done.
 	bool setNodeRecalcAfterFall = false;

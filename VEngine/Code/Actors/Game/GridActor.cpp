@@ -117,6 +117,31 @@ void GridActor::CheckSetIsRotating()
 	}
 }
 
+void GridActor::FallCheck(float deltaTime)
+{
+	if (canFall)
+	{
+		HitResult hit(this);
+		if (!Physics::Raycast(hit, GetPositionV(), -VMath::GlobalUpVector(), 1.0f))
+		{
+			inFall = true;
+			constexpr float fallSpeed = 2.f;
+			nextPos -= VMath::GlobalUpVector() * fallSpeed * deltaTime;
+		}
+		else if (inFall)
+		{
+			inFall = false;
+			setNodeRecalcAfterFall = true;
+
+			nextPos.m128_f32[1] = std::round(nextPos.m128_f32[1]);
+
+			SpawnDustSpriteSheet();
+
+			GameUtils::PlayAudioOneShot("step.wav");
+		}
+	}
+}
+
 void GridActor::OnLinkMove()
 {
 	isMoving = true;
@@ -176,27 +201,7 @@ void GridActor::Tick(float deltaTime)
 		return;
 	}
 
-	if (canFall)
-	{
-		HitResult hit(this);
-		if (!Physics::Raycast(hit, GetPositionV(), -VMath::GlobalUpVector(), 1.f))
-		{
-			inFall = true;
-			constexpr float fallSpeed = 2.f;
-			nextPos -= VMath::GlobalUpVector() * fallSpeed * deltaTime;
-		}
-		else if (inFall)
-		{
-			inFall = false;
-			setNodeRecalcAfterFall = true;
-
-			nextPos.m128_f32[1] = std::round(nextPos.m128_f32[1]);
-
-			SpawnDustSpriteSheet();
-
-			GameUtils::PlayAudioOneShot("step.wav");
-		}
-	}
+	FallCheck(deltaTime);
 
 	dialogueComponent->SetPosition(GetHomogeneousPositionV());
 }
