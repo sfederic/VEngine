@@ -18,7 +18,7 @@ void DialogueWidget::Draw(float deltaTime)
 
 	Image("UI/speech_bubble.png", imageRect);
 
-	Text(currentDialogueText, layout);
+	Text(currentDialogueText, layout, Widget::TextAlign::Leading);
 
 	//Check self removal after text has sat at its end for a moment.
 	if (currentDialogueCharIndex >= fullDialogueText.size() - 1)
