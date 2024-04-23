@@ -119,25 +119,29 @@ void GridActor::CheckSetIsRotating()
 
 void GridActor::FallCheck(float deltaTime)
 {
-	if (canFall)
+	if (!canFall)
+	{
+		return;
+	}
+
+	if (!CheckMovementAndRotationStopped())
+	{
+		return;
+	}
+
+	if (inFall)
+	{
+		RecalcCurrentNodeDontIgnoreThis();
+		inFall = false;
+	}
+	else
 	{
 		HitResult hit(this);
-		if (!Physics::Raycast(hit, GetPositionV(), -VMath::GlobalUpVector(), 1.0f))
+		if (!Physics::Raycast(hit, GetPositionV(), -VMath::GlobalUpVector(), 1.f))
 		{
 			inFall = true;
-			constexpr float fallSpeed = 2.f;
-			nextPos -= VMath::GlobalUpVector() * fallSpeed * deltaTime;
-		}
-		else if (inFall)
-		{
-			inFall = false;
-			setNodeRecalcAfterFall = true;
-
-			nextPos.m128_f32[1] = std::round(nextPos.m128_f32[1]);
-
-			SpawnDustSpriteSheet();
-
-			GameUtils::PlayAudioOneShot("step.wav");
+			RecalcCurrentNodePosition();
+			nextPos = GetCurrentNode()->GetWorldPosV();
 		}
 	}
 }
@@ -182,19 +186,6 @@ void GridActor::Tick(float deltaTime)
 	CheckSetIsMoving();
 	CheckSetIsRotating();
 
-	if (setNodeRecalcAfterFall)
-	{
-		if (VMath::VecEqual(GetPositionV(), nextPos))
-		{
-			HitResult nodeHit;
-			GetCurrentNode()->RecalcNodeHeight(nodeHit);
-			setNodeRecalcAfterFall = false;
-		}
-	}
-
-	SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextPos, deltaTime, moveSpeed));
-	SetRotation(VMath::QuatConstantLerp(GetRotationV(), nextRot, deltaTime, rotateSpeed));
-
 	CheckIfSubmerged();
 	if (isSubmerged)
 	{
@@ -202,6 +193,17 @@ void GridActor::Tick(float deltaTime)
 	}
 
 	FallCheck(deltaTime);
+
+	if (inFall)
+	{
+		SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextPos, deltaTime, fallSpeed));
+	}
+	else
+	{
+		SetPosition(VMath::VectorConstantLerp(GetPositionV(), nextPos, deltaTime, moveSpeed));
+	}
+
+	SetRotation(VMath::QuatConstantLerp(GetRotationV(), nextRot, deltaTime, rotateSpeed));
 
 	dialogueComponent->SetPosition(GetHomogeneousPositionV());
 }
