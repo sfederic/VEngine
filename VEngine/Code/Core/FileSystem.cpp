@@ -231,7 +231,7 @@ void FileSystem::LoadWorld(std::string worldName)
 		d.is >> numObjectsToSpawn;
 		assert(numObjectsToSpawn != 0);
 
-		std::string stdSystemName = VString::wstos(systemName);
+		const std::string stdSystemName = VString::wstos(systemName);
 
 		auto actorSystem = ActorSystemCache::Get().GetSystem(stdSystemName);
 		auto componentSystem = ComponentSystemCache::Get().GetSystem(stdSystemName);
