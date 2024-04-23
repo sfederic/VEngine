@@ -96,6 +96,25 @@ Size Y
 UID
 1156217665
 next
+DebugNoteActor
+1
+ Enabled
+1
+ Position
+3 1 5
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+DebugNoteActor0
+Note Text
+This needs to be larger and have a puzzle element. It's just a big hallway...
+UID
+2000018165
+next
 MeshActor
 29
  Enabled
@@ -561,7 +580,7 @@ DiffuseProbeMap
  Scale
 1 1 1
  Visible
-1
+0
 Name
 DiffuseProbeMap0
 Size X
@@ -574,7 +593,7 @@ UID
 2459236355
 next
 MeshComponent
-30
+31
 3893847023
 Mesh
  Enabled
@@ -595,6 +614,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -609,6 +630,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -632,6 +655,67 @@ Trans. Occlude
 UID
 3839367250
 next
+3893847023
+LinkEffectMesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+0
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 0
+M_AudioType
+Default
+M_Blend State
+transparent
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+DefaultClip
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+UI/spellbinding_circle.png
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+3744130926
+next
 231175086
 Mesh
  Enabled
@@ -652,6 +736,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -666,6 +752,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -709,6 +797,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -723,6 +813,8 @@ M_Specular
 1 1 1 1
 M_Texture
 stone.jpg
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -766,6 +858,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -780,6 +874,8 @@ M_Specular
 1 1 1 1
 M_Texture
 stone.jpg
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -823,6 +919,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -837,6 +935,8 @@ M_Specular
 1 1 1 1
 M_Texture
 stone.jpg
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -880,6 +980,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -894,6 +996,8 @@ M_Specular
 1 1 1 1
 M_Texture
 stone.jpg
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -937,6 +1041,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -951,6 +1057,8 @@ M_Specular
 1 1 1 1
 M_Texture
 stone.jpg
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -994,6 +1102,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1008,6 +1118,8 @@ M_Specular
 1 1 1 1
 M_Texture
 stone.jpg
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1051,6 +1163,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1065,6 +1179,8 @@ M_Specular
 1 1 1 1
 M_Texture
 stone.jpg
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1108,6 +1224,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1122,6 +1240,8 @@ M_Specular
 1 1 1 1
 M_Texture
 stone.jpg
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1165,6 +1285,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1179,6 +1301,8 @@ M_Specular
 1 1 1 1
 M_Texture
 stone.jpg
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1222,6 +1346,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1236,6 +1362,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1279,6 +1407,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1293,6 +1423,8 @@ M_Specular
 1 1 1 1
 M_Texture
 stone.jpg
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1336,6 +1468,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1350,6 +1484,8 @@ M_Specular
 1 1 1 1
 M_Texture
 stone.jpg
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1393,6 +1529,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1407,6 +1545,8 @@ M_Specular
 1 1 1 1
 M_Texture
 stone.jpg
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1450,6 +1590,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1464,6 +1606,8 @@ M_Specular
 1 1 1 1
 M_Texture
 stone.jpg
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1507,6 +1651,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1521,6 +1667,8 @@ M_Specular
 1 1 1 1
 M_Texture
 stone.jpg
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1564,6 +1712,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1578,6 +1728,8 @@ M_Specular
 1 1 1 1
 M_Texture
 stone.jpg
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1621,6 +1773,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1635,6 +1789,8 @@ M_Specular
 1 1 1 1
 M_Texture
 stone.jpg
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1678,6 +1834,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1692,6 +1850,8 @@ M_Specular
 1 1 1 1
 M_Texture
 wall.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1735,6 +1895,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1749,6 +1911,8 @@ M_Specular
 1 1 1 1
 M_Texture
 orientation_enemy.jpg
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1792,6 +1956,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1806,6 +1972,8 @@ M_Specular
 1 1 1 1
 M_Texture
 orientation_enemy.jpg
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1849,6 +2017,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1863,6 +2033,8 @@ M_Specular
 1 1 1 1
 M_Texture
 orientation_enemy.jpg
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1906,6 +2078,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1920,6 +2094,8 @@ M_Specular
 1 1 1 1
 M_Texture
 orientation_enemy.jpg
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1963,6 +2139,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1977,6 +2155,8 @@ M_Specular
 1 1 1 1
 M_Texture
 orientation_enemy.jpg
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -2020,6 +2200,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -2034,6 +2216,8 @@ M_Specular
 1 1 1 1
 M_Texture
 orientation_enemy.jpg
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -2077,6 +2261,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -2091,6 +2277,8 @@ M_Specular
 1 1 1 1
 M_Texture
 orientation_enemy.jpg
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -2134,6 +2322,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -2148,6 +2338,8 @@ M_Specular
 1 1 1 1
 M_Texture
 orientation_enemy.jpg
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -2191,6 +2383,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -2205,6 +2399,8 @@ M_Specular
 1 1 1 1
 M_Texture
 orientation_enemy.jpg
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -2248,6 +2444,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -2262,6 +2460,8 @@ M_Specular
 1 1 1 1
 M_Texture
 orientation_enemy.jpg
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -2388,8 +2588,10 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
-default
+transparent
 M_Metallic
 0
 M_Rast State
@@ -2402,6 +2604,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -2472,7 +2676,7 @@ UID
 1852829273
 next
 EmptyComponent
-2
+3
 3893847023
 Root
  Enabled
@@ -2502,5 +2706,20 @@ Root
 1
 UID
 685884956
+next
+2000018165
+Root
+ Enabled
+1
+ Pos
+3 1 5
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+UID
+2560910543
 next
 end

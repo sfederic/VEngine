@@ -1,9 +1,72 @@
-Steam
-1
+GridActor
+2
  Enabled
 1
  Position
-3 0 3
+2 -0 3
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Audio LinkMove
+cloth_heavy.wav
+Audio LinkRotate
+chainmail1.wav
+BigGridActor
+0
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+MoveOnlyXAxis
+0
+MoveOnlyZAxis
+0
+Name
+GridActor0
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Roll
+0
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+2347879366
+next
+ Enabled
+1
+ Position
+2 1 3
  Rotation
 -0 0 -0 1
  Scale
@@ -49,7 +112,7 @@ MoveOnlyXAxis
 MoveOnlyZAxis
 0
 Name
-Steam0
+GridActor1
 Obstacle
 1
 Rotate Pitch
@@ -61,85 +124,16 @@ Rotate Speed
 Rotate Yaw
 1
 UID
-2451878652
-next
-SteamValve
-1
- Enabled
-1
- Position
-1 0.5 3
- Rotation
-0.5 0.5 -0.5 -0.5
- Scale
-1 0.999992 0.999992
- Visible
-1
-Audio LinkMove
-cloth_heavy.wav
-Audio LinkRotate
-chainmail1.wav
-BigGridActor
-0
-Can Fall
-0
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-1
-Inspect
-0
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-0
-Link Rotation
-1
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Move Speed
-12
-MoveOnlyXAxis
-0
-MoveOnlyZAxis
-0
-Name
-SteamValve0
-Obstacle
-1
-Rotate Pitch
-0
-Rotate Roll
-1
-Rotate Speed
-2
-Rotate Yaw
-0
-Steam
-Steam0
-UID
-592025450
-Valve On
-0
+2676392153
 next
 Player
 1
  Enabled
 1
  Position
-1 -0 1
+2 0 0
  Rotation
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -147,16 +141,16 @@ Player
 Name
 Player0
 UID
-350253916
+1842864247
 next
 Grid
 1
  Enabled
 1
  Position
-1 0 1
+0 0 0
  Rotation
--0 0 -0 1
+0 0 0 1
  Scale
 1 1 1
  Visible
@@ -168,7 +162,7 @@ Size X
 Size Y
 5
 UID
-473649236
+3323296809
 next
 MeshActor
 1
@@ -185,7 +179,7 @@ MeshActor
 Name
 MeshActor0
 UID
-896365958
+1395682820
 next
 DirectionalLightActor
 1
@@ -194,7 +188,7 @@ DirectionalLightActor
  Position
 0 5 0
  Rotation
-0.707107 0 0 0.707107
+0.354 0.354 -0.14 0.853
  Scale
 1 1 1
  Visible
@@ -202,188 +196,11 @@ DirectionalLightActor
 Name
 DirectionalLightActor0
 UID
-4215654841
+1443591394
 next
 MeshComponent
 5
-2451878652
-Mesh
- Enabled
-1
- Pos
-3 0 3
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-0
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-default
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Texture2
-
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cube.vmesh
-Physics Static
-1
-Render Static
-0
-Trans. Occlude
-0
-UID
-485136461
-next
-592025450
-Mesh
- Enabled
-1
- Pos
-1 0.5 3
- Rot
-0.5 0.5 -0.5 -0.5
- Scale
-1 0.999992 0.999992
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-default
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Texture2
-
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-gear.vmesh
-Physics Static
-1
-Render Static
-0
-Trans. Occlude
-0
-UID
-481750400
-next
-896365958
-Mesh
- Enabled
-1
- Pos
-2 -0.5 2
- Rot
-0 0 0 1
- Scale
-5 1 5
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-default
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Texture2
-
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-node.vmesh
-Physics Static
-1
-Render Static
-1
-Trans. Occlude
-0
-UID
-1775105599
-next
-350253916
+1842864247
 Mesh
  Enabled
 1
@@ -403,6 +220,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -440,12 +259,12 @@ Render Static
 Trans. Occlude
 0
 UID
-2008487116
+212711528
 next
-350253916
+1842864247
 LinkEffectMesh
  Enabled
-0
+1
  Pos
 0 0 0
  Rot
@@ -455,21 +274,23 @@ LinkEffectMesh
  Visible
 1
 Casts Shadow
-1
+0
 Grid Ignore
 0
 Grid Obst.
 0
 M_Ambient
-1 1 1 1
+1 1 1 0
+M_AudioType
+Default
 M_Blend State
-default
+transparent
 M_Metallic
 0
 M_Rast State
 solid
 M_Shader
-Default
+DefaultClip
 M_Smoothness
 0
 M_Specular
@@ -499,57 +320,20 @@ Render Static
 Trans. Occlude
 0
 UID
-1111620320
+3385066620
 next
-DialogueComponent
-3
-2451878652
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-1900101391
-next
-592025450
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-333478668
-next
-350253916
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-533980909
-next
-InstanceMeshComponent
-1
-473649236
-NodeMesh
+1395682820
+Mesh
  Enabled
 1
  Pos
-1 0 1
+2 -0.5 2
  Rot
--0 0 -0 1
+0 0 0 1
  Scale
-1 1 1
+5 1 5
  Visible
-0
+1
 Casts Shadow
 1
 Grid Ignore
@@ -558,6 +342,228 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Physics Static
+1
+Render Static
+1
+Trans. Occlude
+0
+UID
+3614188990
+next
+2347879366
+Mesh
+ Enabled
+1
+ Pos
+2 -0 3
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_AudioType
+Default
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
+UID
+622450740
+next
+2676392153
+Mesh
+ Enabled
+1
+ Pos
+2 1 3
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_AudioType
+Default
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Physics Static
+1
+Render Static
+0
+Trans. Occlude
+0
+UID
+448832224
+next
+DialogueComponent
+3
+1842864247
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+2495667995
+next
+2347879366
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+1152598509
+next
+2676392153
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+3014851461
+next
+InstanceMeshComponent
+1
+3323296809
+NodeMesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_AudioType
+Default
 M_Blend State
 transparent
 M_Metallic
@@ -595,11 +601,11 @@ Render Static
 Trans. Occlude
 0
 UID
-3249942635
+1693624439
 next
 CameraComponent
 1
-350253916
+1842864247
 Camera
  Enabled
 1
@@ -618,18 +624,18 @@ Far Z
 Near Z
 0.01
 UID
-2448028940
+2191394895
 next
 DirectionalLightComponent
 1
-4215654841
+1443591394
 DirectionalLight
  Enabled
 1
  Pos
 0 5 0
  Rot
-0.707107 0 0 0.707107
+0.354 0.354 -0.14 0.853
  Scale
 1 1 1
  Visible
@@ -641,86 +647,23 @@ Intensity
 LightEnabled
 1
 UID
-2907701607
-next
-ParticleEmitter
-1
-2451878652
-SteamEmitter
- Enabled
-1
- Pos
-0 0 0
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-M_Ambient
-1 1 1 1
-M_Blend State
-default
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-DefaultClip
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Particle/smoke.png
-M_Texture2
-
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-P_Lifetime
-1 1
-P_MaxDirection
-0 1 0
-P_MinDirection
-0 1 0
-P_MoveSpeed
-1 1
-P_RotateSpeed
-0 0
-P_Rotation
-0 0
-P_SpawnRadius
-0 1
-P_SpawnRate
-0 0.5
-UID
-2886870827
+1554334306
 next
 EmptyComponent
 1
-350253916
+1842864247
 Root
  Enabled
 1
  Pos
-1 -0 1
+2 0 0
  Rot
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
 1
 UID
-3265800332
+3376537009
 next
 end
