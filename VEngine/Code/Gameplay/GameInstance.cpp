@@ -12,13 +12,6 @@ static std::string heldPlayerItem;
 //Global properties
 //...
 
-//CHURCH
-static bool churchSwordLock = false;
-static bool churchStatueRotateLock = false;
-
-//MINES
-static int minesGeneratorOnCount = 0;
-
 //Used when continuing from game save files
 static std::string mapToLoadOnContinue;
 //...
@@ -26,13 +19,7 @@ static std::string mapToLoadOnContinue;
 Properties GameInstance::GetGlobalProps()
 {
 	Properties props("GameInstance");
-	props.Add("ChurchSwordLock", &churchSwordLock);
-	props.Add("ChurchStatueRotateLock", &churchStatueRotateLock);
 	props.Add("MapToLoadOnContinue", &mapToLoadOnContinue);
-
-	//MINES
-	props.Add("MinesGeneratorOnCount", &minesGeneratorOnCount);
-
 	return props;
 }
 

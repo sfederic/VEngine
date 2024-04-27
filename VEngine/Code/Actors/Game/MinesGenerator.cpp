@@ -53,11 +53,4 @@ Properties MinesGenerator::GetProps()
 void MinesGenerator::PowerOnGenerator()
 {
 	isGeneratorOn = true;
-
-	int* minesGeneratorOnCount = GameInstance::GetGlobalProp<int>("MinesGeneratorOnCount");
-	if (minesGeneratorOnCount != nullptr)
-	{
-		*minesGeneratorOnCount++;
-		Log("Mines generator count incremented to [%d]", minesGeneratorOnCount);
-	}
 }
