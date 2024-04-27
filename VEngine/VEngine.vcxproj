@@ -345,7 +345,6 @@
     <ClCompile Include="Code\Actors\Game\PowerUpLaserReflector.cpp" />
     <ClCompile Include="Code\Actors\Game\TwinOrientationLock.cpp" />
     <ClCompile Include="Code\Actors\Game\GravityCrystal.cpp" />
-    <ClCompile Include="Code\Actors\Game\TimeOfDayWheel.cpp" />
     <ClCompile Include="Code\Actors\OcclusionWall.cpp" />
     <ClCompile Include="Code\Actors\Game\MinesGenerator.cpp" />
     <ClCompile Include="Code\Core\Deserialiser.cpp" />
@@ -745,7 +744,6 @@
     <ClInclude Include="Code\Actors\Game\PowerUpLaserReflector.h" />
     <ClInclude Include="Code\Actors\Game\TwinOrientationLock.h" />
     <ClInclude Include="Code\Actors\Game\GravityCrystal.h" />
-    <ClInclude Include="Code\Actors\Game\TimeOfDayWheel.h" />
     <ClInclude Include="Code\UI\GridLayout.h" />
     <ClInclude Include="Code\Actors\OcclusionWall.h" />
     <ClInclude Include="Code\Actors\Game\MinesGenerator.h" />
