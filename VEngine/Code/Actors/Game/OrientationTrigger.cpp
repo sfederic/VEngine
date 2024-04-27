@@ -37,6 +37,7 @@ void OrientationTrigger::CheckIfOrientationLockIsAlignedInTrigger()
 					actorInTrigger = true;
 					GameUtils::PlayAudioOneShot("equip.wav");
 					orientationLock->Activate();
+					orientationLock->FitIntoOrientationTrigger();
 					return;
 				}
 			}

@@ -2,6 +2,7 @@
 #include "OrientationLock.h"
 #include "Core/VMath.h"
 #include "Core/Log.h"
+#include "Player.h"
 
 void OrientationLock::Start()
 {
@@ -14,7 +15,7 @@ void OrientationLock::Tick(float deltaTime)
 {
 	__super::Tick(deltaTime);
 
-	if (linkedGridActor)
+	if (linkedGridActor && !hasBeenFittedToOrientation)
 	{
 		if (IsOrientationCorrect())
 		{
@@ -64,4 +65,14 @@ bool OrientationLock::IsOrientationCorrect()
 
 	int finalMatchingOrientations = forwardEqual + rightEqual + upEqual;
 	return finalMatchingOrientations == neededOrientations;
+}
+
+void OrientationLock::FitIntoOrientationTrigger()
+{
+	hasBeenFittedToOrientation = true;
+
+	canBeMovedInLink = false;
+	canBeRotatedInLink = false;
+
+	Player::system.GetOnlyActor()->ResetLinkedGridActorIfThis(this);
 }

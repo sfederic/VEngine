@@ -15,7 +15,7 @@ public:
 	void Tick(float deltaTime) override;
 	Properties GetProps() override;
 
-	bool IsActorInTrigger() { return actorInTrigger; }
+	bool IsActorInTrigger() const { return actorInTrigger; }
 
 private:
 	void CheckIfOrientationLockIsAlignedInTrigger();

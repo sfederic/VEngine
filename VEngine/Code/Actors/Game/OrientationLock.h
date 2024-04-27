@@ -13,6 +13,7 @@ public:
 	Properties GetProps() override;
 
 	bool IsOrientationCorrect();
+	void FitIntoOrientationTrigger();
 
 private:
 	//These orientations need to match for the connected actor to activate.
@@ -24,4 +25,7 @@ private:
 	GridActor* linkedGridActor = nullptr;
 
 	std::string gridActorToActivateOnCorrectOrientation;
+
+	//If this is true, the object is locked in and can't be moved anymore. Think like a key.
+	bool hasBeenFittedToOrientation = false;
 };
