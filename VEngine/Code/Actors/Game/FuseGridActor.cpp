@@ -5,6 +5,7 @@
 #include "Gameplay/GameUtils.h"
 #include "Particle/SpriteSheet.h"
 #include "Physics/Raycast.h"
+#include "Grid.h"
 
 void FuseGridActor::OnLinkMove()
 {
@@ -16,6 +17,10 @@ void FuseGridActor::OnLinkMove()
 		auto hitFusedActor = hit.GetHitActorAs<FuseGridActor>();
 		if (hitFusedActor)
 		{
+			//Because the fused grid actor is now larger, set it as a big grid actor so that full grid
+			//recalcs are happening on move/rotate.
+			bigGridActor = true;
+
 			GameUtils::PlayAudioOneShot("equip.wav");
 
 			auto& fuseSprite = GameUtils::SpawnSpriteSheet("Sprites/blue_explosion.png", hit.GetHitPosV(), false, 5, 5, 25.f);
@@ -38,6 +43,9 @@ void FuseGridActor::OnLinkMove()
 			}
 
 			hitFusedActor->Remove();
+
+			HitResult gridRecalcHit;
+			Grid::system.GetOnlyActor()->RecalcAllNodes(gridRecalcHit, true);
 
 			//Reset this actor's next position so that moving into the fuse actor creates a LEGO-like 'click'.
 			SetNextPos(GetPositionV());
