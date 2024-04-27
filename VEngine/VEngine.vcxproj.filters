@@ -707,9 +707,6 @@
     <ClCompile Include="Code\Actors\Game\EntranceInteractTrigger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\SawBlade.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Actors\Game\SnapshotCrystal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1611,9 +1608,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\EntranceInteractTrigger.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Actors\Game\SawBlade.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\SnapshotCrystal.h">
