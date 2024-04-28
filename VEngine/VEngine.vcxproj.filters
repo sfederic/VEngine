@@ -656,9 +656,6 @@
     <ClCompile Include="Code\Actors\Game\SpecificSwitch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\WellWinch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Actors\Game\DouseFruit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1554,9 +1551,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\SpecificSwitch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Actors\Game\WellWinch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\DouseFruit.h">
