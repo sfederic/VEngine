@@ -129,10 +129,7 @@ void HandleActorPicking()
 				if (mesh)
 				{
 					mesh->meshComponentData.filename = MeshActor::spawnMeshFilename;
-					//@Todo: Even through this code block won't be hit during game runtime, it's still a leak
-					//to only recreate the GPU buffers without releasing them. Either make a MeshComponent::Cleanup()
-					//or figure something else out.
-					mesh->Create();
+					mesh->ReCreate();
 					return;
 				}
 			}
