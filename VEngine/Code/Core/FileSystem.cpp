@@ -52,10 +52,15 @@ void FileSystem::SerialiseAllSystems()
 
 	std::string file = "WorldMaps/" + str;
 
-	//@Todo: this is not going to work if you're entering levels with no gamesave
 	if (GameInstance::useGameSaves)
 	{
+		const std::string previousFilePath = file;
 		file = "GameSaves/" + str;
+		if (!std::filesystem::exists(file))
+		{
+			Log("No game save file found for [%s].", file.c_str());
+			file = previousFilePath;
+		}
 	}
 
 	Serialiser s(file, OpenMode::Out);
