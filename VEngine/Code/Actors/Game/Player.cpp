@@ -581,10 +581,6 @@ bool Player::InteractCheck(Actor* hitActor)
 			{
 				gridActor->Interact();
 				gridActorInteractingWith = gridActor;
-
-				//@Todo: this is here if GridActor destroys itself on Interact(), but will probably cause visual 'error's
-				highlightedGridActor = nullptr;
-
 				return true;
 			}
 		}
