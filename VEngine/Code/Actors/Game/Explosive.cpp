@@ -19,11 +19,6 @@ void Explosive::Burn()
 {
 	__super::Burn();
 
-	auto ambientColour = mesh->GetAmbientColour();
-	ambientColour.y = 0.f;
-	ambientColour.z = 0.f;
-	mesh->SetAmbientColour(ambientColour);
-
 	GameUtils::SpawnSpriteSheet("Sprites/explosion.png", GetPositionV(), false, 4, 4);
 	Camera::GetActiveCamera().SetShakeLevel(0.3f);
 
@@ -31,6 +26,7 @@ void Explosive::Burn()
 
 	//To make sure not hitting null after destroy if player is still linked to Explosive on Destroy
 	Player::system.GetOnlyActor()->ResetLinkedGridActorIfThis(this);
+
 	Remove();
 }
 
