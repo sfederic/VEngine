@@ -31,7 +31,6 @@ void SkeletalMeshComponent::LoadAnimations(std::string animationFilename)
 	std::vector<Animation> animations = AssetSystem::ReadVAnimAssetFromFile(animationFilename);
 	for (auto& anim : animations)
 	{
-		//@Todo: this is not nice. Make a fucking "AddAnimation()"
 		skel.GetAnimations().emplace(anim.GetName(), anim);
 	}
 }
