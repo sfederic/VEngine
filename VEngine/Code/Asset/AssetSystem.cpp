@@ -76,8 +76,6 @@ void AssetSystem::CreateVMeshFromInWorldMesh()
 	auto actor = WorldEditor::GetPickedActor();
 	if (actor)
 	{
-		//@Todo: can loop through skeletalmeshcomponents here to export the skeleton too to mesh data.
-
 		auto meshes = actor->GetComponents<MeshComponent>();
 		for (auto mesh : meshes)
 		{
