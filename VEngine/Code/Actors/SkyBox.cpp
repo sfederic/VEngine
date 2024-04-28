@@ -5,12 +5,20 @@
 
 SkyBox::SkyBox()
 {
-	auto mesh = CreateComponent("Skybox", MeshComponent("sky_cylinder.vmesh", "sky.jpg", "Unlit"));
-	mesh->SetCollisionLayer(CollisionLayers::Editor); //Make sure actors in-game can't interact with skyboxes' bounds.
-	mesh->SetRastState(RastStates::noBackCull);
+	skyboxMesh = CreateComponent<MeshComponent>("SkyboxMesh");
+	rootComponent = skyboxMesh;
+}
 
-	rootComponent = mesh;
-	SetScale(XMVectorSet(50.f, 50.f, 50.f, 0.f)); //@Todo: this setscale doesn't work. why?
+void SkyBox::Create()
+{
+	__super::Create();
+
+	skyboxMesh->SetMeshFilename("sky_cylinder.vmesh");
+	skyboxMesh->SetTexture("sky.jpg");;
+	skyboxMesh->SetShaderItem("Unlit");
+	skyboxMesh->SetWorldScale(XMVectorSet(50.f, 50.f, 50.f, 0.f));
+	skyboxMesh->SetCollisionLayer(CollisionLayers::Editor);
+	skyboxMesh->SetRastState(RastStates::noBackCull);
 }
 
 Properties SkyBox::GetProps()
