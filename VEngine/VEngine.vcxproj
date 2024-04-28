@@ -117,7 +117,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Code\Actors\Game\BombFlower.cpp" />
+    <ClCompile Include="Code\Actors\Game\TimerExplosive.cpp" />
     <ClCompile Include="Code\Editor\AssetIconListWidget.cpp" />
     <ClCompile Include="Code\Render\BlendState.cpp" />
     <ClCompile Include="Code\Render\VertexBuffer.cpp" />
@@ -367,7 +367,7 @@
     <ClCompile Include="Code\Actors\Game\VerticalMoveGridActor.cpp" />
     <ClCompile Include="Code\Actors\Game\WindowGridActor.cpp" />
     <ClCompile Include="Code\Actors\Game\Lever.cpp" />
-    <ClInclude Include="Code\Actors\Game\BombFlower.h" />
+    <ClInclude Include="Code\Actors\Game\TimerExplosive.h" />
     <ClInclude Include="Code\Actors\Game\TeleportGridActor.h" />
     <ClInclude Include="Code\Audio\MaterialAudioType.h" />
     <ClInclude Include="Code\Editor\AssetIconListWidget.h" />

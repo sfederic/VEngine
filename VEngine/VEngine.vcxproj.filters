@@ -869,7 +869,7 @@
     <ClCompile Include="Code\Actors\Game\Lever.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\BombFlower.cpp">
+    <ClCompile Include="Code\Actors\Game\TimerExplosive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1790,7 +1790,7 @@
     <ClInclude Include="Code\Actors\Game\Lever.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\Game\BombFlower.h">
+    <ClInclude Include="Code\Actors\Game\TimerExplosive.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

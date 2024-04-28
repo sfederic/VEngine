@@ -2,11 +2,11 @@
 
 #include "Explosive.h"
 
-//Thanks Ocarina.
-class BombFlower : public Explosive
+//Think bomb flower from ocarina.
+class TimerExplosive : public Explosive
 {
 public:
-	ACTOR_SYSTEM(BombFlower);
+	ACTOR_SYSTEM(TimerExplosive);
 
 	void Create() override;
 	void Tick(float deltaTime) override;

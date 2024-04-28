@@ -1,8 +1,8 @@
 #include "vpch.h"
-#include "BombFlower.h"
+#include "TimerExplosive.h"
 #include "Components/MeshComponent.h"
 
-void BombFlower::Create()
+void TimerExplosive::Create()
 {
 	__super::Create();
 
@@ -10,7 +10,7 @@ void BombFlower::Create()
 	mesh->SetWorldScale(0.5f);
 }
 
-void BombFlower::Tick(float deltaTime)
+void TimerExplosive::Tick(float deltaTime)
 {
 	__super::Tick(deltaTime);
 
@@ -28,14 +28,14 @@ void BombFlower::Tick(float deltaTime)
 	}
 }
 
-Properties BombFlower::GetProps()
+Properties TimerExplosive::GetProps()
 {
 	auto props = __super::GetProps();
 	props.title = GetTypeName();
 	return props;
 }
 
-void BombFlower::OnLinkActivate()
+void TimerExplosive::OnLinkActivate()
 {
 	__super::OnLinkActivate();
 
