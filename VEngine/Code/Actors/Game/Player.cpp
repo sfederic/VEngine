@@ -722,7 +722,6 @@ void Player::MoveLinkedGridActor()
 		{
 			if (!canBeMoved)
 			{
-				//@Todo: replace this with a shake of the spatial component or some other visual effect
 				Camera::GetActiveCamera().SetShakeLevel(0.25f);
 				return false;
 			}
