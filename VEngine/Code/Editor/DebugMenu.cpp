@@ -337,9 +337,9 @@ void DebugMenu::RenderSkeletalAnimationMenu()
 		for (auto skeletalMesh : skeletalMeshes)
 		{
 			ImGui::Text("SkeletalMesh: %s", skeletalMesh->meshComponentData.filename.c_str());
-			ImGui::Text("Current Animation: %s", skeletalMesh->GetCurrentAnimatonName().c_str());
+			ImGui::Text("Current Animation: %s", skeletalMesh->GetCurrentAnimationName().c_str());
 
-			if (!skeletalMesh->GetCurrentAnimatonName().empty())
+			if (!skeletalMesh->GetCurrentAnimationName().empty())
 			{
 				ImGui::Text("Time: %f/%f",
 					skeletalMesh->GetCurrentAnimationTime(),

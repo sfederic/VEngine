@@ -36,12 +36,12 @@ public:
 	Skeleton& GetSkeleton();
 
 	void LoadAnimations(std::string animationFilename);
-	float GetCurrentAnimationTime() { return currentAnimationTime; }
+	float GetCurrentAnimationTime() const { return currentAnimationTime; }
 	void ResetAnimationTime();
 	void IncrementAnimationTime(float increment) { currentAnimationTime += increment * currentAnimationSpeed; }
 	void SetAnimationSpeed(float animationSpeed) { currentAnimationSpeed = animationSpeed; }
 
-	std::string GetCurrentAnimatonName() { return currentAnimationName; }
+	std::string GetCurrentAnimationName() { return currentAnimationName; }
 	std::string GetNextAnimationName() { return nextAnimationName; }
 
 	Animation& GetCurrentAnimation();
