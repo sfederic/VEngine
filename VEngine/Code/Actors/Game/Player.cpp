@@ -1262,9 +1262,6 @@ void Player::ResetHighlightedActor()
 	}
 }
 
-//@Todo: this function actually fires twice, once when the movement/rotation begins, and once when it ends.
-//It's not too bad considering this was written to cut down on the raycasts every tick(), but leaving a light
-//todo here to make it work once off might be nicer.
 void Player::OnMoveAndRotateEnd()
 {
 	const bool stopped = CheckIfMovementAndRotationStopped();
