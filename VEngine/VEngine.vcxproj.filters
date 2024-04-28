@@ -725,9 +725,6 @@
     <ClCompile Include="Code\Actors\Game\MultiSpecificSwitchLock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\ChurchLockPropActivator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Actors\Game\InspectionActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1626,9 +1623,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\MultiSpecificSwitchLock.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Actors\Game\ChurchLockPropActivator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\InspectionActor.h">

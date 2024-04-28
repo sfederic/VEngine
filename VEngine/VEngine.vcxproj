@@ -123,7 +123,6 @@
     <ClCompile Include="Code\Render\VertexBuffer.cpp" />
     <ClCompile Include="Code\Core\BinaryDeserialiser.cpp" />
     <ClCompile Include="Code\Core\BinarySerialiser.cpp" />
-    <ClCompile Include="Code\Actors\Game\ChurchLockPropActivator.cpp" />
     <ClCompile Include="Code\Actors\Game\GlobalPropSetter.cpp" />
     <ClCompile Include="Code\Actors\Game\ActivateOnGlobalProp.cpp" />
     <ClCompile Include="Code\Actors\Game\ClockHand.cpp" />
@@ -375,7 +374,6 @@
     <ClInclude Include="Code\Render\VertexBuffer.h" />
     <ClInclude Include="Code\Core\BinaryDeserialiser.h" />
     <ClInclude Include="Code\Core\BinarySerialiser.h" />
-    <ClInclude Include="Code\Actors\Game\ChurchLockPropActivator.h" />
     <ClInclude Include="Code\Actors\Game\GlobalPropSetter.h" />
     <ClInclude Include="Code\Actors\Game\ActivateOnGlobalProp.h" />
     <ClInclude Include="Code\Actors\Game\ClockHand.h" />
