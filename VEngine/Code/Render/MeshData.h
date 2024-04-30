@@ -14,7 +14,5 @@ struct MeshData
 
 	std::vector<Vertex> vertices;
 
-	//@Todo: Don't like skeleton being here, as it can then mean it's accessible from MeshComponents too.
-	//Removing it means cleaning up FBXLoader functions a lot.
 	Skeleton skeleton;
 };
