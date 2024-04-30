@@ -5,7 +5,6 @@ std::set<Keys> currentHeldKeys;
 std::set<Keys> currentDownKeys;
 std::set<Keys> currentUpKeys;
 
-//@Todo: the keymap here isn't really good. Needs to be a std::multimap and be able to read from a config file.
 std::multimap<std::string, Keys> keyMap;
 
 namespace Input
