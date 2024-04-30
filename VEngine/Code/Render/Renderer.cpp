@@ -653,8 +653,6 @@ void DrawBoundingBox(MeshComponent* mesh, MeshComponent* boundsMesh)
 	DrawMesh(boundsMesh);
 }
 
-//@Todo: can change the input assembly to only take in Line structs to the shader stage. Right now it's taking
-//in entire verticies and might be too heavy when visualsing entire lightmap raycast networks.
 void RenderDebugLines()
 {
 	MaterialShaderData materialShaderData{};
