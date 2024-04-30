@@ -104,11 +104,7 @@ void UISystem::RemoveWidget(Widget* widgetToRemove)
 void UISystem::Reset()
 {
 	widgetsInViewport.clear();
-
 	ResetWidgets();
-
-	//@Todo: there should be a way to not have to reset global widgets. 
-	//Answer might be to through ALL widgets into UISystem.
 	CreateGlobalWidgets();
 }
 
