@@ -21,8 +21,6 @@ class SpatialComponent;
 //Cool presentation on Silhouette maps. Old (2004), but nice to look at for ideas
 //REF: https://jankautz.com/courses/ShadowCourse/04-SilhouetteMap.pdf
 
-//@Todo: there's only support for one shadowmap per scene right now. It's not too hard to get multiple shadow maps
-//up and running, but I just don't have the debugging means right now. Will need to switch to D3D12.
 struct ShadowMap
 {
 private:
