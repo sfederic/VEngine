@@ -13,10 +13,6 @@ class QGridLayout;
 class QScrollArea;
 class QLineEdit;
 
-//@Todo: figure out if doing a ComponentTreeWidget to be able to sort through an Actor's
-//components and see their spatial relationships (like Unreal) would be good. 
-//Previously attempted it and didn't work out well with the mess of code in PropertiesDock.
-
 class PropertiesDock : public QDockWidget
 {
 public:
@@ -30,11 +26,11 @@ private:
 	void FilterProperties();
 
 	template <typename PropType, typename WidgetType>
-	void CreateWidget(Property& prop, int row) 
+	void CreateWidget(Property& prop, int row)
 	{
-	    auto widget = new WidgetType(prop);
+		auto widget = new WidgetType(prop);
 		actorPropsGridLayout->addWidget(widget, row, propertyDataColumn);
-	    propertyWidgetsToUpdate.emplace_back(static_cast<IPropertyWidget*>(widget));
+		propertyWidgetsToUpdate.emplace_back(static_cast<IPropertyWidget*>(widget));
 	}
 
 	std::vector<IPropertyWidget*> propertyWidgetsToUpdate;
