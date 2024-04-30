@@ -3,6 +3,7 @@
 #include <string>
 #include <DirectXMath.h>
 #include "Layout.h"
+#include "Core/UID.h"
 
 using namespace DirectX;
 
@@ -50,6 +51,8 @@ public:
 
 	void SetWorldPosition(XMVECTOR pos) { worldPosition = pos; }
 
+	auto GetUID() const { return uid; }
+
 protected:
 	void GetScreenSpaceCoords(int& sx, int& sy);
 
@@ -87,4 +90,6 @@ protected:
 
 	//The widget's position in world space to be mapped to screen space (Use Actor::GetHomogeneousPositionV() to set this)
 	XMVECTOR worldPosition = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+
+	UID uid = GenerateUID();
 };

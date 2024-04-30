@@ -14,7 +14,7 @@ static SystemStates systemState = SystemStates::Unloaded;
 ScreenFadeWidget* UISystem::screenFadeWidget;
 MapInfoWidget* UISystem::mapInfoWidget;
 
-std::vector<std::unique_ptr<Widget>> UISystem::widgets;
+std::unordered_map<UID, std::unique_ptr<Widget>> UISystem::widgets;
 
 //Every widget currently being displayed on screen
 std::vector<Widget*> UISystem::widgetsInViewport;
@@ -22,18 +22,18 @@ std::vector<Widget*> UISystem::widgetsInViewport;
 static bool widgetControlActive = false;
 
 //D2D objects
-ID2D1Factory* d2dFactory;
-ID2D1RenderTarget* d2dRenderTarget;
+static ID2D1Factory* d2dFactory;
+static ID2D1RenderTarget* d2dRenderTarget;
 
 //DWrite objects
-IDWriteFactory1* writeFactory;
-IDWriteTextFormat* textFormat;
+static IDWriteFactory1* writeFactory;
+static IDWriteTextFormat* textFormat;
 
 //D2D Brushes
-ID2D1SolidColorBrush* brushText;
-ID2D1SolidColorBrush* debugBrushText;
-ID2D1SolidColorBrush* brushShapes;
-ID2D1SolidColorBrush* brushShapesAlpha;
+static ID2D1SolidColorBrush* brushText;
+static ID2D1SolidColorBrush* debugBrushText;
+static ID2D1SolidColorBrush* brushShapes;
+static ID2D1SolidColorBrush* brushShapesAlpha;
 
 void ResetWidgets();
 
@@ -122,8 +122,7 @@ void UISystem::DestroyWidget(Widget* widget)
 {
 	widgetsInViewport.erase(std::remove(widgetsInViewport.begin(),
 		widgetsInViewport.end(), widget), widgetsInViewport.end());
-	//@Todo: fix this delete
-	//widgets.erase(std::remove(widgets.begin(), widgets.end(), widget), widgets.end());
+	widgets.erase(widget->GetUID());
 }
 
 void UISystem::RemoveAllWidgets()
@@ -217,12 +216,15 @@ bool UISystem::GetWidgetControlActive()
 
 void ResetWidgets()
 {
-	for (int i = 0; i < UISystem::widgets.size(); i++)
+	for (auto it = UISystem::widgets.cbegin(); it != UISystem::widgets.cend();)
 	{
-		auto& widget = UISystem::widgets[i];
-		if (!widget->IsStatic())
+		if (!it->second->IsStatic())
 		{
-			UISystem::widgets.erase(UISystem::widgets.begin() + i);
+			it = UISystem::widgets.erase(it);
+		}
+		else
+		{
+			++it;
 		}
 	}
 }

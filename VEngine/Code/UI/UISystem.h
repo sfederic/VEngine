@@ -2,6 +2,7 @@
 
 #include <string>
 #include <vector>
+#include <unordered_map>
 #include <memory>
 #include "Layout.h"
 #include "Colours.h"
@@ -12,7 +13,7 @@ class MapInfoWidget;
 
 namespace UISystem
 {
-	extern std::vector<std::unique_ptr<Widget>> widgets;
+	extern std::unordered_map<UID, std::unique_ptr<Widget>> widgets;
 	extern std::vector<Widget*> widgetsInViewport;
 
 	extern ScreenFadeWidget* screenFadeWidget;
@@ -37,8 +38,10 @@ namespace UISystem
 	T* CreateWidget()
 	{
 		static_assert(std::is_convertible<T*, Widget*>::value, "Derived must inherit Widget as public");
-		widgets.emplace_back(std::make_unique<T>());
-		return (T*)widgets.back().get();
+		auto widget = std::make_unique<T>();
+		const auto widgetUID = widget->GetUID();
+		widgets.emplace(widgetUID, std::move(widget));
+		return (T*)widgets.find(widgetUID)->second.get();
 	}
 
 	void Init(void* swapchain);
