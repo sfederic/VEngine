@@ -11,7 +11,6 @@ using namespace DirectX;
 class SpatialComponent : public Component
 {
 public:
-	//@Todo: there's a lot of direct refs to this via properties and whatever else. Look into making it protected completely.
 	Transform transform;
 
 	Properties GetProps() override;
