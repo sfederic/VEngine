@@ -108,7 +108,6 @@ namespace RenderUtils
 
 	void SetResourceName(ID3D11DeviceChild* resource, std::string name)
 	{
-		//@Todo: _DEBUG
 		HR(resource->SetPrivateData(WKPDID_D3DDebugObjectName, name.size(), name.c_str()));
 	}
 
