@@ -2207,11 +2207,6 @@ void RenderPostProcess()
 	const float clearColour[4] = { 0.f, 0.f, 0.f, 0.f };
 	context->ClearRenderTargetView(rtvs[frameIndex].Get(), clearColour);
 
-	//@Todo: there's an idea from the old post processing code that I liked.
-	//Basically instead of drawing a stupid quad and rendering a texture onto it, copy to the backbuffer like below:
-	//context->CopyResource(backBuffer, postBuffer);
-	//There are typecasting errors with this (e.g. 16_FLOAT can't be cast to 8_UNORM) but it felt better.
-
 	context->Draw(6, 0);
 
 	context->PSSetShaderResources(0, 1, &nullSRV);
