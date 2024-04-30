@@ -98,7 +98,6 @@ XMMATRIX ShadowMap::GetDirectionalLightOrthoMatrix(DirectionalLightComponent* di
 XMMATRIX ShadowMap::GetSpotLightPerspectiveMatrix(SpotLightComponent* spotLight)
 {
 	const float angle = XMConvertToRadians(spotLight->GetLightData().spotAngle);
-	//@Todo: is the using the shadowmaps width height here right for the aspect ratio?
 	return XMMatrixPerspectiveFovLH(angle, width / height, 0.01f, 1000.f);
 }
 
