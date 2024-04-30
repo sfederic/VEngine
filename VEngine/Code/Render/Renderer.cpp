@@ -1998,7 +1998,6 @@ void Renderer::MeshIconImageCapture()
 	Actor* actor = WorldEditor::GetPickedActor();
 	std::vector<MeshComponent*> meshComponents = actor->GetComponents<MeshComponent>();
 
-	//@Todo: isn't working with multiple meshes nicely
 	if (!meshComponents.empty())
 	{
 		MeshComponent* mesh = meshComponents.front();
