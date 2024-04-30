@@ -812,9 +812,6 @@
     <ClCompile Include="Code\Render\Sampler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Render\ShaderResourceView.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Render\IndexBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1722,9 +1719,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Render\Sampler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Render\ShaderResourceView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Render\IndexBuffer.h">

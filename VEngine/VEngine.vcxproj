@@ -350,7 +350,6 @@
     <ClCompile Include="Code\Render\RastState.cpp" />
     <ClCompile Include="Code\Render\Sampler.cpp" />
     <ClCompile Include="Code\Render\IndexBuffer.cpp" />
-    <ClCompile Include="Code\Render\ShaderResourceView.cpp" />
     <ClCompile Include="Code\Actors\Game\FuseGridActor.cpp" />
     <ClCompile Include="Code\UI\Game\InputIconWidget.cpp" />
     <ClCompile Include="Code\Actors\Game\InputTutorialGridActor.cpp" />
@@ -749,7 +748,6 @@
     <ClInclude Include="Code\Render\RastState.h" />
     <ClInclude Include="Code\Render\Sampler.h" />
     <ClInclude Include="Code\Render\IndexBuffer.h" />
-    <ClInclude Include="Code\Render\ShaderResourceView.h" />
     <ClInclude Include="Code\Actors\Game\FuseGridActor.h" />
     <ClInclude Include="Code\UI\Game\InputIconWidget.h" />
     <ClInclude Include="Code\Actors\Game\InputTutorialGridActor.h" />
