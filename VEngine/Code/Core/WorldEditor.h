@@ -13,7 +13,6 @@ struct Transform;
 
 //Because the UV painting is working with triangle faces and not quads, you can really only rotate
 //the newly set UVs either left or right.
-//@Todo: UV rotating isn't working great. It's not 100% necessary, but it might be good to revisit later.
 enum class UVPaintRotate
 {
 	Left,
