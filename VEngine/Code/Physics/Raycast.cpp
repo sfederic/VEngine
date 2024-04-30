@@ -163,8 +163,6 @@ bool Physics::Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction,
 		return false;
 	}
 
-	//@Todo: There's a problem here when ray casting from 0,0,0 in world for example towards a FenceActor when
-	//the nearestDistance is less than 0.
 	if (hitResult.hitActor)
 	{
 		const XMVECTOR hitPos = hitResult.origin + (hitResult.direction * hitResult.hitDistance);
