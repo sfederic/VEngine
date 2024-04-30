@@ -2508,6 +2508,5 @@ bool Renderer::IsRendererSetToCaptureMeshIcon()
 
 void Renderer::ReportLiveObjectsVerbose()
 {
-	//@Todo: _DEBUG
 	debugDevice->ReportLiveDeviceObjects(D3D11_RLDO_DETAIL);
 }
