@@ -1375,7 +1375,6 @@ void RenderPhysicsMeshes()
 
 		SetVertexBuffer(mesh->GetVertexBuffer());
 
-		//@Todo: feels like this GetComponentByUID() call could get stupidly expensive
 		auto originalMesh = MeshComponent::system.GetComponentByUID(mesh->GetUID());
 		assert(originalMesh);
 		shaderMatrices.model = originalMesh->GetWorldMatrix();
