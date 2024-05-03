@@ -8,20 +8,12 @@
 #include "Core/VString.h"
 #include "Gameplay/ConditionSystem.h"
 
-void DialogueComponent::Tick(float deltaTime)
-{
-}
-
 void DialogueComponent::Start()
 {
 	dialogueWidget = UISystem::CreateWidget<DialogueWidget>();
 	widget = dialogueWidget;
 
 	dialogue.LoadFromFile();
-}
-
-void DialogueComponent::Create()
-{
 }
 
 Properties DialogueComponent::GetProps()

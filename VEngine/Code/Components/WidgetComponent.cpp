@@ -4,12 +4,16 @@
 
 void WidgetComponent::Destroy()
 {
+	__super::Destroy();
+
 	widget->Destroy();
 }
 
 Properties WidgetComponent::GetProps()
 {
-	return __super::GetProps();
+	auto props = __super::GetProps();
+	props.title = GetTypeName();
+	return props;
 }
 
 void WidgetComponent::AddToViewport()
