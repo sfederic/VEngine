@@ -32,6 +32,11 @@ public:
 	//searching out their closest light probe to take data from.
 	int cachedLightProbeMapIndex = 0; //0 should be safe as a default, but it can cause problems.
 
+	//This is for meshes that are messing with transparent meshes given that they're sorted by distance on render.
+	//It's mostly used for floor and wall meshes where their position wouldn't line up with the space they're occupying.
+	//@Todo: this is more of a placeholder. It works well enough in simple scenes, but OIT might be better off.
+	bool alwaysSortLast = false;
+
 	bool castsShadow = true;
 
 	//whether the mesh is moved by physics system

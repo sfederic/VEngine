@@ -72,6 +72,10 @@ std::vector<MeshComponent*> MeshComponent::SortMeshComponentsByDistance()
 	for (auto& mesh : system.GetComponents())
 	{
 		float distance = XMVector3Length(cameraPos - mesh->GetWorldPositionV()).m128_f32[0];
+		if (mesh->alwaysSortLast)
+		{
+			distance = std::numeric_limits<float>::max();
+		}
 		MeshPack pack = { mesh.get(), distance };
 		meshPacks.emplace_back(pack);
 	}
@@ -155,6 +159,7 @@ Properties MeshComponent::GetProps()
 	props.Add("Trans. Occlude", &transparentOcclude);
 	props.Add("Grid Obst.", &gridObstacle);
 	props.Add("Grid Ignore", &ignoreGridRaycasts);
+	props.Add("Sort Last", &alwaysSortLast);
 
 	auto materialProps = material->GetProps();
 	materialProps.SetAllPropertyOwnerUIDs(props.ownerUID);
