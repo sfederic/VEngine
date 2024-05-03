@@ -6,7 +6,10 @@ void WidgetComponent::Destroy()
 {
 	__super::Destroy();
 
-	widget->Destroy();
+	if (widget)
+	{
+		widget->Destroy();
+	}
 }
 
 Properties WidgetComponent::GetProps()
@@ -18,12 +21,18 @@ Properties WidgetComponent::GetProps()
 
 void WidgetComponent::AddToViewport()
 {
-	widget->AddToViewport();
+	if (widget)
+	{
+		widget->AddToViewport();
+	}
 }
 
 void WidgetComponent::RemoveFromViewport()
 {
-	widget->RemoveFromViewport();
+	if (widget)
+	{
+		widget->RemoveFromViewport();
+	}
 }
 
 void WidgetComponent::SetPosition(XMVECTOR newPosition)
