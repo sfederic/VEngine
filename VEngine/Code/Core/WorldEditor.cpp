@@ -172,11 +172,11 @@ void HandleActorPicking()
 			{
 				if (spawnSystem != nullptr)
 				{
-					auto pickedActor = WorldEditor::GetPickedActor();
-					if (pickedActor)
+					auto actor = WorldEditor::GetPickedActor();
+					if (actor)
 					{
-						auto pickedActorTransform = pickedActor->GetTransform();
-						pickedActor->Remove();
+						auto pickedActorTransform = actor->GetTransform();
+						actor->Remove();
 
 						auto replacementActor = spawnSystem->SpawnActor(pickedActorTransform);
 						replacementActor->Create();
@@ -472,7 +472,6 @@ void UVPainting()
 			auto meshes = hit.hitActor->GetComponents<MeshComponent>();
 			for (auto mesh : meshes)
 			{
-				const auto numVerts = mesh->meshDataProxy.vertices.size();
 				auto& vertices = mesh->meshDataProxy.GetVertices();
 
 				assert(hit.vertIndexesOfHitTriangleFace.size() == 3);
