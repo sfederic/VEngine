@@ -110,8 +110,6 @@ public:
 	void ToggleActive();
 	void ToggleVisibility();
 
-	void AddChild(Actor* actor);
-
 	void AddComponent(Component* component);
 	void DeleteComponent(std::string componentName);
 	void RemoveComponent(std::string componentName);
@@ -207,8 +205,6 @@ public:
 
 protected:
 	std::string name;
-	//@Todo: think about removing children. It's not used anywhere and doesn't fit into the engine.
-	std::vector<Actor*> children;
 	std::set<std::string> tags;
 	std::unordered_map<std::string, Component*> componentMap;
 	Actor* parent = nullptr;

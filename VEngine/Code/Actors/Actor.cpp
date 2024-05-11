@@ -9,7 +9,6 @@
 
 XMMATRIX Actor::GetWorldMatrix() const
 {
-	//@Todo: this isn't going over actor parents and children
 	return rootComponent->GetWorldMatrix();
 }
 
@@ -218,11 +217,6 @@ void Actor::SetActive(bool newActiveValue)
 	{
 		componentPair.second->SetActive(newActiveValue);
 	}
-
-	for (auto child : children)
-	{
-		child->SetActive(newActiveValue);
-	}
 }
 
 void Actor::SetVisibility(bool visibility)
@@ -232,11 +226,6 @@ void Actor::SetVisibility(bool visibility)
 	for (auto& [name, component] : componentMap)
 	{
 		component->SetVisibility(visible);
-	}
-
-	for (auto child : children)
-	{
-		child->SetVisibility(visible);
 	}
 }
 
@@ -255,22 +244,6 @@ void Actor::ToggleVisibility()
 {
 	visible = !visible;
 	SetVisibility(visible);
-}
-
-void Actor::AddChild(Actor* actor)
-{
-	assert(actor);
-
-	for (auto child : children)
-	{
-		assert(child != actor && "Actor trying to add child already in list. Recursive set found.");
-	}
-
-	children.emplace_back(actor);
-
-	//Set parent
-	assert(actor->parent != actor);
-	actor->parent = this;
 }
 
 void Actor::AddComponent(Component* component)

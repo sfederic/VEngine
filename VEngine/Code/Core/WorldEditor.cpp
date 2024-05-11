@@ -58,7 +58,6 @@ void SpawnActorOnClick();
 void SpawnActor(Transform& transform);
 void VertexPainting();
 void UVPainting();
-void SetParentOnClick(Actor& hitActor);
 void MoveActorViaKeyboardInput();
 void LoadWorldOnEntranceTriggerClick(Actor* pickedActor);
 void QuickMeshChangeMenu();
@@ -108,8 +107,6 @@ void HandleActorPicking()
 		if (Physics::RaycastFromScreen(hit))
 		{
 			//@Todo: move all these 'placement' blocks into functions
-
-			SetParentOnClick(*hit.hitActor);
 
 			//Assign selected texture in editor to mesh on click
 			if (!TextureSystem::selectedTextureInEditor.empty() && WorldEditor::texturePlacement)
@@ -615,15 +612,6 @@ void UVPainting()
 				mesh->CreateNewVertexBuffer();
 			}
 		}
-	}
-}
-
-void SetParentOnClick(Actor& hitActor)
-{
-	if (WorldEditor::parentSetActive && pickedActor != nullptr)
-	{
-		hitActor.AddChild(pickedActor);
-		Log("[%s] added as child to [%s].", pickedActor->GetName().c_str(), hitActor.GetName().c_str());
 	}
 }
 

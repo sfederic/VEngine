@@ -389,9 +389,6 @@
     <ClCompile Include="Code\Core\IFunction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Editor\ActorTreeWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Actors\CameraActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
