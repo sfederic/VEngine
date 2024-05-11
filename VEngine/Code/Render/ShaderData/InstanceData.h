@@ -10,8 +10,8 @@ struct InstanceData
 
 struct LightProbeInstanceData
 {
-	XMFLOAT4 SH[9]{}; //Spherical Harmonics
+	DirectX::XMFLOAT4 SH[9]{}; //Spherical Harmonics
 	DirectX::XMMATRIX modelMatrix = DirectX::XMMatrixIdentity();
-	XMFLOAT3 position = XMFLOAT3(0.f, 0.f, 0.f);
+	DirectX::XMFLOAT3 position = DirectX::XMFLOAT3(0.f, 0.f, 0.f);
 	int index = 0;
 };
