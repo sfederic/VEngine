@@ -524,9 +524,6 @@
     <ClCompile Include="Code\UI\Game\HealthWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\UI\Game\PlayerHealthWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\UI\Game\PopupWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1413,9 +1410,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\Game\HealthWidget.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\UI\Game\PlayerHealthWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\Game\PopupWidget.h">
