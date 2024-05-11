@@ -130,7 +130,6 @@ void Deserialiser::Deserialise(Properties& props)
 			continue;
 		}
 
-		const std::string& name = propIt->first;
 		Property& prop = propIt->second;
 
 		auto funcIt = typeToReadFuncMap.find(prop.info.value());
