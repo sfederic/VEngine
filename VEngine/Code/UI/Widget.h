@@ -32,8 +32,6 @@ public:
 		BottomRight,
 	};
 
-	bool render = true;
-
 	virtual void Draw(float deltaTime) = 0;
 	virtual void Start() {}
 	void Destroy();
@@ -85,11 +83,14 @@ protected:
 	Layout CenterLayoutOnScreenSpaceCoords(float w, float h);
 	Layout CenterLayoutOnScreenSpaceCoords(float w, float h, float sx, float sy);
 
-	//Means the widget won't be cleaned up on world resets. Mostly for Debug widgets.
-	bool isStaticWidget = false;
-
 	//The widget's position in world space to be mapped to screen space (Use Actor::GetHomogeneousPositionV() to set this)
 	XMVECTOR worldPosition = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 
 	UID uid = GenerateUID();
+
+	//Means the widget won't be cleaned up on world resets. Mostly for Debug widgets.
+	bool isStaticWidget = false;
+
+public:
+	bool render = true;
 };
