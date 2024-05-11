@@ -48,9 +48,9 @@ void GravityCrystal::Tick(float deltaTime)
 			const auto nextPos = actor->GetPositionV() + VMath::GlobalUpVector();
 			actor->SetNextPos(nextPos);
 
-			for (auto mesh : actor->GetComponents<MeshComponent>())
+			for (auto lMesh : actor->GetComponents<MeshComponent>())
 			{
-				mesh->SetShaderItem("Floating");
+				lMesh->SetShaderItem("Floating");
 			}
 
 			actor->RecalcCurrentNodeDontIgnoreThis();
