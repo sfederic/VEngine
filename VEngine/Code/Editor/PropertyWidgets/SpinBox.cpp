@@ -19,7 +19,7 @@ void SpinBox::wheelEvent(QWheelEvent* event_)
 	!hasFocus() ? event_->ignore() : QDoubleSpinBox::wheelEvent(event_);
 }
 
-IntSpinBox::IntSpinBox(QWidget* parent)
+IntSpinBox::IntSpinBox(QWidget* parent) : QSpinBox(parent)
 {
 	setMinimum(std::numeric_limits<int>::lowest());
 	setMaximum(std::numeric_limits<int>::max());
@@ -34,7 +34,7 @@ void IntSpinBox::wheelEvent(QWheelEvent* event_)
 	!hasFocus() ? event_->ignore() : QSpinBox::wheelEvent(event_);
 }
 
-UintSpinBox::UintSpinBox(QWidget* parent)
+UintSpinBox::UintSpinBox(QWidget* parent) : QSpinBox(parent)
 {
 	setMinimum(std::numeric_limits<uint32_t>::lowest());
 	setMaximum(std::numeric_limits<uint32_t>::max());
