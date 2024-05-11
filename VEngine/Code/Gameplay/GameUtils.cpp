@@ -35,6 +35,7 @@ namespace GameUtils
 		std::string name = "Polyboard" + std::to_string(Polyboard::system.GetNumComponents());
 		auto polyboard = Polyboard::system.Add(name, nullptr, Polyboard(), true);
 
+		polyboard->SetTextureFilename(textureFilename);
 		polyboard->SetStartPoint(startPosition);
 		polyboard->SetEndPoint(endPosition);
 
