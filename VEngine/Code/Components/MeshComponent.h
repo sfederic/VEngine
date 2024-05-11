@@ -56,10 +56,10 @@ public:
 	MeshComponent(const std::string filename_,
 		const std::string textureFilename_,
 		std::string shaderItemName = "Default");
-	virtual void Tick(float deltaTime) override;
-	virtual void Create() override;
-	virtual void Destroy() override;
-	virtual Properties GetProps();
+	void Tick(float deltaTime) override;
+	void Create() override;
+	void Destroy() override;
+	Properties GetProps() override;
 
 	void ReCreate();
 
