@@ -2,9 +2,9 @@
 
 #include <string>
 
-struct RastState;
-struct Sampler;
-struct BlendState;
+class RastState;
+class Sampler;
+class BlendState;
 struct Line;
 namespace DirectX {
 	struct BoundingOrientedBox;
