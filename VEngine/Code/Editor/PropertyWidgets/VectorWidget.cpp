@@ -3,7 +3,7 @@
 #include <QHBoxLayout>
 #include <QDoubleSpinBox>
 
-VectorWidget::VectorWidget(Property& prop_, QWidget* parent)
+VectorWidget::VectorWidget(Property& prop_, QWidget* parent) : QWidget(parent)
 {
 	prop = prop_;
 	_vector = prop.GetData<XMVECTOR>();
