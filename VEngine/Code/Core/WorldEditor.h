@@ -6,7 +6,7 @@
 
 class Actor;
 class IActorSystem;
-struct SpatialComponent;
+class SpatialComponent;
 struct Transform;
 
 //@Todo: actor delete undo

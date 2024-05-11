@@ -6,7 +6,7 @@
 
 class Actor;
 struct Transform;
-struct SpatialComponent;
+class SpatialComponent;
 struct Vertex;
 
 using namespace DirectX;

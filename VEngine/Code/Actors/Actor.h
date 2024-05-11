@@ -9,7 +9,7 @@
 #include "Core/UID.h"
 
 class Component;
-struct SpatialComponent;
+class SpatialComponent;
 class IActorSystem;
 
 using namespace DirectX;
