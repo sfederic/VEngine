@@ -273,7 +273,7 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 
 	postProcessRenderTarget.Create(viewport.Width, viewport.Height);
 
-	defaultSampler.Create(D3D11_SAMPLER_DESC());
+	defaultSampler.Create();
 
 	SpriteSystem::Init();
 

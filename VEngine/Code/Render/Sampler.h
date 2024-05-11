@@ -6,7 +6,7 @@
 class Sampler
 {
 public:
-	void Create(D3D11_SAMPLER_DESC desc);
+	void Create();
 	auto GetDataAddress() { return data.GetAddressOf(); }
 	auto GetData() { return data.Get(); }
 

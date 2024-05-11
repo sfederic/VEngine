@@ -10,7 +10,7 @@ struct ID3D11Device;
 struct ID3D11DeviceContext;
 struct ID3D11ShaderResourceView;
 struct ID3D11DeviceChild;
-struct Sampler;
+class Sampler;
 struct MeshDataProxy;
 class Texture2D;
 
@@ -25,6 +25,6 @@ namespace RenderUtils
 	UINT CalcBufferByteSize(UINT byteSize);
 	void CreateBlendState(D3D11_BLEND_DESC blendDesc, Microsoft::WRL::ComPtr<ID3D11BlendState>& blendState);
 	void CreateRastState(D3D11_RASTERIZER_DESC rastDesc, Microsoft::WRL::ComPtr<ID3D11RasterizerState>& rastState);
-	void CreateSamplerState(D3D11_SAMPLER_DESC samplerDesc, Microsoft::WRL::ComPtr<ID3D11SamplerState>& samplerState);
+	void CreateSamplerState(Microsoft::WRL::ComPtr<ID3D11SamplerState>& samplerState);
 	void SetResourceName(ID3D11DeviceChild* resource, std::string name);
 };

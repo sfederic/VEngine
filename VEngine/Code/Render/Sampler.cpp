@@ -2,7 +2,7 @@
 #include "Sampler.h"
 #include "Render/RenderUtils.h"
 
-void Sampler::Create(D3D11_SAMPLER_DESC desc)
+void Sampler::Create()
 {
-	RenderUtils::CreateSamplerState(desc, data);
+	RenderUtils::CreateSamplerState(data);
 }

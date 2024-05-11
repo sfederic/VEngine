@@ -83,7 +83,7 @@ namespace RenderUtils
 		SetResourceName(outputBuffer.Get(), "structured_buffer_" + std::to_string(GenerateUID()));
 	}
 
-	void CreateSamplerState(D3D11_SAMPLER_DESC samplerDesc, Microsoft::WRL::ComPtr<ID3D11SamplerState>& samplerState)
+	void CreateSamplerState(Microsoft::WRL::ComPtr<ID3D11SamplerState>& samplerState)
 	{
 		D3D11_SAMPLER_DESC sampDesc = {};
 		sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
