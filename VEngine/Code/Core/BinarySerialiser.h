@@ -5,10 +5,12 @@
 
 struct Properties;
 
-struct BinarySerialiser
+class BinarySerialiser
 {
+private:
 	FILE* file = nullptr;
 
+public:
 	BinarySerialiser(const char* filename)
 	{
 		fopen_s(&file, filename, "wb");
