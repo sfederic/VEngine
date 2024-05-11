@@ -15,12 +15,12 @@ void GridActorBasket::OnLinkActivate()
 {
 	__super::OnLinkActivate();
 
-	IActorSystem* system = ActorSystemCache::Get().GetSystem(gridActorSystemNameToSpawnFrom);
-	if (system)
+	IActorSystem* lSystem = ActorSystemCache::Get().GetSystem(gridActorSystemNameToSpawnFrom);
+	if (lSystem)
 	{
 		Transform transform;
 		transform.Decompose(GetWorldMatrix());
-		auto actor = system->SpawnActor(transform);
+		auto actor = lSystem->SpawnActor(transform);
 		actor->Create();
 		actor->CreateAllComponents();
 		actor->Start();
