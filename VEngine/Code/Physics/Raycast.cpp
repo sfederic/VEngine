@@ -149,8 +149,6 @@ bool Physics::Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction,
 		}
 	}
 
-	float nearestDistance = std::numeric_limits<float>::max();
-
 	if (!bRayHit)
 	{
 		return false;
