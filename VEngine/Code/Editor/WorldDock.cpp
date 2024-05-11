@@ -39,7 +39,7 @@ WorldDock::WorldDock() : QDockWidget("World")
 	actorTreeWidget->setSelectionMode(QAbstractItemView::SelectionMode::MultiSelection);
 	//turn on sorting (click on column header to sort)
 	actorTreeWidget->setSortingEnabled(true);
-	actorTreeWidget->sortByColumn(0);
+	actorTreeWidget->sortByColumn(0, Qt::SortOrder::AscendingOrder);
 
 	actorTreeWidget->setContextMenuPolicy(Qt::CustomContextMenu);
 	connect(actorTreeWidget, &QTreeWidget::customContextMenuRequested, this, &WorldDock::ActorListContextMenu);
@@ -76,7 +76,7 @@ void WorldDock::Tick()
 
 void WorldDock::PopulateWorldActorList()
 {
-    actorTreeWidget->clear();
+	actorTreeWidget->clear();
 
 	//Need to block signals because calling functions on tree items makes the connect()ed event fire
 	actorTreeWidget->blockSignals(true);
@@ -203,14 +203,14 @@ void WorldDock::SelectActorInList()
 
 		//The Qt::MatchRecursive flag is what moves the find through the entire actor tree
 		auto foundItems = actorTreeWidget->findItems(
-			QString::fromStdString(actorName), Qt::MatchExactly|Qt::MatchRecursive);
+			QString::fromStdString(actorName), Qt::MatchExactly | Qt::MatchRecursive);
 
 		listItems.append(foundItems);
 	}
 
 	for (auto item : listItems)
 	{
-		actorTreeWidget->setItemSelected(item, true);
+		item->setSelected(true);
 	}
 
 	actorTreeWidget->blockSignals(false);
@@ -253,7 +253,7 @@ void WorldDock::RemoveActorFromList()
 void WorldDock::SearchActors()
 {
 	QString searchText = actorSearchBar->text().toLower();
-	
+
 	for (int i = 0; i < actorTreeWidget->topLevelItemCount(); i++)
 	{
 		QTreeWidgetItem* item = actorTreeWidget->topLevelItem(i);
