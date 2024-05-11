@@ -6,7 +6,6 @@
 
 struct DialogueComponent;
 class InteractWidget;
-struct PlayerHealthWidget;
 class GridActor;
 class MeshComponent;
 class CameraComponent;
@@ -22,7 +21,6 @@ public:
 	DialogueComponent* currentlyActiveDialogueComponent = nullptr;
 
 	InteractWidget* interactWidget = nullptr;
-	PlayerHealthWidget* healthWidget = nullptr;
 
 	GridActor* gridActorInteractingWith = nullptr;
 
