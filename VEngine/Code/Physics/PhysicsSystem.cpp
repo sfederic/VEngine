@@ -153,7 +153,6 @@ void PhysicsSystem::ReleasePhysicsActor(MeshComponent* mesh)
 
 	scene->removeActor(*rigidActor);
 	rigidActor->release();
-	const auto meshUID = mesh->GetUID();
 	rigidActorMap.erase(mesh->GetUID());
 }
 
