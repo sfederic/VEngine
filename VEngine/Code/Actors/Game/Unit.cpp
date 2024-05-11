@@ -306,7 +306,7 @@ void Unit::ShowUnitMovementPath()
 	auto grid = Grid::system.GetFirstActor();
 	GridNode* destinationNode = grid->GetNode(0, 0);
 
-	auto previewMovementNodes = GetMovementPathPreviewNodes(destinationNode);
+	auto previewMovementNodes = GetMovementPathPreviewNodes();
 
 	grid->DisplayHideAllNodes();
 
@@ -328,7 +328,7 @@ void Unit::SetMovePathIndexToMax()
 	movementPathNodeIndex = pathNodes.size();
 }
 
-std::vector<GridNode*> Unit::GetMovementPathPreviewNodes(GridNode* destinationNode)
+std::vector<GridNode*> Unit::GetMovementPathPreviewNodes()
 {
 	auto grid = Grid::system.GetFirstActor();
 	grid->ResetAllNodes();

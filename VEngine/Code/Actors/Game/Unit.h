@@ -6,13 +6,14 @@
 #include "Gameplay/BattleEnums.h"
 
 struct GridNode;
-struct EntranceTrigger;
-struct Polyboard;
+class EntranceTrigger;
+class Polyboard;
 class Player;
 
 //Units are battle ready actors and really only move and fight.
-struct Unit : GridActor
+class Unit : public GridActor
 {
+public:
 	ACTOR_SYSTEM(Unit);
 
 	//Battle states
@@ -67,5 +68,5 @@ struct Unit : GridActor
 	void SetMovePathIndexToMax();
 
 private:
-	std::vector<GridNode*> GetMovementPathPreviewNodes(GridNode* destinationNode);
+	std::vector<GridNode*> GetMovementPathPreviewNodes();
 };
