@@ -23,3 +23,10 @@ void RenderTarget::Create(uint32_t width, uint32_t height)
 	HR(Renderer::GetDevice().CreateRenderTargetView(texture.Get(), nullptr, rtv.GetAddressOf()));
 	HR(Renderer::GetDevice().CreateShaderResourceView(texture.Get(), nullptr, srv.GetAddressOf()));
 }
+
+void RenderTarget::Recycle()
+{
+	texture.Reset();
+	rtv.Reset();
+	srv.Reset();
+}

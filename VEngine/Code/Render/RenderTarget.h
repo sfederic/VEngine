@@ -9,6 +9,7 @@ public:
 	RenderTarget(DXGI_FORMAT format_) : format(format_) {}
 
 	void Create(uint32_t width, uint32_t height);
+	void Recycle();
 
 	auto& GetRTV() { return *rtv.Get(); }
 	auto GetRTVAddress() { return rtv.GetAddressOf(); }
