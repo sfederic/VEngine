@@ -1888,13 +1888,13 @@ void Renderer::Present()
 	{
 		debugMenu.debugNotifications.clear();
 
-		Microsoft::WRL::ComPtr<ID3D11Texture2D> backBuffer;
-		HR(swapchain->GetBuffer(0, IID_PPV_ARGS(backBuffer.GetAddressOf())));
+		Microsoft::WRL::ComPtr<ID3D11Texture2D> meshIconBackBuffer;
+		HR(swapchain->GetBuffer(0, IID_PPV_ARGS(meshIconBackBuffer.GetAddressOf())));
 		assert(backBuffer);
 
 		const std::wstring imageFile = L"Icons/MeshIcons/" +
 			VString::stows(captureMeshIconMeshFilename) + L".jpg";
-		HR(SaveWICTextureToFile(context.Get(), backBuffer.Get(), GUID_ContainerFormatJpeg, imageFile.c_str()));
+		HR(SaveWICTextureToFile(context.Get(), meshIconBackBuffer.Get(), GUID_ContainerFormatJpeg, imageFile.c_str()));
 
 		Log("Mesh Icon created from [%s] mesh.", captureMeshIconMeshFilename.c_str());
 
@@ -1977,14 +1977,14 @@ void Renderer::ScreenshotCapture()
 		//Clear previous notification so nothing appears in the screenshot.
 		debugMenu.debugNotifications.clear();
 
-		Microsoft::WRL::ComPtr<ID3D11Texture2D> backBuffer;
-		HR(swapchain->GetBuffer(0, IID_PPV_ARGS(backBuffer.GetAddressOf())));
-		assert(backBuffer);
+		Microsoft::WRL::ComPtr<ID3D11Texture2D> screenshotBackBuffer;
+		HR(swapchain->GetBuffer(0, IID_PPV_ARGS(screenshotBackBuffer.GetAddressOf())));
+		assert(screenshotBackBuffer);
 
 		//Use a generated UID so that filenames are unique
 		UID imageFileID = GenerateUID();
 		std::wstring imageFile = L"Screenshots/" + std::to_wstring(imageFileID) + L".jpg";
-		HR(SaveWICTextureToFile(context.Get(), backBuffer.Get(), GUID_ContainerFormatJpeg, imageFile.c_str()));
+		HR(SaveWICTextureToFile(context.Get(), screenshotBackBuffer.Get(), GUID_ContainerFormatJpeg, imageFile.c_str()));
 		debugMenu.AddNotification(L"Screen shot taken.");
 	}
 }
@@ -1998,9 +1998,9 @@ void Renderer::MeshIconImageCapture()
 	{
 		MeshComponent* mesh = meshComponents.front();
 
-		Microsoft::WRL::ComPtr<ID3D11Texture2D> backBuffer;
-		HR(swapchain->GetBuffer(0, IID_PPV_ARGS(backBuffer.GetAddressOf())));
-		assert(backBuffer);
+		Microsoft::WRL::ComPtr<ID3D11Texture2D> meshIconBackBuffer;
+		HR(swapchain->GetBuffer(0, IID_PPV_ARGS(meshIconBackBuffer.GetAddressOf())));
+		assert(meshIconBackBuffer);
 
 		const std::wstring imageFile = L"Icons/MeshIcons/" +
 			VString::stows(mesh->meshComponentData.filename) + L".jpg";
@@ -2011,12 +2011,12 @@ void Renderer::MeshIconImageCapture()
 
 void Renderer::MapIconImageCapture()
 {
-	Microsoft::WRL::ComPtr<ID3D11Texture2D> backBuffer;
-	HR(swapchain->GetBuffer(0, IID_PPV_ARGS(backBuffer.GetAddressOf())));
-	assert(backBuffer);
+	Microsoft::WRL::ComPtr<ID3D11Texture2D> iconImageBackBuffer;
+	HR(swapchain->GetBuffer(0, IID_PPV_ARGS(iconImageBackBuffer.GetAddressOf())));
+	assert(iconImageBackBuffer);
 
 	const std::wstring imageFile = L"Icons/MapIcons/" + VString::stows(World::worldFilename) + L".jpg";
-	HR(SaveWICTextureToFile(context.Get(), backBuffer.Get(), GUID_ContainerFormatJpeg, imageFile.c_str()));
+	HR(SaveWICTextureToFile(context.Get(), iconImageBackBuffer.Get(), GUID_ContainerFormatJpeg, imageFile.c_str()));
 	debugMenu.AddNotification(L"Map Icon created.");
 }
 
@@ -2024,12 +2024,12 @@ void Renderer::PlayerPhotoCapture(std::wstring outputFilename)
 {
 	debugMenu.debugNotifications.clear();
 
-	Microsoft::WRL::ComPtr<ID3D11Texture2D> backBuffer;
-	HR(swapchain->GetBuffer(0, IID_PPV_ARGS(backBuffer.GetAddressOf())));
-	assert(backBuffer);
+	Microsoft::WRL::ComPtr<ID3D11Texture2D> photoCaptureBackBuffer;
+	HR(swapchain->GetBuffer(0, IID_PPV_ARGS(photoCaptureBackBuffer.GetAddressOf())));
+	assert(photoCaptureBackBuffer);
 
 	std::wstring imageFile = L"Textures/" + outputFilename;
-	HR(SaveWICTextureToFile(context.Get(), backBuffer.Get(), GUID_ContainerFormatJpeg, imageFile.c_str()));
+	HR(SaveWICTextureToFile(context.Get(), photoCaptureBackBuffer.Get(), GUID_ContainerFormatJpeg, imageFile.c_str()));
 	Log("Photo taken [%S]", imageFile.c_str());
 }
 
