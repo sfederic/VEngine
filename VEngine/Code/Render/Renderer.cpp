@@ -542,7 +542,6 @@ void CreateConstantBuffers()
 	cbMaterial.Create(&materialShaderData, cbMaterialRegister);
 
 	//Lights buffer
-	ShaderLights shaderLights = {};
 	cbLights.Create(&shaderLights, cbLightsRegister);
 
 	//Time buffer
