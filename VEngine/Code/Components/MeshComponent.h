@@ -34,7 +34,6 @@ public:
 
 	//This is for meshes that are messing with transparent meshes given that they're sorted by distance on render.
 	//It's mostly used for floor and wall meshes where their position wouldn't line up with the space they're occupying.
-	//@Todo: this is more of a placeholder. It works well enough in simple scenes, but OIT might be better off.
 	bool alwaysSortLast = false;
 
 	bool castsShadow = true;
