@@ -15,6 +15,8 @@ void RenderTarget::Create(uint32_t width, uint32_t height)
 	desc.Width = width;
 	desc.Height = height;
 
+	//RenderTarget is using a D3D11 texture instead of the engine texture because Texture2D doesn't have 
+	//anything to pass in a D3D11_TEXTURE2D_DESC to the DXToolkit functions.
 	HR(Renderer::GetDevice().CreateTexture2D(&desc, nullptr, &texture));
 	assert(texture);
 
