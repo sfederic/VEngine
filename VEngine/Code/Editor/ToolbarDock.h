@@ -19,8 +19,8 @@ public:
 	void SetTranslationSnapValue();
 	void SetScaleSnapValue();
 	void SetRotationSnapValue();
-	void PickModeChanged(const QString& item);
-	void LocalWorldTransformValueChanged(const QString& item);
+	void PickModeChanged(int itemIndex);
+	void LocalWorldTransformValueChanged(int itemIndex);
 
 	QPushButton* playButton = nullptr;
 	QPushButton* resetWorldButton = nullptr;;

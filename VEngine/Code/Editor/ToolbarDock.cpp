@@ -68,8 +68,7 @@ ToolbarDock::ToolbarDock() : QDockWidget("Toolbar")
 	worldLocalTransformSetting->setFixedWidth(100);
 	worldLocalTransformSetting->addItem("World");
 	worldLocalTransformSetting->addItem("Local");
-	connect(worldLocalTransformSetting, static_cast<void(QComboBox::*)(const QString&)>(&QComboBox::currentIndexChanged),
-		this, &ToolbarDock::LocalWorldTransformValueChanged);
+	connect(worldLocalTransformSetting, SIGNAL(QComboBox::(currentIndexChanged(int))), this, SLOT(ToolbarDock::LocalWorldTransformValueChanged));
 	hLayout->addWidget(worldLocalTransformSetting);
 
 	//Camera movespeed
@@ -88,8 +87,7 @@ ToolbarDock::ToolbarDock() : QDockWidget("Toolbar")
 	worldEditorPickMode = new QComboBox(this);
 	worldEditorPickMode->addItem(pickerStringActor);
 	worldEditorPickMode->addItem(pickerStringComponent);
-	connect(worldEditorPickMode, static_cast<void(QComboBox::*)(const QString&)>(&QComboBox::currentIndexChanged),
-		this, &ToolbarDock::PickModeChanged);
+	connect(worldEditorPickMode, SIGNAL(QComboBox::currentIndexChanged(int)), this, SLOT(ToolbarDock::PickModeChanged));
 	hLayout->addWidget(worldEditorPickMode);
 
 	auto toolbarWidget = new QWidget();
@@ -154,20 +152,22 @@ void ToolbarDock::SetRotationSnapValue()
 	transformGizmo.SetRotationSnapValue(value);
 }
 
-void ToolbarDock::PickModeChanged(const QString& item)
+void ToolbarDock::PickModeChanged(int itemIndex)
 {
-	if (item == pickerStringActor)
+	const QString itemText = worldEditorPickMode->itemText(itemIndex);
+
+	if (itemText == pickerStringActor)
 	{
 		WorldEditor::SetPickMode(WorldEditor::PickMode::Actor);
 	}
-	else if (item == pickerStringComponent)
+	else if (itemText == pickerStringComponent)
 	{
 		WorldEditor::SetPickMode(WorldEditor::PickMode::Component);
 	}
 }
 
-void ToolbarDock::LocalWorldTransformValueChanged(const QString& item)
+void ToolbarDock::LocalWorldTransformValueChanged(int itemIndex)
 {
-	std::string transformMode = item.toStdString();
+	const std::string transformMode = worldLocalTransformSetting->itemText(itemIndex).toStdString();
 	transformGizmo.SetLocalWorldTransformMode(transformMode);
 }
