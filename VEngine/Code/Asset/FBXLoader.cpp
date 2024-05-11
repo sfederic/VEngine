@@ -254,12 +254,9 @@ void ProcessAllChildNodes(std::string fbxFilename, FbxNode* node, MeshData& mesh
 		ProcessAllChildNodes(fbxFilename, node->GetChild(i), meshData);
 	}
 
-	FbxScene* scene = node->GetScene();
 	std::string nodename = node->GetName();
 
 	std::unordered_map<int, BoneWeights> boneWeightsMap;
-
-	FbxAnimStack* animStack = nullptr;
 
 	FbxMesh* mesh = node->GetMesh();
 	if (mesh)
@@ -365,10 +362,6 @@ void ProcessAllChildNodes(std::string fbxFilename, FbxNode* node, MeshData& mesh
 		int vectorSize = numVerts * mesh->GetPolygonSize(0);
 		assert((vectorSize % 3) == 0 && "FBX model isn't triangulated"); //This is a check to make sure the mesh is triangulated (in blender, Ctrl+T)
 
-		//Geometry Elements
-		FbxGeometryElementNormal* normals = mesh->GetElementNormal();
-		FbxGeometryElementUV* uvs = mesh->GetElementUV();
-
 		int polyIndexCounter = 0; //Used to index into normals and UVs on a per vertex basis
 		int triangleCount = mesh->GetPolygonCount();
 
@@ -412,14 +405,14 @@ void ProcessAllChildNodes(std::string fbxFilename, FbxNode* node, MeshData& mesh
 					if (boneData)
 					{
 						//There must be a way to merge the above cluster FBX code and the vertices.
-						for (int i = 0; i < boneData->weights.size(); i++)
+						for (int weightIndex = 0; weightIndex < boneData->weights.size(); weightIndex++)
 						{
-							vert.weights[i] = boneData->weights[i];
+							vert.weights[weightIndex] = boneData->weights[weightIndex];
 						}
 
-						for (int i = 0; i < boneData->boneIndex.size(); i++)
+						for (int boneIndex = 0; boneIndex < boneData->boneIndex.size(); boneIndex++)
 						{
-							vert.boneIndices[i] = boneData->boneIndex[i];
+							vert.boneIndices[boneIndex] = boneData->boneIndex[boneIndex];
 						}
 					}
 				}
@@ -432,7 +425,6 @@ void ProcessAllChildNodes(std::string fbxFilename, FbxNode* node, MeshData& mesh
 		//Flip vertex face order
 		for (int i = 0; i < meshData.vertices.size() / 3; i++)
 		{
-			const int index0 = i * 3;
 			const int index1 = i * 3 + 1;
 			const int index2 = i * 3 + 2;
 
@@ -717,10 +709,8 @@ XMFLOAT4 FBXDouble3ToXMFloat3(const fbxsdk::FbxDouble3& fbxDouble)
 
 std::vector<XMFLOAT3> ProcessControlPoints(FbxMesh* currMesh)
 {
-	unsigned int ctrlPointCount = currMesh->GetControlPointsCount();
-
+	const int ctrlPointCount = currMesh->GetControlPointsCount();
 	std::vector<XMFLOAT3> controlPoints;
-
 	for (int i = 0; i < ctrlPointCount; i++)
 	{
 		XMFLOAT3 currPosition = {};
