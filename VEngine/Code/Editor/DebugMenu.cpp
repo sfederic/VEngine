@@ -697,7 +697,6 @@ void DebugMenu::RenderUVPaintMenu()
 //Handle viewport notifications (e.g. "Shaders recompiled", "ERROR: Not X", etc.)
 void DebugMenu::RenderNotifications(float deltaTime)
 {
-	constexpr float textOffsetX = 20.f;
 	constexpr float notificationLifetime = 3.0f;
 
 	for (int i = 0; i < debugNotifications.size(); i++)
