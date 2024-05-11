@@ -111,8 +111,6 @@ public:
 	void ToggleVisibility();
 
 	void AddComponent(Component* component);
-	void DeleteComponent(std::string componentName);
-	void RemoveComponent(std::string componentName);
 	void RemoveComponent(Component* componentToRemove);
 	bool CheckComponentExists(std::string componentName);
 

@@ -259,24 +259,9 @@ void Actor::AddComponent(Component* component)
 	componentMap.emplace(component->name, component);
 }
 
-void Actor::DeleteComponent(std::string componentName)
-{
-	auto componentIt = componentMap.find(componentName);
-	if (componentIt == componentMap.end())
-	{
-		return;
-	}
-	Component* component = componentIt->second;
-	RemoveComponent(component);
-	component->Remove();
-}
-
 void Actor::RemoveComponent(Component* componentToRemove)
 {
 	componentMap.erase(componentToRemove->name);
-
-	//@Todo: originally there was code here to reparent SpatialComponents if a parent node with existing
-	//children still in the componentMap, but it was causing too much problems. Think about a replacement.
 }
 
 bool Actor::CheckComponentExists(std::string componentName)
@@ -287,12 +272,6 @@ bool Actor::CheckComponentExists(std::string componentName)
 void Actor::SetEmptyRootComponent()
 {
 	rootComponent = CreateComponent<EmptyComponent>("Root");
-}
-
-void Actor::RemoveComponent(std::string componentName)
-{
-	Component* component = componentMap.find(componentName)->second;
-	RemoveComponent(component);
 }
 
 Component* Actor::FindComponentAllowNull(const std::string componentName)
