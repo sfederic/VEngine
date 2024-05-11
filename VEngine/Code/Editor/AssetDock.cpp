@@ -192,9 +192,6 @@ void AssetDock::OpenAssetItemInDefaultProgram()
 	QString assetName = assetIconListWidget->currentItem()->text();
 	QString fullPath = path + "/" + assetName;
 
-	auto fileExtension = std::filesystem::path(fullPath.toStdString()).extension();
-	auto extension = fileExtension.c_str();
-
 	//Opens up default system program from filename.
 	QDesktopServices::openUrl(QUrl::fromLocalFile(fullPath));
 }
