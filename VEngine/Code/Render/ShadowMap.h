@@ -35,7 +35,7 @@ public:
 	ShadowMap(ID3D11Device* device, int width_, int height_);
 	void BindDsvAndSetNullRenderTarget(ID3D11DeviceContext* dc);
 
-	XMMATRIX GetDirectionalLightOrthoMatrix(DirectionalLightComponent* directionalLight);
+	XMMATRIX GetDirectionalLightOrthoMatrix();
 	XMMATRIX GetSpotLightPerspectiveMatrix(SpotLightComponent* spotLight);
 	XMMATRIX GetLightViewMatrix(SpatialComponent* light);
 	XMMATRIX GetLightTextureMatrix();

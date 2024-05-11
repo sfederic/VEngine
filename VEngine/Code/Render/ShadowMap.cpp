@@ -77,7 +77,7 @@ void ShadowMap::BindDsvAndSetNullRenderTarget(ID3D11DeviceContext* dc)
 	dc->ClearDepthStencilView(depthMapDSV.Get(), D3D11_CLEAR_DEPTH, 1.0f, 0);
 }
 
-XMMATRIX ShadowMap::GetDirectionalLightOrthoMatrix(DirectionalLightComponent* directionalLight)
+XMMATRIX ShadowMap::GetDirectionalLightOrthoMatrix()
 {
 	auto light = DirectionalLightComponent::system.GetFirstComponent();
 	XMFLOAT3 center = light->GetWorldPosition();
@@ -122,7 +122,7 @@ XMMATRIX ShadowMap::GetLightTextureMatrix()
 XMMATRIX ShadowMap::DirectionalLightViewProjectionTextureMatrix(DirectionalLightComponent* directionalLight)
 {
 	auto V = GetLightViewMatrix(directionalLight);
-	auto P = GetDirectionalLightOrthoMatrix(directionalLight);
+	auto P = GetDirectionalLightOrthoMatrix();
 	auto T = GetLightTextureMatrix();
 
 	XMMATRIX S = V * P * T;

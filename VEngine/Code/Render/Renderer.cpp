@@ -590,7 +590,7 @@ void SetShadowData()
 		auto dLight = DirectionalLightComponent::system.GetFirstComponent();
 		shaderMatrices.lightMVP = shadowMap->DirectionalLightViewProjectionTextureMatrix(dLight);
 		shaderMatrices.lightViewProj =
-			shadowMap->GetLightViewMatrix(dLight) * shadowMap->GetDirectionalLightOrthoMatrix(dLight);
+			shadowMap->GetLightViewMatrix(dLight) * shadowMap->GetDirectionalLightOrthoMatrix();
 
 		shaderLights.shadowsEnabled = true;
 	}
@@ -845,8 +845,6 @@ void RenderPostProcessSetup()
 	context->RSSetViewports(1, &viewport);
 
 	constexpr float clearColour[4] = { 0.f, 0.f, 0.f, 1.f };
-	UINT frameIndex = swapchain->GetCurrentBackBufferIndex();
-
 	context->ClearRenderTargetView(&postProcessRenderTarget.GetRTV(), clearColour);
 	context->ClearDepthStencilView(dsv.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
 
@@ -2004,7 +2002,7 @@ void Renderer::MeshIconImageCapture()
 
 		const std::wstring imageFile = L"Icons/MeshIcons/" +
 			VString::stows(mesh->meshComponentData.filename) + L".jpg";
-		HR(SaveWICTextureToFile(context.Get(), backBuffer.Get(), GUID_ContainerFormatJpeg, imageFile.c_str()));
+		HR(SaveWICTextureToFile(context.Get(), meshIconBackBuffer.Get(), GUID_ContainerFormatJpeg, imageFile.c_str()));
 		debugMenu.AddNotification(L"Mesh Icon created.");
 	}
 }
@@ -2178,7 +2176,6 @@ void RenderPostProcess()
 	SetNullRTV();
 
 	ID3D11ShaderResourceView* nullSRV = nullptr;
-	ID3D11UnorderedAccessView* nullUAV = nullptr;
 
 	context->RSSetState(rastStateMap.find(RastStates::solid)->second->GetData());
 
