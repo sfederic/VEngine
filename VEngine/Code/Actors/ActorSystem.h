@@ -142,7 +142,7 @@ public:
 		return actors.front().get();
 	}
 
-	virtual uint32_t GetNumActors() override
+	virtual size_t GetNumActors() override
 	{
 		return actors.size();
 	}

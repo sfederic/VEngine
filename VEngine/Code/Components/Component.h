@@ -30,8 +30,8 @@ public:
 	void SetActive(bool newActive) { active = newActive; }
 	void ToggleActive() { active = !active; }
 
-	int GetIndex() const { return index; }
-	void SetIndex(int newIndex) { index = newIndex; }
+	auto GetIndex() const { return index; }
+	void SetIndex(size_t newIndex) { index = newIndex; }
 
 	void SetComponentSystem(IComponentSystem* componentSystem_) { componentSystem = componentSystem_; }
 
@@ -58,9 +58,9 @@ public:
 private:
 	std::set<std::string> tags;
 	IComponentSystem* componentSystem = nullptr;
+	size_t index = 0;
 	UID uid = 0;
 	UID ownerUID = 0; //Keep as zero to denote component that doesn't have an owner.
-	int index = -1;
 	bool active = true;
 	bool visible = true;
 	bool tickEnabled = true;

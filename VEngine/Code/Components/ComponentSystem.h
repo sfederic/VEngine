@@ -23,14 +23,14 @@ public:
 		ComponentSystemCache::Get().Add(typeid(T), this);
 	}
 
-	T* Add(std::string name, Actor* owner = nullptr, T newComponent = T(), bool callCreate = false)
+	T* Add(std::string name_, Actor* owner = nullptr, T newComponent = T(), bool callCreate = false)
 	{
 		components.emplace_back(std::make_unique<T>(std::move(newComponent)));
 		auto& component = components.back();
 
 		component->SetIndex(components.size() - 1);
 		component->SetComponentSystem(this);
-		component->name = name;
+		component->name = name_;
 		component->SetUID(GenerateUID());
 
 		if (systemState == SystemStates::Loaded && callCreate)
@@ -214,7 +214,7 @@ public:
 		return outComponents;
 	}
 
-	uint32_t GetNumComponents() override
+	size_t GetNumComponents() override
 	{
 		return components.size();
 	}

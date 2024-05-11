@@ -24,7 +24,7 @@ public:
 	virtual void DeserialiseBinary(BinaryDeserialiser& d) = 0;
 	virtual Component* SpawnComponent(Actor* owner) = 0;
 	virtual std::vector<Component*> GetComponentsAsBaseClass() = 0;
-	virtual uint32_t GetNumComponents() = 0;
+	virtual size_t GetNumComponents() = 0;
 	virtual Component* FindComponentByName(std::string componentName) = 0;
 
 	auto GetName() { return name; }

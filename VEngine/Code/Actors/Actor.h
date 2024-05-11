@@ -178,8 +178,8 @@ public:
 	UID GetUID() const { return uid; }
 	void SetUID(const UID uid_) { uid = uid_; }
 
-	int GetSystemIndex() const { return actorSystemIndex; }
-	void SetSystemIndex(const int index) { actorSystemIndex = index; }
+	auto GetSystemIndex() const { return actorSystemIndex; }
+	void SetSystemIndex(size_t index) { actorSystemIndex = index; }
 
 	IActorSystem* GetActorSystem() { return actorSystem; }
 	void SetActorSystem(IActorSystem* system) { actorSystem = system; }
@@ -208,8 +208,8 @@ protected:
 	Actor* parent = nullptr;
 	SpatialComponent* rootComponent = nullptr;
 	IActorSystem* actorSystem = nullptr;
+	size_t actorSystemIndex = 0;
 	UID uid = GenerateUID();
-	int actorSystemIndex = -1;
 	bool active = true;
 	bool visible = true;
 	bool tickEnabled = true;
