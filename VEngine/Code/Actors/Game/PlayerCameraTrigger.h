@@ -22,12 +22,13 @@ public:
 	void ResetCameraPosAndTarget();
 
 private:
+	std::string newTargetActorName;
+
 	BoxTriggerComponent* boxTrigger = nullptr;
 
-	XMFLOAT3 newLocalCameraPos = XMFLOAT3(1.f, 1.f, -1.f);
 	XMVECTOR initialLocalCameraPos = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+	XMFLOAT3 newLocalCameraPos = XMFLOAT3(1.f, 1.f, -1.f);
 
-	std::string newTargetActorName;
 	Actor* newTargetActor = nullptr;
 	Actor* initialTargetActor = nullptr;
 };
