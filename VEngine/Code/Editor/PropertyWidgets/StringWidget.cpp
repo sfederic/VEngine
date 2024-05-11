@@ -54,18 +54,18 @@ void StringWidget::SetDirectoryFilenamesAutoComplete(const std::string& director
 	//Can only use actors or filenames for now with auto-complete.
 	assert(prop.useActorsAutoComplete == false);
 
-	std::string path = std::filesystem::current_path().generic_string() + prop.autoCompletePath;
+	const std::string path = std::filesystem::current_path().generic_string() + prop.autoCompletePath;
 
 	QStringList dirContents;
 
 	for (auto const& entry : std::filesystem::recursive_directory_iterator(path))
 	{
 		//Use generic_string() here. Windows likes to throw in '\\' when it wants with string().
-		std::string path = entry.path().generic_string();
+		const std::string entryPath = entry.path().generic_string();
 
 		//Grab the index so file paths are displayed correctly on autocomplete. Eg. "test_map/item.png"
-		size_t index = path.find(prop.autoCompletePath);
-		std::string file = path.substr(index + prop.autoCompletePath.size());
+		size_t index = entryPath.find(prop.autoCompletePath);
+		std::string file = entryPath.substr(index + prop.autoCompletePath.size());
 
 		dirContents.append(QString::fromStdString(file));
 	}
