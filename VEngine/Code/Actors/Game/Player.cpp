@@ -22,7 +22,6 @@
 #include "UI/UISystem.h"
 #include "UI/Game/DialogueWidget.h"
 #include "UI/Game/InteractWidget.h"
-#include "UI/Game/PlayerHealthWidget.h"
 #include "Gameplay/GameUtils.h"
 
 //Distance the player can ray/box cast to a grid actor to link to.
@@ -85,7 +84,6 @@ void Player::Start()
 
 	//Setup widgets
 	interactWidget = UISystem::CreateWidget<InteractWidget>();
-	healthWidget = UISystem::CreateWidget<PlayerHealthWidget>();
 }
 
 void Player::End()
@@ -1303,7 +1301,7 @@ void Player::EnableLinkEffectMeshForHover(MeshComponent* mesh)
 	linkEffectMesh->ReCreate();
 }
 
-void Player::EnableLinkEffectMeshForSelect(MeshComponent* mesh)
+void Player::EnableLinkEffectMeshForSelect(MeshComponent* linkMesh)
 {
 	linkEffectMeshSetAlpha = true;
 	linkEffectMesh->SetVisibility(true);
@@ -1311,12 +1309,12 @@ void Player::EnableLinkEffectMeshForSelect(MeshComponent* mesh)
 	linkEffectMesh->SetUVOffsetSpeed(XMFLOAT2(0.15f, 0.1f));
 	linkEffectMesh->SetUVRotationSpeed(0.1f);
 
-	linkEffectMesh->SetWorldScale(mesh->GetWorldScaleV() * 1.05f);
-	linkEffectMesh->SetWorldPosition(mesh->GetWorldPositionV());
+	linkEffectMesh->SetWorldScale(linkMesh->GetWorldScaleV() * 1.05f);
+	linkEffectMesh->SetWorldPosition(linkMesh->GetWorldPositionV());
 
-	linkEffectMesh->SetRastState(mesh->GetRastState().GetName());
+	linkEffectMesh->SetRastState(linkMesh->GetRastState().GetName());
 
-	linkEffectMesh->SetMeshFilename(mesh->GetMeshFilename());
+	linkEffectMesh->SetMeshFilename(linkMesh->GetMeshFilename());
 	linkEffectMesh->ReCreate();
 }
 
