@@ -5,8 +5,9 @@
 
 struct Properties;
 
-struct BinaryDeserialiser
+class BinaryDeserialiser
 {
+public:
 	FILE* file = nullptr;
 
 	BinaryDeserialiser(const std::string filename)

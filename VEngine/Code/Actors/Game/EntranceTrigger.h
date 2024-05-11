@@ -4,15 +4,15 @@
 #include "../ActorSystem.h"
 
 class BoxTriggerComponent;
-struct ConditionComponent;
-struct InteractWidget;
+class ConditionComponent;
+class InteractWidget;
 
 class EntranceTrigger : public Actor
 {
 public:
 	ACTOR_SYSTEM(EntranceTrigger)
 
-	EntranceTrigger();
+		EntranceTrigger();
 	virtual void Start() override;
 	virtual void Tick(float deltaTime) override;
 	virtual Properties GetProps() override;

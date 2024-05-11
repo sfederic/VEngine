@@ -4,10 +4,10 @@
 #include "../ActorSystem.h"
 #include "Gameplay/ForwardFace.h"
 
-struct MeshComponent;
-struct HealthWidget;
+class MeshComponent;
+class HealthWidget;
 struct GridNode;
-struct DialogueComponent;
+class DialogueComponent;
 
 //@Todo: SkeletalMeshGridActor
 

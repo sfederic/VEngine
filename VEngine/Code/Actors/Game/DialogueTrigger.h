@@ -2,8 +2,8 @@
 #include "../Actor.h"
 #include "../ActorSystem.h"
 
-struct DialogueComponent;
-struct BoxTriggerComponent;
+class DialogueComponent;
+class BoxTriggerComponent;
 
 //Conversations are just dialog files that use NPCs to talk with themselves with or without player input.
 //eg. walking into room, walking into a Conversation's trigger.

@@ -3,11 +3,12 @@
 #include "../WidgetComponent.h"
 #include "Gameplay/DialogueStructures.h"
 
-struct DialogueWidget;
+class DialogueWidget;
 
 //Looks like about 70 characters per line is the limit.
-struct DialogueComponent : WidgetComponent
+class DialogueComponent : public WidgetComponent
 {
+public:
 	COMPONENT_SYSTEM(DialogueComponent)
 
 private:

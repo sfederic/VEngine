@@ -3,7 +3,7 @@
 
 //Throws a fullscreen rect over the viewport and fades transparency.
 //There's maybe a nicer way to do it with D3D/GL and RenderTargets or something.
-struct ScreenFadeWidget : Widget
+class ScreenFadeWidget : public Widget
 {
 private:
 	enum class FadeValue

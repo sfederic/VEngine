@@ -3,16 +3,16 @@
 #include "../Actor.h"
 #include "../ActorSystem.h"
 
-struct BoxTriggerComponent;
-struct Widget;
-struct InteractWidget;
+class BoxTriggerComponent;
+class Widget;
+class InteractWidget;
 
 //Used to open up a quick prompt/action when the player overlaps
 struct InteractTrigger : Actor
 {
 	ACTOR_SYSTEM(InteractTrigger)
 
-	BoxTriggerComponent* trigger = nullptr;
+		BoxTriggerComponent* trigger = nullptr;
 
 	//Widget shown on interact
 	InteractWidget* interactWidget = nullptr;

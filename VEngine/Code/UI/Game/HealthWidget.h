@@ -1,8 +1,9 @@
 #pragma once
 #include "../Widget.h"
 
-struct HealthWidget : Widget
+class HealthWidget : public Widget
 {
+public:
 	int healthPoints = 0;
 	int maxHealthPoints = 1;
 

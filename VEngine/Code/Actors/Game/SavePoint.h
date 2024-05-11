@@ -2,7 +2,7 @@
 #include "../Actor.h"
 #include "../ActorSystem.h"
 
-struct BoxTriggerComponent;
+class BoxTriggerComponent;
 
 //In-world save point the player can interact with to save.
 struct SavePoint : Actor

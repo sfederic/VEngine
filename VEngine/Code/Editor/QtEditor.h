@@ -6,8 +6,8 @@
 class QtEditor : public IEditor, public QObject
 {
 public:
-	struct QApplication* app = nullptr;
-	struct EditorMainWindow* mainWindow = nullptr;
+	class QApplication* app = nullptr;
+	class EditorMainWindow* mainWindow = nullptr;
 
 	void Init(int argc, char* argv[]) override;
 	void Tick() override;

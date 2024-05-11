@@ -5,7 +5,7 @@
 #include "../ActorSystem.h"
 #include "Gameplay/GridNode.h"
 
-struct InstanceMeshComponent;
+class InstanceMeshComponent;
 struct InstanceData;
 class Unit;
 class GridActor;

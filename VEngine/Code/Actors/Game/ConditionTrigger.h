@@ -3,8 +3,8 @@
 #include "../Actor.h"
 #include "../ActorSystem.h"
 
-struct ConditionComponent;
-struct BoxTriggerComponent;
+class ConditionComponent;
+class BoxTriggerComponent;
 
 //Trigger that sets off a condition in the world.
 //Used as a box trigger or as an in world reference.

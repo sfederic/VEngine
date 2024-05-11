@@ -2,7 +2,7 @@
 
 struct DebugLightProbe
 {
-	struct InstanceMeshComponent* instanceMesh = nullptr;
+	class InstanceMeshComponent* instanceMesh = nullptr;
 
 	DebugLightProbe(int probeCount);
 };

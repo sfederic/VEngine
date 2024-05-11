@@ -1,11 +1,13 @@
 #pragma once
+
 #include "Unit.h"
 
-struct DialogueWidget;
+class DialogueWidget;
 
 //Actor that can be talked to and interactied with.
-struct NPC : Unit
+class NPC : public Unit
 {
+public:
 	ACTOR_SYSTEM(NPC);
 
 	bool isQuickDialogueActive = false;

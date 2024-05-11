@@ -5,9 +5,9 @@
 #include "Render/ShaderData/MaterialShaderData.h"
 
 class Texture2D;
-struct Sampler;
-struct RastState;
-struct BlendState;
+class Sampler;
+class RastState;
+class BlendState;
 class VertexShader;
 class PixelShader;
 class ShaderItem;
