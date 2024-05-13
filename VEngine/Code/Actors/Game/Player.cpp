@@ -37,8 +37,8 @@ Player::Player()
 	nextPos = XMVectorZero();
 	nextRot = XMVectorZero();
 
-	mesh = CreateComponent("Mesh", MeshComponent("char.vmesh", "test.png"));
-	rootComponent->AddChild(mesh);
+	_mesh = CreateComponent("Mesh", MeshComponent("char.vmesh", "test.png"));
+	rootComponent->AddChild(_mesh);
 
 	dialogueComponent = DialogueComponent::system.Add("Dialogue", this);
 
@@ -51,7 +51,7 @@ void Player::Create()
 {
 	__super::Create();
 
-	mesh->SetRenderStatic(false);
+	_mesh->SetRenderStatic(false);
 
 	linkEffectMesh->SetActive(true);
 	linkEffectMesh->SetMeshFilename("cube.vmesh");
@@ -165,12 +165,12 @@ Properties Player::GetProps()
 
 XMVECTOR Player::GetMeshForward()
 {
-	return mesh->GetForwardVectorV();
+	return _mesh->GetForwardVectorV();
 }
 
 XMVECTOR Player::GetMeshRight()
 {
-	return mesh->GetRightVectorV();
+	return _mesh->GetRightVectorV();
 }
 
 bool Player::CheckAttackPositionAgainstUnitDirection(Unit* unit)
@@ -180,7 +180,7 @@ bool Player::CheckAttackPositionAgainstUnitDirection(Unit* unit)
 		return true;
 	}
 
-	auto playerForward = mesh->GetForwardVectorV();
+	auto playerForward = _mesh->GetForwardVectorV();
 	VMath::RoundVector(playerForward);
 
 	auto unitForward = unit->GetForwardVectorV();
@@ -351,7 +351,7 @@ void Player::PrimaryAction()
 		}
 
 		HitResult hit(this);
-		auto meshForward = mesh->GetForwardVectorV();
+		auto meshForward = _mesh->GetForwardVectorV();
 		auto center = GetPositionV();
 		auto boxCastOrigin = center + meshForward;
 		if (Physics::SimpleBoxCast(boxCastOrigin, XMFLOAT3(0.25f, 0.25f, 0.25f), hit, false, true))
@@ -439,14 +439,14 @@ void Player::MakeOccludingMeshBetweenCameraAndPlayerTransparent()
 			{
 				previousHitTransparentActors.insert(actor);
 
-				auto mesh = actor->GetFirstComponentOfTypeAllowNull<MeshComponent>();
-				if (mesh && mesh->transparentOcclude)
+				auto lMesh = actor->GetFirstComponentOfTypeAllowNull<MeshComponent>();
+				if (lMesh && lMesh->transparentOcclude)
 				{
-					float alpha = mesh->GetAlpha();
+					float alpha = lMesh->GetAlpha();
 					if (alpha > 0.33f)
 					{
 						alpha -= Core::GetDeltaTime() * 3.f;
-						mesh->SetAlpha(alpha);
+						lMesh->SetAlpha(alpha);
 					}
 				}
 			}
@@ -459,14 +459,14 @@ void Player::MakeOccludingMeshBetweenCameraAndPlayerTransparent()
 	{
 		if (hit.FindHitActor(*(it)) == nullptr)
 		{
-			auto mesh = (*it)->GetFirstComponentOfTypeAllowNull<MeshComponent>();
-			if (mesh && mesh->transparentOcclude)
+			auto lMesh = (*it)->GetFirstComponentOfTypeAllowNull<MeshComponent>();
+			if (lMesh && lMesh->transparentOcclude)
 			{
-				float alpha = mesh->GetAlpha();
+				float alpha = _mesh->GetAlpha();
 				if (alpha < 1.f)
 				{
 					alpha += Core::GetDeltaTime() * 1.5f;
-					mesh->SetAlpha(alpha);
+					lMesh->SetAlpha(alpha);
 				}
 
 				if (alpha >= 1.f)
@@ -1014,7 +1014,7 @@ void Player::CheckNextMoveNode(const XMVECTOR previousPos)
 	int nextYIndex = (int)std::round(nextPos.m128_f32[2]);
 
 	//Keep the call here so playerunit can face walls and holes on input.
-	mesh->SetWorldRotation(VMath::LookAtRotation(nextPos, previousPos));
+	_mesh->SetWorldRotation(VMath::LookAtRotation(nextPos, previousPos));
 	//Put this here so that quick turns with the mesh with invalid grid node check will still
 	//highlight linkable actors. It might mess some stuff up, keep an eye on this bool set.
 	previousMovementAndRotationStoppedValue = false;
@@ -1170,7 +1170,7 @@ void Player::SetLinkedGridActor(GridActor& gridActor)
 	const auto lookAtRotation = VMath::LookAtRotation(pos + GetMeshForward(), pos);
 	nextRot = lookAtRotation;
 	SetRotation(lookAtRotation);
-	mesh->SetWorldRotation(lookAtRotation);
+	_mesh->SetWorldRotation(lookAtRotation);
 
 	EnableLinkEffectMeshForSelect(&gridActor.GetMesh());
 
@@ -1276,7 +1276,7 @@ bool Player::IsInInteraction() const
 	return inInteraction || inConversation || inInspection;
 }
 
-void Player::EnableLinkEffectMeshForHover(MeshComponent* mesh)
+void Player::EnableLinkEffectMeshForHover(MeshComponent* linkMesh)
 {
 	linkEffectMeshSetAlpha = true;
 	linkEffectMesh->SetVisibility(true);
@@ -1289,15 +1289,15 @@ void Player::EnableLinkEffectMeshForHover(MeshComponent* mesh)
 	linkEffectMesh->SetUVOffsetSpeed(XMFLOAT2(0.075f, 0.05f));
 	linkEffectMesh->SetUVRotationSpeed(0.05f);
 
-	linkEffectMesh->SetWorldScale(mesh->GetWorldScaleV() * 1.05f);
-	linkEffectMesh->SetWorldPosition(mesh->GetWorldPositionV());
-	linkEffectMesh->SetWorldRotation(mesh->GetWorldRotationV());
+	linkEffectMesh->SetWorldScale(linkMesh->GetWorldScaleV() * 1.05f);
+	linkEffectMesh->SetWorldPosition(linkMesh->GetWorldPositionV());
+	linkEffectMesh->SetWorldRotation(linkMesh->GetWorldRotationV());
 
 	//Make sure the rast state is copied too because grid actors like doors that don't have their backs culled
 	//will only show one side of the link effect mesh.
-	linkEffectMesh->SetRastState(mesh->GetRastState().GetName());
+	linkEffectMesh->SetRastState(linkMesh->GetRastState().GetName());
 
-	linkEffectMesh->SetMeshFilename(mesh->GetMeshFilename());
+	linkEffectMesh->SetMeshFilename(linkMesh->GetMeshFilename());
 	linkEffectMesh->ReCreate();
 }
 

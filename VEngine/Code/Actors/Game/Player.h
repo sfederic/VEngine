@@ -4,7 +4,7 @@
 #include "Actors/ActorSystem.h"
 #include <set>
 
-struct DialogueComponent;
+class DialogueComponent;
 class InteractWidget;
 class GridActor;
 class MeshComponent;
@@ -17,6 +17,12 @@ class Player : public Actor
 public:
 	ACTOR_SYSTEM(Player);
 
+	std::set<Actor*> previousHitTransparentActors;
+
+	XMVECTOR nextPos = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+	XMVECTOR nextRot = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+	XMVECTOR nextHopPos = XMVectorZero();
+
 	DialogueComponent* dialogueComponent = nullptr;
 	DialogueComponent* currentlyActiveDialogueComponent = nullptr;
 
@@ -24,17 +30,7 @@ public:
 
 	GridActor* gridActorInteractingWith = nullptr;
 
-	std::set<Actor*> previousHitTransparentActors;
-
-	bool inConversation = false;
-	bool inInteraction = false;
-	bool inInspection = false;
-	bool gameOver = false;
-
-	XMVECTOR nextPos = XMVectorSet(0.f, 0.f, 0.f, 1.f);
-	XMVECTOR nextRot = XMVectorSet(0.f, 0.f, 0.f, 1.f);
-
-	MeshComponent* mesh = nullptr;
+	MeshComponent* _mesh = nullptr;
 	MeshComponent* linkEffectMesh = nullptr;
 	CameraComponent* camera = nullptr;
 
@@ -45,6 +41,11 @@ public:
 
 	int xIndex = -1;
 	int yIndex = -1;
+
+	bool inConversation = false;
+	bool inInteraction = false;
+	bool inInspection = false;
+	bool gameOver = false;
 
 	Player();
 	void Create() override;
@@ -130,7 +131,7 @@ private:
 	bool IsInInteraction() const;
 
 	//Link effect logic to use on grid actor link select hover.
-	void EnableLinkEffectMeshForHover(MeshComponent* mesh);
+	void EnableLinkEffectMeshForHover(MeshComponent* linkMesh);
 	//Link effect logic to use on grid actor link select.
 	void EnableLinkEffectMeshForSelect(MeshComponent* mesh);
 	void UpdateLinkEffectMesh();
@@ -142,7 +143,6 @@ private:
 
 	//Cute little hop animation when jumping off higher nodes. Think like Pokémon Blue when you jump.
 	void CuteHopToLowerNode(const XMFLOAT3 nextNodePos);
-	XMVECTOR nextHopPos = XMVectorZero();
 	bool inHop = false;
 	bool hopLanding = false;
 
