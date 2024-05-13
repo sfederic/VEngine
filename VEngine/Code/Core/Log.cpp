@@ -7,7 +7,7 @@
 void Log(std::string logMessage, ...)
 {
 	va_list args;
-	va_start(args, logMessage);
+	va_start(args, logMessage.c_str());
 
 	char msg[1024];
 	_vsnprintf_s(msg, 1024, logMessage.c_str(), args);
@@ -25,7 +25,7 @@ void Log(std::string logMessage, ...)
 void Log(std::wstring logMessage, ...)
 {
 	va_list args;
-	va_start(args, logMessage);
+	va_start(args, logMessage.c_str());
 
 	wchar_t msg[1024];
 	_vsnwprintf_s(msg, 1024, logMessage.c_str(), args);

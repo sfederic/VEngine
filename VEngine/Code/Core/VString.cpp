@@ -21,7 +21,7 @@ namespace VString
 	std::wstring wformat(const std::wstring wstr, ...)
 	{
 		va_list args;
-		va_start(args, wstr);
+		va_start(args, wstr.c_str());
 
 		wchar_t output[1024];
 		_vsnwprintf_s(output, 1024, wstr.c_str(), args);
@@ -33,7 +33,7 @@ namespace VString
 	std::string format(const std::string str, ...)
 	{
 		va_list args;
-		va_start(args, str);
+		va_start(args, str.c_str());
 
 		char output[1024];
 		_vsnprintf_s(output, 1024, str.c_str(), args);
