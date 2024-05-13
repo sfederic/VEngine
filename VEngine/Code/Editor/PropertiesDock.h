@@ -5,7 +5,7 @@
 #include <vector>
 
 class Actor;
-struct IPropertyWidget;
+class IPropertyWidget;
 struct Properties;
 struct Property;
 class QWidget;
