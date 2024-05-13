@@ -10,7 +10,7 @@ struct GridNode
 {
 	GridNode() {}
 
-	GridNode(int x, int y, int instancedMeshIndex_)
+	GridNode(int x, int y, size_t instancedMeshIndex_)
 	{
 		xIndex = x;
 		yIndex = y;
