@@ -63,8 +63,8 @@ void Pulley::ReelActorIn()
 {
 	if (pullActor)
 	{
-		const XMVECTOR nextPos = (pullActor->GetPositionV() + XMLoadFloat3(&pullDirection)) * pullIncrement;
-		pullActor->SetNextPos(nextPos);
+		const XMVECTOR nextPosition = (pullActor->GetPositionV() + XMLoadFloat3(&pullDirection)) * pullIncrement;
+		pullActor->SetNextPos(nextPosition);
 	}
 }
 
@@ -72,7 +72,7 @@ void Pulley::ReelActorOut()
 {
 	if (pullActor)
 	{
-		const XMVECTOR nextPos = (pullActor->GetPositionV() - XMLoadFloat3(&pullDirection)) * pullIncrement;
-		pullActor->SetNextPos(nextPos);
+		const XMVECTOR nextPosition = (pullActor->GetPositionV() - XMLoadFloat3(&pullDirection)) * pullIncrement;
+		pullActor->SetNextPos(nextPosition);
 	}
 }

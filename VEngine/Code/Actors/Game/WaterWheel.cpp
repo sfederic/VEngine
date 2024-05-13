@@ -38,8 +38,8 @@ void WaterWheel::OnLinkRotate()
 			}
 
 			auto pushDirectionV = XMLoadFloat3(&pushDirection);
-			auto nextPos = pushDirectionV + gridActor->GetPositionV();
-			gridActor->SetNextPos(nextPos);
+			auto nextPosition = pushDirectionV + gridActor->GetPositionV();
+			gridActor->SetNextPos(nextPosition);
 		}
 	}
 }

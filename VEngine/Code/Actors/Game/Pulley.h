@@ -21,10 +21,9 @@ private:
 	void ReelActorOut();
 
 	std::string pullActorName;
+	XMFLOAT3 pullDirection = XMFLOAT3(0.f, 0.f, 0.f);
 	GridActor* pullActor = nullptr;
-	XMFLOAT3 pullDirection;
 	float pullIncrement = 1.f;
-
 	//The current 'index' the pulley is on per each direction.
 	int pullIndex = 0;
 	int pullMin = 0;

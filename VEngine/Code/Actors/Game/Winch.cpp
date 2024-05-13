@@ -31,8 +31,8 @@ void Winch::OnLinkRotateLeft()
 
 	if (linkedActor)
 	{
-		const XMVECTOR nextPos = linkedActor->GetPositionV() + XMLoadFloat3(&moveDirection) * moveIncrement;
-		linkedActor->SetNextPos(nextPos);
+		const XMVECTOR nextPosition = linkedActor->GetPositionV() + XMLoadFloat3(&moveDirection) * moveIncrement;
+		linkedActor->SetNextPos(nextPosition);
 	}
 }
 
@@ -42,7 +42,7 @@ void Winch::OnLinkRotateRight()
 
 	if (linkedActor)
 	{
-		const XMVECTOR nextPos = linkedActor->GetPositionV() - XMLoadFloat3(&moveDirection) * moveIncrement;
-		linkedActor->SetNextPos(nextPos);
+		const XMVECTOR nextPosition = linkedActor->GetPositionV() - XMLoadFloat3(&moveDirection) * moveIncrement;
+		linkedActor->SetNextPos(nextPosition);
 	}
 }

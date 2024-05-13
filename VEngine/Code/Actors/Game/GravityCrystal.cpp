@@ -45,8 +45,8 @@ void GravityCrystal::Tick(float deltaTime)
 
 			actor->SetCanFall(false);
 
-			const auto nextPos = actor->GetPositionV() + VMath::GlobalUpVector();
-			actor->SetNextPos(nextPos);
+			const auto nextPosition = actor->GetPositionV() + VMath::GlobalUpVector();
+			actor->SetNextPos(nextPosition);
 
 			for (auto lMesh : actor->GetComponents<MeshComponent>())
 			{
@@ -65,8 +65,8 @@ void GravityCrystal::Tick(float deltaTime)
 		{
 			actor->SetCanFall(true);
 
-			const auto nextPos = actor->GetPositionV() - VMath::GlobalUpVector();
-			actor->SetNextPos(nextPos);
+			const auto nextPosition = actor->GetPositionV() - VMath::GlobalUpVector();
+			actor->SetNextPos(nextPosition);
 
 			actor->RecalcCurrentNodeDontIgnoreThis();
 
