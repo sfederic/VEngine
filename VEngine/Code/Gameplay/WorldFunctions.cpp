@@ -18,9 +18,9 @@ void TownStart()
 				const auto fillColour = XMLoadFloat4(&colour);
 				for (auto& vertex : mesh->GetAllVertices())
 				{
-					auto colour = XMLoadFloat4(&vertex.colour);
-					colour *= fillColour;
-					XMStoreFloat4(&vertex.colour, colour);
+					auto vertexColour = XMLoadFloat4(&vertex.colour);
+					vertexColour *= fillColour;
+					XMStoreFloat4(&vertex.colour, vertexColour);
 				}
 
 				mesh->CreateNewVertexBuffer();
