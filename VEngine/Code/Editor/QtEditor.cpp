@@ -80,9 +80,9 @@ void QtEditor::SetMousePosFPSGameplay()
 	const QPoint mousePos = mainWindow->renderView->mapFromGlobal(QCursor::pos());
 	SetViewportMousePositions(mousePos.x(), mousePos.y());
 
-	const int centerOffsetX = (GetViewportWidth() / 2) - GetViewportMouseX();
-	const int centerOffsetY = (GetViewportWidth() / 2) - GetViewportMouseY();
-	SetCenterOffsetPositions(centerOffsetX, centerOffsetY);
+	const int lCenterOffsetX = (GetViewportWidth() / 2) - GetViewportMouseX();
+	const int lCenterOffsetY = (GetViewportWidth() / 2) - GetViewportMouseY();
+	SetCenterOffsetPositions(lCenterOffsetX, lCenterOffsetY);
 
 	const QPoint glob = mainWindow->renderView->mapToGlobal(QPoint(GetViewportWidth() / 2, GetViewportHeight() / 2));
 	QCursor::setPos(glob);
