@@ -56,7 +56,7 @@ public:
 		return (Component*)Add("", owner);
 	}
 
-	void Remove(int index)
+	void Remove(size_t index)
 	{
 		std::swap(components[index], components.back());
 		components[index]->SetIndex(index);
