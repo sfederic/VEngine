@@ -13,7 +13,6 @@ using namespace DirectX;
 Serialiser::Serialiser(const std::string filename_, const OpenMode mode_) :
 	filename(filename_), mode(mode_)
 {
-	//@Todo: This locale stuff here and in Deserialiser is deprecated in C++17 but I have no idea on the replacement.
 	std::locale loc(std::locale::classic(), new std::codecvt_utf8<wchar_t, 0x10ffff, std::little_endian>);
 	ofs.imbue(loc);
 
