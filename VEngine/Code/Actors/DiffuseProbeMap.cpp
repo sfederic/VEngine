@@ -120,8 +120,8 @@ void DiffuseProbeMap::WriteProbeDataToFile()
 	assert(file);
 
 	//Write probe data count to read back.
-	int probeDataCount = lightProbeData.size();
-	fwrite(&probeDataCount, sizeof(int), 1, file);
+	size_t probeDataCount = lightProbeData.size();
+	fwrite(&probeDataCount, sizeof(probeDataCount), 1, file);
 
 	fwrite(lightProbeData.data(), sizeof(LightProbeInstanceData), probeDataCount, file);
 
@@ -153,8 +153,8 @@ void DiffuseProbeMap::ReadProbeDataFromFile()
 		fopen_s(&file, filename.c_str(), "rb");
 		assert(file);
 
-		int probeDataCount = 0;
-		fread(&probeDataCount, sizeof(int), 1, file);
+		size_t probeDataCount = 0;
+		fread(&probeDataCount, sizeof(probeDataCount), 1, file);
 		assert(probeDataCount > 0);
 
 		lightProbeData.reserve(probeDataCount);
