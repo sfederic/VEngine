@@ -25,7 +25,7 @@
 #include "Components/MeshComponent.h"
 
 std::set<Actor*> pickedActors;
-Actor* pickedActor;
+Actor* gPickedActor;
 SpatialComponent* pickedComponent;
 IActorSystem* spawnSystem;
 std::string actorTemplateFilename;
@@ -207,17 +207,17 @@ void DuplicateActor()
 	{
 		if (Input::GetKeyDown(Keys::W))
 		{
-			if (pickedActor)
+			if (gPickedActor)
 			{
 				pickedActors.clear();
 
 				editor->ClearProperties();
 
-				Transform transform = pickedActor->GetTransform();
-				Actor* newDuplicateActor = pickedActor->GetActorSystem()->SpawnActor(transform);
+				Transform transform = gPickedActor->GetTransform();
+				Actor* newDuplicateActor = gPickedActor->GetActorSystem()->SpawnActor(transform);
 
 				//Copy values across
-				auto oldProps = pickedActor->GetAllProps();
+				auto oldProps = gPickedActor->GetAllProps();
 				auto newProps = newDuplicateActor->GetAllProps();
 				Properties::CopyProperties(oldProps, newProps);
 
@@ -229,7 +229,7 @@ void DuplicateActor()
 				auto newDuplicateActorMeshes = newDuplicateActor->GetComponents<MeshComponent>();
 				for (auto mesh : newDuplicateActorMeshes)
 				{
-					auto matchingMesh = pickedActor->GetComponent<MeshComponent>(mesh->name);
+					auto matchingMesh = gPickedActor->GetComponent<MeshComponent>(mesh->name);
 					if (matchingMesh)
 					{
 						mesh->meshDataProxy.vertices = matchingMesh->meshDataProxy.vertices;
@@ -246,7 +246,7 @@ void DuplicateActor()
 					L"Duplicated new actor [%S]", newDuplicateActor->GetName().c_str()));
 
 				//Set new actor as picked in-editor
-				pickedActor = newDuplicateActor;
+				gPickedActor = newDuplicateActor;
 			}
 		}
 	}
@@ -275,7 +275,7 @@ void DeleteActor()
 		{
 		case WorldEditor::PickMode::Actor:
 		{
-			if (pickedActor)
+			if (gPickedActor)
 			{
 				editor->RemoveActorFromWorldList();
 
@@ -290,8 +290,8 @@ void DeleteActor()
 				else
 				{
 					debugMenu.AddNotification(VString::wformat(
-						L"Destroyed actor [%S]", pickedActor->GetName().c_str()));
-					pickedActor->Remove();
+						L"Destroyed actor [%S]", gPickedActor->GetName().c_str()));
+					gPickedActor->Remove();
 				}
 			}
 
@@ -309,7 +309,7 @@ void DeleteActor()
 		}
 
 		pickedActors.clear();
-		pickedActor = nullptr;
+		gPickedActor = nullptr;
 		pickedComponent = nullptr;
 
 		editor->ClearProperties();
@@ -375,8 +375,8 @@ void SpawnActor(Transform& transform)
 	actor->CreateAllComponents();
 	actor->PostCreate();
 
-	pickedActor = actor;
-	editor->SetActorProps(pickedActor);
+	gPickedActor = actor;
+	editor->SetActorProps(gPickedActor);
 }
 
 void VertexPainting()
@@ -616,34 +616,34 @@ void UVPainting()
 
 void MoveActorViaKeyboardInput()
 {
-	if (pickedActor == nullptr || !WorldEditor::moveActorViaKeyboardInput) {
+	if (gPickedActor == nullptr || !WorldEditor::moveActorViaKeyboardInput) {
 		return;
 	}
 
 	if (Input::GetKeyDown(Keys::W)) {
-		pickedActor->AddPositionV(VMath::GlobalForwardVector());
+		gPickedActor->AddPositionV(VMath::GlobalForwardVector());
 	}
 	else if (Input::GetKeyDown(Keys::S)) {
-		pickedActor->AddPositionV(-VMath::GlobalForwardVector());
+		gPickedActor->AddPositionV(-VMath::GlobalForwardVector());
 	}
 	else if (Input::GetKeyDown(Keys::A)) {
-		pickedActor->AddPositionV(-VMath::GlobalRightVector());
+		gPickedActor->AddPositionV(-VMath::GlobalRightVector());
 	}
 	else if (Input::GetKeyDown(Keys::D)) {
-		pickedActor->AddPositionV(VMath::GlobalRightVector());
+		gPickedActor->AddPositionV(VMath::GlobalRightVector());
 	}
 
 	if (Input::GetKeyDown(Keys::Down)) {
-		pickedActor->AddRotation(VMath::GlobalRightVector(), -90.f);
+		gPickedActor->AddRotation(VMath::GlobalRightVector(), -90.f);
 	}
 	else if (Input::GetKeyDown(Keys::Up)) {
-		pickedActor->AddRotation(VMath::GlobalRightVector(), 90.f);
+		gPickedActor->AddRotation(VMath::GlobalRightVector(), 90.f);
 	}
 	else if (Input::GetKeyDown(Keys::Left)) {
-		pickedActor->AddRotation(VMath::GlobalUpVector(), -90.f);
+		gPickedActor->AddRotation(VMath::GlobalUpVector(), -90.f);
 	}
 	else if (Input::GetKeyDown(Keys::Right)) {
-		pickedActor->AddRotation(VMath::GlobalUpVector(), 90.f);
+		gPickedActor->AddRotation(VMath::GlobalUpVector(), 90.f);
 	}
 }
 
@@ -732,7 +732,7 @@ void QuickTextureChangeMenu()
 
 void WorldEditor::DeselectPickedActor()
 {
-	pickedActor = nullptr;
+	gPickedActor = nullptr;
 	editor->ClearProperties();
 }
 
@@ -745,11 +745,11 @@ void WorldEditor::DeselectAll()
 void WorldEditor::SetPickedActor(Actor* actor)
 {
 	assert(actor);
-	pickedActor = actor;
+	gPickedActor = actor;
 
 	pickedActors.insert(actor);
 
-	editor->SetActorProps(pickedActor);
+	editor->SetActorProps(gPickedActor);
 	editor->SelectActorInWorldList();
 }
 
@@ -761,7 +761,7 @@ void WorldEditor::SetPickedComponent(SpatialComponent* spatialComponent)
 
 Actor* WorldEditor::GetPickedActor()
 {
-	return pickedActor;
+	return gPickedActor;
 }
 
 std::set<Actor*>& WorldEditor::GetPickedActors()
@@ -855,4 +855,3 @@ Actor* WorldEditor::SpawnActorFromTemplateFile(std::string templateFilename, Tra
 
 	return actor;
 }
-
