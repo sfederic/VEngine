@@ -50,7 +50,7 @@ public:
 		return actor.get();
 	}
 
-	void Remove(int index)
+	void Remove(size_t index)
 	{
 		auto components = actors[index]->GetAllComponents();
 		for (int i = 0; i < components.size(); i++)
