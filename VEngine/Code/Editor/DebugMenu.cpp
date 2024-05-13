@@ -373,19 +373,6 @@ void DebugMenu::RenderSkeletalAnimationMenu()
 	ImGui::End();
 }
 
-void DebugMenu::RenderPhysicsMenu()
-{
-	if (!physicsMenuOpen) return;
-
-	ImGui::Begin("Rigid Bodies");
-
-	for (auto rigidActor : PhysicsSystem::GetRigidActors())
-	{
-	}
-
-	ImGui::End();
-}
-
 void DebugMenu::RenderCoreMenu()
 {
 	if (!coreMenuOpen) return;
@@ -534,9 +521,9 @@ void DebugMenu::RenderVertexPaintMenu()
 			const auto fillColour = XMLoadFloat4(&WorldEditor::vertexPaintColour);
 			for (auto& vertex : mesh->GetAllVertices())
 			{
-				auto colour = XMLoadFloat4(&vertex.colour);
-				colour *= fillColour;
-				XMStoreFloat4(&vertex.colour, colour);
+				auto vertexColour = XMLoadFloat4(&vertex.colour);
+				vertexColour *= fillColour;
+				XMStoreFloat4(&vertex.colour, vertexColour);
 			}
 
 			mesh->CreateNewVertexBuffer();
