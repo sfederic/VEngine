@@ -31,7 +31,7 @@ private:
 	void ActorNameChanged(QTreeWidgetItem* item, int column);
 	void ActorListContextMenu(const QPoint& pos);
 
-	void ActorTypeFilterChanged(const QString& index);
+	void ActorTypeFilterChanged(int index);
 
 private:
 	ActorTreeWidget* actorTreeWidget = nullptr;

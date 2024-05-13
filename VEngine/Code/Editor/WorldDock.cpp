@@ -29,8 +29,8 @@ WorldDock::WorldDock() : QDockWidget("World")
 	{
 		actorTypeComboBox->addItem(QString::fromStdString(actorSystemName));
 	}
-	connect(actorTypeComboBox, static_cast<void(QComboBox::*)(const QString&)>(&QComboBox::currentIndexChanged),
-		this, &WorldDock::ActorTypeFilterChanged);
+	connect(actorTypeComboBox, SIGNAL(QComboBox::currentIndexChanged(int)),
+		this, SLOT(WorldDock::ActorTypeFilterChanged));
 
 	//Actor Tree widget
 	actorTreeWidget = new ActorTreeWidget(this);
@@ -162,10 +162,12 @@ void WorldDock::ActorListContextMenu(const QPoint& pos)
 	actorListMenu.exec(globalPos);
 }
 
-void WorldDock::ActorTypeFilterChanged(const QString& index)
+void WorldDock::ActorTypeFilterChanged(int index)
 {
+	const QString itemText = actorTypeComboBox->itemText(index);
+
 	//Set all actors
-	if (index == "All")
+	if (itemText == "All")
 	{
 		PopulateWorldActorList();
 		return;
@@ -176,7 +178,7 @@ void WorldDock::ActorTypeFilterChanged(const QString& index)
 	actorTreeWidget->clear();
 	actorTreeWidget->blockSignals(true);
 
-	IActorSystem* actorSystem = ActorSystemCache::Get().GetSystem(index.toStdString());
+	IActorSystem* actorSystem = ActorSystemCache::Get().GetSystem(itemText.toStdString());
 
 	for (Actor* actor : actorSystem->GetActorsAsBaseClass())
 	{
@@ -252,7 +254,7 @@ void WorldDock::RemoveActorFromList()
 //later on, need to change this too in the item->text(int column) below.
 void WorldDock::SearchActors()
 {
-	QString searchText = actorSearchBar->text().toLower();
+	const QString searchText = actorSearchBar->text().toLower();
 
 	for (int i = 0; i < actorTreeWidget->topLevelItemCount(); i++)
 	{
