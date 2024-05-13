@@ -16,8 +16,8 @@ public:
 	void OnLinkRotateRight() override;
 
 private:
-	XMFLOAT3 moveDirection;
 	std::string linkedActorName;
+	XMFLOAT3 moveDirection = XMFLOAT3(0.f, 0.f, 0.f);
 	GridActor* linkedActor = nullptr;
 	float moveIncrement = 1.0f;
 };
