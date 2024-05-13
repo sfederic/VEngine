@@ -85,7 +85,7 @@ void PhysicsSystem::Start()
 					dMesh->RemoveChild(cell);
 				}
 			}
-			else if (!mesh->skipPhysicsCreation)
+			else if (mesh && !mesh->skipPhysicsCreation)
 			{
 				PhysicsType physicsType;
 				mesh->isPhysicsStatic ? physicsType = PhysicsType::Static : physicsType = PhysicsType::Dynamic;
