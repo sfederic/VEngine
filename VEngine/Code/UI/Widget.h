@@ -32,6 +32,7 @@ public:
 		BottomRight,
 	};
 
+	virtual ~Widget() = default;
 	virtual void Draw(float deltaTime) = 0;
 	virtual void Start() {}
 	void Destroy();
