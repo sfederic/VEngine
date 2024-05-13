@@ -79,7 +79,7 @@ static void ReassignTexture(void* data)
 	auto swapTexture = TextureSystem::FindTexture2D(textureData->filename);
 	if (swapTexture == nullptr)
 	{
-		Log("%s wasn't found on texture change.", textureData->filename);
+		Log("%s wasn't found on texture change.", textureData->filename.c_str());
 		return;
 	}
 
@@ -100,7 +100,7 @@ static void ReassignTextureSecondary(void* data)
 	auto swapTexture = TextureSystem::FindTexture2D(textureData->filename);
 	if (swapTexture == nullptr)
 	{
-		Log("%s wasn't found on texture change.", textureData->filename);
+		Log("%s wasn't found on texture change.", textureData->filename.c_str());
 		return;
 	}
 
