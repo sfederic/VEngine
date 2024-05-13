@@ -304,7 +304,6 @@ void Unit::WindUpAttack()
 void Unit::ShowUnitMovementPath()
 {
 	auto grid = Grid::system.GetFirstActor();
-	GridNode* destinationNode = grid->GetNode(0, 0);
 
 	auto previewMovementNodes = GetMovementPathPreviewNodes();
 
