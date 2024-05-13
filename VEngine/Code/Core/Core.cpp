@@ -19,15 +19,15 @@
 
 static bool gameWorldPaused = false;
 
-double ticks = 0.0;
-double deltaTime = 0.0;
-double deltaAccum = 0.0;
+static double ticks = 0.0;
+static double deltaTime = 0.0;
+static double deltaAccum = 0.0;
 
-__int64 tickFrequency;
-__int64 frameStartTime;
-__int64 frameEndTime;
+static __int64 tickFrequency;
+static __int64 frameStartTime;
+static __int64 frameEndTime;
 
-uint32_t frameCount;
+static uint32_t frameCount;
 
 namespace Core
 {
