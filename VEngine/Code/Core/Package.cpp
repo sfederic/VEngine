@@ -35,6 +35,7 @@ Resource ReadFile(const std::string& filename)
 	uint64_t size = ftell(file);
 	rewind(file);
 	uint8_t* data = (uint8_t*)malloc(size);
+	assert(data);
 	fread(data, 1, size, file);
 	fclose(file);
 	return Resource{ data, size };
@@ -95,8 +96,8 @@ void ReadFromPackage()
 	size_t numEntries = 0; //TOC will be SEEK_END - (numEntries * sizeof(ResourceDataEntry))
 	fread(&numEntries, sizeof(size_t), 1, file);
 
-	int offset = numEntries * sizeof(ResourceDataEntry);
-	fseek(file, -offset, SEEK_END);
+	size_t offset = numEntries * sizeof(ResourceDataEntry);
+	fseek(file, offset, SEEK_END);
 
 	for (size_t i = 0; i < numEntries; i++)
 	{
