@@ -144,7 +144,7 @@ Properties Actor::GetProps()
 	props.Add(" Scale", &rootComponent->transform.scale);
 	props.Add(" Rotation", &rootComponent->transform.rotation);
 	props.Add("UID", &uid).hide = true;
-	props.Add("Name", &name).hide = true;
+	props.Add("Name", &_name).hide = true;
 	props.Add(" Enabled", &active);
 	props.Add(" Visible", &visible);
 
@@ -187,7 +187,7 @@ bool Actor::SetName(const std::string newName)
 	if (!World::CheckIfActorExistsInWorld(newName))
 	{
 		World::RemoveActorFromWorld(this);
-		name = newName;
+		_name = newName;
 		World::AddActorToWorld(this);
 
 		return true;
@@ -296,7 +296,7 @@ Component* Actor::GetComponentByUID(UID componentUID)
 		}
 	}
 
-	Log("Component [%d] not found on Actor [%s].", componentUID, this->name.c_str());
+	Log("Component [%d] not found on Actor [%s].", componentUID, _name.c_str());
 	return nullptr;
 }
 
@@ -310,7 +310,7 @@ Component* Actor::GetComponentByName(const std::string componentName)
 		}
 	}
 
-	Log("Component [%s] not found on Actor [%s].", componentName.c_str(), this->name.c_str());
+	Log("Component [%s] not found on Actor [%s].", componentName.c_str(), _name.c_str());
 	return nullptr;
 }
 

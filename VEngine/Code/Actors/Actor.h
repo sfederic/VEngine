@@ -65,7 +65,7 @@ public:
 	virtual void LateStart() {}
 
 	//Called once per frame to update actor and its components
-	virtual void Tick(float deltaTime) {}
+	virtual void Tick(float) {}
 
 	//An optional function to call after components have been setup (Not Create()'ed, after the Actor's constructor has been called.
 	//(Use this when you want to override component fields that have to be defined in constructors)
@@ -86,9 +86,9 @@ public:
 	bool SetName(const std::string newName);
 
 	//Use this for when world state update order is an issue (e.g. ActorSystem, serialisation, WorldEditor)
-	void SimpleSetName(const std::string newName) { name = newName; }
+	void SimpleSetName(const std::string newName) { _name = newName; }
 
-	std::string GetName() { return name; }
+	std::string GetName() { return _name; }
 
 	std::string GetTypeName();
 
@@ -202,7 +202,7 @@ public:
 	bool FlaggedForDeferredDestroy() const { return deferredForDestroy; }
 
 protected:
-	std::string name;
+	std::string _name;
 	std::set<std::string> tags;
 	std::unordered_map<std::string, Component*> componentMap;
 	Actor* parent = nullptr;
