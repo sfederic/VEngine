@@ -181,7 +181,7 @@ void UISystem::TextDraw(const std::wstring text,
 	brushText->SetColor(colour);
 	brushText->SetOpacity(opacity);
 
-	d2dRenderTarget->DrawText(text.c_str(), text.size(), textFormat, layout.rect, brushText);
+	d2dRenderTarget->DrawText(text.c_str(), static_cast<UINT32>(text.size()), textFormat, layout.rect, brushText);
 }
 
 void UISystem::FillRect(const Layout& layout, const D2D1_COLOR_F colour, const float opacity)

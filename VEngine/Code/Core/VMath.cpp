@@ -65,7 +65,7 @@ namespace VMath
 			-VMath::GlobalForwardVector(),
 		};
 
-		int randomDirectionIndex = VMath::RandomRangeInt(0, directions.size() - 1);
+		const size_t randomDirectionIndex = VMath::RandomRangeInt(0, directions.size() - 1);
 		XMVECTOR selectedDirection = directions[randomDirectionIndex];
 		return selectedDirection;
 	}

@@ -108,7 +108,7 @@ namespace RenderUtils
 
 	void SetResourceName(ID3D11DeviceChild* resource, std::string name)
 	{
-		HR(resource->SetPrivateData(WKPDID_D3DDebugObjectName, name.size(), name.c_str()));
+		HR(resource->SetPrivateData(WKPDID_D3DDebugObjectName, static_cast<UINT>(name.size()), name.c_str()));
 	}
 
 	UINT CalcBufferByteSize(UINT byteSize)

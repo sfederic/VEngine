@@ -3,7 +3,7 @@
 #include "Actor.h"
 #include "ActorSystem.h"
 
-struct DebugNoteWidget;
+class DebugNoteWidget;
 
 //Note that is meant to be a debug-esque thing viewed during gameplay, rendered in-world for development purposes.
 //Got the idea from Breath of the Wild's engine from that GDC talk.

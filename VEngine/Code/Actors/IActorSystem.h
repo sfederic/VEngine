@@ -21,7 +21,7 @@ public:
 	virtual Actor* SpawnActor(const Transform& transform) = 0;
 	virtual Actor* FindActorByName(std::string actorName) = 0;
 	virtual size_t GetNumActors() = 0;
-	virtual void DeferActorForDestroy(int index) = 0;
+	virtual void DeferActorForDestroy(size_t index) = 0;
 	virtual void DestroyDeferredActors() = 0;
 
 	//Destroys an actor through its linked ActorSystem when its base class does not ACTOR_SYSTEM() defined.

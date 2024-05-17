@@ -28,5 +28,5 @@ private:
 	void Redo();
 
 	std::vector<std::unique_ptr<ICommand>> commands;
-	uint32_t commandIndex = 0;
+	size_t commandIndex = 0;
 };

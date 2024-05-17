@@ -616,12 +616,12 @@ void SetLightResources()
 
 void DrawMesh(MeshComponent* mesh)
 {
-	context->Draw(mesh->meshDataProxy.vertices.size(), 0);
+	context->Draw(static_cast<UINT>(mesh->meshDataProxy.vertices.size()), 0);
 }
 
 void DrawMeshInstanced(InstanceMeshComponent* mesh)
 {
-	context->DrawInstanced(mesh->meshDataProxy.vertices.size(), mesh->GetInstanceCount(), 0, 0);
+	context->DrawInstanced(static_cast<UINT>(mesh->meshDataProxy.vertices.size()), mesh->GetInstanceCount(), 0, 0);
 }
 
 void DrawBoundingBox(MeshComponent* mesh, MeshComponent* boundsMesh)
@@ -673,7 +673,7 @@ void RenderDebugLines()
 	cbMatrices.Map(&shaderMatrices);
 	cbMatrices.SetVS();
 
-	context->Draw(debugLines.size(), 0);
+	context->Draw(static_cast<UINT>(debugLines.size()), 0);
 }
 
 void CheckSupportedFeatures()
@@ -719,7 +719,7 @@ void RenderMeshForShadowPass(MeshComponent* mesh)
 	SetShaderResourceFromMaterial(mat);
 
 	//Draw
-	context->Draw(mesh->meshDataProxy.vertices.size(), 0);
+	context->Draw(static_cast<UINT>(mesh->meshDataProxy.vertices.size()), 0);
 }
 
 void RenderInstanceMeshForShadowPass(InstanceMeshComponent& instanceMesh)
@@ -748,7 +748,7 @@ void RenderInstanceMeshForShadowPass(InstanceMeshComponent& instanceMesh)
 		SetShaderResourceFromMaterial(mat);
 
 		//Draw
-		context->Draw(vertexCount, 0);
+		context->Draw(static_cast<UINT>(vertexCount), 0);
 	}
 }
 
@@ -816,7 +816,7 @@ void RenderShadowPass()
 		SetShaderResourceFromMaterial(mat);
 
 		//Draw
-		context->Draw(mesh->meshDataProxy.vertices.size(), 0);
+		context->Draw(static_cast<UINT>(mesh->meshDataProxy.vertices.size()), 0);
 	}
 
 	SetNullRTV();
@@ -1169,7 +1169,7 @@ void Renderer::RenderLightProbeViews()
 				cbMeshData.SetVSAndPS();
 
 				//Draw
-				context->Draw(mesh->meshDataProxy.vertices.size(), 0);
+				context->Draw(static_cast<UINT>(mesh->meshDataProxy.vertices.size()), 0);
 			}
 
 			//Remove lightprobe RTV
@@ -1619,7 +1619,7 @@ void RenderPolyboards()
 		SetVertexBuffer(polyboard->GetVertexBuffer());
 		SetIndexBuffer(polyboard->GetIndexBuffer());
 
-		context->DrawIndexed(polyboard->GetIndices().size(), 0, 0);
+		context->DrawIndexed(static_cast<UINT>(polyboard->GetIndices().size()), 0, 0);
 	}
 
 	Profile::End();
@@ -2301,7 +2301,7 @@ void RenderLightProbes()
 
 	cbLights.SetPS();
 
-	context->DrawInstanced(instanceMesh->meshDataProxy.vertices.size(), probeMap->GetProbeCount(), 0, 0);
+	context->DrawInstanced(static_cast<UINT>(instanceMesh->meshDataProxy.vertices.size()), probeMap->GetProbeCount(), 0, 0);
 }
 
 void RenderMeshToCaptureMeshIcon()

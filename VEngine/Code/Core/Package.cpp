@@ -97,7 +97,7 @@ void ReadFromPackage()
 	fread(&numEntries, sizeof(size_t), 1, file);
 
 	size_t offset = numEntries * sizeof(ResourceDataEntry);
-	fseek(file, offset, SEEK_END);
+	fseek(file, static_cast<long>(offset), SEEK_END);
 
 	for (size_t i = 0; i < numEntries; i++)
 	{

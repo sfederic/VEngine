@@ -227,14 +227,14 @@ public:
 		actors.clear();
 	}
 
-	virtual void DeferActorForDestroy(int index) override
+	virtual void DeferActorForDestroy(size_t index) override
 	{
 		actorIndexToDeferDestroy.insert(index);
 	}
 
 	virtual void DestroyDeferredActors() override
 	{
-		for (int index : actorIndexToDeferDestroy)
+		for (auto index : actorIndexToDeferDestroy)
 		{
 			Remove(index);
 		}
@@ -252,7 +252,7 @@ public:
 
 private:
 	std::vector<std::unique_ptr<T>> actors;
-	std::unordered_set<int> actorIndexToDeferDestroy;
+	std::unordered_set<size_t> actorIndexToDeferDestroy;
 };
 
 #define ACTOR_SYSTEM(type) inline static ActorSystem<type> system; \
