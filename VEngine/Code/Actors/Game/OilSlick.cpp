@@ -9,8 +9,8 @@ void OilSlick::Create()
 
 	DisableAllInteractivity();
 
-	mesh->SetMeshFilename("node.vmesh");
-	mesh->SetTexture("oil_slick.png");
+	_mesh->SetMeshFilename("node.vmesh");
+	_mesh->SetTexture("oil_slick.png");
 }
 
 Properties OilSlick::GetProps()

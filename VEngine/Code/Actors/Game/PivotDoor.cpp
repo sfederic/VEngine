@@ -6,17 +6,17 @@
 PivotDoor::PivotDoor()
 {
 	SetEmptyRootComponent();
-	rootComponent->AddChild(mesh);
+	rootComponent->AddChild(_mesh);
 }
 
 void PivotDoor::Create()
 {
 	__super::Create();
 
-	mesh->SetLocalPosition(0.5f, 0.25f, 0.f);
-	mesh->SetLocalScale(0.5f, 0.75f, 1.f);
-	mesh->SetMeshFilename("plane.vmesh");
-	mesh->SetRastState(RastStates::noBackCull);
+	_mesh->SetLocalPosition(0.5f, 0.25f, 0.f);
+	_mesh->SetLocalScale(0.5f, 0.75f, 1.f);
+	_mesh->SetMeshFilename("plane.vmesh");
+	_mesh->SetRastState(RastStates::noBackCull);
 
 	linkRotateAudio = "door.wav";
 	rotateSpeed = 2.5f;

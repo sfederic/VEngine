@@ -11,9 +11,9 @@ void LookingGlass::Create()
 	canBeRotatedPitchXAxis = false;
 
 	SetMeshFilename("cube.vmesh");
-	mesh->SetLocalScale(3.f, 3.f, 0.1f);
-	mesh->SetBlendState(BlendStates::Default);
-	mesh->SetAlpha(0.35f);
+	_mesh->SetLocalScale(3.f, 3.f, 0.1f);
+	_mesh->SetBlendState(BlendStates::Default);
+	_mesh->SetAlpha(0.35f);
 }
 
 Properties LookingGlass::GetProps()

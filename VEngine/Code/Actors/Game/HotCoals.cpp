@@ -8,8 +8,8 @@ void HotCoals::Create()
 {
 	__super::Create();
 
-	mesh->SetMeshFilename("node.vmesh");
-	mesh->SetTexture("hot_coals.jpg");
+	_mesh->SetMeshFilename("node.vmesh");
+	_mesh->SetTexture("hot_coals.jpg");
 }
 
 void HotCoals::Start()

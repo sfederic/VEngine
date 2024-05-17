@@ -66,10 +66,10 @@ void Steam::Create()
 	steamAudio->SetAudioFilename("steam.wav");
 	steamAudio->SetLoop(true);
 
-	mesh->SetVisibility(false);
-	mesh->SetActive(false);
-	mesh->ignoreGridRaycasts = true;
-	mesh->canBeLinkedTo = false;
+	_mesh->SetVisibility(false);
+	_mesh->SetActive(false);
+	_mesh->ignoreGridRaycasts = true;
+	_mesh->canBeLinkedTo = false;
 }
 
 Properties Steam::GetProps()

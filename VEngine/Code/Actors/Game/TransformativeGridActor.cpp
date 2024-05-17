@@ -7,7 +7,7 @@ void TransformativeGridActor::Create()
 {
 	__super::Create();
 
-	mesh->SetMeshFilename(originalMeshFilename);
+	_mesh->SetMeshFilename(originalMeshFilename);
 }
 
 Properties TransformativeGridActor::GetProps()
@@ -25,7 +25,7 @@ void TransformativeGridActor::OnLinkMove()
 	ChangeMeshShape();
 
 	//Player's link effect mesh needs to be reset to reflect the changes in this actor.
-	Player::system.GetOnlyActor()->SetLinkEffectMeshForTransformativeGridActors(*mesh);
+	Player::system.GetOnlyActor()->SetLinkEffectMeshForTransformativeGridActors(*_mesh);
 }
 
 void TransformativeGridActor::ChangeMeshShape()
@@ -33,8 +33,8 @@ void TransformativeGridActor::ChangeMeshShape()
 	changeMeshActive = !changeMeshActive;
 
 	changeMeshActive ?
-		mesh->SetMeshFilename(changeMeshFilename) :
-		mesh->SetMeshFilename(originalMeshFilename);
+		_mesh->SetMeshFilename(changeMeshFilename) :
+		_mesh->SetMeshFilename(originalMeshFilename);
 
-	mesh->ReCreate();
+	_mesh->ReCreate();
 }

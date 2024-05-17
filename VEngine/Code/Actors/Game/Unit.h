@@ -29,8 +29,9 @@ public:
 	//Text to display on unit's death during battle
 	std::wstring deathText;
 
+	size_t movementPathNodeIndex = 0;
+
 	int movementPoints = 1;
-	int movementPathNodeIndex = 0;
 
 	int numOfAttacks = 1;
 

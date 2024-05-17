@@ -41,7 +41,7 @@ Properties MultiSpecificSwitchLock::GetProps()
 
 void MultiSpecificSwitchLock::CheckIfAllActorOrientationsAreCorrect()
 {
-	int numOfSwitchActorsToCheck = switchActors.size();
+	size_t numOfSwitchActorsToCheck = switchActors.size();
 
 	for (auto switchActor : switchActors)
 	{

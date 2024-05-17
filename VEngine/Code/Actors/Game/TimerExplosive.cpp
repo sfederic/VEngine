@@ -6,8 +6,8 @@ void TimerExplosive::Create()
 {
 	__super::Create();
 
-	mesh->SetMeshFilename("sphere.vmesh");
-	mesh->SetWorldScale(0.5f);
+	_mesh->SetMeshFilename("sphere.vmesh");
+	_mesh->SetWorldScale(0.5f);
 }
 
 void TimerExplosive::Tick(float deltaTime)
@@ -19,7 +19,7 @@ void TimerExplosive::Tick(float deltaTime)
 		explodeTimer += deltaTime;
 
 		constexpr float explodeTimerMax = 3.0f;
-		mesh->SetAmbientColour(XMFLOAT3(explodeTimer / explodeTimerMax, 0.f, 0.f));
+		_mesh->SetAmbientColour(XMFLOAT3(explodeTimer / explodeTimerMax, 0.f, 0.f));
 
 		if (explodeTimer > explodeTimerMax)
 		{

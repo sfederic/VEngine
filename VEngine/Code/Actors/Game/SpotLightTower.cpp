@@ -15,7 +15,7 @@ void SpotLightTower::Create()
 {
 	__super::Create();
 
-	mesh->SetShaderItem("Unlit");
+	_mesh->SetShaderItem("Unlit");
 
 	spotLight->SetLocalPosition(0.f, 1.f, 0.f);
 }

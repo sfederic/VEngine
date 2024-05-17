@@ -19,8 +19,8 @@ void Bucket::Create()
 
 	ignoreRotationValidCheck = true;
 
-	mesh->SetMeshFilename("hollow_barrel.vmesh");
-	mesh->SetTexture("barrel_texture.jpg");
+	_mesh->SetMeshFilename("hollow_barrel.vmesh");
+	_mesh->SetTexture("barrel_texture.jpg");
 
 	waterMesh->SetMeshFilename("node.vmesh");
 	waterMesh->SetTexture("water.jpg");

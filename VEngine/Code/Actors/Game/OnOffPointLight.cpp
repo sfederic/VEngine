@@ -13,8 +13,8 @@ void OnOffPointLight::Create()
 {
 	__super::Create();
 
-	mesh->SetVisibility(false);
-	mesh->SetActive(false);
+	_mesh->SetVisibility(false);
+	_mesh->SetActive(false);
 }
 
 Properties OnOffPointLight::GetProps()

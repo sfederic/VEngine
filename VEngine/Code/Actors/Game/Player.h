@@ -17,11 +17,17 @@ class Player : public Actor
 public:
 	ACTOR_SYSTEM(Player);
 
-	std::set<Actor*> previousHitTransparentActors;
-
 	XMVECTOR nextPos = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 	XMVECTOR nextRot = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 	XMVECTOR nextHopPos = XMVectorZero();
+
+private:
+	XMVECTOR nextCameraPosition = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+	XMVECTOR cameraLinkActiveLocalPosition = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+	XMVECTOR cameraStartingLocalPosition = XMVectorSet(1.75f, 1.75f, -2.75f, 1.f);
+
+public:
+	std::set<Actor*> previousHitTransparentActors;
 
 	DialogueComponent* dialogueComponent = nullptr;
 	DialogueComponent* currentlyActiveDialogueComponent = nullptr;
@@ -84,9 +90,6 @@ public:
 	void SetLinkEffectMeshForTransformativeGridActors(MeshComponent& mesh);
 
 private:
-	XMVECTOR nextCameraPosition = XMVectorSet(0.f, 0.f, 0.f, 1.f);
-	XMVECTOR cameraLinkActiveLocalPosition = XMVectorSet(0.f, 0.f, 0.f, 1.f);
-	XMVECTOR cameraStartingLocalPosition = XMVectorSet(1.75f, 1.75f, -2.75f, 1.f);
 	float nextCameraFOV = 0.f;
 
 	bool isInputLinkedToGridActor = false;

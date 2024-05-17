@@ -13,9 +13,9 @@ void WindowGridActor::Create()
 
 	canFall = false;
 
-	mesh->SetRastState(RastStates::noBackCull);
-	mesh->SetBlendState(BlendStates::Transparent);
-	mesh->SetAlpha(0.5f);
+	_mesh->SetRastState(RastStates::noBackCull);
+	_mesh->SetBlendState(BlendStates::Transparent);
+	_mesh->SetAlpha(0.5f);
 }
 
 //@Todo: some sort of visual effect for the glass breaking. Sprite sheet? Particles? PhysX?

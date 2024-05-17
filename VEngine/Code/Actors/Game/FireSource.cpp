@@ -19,9 +19,9 @@ void FireSource::Create()
 	__super::Create();
 
 	//Doesn't need to be a node, just needs some sort of mesh for Douse()s to hit
-	mesh->SetMeshFilename("node.vmesh");
-	mesh->ignoreGridRaycasts = true;
-	mesh->SetVisibility(false);
+	_mesh->SetMeshFilename("node.vmesh");
+	_mesh->ignoreGridRaycasts = true;
+	_mesh->SetVisibility(false);
 
 	fireTrigger->SetExtents(1.f, 1.f, 1.f);
 

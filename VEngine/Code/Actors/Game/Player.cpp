@@ -1069,7 +1069,7 @@ bool Player::CheckIfMovementAndRotationStopped()
 	return XMVector4Equal(GetPositionV(), nextPos) && XMQuaternionEqual(GetRotationV(), nextRot);
 }
 
-void Player::MovementInput(float deltaTime)
+void Player::MovementInput(float)
 {
 	if (IsInInteraction() || inHop)
 	{
@@ -1105,7 +1105,7 @@ void Player::MovementInput(float deltaTime)
 	}
 }
 
-void Player::RotationInput(float deltaTime)
+void Player::RotationInput(float)
 {
 	if (IsInInteraction() || inHop)
 	{

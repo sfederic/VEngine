@@ -17,8 +17,8 @@
 
 GridActor::GridActor()
 {
-	mesh = CreateComponent("Mesh", MeshComponent("cube.vmesh", "test.png"));
-	rootComponent = mesh;
+	_mesh = CreateComponent("Mesh", MeshComponent("cube.vmesh", "test.png"));
+	rootComponent = _mesh;
 
 	dialogueComponent = CreateComponent<DialogueComponent>("Dialogue");
 }
@@ -27,7 +27,7 @@ void GridActor::Create()
 {
 	__super::Create();
 
-	mesh->SetRenderStatic(false);
+	_mesh->SetRenderStatic(false);
 }
 
 bool GridActor::CheckNextRotationBoundsIntersect()
@@ -37,7 +37,7 @@ bool GridActor::CheckNextRotationBoundsIntersect()
 		return false;
 	}
 
-	BoundingOrientedBox nextRotBounds = mesh->GetBoundsInWorldSpace();
+	BoundingOrientedBox nextRotBounds = _mesh->GetBoundsInWorldSpace();
 	XMStoreFloat4(&nextRotBounds.Orientation, nextRot);
 	//Lower extents so the actor isn't hitting things like the floor.
 	nextRotBounds.Extents.x -= 0.15f;
@@ -117,7 +117,7 @@ void GridActor::CheckSetIsRotating()
 	}
 }
 
-void GridActor::FallCheck(float deltaTime)
+void GridActor::FallCheck(float)
 {
 	if (!canFall)
 	{
@@ -458,7 +458,7 @@ void GridActor::ResetNextPos()
 
 void GridActor::SetMeshFilename(std::string_view filename)
 {
-	mesh->SetMeshFilename(filename);
+	_mesh->SetMeshFilename(filename);
 }
 
 void GridActor::AddNextRotation(XMVECTOR axis, float angle)

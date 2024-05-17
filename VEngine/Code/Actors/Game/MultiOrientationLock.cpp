@@ -42,7 +42,7 @@ Properties MultiOrientationLock::GetProps()
 
 void MultiOrientationLock::CheckIfAllActorOrientationsAreCorrect()
 {
-	int numOfCorrectlyOrientedLockActorsToCheck = lockActors.size();
+	size_t numOfCorrectlyOrientedLockActorsToCheck = lockActors.size();
 
 	for (auto lockActor : lockActors)
 	{

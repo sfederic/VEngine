@@ -44,7 +44,7 @@ Properties ScannerEnemy::GetProps()
 	return props;
 }
 
-void ScannerEnemy::ScanForPlayer(float deltaTime)
+void ScannerEnemy::ScanForPlayer(float)
 {
 	const auto start = GetPositionV();
 

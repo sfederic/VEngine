@@ -26,6 +26,6 @@ void LinkedObjects::Tick(float deltaTime)
 {
 	__super::Tick(deltaTime);
 
-	link->SetStartPoint(mesh->GetWorldPositionV());
+	link->SetStartPoint(_mesh->GetWorldPositionV());
 	link->SetEndPoint(mesh2->GetWorldPositionV());
 }

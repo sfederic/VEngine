@@ -41,7 +41,7 @@ Properties MultiOrientationTriggerLock::GetProps()
 
 void MultiOrientationTriggerLock::CheckIfAllOrientationTriggersAreCorrect()
 {
-	int numOfCorrectlyOrientedTriggersToCheck = triggerActors.size();
+	size_t numOfCorrectlyOrientedTriggersToCheck = triggerActors.size();
 
 	for (auto triggerActor : triggerActors)
 	{

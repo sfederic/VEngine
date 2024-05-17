@@ -18,7 +18,7 @@ void ProjectionCrystal::Create()
 {
 	__super::Create();
 
-	mesh->SetMeshFilename("crystal.vmesh");
+	_mesh->SetMeshFilename("crystal.vmesh");
 
 	projectionMesh->canBeLinkedTo = false;
 	projectionMesh->SetAmbientColour(XMFLOAT3(0.f, 0.f, 1.f));

@@ -5,7 +5,7 @@
 ClockHand::ClockHand()
 {
 	SetEmptyRootComponent();
-	rootComponent->AddChild((SpatialComponent*)mesh);
+	rootComponent->AddChild((SpatialComponent*)_mesh);
 }
 
 Properties ClockHand::GetProps()

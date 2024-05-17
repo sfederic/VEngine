@@ -24,7 +24,7 @@ protected:
 	std::string linkMoveAudio = "cloth_heavy.wav";
 	std::string linkRotateAudio = "chainmail1.wav";
 
-	MeshComponent* mesh = nullptr;
+	MeshComponent* _mesh = nullptr;
 	HealthWidget* healthWidget = nullptr;
 	DialogueComponent* dialogueComponent = nullptr;
 
@@ -205,7 +205,7 @@ public:
 	auto GetInteractText() { return interactText; }
 
 	//Note that this is the main mesh of the grid actor. Any link effects need to use this mesh.
-	auto& GetMesh() { return *mesh; }
+	auto& GetMesh() { return *_mesh; }
 
 	auto GetDialogueComponent() { return dialogueComponent; }
 

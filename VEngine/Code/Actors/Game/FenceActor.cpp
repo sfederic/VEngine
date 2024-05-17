@@ -11,9 +11,9 @@ FenceActor::FenceActor()
 
 void FenceActor::Create()
 {
-	mesh->SetMeshFilename("plane.vmesh");
-	mesh->SetTexture("fence01.png");
-	mesh->SetRastState(RastStates::noBackCull);
+	_mesh->SetMeshFilename("plane.vmesh");
+	_mesh->SetTexture("fence01.png");
+	_mesh->SetRastState(RastStates::noBackCull);
 }
 
 Properties FenceActor::GetProps()

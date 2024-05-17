@@ -64,7 +64,7 @@ void Gear::OnLinkRotate()
 	for (int gearIndex = 0; gearIndex < GearSet::system.GetNumActors(); gearIndex++)
 	{
 		auto& gearSet = GearSet::system.GetActors().at(gearIndex);
-		if (gearSet->Intersects(mesh->GetBoundsInWorldSpace()))
+		if (gearSet->Intersects(_mesh->GetBoundsInWorldSpace()))
 		{
 			const float angleIncrement = OddEvenAngleIncrement(gearIndex);
 			gearSet->AddNextRotation(gearSet->GetUpVectorV(), angleIncrement);

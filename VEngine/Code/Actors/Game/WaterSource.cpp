@@ -16,9 +16,9 @@ void WaterSource::Create()
 	canBeMovedInLink = false;
 	canBeRotatedInLink = false;
 
-	mesh->SetMeshFilename("cube.vmesh");
-	mesh->ignoreGridRaycasts = true;
-	mesh->SetVisibility(false);
+	_mesh->SetMeshFilename("cube.vmesh");
+	_mesh->ignoreGridRaycasts = true;
+	_mesh->SetVisibility(false);
 }
 
 void WaterSource::Start()
