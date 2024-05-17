@@ -6,17 +6,17 @@
 
 ParticleEmitter::ParticleEmitter(std::string textureFilename, std::string shaderItemName)
 {
-	material = &MaterialSystem::CreateMaterial(textureFilename, shaderItemName);
+	_material = &MaterialSystem::CreateMaterial(textureFilename, shaderItemName);
 }
 
 void ParticleEmitter::Create()
 {
-	material->Create();
+	_material->Create();
 }
 
 void ParticleEmitter::Destroy()
 {
-	material->Destroy();
+	_material->Destroy();
 }
 
 void ParticleEmitter::Start()
@@ -76,7 +76,7 @@ Properties ParticleEmitter::GetProps()
 	auto particleDataProps = particleData.GetProps();
 	props.Merge(particleDataProps);
 
-	auto materialProps = material->GetProps();
+	auto materialProps = _material->GetProps();
 	props.Merge(materialProps);
 
 	return props;
@@ -96,5 +96,5 @@ float ParticleEmitter::GetAlpha()
 
 void ParticleEmitter::SetTexture(std::string_view textureFilename)
 {
-	material->defaultTextureData.filename = textureFilename;
+	_material->defaultTextureData.filename = textureFilename;
 }

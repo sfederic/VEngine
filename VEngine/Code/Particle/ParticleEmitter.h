@@ -23,7 +23,7 @@ public:
 	void Tick(float deltaTime) override;
 	Properties GetProps() override;
 
-	Material& GetMaterial() { return *material; }
+	Material& GetMaterial() { return *_material; }
 	void SetAlpha(float alpha);
 	float GetAlpha();
 
@@ -37,7 +37,7 @@ public:
 	float emitterLifetime = 0.f;
 
 private:
-	Material* material = nullptr;
+	Material* _material = nullptr;
 
 	float spawnTimer = 0.f;
 	float emitterLifetimeTimer = 0.f;
