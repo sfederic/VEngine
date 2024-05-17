@@ -1377,7 +1377,7 @@ bool Player::CheckIfMeshCanBeLinkedTo(GridActor* gridActorToLinkTo)
 		if (!mesh->canBeLinkedTo)
 		{
 			Camera::GetActiveCamera().SetShakeLevel(0.3f);
-			Log("Cannot link to GridActor via hit mesh [%s]. canBeLinkedTo set to false.", mesh->name.c_str());
+			Log("Cannot link to GridActor via hit mesh [%s]. canBeLinkedTo set to false.", mesh->GetName().c_str());
 			return false;
 		}
 	}

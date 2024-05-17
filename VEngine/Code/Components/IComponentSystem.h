@@ -27,9 +27,9 @@ public:
 	virtual size_t GetNumComponents() = 0;
 	virtual Component* FindComponentByName(std::string componentName) = 0;
 
-	auto GetName() { return name; }
+	auto GetName() { return _name; }
 
 protected:
 	SystemStates systemState = SystemStates::Unloaded;
-	std::string name;
+	std::string _name;
 };

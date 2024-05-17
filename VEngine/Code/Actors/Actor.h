@@ -65,7 +65,7 @@ public:
 	virtual void LateStart() {}
 
 	//Called once per frame to update actor and its components
-	virtual void Tick(float) {}
+	virtual void Tick(float deltaTime) {}
 
 	//An optional function to call after components have been setup (Not Create()'ed, after the Actor's constructor has been called.
 	//(Use this when you want to override component fields that have to be defined in constructors)

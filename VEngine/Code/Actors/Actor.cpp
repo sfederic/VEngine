@@ -255,13 +255,13 @@ void Actor::AddComponent(Component* component)
 
 	component->SetOwnerUID(uid);
 
-	assert(componentMap.find(component->name) == componentMap.end() && "Duplicate Component name (Actor::Create() might be being called twice).");
-	componentMap.emplace(component->name, component);
+	assert(componentMap.find(component->GetName()) == componentMap.end() && "Duplicate Component name (Actor::Create() might be being called twice).");
+	componentMap.emplace(component->GetName(), component);
 }
 
 void Actor::RemoveComponent(Component* componentToRemove)
 {
-	componentMap.erase(componentToRemove->name);
+	componentMap.erase(componentToRemove->GetName());
 }
 
 bool Actor::CheckComponentExists(std::string componentName)
@@ -304,7 +304,7 @@ Component* Actor::GetComponentByName(const std::string componentName)
 {
 	for (auto& componentPair : componentMap)
 	{
-		if (componentPair.second->name == componentName)
+		if (componentPair.second->GetName() == componentName)
 		{
 			return componentPair.second;
 		}

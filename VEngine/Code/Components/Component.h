@@ -35,10 +35,10 @@ public:
 
 	void SetComponentSystem(IComponentSystem* componentSystem_) { componentSystem = componentSystem_; }
 
-	UID GetUID() const { return uid; }
+	auto GetUID() const { return uid; }
 	void SetUID(UID uid_) { uid = uid_; }
 
-	UID GetOwnerUID() const { return ownerUID; }
+	auto GetOwnerUID() const { return ownerUID; }
 	void SetOwnerUID(UID ownerUID_) { ownerUID = ownerUID_; }
 
 	Actor* GetOwner();
@@ -53,9 +53,11 @@ public:
 	//Cleanup all the innards of the component.
 	virtual void Destroy() {}
 
-	std::string name;
+	auto GetName() const { return _name; }
+	void SetName(std::string_view name) { _name = name; }
 
 private:
+	std::string _name;
 	std::set<std::string> tags;
 	IComponentSystem* componentSystem = nullptr;
 	size_t index = 0;

@@ -18,19 +18,19 @@ public:
 	{
 		std::string typeName = typeid(T).name();
 		std::string token = typeName.substr(typeName.find(" ") + 1);
-		name = token;
+		_name = token;
 
 		ComponentSystemCache::Get().Add(typeid(T), this);
 	}
 
-	T* Add(std::string name_, Actor* owner = nullptr, T newComponent = T(), bool callCreate = false)
+	T* Add(std::string name, Actor* owner = nullptr, T newComponent = T(), bool callCreate = false)
 	{
 		components.emplace_back(std::make_unique<T>(std::move(newComponent)));
 		auto& component = components.back();
 
 		component->SetIndex(components.size() - 1);
 		component->SetComponentSystem(this);
-		component->name = name_;
+		component->SetName(name);
 		component->SetUID(GenerateUID());
 
 		if (systemState == SystemStates::Loaded && callCreate)
@@ -140,13 +140,13 @@ public:
 
 	virtual void Serialise(Serialiser& s) override
 	{
-		s.WriteLine(VString::stows(name));
+		s.WriteLine(VString::stows(_name));
 		s.WriteLine(components.size());
 
 		for (auto& component : components)
 		{
 			s.WriteLine(component->GetOwnerUID());
-			s.WriteLine(VString::stows(component->name));
+			s.WriteLine(VString::stows(component->GetName()));
 
 			auto props = component->GetProps();
 			s.Serialise(props);
@@ -157,7 +157,7 @@ public:
 
 	virtual void SerialiseBinary(BinarySerialiser& s) override
 	{
-		s.WriteString(name);
+		s.WriteString(_name);
 		size_t numComponents = components.size();
 		s.Write(&numComponents);
 
@@ -165,7 +165,7 @@ public:
 		{
 			UID ownerUID = component->GetOwnerUID();
 			s.Write(&ownerUID);
-			s.WriteString(component->name);
+			s.WriteString(component->GetName());
 
 			auto props = component->GetProps();
 			s.Serialise(props);
@@ -223,7 +223,7 @@ public:
 	{
 		for (auto& component : components)
 		{
-			if (component->name == componentName)
+			if (component->GetName() == componentName)
 			{
 				return (Component*)component.get();
 			}

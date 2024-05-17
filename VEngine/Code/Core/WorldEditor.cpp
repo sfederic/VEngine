@@ -229,7 +229,7 @@ void DuplicateActor()
 				auto newDuplicateActorMeshes = newDuplicateActor->GetComponents<MeshComponent>();
 				for (auto mesh : newDuplicateActorMeshes)
 				{
-					auto matchingMesh = gPickedActor->GetComponent<MeshComponent>(mesh->name);
+					auto matchingMesh = gPickedActor->GetComponent<MeshComponent>(mesh->GetName());
 					if (matchingMesh)
 					{
 						mesh->meshDataProxy.vertices = matchingMesh->meshDataProxy.vertices;

@@ -100,7 +100,7 @@ void PropertiesDock::DisplayActorProperties(Actor* actor)
 	for (auto component : actor->GetAllComponents())
 	{
 		actorPropsGridLayout->addWidget(
-			new QLabel(component->name.c_str(), actorPropsWidget), gridRow, 0, 1, 1);
+			new QLabel(component->GetName().c_str(), actorPropsWidget), gridRow, 0, 1, 1);
 
 		auto componentProps = component->GetProps();
 		IterateOverProperties(componentProps, gridRow);
