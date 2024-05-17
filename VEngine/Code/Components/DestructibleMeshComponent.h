@@ -13,8 +13,9 @@
 //@Todo: destructible meshes are "working", but they blow up outwards, probably because of tight
 //intersecting convex bounds. Find a way to dull it or tighten the hulls.
 
-struct DestructibleMeshComponent : MeshComponent
+class DestructibleMeshComponent : public MeshComponent
 {
+public:
 	COMPONENT_SYSTEM(DestructibleMeshComponent);
 
 	std::vector<MeshData> meshDatas;
@@ -24,6 +25,6 @@ struct DestructibleMeshComponent : MeshComponent
 	DestructibleMeshComponent(const std::string filename_,
 		const std::string textureFilename_,
 		const std::string shaderItemName = "Default");
-	virtual void Create() override;
-	virtual Properties GetProps() override;
+	void Create() override;
+	Properties GetProps() override;
 };

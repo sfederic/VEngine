@@ -14,8 +14,8 @@ using namespace physx;
 using namespace DirectX;
 
 class MeshComponent;
-struct DestructibleMeshComponent;
-struct CharacterControllerComponent;
+class DestructibleMeshComponent;
+class CharacterControllerComponent;
 struct Transform;
 class Actor;
 
