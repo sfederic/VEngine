@@ -125,18 +125,18 @@ AssetDock::AssetDock() : QDockWidget("Assets")
 	fileExtensionToFunctionMap.emplace(".png", [&](QIcon& icon, std::string& filePath) {
 		icon = QPixmap(VString::GetSubStringWithFoundOffset(filePath, AssetBaseFolders::texture).c_str());
 		});
-	fileExtensionToFunctionMap.emplace(".vmesh", [&](QIcon& icon, std::string& filePath) { icon = *Icons::mesh; });
-	fileExtensionToFunctionMap.emplace(".fbx", [&](QIcon& icon, std::string& filePath) { icon = *Icons::fbx; });
-	fileExtensionToFunctionMap.emplace(".ttf", [&](QIcon& icon, std::string& filePath) { icon = *Icons::font; });
-	fileExtensionToFunctionMap.emplace(".lib", [&](QIcon& icon, std::string& filePath) { icon = *Icons::lib; });
-	fileExtensionToFunctionMap.emplace(".dll", [&](QIcon& icon, std::string& filePath) { icon = *Icons::lib; });
-	fileExtensionToFunctionMap.emplace(".vmap", [&](QIcon& icon, std::string& filePath) { icon = *Icons::world; });
-	fileExtensionToFunctionMap.emplace(".vmat", [&](QIcon& icon, std::string& filePath) { icon = *Icons::material; });
-	fileExtensionToFunctionMap.emplace(".dialog", [&](QIcon& icon, std::string& filePath) { icon = *Icons::dialogue; });
-	fileExtensionToFunctionMap.emplace(".sav", [&](QIcon& icon, std::string& filePath) { icon = *Icons::world; });
-	fileExtensionToFunctionMap.emplace(".wav", [&](QIcon& icon, std::string& filePath) { icon = *Icons::audio; });
-	fileExtensionToFunctionMap.emplace(".h", [&](QIcon& icon, std::string& filePath) { icon = *Icons::code; });
-	fileExtensionToFunctionMap.emplace(".cpp", [&](QIcon& icon, std::string& filePath) { icon = *Icons::code; });
+	fileExtensionToFunctionMap.emplace(".vmesh", [&](QIcon& icon, std::string&) { icon = *Icons::mesh; });
+	fileExtensionToFunctionMap.emplace(".fbx", [&](QIcon& icon, std::string&) { icon = *Icons::fbx; });
+	fileExtensionToFunctionMap.emplace(".ttf", [&](QIcon& icon, std::string&) { icon = *Icons::font; });
+	fileExtensionToFunctionMap.emplace(".lib", [&](QIcon& icon, std::string&) { icon = *Icons::lib; });
+	fileExtensionToFunctionMap.emplace(".dll", [&](QIcon& icon, std::string&) { icon = *Icons::lib; });
+	fileExtensionToFunctionMap.emplace(".vmap", [&](QIcon& icon, std::string&) { icon = *Icons::world; });
+	fileExtensionToFunctionMap.emplace(".vmat", [&](QIcon& icon, std::string&) { icon = *Icons::material; });
+	fileExtensionToFunctionMap.emplace(".dialog", [&](QIcon& icon, std::string&) { icon = *Icons::dialogue; });
+	fileExtensionToFunctionMap.emplace(".sav", [&](QIcon& icon, std::string&) { icon = *Icons::world; });
+	fileExtensionToFunctionMap.emplace(".wav", [&](QIcon& icon, std::string&) { icon = *Icons::audio; });
+	fileExtensionToFunctionMap.emplace(".h", [&](QIcon& icon, std::string&) { icon = *Icons::code; });
+	fileExtensionToFunctionMap.emplace(".cpp", [&](QIcon& icon, std::string&) { icon = *Icons::code; });
 }
 
 void AssetDock::AssetItemClicked()

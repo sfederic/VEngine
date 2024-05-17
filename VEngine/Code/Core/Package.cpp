@@ -23,8 +23,8 @@ struct Package
 	std::vector<Resource> resources;
 };
 
-std::map<std::string, Resource> textures;
-std::map<std::string, ResourceDataEntry> entries;
+std::map<std::string, Resource> gTextures;
+std::map<std::string, ResourceDataEntry> gEntries;
 
 Resource ReadFile(const std::string& filename)
 {
@@ -48,7 +48,7 @@ void GetAllFilesOfExtension()
 		if (path.path().filename().extension() == ".png")
 		{
 			std::string file = path.path().filename().string();
-			textures[file] = ReadFile(file);
+			gTextures[file] = ReadFile(file);
 		}
 	}
 }
@@ -59,12 +59,12 @@ void WriteToPackage()
 	fopen_s(&file, "textures.pkg", "wb");
 	assert(file);
 
-	size_t pSize = textures.size();
+	size_t pSize = gTextures.size();
 	fwrite(&pSize, sizeof(size_t), 1, file); //Num of ResourceEntries
 
 	std::vector<ResourceDataEntry> entries;
 
-	for (auto& texturePair : textures)
+	for (auto& texturePair : gTextures)
 	{
 		auto& resource = texturePair.second;
 
@@ -103,7 +103,7 @@ void ReadFromPackage()
 	{
 		ResourceDataEntry entry = {};
 		fread(&entry, sizeof(ResourceDataEntry), 1, file);
-		entries[entry.name] = (entry);
+		gEntries[entry.name] = (entry);
 	}
 
 	fclose(file);
@@ -111,7 +111,7 @@ void ReadFromPackage()
 
 uint8_t* FindResouce(const std::string name)
 {
-	auto& entry = entries[name];
+	auto& entry = gEntries[name];
 
 	FILE* file = nullptr;
 	fopen_s(&file, "textures.pkg", "rb");

@@ -48,9 +48,9 @@ void MeshParticleEmitter::Tick(float deltaTime)
 
 		if (particle.lifetime > lifetimeRange)
 		{
-			const int particlesSize = particles.size() - 1;
-			std::swap(instanceMesh->GetInstanceData()[i], instanceMesh->GetInstanceData()[particlesSize]);
-			instanceMesh->GetInstanceData()[particlesSize].world = VMath::ZeroMatrix();
+			const size_t particlesSize = particles.size() - 1;
+			std::swap(instanceMesh->GetInstanceData()[i], instanceMesh->GetInstanceData().at(particlesSize));
+			instanceMesh->GetInstanceData().at(particlesSize).world = VMath::ZeroMatrix();
 
 			std::swap(particle, particles.back());
 			particles.pop_back();

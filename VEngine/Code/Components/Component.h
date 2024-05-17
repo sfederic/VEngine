@@ -10,7 +10,7 @@ class Actor;
 class Component
 {
 public:
-	virtual void Tick(float deltaTime) {}
+	virtual void Tick(float) {}
 	virtual void Start() {}
 	virtual void Create() {};
 

@@ -26,10 +26,10 @@ Actor* HitResult::GetClosestHitActor(const DirectX::XMVECTOR point)
 
 	std::vector<ActorPack> actorPacks;
 
-	for (auto hitActor : hitActors)
+	for (auto lHitActor : hitActors)
 	{
-		const float distance = XMVector3Length(point - hitActor->GetPositionV()).m128_f32[0];
-		ActorPack pack = { hitActor, distance };
+		const float distance = XMVector3Length(point - lHitActor->GetPositionV()).m128_f32[0];
+		ActorPack pack = { lHitActor , distance };
 		actorPacks.emplace_back(pack);
 	}
 

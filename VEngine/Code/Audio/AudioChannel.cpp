@@ -2,10 +2,6 @@
 #include "AudioChannel.h"
 #include "Core/Debug.h"
 
-AudioChannel::AudioChannel()
-{
-}
-
 AudioChannel::~AudioChannel()
 {
 	HR(sourceVoice->Stop());
@@ -37,32 +33,12 @@ float AudioChannel::GetPitch()
 	return pitch;
 }
 
-void __stdcall AudioChannel::OnVoiceProcessingPassStart(UINT32 BytesRequired)
-{
-}
-
-void __stdcall AudioChannel::OnVoiceProcessingPassEnd(void)
-{
-}
-
-void __stdcall AudioChannel::OnStreamEnd(void)
-{
-}
-
-void __stdcall AudioChannel::OnBufferStart(void* pBufferContext)
+void __stdcall AudioChannel::OnBufferStart(void*)
 {
 	isPlaying = true;
 }
 
-void __stdcall AudioChannel::OnBufferEnd(void* pBufferContext)
+void __stdcall AudioChannel::OnBufferEnd(void*)
 {
 	isPlaying = false;
-}
-
-void __stdcall AudioChannel::OnLoopEnd(void* pBufferContext)
-{
-}
-
-void __stdcall AudioChannel::OnVoiceError(void* pBufferContext, HRESULT Error)
-{
 }

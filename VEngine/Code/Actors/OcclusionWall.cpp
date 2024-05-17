@@ -12,7 +12,7 @@ OcclusionWall::OcclusionWall()
 	mesh->SetMeshFilename("cube.vmesh");
 }
 
-void OcclusionWall::Tick(float deltaTime)
+void OcclusionWall::Tick(float)
 {
 	auto& cam = Camera::GetActiveCamera();
 

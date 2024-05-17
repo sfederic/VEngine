@@ -7,5 +7,5 @@ class AssetIconListWidget : public QListWidget
 {
 public:
 	AssetIconListWidget();
-	void keyPressEvent(QKeyEvent* event) override {}
+	void keyPressEvent(QKeyEvent*) override {}
 };

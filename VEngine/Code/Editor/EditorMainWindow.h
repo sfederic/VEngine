@@ -19,6 +19,6 @@ public:
 	EditorMainWindow();
 	void Tick();
 	void closeEvent(QCloseEvent* closeEvent) override;
-	bool nativeEvent(const QByteArray& eventType, void* message, long* result) override;
+	bool nativeEvent(const QByteArray&, void* message, long*) override;
 	void HideAllDocks();
 };

@@ -14,7 +14,7 @@ BoxTriggerComponent::BoxTriggerComponent()
 	boundingBox.Extents = XMFLOAT3(0.45f, 0.45f, 0.45f);
 }
 
-void BoxTriggerComponent::Tick(float deltaTime)
+void BoxTriggerComponent::Tick(float)
 {
 	TargetActorIntersectCallbackLogic();
 }

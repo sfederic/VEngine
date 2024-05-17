@@ -10,7 +10,7 @@ struct AudioChannel : IXAudio2VoiceCallback
 	bool isPlaying = false;
 	bool isLooping = false;
 
-	AudioChannel();
+	AudioChannel() {}
 	~AudioChannel();
 	void SetVolume(float volume);
 	float GetVolume();
@@ -18,11 +18,11 @@ struct AudioChannel : IXAudio2VoiceCallback
 	float GetPitch();
 
 	// Inherited via IXAudio2VoiceCallback
-	virtual void __stdcall OnVoiceProcessingPassStart(UINT32 BytesRequired) override;
-	virtual void __stdcall OnVoiceProcessingPassEnd(void) override;
-	virtual void __stdcall OnStreamEnd(void) override;
-	virtual void __stdcall OnBufferStart(void* pBufferContext) override;
-	virtual void __stdcall OnBufferEnd(void* pBufferContext) override;
-	virtual void __stdcall OnLoopEnd(void* pBufferContext) override;
-	virtual void __stdcall OnVoiceError(void* pBufferContext, HRESULT Error) override;
+	virtual void __stdcall OnVoiceProcessingPassStart(UINT32) override {}
+	virtual void __stdcall OnVoiceProcessingPassEnd(void) override {}
+	virtual void __stdcall OnStreamEnd(void) override {}
+	virtual void __stdcall OnBufferStart(void*) override;
+	virtual void __stdcall OnBufferEnd(void*) override;
+	virtual void __stdcall OnLoopEnd(void*) override {}
+	virtual void __stdcall OnVoiceError(void*, HRESULT) override {}
 };

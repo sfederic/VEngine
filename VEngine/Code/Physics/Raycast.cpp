@@ -194,7 +194,7 @@ bool Physics::RaycastTriangleIntersect(HitResult& hitResult)
 			}
 
 			const auto& vertices = mesh.meshDataProxy.GetVertices();
-			const int vertexTriangleCount = vertices.size() / 3;
+			const size_t vertexTriangleCount = vertices.size() / 3;
 			for (int i = 0; i < vertexTriangleCount; i++)
 			{
 				const int index0 = i * 3;
@@ -317,9 +317,9 @@ bool Physics::RaycastTriangleIntersect(HitResult& hitResult)
 
 	//Get all hit actors
 	std::vector<Actor*> hitActors;
-	for (auto& hitResult : hitResults)
+	for (auto& lHitResult : hitResults)
 	{
-		hitActors.emplace_back(hitResult.hitActor);
+		hitActors.emplace_back(lHitResult.hitActor);
 	}
 
 	//Set nearest hit actor

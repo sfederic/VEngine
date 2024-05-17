@@ -53,7 +53,7 @@ void EditorMainWindow::closeEvent(QCloseEvent* closeEvent)
 	Core::mainLoop = false;
 }
 
-bool EditorMainWindow::nativeEvent(const QByteArray& eventType, void* message, long* result)
+bool EditorMainWindow::nativeEvent(const QByteArray&, void* message, long*)
 {
 	MSG* msg = (MSG*)message;
 
