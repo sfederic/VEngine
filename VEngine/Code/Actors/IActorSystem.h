@@ -16,7 +16,7 @@ public:
 	virtual void Init() = 0;
 	virtual void PostInit() = 0;
 	virtual void DestroyAll() = 0;
-	std::string GetName() { return name; }
+	std::string GetName() { return _name; }
 	virtual std::vector<Actor*> GetActorsAsBaseClass() = 0;
 	virtual Actor* SpawnActor(const Transform& transform) = 0;
 	virtual Actor* FindActorByName(std::string actorName) = 0;
@@ -35,5 +35,5 @@ public:
 	virtual void Cleanup() = 0;
 
 protected:
-	std::string name;
+	std::string _name;
 };

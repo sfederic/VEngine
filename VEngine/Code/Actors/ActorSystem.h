@@ -26,7 +26,7 @@ public:
 	{
 		std::string typeName = typeid(T).name();
 		std::string token = typeName.substr(typeName.find(" ") + 1);
-		name = token;
+		_name = token;
 
 		ActorSystemCache::Get().AddSystem(typeid(T), this);
 	}
@@ -41,10 +41,10 @@ public:
 		actor->SetTransform(transform);
 
 		//AddActorToWorld() call is in SetName()
-		if (!actor->SetName(this->name + std::to_string(actor->GetSystemIndex())))
+		if (!actor->SetName(this->GetName() + std::to_string(actor->GetSystemIndex())))
 		{
 			auto uid = (unsigned int)GenerateUID(); //std::to_string goes bananas with UID
-			actor->SimpleSetName(this->name + std::to_string(uid));
+			actor->SimpleSetName(this->GetName() + std::to_string(uid));
 		}
 
 		return actor.get();
