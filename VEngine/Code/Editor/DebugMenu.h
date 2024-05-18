@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <string>
+#include "Core/Log.h"
 
 struct Properties;
 class UVPaintWidget;
@@ -37,6 +38,7 @@ public:
 	bool vertexPaintMenuOpen = false;
 	bool uvMenuOpen = false;
 	bool uvPaintMenuOpen = false;
+	bool sequencerOpen = false;
 
 	//Whether the Imgui windows have been clicked
 	bool hasMouseFocus = false;

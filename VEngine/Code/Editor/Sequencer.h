@@ -32,7 +32,7 @@ public:
 	const char* GetItemLabel(int index) const override
 	{
 		static char tmps[512];
-		snprintf(tmps, 512, "[%02d] %s", index, SequencerItemTypeNames[sequencerItems[index].mType]);
+		snprintf(tmps, 512, "[%02d] %s", index, SequencerItemTypeNames[(int)sequencerItems[index].mType]);
 		return tmps;
 	}
 

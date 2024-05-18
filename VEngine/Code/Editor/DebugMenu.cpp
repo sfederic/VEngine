@@ -29,8 +29,11 @@
 #include "Render/Material.h"
 #include "Animation/Skeleton.h"
 #include "Asset/AssetSystem.h"
+#include "Editor/Sequencer.h"
 
 DebugMenu debugMenu;
+
+static Sequencer gSequencer;
 
 void DebugMenu::Init()
 {
@@ -66,6 +69,11 @@ void DebugMenu::Tick(float deltaTime)
 
 	//ImGuizmo has to be called here, it's part of ImGui
 	transformGizmo.Tick();
+
+	if (sequencerOpen)
+	{
+		gSequencer.Render();
+	}
 
 	RenderFPSMenu(deltaTime);
 	RenderGPUMenu();

@@ -47,6 +47,10 @@ void Console::Init()
 			},
 			"Deletes all actors and components in world."));
 
+	executeMap.emplace(L"CINE",
+		std::make_pair([]() { debugMenu.sequencerOpen = !debugMenu.sequencerOpen; },
+			"Opens ImGuizmo-based sequencer up."));
+
 	executeMap.emplace(L"WORLDLOADTEST",
 		std::make_pair([]() { RunWorldLoadTest(); },
 			"Load every world in the world maps folder in sequence."));
