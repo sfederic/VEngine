@@ -33,8 +33,6 @@
 
 DebugMenu debugMenu;
 
-static Sequencer gSequencer;
-
 void DebugMenu::Init()
 {
 	//IMGUI setup

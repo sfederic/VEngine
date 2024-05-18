@@ -1,131 +1,3 @@
-GridActor
-2
- Enabled
-1
- Position
-2 -0 3
- Rotation
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Audio LinkMove
-cloth_heavy.wav
-Audio LinkRotate
-chainmail1.wav
-BigGridActor
-0
-Can Fall
-1
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-0
-Inspect
-0
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Move Speed
-12
-MoveOnlyXAxis
-0
-MoveOnlyZAxis
-0
-Name
-GridActor0
-Obstacle
-1
-Rotate Pitch
-1
-Rotate Roll
-0
-Rotate Speed
-12
-Rotate Yaw
-1
-UID
-2347879366
-next
- Enabled
-1
- Position
-2 1 3
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Audio LinkMove
-cloth_heavy.wav
-Audio LinkRotate
-chainmail1.wav
-BigGridActor
-0
-Can Fall
-1
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-0
-Inspect
-0
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Move Speed
-12
-MoveOnlyXAxis
-0
-MoveOnlyZAxis
-0
-Name
-GridActor1
-Obstacle
-1
-Rotate Pitch
-1
-Rotate Roll
-0
-Rotate Speed
-12
-Rotate Yaw
-1
-UID
-2676392153
-next
 Player
 1
  Enabled
@@ -198,69 +70,25 @@ DirectionalLightActor0
 UID
 1443591394
 next
-MeshComponent
-5
-1842864247
-Mesh
+SequencerTrigger
+1
  Enabled
 1
- Pos
-0 0 0
- Rot
-0 0 0 1
+ Position
+2 0 2
+ Rotation
+-0 0 -0 1
  Scale
 1 1 1
  Visible
 1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_AudioType
-Default
-M_Blend State
-default
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Texture2
-
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-char.vmesh
-Physics Static
-1
-Render Static
-0
-Trans. Occlude
-0
+Name
+SequencerTrigger0
 UID
-212711528
+3282956789
 next
+MeshComponent
+3
 1842864247
 LinkEffectMesh
  Enabled
@@ -317,6 +145,8 @@ Physics Static
 1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
@@ -378,17 +208,19 @@ Physics Static
 1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
 3614188990
 next
-2347879366
+1842864247
 Mesh
  Enabled
 1
  Pos
-2 -0 3
+0 0 0
  Rot
 0 0 0 1
  Scale
@@ -434,79 +266,41 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-cube.vmesh
+char.vmesh
 Physics Static
 1
 Render Static
 0
+Sort Last
+0
 Trans. Occlude
 0
 UID
-622450740
+212711528
 next
-2676392153
-Mesh
+BoxTriggerComponent
+1
+3282956789
+BoxTrigger
  Enabled
 1
  Pos
-2 1 3
+2 0 2
  Rot
 -0 0 -0 1
  Scale
 1 1 1
  Visible
 1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_AudioType
-Default
-M_Blend State
-default
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Texture2
-
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cube.vmesh
-Physics Static
-1
-Render Static
-0
-Trans. Occlude
-0
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
 UID
-448832224
+2450153988
 next
 DialogueComponent
-3
+1
 1842864247
 Dialogue
  Enabled
@@ -517,28 +311,6 @@ File
 
 UID
 2495667995
-next
-2347879366
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-1152598509
-next
-2676392153
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-3014851461
 next
 InstanceMeshComponent
 1
@@ -598,6 +370,8 @@ Physics Static
 1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID

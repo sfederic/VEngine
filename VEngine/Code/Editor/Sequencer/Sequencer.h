@@ -20,8 +20,9 @@ struct SequenceItem
 	SequenceEntryData* entryData = nullptr;
 	SequenceEntryTypes mType = SequenceEntryTypes::Audio;
 	int mFrameStart = 0;
-	int mFrameEnd = 10;
+	int mFrameEnd = 60;
 	bool mExpanded = false;
+	bool mIsActive = false;
 };
 
 class Sequencer : public ImSequencer::SequenceInterface
@@ -33,6 +34,7 @@ private:
 public:
 	Sequencer() : _frameMin(0), _frameMax(100) {}
 
+	void Tick();
 	void Render();
 
 	int GetFrameMin() const override { return _frameMin; }
@@ -92,6 +94,8 @@ public:
 		sequencerItems[index].mExpanded = !sequencerItems[index].mExpanded;
 	}
 
+	void ActivateSequencer();
+
 private:
 	auto& GetSequenceEntry(int index) { return sequencerItems[index]; }
 
@@ -105,4 +109,8 @@ private:
 	int firstFrame = 0;
 
 	bool expanded = true;
+
+	bool isRunning = false;
 };
+
+extern Sequencer gSequencer;

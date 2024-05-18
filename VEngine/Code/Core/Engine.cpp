@@ -19,6 +19,7 @@
 #include "UI/UISystem.h"
 #include "Editor/DebugMenu.h"
 #include "Editor/Console.h"
+#include "Editor/Sequencer/Sequencer.h"
 #include "Editor/Editor.h"
 #include "Commands/CommandSystem.h"
 #include "Audio/AudioSystem.h"
@@ -85,6 +86,7 @@ void Engine::TickSystems(float deltaTime)
 	editor->Tick();
 	Core::Tick();
 	CommandSystem::Get().Tick();
+	gSequencer.Tick();
 	AudioSystem::Tick();
 
 	if (!Core::gameplayOn) //Tick editor camera
