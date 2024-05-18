@@ -363,6 +363,7 @@
     <ClCompile Include="Code\Actors\Game\VerticalMoveGridActor.cpp" />
     <ClCompile Include="Code\Actors\Game\WindowGridActor.cpp" />
     <ClCompile Include="Code\Actors\Game\Lever.cpp" />
+    <ClCompile Include="Code\Editor\Sequencer.cpp" />
     <ClInclude Include="Code\Actors\Game\TimerExplosive.h" />
     <ClInclude Include="Code\Actors\Game\TeleportGridActor.h" />
     <ClInclude Include="Code\Audio\MaterialAudioType.h" />
@@ -759,6 +760,7 @@
     <ClInclude Include="Code\Actors\Game\VerticalMoveGridActor.h" />
     <ClInclude Include="Code\Actors\Game\WindowGridActor.h" />
     <ClInclude Include="Code\Actors\Game\Lever.h" />
+    <ClInclude Include="Code\Editor\Sequencer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
