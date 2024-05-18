@@ -217,7 +217,7 @@ bool Physics::RaycastTriangleIntersect(HitResult& hitResult)
 					tempHitResult.hitDistance = hitDistance;
 
 					//Get normal for triangle
-					XMVECTOR normal = XMLoadFloat3(&mesh.meshDataProxy.vertices.at(index0).normal);
+					XMVECTOR normal = XMLoadFloat3(&mesh.meshDataProxy.vertices[index0].normal);
 					normal = XMVector3TransformNormal(normal, meshWorldMatrix);
 					normal = XMVector3Normalize(normal);
 					XMStoreFloat3(&tempHitResult.hitNormal, normal);
@@ -252,9 +252,9 @@ bool Physics::RaycastTriangleIntersect(HitResult& hitResult)
 
 					//Get hit UV
 					float hitU, hitV;
-					VMath::TriangleXYZToUV(mesh.meshDataProxy.vertices.at(index0),
-						mesh.meshDataProxy.vertices.at(index1),
-						mesh.meshDataProxy.vertices.at(index2), hitPosition, hitU, hitV);
+					VMath::TriangleXYZToUV(mesh.meshDataProxy.vertices[index0],
+						mesh.meshDataProxy.vertices[index1],
+						mesh.meshDataProxy.vertices[index2], hitPosition, hitU, hitV);
 					tempHitResult.uv = XMFLOAT2(hitU, hitV);
 
 					//Set hit component and actor
