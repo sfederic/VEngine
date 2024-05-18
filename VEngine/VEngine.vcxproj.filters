@@ -857,7 +857,7 @@
     <ClCompile Include="Code\Actors\Game\TimerExplosive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Editor\Sequencer.cpp">
+    <ClCompile Include="Code\Editor\Sequencer\Sequencer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1769,7 +1769,7 @@
     <ClInclude Include="Code\Actors\Game\TimerExplosive.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Editor\Sequencer.h">
+    <ClInclude Include="Code\Editor\Sequencer\Sequencer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

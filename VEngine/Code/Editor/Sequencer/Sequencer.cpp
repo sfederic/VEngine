@@ -1,14 +1,9 @@
 #include "vpch.h"
 #include "Sequencer.h"
-#include "ImGui/imgui.h"
+#include "Editor/ImGui/imgui.h"
 
 void Sequencer::Render()
 {
-	static int currentFrame = 0;
-	static bool expanded = true;
-	static int selectedEntry = 0;
-	static int firstFrame = 0;
-
 	ImGui::PushItemWidth(130);
 	ImGui::InputInt("Frame ", &currentFrame);
 	ImGui::SameLine();
@@ -16,15 +11,26 @@ void Sequencer::Render()
 	ImGui::SameLine();
 	ImGui::InputInt("Frame Max", &_frameMax);
 	ImGui::PopItemWidth();
-	if (ImGui::Button("Add Item"))
+
+	if (ImGui::Button("Camera"))
 	{
-		Add(0);
+		Add((int)SequenceEntryTypes::Camera);
+	}
+	if (ImGui::Button("Audio"))
+	{
+		Add((int)SequenceEntryTypes::Audio);
 	}
 
 	ImSequencer::Sequencer(this, &currentFrame, &expanded, &selectedEntry, &firstFrame, ImSequencer::SEQUENCER_EDIT_STARTEND | ImSequencer::SEQUENCER_ADD | ImSequencer::SEQUENCER_DEL | ImSequencer::SEQUENCER_COPYPASTE | ImSequencer::SEQUENCER_CHANGE_FRAME);
 
-	if (selectedEntry != -1)
+	if (selectedEntry >= 0)
 	{
-		ImGui::Text("I am a %d, please edit me", selectedEntry);
+		switch (selectedEntry)
+		{
+		case (int)SequenceEntryTypes::Audio:
+			auto& entry = GetSequenceEntry(selectedEntry);
+
+			break;
+		}
 	}
 }

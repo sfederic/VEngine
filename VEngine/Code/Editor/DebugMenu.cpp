@@ -29,7 +29,7 @@
 #include "Render/Material.h"
 #include "Animation/Skeleton.h"
 #include "Asset/AssetSystem.h"
-#include "Editor/Sequencer.h"
+#include "Editor/Sequencer/Sequencer.h"
 
 DebugMenu debugMenu;
 
