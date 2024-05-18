@@ -9,14 +9,6 @@ DestructibleActor::DestructibleActor()
 	rootComponent = destructibleMesh;
 }
 
-void DestructibleActor::Start()
-{
-}
-
-void DestructibleActor::Tick(float deltaTime)
-{
-}
-
 Properties DestructibleActor::GetProps()
 {
 	auto props = __super::GetProps();

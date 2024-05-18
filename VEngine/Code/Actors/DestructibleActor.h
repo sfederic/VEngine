@@ -14,8 +14,6 @@ public:
 	ACTOR_SYSTEM(DestructibleActor);
 
 	DestructibleActor();
-	void Start() override;
-	void Tick(float deltaTime) override;
 	Properties GetProps() override;
 
 private:

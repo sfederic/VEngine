@@ -12,6 +12,8 @@ Billboard::Billboard()
 
 void Billboard::Create()
 {
+	__super::Create();
+
 	mesh->SetMeshFilename("plane.vmesh");
 	mesh->SetRastState(RastStates::noBackCull);
 	mesh->SetShaderItem("Unlit");
@@ -19,6 +21,8 @@ void Billboard::Create()
 
 void Billboard::Tick(float deltaTime)
 {
+	__super::Tick(deltaTime);
+
 	auto transform = GetTransform();
 	VMath::RotateTowardsCamera(transform);
 	SetTransform(transform);
@@ -26,5 +30,7 @@ void Billboard::Tick(float deltaTime)
 
 Properties Billboard::GetProps()
 {
-	return __super::GetProps();
+	auto props = __super::GetProps();
+	props.title = GetTypeName();
+	return props;
 }

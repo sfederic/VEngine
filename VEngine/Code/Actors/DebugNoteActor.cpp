@@ -10,6 +10,8 @@ DebugNoteActor::DebugNoteActor()
 
 void DebugNoteActor::Start()
 {
+	__super::Start();
+
 	noteWidget = UISystem::CreateWidget<DebugNoteWidget>();
 	noteWidget->SetNoteText(noteText);
 	noteWidget->AddToViewport();
@@ -17,6 +19,8 @@ void DebugNoteActor::Start()
 
 void DebugNoteActor::Tick(float deltaTime)
 {
+	__super::Tick(deltaTime);
+
 	noteWidget->SetWorldPosition(GetHomogeneousPositionV());
 }
 
