@@ -368,6 +368,7 @@
     <ClInclude Include="Code\Actors\Game\TeleportGridActor.h" />
     <ClInclude Include="Code\Audio\MaterialAudioType.h" />
     <ClInclude Include="Code\Editor\AssetIconListWidget.h" />
+    <ClInclude Include="Code\Editor\Sequencer\SequenceEntryData.h" />
     <ClInclude Include="Code\Render\BlendState.h" />
     <ClInclude Include="Code\Render\VertexBuffer.h" />
     <ClInclude Include="Code\Core\BinaryDeserialiser.h" />

@@ -19,18 +19,25 @@ void Sequencer::Render()
 	if (ImGui::Button("Audio"))
 	{
 		Add((int)SequenceEntryTypes::Audio);
+		auto& entry = GetSequenceEntry((int)SequenceEntryTypes::Audio);
+		entry.entryData = new AudioSequenceEntryData();
 	}
 
-	ImSequencer::Sequencer(this, &currentFrame, &expanded, &selectedEntry, &firstFrame, ImSequencer::SEQUENCER_EDIT_STARTEND | ImSequencer::SEQUENCER_ADD | ImSequencer::SEQUENCER_DEL | ImSequencer::SEQUENCER_COPYPASTE | ImSequencer::SEQUENCER_CHANGE_FRAME);
-
-	if (selectedEntry >= 0)
+	if (selectedEntry >= 0 && !sequencerItems.empty())
 	{
 		switch (selectedEntry)
 		{
 		case (int)SequenceEntryTypes::Audio:
-			auto& entry = GetSequenceEntry(selectedEntry);
-
+			const auto& entry = GetSequenceEntry(selectedEntry);
+			auto entryData = dynamic_cast<AudioSequenceEntryData*>(entry.entryData);
+			static char audioFilenameInput[512];
+			ImGui::InputText("Audio Filename", audioFilenameInput, sizeof(audioFilenameInput));
+			entryData->audioFilename = audioFilenameInput;
 			break;
 		}
 	}
+
+	ImSequencer::Sequencer(this, &currentFrame, &expanded, &selectedEntry, &firstFrame,
+		ImSequencer::SEQUENCER_EDIT_STARTEND | ImSequencer::SEQUENCER_ADD | ImSequencer::SEQUENCER_DEL |
+		ImSequencer::SEQUENCER_COPYPASTE | ImSequencer::SEQUENCER_CHANGE_FRAME);
 }

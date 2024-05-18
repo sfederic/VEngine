@@ -1772,6 +1772,9 @@
     <ClInclude Include="Code\Editor\Sequencer\Sequencer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Code\Editor\Sequencer\SequenceEntryData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

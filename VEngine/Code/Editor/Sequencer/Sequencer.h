@@ -1,16 +1,34 @@
 #pragma once
 
 #include "Editor/ImGuizmo/ImSequencer.h"
+#include "Editor/Sequencer/SequenceEntryData.h"
 #include <vector>
 #include <cstdio>
 
 //Ref:https://github.com/CedricGuillemet/ImGuizmo/blob/master/example/main.cpp
 
+enum class SequenceEntryTypes : int
+{
+	Audio,
+	Camera
+};
+
+struct SequenceItem
+{
+	SequenceItem(int type) : mType((SequenceEntryTypes)type) {}
+
+	SequenceEntryData* entryData = nullptr;
+	SequenceEntryTypes mType = SequenceEntryTypes::Audio;
+	int mFrameStart = 0;
+	int mFrameEnd = 10;
+	bool mExpanded = false;
+};
+
 class Sequencer : public ImSequencer::SequenceInterface
 {
 private:
-	//Make sure this matches with SequenceEntryTypes. Could use VEnum, but this API is very int based.
-	inline const static char* SequencerItemTypeNames[] = { "Camera", "Audio" };
+	//Make sure the ordering here matches with SequenceEntryTypes. Could use VEnum, but this API is very int based.
+	inline const static char* SequencerItemTypeNames[] = { "Audio", "Camera" };
 
 public:
 	Sequencer() : _frameMin(0), _frameMax(100) {}
@@ -76,23 +94,6 @@ public:
 
 private:
 	auto& GetSequenceEntry(int index) { return sequencerItems[index]; }
-
-	enum class SequenceEntryTypes : int
-	{
-		Audio,
-		Camera
-	};
-
-	struct SequenceItem
-	{
-		SequenceItem(int type) : mType((SequenceEntryTypes)type) {}
-
-		void* mEntryData = nullptr;
-		SequenceEntryTypes mType = SequenceEntryTypes::Audio;
-		int mFrameStart = 0;
-		int mFrameEnd = 10;
-		bool mExpanded = false;
-	};
 
 	std::vector<SequenceItem> sequencerItems;
 
