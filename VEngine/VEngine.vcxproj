@@ -120,6 +120,10 @@
   <ItemGroup>
     <ClCompile Include="Code\Actors\Game\TimerExplosive.cpp" />
     <ClCompile Include="Code\Editor\AssetIconListWidget.cpp" />
+    <ClCompile Include="Code\Editor\imgui\misc\cpp\imgui_stdlib.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="Code\Editor\Sequencer\AudioSequenceEntryData.cpp" />
     <ClCompile Include="Code\Render\BlendState.cpp" />
     <ClCompile Include="Code\Render\VertexBuffer.cpp" />
@@ -370,6 +374,7 @@
     <ClInclude Include="Code\Actors\Game\TeleportGridActor.h" />
     <ClInclude Include="Code\Audio\MaterialAudioType.h" />
     <ClInclude Include="Code\Editor\AssetIconListWidget.h" />
+    <ClInclude Include="Code\Editor\imgui\misc\cpp\imgui_stdlib.h" />
     <ClInclude Include="Code\Editor\Sequencer\AudioSequenceEntryData.h" />
     <ClInclude Include="Code\Editor\Sequencer\SequenceEntryData.h" />
     <ClInclude Include="Code\Editor\Sequencer\SequenceEntryTypes.h" />
