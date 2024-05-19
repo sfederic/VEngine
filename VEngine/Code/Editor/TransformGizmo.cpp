@@ -191,6 +191,11 @@ void TransformGizmo::Tick()
 			{
 			case ImGuizmo::OPERATION::TRANSLATE:
 			{
+				//@Todo: there's a problem here with the commands that because you have to wait for the mouse 
+				//input to go back up in order to register the properties, the starting position of the actor
+				//will never be put into the command undo/redo list. I don't think it can really be fixes without
+				//overhauling the entire engine, but leaving this here more as a future note.
+
 				auto prop = props.GetProperty(" Position");
 				CommandSystem::Get().AddCommand<XMFLOAT3>(*prop);
 				break;
