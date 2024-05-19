@@ -81,10 +81,11 @@ void Sequencer::Render()
 
 	if (selectedEntry >= 0 && !sequencerItems.empty())
 	{
-		switch (selectedEntry)
+		const auto& entry = GetSequenceEntry(selectedEntry);
+
+		switch (entry.mType)
 		{
-		case (int)SequenceEntryTypes::Audio:
-			const auto& entry = GetSequenceEntry(selectedEntry);
+		case SequenceEntryTypes::Audio:
 			auto entryData = dynamic_cast<AudioSequenceEntryData*>(entry.entryData);
 			ImGui::InputText("Audio Filename", &entryData->audioFilename);
 			break;
