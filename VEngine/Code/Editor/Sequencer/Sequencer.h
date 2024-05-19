@@ -2,16 +2,11 @@
 
 #include "Editor/ImGuizmo/ImSequencer.h"
 #include "Editor/Sequencer/SequenceEntryData.h"
+#include "Editor/Sequencer/SequenceEntryTypes.h"
 #include <vector>
 #include <cstdio>
 
 //Ref:https://github.com/CedricGuillemet/ImGuizmo/blob/master/example/main.cpp
-
-enum class SequenceEntryTypes : int
-{
-	Audio,
-	Camera
-};
 
 struct SequenceItem
 {
