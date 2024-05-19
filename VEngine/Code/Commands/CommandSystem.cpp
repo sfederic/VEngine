@@ -39,6 +39,7 @@ void CommandSystem::Undo()
 	editor->ResetPropertyWidgetValues();
 }
 
+//@Todo: Redo doesn't work while the pop_back is in undo.
 void CommandSystem::Redo()
 {
 	if (commands.size() == 0)
