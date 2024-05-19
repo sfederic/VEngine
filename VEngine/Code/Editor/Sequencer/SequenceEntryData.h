@@ -1,27 +1,18 @@
 #pragma once
 
-#include <string>
-#include "Gameplay/GameUtils.h"
-#include "Audio/AudioSystem.h"
+#include "Core/Properties.h"
+#include "Core/UID.h"
 
 struct SequenceEntryData
 {
-	virtual void Activate() {}
-	virtual void Deactivate() {}
-};
+	const UID uid = GenerateUID();
 
-struct AudioSequenceEntryData : SequenceEntryData
-{
-	std::string audioFilename;
-
-	void Activate() override
+	virtual void Activate() = 0;
+	virtual void Deactivate() = 0;
+	virtual Properties GetProps()
 	{
-		GameUtils::PlayAudioOneShot(audioFilename);
-	}
-
-	void Deactivate() override
-	{
-		//@Todo: Just for testing. Remove.
-		AudioSystem::StopAllAudio();
+		Properties props;
+		//props.Add("UID", &uid);
+		return props;
 	}
 };

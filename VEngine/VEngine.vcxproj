@@ -120,6 +120,7 @@
   <ItemGroup>
     <ClCompile Include="Code\Actors\Game\TimerExplosive.cpp" />
     <ClCompile Include="Code\Editor\AssetIconListWidget.cpp" />
+    <ClCompile Include="Code\Editor\Sequencer\AudioSequenceEntryData.cpp" />
     <ClCompile Include="Code\Render\BlendState.cpp" />
     <ClCompile Include="Code\Render\VertexBuffer.cpp" />
     <ClCompile Include="Code\Core\BinaryDeserialiser.cpp" />
@@ -369,6 +370,7 @@
     <ClInclude Include="Code\Actors\Game\TeleportGridActor.h" />
     <ClInclude Include="Code\Audio\MaterialAudioType.h" />
     <ClInclude Include="Code\Editor\AssetIconListWidget.h" />
+    <ClInclude Include="Code\Editor\Sequencer\AudioSequenceEntryData.h" />
     <ClInclude Include="Code\Editor\Sequencer\SequenceEntryData.h" />
     <ClInclude Include="Code\Render\BlendState.h" />
     <ClInclude Include="Code\Render\VertexBuffer.h" />

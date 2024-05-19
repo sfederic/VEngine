@@ -2,6 +2,7 @@
 #include "Sequencer.h"
 #include "Editor/ImGui/imgui.h"
 #include "Core/Core.h"
+#include "AudioSequenceEntryData.h"
 
 Sequencer gSequencer;
 
