@@ -3,16 +3,18 @@
 #include "Core/Properties.h"
 #include "Core/UID.h"
 
-struct SequenceEntryData
+class SequenceEntryData
 {
-	const UID uid = GenerateUID();
+private:
+	UID uid = GenerateUID();
 
+public:
 	virtual void Activate() = 0;
 	virtual void Deactivate() = 0;
 	virtual Properties GetProps()
 	{
 		Properties props;
-		//props.Add("UID", &uid);
+		props.Add("UID", &uid);
 		return props;
 	}
 };

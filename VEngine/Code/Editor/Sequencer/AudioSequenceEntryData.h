@@ -3,8 +3,9 @@
 #include "SequenceEntryData.h"
 #include <string>
 
-struct AudioSequenceEntryData : SequenceEntryData
+class AudioSequenceEntryData : public SequenceEntryData
 {
+public:
 	std::string audioFilename;
 
 	void Activate() override;
@@ -14,7 +15,7 @@ struct AudioSequenceEntryData : SequenceEntryData
 	Properties GetProps() override
 	{
 		auto props = __super::GetProps();
-		//props.Add("AudioFilename", &audioFilename);
+		props.Add("AudioFilename", &audioFilename);
 		return props;
 	}
 };
