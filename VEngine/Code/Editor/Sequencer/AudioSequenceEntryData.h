@@ -8,6 +8,8 @@ class AudioSequenceEntryData : public SequenceEntryData
 public:
 	std::string audioFilename;
 
+	AudioSequenceEntryData() : SequenceEntryData((int)SequenceEntryTypes::Audio) {}
+
 	void Activate() override;
 
 	void Deactivate() override {}
