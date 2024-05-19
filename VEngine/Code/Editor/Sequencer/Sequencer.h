@@ -94,6 +94,9 @@ public:
 private:
 	auto& GetSequenceEntry(int index) { return sequencerItems[index]; }
 
+	void WriteCurrentSequenceFileOut();
+	void ReadInSequencerFile();
+
 	std::vector<SequenceItem> sequencerItems;
 
 	int _frameMin = 0;
