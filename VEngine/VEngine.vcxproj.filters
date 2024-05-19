@@ -1787,6 +1787,9 @@
     <ClInclude Include="Code\Editor\Sequencer\AudioSequenceEntryData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Code\Editor\Sequencer\SequenceEntryTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
