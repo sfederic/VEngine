@@ -206,6 +206,7 @@ ShadowMap* shadowMap;
 Sampler defaultSampler;
 
 //Light probe buffers
+//@Todo: CubeMap class? Light probe class? Put into Diffuse probe map?
 Microsoft::WRL::ComPtr<ID3D11RenderTargetView> lightProbeRTVs[6]; //Cubemap
 Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> lightProbeSRV;
 Microsoft::WRL::ComPtr<ID3D11Texture2D> lightProbeTexture;
