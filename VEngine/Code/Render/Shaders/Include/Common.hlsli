@@ -134,14 +134,7 @@ cbuffer cbMeshData : register(b5)
     bool isDiffuseProbeMapActive;
 }
 
-cbuffer ShaderMeshLightMapData : register(b6)
-{
-    int2 atlasSegmentOffset;
-    int2 atlasSegmentSize;
-    int2 atlasSize;
-};
-
-cbuffer cbCameraData : register(b7)
+cbuffer cbCameraData : register(b6)
 {
     float4 cameraWorldPos;
     float4 cameraForwardVector;

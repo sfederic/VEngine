@@ -194,7 +194,6 @@ ConstantBuffer<ShaderLights> cbLights;
 ConstantBuffer<ShaderTimeData> cbTime;
 ConstantBuffer<ShaderMeshData> cbMeshData;
 ConstantBuffer<ShaderSkinningData> cbSkinningData;
-//ConstantBuffer<ShaderMeshLightMapData>* cbMeshLightMapData;
 ConstantBuffer<ShaderPostProcessData> cbPostProcess;
 ConstantBuffer<ShaderCameraData> cbCameraData;
 
@@ -534,7 +533,7 @@ void CreateConstantBuffers()
 	const int cbLightsRegister = 3;
 	const int cbTimeRegister = 4;
 	const int cbMeshDataRegister = 5;
-	const int cbCameraDataRegister = 7;
+	const int cbCameraDataRegister = 6;
 
 	//Shader matrix constant buffer
 	shaderMatrices.Create();
@@ -977,16 +976,6 @@ void SetShaderMeshData(MeshComponent* mesh)
 
 	cbMeshData.Map(&meshData);
 	cbMeshData.SetVSAndPS();
-
-	//Light map data
-	//ShaderMeshLightMapData meshLightMapData;
-	//meshLightMapData = mesh->lightMapData;
-	//meshLightMapData.atlasSize.x = lightMap.GetWidth();
-	//meshLightMapData.atlasSize.y = lightMap.GetHeight();
-	//meshLightMapData.AssertValues();
-
-	//cbMeshLightMapData->Map(&meshLightMapData);
-	//cbMeshLightMapData->SetVS();
 }
 
 void RenderMeshComponents()
