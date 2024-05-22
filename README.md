@@ -9,7 +9,7 @@ _Note that this repository isn't for general use, it's more of an open source sn
 _Helpful Fork [https://github.com/sfederic/Engine/pull/3] to build using premake._
 _Thanks to https://github.com/ignite720_
 
-* Visual Studio 2022 17.8
+* Visual Studio 2022 17.10
 * Blender 3.4 
 
 ## Packages
