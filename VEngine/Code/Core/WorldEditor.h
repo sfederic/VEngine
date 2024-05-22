@@ -50,7 +50,6 @@ namespace WorldEditor
 	extern bool uvPaintOn;
 	extern bool actorReplaceModeActive;
 	extern bool parentSetActive;
-	extern bool moveActorViaKeyboardInput;
 	extern bool entranceTriggerWorldLoadMode;
 
 	extern DirectX::XMFLOAT4 vertexPaintColour;

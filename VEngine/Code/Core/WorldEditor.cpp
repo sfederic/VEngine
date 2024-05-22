@@ -39,7 +39,6 @@ bool WorldEditor::uvPaintActive = false;
 bool WorldEditor::uvPaintOn = false;
 bool WorldEditor::actorReplaceModeActive = false;
 bool WorldEditor::parentSetActive = false;
-bool WorldEditor::moveActorViaKeyboardInput = false;
 
 UVPaintData WorldEditor::uvPaintData;
 
@@ -58,7 +57,6 @@ void SpawnActorOnClick();
 void SpawnActor(Transform& transform);
 void VertexPainting();
 void UVPainting();
-void MoveActorViaKeyboardInput();
 void LoadWorldOnEntranceTriggerClick(Actor* pickedActor);
 void QuickMeshChangeMenu();
 void QuickTextureChangeMenu();
@@ -75,8 +73,6 @@ void WorldEditor::Tick()
 
 	DuplicateActor();
 	DeleteActor();
-
-	MoveActorViaKeyboardInput();
 
 	QuickMeshChangeMenu();
 	QuickTextureChangeMenu();
@@ -611,39 +607,6 @@ void UVPainting()
 				mesh->CreateNewVertexBuffer();
 			}
 		}
-	}
-}
-
-void MoveActorViaKeyboardInput()
-{
-	if (gPickedActor == nullptr || !WorldEditor::moveActorViaKeyboardInput) {
-		return;
-	}
-
-	if (Input::GetKeyDown(Keys::W)) {
-		gPickedActor->AddPositionV(VMath::GlobalForwardVector());
-	}
-	else if (Input::GetKeyDown(Keys::S)) {
-		gPickedActor->AddPositionV(-VMath::GlobalForwardVector());
-	}
-	else if (Input::GetKeyDown(Keys::A)) {
-		gPickedActor->AddPositionV(-VMath::GlobalRightVector());
-	}
-	else if (Input::GetKeyDown(Keys::D)) {
-		gPickedActor->AddPositionV(VMath::GlobalRightVector());
-	}
-
-	if (Input::GetKeyDown(Keys::Down)) {
-		gPickedActor->AddRotation(VMath::GlobalRightVector(), -90.f);
-	}
-	else if (Input::GetKeyDown(Keys::Up)) {
-		gPickedActor->AddRotation(VMath::GlobalRightVector(), 90.f);
-	}
-	else if (Input::GetKeyDown(Keys::Left)) {
-		gPickedActor->AddRotation(VMath::GlobalUpVector(), -90.f);
-	}
-	else if (Input::GetKeyDown(Keys::Right)) {
-		gPickedActor->AddRotation(VMath::GlobalUpVector(), 90.f);
 	}
 }
 

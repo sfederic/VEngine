@@ -192,14 +192,6 @@ void Console::Init()
 			},
 			"Replace clicked actor in world with the currently selected actor system."));
 
-	executeMap.emplace(L"MOV",
-		std::make_pair([]() {
-			WorldEditor::moveActorViaKeyboardInput = !WorldEditor::moveActorViaKeyboardInput;
-			WorldEditor::actorReplaceModeActive ? debugMenu.AddStaticNotification(L"ActorKeyboardMove Mode Active") :
-				debugMenu.ClearAllStaticNotifications();
-			},
-			"Set World Editor to move selected actor via keyboard input."));
-
 	executeMap.emplace(L"PAINT",
 		std::make_pair([]() {
 			debugMenu.vertexPaintMenuOpen = !debugMenu.vertexPaintMenuOpen;
