@@ -7,7 +7,7 @@ float4 main(VS_OUT i) : SV_Target
     const float3 normal = normalize(i.normal);
     const float4 position = i.posWS;
 
-    const float3 V = normalize(eyePosition - position).xyz;
+    const float3 V = normalize(cameraWorldPos - position).xyz;
 
     const LightingResult lightResult = CalcForwardLighting(V, position, normal);
 

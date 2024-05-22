@@ -114,7 +114,6 @@ struct LightingResult
 
 cbuffer cbLights : register(b3)
 {
-	float4 eyePosition;
 	float4 globalAmbient;
 	int numLights;
 	bool shadowsEnabled;
@@ -128,8 +127,6 @@ cbuffer cbTime : register(b4)
 	float timeSinceStartup;
 }
 
-//@Todo: constant buffer for camera world pos and camera forward vector. Can probably merge in eyePosition too.
-
 cbuffer cbMeshData : register(b5)
 {
     float4 SH[9]; //Spherical Harmonics for probe linked to mesh
@@ -142,6 +139,12 @@ cbuffer ShaderMeshLightMapData : register(b6)
     int2 atlasSegmentOffset;
     int2 atlasSegmentSize;
     int2 atlasSize;
+};
+
+cbuffer cbCameraData : register(b7)
+{
+    float4 cameraWorldPos;
+    float4 cameraForwardVector;
 };
 
 //Stole all this from https://interplayoflight.wordpress.com/2021/12/31/occlusion-and-directionality-in-image-based-lighting-implementation-details/ for simple diffuse testing.

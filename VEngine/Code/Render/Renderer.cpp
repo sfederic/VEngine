@@ -50,6 +50,7 @@
 #include "Render/ShaderData/ShaderMatrices.h"
 #include "Render/ShaderData/ShaderMeshData.h"
 #include "Render/ShaderData/ShaderPostProcessData.h"
+#include "Render/ShaderData/ShaderCameraData.h"
 #include "Render/ShaderData/ShaderSkinningData.h"
 #include "Render/ShaderData/ShaderTimeData.h"
 #include "Render/SpriteSystem.h"
@@ -151,6 +152,7 @@ void SetSampler(uint32_t shaderRegister, Sampler& sampler);
 void SetShaderResourcePixel(uint32_t shaderRegister, std::string textureName);
 void SetShaderResourceFromMaterial(Material& material);
 void SetLightsConstantBufferData();
+void SetCameraConstantBufferData();
 void ClearBounds();
 
 float Renderer::frameTime;
@@ -194,6 +196,7 @@ ConstantBuffer<ShaderMeshData> cbMeshData;
 ConstantBuffer<ShaderSkinningData> cbSkinningData;
 //ConstantBuffer<ShaderMeshLightMapData>* cbMeshLightMapData;
 ConstantBuffer<ShaderPostProcessData> cbPostProcess;
+ConstantBuffer<ShaderCameraData> cbCameraData;
 
 //Viewport
 D3D11_VIEWPORT viewport;
@@ -531,6 +534,7 @@ void CreateConstantBuffers()
 	const int cbLightsRegister = 3;
 	const int cbTimeRegister = 4;
 	const int cbMeshDataRegister = 5;
+	const int cbCameraDataRegister = 7;
 
 	//Shader matrix constant buffer
 	shaderMatrices.Create();
@@ -559,6 +563,9 @@ void CreateConstantBuffers()
 	//Post process data
 	ShaderPostProcessData postProcessData = {};
 	cbPostProcess.Create(&postProcessData, 0);
+
+	ShaderCameraData cameraData;
+	cbCameraData.Create(&cameraData, cbCameraDataRegister);
 }
 
 void MapBuffer(ID3D11Resource* resource, const void* src, size_t size)
@@ -897,6 +904,7 @@ void Renderer::Render()
 	}
 
 	SetLightsConstantBufferData();
+	SetCameraConstantBufferData();
 
 	RenderMeshComponents();
 	RenderWireframeForVertexPaintingAndPickedActor();
@@ -1872,12 +1880,20 @@ void SetLightsConstantBufferData()
 	shaderLights.numLights = shaderLightsIndex;
 	assert(shaderLights.numLights < ShaderLights::MAX_LIGHTS);
 
-	XMStoreFloat4(&shaderLights.eyePosition, Camera::GetActiveCamera().GetWorldPositionV());
-
 	cbLights.Map(&shaderLights);
 	cbLights.SetVSAndPS();
 
 	Profile::End();
+}
+
+void SetCameraConstantBufferData()
+{
+	ShaderCameraData cameraData;
+	XMStoreFloat4(&cameraData.cameraWorldPos, Camera::GetActiveCamera().GetWorldPositionV());
+	XMStoreFloat4(&cameraData.cameraForwardVector, Camera::GetActiveCamera().GetForwardVectorV());
+
+	cbCameraData.Map(&cameraData);
+	cbCameraData.SetVSAndPS();
 }
 
 void Renderer::Present()
