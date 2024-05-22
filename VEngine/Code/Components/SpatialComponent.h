@@ -84,9 +84,8 @@ protected:
 	void FPSCameraRotation();
 
 	BoundingOrientedBox boundingBox;
-	SpatialComponent* parent = nullptr;
 	std::vector<SpatialComponent*> children;
-
+	SpatialComponent* parent = nullptr;
 	CollisionLayers layer = CollisionLayers::All;
 
 private:
