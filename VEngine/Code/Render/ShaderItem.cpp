@@ -14,3 +14,9 @@ ShaderItem::ShaderItem(std::string shaderItemName_,
 	vertexShader = ShaderSystem::FindVertexShader(vertexShaderFilename)->GetShader();
 	pixelShader = ShaderSystem::FindPixelShader(pixelShaderFilename)->GetShader();
 }
+
+ID3D11InputLayout* ShaderItem::GetInputLayout() const
+{
+	auto vertShader = ShaderSystem::FindVertexShader(vertexShaderFilename);
+	return vertShader->GetInputLayout();
+}

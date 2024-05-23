@@ -7,6 +7,7 @@ class VertexShader;
 class PixelShader;
 struct ID3D11VertexShader;
 struct ID3D11PixelShader;
+struct ID3D11InputLayout;
 
 //Helper structure when finding shaders from Shader System
 class ShaderItem
@@ -23,6 +24,8 @@ public:
 
 	auto GetVertexShaderFilename() { return vertexShaderFilename; }
 	auto GetPixelShaderFilename() { return pixelShaderFilename; }
+
+	ID3D11InputLayout* GetInputLayout() const;
 
 	auto GetUID() const { return uid; }
 

@@ -207,3 +207,8 @@ ID3D11PixelShader* Material::GetPixelShader()
 {
 	return shader->GetPixelShader();
 }
+
+ID3D11InputLayout* Material::GetInputLayout()
+{
+	return shader->GetInputLayout();
+}

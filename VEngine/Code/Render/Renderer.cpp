@@ -91,7 +91,6 @@ void CreateFactory();
 void CreateDevice();
 void CreateSwapchain(HWND window);
 void CreateRTVAndDSV();
-void CreateInputLayout();
 void CreateRasterizerStates();
 void CreateBlendStates();
 void CreateConstantBuffers();
@@ -177,7 +176,6 @@ Microsoft::WRL::ComPtr<ID3D11DeviceContext> context;
 Microsoft::WRL::ComPtr<ID3D11RenderTargetView> rtvs[swapchainCount];
 
 Microsoft::WRL::ComPtr<ID3D11DepthStencilView> dsv;
-Microsoft::WRL::ComPtr<ID3D11InputLayout> inputLayout;
 
 //Rasterizer states
 std::unordered_map<std::string, std::unique_ptr<RastState>> rastStateMap;
@@ -269,7 +267,6 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 
 	CreateSwapchain((HWND)window);
 	CreateRTVAndDSV();
-	CreateInputLayout();
 	CreateRasterizerStates();
 	CreateBlendStates();
 	CreateConstantBuffers();
@@ -300,7 +297,6 @@ void Renderer::Cleanup()
 	}
 
 	dsv.Reset();
-	inputLayout.Reset();
 
 	rastStateMap.clear();
 	blendStateMap.clear();
@@ -429,30 +425,6 @@ void CreateRTVAndDSV()
 	HR(device->CreateTexture2D(&dsDesc, nullptr, depthStencilBuffer.GetAddressOf()));
 	assert(depthStencilBuffer);
 	HR(device->CreateDepthStencilView(depthStencilBuffer.Get(), nullptr, dsv.GetAddressOf()));
-}
-
-void CreateInputLayout()
-{
-	//@Todo: Because the game worlds are so simple for the time being, the vertex structure being fat with the animation
-	//variables is fine, it's only a few more bytes. Later on if you want to utilise D3D reflection and pretty input layouts
-	//up, can use https://takinginitiative.net/2011/12/11/directx-1011-basic-shader-reflection-automatic-input-layout-creation/
-	//as a starting point.
-
-	D3D11_INPUT_ELEMENT_DESC inputDesc[] =
-	{
-		{"COLOUR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, offsetof(Vertex, colour), D3D11_INPUT_PER_VERTEX_DATA, 0},
-		{"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Vertex, pos), D3D11_INPUT_PER_VERTEX_DATA, 0},
-		{"NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Vertex, normal), D3D11_INPUT_PER_VERTEX_DATA, 0},
-		{"TANGENT", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Vertex, tangent), D3D11_INPUT_PER_VERTEX_DATA, 0},
-		{"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, offsetof(Vertex, uv), D3D11_INPUT_PER_VERTEX_DATA, 0},
-		{"BONEINDICES", 0, DXGI_FORMAT_R32G32B32A32_UINT, 0, offsetof(Vertex, boneIndices), D3D11_INPUT_PER_VERTEX_DATA, 0},
-		{"WEIGHTS", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Vertex, weights), D3D11_INPUT_PER_VERTEX_DATA, 0},
-	};
-
-	VertexShader* shader = ShaderSystem::FindVertexShader(L"Default_vs.cso");
-
-	HR(device->CreateInputLayout(inputDesc, _countof(inputDesc), shader->GetByteCodeData(), shader->GetByteCodeSize(), inputLayout.GetAddressOf()));
-	context->IASetInputLayout(inputLayout.Get());
 }
 
 void CreateRasterizerStates()
@@ -769,7 +741,6 @@ void RenderShadowPass()
 	}
 
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	context->IASetInputLayout(inputLayout.Get());
 
 	shadowMap->BindDsvAndSetNullRenderTarget(context.Get());
 
@@ -801,6 +772,7 @@ void RenderShadowPass()
 		ShaderItem* shader = ShaderSystem::FindShaderItem("ShadowAnimation");
 
 		context->VSSetShader(shader->GetVertexShader(), nullptr, 0);
+		context->IASetInputLayout(shader->GetInputLayout());
 		context->PSSetShader(shader->GetPixelShader(), nullptr, 0);
 
 		//Set matrices
@@ -843,7 +815,6 @@ void RenderSetup()
 
 	context->OMSetRenderTargets(1, rtvs[frameIndex].GetAddressOf(), dsv.Get());
 
-	context->IASetInputLayout(inputLayout.Get());
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }
 
@@ -857,7 +828,6 @@ void RenderPostProcessSetup()
 
 	context->OMSetRenderTargets(1, postProcessRenderTarget.GetRTVAddress(), dsv.Get());
 
-	context->IASetInputLayout(inputLayout.Get());
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }
 
@@ -1106,7 +1076,7 @@ void Renderer::RenderLightProbeViews()
 			context->RSSetViewports(1, &viewport);
 			constexpr float clearColour[4] = { 0.f, 0.f, 0.f, 0.f };
 			context->ClearRenderTargetView(lightProbeRTVs[i].Get(), clearColour);
-			context->IASetInputLayout(inputLayout.Get());
+
 			context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 			context->OMSetRenderTargets(1, lightProbeRTVs[i].GetAddressOf(), nullptr);
 
@@ -1137,6 +1107,8 @@ void Renderer::RenderLightProbeViews()
 				context->RSSetState(mesh->GetRastState().GetData());
 
 				context->VSSetShader(lightProbeShader->GetVertexShader(), nullptr, 0);
+				context->IASetInputLayout(lightProbeShader->GetInputLayout());
+
 				context->PSSetShader(lightProbeShader->GetPixelShader(), nullptr, 0);
 
 				context->PSSetSamplers(0, 1, material.sampler->GetDataAddress());
@@ -1364,6 +1336,7 @@ void RenderPhysicsMeshes()
 
 		auto shaderItem = ShaderSystem::FindShaderItem("SolidColour");
 		context->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
+		context->IASetInputLayout(shaderItem->GetInputLayout());
 		context->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
 
 		SetVertexBuffer(mesh->GetVertexBuffer());
@@ -1693,6 +1666,7 @@ void AnimateAndRenderSkeletalMeshes()
 				//Set shader for skeletal animation
 				ShaderItem* shaderItem = ShaderSystem::FindShaderItem("Animation");
 				context->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
+				context->IASetInputLayout(shaderItem->GetInputLayout());
 				context->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
 
 				if (!skeletalMesh->GetNextAnimationName().empty())
@@ -2054,6 +2028,8 @@ void SetRenderPipelineStates(MeshComponent* mesh)
 	context->OMSetBlendState(material.blendState->GetData(), blendState, 0xFFFFFFFF);
 
 	context->VSSetShader(material.GetVertexShader(), nullptr, 0);
+	context->IASetInputLayout(material.GetInputLayout());
+
 	context->PSSetShader(material.GetPixelShader(), nullptr, 0);
 
 	context->PSSetSamplers(0, 1, material.sampler->GetDataAddress());
@@ -2072,6 +2048,8 @@ void SetRenderPipelineStatesForShadows(MeshComponent* mesh)
 	ShaderItem* shader = ShaderSystem::FindShaderItem("Shadow");
 
 	context->VSSetShader(shader->GetVertexShader(), nullptr, 0);
+	context->IASetInputLayout(shader->GetInputLayout());
+
 	context->PSSetShader(shader->GetPixelShader(), nullptr, 0);
 
 	context->IASetVertexBuffers(0, 1, mesh->GetVertexBuffer().GetDataAddress(), &Renderer::stride, &Renderer::offset);
@@ -2080,6 +2058,7 @@ void SetRenderPipelineStatesForShadows(MeshComponent* mesh)
 void SetShaders(ShaderItem* shaderItem)
 {
 	context->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
+	context->IASetInputLayout(shaderItem->GetInputLayout());
 	context->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
 }
 
@@ -2087,6 +2066,7 @@ void SetShaders(const std::string shaderItemName)
 {
 	ShaderItem* shaderItem = ShaderSystem::FindShaderItem(shaderItemName);
 	context->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
+	context->IASetInputLayout(shaderItem->GetInputLayout());
 	context->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
 }
 
@@ -2223,6 +2203,7 @@ void RenderWireframeForVertexPaintingAndPickedActor()
 
 			ShaderItem* shaderItem = ShaderSystem::FindShaderItem("SolidColour");
 			context->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
+			context->IASetInputLayout(shaderItem->GetInputLayout());
 			context->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
 
 			SetVertexBuffer(mesh->GetVertexBuffer());
