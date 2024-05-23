@@ -8,23 +8,19 @@ void BloomSeed::Create()
 	SetMeshFilename("cube.vmesh");
 }
 
-void BloomSeed::Tick(float deltaTime)
-{
-	__super::Tick(deltaTime);
-}
-
 Properties BloomSeed::GetProps()
 {
 	auto props = __super::GetProps();
 	props.title = GetTypeName();
-	props.Add("Planted", &mIsPlanted).change = std::bind(&BloomSeed::Test, this);
+	props.Add("Planted", &mIsPlanted);
 	return props;
 }
 
-void BloomSeed::Test()
+void BloomSeed::Plant()
 {
-	if (mIsPlanted)
+	if (!mIsPlanted)
 	{
+		mIsPlanted = true;
 		SetScale(XMVectorSet(1.f, 2.f, 1.f, 1.f));
 		RecalcCurrentNodeDontIgnoreThis();
 	}

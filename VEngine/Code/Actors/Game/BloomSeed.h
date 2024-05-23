@@ -11,11 +11,10 @@ public:
 	ACTOR_SYSTEM(BloomSeed);
 
 	void Create() override;
-	void Tick(float deltaTime) override;
 	Properties GetProps() override;
 
-private:
-	void Test();
+	void Plant();
 
+private:
 	bool mIsPlanted = false;
 };

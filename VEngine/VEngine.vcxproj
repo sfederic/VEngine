@@ -118,6 +118,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Code\Actors\Game\BloomSeedSoil.cpp" />
     <ClCompile Include="Code\Actors\Game\BloomSeed.cpp" />
     <ClCompile Include="Code\Actors\Game\TimerExplosive.cpp" />
     <ClCompile Include="Code\Editor\AssetIconListWidget.cpp" />
@@ -371,6 +372,7 @@
     <ClCompile Include="Code\Actors\Game\Lever.cpp" />
     <ClCompile Include="Code\Editor\Sequencer\Sequencer.cpp" />
     <ClCompile Include="Code\Actors\SequencerTrigger.cpp" />
+    <ClInclude Include="Code\Actors\Game\BloomSeedSoil.h" />
     <ClInclude Include="Code\Actors\Game\BloomSeed.h" />
     <ClInclude Include="Code\Actors\Game\TimerExplosive.h" />
     <ClInclude Include="Code\Actors\Game\TeleportGridActor.h" />
