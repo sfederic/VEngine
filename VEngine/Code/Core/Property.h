@@ -8,6 +8,11 @@
 
 struct Property
 {
+	// @Todo: there's something I want to try with the 'change' function. Since most actors have the direct type
+	// of the property (e.g. bool isHot;), if you could wrap all properties on an actor in some class, what you could
+	// do is call the Change() function every time the variable is set/get, then you wouldn't have to do weird shit
+	// in Tick() where you're constantly looping over bools.
+
 	//Function to call when the set value is changed.
 	std::function<void(void*)> change;
 
