@@ -1,3 +1,70 @@
+BloomSeed
+1
+ Enabled
+1
+ Position
+2 -0 3
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Audio LinkMove
+cloth_heavy.wav
+Audio LinkRotate
+chainmail1.wav
+BigGridActor
+0
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+MoveOnlyXAxis
+0
+MoveOnlyZAxis
+0
+Name
+BloomSeed0
+Obstacle
+1
+Planted
+0
+Rotate Pitch
+1
+Rotate Roll
+0
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+1164018683
+next
 Player
 1
  Enabled
@@ -70,25 +137,71 @@ DirectionalLightActor0
 UID
 1443591394
 next
-SequencerTrigger
-1
+MeshComponent
+4
+1842864247
+Mesh
  Enabled
 1
- Position
-2 0 2
- Rotation
--0 0 -0 1
+ Pos
+0 0 0
+ Rot
+0 0 0 1
  Scale
 1 1 1
  Visible
 1
-Name
-SequencerTrigger0
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_AudioType
+Default
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+char.vmesh
+Physics Static
+1
+Render Static
+0
+Sort Last
+0
+Trans. Occlude
+0
 UID
-3282956789
+212711528
 next
-MeshComponent
-3
 1842864247
 LinkEffectMesh
  Enabled
@@ -215,12 +328,12 @@ Trans. Occlude
 UID
 3614188990
 next
-1842864247
+1164018683
 Mesh
  Enabled
 1
  Pos
-0 0 0
+2 -0 3
  Rot
 0 0 0 1
  Scale
@@ -266,7 +379,7 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-char.vmesh
+cube.vmesh
 Physics Static
 1
 Render Static
@@ -276,31 +389,10 @@ Sort Last
 Trans. Occlude
 0
 UID
-212711528
-next
-BoxTriggerComponent
-1
-3282956789
-BoxTrigger
- Enabled
-1
- Pos
-2 0 2
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Extents
-0.45 0.45 0.45
-Offset
-0 0 0
-UID
-2450153988
+1616147828
 next
 DialogueComponent
-1
+2
 1842864247
 Dialogue
  Enabled
@@ -311,6 +403,17 @@ File
 
 UID
 2495667995
+next
+1164018683
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+1936511359
 next
 InstanceMeshComponent
 1
