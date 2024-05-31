@@ -41,6 +41,7 @@ public:
 	void OnceOffAddToViewport(float removeTimer);
 	void RemoveFromViewport();
 	void RemoveFromViewportAndDelete();
+	void ToggleInViewport();
 
 	bool IsInViewport();
 

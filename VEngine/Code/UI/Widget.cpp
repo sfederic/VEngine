@@ -45,6 +45,18 @@ void Widget::RemoveFromViewportAndDelete()
 	UISystem::DestroyWidget(this);
 }
 
+void Widget::ToggleInViewport()
+{
+	if (IsInViewport())
+	{
+		RemoveFromViewport();
+	}
+	else
+	{
+		AddToViewport();
+	}
+}
+
 bool Widget::IsInViewport()
 {
 	for (Widget* widget : UISystem::widgetsInViewport)
