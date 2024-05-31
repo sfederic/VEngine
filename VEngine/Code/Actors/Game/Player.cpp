@@ -22,7 +22,6 @@
 #include "UI/UISystem.h"
 #include "UI/Game/DialogueWidget.h"
 #include "UI/Game/InteractWidget.h"
-#include "UI/Game/PauseGameWidget.h"
 #include "Gameplay/GameUtils.h"
 
 //Distance the player can ray/box cast to a grid actor to link to.
@@ -85,7 +84,6 @@ void Player::Start()
 
 	//Setup widgets
 	interactWidget = UISystem::CreateWidget<InteractWidget>();
-	pauseGameWidget = UISystem::CreateWidget<PauseGameWidget>();
 }
 
 void Player::End()
@@ -126,11 +124,6 @@ void Player::Tick(float deltaTime)
 	MakeOccludingMeshBetweenCameraAndPlayerTransparent();
 
 	dialogueComponent->SetPosition(GetHomogeneousPositionV());
-
-	if (Input::GetKeyUp(Keys::Esc))
-	{
-		pauseGameWidget->ToggleInViewport();
-	}
 
 	//Lerp actor position and rotation
 	if (inHop)

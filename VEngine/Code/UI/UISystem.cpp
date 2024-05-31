@@ -3,16 +3,19 @@
 #include <cassert>
 #include <dxgi1_6.h>
 #include "Core/Debug.h"
+#include "Core/Input.h"
 #include "Core/Core.h"
 #include "UI/Widget.h"
 #include "UI/ScreenFadeWidget.h"
 #include "UI/Game/MapInfoWidget.h"
+#include "UI/Game/PauseGameWidget.h"
 #include "Core/SystemStates.h"
 
 static SystemStates systemState = SystemStates::Unloaded;
 
 ScreenFadeWidget* UISystem::screenFadeWidget;
 MapInfoWidget* UISystem::mapInfoWidget;
+PauseGameWidget* gPauseGameWidget;
 
 std::unordered_map<UID, std::unique_ptr<Widget>> UISystem::widgets;
 
@@ -77,6 +80,16 @@ void UISystem::Init(void* swapchain)
 	systemState = SystemStates::Loaded;
 }
 
+void UISystem::Tick()
+{
+	//@Todo: Tab as input is no good. Need to figure something out. Esc is for existing play in-editor.
+	if (Input::GetKeyUp(Keys::Tab))
+	{
+		gPauseGameWidget->ToggleInViewport();
+		gPauseGameWidget->ToggleGamePaused();
+	}
+}
+
 void UISystem::BeginDraw()
 {
 	d2dRenderTarget->BeginDraw();
@@ -112,6 +125,7 @@ void UISystem::CreateGlobalWidgets()
 {
 	screenFadeWidget = CreateWidget<ScreenFadeWidget>();
 	mapInfoWidget = CreateWidget<MapInfoWidget>();
+	gPauseGameWidget = CreateWidget<PauseGameWidget>();
 }
 
 void UISystem::DestroyWidget(Widget* widget)

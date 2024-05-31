@@ -7,7 +7,6 @@
 class DialogueComponent;
 class InteractWidget;
 class GridActor;
-class PauseGameWidget;
 class MeshComponent;
 class CameraComponent;
 struct GridNode;
@@ -34,7 +33,6 @@ public:
 	DialogueComponent* currentlyActiveDialogueComponent = nullptr;
 
 	InteractWidget* interactWidget = nullptr;
-	PauseGameWidget* pauseGameWidget = nullptr;
 
 	GridActor* gridActorInteractingWith = nullptr;
 

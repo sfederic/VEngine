@@ -99,6 +99,7 @@ void Engine::TickSystems(float deltaTime)
 	WorldEditor::Tick();
 	PhysicsSystem::Tick(deltaTime);
 	Renderer::Tick();
+	UISystem::Tick();
 
 	if (Core::gameplayOn && !Core::IsGameWorldPaused())
 	{

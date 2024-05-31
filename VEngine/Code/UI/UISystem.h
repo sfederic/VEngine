@@ -45,6 +45,7 @@ namespace UISystem
 	}
 
 	void Init(void* swapchain);
+	void Tick();
 	void BeginDraw();
 	void EndDraw();
 	void DrawAllWidgets(float deltaTime);
