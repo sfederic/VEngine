@@ -269,6 +269,12 @@ bool Actor::CheckComponentExists(std::string componentName)
 	return componentMap.find(componentName) != componentMap.end();
 }
 
+void Actor::SetRootComponent(SpatialComponent* component)
+{
+	assert(component);
+	rootComponent = component;
+}
+
 void Actor::AddChildToRoot(SpatialComponent* child)
 {
 	rootComponent->AddChild(child);
