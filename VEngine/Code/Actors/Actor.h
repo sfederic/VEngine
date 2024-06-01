@@ -113,6 +113,7 @@ public:
 	void AddComponent(Component* component);
 	void RemoveComponent(Component* componentToRemove);
 	bool CheckComponentExists(std::string componentName);
+	void AddChildToRoot(SpatialComponent* child);
 
 	void SetEmptyRootComponent();
 
