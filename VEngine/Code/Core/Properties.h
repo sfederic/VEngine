@@ -5,6 +5,12 @@
 #include "Property.h"
 #include "Render/RenderPropertyStructs.h"
 
+#define DEFAULT_PROPS Properties GetProps() override { \
+auto props = __super::GetProps(); \
+props.title = GetTypeName(); \
+return props; \
+} \
+
 struct Properties
 {
 	//PROPERTIES FOR TEXT
