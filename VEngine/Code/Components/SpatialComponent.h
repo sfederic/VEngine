@@ -39,6 +39,7 @@ public:
 	void SetLocalScale(XMVECTOR newScale);
 
 	void SetWorldScale(float uniformScale);
+	void SetWorldScale(XMFLOAT3 scale);
 	void SetWorldScale(XMVECTOR scale);
 
 	XMFLOAT4 GetLocalRotation() const;

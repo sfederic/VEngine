@@ -176,6 +176,11 @@ void SpatialComponent::SetWorldScale(float uniformScale)
 	SetWorldScale(XMVectorSet(uniformScale, uniformScale, uniformScale, 1.f));
 }
 
+void SpatialComponent::SetWorldScale(XMFLOAT3 scale)
+{
+	SetWorldScale(XMLoadFloat3(&scale));
+}
+
 void SpatialComponent::SetWorldScale(XMVECTOR scale)
 {
 	XMVECTOR relativeScale = scale;
