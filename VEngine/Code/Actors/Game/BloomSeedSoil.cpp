@@ -1,22 +1,23 @@
 #include "vpch.h"
 #include "BloomSeedSoil.h"
 #include "Components/BoxTriggerComponent.h"
+#include "Components/MeshComponent.h"
 #include "BloomSeed.h"
 
 BloomSeedSoil::BloomSeedSoil()
 {
+	moundMesh = CreateComponent<MeshComponent>("MoundMesh");
+	SetRootComponent(moundMesh);
+
 	boxTrigger = CreateComponent<BoxTriggerComponent>("BoxTrigger");
-	rootComponent->AddChild(boxTrigger);
+	AddChildToRoot(boxTrigger);
 }
 
 void BloomSeedSoil::Create()
 {
 	__super::Create();
 
-	canBeMovedInLink = false;
-	canBeRotatedInLink = false;
-
-	SetMeshFilename("mound.vmesh");
+	moundMesh->SetMeshFilename("mound.vmesh");
 
 	boxTrigger->AddLocalPosition(XMVectorSet(0.f, 1.f, 0.f, 1.f));
 }
