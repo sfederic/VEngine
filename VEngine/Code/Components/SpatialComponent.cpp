@@ -173,7 +173,7 @@ void SpatialComponent::SetLocalScale(XMVECTOR newScale)
 
 void SpatialComponent::SetWorldScale(float uniformScale)
 {
-	SetWorldScale(XMVectorSet(uniformScale, uniformScale, uniformScale, 0.f));
+	SetWorldScale(XMVectorSet(uniformScale, uniformScale, uniformScale, 1.f));
 }
 
 void SpatialComponent::SetWorldScale(XMVECTOR scale)
