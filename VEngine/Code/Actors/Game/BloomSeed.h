@@ -2,7 +2,7 @@
 
 #include "GridActor.h"
 
-//@Todo: actors needs a visual overhaul.
+class MeshComponent;
 
 //See that blooms into a flower platform when planted.
 class BloomSeed : public GridActor
@@ -10,11 +10,16 @@ class BloomSeed : public GridActor
 public:
 	ACTOR_SYSTEM(BloomSeed);
 
+	BloomSeed();
 	void Create() override;
+	void Start() override;
+	void Tick(float deltaTime) override;
 	Properties GetProps() override;
 
 	void Plant();
 
 private:
-	bool mIsPlanted = false;
+	MeshComponent* flowerBloomMesh = nullptr;
+
+	bool isPlanted = false;
 };
