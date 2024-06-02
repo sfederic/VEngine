@@ -109,6 +109,8 @@ public:
 	virtual void OnLinkRotate();
 	virtual void OnLinkRotateRight() {}
 	virtual void OnLinkRotateLeft() {}
+	virtual void OnLinkRotateUp() {}
+	virtual void OnLinkRotateDown() {}
 
 	virtual void OnRotationEnd() {}
 	virtual void OnMoveEnd() {}
