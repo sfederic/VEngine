@@ -44,8 +44,7 @@ void FuseGridActor::OnLinkMove()
 
 			hitFusedActor->Remove();
 
-			HitResult gridRecalcHit;
-			Grid::system.GetOnlyActor()->RecalcAllNodes(gridRecalcHit, true);
+			Grid::system.GetOnlyActor()->RecalcNodesToIgnoreLinkedGridActor(this);
 
 			//Reset this actor's next position so that moving into the fuse actor creates a LEGO-like 'click'.
 			SetNextPos(GetPositionV());
