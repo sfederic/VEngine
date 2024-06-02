@@ -35,6 +35,8 @@ void Lever::OnLinkRotateUp()
 	//These checks are the make sure the Level can only move in two 90 degree increments, back and forth.
 	if (!isLeverActive)
 	{
+		//Todo: this is no good because OnLinkRotate() is still going to be called in Player.cpp, making the 
+		//audio and sprite sheet still go off on rotate.
 		ResetNextRot();
 	}
 
