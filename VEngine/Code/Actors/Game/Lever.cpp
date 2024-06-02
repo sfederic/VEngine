@@ -28,21 +28,27 @@ Properties Lever::GetProps()
 	return props;
 }
 
-void Lever::OnLinkRotate()
+void Lever::OnLinkRotateUp()
 {
-	__super::OnLinkRotate();
+	__super::OnLinkRotateUp();
 
-	isLeverActive = !isLeverActive;
-
-	if (actorToActivate)
+	//These checks are the make sure the Level can only move in two 90 degree increments, back and forth.
+	if (!isLeverActive)
 	{
-		if (isLeverActive)
-		{
-			actorToActivate->Activate();
-		}
-		else
-		{
-			actorToActivate->Deactivate();
-		}
+		ResetNextRot();
 	}
+
+	isLeverActive = false;
+}
+
+void Lever::OnLinkRotateDown()
+{
+	__super::OnLinkRotateDown();
+
+	if (isLeverActive)
+	{
+		ResetNextRot();
+	}
+
+	isLeverActive = true;
 }

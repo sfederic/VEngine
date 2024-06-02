@@ -2,7 +2,6 @@
 
 #include "GridActor.h"
 
-//@Todo: this actor needs some limitations on how it'll be rotated. A lever can't be rotated 360 degrees.
 class Lever : public GridActor
 {
 public:
@@ -12,7 +11,8 @@ public:
 	void Start() override;
 	Properties GetProps() override;
 
-	void OnLinkRotate() override;
+	void OnLinkRotateUp() override;
+	void OnLinkRotateDown() override;
 
 private:
 	std::string actorToActivateName;

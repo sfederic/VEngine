@@ -456,6 +456,11 @@ void GridActor::ResetNextPos()
 	nextPos = GetPositionV();
 }
 
+void GridActor::ResetNextRot()
+{
+	nextRot = GetRotationV();
+}
+
 void GridActor::SetMeshFilename(std::string_view filename)
 {
 	_mesh->SetMeshFilename(filename);
