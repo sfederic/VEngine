@@ -66,7 +66,6 @@ public:
 		World::RemoveActorFromWorld(actors.back().get());
 		actors.pop_back();
 
-		//@Todo: Release/NoEditor #ifdef here later.
 		editor->UpdateWorldList();
 		editor->ClearProperties();
 	}
