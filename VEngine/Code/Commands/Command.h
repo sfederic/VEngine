@@ -24,13 +24,18 @@ struct Command : ICommand
 		{
 			return;
 		}
+
 		auto allProps = actor->GetAllProps();
 		for (auto& props : allProps)
 		{
-			auto data = props.GetDataAllowNull<T>(prop.name);
+			T* data = props.GetDataAllowNull<T>(prop.name);
 			if (data)
 			{
-				//@Todo: undo/redo for textures isn't working.
+				if (prop.change)
+				{
+					prop.change(data);
+				}
+
 				*data = value;
 			}
 		}
