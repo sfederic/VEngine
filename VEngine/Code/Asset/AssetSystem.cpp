@@ -167,7 +167,6 @@ void AssetSystem::BuildSingleVMeshFromFBX(const std::string fbxFilePath, const s
 	header.boneCount = meshData.skeleton.GetNumJoints();
 
 	//Note: Make sure there's a matching folder for meshes from where the fbx file came from. 
-	//@Todo: std::filesystem::create_directory could be used here for the above Note if needed.
 	FILE* file = nullptr;
 	fopen_s(&file, meshFilePath.string().c_str(), "wb");
 	assert(file);
