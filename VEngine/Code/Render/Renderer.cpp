@@ -1557,7 +1557,7 @@ void RenderPolyboards()
 	cbMatrices.Map(&shaderMatrices);
 	cbMatrices.SetVS();
 
-	SetBlendStateByName(BlendStates::Default);
+	SetBlendStateByName(BlendStates::Transparent);
 	SetRastStateByName(RastStates::noBackCull);
 	SetShaders("DefaultClip");
 
