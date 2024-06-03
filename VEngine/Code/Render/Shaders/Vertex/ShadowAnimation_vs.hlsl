@@ -12,14 +12,14 @@ VS_OUT main(VS_IN i)
     weights[3] = 1.0f - weights[0] - weights[1] - weights[2];
 
     float3 posL = float3(0.0f, 0.0f, 0.0f);
-    //float3 normalL = float3(0.0f, 0.0f, 0.0f);
+    float3 normalL = float3(0.0f, 0.0f, 0.0f);
     if(isAnimated)
     {
         for (int index = 0; index < 4; ++index)
         {
 		    //no nonuniform scaling
             posL += weights[index] * mul(boneTransforms[i.boneIndices[index]], float4(i.pos.xyz, 1.0f)).xyz;
-            //normalL += weights[index] * mul((float3x3) boneTransforms[i.boneIndices[index]], i.normal);
+            normalL += weights[index] * mul((float3x3) boneTransforms[i.boneIndices[index]], i.normal);
         }
     }
     else
@@ -32,7 +32,7 @@ VS_OUT main(VS_IN i)
     o.posWS = mul(model, float4(posL, 1.0f));
     float4 newUv = mul(texMatrix, float4(i.uv, 0.f, 1.0f));
     o.uv = float2(newUv.x, newUv.y);
-    o.normal = mul((float3x3) model, i.normal);
+    o.normal = mul((float3x3) model, normalL);
     o.shadowPos = mul(lightMVP, o.pos);
     o.instanceID = i.instanceID;
     o.tangent = i.tangent;
