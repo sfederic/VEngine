@@ -17,6 +17,7 @@
 #include "Editor/DebugMenu.h"
 #include "Core.h"
 #include "Core/Log.h"
+#include "Commands/CommandSystem.h"
 #include "Asset/AssetBaseFolders.h"
 #include "Render/TextureSystem.h"
 #include "Render/Texture2D.h"
@@ -650,6 +651,11 @@ void QuickMeshChangeMenu()
 
 				for (auto mesh : pickedActor->GetComponents<MeshComponent>())
 				{
+					//Make sure the command add is done before changing the mesh value
+					auto meshProps = mesh->GetProps();
+					auto meshComponentDataProperty = meshProps.GetProperty("Mesh");
+					CommandSystem::Get().AddCommand<MeshComponentData>(*meshComponentDataProperty);
+
 					mesh->SetMeshFilename(meshFilename);
 					mesh->ReCreate();
 					Log("[%s] mesh [%u] changed mesh filename to [%s].",
@@ -682,6 +688,10 @@ void QuickTextureChangeMenu()
 
 				for (auto mesh : pickedActor->GetComponents<MeshComponent>())
 				{
+					auto meshProps = mesh->GetProps();
+					auto textureDataProperty = meshProps.GetProperty("M_Texture");
+					CommandSystem::Get().AddCommand<TextureData>(*textureDataProperty);
+
 					mesh->SetTexture(textureFilename);
 					Log("[%s] mesh [%u] changed mesh texture to [%s].",
 						pickedActor->GetName().c_str(), mesh->GetUID(), textureFilename.c_str());
