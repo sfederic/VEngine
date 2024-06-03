@@ -4,8 +4,6 @@ VS_OUT main(VS_IN i)
 {
     VS_OUT o;
 
-    //@Todo: consolidate this code with TransformOut.hlsli
-    
 	//VERTEX BLENDING FOR SKINNED ANIMATION
     float weights[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
     weights[0] = i.weights.x;
