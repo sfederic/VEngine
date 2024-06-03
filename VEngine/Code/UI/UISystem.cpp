@@ -82,8 +82,7 @@ void UISystem::Init(void* swapchain)
 
 void UISystem::Tick()
 {
-	//@Todo: Tab as input is no good. Need to figure something out. Esc is for existing play in-editor.
-	if (Core::gameplayOn && Input::GetKeyUp(Keys::Tab))
+	if (Core::gameplayOn && Input::GetKeyUp(Keys::M))
 	{
 		gPauseGameWidget->ToggleInViewport();
 		gPauseGameWidget->ToggleGamePaused();
