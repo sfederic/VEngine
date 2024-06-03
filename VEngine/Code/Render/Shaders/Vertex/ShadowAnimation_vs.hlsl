@@ -29,8 +29,6 @@ VS_OUT main(VS_IN i)
         posL = i.pos.xyz;
     }
 
-    //@Todo: shadow doesn't exist if animation isn't playing, because there are no bone matrices sent in.
-    //Could probably fix this with a bool in a constant buffer to make 'posL' all 1s so the mul() doesn't fall over.
     o.pos = mul(model, float4(posL, 1.0f));
     o.pos = mul(lightViewProj, o.pos);
     o.posWS = mul(model, float4(posL, 1.0f));
