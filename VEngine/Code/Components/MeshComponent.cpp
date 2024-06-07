@@ -159,6 +159,7 @@ Properties MeshComponent::GetProps()
 	props.Add("Trans. Occlude", &transparentOcclude);
 	props.Add("Grid Obst.", &gridObstacle);
 	props.Add("Grid Ignore", &ignoreGridRaycasts);
+	props.Add("Player Traversable", &canPlayerTraverse);
 	props.Add("Sort Last", &alwaysSortLast);
 
 	auto materialProps = material->GetProps();

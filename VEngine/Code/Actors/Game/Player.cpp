@@ -1059,6 +1059,20 @@ void Player::CheckNextMoveNode(const XMVECTOR previousPos)
 		}
 	}
 
+	//Raycast to test whether mesh can be walked on by player.
+	HitResult traversableHit(this);
+	auto traversableCastEnd = nextPos;
+	traversableCastEnd.m128_f32[1] -= 10.f; //This value might need testing in different scenarios.
+	if (Physics::Raycast(traversableHit, nextPos + VMath::GlobalUpVector(), traversableCastEnd))
+	{
+		auto mesh = traversableHit.hitActor->GetFirstComponentOfTypeAllowNull<MeshComponent>();
+		if (mesh && !mesh->canPlayerTraverse)
+		{
+			nextPos = previousPos;
+			return;
+		}
+	}
+
 	CuteHopToLowerNode(nextNode->worldPosition);
 
 	PlayFootstepAudio();
