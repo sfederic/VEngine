@@ -2404,6 +2404,39 @@ void VertexColourLightBake()
 			}
 		}
 
+		for (const auto& spotLight : SpotLightComponent::system.GetComponents())
+		{
+			for (auto& vertex : vertices)
+			{
+				const auto vertexPos = XMLoadFloat3(&vertex.pos);
+				const auto worldSpaceVertexPos = XMVector3TransformCoord(vertexPos, meshWorldMatrix);
+
+				auto normal = XMLoadFloat3(&vertex.normal);
+				normal = XMVector3TransformNormal(normal, meshWorldMatrix);
+				normal = XMVector3Normalize(normal);
+
+				HitResult vertexRayHit;
+				vertexRayHit.AddAllRenderStaticMeshesToIgnore();
+				vertexRayHit.ignoreBackFaceHits = false;
+				vertexRayHit.ignoreLayer = CollisionLayers::Editor;
+
+				const auto spotLightWorldPos = spotLight->GetWorldPositionV();
+				const auto rayOrigin = worldSpaceVertexPos + (normal * 0.1f);
+
+				const float angleBetweenSpotLightForwardAndRaycastDirection =
+					XMConvertToDegrees(XMVector3AngleBetweenNormals(
+						spotLight->GetForwardVectorV(),
+						XMVector3Normalize(rayOrigin - spotLightWorldPos)).m128_f32[0]);
+				if (angleBetweenSpotLightForwardAndRaycastDirection <= spotLight->GetLightData().spotAngle)
+				{
+					if (!Physics::Raycast(vertexRayHit, rayOrigin, spotLight->GetWorldPositionV()))
+					{
+						vertex.colour = XMFLOAT4(1.f, 1.f, 1.f, 1.f);
+					}
+				}
+			}
+		}
+
 		mesh->CreateNewVertexBuffer();
 	}
 
