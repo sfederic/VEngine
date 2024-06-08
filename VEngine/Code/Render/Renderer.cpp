@@ -2322,7 +2322,6 @@ void RenderMeshToCaptureMeshIcon()
 //Don't actually want to use usual light calculations with vertex colour baking.
 //Because the pixel shaders are already adding colour to meshes, instead, vertex colour baking can be used
 //like a more coarse ambient occlusion, only considering raycast hits from the light source.
-//@Todo: still has the problem of multiple lights in the secen overwriting vertex colour data.
 void VertexColourLightBake()
 {
 	const auto startTime = Profile::QuickStart();
@@ -2337,6 +2336,12 @@ void VertexColourLightBake()
 
 		const auto meshWorldMatrix = mesh->GetWorldMatrix();
 		auto& vertices = mesh->GetAllVertices();
+
+		//Set all vertices to a default grey
+		for (auto& vertex : vertices)
+		{
+			vertex.colour = XMFLOAT4(0.3f, 0.3f, 0.3f, 1.f);
+		}
 
 		for (const auto& dLight : DirectionalLightComponent::system.GetComponents())
 		{
@@ -2357,13 +2362,8 @@ void VertexColourLightBake()
 				const auto rayOrigin = worldSpaceVertexPos + (normal * 0.1f);
 				const auto dLightDirection = dLight->GetForwardVectorV();
 				if (!Physics::Raycast(vertexRayHit, rayOrigin, -dLightDirection, 50.f))
-
 				{
 					vertex.colour = XMFLOAT4(1.f, 1.f, 1.f, 1.f);
-				}
-				else
-				{
-					vertex.colour = XMFLOAT4(0.3f, 0.3f, 0.3f, 1.f);
 				}
 			}
 		}
@@ -2390,10 +2390,6 @@ void VertexColourLightBake()
 				if (!Physics::Raycast(vertexRayHit, rayOrigin, pointLight->GetWorldPositionV()))
 				{
 					vertex.colour = XMFLOAT4(1.f, 1.f, 1.f, 1.f);
-				}
-				else
-				{
-					vertex.colour = XMFLOAT4(0.3f, 0.3f, 0.3f, 1.f);
 				}
 			}
 		}
