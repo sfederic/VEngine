@@ -55,45 +55,6 @@ std::vector<MeshComponent*> MeshComponent::GetAllStaticMeshes()
 	return meshes;
 }
 
-//@Todo: this is still not a great solution for transparency. Lot of meshes are overlapping their transparency
-//based on distance. Look into some helpful add-on solution, maybe even something dirty like:
-//"If multiple meshes have same world position, bring transparent blend state actors to front."
-std::vector<MeshComponent*> MeshComponent::SortMeshComponentsByDistance()
-{
-	struct MeshPack
-	{
-		MeshComponent* mesh = nullptr;
-		float distance = 0.f;
-	};
-	std::vector<MeshPack> meshPacks;
-
-	const XMVECTOR cameraPos = Camera::GetActiveCamera().GetWorldPositionV();
-
-	for (auto& mesh : system.GetComponents())
-	{
-		float distance = XMVector3Length(cameraPos - mesh->GetWorldPositionV()).m128_f32[0];
-		if (mesh->alwaysSortLast)
-		{
-			distance = std::numeric_limits<float>::max();
-		}
-		MeshPack pack = { mesh.get(), distance };
-		meshPacks.emplace_back(pack);
-	}
-
-	auto DistCompare = [](const MeshPack& leftPack, const MeshPack& rightPack)
-		{
-			return leftPack.distance > rightPack.distance;
-		};
-	std::sort(meshPacks.begin(), meshPacks.end(), DistCompare);
-
-	std::vector<MeshComponent*> sortedMeshes;
-	for (auto& pack : meshPacks)
-	{
-		sortedMeshes.emplace_back(pack.mesh);
-	}
-	return sortedMeshes;
-}
-
 MeshComponent::MeshComponent()
 {
 	material = &MaterialSystem::CreateMaterial("test.png", "Default");

@@ -21,7 +21,6 @@ public:
 	static void DestroyDebugMeshes();
 	static MeshComponent* GetDebugMesh(std::string name);
 	static std::vector<MeshComponent*> GetAllStaticMeshes();
-	static std::vector<MeshComponent*> SortMeshComponentsByDistance();
 
 	MeshComponentData meshComponentData;
 

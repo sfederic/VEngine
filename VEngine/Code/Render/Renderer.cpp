@@ -967,7 +967,7 @@ void RenderMeshComponents()
 	SetShadowResources();
 	SetLightResources();
 
-	auto meshes = MeshComponent::SortMeshComponentsByDistance();
+	auto meshes = RenderUtils::SortMeshesByDistanceToCamera<MeshComponent>();
 	for (auto mesh : meshes)
 	{
 		if (!mesh->IsVisible() || !mesh->IsActive())
@@ -1659,15 +1659,15 @@ void AnimateAndRenderSkeletalMeshes()
 	SetShadowResources();
 	SetLightResources();
 
-	for (auto& skeletalMesh : SkeletalMeshComponent::system.GetComponents()) //@Todo: figure out transparency sort
+	for (auto skeletalMesh : RenderUtils::SortMeshesByDistanceToCamera<SkeletalMeshComponent>())
 	{
 		if (!skeletalMesh->IsVisible()) { continue; }
 
-		SetRenderPipelineStates(skeletalMesh.get());
+		SetRenderPipelineStates(skeletalMesh);
 
 		//Constant buffer data
-		SetMatricesFromMesh(skeletalMesh.get());
-		SetShaderMeshData(skeletalMesh.get());
+		SetMatricesFromMesh(skeletalMesh);
+		SetShaderMeshData(skeletalMesh);
 
 		if (!skeletalMesh->GetCurrentAnimationName().empty())
 		{
@@ -1695,7 +1695,7 @@ void AnimateAndRenderSkeletalMeshes()
 			}
 		}
 
-		DrawMesh(skeletalMesh.get());
+		DrawMesh(skeletalMesh);
 	}
 
 	SetGeneralShaderResourcesToNull();

@@ -2,8 +2,12 @@
 
 #include <cstdint>
 #include <string>
+#include <vector>
+#include <limits>
 #include <wrl.h>
 #include "Render/MeshData.h"
+#include "Core/Camera.h"
+#include <DirectXMath.h>
 
 struct ID3D11Buffer;
 struct ID3D11Device;
@@ -27,4 +31,43 @@ namespace RenderUtils
 	void CreateRastState(D3D11_RASTERIZER_DESC rastDesc, Microsoft::WRL::ComPtr<ID3D11RasterizerState>& rastState);
 	void CreateSamplerState(Microsoft::WRL::ComPtr<ID3D11SamplerState>& samplerState);
 	void SetResourceName(ID3D11DeviceChild* resource, std::string name);
+
+	//This function is done as a template because there are several classes inheriting from MeshComponent.
+	template <typename T>
+	std::vector<T*> SortMeshesByDistanceToCamera()
+	{
+		struct MeshPack
+		{
+			T* mesh;
+			float distance = 0.f;
+		};
+		std::vector<MeshPack> meshPacks;
+
+		const XMVECTOR cameraPos = Camera::GetActiveCamera().GetWorldPositionV();
+
+		for (const auto& mesh : T::system.GetComponents())
+		{
+			float distance = DirectX::XMVector3Length(cameraPos - mesh->GetWorldPositionV()).m128_f32[0];
+			if (mesh->alwaysSortLast)
+			{
+				distance = std::numeric_limits<float>::max();
+			}
+			MeshPack pack = { mesh.get(), distance };
+			meshPacks.emplace_back(pack);
+		}
+
+		const auto DistCompare = [](const MeshPack& leftPack, const MeshPack& rightPack)
+			{
+				return leftPack.distance > rightPack.distance;
+			};
+		std::sort(meshPacks.begin(), meshPacks.end(), DistCompare);
+
+		std::vector<T*> sortedMeshes;
+		for (auto& pack : meshPacks)
+		{
+			sortedMeshes.emplace_back(pack.mesh);
+		}
+
+		return sortedMeshes;
+	}
 };
