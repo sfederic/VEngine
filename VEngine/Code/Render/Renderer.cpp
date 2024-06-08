@@ -567,6 +567,11 @@ void SetShadowData()
 	if (DirectionalLightComponent::system.GetNumComponents() > 0)
 	{
 		auto dLight = DirectionalLightComponent::system.GetFirstComponent();
+		if (!dLight->IsActive())
+		{
+			shaderLights.shadowsEnabled = false;
+		}
+
 		shaderMatrices.lightMVP = shadowMap->DirectionalLightViewProjectionTextureMatrix(dLight);
 		shaderMatrices.lightViewProj =
 			shadowMap->GetLightViewMatrix(dLight) * shadowMap->GetDirectionalLightOrthoMatrix();
@@ -576,6 +581,11 @@ void SetShadowData()
 	else if (SpotLightComponent::system.GetNumComponents() > 0)
 	{
 		auto spotLight = SpotLightComponent::system.GetFirstComponent();
+		if (!spotLight->IsActive())
+		{
+			shaderLights.shadowsEnabled = false;
+		}
+
 		shaderMatrices.lightMVP = shadowMap->SpotLightViewProjectionTextureMatrix(spotLight);
 		shaderMatrices.lightViewProj =
 			shadowMap->GetLightViewMatrix(spotLight) * shadowMap->GetSpotLightPerspectiveMatrix(spotLight);
