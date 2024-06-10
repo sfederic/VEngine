@@ -1199,14 +1199,17 @@ void RenderInstanceMeshComponents()
 	cbMatrices.Map(&shaderMatrices);
 	cbMatrices.SetVS();
 
-	for (auto instanceMesh : RenderUtils::SortMeshesByDistanceToCamera<InstanceMeshComponent>())
+	//Note: Sorting instance meshes for transparency won't work, mesh instances could be anywhere in the world.
+	//Correct transparency isn't supported right now, and only gets by by calling this function before
+	//mesh components are rendered.
+	for (auto& instanceMesh : InstanceMeshComponent::system.GetComponents())
 	{
 		if (!instanceMesh->IsVisible() || !instanceMesh->IsActive())
 		{
 			continue;
 		}
 
-		SetRenderPipelineStates(instanceMesh);
+		SetRenderPipelineStates(instanceMesh.get());
 
 		//Update texture matrix
 		shaderMatrices.MakeTextureMatrix(instanceMesh->GetMaterial());
@@ -1221,7 +1224,7 @@ void RenderInstanceMeshComponents()
 		//Set lights buffer
 		cbLights.SetPS();
 
-		DrawMeshInstanced(instanceMesh);
+		DrawMeshInstanced(instanceMesh.get());
 	}
 
 	Profile::End();
