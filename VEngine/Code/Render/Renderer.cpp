@@ -1191,7 +1191,6 @@ void Renderer::RenderLightProbeViews()
 void RenderInstanceMeshComponents()
 {
 	//@Todo: shadows for instancemeshes
-	//@Todo: animated instance meshes
 
 	Profile::Start();
 
