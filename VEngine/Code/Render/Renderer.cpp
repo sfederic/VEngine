@@ -1262,8 +1262,6 @@ void RenderBounds()
 			DrawBoundingBox(skeletalMesh.get(), debugBox);
 		}
 
-		//@Todo: drawing bounds for instance meshes is hard, but have a think about it.
-
 		for (auto& boxData : debugOrientedBoxesOnTimerToRender)
 		{
 			const auto& box = boxData.bb;
