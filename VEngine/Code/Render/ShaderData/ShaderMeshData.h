@@ -4,7 +4,8 @@
 
 struct ShaderMeshData
 {
-	DirectX::XMFLOAT4 SH[9]{};
 	DirectX::XMFLOAT3 position = DirectX::XMFLOAT3(0.f, 0.f, 0.f);
-	int isDiffuseProbeMapActive = false;
+
+private:
+	float padding;
 };

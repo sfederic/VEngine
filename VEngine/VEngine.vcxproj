@@ -385,6 +385,7 @@
     <ClInclude Include="Code\Editor\Sequencer\SequenceEntryTypes.h" />
     <ClInclude Include="Code\Render\BlendState.h" />
     <ClInclude Include="Code\Render\ShaderData\ShaderCameraData.h" />
+    <ClInclude Include="Code\Render\ShaderData\ShaderLightProbeData.h" />
     <ClInclude Include="Code\Render\VertexBuffer.h" />
     <ClInclude Include="Code\Core\BinaryDeserialiser.h" />
     <ClInclude Include="Code\Core\BinarySerialiser.h" />

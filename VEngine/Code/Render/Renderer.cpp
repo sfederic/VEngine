@@ -53,6 +53,7 @@
 #include "Render/ShaderData/ShaderCameraData.h"
 #include "Render/ShaderData/ShaderSkinningData.h"
 #include "Render/ShaderData/ShaderTimeData.h"
+#include "Render/ShaderData/ShaderLightProbeData.h"
 #include "Render/SpriteSystem.h"
 #include "Render/VertexShader.h"
 #include "RenderUtils.h"
@@ -134,6 +135,7 @@ void SetLightResources();
 void SetShadowResources();
 void SetMatricesFromMesh(MeshComponent* mesh);
 void SetShaderMeshData(MeshComponent* mesh);
+void SetLightProbeData(MeshComponent* mesh);
 void SetRenderPipelineStates(MeshComponent* mesh);
 void SetRenderPipelineStatesForShadows(MeshComponent* mesh);
 void SetShaders(std::string shaderItemName);
@@ -194,6 +196,7 @@ ConstantBuffer<ShaderMeshData> cbMeshData;
 ConstantBuffer<ShaderSkinningData> cbSkinningData;
 ConstantBuffer<ShaderPostProcessData> cbPostProcess;
 ConstantBuffer<ShaderCameraData> cbCameraData;
+ConstantBuffer<ShaderLightProbeData> cbLightProbeData;
 
 //Viewport
 D3D11_VIEWPORT viewport;
@@ -499,7 +502,6 @@ void CreateBlendStates()
 
 void CreateConstantBuffers()
 {
-	//Registers
 	const int cbMatrixRegister = 0;
 	const int cbMaterialRegister = 1;
 	const int cbSkinningRegister = 2;
@@ -507,37 +509,34 @@ void CreateConstantBuffers()
 	const int cbTimeRegister = 4;
 	const int cbMeshDataRegister = 5;
 	const int cbCameraDataRegister = 6;
+	const int cbLightProbeDataRegister = 7;
 
-	//Shader matrix constant buffer
 	shaderMatrices.Create();
 
 	cbMatrices.Create(&shaderMatrices, cbMatrixRegister);
 
-	//Material buffer
 	MaterialShaderData materialShaderData = {};
 	cbMaterial.Create(&materialShaderData, cbMaterialRegister);
 
-	//Lights buffer
 	cbLights.Create(&shaderLights, cbLightsRegister);
 
-	//Time buffer
 	ShaderTimeData timeData = {};
 	cbTime.Create(&timeData, cbTimeRegister);
 
-	//Mesh data buffer
 	ShaderMeshData meshData = {};
 	cbMeshData.Create(&meshData, cbMeshDataRegister);
 
-	//Skinning data
 	ShaderSkinningData skinningData = {};
 	cbSkinningData.Create(&skinningData, cbSkinningRegister);
 
-	//Post process data
 	ShaderPostProcessData postProcessData = {};
 	cbPostProcess.Create(&postProcessData, 0);
 
 	ShaderCameraData cameraData;
 	cbCameraData.Create(&cameraData, cbCameraDataRegister);
+
+	ShaderLightProbeData lightProbeData;
+	cbLightProbeData.Create(&lightProbeData, cbLightProbeDataRegister);
 }
 
 void MapBuffer(ID3D11Resource* resource, const void* src, size_t size)
@@ -928,9 +927,14 @@ void SetShaderMeshData(MeshComponent* mesh)
 {
 	ShaderMeshData meshData = {};
 	meshData.position = mesh->GetWorldPosition();
+	cbMeshData.Map(&meshData);
+	cbMeshData.SetVSAndPS();
+}
 
-	//@Todo: light probe data should have its own constant buffer, for now in testing, it's part of ShaderMeshData
-	//Set light probe resources
+void SetLightProbeData(MeshComponent* mesh)
+{
+	ShaderLightProbeData lightProbeData;
+
 	if (!DiffuseProbeMap::system.GetActors().empty())
 	{
 		context->PSSetShaderResources(environmentMapTextureRegister, 1, lightProbeSRV.GetAddressOf());
@@ -946,17 +950,17 @@ void SetShaderMeshData(MeshComponent* mesh)
 			probeData = lightProbeMap->FindClosestProbe(mesh->GetWorldPositionV());
 		}
 
-		memcpy(meshData.SH, probeData.SH, sizeof(XMFLOAT4) * 9);
+		memcpy(lightProbeData.SH, probeData.SH, sizeof(XMFLOAT4) * 9);
 
-		meshData.isDiffuseProbeMapActive = DiffuseProbeMap::system.GetOnlyActor()->IsActive();
+		lightProbeData.isDiffuseProbeMapActive = DiffuseProbeMap::system.GetOnlyActor()->IsActive();
 	}
 	else
 	{
-		meshData.isDiffuseProbeMapActive = false;
+		lightProbeData.isDiffuseProbeMapActive = false;
 	}
 
-	cbMeshData.Map(&meshData);
-	cbMeshData.SetVSAndPS();
+	cbLightProbeData.Map(&lightProbeData);
+	cbLightProbeData.SetVSAndPS();
 }
 
 void RenderMeshComponents()
@@ -980,6 +984,7 @@ void RenderMeshComponents()
 		//Constant buffer data
 		SetMatricesFromMesh(mesh);
 		SetShaderMeshData(mesh);
+		SetLightProbeData(mesh);
 
 		DrawMesh(mesh);
 	}
@@ -996,6 +1001,7 @@ void RenderMeshComponents()
 		//Constant buffer data
 		SetMatricesFromMesh(mesh.get());
 		SetShaderMeshData(mesh.get());
+		SetLightProbeData(mesh.get());
 
 		DrawMesh(mesh.get());
 	}
@@ -1024,6 +1030,8 @@ void RenderDestructibleMeshes()
 			SetRenderPipelineStates(meshCell);
 			SetMatricesFromMesh(meshCell);
 			SetShaderMeshData(meshCell);
+			SetLightProbeData(meshCell);
+
 			DrawMesh(meshCell);
 		}
 	}
@@ -1711,6 +1719,7 @@ void RenderSocketMeshComponents()
 
 		SetMatricesFromMesh(socketMesh.get());
 		SetShaderMeshData(socketMesh.get());
+		SetLightProbeData(socketMesh.get());
 
 		DrawMesh(socketMesh.get());
 	}
@@ -2213,6 +2222,7 @@ void RenderWireframeForVertexPaintingAndPickedActor()
 
 			SetMatricesFromMesh(mesh);
 			SetShaderMeshData(mesh);
+			SetLightProbeData(mesh);
 
 			DrawMesh(mesh);
 		};
@@ -2314,6 +2324,8 @@ void RenderMeshToCaptureMeshIcon()
 	SetRenderPipelineStates(mesh);
 	SetMatricesFromMesh(mesh);
 	SetShaderMeshData(mesh);
+	SetLightProbeData(mesh);
+
 	DrawMesh(mesh);
 
 	mesh->Remove();

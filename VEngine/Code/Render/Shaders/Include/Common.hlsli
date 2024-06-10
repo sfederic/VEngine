@@ -129,9 +129,7 @@ cbuffer cbTime : register(b4)
 
 cbuffer cbMeshData : register(b5)
 {
-    float4 SH[9]; //Spherical Harmonics for probe linked to mesh
 	float3 meshPosition;
-    bool isDiffuseProbeMapActive;
 }
 
 cbuffer cbCameraData : register(b6)
@@ -139,6 +137,12 @@ cbuffer cbCameraData : register(b6)
     float4 cameraWorldPos;
     float4 cameraForwardVector;
 };
+
+cbuffer cbLightProbeData : register(b7)
+{
+    float4 SH[9]; //Spherical Harmonics for probe linked to mesh
+    bool isDiffuseProbeMapActive;
+}
 
 //Stole all this from https://interplayoflight.wordpress.com/2021/12/31/occlusion-and-directionality-in-image-based-lighting-implementation-details/ for simple diffuse testing.
 //Was the only online example working with DXMath's SH lib.
