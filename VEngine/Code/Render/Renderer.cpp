@@ -1190,8 +1190,6 @@ void Renderer::RenderLightProbeViews()
 
 void RenderInstanceMeshComponents()
 {
-	//@Todo: shadows for instancemeshes
-
 	Profile::Start();
 
 	//Set matrices (Instance mesh model matrices placed in a structured buffer)
