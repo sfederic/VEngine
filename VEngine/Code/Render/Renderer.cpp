@@ -1202,18 +1202,14 @@ void RenderInstanceMeshComponents()
 	cbMatrices.Map(&shaderMatrices);
 	cbMatrices.SetVS();
 
-	for (auto& instanceMesh : InstanceMeshComponent::system.GetComponents())
+	for (auto instanceMesh : RenderUtils::SortMeshesByDistanceToCamera<InstanceMeshComponent>())
 	{
 		if (!instanceMesh->IsVisible() || !instanceMesh->IsActive())
 		{
 			continue;
 		}
 
-		//@Todo: instance meshes won't render behind transparent objects unless RenderInstanceMeshes() is called
-		//before RenderMeshComponents(). However doing so will render instance meshes seemingly without a 
-		//blend state, even though one appears to be set. HOWEVER, certain instance meshes WILL render as if
-		//with a transparent blend state because you can see them blended though various instance meshes.
-		SetRenderPipelineStates(instanceMesh.get());
+		SetRenderPipelineStates(instanceMesh);
 
 		//Update texture matrix
 		shaderMatrices.MakeTextureMatrix(instanceMesh->GetMaterial());
@@ -1228,7 +1224,7 @@ void RenderInstanceMeshComponents()
 		//Set lights buffer
 		cbLights.SetPS();
 
-		DrawMeshInstanced(instanceMesh.get());
+		DrawMeshInstanced(instanceMesh);
 	}
 
 	Profile::End();
