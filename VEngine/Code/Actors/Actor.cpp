@@ -333,7 +333,6 @@ void Actor::ResetOwnerUIDToComponents()
 	}
 }
 
-//@Todo: code here is no good. needs to work with all meshes on an actor.
 bool Actor::CanBeTransparentlyOccluded()
 {
 	auto mesh = GetFirstComponentOfTypeAllowNull<MeshComponent>();
