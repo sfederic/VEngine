@@ -1651,7 +1651,6 @@ void RenderSpriteSheets()
 	Profile::End();
 }
 
-//@Todo: think about splitting render and animate up
 void AnimateAndRenderSkeletalMeshes()
 {
 	Profile::Start();
