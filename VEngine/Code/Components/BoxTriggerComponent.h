@@ -7,10 +7,6 @@
 class Actor;
 struct HitResult;
 
-//@Todo: Would like to have an event system for BoxTriggers instead of logic through
-//Tick()s constantly calling. Essentially would have it so when a target actor enters and exits,
-//and event fires and that's it, like in Unity with OnTriggerEnter() or Unreal.
-
 class BoxTriggerComponent : public SpatialComponent
 {
 public:
