@@ -61,7 +61,6 @@ Properties AudioComponent::GetProps()
 void AudioComponent::Play()
 {
 	auto channel = AudioSystem::GetChannel(channelID);
-	//@Todo: this is still not right. The audio channel is only paused, not restarted.
 	channel->sourceVoice->Start();
 }
 
