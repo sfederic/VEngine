@@ -409,6 +409,21 @@ namespace VMath
 		return XMVector3Length(pos1 - pos2).m128_f32[0];
 	}
 
+	bool IsToRightOfVector(XMVECTOR v0, XMVECTOR v1)
+	{
+		const auto delta = XMVector3Normalize(v0);
+		const auto cross = XMVector3Cross(delta, v1);
+
+		if (cross.m128_f32[1] > 0.f) //vector is to the right
+		{
+			return true;
+		}
+		else //vector is to the left
+		{
+			return false;
+		}
+	}
+
 	XMVECTOR CalcMidPoint(XMVECTOR p0, XMVECTOR p1)
 	{
 		return (p0 + p1) / 2;

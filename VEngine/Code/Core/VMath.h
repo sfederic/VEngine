@@ -78,6 +78,8 @@ namespace VMath
 
 	float Distance(XMVECTOR pos1, XMVECTOR pos2);
 
+	bool IsToRightOfVector(XMVECTOR v0, XMVECTOR v1);
+
 	//Calculate middle position between two points in-world.
 	XMVECTOR CalcMidPoint(XMVECTOR p0, XMVECTOR p1);
 
