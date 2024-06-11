@@ -187,12 +187,11 @@ void GridActor::Tick(float deltaTime)
 	CheckSetIsRotating();
 
 	CheckIfSubmerged();
-	if (isSubmerged)
-	{
-		return;
-	}
 
-	FallCheck(deltaTime);
+	if (!isSubmerged)
+	{
+		FallCheck(deltaTime);
+	}
 
 	if (inFall)
 	{
@@ -490,10 +489,13 @@ bool GridActor::IsNextMoveAxisValid(XMVECTOR direction)
 	return true;
 }
 
-//@Todo: this code should be moved to WaterVolume. Come back to it if water puzzles pick up in quantity.
-//Also it doesn't work too well in its current state. The Grid actor sits on top of the water.
 void GridActor::CheckIfSubmerged()
 {
+	if (!CheckMovementAndRotationStopped())
+	{
+		return;
+	}
+
 	for (auto& waterVolume : WaterVolume::system.GetActors())
 	{
 		auto pos = GetPositionV();
