@@ -169,7 +169,7 @@ uint64_t AudioSystem::LoadAudio(const std::string filename, bool loopAudio)
 		if (audioIt == loadedAudioMap.end())
 		{
 			Log("Audio file [%s] in PlayAudio() not found.", filename.c_str());
-			return 0; //@Todo: could this be an issue?
+			throw new std::exception("Audio file not found");
 		}
 	}
 
