@@ -1,5 +1,6 @@
 #include "vpch.h"
 #include "Lever.h"
+#include "Gameplay/GameUtils.h"
 
 void Lever::Create()
 {
@@ -28,6 +29,13 @@ Properties Lever::GetProps()
 	return props;
 }
 
+//Careful with this function. It's purposefully not calling super::OnLinkRotate() to avoid conflicting
+//events in OnLinkRotateUp and Down.
+void Lever::OnLinkRotate()
+{
+	isRotating = true;
+}
+
 void Lever::OnLinkRotateUp()
 {
 	__super::OnLinkRotateUp();
@@ -35,9 +43,11 @@ void Lever::OnLinkRotateUp()
 	//These checks are the make sure the Level can only move in two 90 degree increments, back and forth.
 	if (!isLeverActive)
 	{
-		//Todo: this is no good because OnLinkRotate() is still going to be called in Player.cpp, making the 
-		//audio and sprite sheet still go off on rotate.
 		ResetNextRot();
+	}
+	else
+	{
+		GameUtils::PlayAudioOneShot(linkRotateAudio);
 	}
 
 	isLeverActive = false;
@@ -50,6 +60,10 @@ void Lever::OnLinkRotateDown()
 	if (isLeverActive)
 	{
 		ResetNextRot();
+	}
+	else
+	{
+		GameUtils::PlayAudioOneShot(linkRotateAudio);
 	}
 
 	isLeverActive = true;

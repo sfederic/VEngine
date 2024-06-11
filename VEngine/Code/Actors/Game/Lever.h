@@ -11,6 +11,7 @@ public:
 	void Start() override;
 	Properties GetProps() override;
 
+	void OnLinkRotate() override;
 	void OnLinkRotateUp() override;
 	void OnLinkRotateDown() override;
 
