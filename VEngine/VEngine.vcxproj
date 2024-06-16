@@ -365,7 +365,6 @@
     <ClCompile Include="Code\Actors\Game\Steam.cpp" />
     <ClCompile Include="Code\Actors\Game\Grass.cpp" />
     <ClCompile Include="Code\Actors\Game\TransformativeGridActor.cpp" />
-    <ClCompile Include="Code\Components\SphereTriggerComponent.cpp" />
     <ClCompile Include="Code\Actors\Game\WindowGridActor.cpp" />
     <ClCompile Include="Code\Actors\Game\Lever.cpp" />
     <ClCompile Include="Code\Editor\Sequencer\Sequencer.cpp" />
@@ -771,7 +770,6 @@
     <ClInclude Include="Code\Actors\Game\Steam.h" />
     <ClInclude Include="Code\Actors\Game\Grass.h" />
     <ClInclude Include="Code\Actors\Game\TransformativeGridActor.h" />
-    <ClInclude Include="Code\Components\SphereTriggerComponent.h" />
     <ClInclude Include="Code\Actors\Game\WindowGridActor.h" />
     <ClInclude Include="Code\Actors\Game\Lever.h" />
     <ClInclude Include="Code\Editor\Sequencer\Sequencer.h" />
