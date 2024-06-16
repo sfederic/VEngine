@@ -19,8 +19,6 @@ uint64_t nextChannelID = 0;
 IXAudio2* audioEngine = nullptr; //Main XAudio2 sound engine
 IXAudio2MasteringVoice* masteringVoice = nullptr; //Main track	
 
-//@Todo: this is ok for one track, needs some work if multiple are needed.
-//These variables are for the singular track that can play between worlds loading.
 std::string persistentAudioFilename;
 std::unique_ptr<AudioBase> persistentAudio;
 std::unique_ptr<AudioChannel> persistentChannel;
