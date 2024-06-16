@@ -845,9 +845,6 @@
     <ClCompile Include="Code\Components\SphereTriggerComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\VerticalMoveGridActor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Actors\Game\WindowGridActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1770,9 +1767,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Components\SphereTriggerComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Actors\Game\VerticalMoveGridActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\WindowGridActor.h">
