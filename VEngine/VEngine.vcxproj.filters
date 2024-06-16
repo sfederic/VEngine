@@ -275,9 +275,6 @@
     <ClCompile Include="Code\Actors\Billboard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Audio\AudioBase.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Audio\AudioChannel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

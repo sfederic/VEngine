@@ -198,7 +198,6 @@
     <ClCompile Include="Code\Actors\AudioActor.cpp" />
     <ClCompile Include="Code\Asset\AssetSystem.cpp" />
     <ClCompile Include="Code\Components\AudioComponent.cpp" />
-    <ClCompile Include="Code\Audio\AudioBase.cpp" />
     <ClCompile Include="Code\Audio\AudioChannel.cpp" />
     <ClCompile Include="Code\Components\BoxTriggerComponent.cpp" />
     <ClCompile Include="Code\Actors\ActorSystemCache.cpp" />
