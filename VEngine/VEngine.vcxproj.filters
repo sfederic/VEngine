@@ -812,9 +812,6 @@
     <ClCompile Include="Code\Actors\Game\FuseGridActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Particle\MeshEffect.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\UI\Game\InputIconWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1731,9 +1728,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\FuseGridActor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Particle\MeshEffect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\Game\InputIconWidget.h">

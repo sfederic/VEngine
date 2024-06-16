@@ -358,7 +358,6 @@
     <ClCompile Include="Code\Actors\Game\FuseGridActor.cpp" />
     <ClCompile Include="Code\UI\Game\InputIconWidget.cpp" />
     <ClCompile Include="Code\Actors\Game\InputTutorialGridActor.cpp" />
-    <ClCompile Include="Code\Particle\MeshEffect.cpp" />
     <ClCompile Include="Code\Actors\Game\TeleportGridActor.cpp" />
     <ClCompile Include="Code\Actors\Game\PressureSwitch.cpp" />
     <ClCompile Include="Code\Actors\Game\PivotDoor.cpp" />
@@ -764,7 +763,6 @@
     <ClInclude Include="Code\Actors\Game\FuseGridActor.h" />
     <ClInclude Include="Code\UI\Game\InputIconWidget.h" />
     <ClInclude Include="Code\Actors\Game\InputTutorialGridActor.h" />
-    <ClInclude Include="Code\Particle\MeshEffect.h" />
     <ClInclude Include="Code\Actors\Game\PressureSwitch.h" />
     <ClInclude Include="Code\Actors\Game\PivotDoor.h" />
     <ClInclude Include="Code\Actors\Game\Steam.h" />
