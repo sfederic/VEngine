@@ -16,29 +16,27 @@ void Nut::OnLinkRotateLeft()
 {
 	__super::OnLinkRotateLeft();
 
-	CheckIfConnectedToBolt(-GetUpVectorV());
+	constexpr float moveIncrement = 0.2f;
+	nextPos += GetUpVectorV() * moveIncrement;
 }
 
 void Nut::OnLinkRotateRight()
 {
 	__super::OnLinkRotateRight();
 
-	CheckIfConnectedToBolt(GetUpVectorV());
+	CheckIfConnectedToBolt(-GetUpVectorV());
 }
 
+//@Todo: this logic still needs work. Come back to it after more puzzles are done.
 void Nut::CheckIfConnectedToBolt(const XMVECTOR moveDirection)
 {
 	HitResult hit(this);
-	if (Physics::SimpleBoxCast(GetPositionV(), XMFLOAT3(0.5f, 0.5f, 0.5f), hit, false, false))
+	if (Physics::Raycast(hit, GetPositionV(), moveDirection, 10.f))
 	{
-		for (auto actor : hit.hitActors)
+		if (hit.GetHitActorAs<Bolt>())
 		{
-			auto bolt = dynamic_cast<Bolt*>(actor);
-			if (bolt)
-			{
-				constexpr float moveIncrement = 0.2f;
-				nextPos += moveDirection * moveIncrement;
-			}
+			constexpr float moveIncrement = 0.2f;
+			nextPos += moveDirection * moveIncrement;
 		}
 	}
 }
