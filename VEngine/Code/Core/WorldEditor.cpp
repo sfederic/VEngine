@@ -103,8 +103,6 @@ void HandleActorPicking()
 		HitResult hit;
 		if (Physics::RaycastFromScreen(hit))
 		{
-			//@Todo: move all these 'placement' blocks into functions
-
 			//Assign selected texture in editor to mesh on click
 			if (!TextureSystem::selectedTextureInEditor.empty() && WorldEditor::texturePlacement)
 			{
