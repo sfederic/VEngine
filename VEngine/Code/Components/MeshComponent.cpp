@@ -150,8 +150,6 @@ void MeshComponent::SplitMeshCreate()
 	BoundingBox::CreateFromPoints(bb, meshDataProxy.vertices.size(),
 		&meshDataProxy.vertices.at(0).pos, sizeof(Vertex));
 
-	//@Todo: owner being set as null on CreatePhysicsActor() won't explode the program,
-	//but it will cause problems if you want to use raycasts via PhysX.
 	if (meshDataProxy.vertices.size() > 255)
 	{
 		PhysicsSystem::CreatePhysicsActor(this, PhysicsType::Dynamic, GetOwner());
