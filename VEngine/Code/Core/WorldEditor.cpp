@@ -220,7 +220,6 @@ void DuplicateActor()
 				newDuplicateActor->CreateAllComponents();
 				newDuplicateActor->PostCreate();
 
-				//@Todo: move to Paint debug menu
 				auto newDuplicateActorMeshes = newDuplicateActor->GetComponents<MeshComponent>();
 				for (auto mesh : newDuplicateActorMeshes)
 				{
