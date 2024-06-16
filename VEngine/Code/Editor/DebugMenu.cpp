@@ -27,6 +27,7 @@
 #include "Render/Texture2D.h"
 #include "Render/MaterialSystem.h"
 #include "Render/Material.h"
+#include "Particle/ParticleEmitter.h"
 #include "Animation/Skeleton.h"
 #include "Asset/AssetSystem.h"
 #include "Editor/Sequencer/Sequencer.h"
@@ -396,6 +397,13 @@ void DebugMenu::RenderParticleMenu()
 	if (!particleMenuOpen) return;
 
 	ImGui::Begin("Particles");
+
+	for (auto emitter : World::GetAllComponentsOfType<ParticleEmitter>())
+	{
+		ImGui::Text(emitter->GetName().c_str());
+		ImGui::Text("Particle Count: %u", emitter->GetParticleCount());
+		ImGui::NewLine();
+	}
 
 	ImGui::End();
 }

@@ -29,6 +29,7 @@ public:
 
 	void SetTexture(std::string_view textureFilename);
 
+	auto GetParticleCount() const { return particles.size(); }
 	std::vector<Particle> particles;
 
 	ParticleData particleData;
