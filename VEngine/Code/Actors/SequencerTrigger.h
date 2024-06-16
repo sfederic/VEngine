@@ -5,9 +5,6 @@
 
 class BoxTriggerComponent;
 
-//@Todo: this trigger will eventually have to work with the specified sequencer file instead of just 
-//setting the timer from the system.
-
 class SequencerTrigger : public Actor
 {
 public:
@@ -19,5 +16,6 @@ public:
 	Properties GetProps() override;
 
 private:
+	std::string sequencerFile;
 	BoxTriggerComponent* boxTrigger = nullptr;
 };

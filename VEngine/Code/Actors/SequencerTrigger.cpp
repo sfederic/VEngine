@@ -30,5 +30,6 @@ Properties SequencerTrigger::GetProps()
 {
 	auto props = __super::GetProps();
 	props.title = GetTypeName();
+	props.Add("Sequencer File", &sequencerFile); //@Todo: needs an autocorrect path
 	return props;
 }
