@@ -9,8 +9,6 @@ class IActorSystem;
 class SpatialComponent;
 struct Transform;
 
-//@Todo: actor delete undo
-
 //Because the UV painting is working with triangle faces and not quads, you can really only rotate
 //the newly set UVs either left or right.
 enum class UVPaintRotate
