@@ -15,6 +15,7 @@ struct Particle
 	float roll = 0.f;
 	float rotateSpeed = 0.f;
 	float moveSpeed = 0.f;
+	float alpha = 0.f;
 
 	void AddVelocity(float deltaTime)
 	{

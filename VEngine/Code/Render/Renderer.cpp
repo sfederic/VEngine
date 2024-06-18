@@ -1761,11 +1761,6 @@ void Renderer::RenderParticleEmitters()
 
 		context->PSSetSamplers(0, 1, Renderer::GetDefaultSampler().GetDataAddress());
 
-		MaterialShaderData materialShaderData;
-		materialShaderData = emitter->GetMaterial().materialShaderData;
-		cbMaterial.Map(&materialShaderData);
-		cbMaterial.SetPS();
-
 		//Set texture from emitter for every particle
 		SetShaderResourcePixel(0, emitter->GetMaterial().defaultTextureData.filename);
 
@@ -1783,6 +1778,12 @@ void Renderer::RenderParticleEmitters()
 
 			cbMatrices.Map(&shaderMatrices);
 			cbMatrices.SetVS();
+
+			MaterialShaderData materialShaderData;
+			materialShaderData = emitter->GetMaterial().materialShaderData;
+			materialShaderData.ambient.w = particle.alpha;
+			cbMaterial.Map(&materialShaderData);
+			cbMaterial.SetPS();
 
 			//Note: Apparently using DrawInstanced() degrades performance when the vertex count it really low
 			//and DrawIndexed is actually faster.
