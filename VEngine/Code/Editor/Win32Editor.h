@@ -20,7 +20,5 @@ public:
 	virtual void SelectActorInWorldList() override;
 	virtual void SetPlayButtonText() override;
 	void SetupWindow();
-
-	//@Todo: input on Win32Editor is going really fast, like it's calling GetKeyAsync() or something
 	void HandleMessages();
 };
