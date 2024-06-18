@@ -51,6 +51,17 @@ void ParticleEmitter::Tick(float deltaTime)
 		//Get random range between lifetimes
 		const float lifetimeRange = VMath::RandomRange(particleData.lifetime.x, particleData.lifetime.y);
 
+		constexpr float lifetimeAlphaSpeed = 5.f;
+		if (particle.lifetime > (lifetimeRange / 1.5f))
+		{
+			particle.alpha -= deltaTime * lifetimeAlphaSpeed;
+		}
+		else
+		{
+			particle.alpha += deltaTime * lifetimeAlphaSpeed;
+		}
+		particle.alpha = std::clamp(particle.alpha, 0.f, 1.f);
+
 		if (particle.lifetime > lifetimeRange)
 		{
 			std::swap(particle, particles.back());
