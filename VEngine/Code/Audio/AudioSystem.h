@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include "Core/UID.h"
 
 struct AudioChannel;
 
@@ -13,7 +14,7 @@ namespace AudioSystem
 	void Cleanup();
 	void DeleteLoadedAudioAndChannels();
 	void StopPersistentTracks();
-	AudioChannel* GetChannel(uint64_t channelID);
+	AudioChannel* GetChannel(UID channelID);
 	void MuteAllAudio();
 	void StopAllAudio();
 	void StartAllAudio();
@@ -21,8 +22,8 @@ namespace AudioSystem
 	void FadeOutAllAudio();
 	void FadeInAllAudio();
 	//Returns channel ID that audio is playing on so that audio components can work with that data.
-	uint64_t LoadAudio(const std::string filename, bool loopAudio = false);
-	void PlayAudio(uint64_t channelID);
+	UID LoadAudio(const std::string filename, bool loopAudio = false);
+	void PlayAudio(UID channelID);
 	void InnerLoadAudio(const std::string filename);
 	void UnloadAudio(const std::string filename);
 	void PlayPersistentAudio(std::string filename);

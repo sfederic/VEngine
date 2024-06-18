@@ -47,7 +47,7 @@ protected:
 
 	FadeValue fade = FadeValue::None;
 
-	uint64_t channelID = 0;
+	UID channelID = 0;
 
 	float volume = 1.0f;
 	float pitch = 1.0f;

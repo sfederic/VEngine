@@ -14,7 +14,7 @@
 #define fourccXWMA 'AMWX'
 #define fourccDPDS 'sdpd'
 
-uint64_t nextChannelID = 0;
+UID nextChannelID = 0;
 
 IXAudio2* audioEngine = nullptr; //Main XAudio2 sound engine
 IXAudio2MasteringVoice* masteringVoice = nullptr; //Main track	
@@ -26,7 +26,7 @@ std::unique_ptr<AudioChannel> persistentChannel;
 typedef std::unordered_map<std::string, std::unique_ptr<AudioBase>> AudioMap;
 AudioMap loadedAudioMap;
 
-typedef std::unordered_map<uint64_t, std::unique_ptr<AudioChannel>> ChannelMap;
+typedef std::unordered_map<UID, std::unique_ptr<AudioChannel>> ChannelMap;
 ChannelMap channelMap;
 
 HRESULT LoadWAV(const std::string filename, WAVEFORMATEXTENSIBLE& waveFormat, XAUDIO2_BUFFER& buffer);
@@ -98,7 +98,7 @@ void AudioSystem::StopPersistentTracks()
 	}
 }
 
-AudioChannel* AudioSystem::GetChannel(uint64_t channelID)
+AudioChannel* AudioSystem::GetChannel(UID channelID)
 {
 	return channelMap.find(channelID)->second.get();
 }
@@ -155,7 +155,7 @@ void AudioSystem::FadeInAllAudio()
 	}
 }
 
-uint64_t AudioSystem::LoadAudio(const std::string filename, bool loopAudio)
+UID AudioSystem::LoadAudio(const std::string filename, bool loopAudio)
 {
 	auto audioIt = loadedAudioMap.find(filename);
 	if (audioIt == loadedAudioMap.end())
@@ -193,7 +193,7 @@ uint64_t AudioSystem::LoadAudio(const std::string filename, bool loopAudio)
 	return nextChannelID;
 }
 
-void AudioSystem::PlayAudio(uint64_t channelID)
+void AudioSystem::PlayAudio(UID channelID)
 {
 	auto channel = GetChannel(channelID);
 	channel->sourceVoice->Start();
