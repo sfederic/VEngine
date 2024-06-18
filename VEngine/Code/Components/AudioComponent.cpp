@@ -39,7 +39,6 @@ void AudioComponent::Tick(float deltaTime)
 
 	SetVolumeToPlayerPositionAgainstRadius();
 
-	//@Todo: Ideally you want these as Property Changed events, but it's fine for now.
 	channel->SetPitch(pitch);
 	channel->SetVolume(volume);
 }
