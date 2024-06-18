@@ -390,8 +390,6 @@ void DebugMenu::RenderCoreMenu()
 	ImGui::End();
 }
 
-//@Todo: this function needs a 'getallcomponentsoftype()' to be able to work properly and display
-//number of particle systems and particles in world
 void DebugMenu::RenderParticleMenu()
 {
 	if (!particleMenuOpen) return;
