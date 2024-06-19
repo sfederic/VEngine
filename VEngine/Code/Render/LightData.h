@@ -19,4 +19,7 @@ struct LightData
 	float range = 100.f;
 	int lightType = 0;
 	int enabled = 1;
+
+private:
+	int padding[3];
 };
