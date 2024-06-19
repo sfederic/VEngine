@@ -97,6 +97,7 @@ struct Light
 	float4 colour;
 	float spotAngle;
     float intensity;
+    float range;
 	int lightType;
 	bool enabled;
 };
@@ -262,6 +263,13 @@ LightingResult CalcPointLight(Light light, float distance, float NdotV,
 	float falloff = CalcFalloff(light.intensity, distance);
 
     LightingResult result;
+    result.diffuse = float4(0.f, 0.f, 0.f, 1.f);
+    result.specular = float4(0.f, 0.f, 0.f, 1.f);
+    if (distance > light.range)
+    {
+        return result;
+    }
+        
     result.diffuse = CalcDiffuse(light.colour, NdotL) * falloff;
     result.specular = CalcSpecularPBR(light, NdotV, NdotL, NdotH, LdotH, HdotV) * falloff;
 	return result;
