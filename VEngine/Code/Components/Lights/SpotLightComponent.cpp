@@ -15,6 +15,7 @@ Properties SpotLightComponent::GetProps()
 	props.Add("Spot Angle", &lightData.spotAngle);
 	props.Add("Intensity", &lightData.intensity);
 	props.Add("LightEnabled", &lightData.enabled);
+	props.Add("Shadows Enabled", &enabledShadows);
 	return props;
 }
 

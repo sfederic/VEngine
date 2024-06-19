@@ -17,6 +17,9 @@ public:
 	void SetColour(XMFLOAT4 colour) { lightData.colour = colour; }
 	void SetIntensity(float intensity) { lightData.intensity = intensity; }
 
+	bool IsShadowsEnabled() { return enabledShadows; }
+
 private:
 	LightData lightData;
+	bool enabledShadows = true;
 };

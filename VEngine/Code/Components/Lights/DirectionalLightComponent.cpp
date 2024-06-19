@@ -20,6 +20,7 @@ Properties DirectionalLightComponent::GetProps()
 	props.Add("Colour", &lightData.colour);
 	props.Add("Intensity", &lightData.intensity);
 	props.Add("LightEnabled", &lightData.enabled);
+	props.Add("Shadows Enabled", &enableShadows);
 	return props;
 }
 

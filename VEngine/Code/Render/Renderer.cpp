@@ -570,12 +570,14 @@ void SetShadowData()
 		{
 			shaderLights.shadowsEnabled = false;
 		}
+		else
+		{
+			shaderLights.shadowsEnabled = dLight->IsShadowsEnabled();
+		}
 
 		shaderMatrices.lightMVP = shadowMap->DirectionalLightViewProjectionTextureMatrix(dLight);
 		shaderMatrices.lightViewProj =
 			shadowMap->GetLightViewMatrix(dLight) * shadowMap->GetDirectionalLightOrthoMatrix();
-
-		shaderLights.shadowsEnabled = true;
 	}
 	else if (SpotLightComponent::system.GetNumComponents() > 0)
 	{
@@ -584,12 +586,14 @@ void SetShadowData()
 		{
 			shaderLights.shadowsEnabled = false;
 		}
+		else
+		{
+			shaderLights.shadowsEnabled = spotLight->IsShadowsEnabled();
+		}
 
 		shaderMatrices.lightMVP = shadowMap->SpotLightViewProjectionTextureMatrix(spotLight);
 		shaderMatrices.lightViewProj =
 			shadowMap->GetLightViewMatrix(spotLight) * shadowMap->GetSpotLightPerspectiveMatrix(spotLight);
-
-		shaderLights.shadowsEnabled = true;
 	}
 	else
 	{

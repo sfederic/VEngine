@@ -16,7 +16,10 @@ public:
 	LightData GetLightData();
 	auto GetShadowMapOrthoSize() const { return shadowMapOrthoSize; }
 
+	bool IsShadowsEnabled() const { return enableShadows; }
+
 private:
 	LightData lightData;
 	float shadowMapOrthoSize = 0.f;
+	bool enableShadows = true;
 };
