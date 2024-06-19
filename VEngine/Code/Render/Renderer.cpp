@@ -1858,6 +1858,13 @@ void SetLightsConstantBufferData()
 		shaderLightsIndex++;
 	}
 
+	if (!DirectionalLightComponent::system.Empty())
+	{
+		//Code is only working with singular directional lights for now because of shadows, so this sort
+		//of setting of global ambient should be fine.
+		shaderLights.globalAmbient = DirectionalLightComponent::system.GetFirstComponent()->GetGlobalAmbient();
+	}
+
 	shaderLights.numLights = shaderLightsIndex;
 	assert(shaderLights.numLights < ShaderLights::MAX_LIGHTS);
 

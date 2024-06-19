@@ -21,6 +21,7 @@ Properties DirectionalLightComponent::GetProps()
 	props.Add("Intensity", &lightData.intensity);
 	props.Add("LightEnabled", &lightData.enabled);
 	props.Add("Shadows Enabled", &enableShadows);
+	props.Add("Global Ambient", &globalAmbient);
 	return props;
 }
 

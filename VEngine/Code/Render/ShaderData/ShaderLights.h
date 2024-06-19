@@ -6,7 +6,7 @@ struct ShaderLights
 {
 	static const int MAX_LIGHTS = 32;
 
-	DirectX::XMFLOAT4 globalAmbient = DirectX::XMFLOAT4(0.5f, 0.5f, 0.5f, 0.f);
+	DirectX::XMFLOAT4 globalAmbient = DirectX::XMFLOAT4(0.5f, 0.5f, 0.5f, 1.f);
 	int numLights = 0;
 
 	//Shadows for now are based on 1 directional light in the level. Set this to false to avoid the 
