@@ -25,6 +25,7 @@ public:
 	virtual Component* SpawnComponent(Actor* owner) = 0;
 	virtual std::vector<Component*> GetComponentsAsBaseClass() = 0;
 	virtual size_t GetNumComponents() = 0;
+	virtual bool Empty() = 0;
 	virtual Component* FindComponentByName(std::string componentName) = 0;
 
 	auto GetName() { return _name; }

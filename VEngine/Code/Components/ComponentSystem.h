@@ -219,6 +219,11 @@ public:
 		return components.size();
 	}
 
+	bool Empty() override
+	{
+		return components.empty();
+	}
+
 	virtual Component* FindComponentByName(std::string componentName) override
 	{
 		for (auto& component : components)
