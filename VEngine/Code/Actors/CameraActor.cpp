@@ -5,7 +5,7 @@
 CameraActor::CameraActor()
 {
 	camera = CreateComponent<CameraComponent>("Camera");
-	rootComponent = camera;
+	SetRootComponent(camera);
 }
 
 Properties CameraActor::GetProps()

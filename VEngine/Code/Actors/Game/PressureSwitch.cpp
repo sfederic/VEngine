@@ -7,10 +7,10 @@
 PressureSwitch::PressureSwitch()
 {
 	switchTrigger = CreateComponent<BoxTriggerComponent>("SwitchTrigger");
-	rootComponent = switchTrigger;
+	SetRootComponent(switchTrigger);
 
 	switchMesh = CreateComponent<MeshComponent>("SwitchMesh");
-	rootComponent->AddChild(switchMesh);
+	AddChildToRoot(switchMesh);
 }
 
 void PressureSwitch::Create()

@@ -8,7 +8,7 @@ constexpr int maxMeshes = 5;
 MeshParticleEmitter::MeshParticleEmitter(std::string textureFilename, std::string shaderItemName)
 {
 	instanceMesh = CreateComponent("Mesh", InstanceMeshComponent(maxMeshes, "bevel_rock.vmesh", "test.png", shaderItemName));
-	rootComponent = instanceMesh;
+	SetRootComponent(instanceMesh);
 }
 
 void MeshParticleEmitter::Create()

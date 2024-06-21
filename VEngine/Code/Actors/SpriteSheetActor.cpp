@@ -5,7 +5,7 @@
 SpriteSheetActor::SpriteSheetActor()
 {
 	spriteSheet = CreateComponent<SpriteSheet>("SpriteSheet");
-	rootComponent = spriteSheet;
+	SetRootComponent(spriteSheet);
 }
 
 Properties SpriteSheetActor::GetProps()

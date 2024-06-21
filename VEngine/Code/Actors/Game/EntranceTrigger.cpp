@@ -19,7 +19,7 @@
 EntranceTrigger::EntranceTrigger()
 {
 	trigger = BoxTriggerComponent::system.Add("Trigger", this);
-	rootComponent = trigger;
+	SetRootComponent(trigger);
 
 	conditionComponent = ConditionComponent::system.Add("Condition", this);
 }

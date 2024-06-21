@@ -8,10 +8,10 @@
 FireSource::FireSource()
 {
 	fireTrigger = CreateComponent<BoxTriggerComponent>("FireTrigger");
-	rootComponent->AddChild(fireTrigger);
+	AddChildToRoot(fireTrigger);
 
 	fireSprite = CreateComponent<SpriteSheet>("FireSprite");
-	rootComponent->AddChild(fireSprite);
+	AddChildToRoot(fireSprite);
 }
 
 void FireSource::Create()

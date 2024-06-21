@@ -6,7 +6,7 @@ DestructibleActor::DestructibleActor()
 {
 	destructibleMesh = DestructibleMeshComponent::system.Add("Destructible", this,
 		DestructibleMeshComponent("destructible_cube.fbx", "test.png"));
-	rootComponent = destructibleMesh;
+	SetRootComponent(destructibleMesh);
 }
 
 Properties DestructibleActor::GetProps()

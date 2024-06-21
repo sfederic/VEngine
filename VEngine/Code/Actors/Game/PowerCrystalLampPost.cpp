@@ -5,7 +5,7 @@
 PowerCrystalLampPost::PowerCrystalLampPost()
 {
 	pointLight = CreateComponent<PointLightComponent>("PointLight");
-	rootComponent->AddChild(pointLight);
+	AddChildToRoot(pointLight);
 }
 
 void PowerCrystalLampPost::Create()

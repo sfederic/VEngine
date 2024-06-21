@@ -32,13 +32,13 @@ Player::Player()
 	SetEmptyRootComponent();
 
 	camera = CreateComponent<CameraComponent>("Camera");
-	rootComponent->AddChild(camera);
+	AddChildToRoot(camera);
 
 	nextPos = XMVectorZero();
 	nextRot = XMVectorZero();
 
 	_mesh = CreateComponent("Mesh", MeshComponent("char.vmesh", "test.png"));
-	rootComponent->AddChild(_mesh);
+	AddChildToRoot(_mesh);
 
 	dialogueComponent = DialogueComponent::system.Add("Dialogue", this);
 

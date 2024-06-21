@@ -6,7 +6,7 @@
 LaserPowerUpGridActor::LaserPowerUpGridActor()
 {
 	laser = CreateComponent<Polyboard>("Laser");
-	rootComponent->AddChild(laser);
+	AddChildToRoot(laser);
 }
 
 void LaserPowerUpGridActor::Create()

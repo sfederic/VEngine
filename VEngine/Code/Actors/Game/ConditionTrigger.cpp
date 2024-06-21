@@ -8,7 +8,7 @@ ConditionTrigger::ConditionTrigger()
 	condition = CreateComponent<ConditionComponent>("Condition");
 
 	boxTrigger = CreateComponent<BoxTriggerComponent>("BoxTrigger");
-	rootComponent = boxTrigger;
+	SetRootComponent(boxTrigger);
 }
 
 void ConditionTrigger::Start()

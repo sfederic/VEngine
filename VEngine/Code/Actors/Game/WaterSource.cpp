@@ -6,7 +6,7 @@
 WaterSource::WaterSource()
 {
 	boxTrigger = CreateComponent<BoxTriggerComponent>("BoxTrigger");
-	rootComponent->AddChild(boxTrigger);
+	AddChildToRoot(boxTrigger);
 }
 
 void WaterSource::Create()

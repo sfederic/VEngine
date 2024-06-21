@@ -5,7 +5,7 @@
 AudioActor::AudioActor()
 {
 	audioComponent = AudioComponent::system.Add("Audio", this);
-	rootComponent = audioComponent;
+	SetRootComponent(audioComponent);
 }
 
 Properties AudioActor::GetProps()

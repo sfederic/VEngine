@@ -5,7 +5,7 @@
 DirectionalLightActor::DirectionalLightActor()
 {
 	directionalLight = DirectionalLightComponent::system.Add("DirectionalLight", this);
-	rootComponent = directionalLight;
+	SetRootComponent(directionalLight);
 }
 
 Properties DirectionalLightActor::GetProps()

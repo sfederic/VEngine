@@ -6,7 +6,7 @@
 Grass::Grass()
 {
 	mesh = CreateComponent<MeshComponent>("Mesh");
-	rootComponent = mesh;
+	SetRootComponent(mesh);
 }
 
 void Grass::Create()

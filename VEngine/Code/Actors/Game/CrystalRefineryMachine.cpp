@@ -8,12 +8,12 @@ CrystalRefineryMachine::CrystalRefineryMachine()
 {
 	materialInputTrigger = CreateComponent<BoxTriggerComponent>("MaterialTrigger");
 	materialInputTrigger->AddLocalPosition(GetForwardVectorV());
-	rootComponent->AddChild(materialInputTrigger);
+	AddChildToRoot(materialInputTrigger);
 
 	crystalOutputTrigger = CreateComponent<BoxTriggerComponent>("CrystalTrigger");
 	crystalOutputTrigger->AddLocalPosition(-GetForwardVectorV());
 	crystalOutputTrigger->renderWireframeColour = XMFLOAT4(0.1f, 0.1f, 0.9f, 1.f); //Blue
-	rootComponent->AddChild(crystalOutputTrigger);
+	AddChildToRoot(crystalOutputTrigger);
 }
 
 void CrystalRefineryMachine::Interact()

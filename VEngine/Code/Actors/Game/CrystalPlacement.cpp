@@ -35,6 +35,6 @@ void CrystalPlacement::Interact()
 		crystalMesh->SetMeshFilename("crystal.vmesh");
 		crystalMesh->Create();
 		crystalMesh->SetLocalPosition(0.f, 1.f, 0.f);
-		rootComponent->AddChild(crystalMesh);
+		AddChildToRoot(crystalMesh);
 	}
 }

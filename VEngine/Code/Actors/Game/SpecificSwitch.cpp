@@ -8,10 +8,10 @@
 SpecificSwitch::SpecificSwitch()
 {
 	mesh = CreateComponent<MeshComponent>("Mesh");
-	rootComponent = mesh;
+	SetRootComponent(mesh);
 
 	trigger = CreateComponent<BoxTriggerComponent>("Trigger");
-	rootComponent->AddChild(trigger);
+	AddChildToRoot(trigger);
 }
 
 void SpecificSwitch::Create()

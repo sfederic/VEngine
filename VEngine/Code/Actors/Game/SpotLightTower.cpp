@@ -8,7 +8,7 @@
 SpotLightTower::SpotLightTower()
 {
 	spotLight = CreateComponent<SpotLightComponent>("SpotLight");
-	rootComponent->AddChild(spotLight);
+	AddChildToRoot(spotLight);
 }
 
 void SpotLightTower::Create()

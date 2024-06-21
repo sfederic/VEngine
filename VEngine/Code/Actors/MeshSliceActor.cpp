@@ -7,7 +7,7 @@ MeshSliceActor::MeshSliceActor()
 {
 	sliceableMesh = CreateComponent("Mesh", SliceableMeshComponent("cube.vmesh", "test.png"));
 	//Make sure the mesh is always the root here, else the sliced meshcomponents will have wrong transforms
-	rootComponent = sliceableMesh;
+	SetRootComponent(sliceableMesh);
 }
 
 Properties MeshSliceActor::GetProps()

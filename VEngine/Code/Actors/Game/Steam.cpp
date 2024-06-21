@@ -8,10 +8,10 @@
 Steam::Steam()
 {
 	steamEmitter = CreateComponent<ParticleEmitter>("SteamEmitter");
-	rootComponent->AddChild(steamEmitter);
+	AddChildToRoot(steamEmitter);
 
 	steamAudio = CreateComponent<AudioComponent>("SteamAudio");
-	rootComponent->AddChild(steamAudio);
+	AddChildToRoot(steamAudio);
 }
 
 void Steam::Start()

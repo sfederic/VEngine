@@ -8,10 +8,10 @@
 GravityCrystal::GravityCrystal()
 {
 	gravityFieldMesh = CreateComponent<MeshComponent>("GravityFieldMesh");
-	rootComponent->AddChild(gravityFieldMesh);
+	AddChildToRoot(gravityFieldMesh);
 
 	gravityInfluenceTrigger = CreateComponent<BoxTriggerComponent>("BoxTrigger");
-	rootComponent->AddChild(gravityInfluenceTrigger);
+	AddChildToRoot(gravityInfluenceTrigger);
 }
 
 void GravityCrystal::Create()

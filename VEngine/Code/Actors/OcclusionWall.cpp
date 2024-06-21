@@ -8,7 +8,7 @@
 OcclusionWall::OcclusionWall()
 {
 	mesh = CreateComponent<MeshComponent>("Mesh");
-	rootComponent = mesh;
+	SetRootComponent(mesh);
 	mesh->SetMeshFilename("cube.vmesh");
 }
 

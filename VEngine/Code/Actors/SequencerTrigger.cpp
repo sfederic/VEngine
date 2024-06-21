@@ -6,7 +6,7 @@
 SequencerTrigger::SequencerTrigger()
 {
 	boxTrigger = CreateComponent<BoxTriggerComponent>("BoxTrigger");
-	rootComponent = boxTrigger;
+	SetRootComponent(boxTrigger);
 }
 
 void SequencerTrigger::Start()

@@ -6,5 +6,5 @@
 GridActorOffsetMesh::GridActorOffsetMesh()
 {
 	SetEmptyRootComponent();
-	rootComponent->AddChild(_mesh);
+	AddChildToRoot(_mesh);
 }

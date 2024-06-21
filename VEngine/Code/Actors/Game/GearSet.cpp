@@ -4,12 +4,10 @@
 #include "GearSetDoor.h"
 #include "Core/Log.h"
 
-using namespace DirectX;
-
 GearSet::GearSet()
 {
 	boxTrigger = CreateComponent<BoxTriggerComponent>("BoxTrigger");
-	rootComponent->AddChild(boxTrigger);
+	AddChildToRoot(boxTrigger);
 }
 
 void GearSet::Create()

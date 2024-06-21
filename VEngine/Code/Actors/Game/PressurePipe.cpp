@@ -5,7 +5,7 @@
 PressurePipe::PressurePipe()
 {
 	flowMesh = CreateComponent<MeshComponent>("FlowMesh");
-	rootComponent->AddChild(flowMesh);
+	AddChildToRoot(flowMesh);
 }
 
 void PressurePipe::Create()

@@ -5,5 +5,5 @@
 PointLightGridActor::PointLightGridActor()
 {
 	pointLight = CreateComponent<PointLightComponent>("PointLight");
-	rootComponent->AddChild(pointLight);
+	AddChildToRoot(pointLight);
 }

@@ -7,7 +7,7 @@ PostProcessVolume::PostProcessVolume()
 {
 	boxTrigger = CreateComponent<BoxTriggerComponent>("BoxTrigger");
 	boxTrigger->renderWireframeColour = XMFLOAT4(0.45f, 0.2f, 0.64f, 1.f);
-	rootComponent = boxTrigger;
+	SetRootComponent(boxTrigger);
 }
 
 Properties PostProcessVolume::GetProps()

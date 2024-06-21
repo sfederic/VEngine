@@ -11,7 +11,7 @@
 ScannerEnemy::ScannerEnemy()
 {
 	scanLaser = CreateComponent<Polyboard>("Laser");
-	rootComponent->AddChild(scanLaser);
+	AddChildToRoot(scanLaser);
 }
 
 void ScannerEnemy::Create()

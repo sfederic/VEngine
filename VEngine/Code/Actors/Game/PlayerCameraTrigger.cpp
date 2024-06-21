@@ -6,7 +6,7 @@
 PlayerCameraTrigger::PlayerCameraTrigger()
 {
 	boxTrigger = CreateComponent<BoxTriggerComponent>("BoxTrigger");
-	rootComponent = boxTrigger;
+	SetRootComponent(boxTrigger);
 }
 
 void PlayerCameraTrigger::Start()

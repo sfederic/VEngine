@@ -8,10 +8,10 @@
 ProjectionCrystal::ProjectionCrystal()
 {
 	projectionMesh = CreateComponent<MeshComponent>("TestMesh");
-	rootComponent->AddChild(projectionMesh);
+	AddChildToRoot(projectionMesh);
 
 	projectionSpotLight = CreateComponent<SpotLightComponent>("SpotLight");
-	rootComponent->AddChild(projectionSpotLight);
+	AddChildToRoot(projectionSpotLight);
 }
 
 void ProjectionCrystal::Create()

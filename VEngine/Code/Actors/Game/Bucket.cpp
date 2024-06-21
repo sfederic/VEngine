@@ -10,7 +10,7 @@
 Bucket::Bucket()
 {
 	waterMesh = CreateComponent<MeshComponent>("WaterMesh");
-	rootComponent->AddChild(waterMesh);
+	AddChildToRoot(waterMesh);
 }
 
 void Bucket::Create()

@@ -89,7 +89,7 @@ Properties Gear::GetProps()
 
 bool Gear::Intersects(const DirectX::BoundingOrientedBox& bob)
 {
-	return rootComponent->GetBoundsInWorldSpace().Intersects(bob);
+	return GetRootComponent().GetBoundsInWorldSpace().Intersects(bob);
 }
 
 bool Gear::CheckIfPreviousGear(Gear* gear)

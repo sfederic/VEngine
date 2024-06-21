@@ -10,10 +10,10 @@ WaterVolume::WaterVolume()
 	SetEmptyRootComponent();
 
 	waterMesh = CreateComponent<MeshComponent>("WaterMesh");
-	rootComponent->AddChild(waterMesh);
+	AddChildToRoot(waterMesh);
 
 	waterVolumeTrigger = CreateComponent<BoxTriggerComponent>("VolumeTrigger");
-	rootComponent->AddChild(waterVolumeTrigger);
+	AddChildToRoot(waterVolumeTrigger);
 }
 
 void WaterVolume::Create()

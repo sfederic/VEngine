@@ -5,7 +5,7 @@
 Lift::Lift()
 {
 	liftTrigger = CreateComponent<BoxTriggerComponent>("LiftTrigger");
-	rootComponent->AddChild(liftTrigger);
+	AddChildToRoot(liftTrigger);
 }
 
 void Lift::Create()

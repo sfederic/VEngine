@@ -8,10 +8,10 @@
 MinesGenerator::MinesGenerator()
 {
 	mesh = CreateComponent<MeshComponent>("Mesh");
-	rootComponent = mesh;
+	SetRootComponent(mesh);
 
 	crystalTrigger = CreateComponent<BoxTriggerComponent>("CrystalTrigger");
-	rootComponent->AddChild(crystalTrigger);
+	AddChildToRoot(crystalTrigger);
 }
 
 void MinesGenerator::Create()

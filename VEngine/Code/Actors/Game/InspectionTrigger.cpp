@@ -5,7 +5,7 @@
 InspectionTrigger::InspectionTrigger()
 {
 	boxTrigger = CreateComponent<BoxTriggerComponent>("BoxTrigger");
-	rootComponent->AddChild(boxTrigger);
+	AddChildToRoot(boxTrigger);
 }
 
 void InspectionTrigger::Start()

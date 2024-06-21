@@ -5,7 +5,7 @@
 PowerCrystal::PowerCrystal()
 {
 	effectTrigger = CreateComponent<BoxTriggerComponent>("EffectTrigger");
-	rootComponent->AddChild(effectTrigger);
+	AddChildToRoot(effectTrigger);
 }
 
 void PowerCrystal::Create()

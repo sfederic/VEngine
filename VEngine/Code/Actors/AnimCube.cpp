@@ -6,7 +6,7 @@
 AnimCube::AnimCube()
 {
 	skeletalMesh = CreateComponent<SkeletalMeshComponent>("Skeleton");
-	rootComponent = skeletalMesh;
+	SetRootComponent(skeletalMesh);
 }
 
 void AnimCube::Create()

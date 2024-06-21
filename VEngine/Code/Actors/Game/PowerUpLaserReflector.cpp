@@ -6,7 +6,7 @@
 PowerUpLaserReflector::PowerUpLaserReflector()
 {
 	reflectedLaser = CreateComponent<Polyboard>("ReflectedLaser");
-	rootComponent->AddChild(reflectedLaser);
+	AddChildToRoot(reflectedLaser);
 }
 
 void PowerUpLaserReflector::Create()

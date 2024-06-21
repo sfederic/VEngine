@@ -14,7 +14,7 @@ Grid::Grid()
 {
 	nodeMesh = InstanceMeshComponent::system.Add("NodeMesh",
 		this, InstanceMeshComponent(0, "node.vmesh", "test.png", "Instance"));
-	rootComponent = nodeMesh;
+	SetRootComponent(nodeMesh);
 }
 
 //Grid::Awake() can also be used to reset all node world positions during gameplay
@@ -122,7 +122,7 @@ void Grid::RecalcAllNodes(HitResult& hit, bool preserveNodeScaleValues)
 
 	RenderUtils::CreateSRVForMeshInstance(nodeMesh->structuredBuffer.Get(), meshInstanceCount, nodeMesh->srv);
 
-	const XMMATRIX rootWorldMatrix = rootComponent->GetWorldMatrix();
+	const XMMATRIX rootWorldMatrix = GetRootComponent().GetWorldMatrix();
 	XMVECTOR rayOrigin = XMVectorZero();
 
 	nodeMesh->GetInstanceData().clear();

@@ -6,7 +6,7 @@
 SkyBox::SkyBox()
 {
 	skyboxMesh = CreateComponent<MeshComponent>("SkyboxMesh");
-	rootComponent = skyboxMesh;
+	SetRootComponent(skyboxMesh);
 }
 
 void SkyBox::Create()

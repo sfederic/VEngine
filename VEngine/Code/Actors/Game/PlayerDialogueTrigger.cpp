@@ -7,7 +7,7 @@ PlayerDialogueTrigger::PlayerDialogueTrigger()
 {
 	trigger = CreateComponent<BoxTriggerComponent>("Trigger");
 	trigger->renderWireframeColour = XMFLOAT4(0.5f, 0.5f, 1.f, 1.f);
-	rootComponent = trigger;
+	SetRootComponent(trigger);
 }
 
 void PlayerDialogueTrigger::Start()

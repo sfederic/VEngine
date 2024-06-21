@@ -7,7 +7,7 @@
 Billboard::Billboard()
 {
 	mesh = CreateComponent<MeshComponent>("Mesh");
-	rootComponent = mesh;
+	SetRootComponent(mesh);
 }
 
 void Billboard::Create()

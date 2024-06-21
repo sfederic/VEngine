@@ -6,10 +6,10 @@
 LinkedObjects::LinkedObjects()
 {
 	mesh2 = CreateComponent<MeshComponent>("Mesh2");
-	rootComponent->AddChild(mesh2);
+	AddChildToRoot(mesh2);
 
 	link = CreateComponent<Polyboard>("Link");
-	rootComponent->AddChild(link);
+	AddChildToRoot(link);
 }
 
 void LinkedObjects::Create()

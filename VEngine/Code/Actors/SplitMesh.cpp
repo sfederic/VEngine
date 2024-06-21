@@ -8,7 +8,7 @@
 SplitMesh::SplitMesh()
 {
 	mesh = CreateComponent<MeshComponent>("SlicedMesh");
-	rootComponent = mesh;
+	SetRootComponent(mesh);
 }
 
 void SplitMesh::Tick(float deltaTime)

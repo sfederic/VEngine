@@ -203,7 +203,7 @@ public:
 
 	bool FlaggedForDeferredDestroy() const { return deferredForDestroy; }
 
-protected:
+private:
 	std::string _name;
 	std::set<std::string> tags;
 	std::unordered_map<std::string, Component*> componentMap;

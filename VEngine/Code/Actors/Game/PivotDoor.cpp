@@ -6,7 +6,7 @@
 PivotDoor::PivotDoor()
 {
 	SetEmptyRootComponent();
-	rootComponent->AddChild(_mesh);
+	AddChildToRoot(_mesh);
 }
 
 void PivotDoor::Create()

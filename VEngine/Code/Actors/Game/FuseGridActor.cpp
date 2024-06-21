@@ -38,7 +38,7 @@ void FuseGridActor::OnLinkMove()
 
 				newMesh->Create();
 
-				rootComponent->AddChild(newMesh);
+				AddChildToRoot(newMesh);
 				newMesh->SetWorldPosition(hitFusedMesh->GetWorldPositionV());
 			}
 

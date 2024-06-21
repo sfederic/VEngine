@@ -6,7 +6,7 @@
 OnOffPointLight::OnOffPointLight()
 {
 	pointLight = CreateComponent<PointLightComponent>("PointLight");
-	rootComponent = pointLight;
+	SetRootComponent(pointLight);
 }
 
 void OnOffPointLight::Create()

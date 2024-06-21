@@ -13,7 +13,7 @@ MeshActor::MeshActor()
 		mesh = CreateComponent("Mesh", MeshComponent("cube.vmesh", "test.png"));
 	}
 
-	rootComponent = mesh;
+	SetRootComponent(mesh);
 
 	const std::string meshFilename = mesh->GetMeshFilename();
 	const std::string meshSubStr = meshFilename.substr(0, meshFilename.find("."));

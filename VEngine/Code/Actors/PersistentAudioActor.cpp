@@ -5,7 +5,7 @@
 PersistentAudioActor::PersistentAudioActor()
 {
 	persistentAudio = CreateComponent<PersistentAudioComponent>("PeristentAudio");
-	rootComponent = persistentAudio;
+	SetRootComponent(persistentAudio);
 }
 
 Properties PersistentAudioActor::GetProps()
