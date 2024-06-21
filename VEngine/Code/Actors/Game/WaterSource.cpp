@@ -24,8 +24,6 @@ void WaterSource::Create()
 void WaterSource::Start()
 {
 	__super::Start();
-
-	SetVisibility(visible);
 }
 
 void WaterSource::Tick(float deltaTime)
