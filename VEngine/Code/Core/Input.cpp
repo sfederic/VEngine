@@ -32,7 +32,7 @@ namespace Input
 	{
 		const auto ScanCodeToVirtualKey = [](UINT scanCode) -> Keys
 			{
-				const UINT key = MapVirtualKeyA(scanCode, MAPVK_VSC_TO_VK_EX);
+				const UINT key = MapVirtualKeyA(scanCode, MAPVK_VSC_TO_VK);
 				return (Keys)key;
 			};
 
