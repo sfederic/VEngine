@@ -85,6 +85,7 @@ void Engine::TickSystems(float deltaTime)
 {
 	Editor::Get().Tick();
 	Core::Tick();
+	Input::PollInput();
 	CommandSystem::Get().Tick();
 	gSequencer.Tick();
 	AudioSystem::Tick();

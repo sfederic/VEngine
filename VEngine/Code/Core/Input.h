@@ -13,6 +13,8 @@ namespace Input
 	void InitKeyMap();
 	void Reset();
 
+	void PollInput();
+
 	//Used for when Qt or ImGui might take away input WndProc focus from the program with a QtDialog for example,
 	//meaning that hotkeys to access such dialogs will be stuck as held as held keys aren't cleared every frame.
 	void ResetHeldKeys();

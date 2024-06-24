@@ -1,5 +1,12 @@
 #include "vpch.h"
 #include "Input.h"
+#include <GameInput.h>
+#include "Core/Debug.h"
+
+IGameInput* gGameInput;
+IGameInputDevice* gGamepad;
+
+std::vector<GameInputKeyState> gPreviousFrameKeyState;
 
 std::set<Keys> currentHeldKeys;
 std::set<Keys> currentDownKeys;
@@ -21,6 +28,42 @@ namespace Input
 	bool mouseMiddleUp;
 	bool mouseMiddleDown;
 
+	void PollInput()
+	{
+		const auto ScanCodeToVirtualKey = [](UINT scanCode) -> Keys
+			{
+				const UINT key = MapVirtualKeyA(scanCode, MAPVK_VSC_TO_VK_EX);
+				return (Keys)key;
+			};
+
+		IGameInputReading* reading = nullptr;
+		if (SUCCEEDED(gGameInput->GetCurrentReading(GameInputKindKeyboard, gGamepad, &reading)))
+		{
+			const auto keyCount = reading->GetKeyCount();
+			std::vector<GameInputKeyState> keyStates(keyCount);
+			reading->GetKeyState(keyCount, keyStates.data());
+
+			for (const auto& keyState : keyStates)
+			{
+				const auto key = ScanCodeToVirtualKey(keyState.scanCode);
+				Input::SetKeyDown(key);
+			}
+
+			for (const auto& keyState : gPreviousFrameKeyState)
+			{
+				const auto key = ScanCodeToVirtualKey(keyState.scanCode);
+				if (!Input::GetKeyDown(key))
+				{
+					Input::SetKeyUp(key);
+				}
+			}
+
+			gPreviousFrameKeyState = keyStates;
+
+			reading->Release();
+		}
+	}
+
 	void InitKeyMap()
 	{
 		keyMap.emplace("MoveForward", Keys::W);
@@ -41,6 +84,8 @@ namespace Input
 		keyMap.emplace("Interact", Keys::Down);
 
 		keyMap.emplace("OpenJournal", Keys::J);
+
+		HR(GameInputCreate(&gGameInput));
 	}
 
 	void Reset()
