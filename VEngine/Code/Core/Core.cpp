@@ -79,7 +79,7 @@ void Core::Tick()
 	//Reset current world
 	if (Input::GetKeyHeld(Keys::Ctrl))
 	{
-		if (Input::GetKeyDown(Keys::R))
+		if (Input::GetKeyUp(Keys::R))
 		{
 			FileSystem::ReloadCurrentWorld();
 		}
@@ -88,7 +88,7 @@ void Core::Tick()
 	//Toggle gameplay on/off
 	if (Input::GetKeyHeld(Keys::Ctrl))
 	{
-		if (Input::GetKeyDown(Keys::P))
+		if (Input::GetKeyUp(Keys::P))
 		{
 			SetGameplayState();
 		}

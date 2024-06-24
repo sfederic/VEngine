@@ -282,7 +282,7 @@ void Console::Tick()
 
 void Console::InputTick()
 {
-	if (Input::GetKeyDown(Keys::Tilde)) //~ key, like doom and unreal
+	if (Input::GetKeyUp(Keys::Tilde)) //~ key, like doom and unreal
 	{
 		bConsoleActive = !bConsoleActive;
 		consoleString.clear();
@@ -291,7 +291,7 @@ void Console::InputTick()
 
 	if (bConsoleActive)
 	{
-		if (Input::GetKeyDown(Keys::Enter))
+		if (Input::GetKeyUp(Keys::Enter))
 		{
 			ExecuteString();
 			bConsoleActive = false;
