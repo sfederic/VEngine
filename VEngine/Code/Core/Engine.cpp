@@ -83,9 +83,10 @@ void Engine::Init(int argc, char* argv[])
 
 void Engine::TickSystems(float deltaTime)
 {
+	Input::PollInput();
+
 	Editor::Get().Tick();
 	Core::Tick();
-	Input::PollInput();
 	CommandSystem::Get().Tick();
 	gSequencer.Tick();
 	AudioSystem::Tick();
