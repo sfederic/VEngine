@@ -49,6 +49,7 @@ namespace Input
 				Input::SetKeyDown(key);
 			}
 
+			//Set key up if doesn't exist on current frame.
 			for (const auto& keyState : gPreviousFrameKeyState)
 			{
 				const auto key = ScanCodeToVirtualKey(keyState.scanCode);
