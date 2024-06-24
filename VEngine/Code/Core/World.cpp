@@ -157,7 +157,7 @@ void World::CreateDefaultMapActors()
 
 	MeshActor::spawnMeshFilename.clear();
 
-	editor->UpdateWorldList();
+	Editor::Get().UpdateWorldList();
 }
 
 std::vector<IActorSystem*> World::GetLayerActorSystems()
@@ -308,7 +308,7 @@ void World::DestroyAllActorsAndComponentsInWorld()
 
 	ClearAllActorsFromWorld();
 
-	editor->UpdateWorldList();
+	Editor::Get().UpdateWorldList();
 }
 
 bool World::CheckIfActorExistsInWorld(std::string actorName)

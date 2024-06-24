@@ -142,7 +142,7 @@ void Core::StartGame()
 
 	GameUtils::LoadGameInstanceData();
 
-	editor->SetPlayButtonText();
+	Editor::Get().SetPlayButtonText();
 	debugMenu.AddNotification(L"Gameplay started");
 }
 
@@ -167,7 +167,7 @@ void Core::EndGame()
 	//Clear the properties dock or you'll end up with pointer problems
 	WorldEditor::DeselectPickedActor();
 
-	editor->SetPlayButtonText();
+	Editor::Get().SetPlayButtonText();
 	debugMenu.AddNotification(L"Gameplay stopped");
 }
 
@@ -262,7 +262,7 @@ void Core::HandleWin32MessagePump(UINT message, WPARAM wparam, LPARAM lparam)
 		UINT resizedWidth = LOWORD(lparam);
 		UINT resizedHeight = HIWORD(lparam);
 
-		editor->SetViewportDimensions(resizedWidth, resizedHeight);
+		Editor::Get().SetViewportDimensions(resizedWidth, resizedHeight);
 
 		//Minimizing the window for some reason when using Qt returns the wrong resize sizes. With Win32 it works
 		//fine, but using the previous width and height here regardless doesn't hurt.

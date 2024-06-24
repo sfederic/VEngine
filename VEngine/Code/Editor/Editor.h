@@ -2,4 +2,7 @@
 
 #include "IEditor.h"
 
-extern IEditor* editor;
+namespace Editor
+{
+	IEditor& Get();
+};

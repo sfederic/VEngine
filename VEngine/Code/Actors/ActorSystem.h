@@ -66,8 +66,8 @@ public:
 		World::RemoveActorFromWorld(actors.back().get());
 		actors.pop_back();
 
-		editor->UpdateWorldList();
-		editor->ClearProperties();
+		Editor::Get().UpdateWorldList();
+		Editor::Get().ClearProperties();
 	}
 
 	virtual void RemoveInterfaceActor(Actor* actor) override

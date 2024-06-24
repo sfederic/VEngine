@@ -178,7 +178,7 @@ void HandleActorPicking()
 						replacementActor->CreateAllComponents();
 						replacementActor->PostCreate();
 
-						editor->UpdateWorldList();
+						Editor::Get().UpdateWorldList();
 
 						WorldEditor::ClearPickedActors();
 						WorldEditor::SetPickedActor(replacementActor);
@@ -206,7 +206,7 @@ void DuplicateActor()
 			{
 				pickedActors.clear();
 
-				editor->ClearProperties();
+				Editor::Get().ClearProperties();
 
 				Transform transform = gPickedActor->GetTransform();
 				Actor* newDuplicateActor = gPickedActor->GetActorSystem()->SpawnActor(transform);
@@ -233,8 +233,8 @@ void DuplicateActor()
 
 				World::AddActorToWorld(newDuplicateActor);
 
-				editor->SetActorProps(newDuplicateActor);
-				editor->UpdateWorldList();
+				Editor::Get().SetActorProps(newDuplicateActor);
+				Editor::Get().UpdateWorldList();
 
 				debugMenu.AddNotification(VString::wformat(
 					L"Duplicated new actor [%S]", newDuplicateActor->GetName().c_str()));
@@ -271,7 +271,7 @@ void DeleteActor()
 		{
 			if (gPickedActor)
 			{
-				editor->RemoveActorFromWorldList();
+				Editor::Get().RemoveActorFromWorldList();
 
 				if (pickedActors.size() > 1)
 				{
@@ -306,7 +306,7 @@ void DeleteActor()
 		gPickedActor = nullptr;
 		pickedComponent = nullptr;
 
-		editor->ClearProperties();
+		Editor::Get().ClearProperties();
 	}
 }
 
@@ -344,7 +344,7 @@ void SpawnActorOnClick()
 				SpawnActor(transform);
 			}
 
-			editor->UpdateWorldList();
+			Editor::Get().UpdateWorldList();
 			pickedActors.clear();
 		}
 	}
@@ -370,7 +370,7 @@ void SpawnActor(Transform& transform)
 	actor->PostCreate();
 
 	gPickedActor = actor;
-	editor->SetActorProps(gPickedActor);
+	Editor::Get().SetActorProps(gPickedActor);
 }
 
 void VertexPainting()
@@ -703,7 +703,7 @@ void QuickTextureChangeMenu()
 void WorldEditor::DeselectPickedActor()
 {
 	gPickedActor = nullptr;
-	editor->ClearProperties();
+	Editor::Get().ClearProperties();
 }
 
 void WorldEditor::DeselectAll()
@@ -719,8 +719,8 @@ void WorldEditor::SetPickedActor(Actor* actor)
 
 	pickedActors.insert(actor);
 
-	editor->SetActorProps(gPickedActor);
-	editor->SelectActorInWorldList();
+	Editor::Get().SetActorProps(gPickedActor);
+	Editor::Get().SelectActorInWorldList();
 }
 
 void WorldEditor::SetPickedComponent(SpatialComponent* spatialComponent)

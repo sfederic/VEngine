@@ -343,8 +343,8 @@ void SpatialComponent::RotateY(float angle)
 
 void SpatialComponent::FPSCameraRotation()
 {
-	const int x = editor->GetCenterOffsetX();
-	const int y = editor->GetCenterOffsetX();
+	const int x = Editor::Get().GetCenterOffsetX();
+	const int y = Editor::Get().GetCenterOffsetX();
 
 	const float dx = -XMConvertToRadians(0.25f * (float)x);
 	const float dy = -XMConvertToRadians(0.25f * (float)y);

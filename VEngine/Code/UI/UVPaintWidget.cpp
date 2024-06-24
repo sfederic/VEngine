@@ -16,8 +16,8 @@ void UVPaintWidget::Draw(float deltaTime)
 	{
 		if (Input::GetMouseLeftDown())
 		{
-			const auto mouseX = (float)editor->GetViewportMouseX();
-			const auto mouseY = (float)editor->GetViewportMouseY();
+			const auto mouseX = (float)Editor::Get().GetViewportMouseX();
+			const auto mouseY = (float)Editor::Get().GetViewportMouseY();
 
 			pickerLayout = Layout({ mouseX, mouseY, mouseX + uvPickerWidth, mouseY + uvPickerHeight });
 

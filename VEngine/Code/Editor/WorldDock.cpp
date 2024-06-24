@@ -115,7 +115,7 @@ void WorldDock::ClickOnActorInList(QTreeWidgetItem* item, int column)
 			WorldEditor::ClearPickedActors();
 		}
 
-		editor->SetActorProps(clickedActor);
+		Editor::Get().SetActorProps(clickedActor);
 	}
 }
 
@@ -131,7 +131,7 @@ void WorldDock::ArrowSelectActorInList()
 
 		WorldEditor::SetPickedActor(pickedActor);
 
-		editor->SetActorProps(pickedActor);
+		Editor::Get().SetActorProps(pickedActor);
 	}
 }
 

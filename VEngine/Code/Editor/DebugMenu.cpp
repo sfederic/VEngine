@@ -51,7 +51,7 @@ void DebugMenu::Init()
 	//io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
 
 	ImGui::StyleColorsDark();
-	ImGui_ImplWin32_Init((HWND)editor->windowHwnd);
+	ImGui_ImplWin32_Init((HWND)Editor::Get().windowHwnd);
 	ImGui_ImplDX11_Init(&Renderer::GetDevice(), &Renderer::GetDeviceContext());
 }
 
@@ -830,7 +830,7 @@ void DebugMenu::RenderActorInspectMenu()
 			if (actor)
 			{
 				ImGui::Begin("Actor Inspect");
-				ImGui::SetWindowPos(ImVec2(editor->GetViewportMouseX(), editor->GetViewportMouseY()));
+				ImGui::SetWindowPos(ImVec2(Editor::Get().GetViewportMouseX(), Editor::Get().GetViewportMouseY()));
 
 				ImGui::Text("Name: %s", actor->GetName().c_str());
 				ImGui::Text("System: %s", actor->GetActorSystem()->GetName().c_str());

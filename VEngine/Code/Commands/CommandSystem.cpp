@@ -35,7 +35,7 @@ void CommandSystem::Undo()
 		commands[0]->Execute();
 	}
 
-	editor->ResetPropertyWidgetValues();
+	Editor::Get().ResetPropertyWidgetValues();
 }
 
 void CommandSystem::Redo()
@@ -55,7 +55,7 @@ void CommandSystem::Redo()
 		commands[commands.size() - 1]->Execute();
 	}
 
-	editor->ResetPropertyWidgetValues();
+	Editor::Get().ResetPropertyWidgetValues();
 }
 
 void CommandSystem::Reset()

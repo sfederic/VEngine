@@ -72,8 +72,8 @@ bool Widget::IsInViewport()
 
 bool Widget::IsMouseInLayout(Layout layout)
 {
-	const int viewportMouseX = editor->GetViewportMouseX();
-	const int viewportMouseY = editor->GetViewportMouseY();
+	const int viewportMouseX = Editor::Get().GetViewportMouseX();
+	const int viewportMouseY = Editor::Get().GetViewportMouseY();
 
 	if (viewportMouseX > layout.rect.left && viewportMouseX < layout.rect.right)
 	{
@@ -128,8 +128,8 @@ bool Widget::Button(const std::wstring text, Layout layout, float lineWidth,
 	UISystem::FillRect(layout, Colours::Grey);
 	Text(text, layout.rect, textAlign, textColor, textOpacity);
 
-	const int viewportMouseX = editor->GetViewportMouseX();
-	const int viewportMouseY = editor->GetViewportMouseY();
+	const int viewportMouseX = Editor::Get().GetViewportMouseX();
+	const int viewportMouseY = Editor::Get().GetViewportMouseY();
 
 	if (viewportMouseX > layout.rect.left && viewportMouseX < layout.rect.right)
 	{
@@ -208,8 +208,8 @@ bool Widget::ImageButton(std::string_view filename, Layout layout, float alpha)
 
 	SpriteSystem::CreateScreenSprite(sprite);
 
-	const int viewportMouseX = editor->GetViewportMouseX();
-	const int viewportMouseY = editor->GetViewportMouseY();
+	const int viewportMouseX = Editor::Get().GetViewportMouseX();
+	const int viewportMouseY = Editor::Get().GetViewportMouseY();
 
 	if (viewportMouseX > layout.rect.left && viewportMouseX < layout.rect.right)
 	{

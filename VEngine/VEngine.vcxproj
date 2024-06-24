@@ -122,6 +122,7 @@
     <ClCompile Include="Code\Actors\Game\BloomSeed.cpp" />
     <ClCompile Include="Code\Actors\Game\TimerExplosive.cpp" />
     <ClCompile Include="Code\Editor\AssetIconListWidget.cpp" />
+    <ClCompile Include="Code\Editor\Editor.cpp" />
     <ClCompile Include="Code\Editor\imgui\misc\cpp\imgui_stdlib.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
@@ -505,7 +506,6 @@
     <ClInclude Include="Code\Editor\DebugMenu.h" />
     <ClCompile Include="Code\Editor\AssetDock.cpp" />
     <ClInclude Include="Code\Editor\AssetDock.h" />
-    <ClCompile Include="Code\Editor\Editor.cpp" />
     <ClCompile Include="Code\Editor\ImGuizmo\ImGuizmo.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>

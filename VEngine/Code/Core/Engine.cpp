@@ -55,8 +55,8 @@ void Engine::Init(int argc, char* argv[])
 	auto physicsInit = std::async(std::launch::async, []() { PhysicsSystem::Init(); });
 	auto fbxInit = std::async(std::launch::async, []() { FBXLoader::Init(); });
 
-	editor->Init(argc, argv);
-	auto rendererInit = std::async(std::launch::async, []() { Renderer::Init(editor->windowHwnd, editor->GetViewportWidth(), editor->GetViewportHeight()); });
+	Editor::Get().Init(argc, argv);
+	auto rendererInit = std::async(std::launch::async, []() { Renderer::Init(Editor::Get().windowHwnd, Editor::Get().GetViewportWidth(), Editor::Get().GetViewportHeight()); });
 
 	rendererInit.wait();
 	MaterialSystem::Init();
@@ -71,8 +71,8 @@ void Engine::Init(int argc, char* argv[])
 
 	World::Init();
 
-	editor->UpdateWorldList();
-	editor->UpdateSystemsList();
+	Editor::Get().UpdateWorldList();
+	Editor::Get().UpdateSystemsList();
 
 	debugMenuInit.wait();
 	consoleInit.wait();
@@ -83,7 +83,7 @@ void Engine::Init(int argc, char* argv[])
 
 void Engine::TickSystems(float deltaTime)
 {
-	editor->Tick();
+	Editor::Get().Tick();
 	Core::Tick();
 	CommandSystem::Get().Tick();
 	gSequencer.Tick();

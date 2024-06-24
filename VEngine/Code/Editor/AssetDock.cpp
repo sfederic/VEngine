@@ -489,7 +489,7 @@ void AssetDock::ImportMesh()
 
 		Renderer::SetRendererToCaptureMeshIcon(filename);
 
-		editor->RefreshAssetList();
+		Editor::Get().RefreshAssetList();
 	}
 }
 
@@ -512,7 +512,7 @@ void AssetDock::ImportAnim()
 		AssetSystem::BuildSingleVAnimFromFBX(filePath.toStdString(), filename);
 		Log("VAnim built from [%s].", filename.c_str());
 
-		editor->RefreshAssetList();
+		Editor::Get().RefreshAssetList();
 	}
 }
 

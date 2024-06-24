@@ -13,7 +13,7 @@ void Log(std::string logMessage, ...)
 	_vsnprintf_s(msg, 1024, logMessage.c_str(), args);
 	va_end(args);
 
-	editor->Log(msg);
+	Editor::Get().Log(msg);
 
 	std::ofstream os;
 	os.open("Log.txt", std::ios_base::app);
@@ -31,7 +31,7 @@ void Log(std::wstring logMessage, ...)
 	_vsnwprintf_s(msg, 1024, logMessage.c_str(), args);
 	va_end(args);
 
-	editor->Log(msg);
+	Editor::Get().Log(msg);
 
 	std::wofstream os;
 	os.open("Log.txt", std::ios_base::app);

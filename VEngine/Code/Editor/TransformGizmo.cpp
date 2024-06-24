@@ -91,12 +91,12 @@ void TransformGizmo::Tick()
 		if (currentTransformMode == ImGuizmo::MODE::LOCAL)
 		{
 			currentTransformMode = ImGuizmo::MODE::WORLD;
-			editor->SetCurrentTransformMode("World");
+			Editor::Get().SetCurrentTransformMode("World");
 		}
 		else if (currentTransformMode == ImGuizmo::MODE::WORLD)
 		{
 			currentTransformMode = ImGuizmo::MODE::LOCAL;
-			editor->SetCurrentTransformMode("Local");
+			Editor::Get().SetCurrentTransformMode("Local");
 		}
 	}
 
@@ -146,7 +146,7 @@ void TransformGizmo::Tick()
 				actor->SetScale(scale);
 				actor->SetRotation(rot);
 
-				editor->SetActorProps(actor);
+				Editor::Get().SetActorProps(actor);
 			}
 			break;
 		}
@@ -163,7 +163,7 @@ void TransformGizmo::Tick()
 				auto owner = World::GetActorByUID(component->GetOwnerUID());
 				if (owner)
 				{
-					editor->SetActorProps(owner);
+					Editor::Get().SetActorProps(owner);
 				}
 				else
 				{

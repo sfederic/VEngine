@@ -202,7 +202,7 @@ void FileSystem::LoadWorld(std::string worldName)
 {
 	const auto startTime = Profile::QuickStart();
 
-	editor->SetEditorTitle(worldName);
+	Editor::Get().SetEditorTitle(worldName);
 
 	GameInstance::previousMapMovedFrom = World::worldFilename;
 
@@ -373,8 +373,8 @@ void FileSystem::ResetWorldState()
 	//Make sure always after camera gets set
 	World::Start();
 
-	editor->UpdateWorldList();
-	editor->ClearProperties();
+	Editor::Get().UpdateWorldList();
+	Editor::Get().ClearProperties();
 }
 
 void FileSystem::SetDeferredWorldLoad(const std::string_view filename)

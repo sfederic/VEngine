@@ -70,7 +70,7 @@ public:
 		components.pop_back();
 
 		//Make sure the Properties Dock is reset else you'll have widgets trying to access invalid pointers to components.
-		editor->ClearProperties();
+		Editor::Get().ClearProperties();
 	}
 
 	virtual void Init() override
