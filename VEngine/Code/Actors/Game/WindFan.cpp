@@ -24,6 +24,9 @@ void WindFan::Tick(float deltaTime)
 			{
 				const auto nextWindPushPos = gridActor->GetPositionV() + (GetForwardVectorV() * windRange);
 				gridActor->SetNextPos(nextWindPushPos);
+
+				//Todo: this recalc is also needed when the grid actor finishes its movement. Maybe just delete this whole actor, it's too hard to implement with the current systems.
+				gridActor->RecalcCurrentNodePosition();
 			}
 		}
 	}
