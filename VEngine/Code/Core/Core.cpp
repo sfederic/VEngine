@@ -211,6 +211,42 @@ void Core::HandleWin32MessagePump(UINT message, WPARAM wparam, LPARAM lparam)
 		PostQuitMessage(0);
 		break;
 
+		/*case WM_MBUTTONUP:
+			Input::SetMiddleMouseUp();
+			break;
+
+		case WM_MBUTTONDOWN:
+			Input::SetMiddleMouseDown();
+			break;
+
+		case WM_LBUTTONUP:
+			Input::SetLeftMouseUp();
+			break;
+
+		case WM_LBUTTONDOWN:
+			Input::SetLeftMouseDown();
+			break;
+
+		case WM_RBUTTONUP:
+			Input::SetRightMouseUp();
+			break;
+
+		case WM_RBUTTONDOWN:
+			Input::SetRightMouseDown();
+			break;
+
+		case WM_MOUSEWHEEL:
+			if (GET_WHEEL_DELTA_WPARAM(wparam) < 0)
+			{
+				Input::mouseWheelDown = true;
+			}
+			else
+			{
+				Input::mouseWheelUp = true;
+			}
+
+			break;*/
+
 	case WM_SIZE:
 		//@Todo: if you ever want a low poly look, just divide the width and height here.
 		//Note that it messes with in-game widget layouts. Might come back here and make a main menu
