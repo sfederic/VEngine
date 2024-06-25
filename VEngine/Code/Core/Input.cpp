@@ -280,86 +280,84 @@ void PollKeyboardInput()
 			return (Keys)key;
 		};
 
-	if (SUCCEEDED(gGameInput->GetCurrentReading(GameInputKindKeyboard, gGamepad, &keyboardInputReading)))
+	HR(gGameInput->GetCurrentReading(GameInputKindKeyboard, gGamepad, &keyboardInputReading));
+
+	const uint32_t keyCount = keyboardInputReading->GetKeyCount();
+	std::vector<GameInputKeyState> keyStates(keyCount);
+	keyboardInputReading->GetKeyState(keyCount, keyStates.data());
+
+	for (const auto& keyState : keyStates)
 	{
-		const uint32_t keyCount = keyboardInputReading->GetKeyCount();
-		std::vector<GameInputKeyState> keyStates(keyCount);
-		keyboardInputReading->GetKeyState(keyCount, keyStates.data());
-
-		for (const auto& keyState : keyStates)
-		{
-			const Keys key = ScanCodeToVirtualKey(keyState.scanCode);
-			Input::SetKeyDown(key);
-		}
-
-		//Set key up if doesn't exist on current frame.
-		for (const auto& keyState : gPreviousFrameKeyState)
-		{
-			const auto key = ScanCodeToVirtualKey(keyState.scanCode);
-			if (!Input::GetKeyDown(key))
-			{
-				Input::SetKeyUp(key);
-			}
-		}
-
-		gPreviousFrameKeyState = keyStates;
+		const Keys key = ScanCodeToVirtualKey(keyState.scanCode);
+		Input::SetKeyDown(key);
 	}
+
+	//Set key up if doesn't exist on current frame.
+	for (const auto& keyState : gPreviousFrameKeyState)
+	{
+		const auto key = ScanCodeToVirtualKey(keyState.scanCode);
+		if (!Input::GetKeyDown(key))
+		{
+			Input::SetKeyUp(key);
+		}
+	}
+
+	gPreviousFrameKeyState = keyStates;
 }
 
 void PollMouseInput()
 {
-	if (SUCCEEDED(gGameInput->GetCurrentReading(GameInputKindMouse, gGamepad, &mouseInputReading)))
+	HR(gGameInput->GetCurrentReading(GameInputKindMouse, gGamepad, &mouseInputReading));
+
+	GameInputMouseState mouseState = {};
+	mouseInputReading->GetMouseState(&mouseState);
+
+	//Mouse wheel
+	const int64_t mouseWheelDeltaY = mouseState.wheelY - previousMouseWheelY;
+
+	if (mouseWheelDeltaY > 0)
 	{
-		GameInputMouseState mouseState = {};
-		mouseInputReading->GetMouseState(&mouseState);
+		Input::mouseWheelUp = true;
+	}
+	else if (mouseWheelDeltaY < 0)
+	{
+		Input::mouseWheelDown = true;
+	}
 
-		//Mouse wheel
-		const int64_t mouseWheelDeltaY = mouseState.wheelY - previousMouseWheelY;
+	previousMouseWheelY = mouseState.wheelY;
 
-		if (mouseWheelDeltaY > 0)
-		{
-			Input::mouseWheelUp = true;
-		}
-		else if (mouseWheelDeltaY < 0)
-		{
-			Input::mouseWheelDown = true;
-		}
+	//Mouse position
+	const int64_t mouseDeltaX = mouseState.positionX - previousMouseX;
+	const int64_t mouseDeltaY = mouseState.positionY - previousMouseY;
 
-		previousMouseWheelY = mouseState.wheelY;
+	previousMouseX = mouseState.positionX;
+	previousMouseY = mouseState.positionY;
 
-		//Mouse position
-		const int64_t mouseDeltaX = mouseState.positionX - previousMouseX;
-		const int64_t mouseDeltaY = mouseState.positionY - previousMouseY;
+	//Button input
+	if (mouseState.buttons & GameInputMouseButtons::GameInputMouseLeftButton)
+	{
+		Input::SetLeftMouseDown();
+	}
+	else if (previousMouseLeftDown)
+	{
+		Input::SetLeftMouseUp();
+	}
 
-		previousMouseX = mouseState.positionX;
-		previousMouseY = mouseState.positionY;
+	if (mouseState.buttons & GameInputMouseButtons::GameInputMouseRightButton)
+	{
+		Input::SetRightMouseDown();
+	}
+	else if (previousMouseRightDown)
+	{
+		Input::SetRightMouseUp();
+	}
 
-		//Button input
-		if (mouseState.buttons & GameInputMouseButtons::GameInputMouseLeftButton)
-		{
-			Input::SetLeftMouseDown();
-		}
-		else if (previousMouseLeftDown)
-		{
-			Input::SetLeftMouseUp();
-		}
-
-		if (mouseState.buttons & GameInputMouseButtons::GameInputMouseRightButton)
-		{
-			Input::SetRightMouseDown();
-		}
-		else if (previousMouseRightDown)
-		{
-			Input::SetRightMouseUp();
-		}
-
-		if (mouseState.buttons & GameInputMouseButtons::GameInputMouseMiddleButton)
-		{
-			Input::SetMiddleMouseDown();
-		}
-		else if (previousMouseMiddleDown)
-		{
-			Input::SetMiddleMouseUp();
-		}
+	if (mouseState.buttons & GameInputMouseButtons::GameInputMouseMiddleButton)
+	{
+		Input::SetMiddleMouseDown();
+	}
+	else if (previousMouseMiddleDown)
+	{
+		Input::SetMiddleMouseUp();
 	}
 }
