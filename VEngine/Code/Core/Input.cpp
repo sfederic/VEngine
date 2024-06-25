@@ -8,11 +8,26 @@ IGameInputDevice* gGamepad;
 
 std::vector<GameInputKeyState> gPreviousFrameKeyState;
 
+IGameInputReading* keyboardInputReading;
+IGameInputReading* mouseInputReading;
+
+int64_t previousMouseX;
+int64_t previousMouseY;
+
+int64_t previousMouseWheelY;
+
+bool previousMouseLeftDown;
+bool previousMouseRightDown;
+bool previousMouseMiddleDown;
+
 std::set<Keys> currentHeldKeys;
 std::set<Keys> currentDownKeys;
 std::set<Keys> currentUpKeys;
 
 std::multimap<std::string, Keys> keyMap;
+
+void PollKeyboardInput();
+void PollMouseInput();
 
 namespace Input
 {
@@ -30,39 +45,8 @@ namespace Input
 
 	void PollInput()
 	{
-		const auto ScanCodeToVirtualKey = [](UINT scanCode) -> Keys
-			{
-				const UINT key = MapVirtualKeyA(scanCode, MAPVK_VSC_TO_VK);
-				return (Keys)key;
-			};
-
-		IGameInputReading* reading = nullptr;
-		if (SUCCEEDED(gGameInput->GetCurrentReading(GameInputKindKeyboard, gGamepad, &reading)))
-		{
-			const auto keyCount = reading->GetKeyCount();
-			std::vector<GameInputKeyState> keyStates(keyCount);
-			reading->GetKeyState(keyCount, keyStates.data());
-
-			for (const auto& keyState : keyStates)
-			{
-				const auto key = ScanCodeToVirtualKey(keyState.scanCode);
-				Input::SetKeyDown(key);
-			}
-
-			//Set key up if doesn't exist on current frame.
-			for (const auto& keyState : gPreviousFrameKeyState)
-			{
-				const auto key = ScanCodeToVirtualKey(keyState.scanCode);
-				if (!Input::GetKeyDown(key))
-				{
-					Input::SetKeyUp(key);
-				}
-			}
-
-			gPreviousFrameKeyState = keyStates;
-
-			reading->Release();
-		}
+		PollKeyboardInput();
+		PollMouseInput();
 	}
 
 	void InitKeyMap()
@@ -191,36 +175,42 @@ namespace Input
 
 	void SetLeftMouseDown()
 	{
+		previousMouseLeftDown = true;
 		mouseLeftDown = true;
 		mouseLeftUp = false;
 	}
 
 	void SetRightMouseUp()
 	{
+		previousMouseRightDown = false;
 		mouseRightUp = true;
 		mouseRightDown = false;
 	}
 
 	void SetRightMouseDown()
 	{
+		previousMouseRightDown = true;
 		mouseRightDown = true;
 		mouseRightUp = false;
 	}
 
 	void SetMiddleMouseUp()
 	{
+		previousMouseMiddleDown = false;
 		mouseMiddleUp = true;
 		mouseMiddleDown = false;
 	}
 
 	void SetMiddleMouseDown()
 	{
+		previousMouseMiddleDown = true;
 		mouseMiddleDown = true;
 		mouseMiddleUp = false;
 	}
 
 	void SetLeftMouseUp()
 	{
+		previousMouseLeftDown = false;
 		mouseLeftUp = true;
 		mouseLeftDown = false;
 	}
@@ -279,5 +269,97 @@ namespace Input
 	std::set<Keys> GetAllUpKeys()
 	{
 		return currentUpKeys;
+	}
+}
+
+void PollKeyboardInput()
+{
+	const auto ScanCodeToVirtualKey = [](UINT scanCode) -> Keys
+		{
+			const UINT key = MapVirtualKeyA(scanCode, MAPVK_VSC_TO_VK);
+			return (Keys)key;
+		};
+
+	if (SUCCEEDED(gGameInput->GetCurrentReading(GameInputKindKeyboard, gGamepad, &keyboardInputReading)))
+	{
+		const uint32_t keyCount = keyboardInputReading->GetKeyCount();
+		std::vector<GameInputKeyState> keyStates(keyCount);
+		keyboardInputReading->GetKeyState(keyCount, keyStates.data());
+
+		for (const auto& keyState : keyStates)
+		{
+			const Keys key = ScanCodeToVirtualKey(keyState.scanCode);
+			Input::SetKeyDown(key);
+		}
+
+		//Set key up if doesn't exist on current frame.
+		for (const auto& keyState : gPreviousFrameKeyState)
+		{
+			const auto key = ScanCodeToVirtualKey(keyState.scanCode);
+			if (!Input::GetKeyDown(key))
+			{
+				Input::SetKeyUp(key);
+			}
+		}
+
+		gPreviousFrameKeyState = keyStates;
+	}
+}
+
+void PollMouseInput()
+{
+	if (SUCCEEDED(gGameInput->GetCurrentReading(GameInputKindMouse, gGamepad, &mouseInputReading)))
+	{
+		GameInputMouseState mouseState = {};
+		mouseInputReading->GetMouseState(&mouseState);
+
+		//Mouse wheel
+		const int64_t mouseWheelDeltaY = mouseState.wheelY - previousMouseWheelY;
+
+		if (mouseWheelDeltaY > 0)
+		{
+			Input::mouseWheelUp = true;
+		}
+		else if (mouseWheelDeltaY < 0)
+		{
+			Input::mouseWheelDown = true;
+		}
+
+		previousMouseWheelY = mouseState.wheelY;
+
+		//Mouse position
+		const int64_t mouseDeltaX = mouseState.positionX - previousMouseX;
+		const int64_t mouseDeltaY = mouseState.positionY - previousMouseY;
+
+		previousMouseX = mouseState.positionX;
+		previousMouseY = mouseState.positionY;
+
+		//Button input
+		if (previousMouseLeftDown)
+		{
+			Input::SetLeftMouseUp();
+		}
+		else if (mouseState.buttons & GameInputMouseButtons::GameInputMouseLeftButton)
+		{
+			Input::SetLeftMouseDown();
+		}
+
+		if (previousMouseRightDown)
+		{
+			Input::SetRightMouseUp();
+		}
+		else if (mouseState.buttons & GameInputMouseButtons::GameInputMouseRightButton)
+		{
+			Input::SetRightMouseDown();
+		}
+
+		if (previousMouseMiddleDown)
+		{
+			Input::SetMiddleMouseUp();
+		}
+		if (mouseState.buttons & GameInputMouseButtons::GameInputMouseMiddleButton)
+		{
+			Input::SetMiddleMouseDown();
+		}
 	}
 }
