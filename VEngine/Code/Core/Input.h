@@ -1,6 +1,7 @@
 #pragma once
 
 #include <set>
+#include <string>
 #include "Win32Keys.h"
 
 namespace Input
