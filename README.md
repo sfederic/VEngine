@@ -24,6 +24,8 @@ DirectXTK (directxtk_desktop_win10) ver. 2021.8.2.1 - https://github.com/microso
 
 * DirectXMath | Spherical Harmonics (included in repo) https://github.com/microsoft/DirectXMath/tree/main/SHMath
 
+* Microsoft GameInput https://www.nuget.org/packages/Microsoft.GameInput
+
 * Qt ver. 5.15.0 - https://download.qt.io/official_releases/qt/5.15/
 
 (The ImGui libs are already included in the repo)
