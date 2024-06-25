@@ -335,31 +335,31 @@ void PollMouseInput()
 		previousMouseY = mouseState.positionY;
 
 		//Button input
-		if (previousMouseLeftDown)
-		{
-			Input::SetLeftMouseUp();
-		}
-		else if (mouseState.buttons & GameInputMouseButtons::GameInputMouseLeftButton)
+		if (mouseState.buttons & GameInputMouseButtons::GameInputMouseLeftButton)
 		{
 			Input::SetLeftMouseDown();
 		}
-
-		if (previousMouseRightDown)
+		else if (previousMouseLeftDown)
 		{
-			Input::SetRightMouseUp();
+			Input::SetLeftMouseUp();
 		}
-		else if (mouseState.buttons & GameInputMouseButtons::GameInputMouseRightButton)
+
+		if (mouseState.buttons & GameInputMouseButtons::GameInputMouseRightButton)
 		{
 			Input::SetRightMouseDown();
 		}
-
-		if (previousMouseMiddleDown)
+		else if (previousMouseRightDown)
 		{
-			Input::SetMiddleMouseUp();
+			Input::SetRightMouseUp();
 		}
+
 		if (mouseState.buttons & GameInputMouseButtons::GameInputMouseMiddleButton)
 		{
 			Input::SetMiddleMouseDown();
+		}
+		else if (previousMouseMiddleDown)
+		{
+			Input::SetMiddleMouseUp();
 		}
 	}
 }
