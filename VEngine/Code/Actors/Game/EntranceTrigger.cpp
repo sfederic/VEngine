@@ -100,7 +100,7 @@ void EntranceTrigger::Tick(float deltaTime)
 
 			entranceInteractedWith = true;
 
-			Input::blockInput = true;
+			Input::SetBlockInput(true);
 		}
 	}
 	else

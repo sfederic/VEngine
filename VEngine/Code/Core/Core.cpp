@@ -238,11 +238,11 @@ void Core::HandleWin32MessagePump(UINT message, WPARAM wparam, LPARAM lparam)
 	case WM_MOUSEWHEEL:
 		if (GET_WHEEL_DELTA_WPARAM(wparam) < 0)
 		{
-			Input::mouseWheelDown = true;
+			Input::SetMouseWheelDown();
 		}
 		else
 		{
-			Input::mouseWheelUp = true;
+			Input::SetMouseWheelUp();
 		}
 		break;
 

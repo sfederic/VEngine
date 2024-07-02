@@ -62,11 +62,11 @@ void EditorCamera::Tick(float deltaTime)
 
 		if (!debugMenu.hasMouseFocus) //Don't allow mousescroll camera zoom if Imgui debug menu is open
 		{
-			if (Input::mouseWheelUp)
+			if (Input::IsMouseWheelUp())
 			{
 				Move(zoomSpeed, forward);
 			}
-			else if (Input::mouseWheelDown)
+			else if (Input::IsMouseWheelDown())
 			{
 				Move(-zoomSpeed, forward);
 			}

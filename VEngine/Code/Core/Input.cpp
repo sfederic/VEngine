@@ -17,23 +17,22 @@ std::set<Keys> currentUpKeys;
 
 std::multimap<std::string, Keys> keyMap;
 
+bool mouseWheelUp;
+bool mouseWheelDown;
+bool mouseLeftUp;
+bool mouseLeftDown;
+bool mouseRightUp;
+bool mouseRightDown;
+bool mouseMiddleUp;
+bool mouseMiddleDown;
+
+bool blockInput;
+
 void PollKeyboardInput();
 void InitKeyMap();
 
 namespace Input
 {
-	bool mouseWheelUp;
-	bool mouseWheelDown;
-
-	bool blockInput = false;
-
-	bool mouseLeftUp;
-	bool mouseLeftDown;
-	bool mouseRightUp;
-	bool mouseRightDown;
-	bool mouseMiddleUp;
-	bool mouseMiddleDown;
-
 	void PollInput()
 	{
 		PollKeyboardInput();
@@ -60,6 +59,31 @@ namespace Input
 	void ResetHeldKeys()
 	{
 		currentHeldKeys.clear();
+	}
+
+	void SetBlockInput(bool value)
+	{
+		blockInput = value;
+	}
+
+	void SetMouseWheelUp()
+	{
+		mouseWheelUp = true;
+	}
+
+	void SetMouseWheelDown()
+	{
+		mouseWheelDown = true;
+	}
+
+	bool IsMouseWheelUp()
+	{
+		return mouseWheelUp;
+	}
+
+	bool IsMouseWheelDown()
+	{
+		return mouseWheelDown;
 	}
 
 	void SetKeyDown(Keys key)

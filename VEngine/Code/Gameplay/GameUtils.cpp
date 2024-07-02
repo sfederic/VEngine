@@ -109,7 +109,7 @@ namespace GameUtils
 
 		LoadWorldDeferred(levelToMoveTo);
 
-		Input::blockInput = false;
+		Input::SetBlockInput(false);
 	}
 
 	void DisablePlayer()

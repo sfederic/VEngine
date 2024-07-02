@@ -6,11 +6,6 @@
 
 namespace Input
 {
-	extern bool mouseWheelUp;
-	extern bool mouseWheelDown;
-
-	extern bool blockInput;
-
 	void Init();
 	void Reset();
 
@@ -19,6 +14,13 @@ namespace Input
 	//Used for when Qt or ImGui might take away input WndProc focus from the program with a QtDialog for example,
 	//meaning that hotkeys to access such dialogs will be stuck as held as held keys aren't cleared every frame.
 	void ResetHeldKeys();
+
+	void SetBlockInput(bool value);
+
+	void SetMouseWheelUp();
+	void SetMouseWheelDown();
+	bool IsMouseWheelUp();
+	bool IsMouseWheelDown();
 
 	void SetKeyDown(Keys key);
 	void SetKeyUp(Keys key);
