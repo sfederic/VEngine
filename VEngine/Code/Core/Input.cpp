@@ -18,6 +18,7 @@ std::set<Keys> currentUpKeys;
 std::multimap<std::string, Keys> keyMap;
 
 void PollKeyboardInput();
+void InitKeyMap();
 
 namespace Input
 {
@@ -38,28 +39,10 @@ namespace Input
 		PollKeyboardInput();
 	}
 
-	void InitKeyMap()
+	void Init()
 	{
-		keyMap.emplace("MoveForward", Keys::W);
-		keyMap.emplace("MoveBack", Keys::S);
-		keyMap.emplace("MoveLeft", Keys::A);
-		keyMap.emplace("MoveRight", Keys::D);
-
-		keyMap.emplace("RotateUp", Keys::Up);
-		keyMap.emplace("RotateDown", Keys::Down);
-		keyMap.emplace("RotateLeft", Keys::Left);
-		keyMap.emplace("RotateRight", Keys::Right);
-
-		keyMap.emplace("Link", Keys::Enter);
-		keyMap.emplace("Unlink", Keys::BackSpace);
-
-		keyMap.emplace("ToggleGrid", Keys::Space);
-
-		keyMap.emplace("Interact", Keys::Down);
-
-		keyMap.emplace("OpenJournal", Keys::J);
-
 		HR(GameInputCreate(&gGameInput));
+		InitKeyMap();
 	}
 
 	void Reset()
@@ -286,4 +269,21 @@ void PollKeyboardInput()
 	}
 
 	gPreviousFrameKeyState = keyStates;
+}
+
+void InitKeyMap()
+{
+	keyMap.emplace("MoveForward", Keys::W);
+	keyMap.emplace("MoveBack", Keys::S);
+	keyMap.emplace("MoveLeft", Keys::A);
+	keyMap.emplace("MoveRight", Keys::D);
+	keyMap.emplace("RotateUp", Keys::Up);
+	keyMap.emplace("RotateDown", Keys::Down);
+	keyMap.emplace("RotateLeft", Keys::Left);
+	keyMap.emplace("RotateRight", Keys::Right);
+	keyMap.emplace("Link", Keys::Enter);
+	keyMap.emplace("Unlink", Keys::BackSpace);
+	keyMap.emplace("ToggleGrid", Keys::Space);
+	keyMap.emplace("Interact", Keys::Down);
+	keyMap.emplace("OpenJournal", Keys::J);
 }

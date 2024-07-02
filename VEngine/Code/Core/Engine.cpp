@@ -38,7 +38,7 @@ void Engine::Init(int argc, char* argv[])
 	const auto startTime = Profile::QuickStart();
 
 	ClearLog();
-	Input::InitKeyMap();
+	Input::Init();
 	PropertyTypes::SetupPropertyTypesVEnum();
 
 	WorldFunctions::SetupWorldStartFunctions();

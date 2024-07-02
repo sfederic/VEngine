@@ -11,7 +11,7 @@ namespace Input
 
 	extern bool blockInput;
 
-	void InitKeyMap();
+	void Init();
 	void Reset();
 
 	void PollInput();
