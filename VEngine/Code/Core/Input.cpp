@@ -11,15 +11,6 @@ std::vector<GameInputKeyState> gPreviousFrameKeyState;
 IGameInputReading* keyboardInputReading;
 IGameInputReading* mouseInputReading;
 
-int64_t previousMouseX;
-int64_t previousMouseY;
-
-int64_t previousMouseWheelY;
-
-bool previousMouseLeftDown;
-bool previousMouseRightDown;
-bool previousMouseMiddleDown;
-
 std::set<Keys> currentHeldKeys;
 std::set<Keys> currentDownKeys;
 std::set<Keys> currentUpKeys;
@@ -27,7 +18,6 @@ std::set<Keys> currentUpKeys;
 std::multimap<std::string, Keys> keyMap;
 
 void PollKeyboardInput();
-void PollMouseInput();
 
 namespace Input
 {
@@ -46,7 +36,6 @@ namespace Input
 	void PollInput()
 	{
 		PollKeyboardInput();
-		PollMouseInput();
 	}
 
 	void InitKeyMap()
@@ -175,42 +164,36 @@ namespace Input
 
 	void SetLeftMouseDown()
 	{
-		previousMouseLeftDown = true;
 		mouseLeftDown = true;
 		mouseLeftUp = false;
 	}
 
 	void SetRightMouseUp()
 	{
-		previousMouseRightDown = false;
 		mouseRightUp = true;
 		mouseRightDown = false;
 	}
 
 	void SetRightMouseDown()
 	{
-		previousMouseRightDown = true;
 		mouseRightDown = true;
 		mouseRightUp = false;
 	}
 
 	void SetMiddleMouseUp()
 	{
-		previousMouseMiddleDown = false;
 		mouseMiddleUp = true;
 		mouseMiddleDown = false;
 	}
 
 	void SetMiddleMouseDown()
 	{
-		previousMouseMiddleDown = true;
 		mouseMiddleDown = true;
 		mouseMiddleUp = false;
 	}
 
 	void SetLeftMouseUp()
 	{
-		previousMouseLeftDown = false;
 		mouseLeftUp = true;
 		mouseLeftDown = false;
 	}
@@ -303,61 +286,4 @@ void PollKeyboardInput()
 	}
 
 	gPreviousFrameKeyState = keyStates;
-}
-
-void PollMouseInput()
-{
-	HR(gGameInput->GetCurrentReading(GameInputKindMouse, gGamepad, &mouseInputReading));
-
-	GameInputMouseState mouseState = {};
-	mouseInputReading->GetMouseState(&mouseState);
-
-	//Mouse wheel
-	const int64_t mouseWheelDeltaY = mouseState.wheelY - previousMouseWheelY;
-
-	if (mouseWheelDeltaY > 0)
-	{
-		Input::mouseWheelUp = true;
-	}
-	else if (mouseWheelDeltaY < 0)
-	{
-		Input::mouseWheelDown = true;
-	}
-
-	previousMouseWheelY = mouseState.wheelY;
-
-	//Mouse position
-	const int64_t mouseDeltaX = mouseState.positionX - previousMouseX;
-	const int64_t mouseDeltaY = mouseState.positionY - previousMouseY;
-
-	previousMouseX = mouseState.positionX;
-	previousMouseY = mouseState.positionY;
-
-	//Button input
-	if (mouseState.buttons & GameInputMouseButtons::GameInputMouseLeftButton)
-	{
-		Input::SetLeftMouseDown();
-	}
-	else if (previousMouseLeftDown)
-	{
-		Input::SetLeftMouseUp();
-	}
-
-	if (mouseState.buttons & GameInputMouseButtons::GameInputMouseRightButton)
-	{
-		Input::SetRightMouseDown();
-	}
-	else if (previousMouseRightDown)
-	{
-		Input::SetRightMouseUp();
-	}
-
-	if (mouseState.buttons & GameInputMouseButtons::GameInputMouseMiddleButton)
-	{
-		Input::SetMiddleMouseDown();
-	}
-	else if (previousMouseMiddleDown)
-	{
-		Input::SetMiddleMouseUp();
-	}
 }
