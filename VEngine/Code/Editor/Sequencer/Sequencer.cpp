@@ -6,6 +6,7 @@
 #include "Core/Serialiser.h"
 #include "Core/Deserialiser.h"
 #include "AudioSequenceEntryData.h"
+#include "CameraSequenceEntryData.h"
 
 Sequencer gSequencer;
 
@@ -71,6 +72,8 @@ void Sequencer::Render()
 	if (ImGui::Button("Camera"))
 	{
 		Add((int)SequenceEntryTypes::Camera);
+		auto& entry = sequencerItems.back();
+		entry.entryData = new CameraSequenceEntryData();
 	}
 	if (ImGui::Button("Audio"))
 	{
