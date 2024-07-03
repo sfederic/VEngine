@@ -58,7 +58,6 @@ public:
 
 	void Add(int type) override;
 	void Del(int index) override { sequencerItems.erase(sequencerItems.begin() + index); }
-	void Duplicate(int index) override { sequencerItems.push_back(sequencerItems[index]); }
 
 	size_t GetCustomHeight(int index) override { return sequencerItems[index].mExpanded ? 300 : 0; }
 
