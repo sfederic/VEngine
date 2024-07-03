@@ -872,6 +872,9 @@
     <ClCompile Include="Code\Editor\Editor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Editor\Sequencer\CameraSequenceEntryData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\main.cpp">
@@ -1809,6 +1812,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\WindFan.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Editor\Sequencer\CameraSequenceEntryData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
