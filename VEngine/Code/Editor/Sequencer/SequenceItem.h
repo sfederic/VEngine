@@ -7,7 +7,6 @@
 struct SequenceItem
 {
 	SequenceItem(int type) : mType((SequenceEntryTypes)type) {}
-	virtual ~SequenceItem() = default;
 
 	std::unique_ptr<SequenceEntryData> entryData;
 	SequenceEntryTypes mType = SequenceEntryTypes::Audio;

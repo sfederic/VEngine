@@ -12,7 +12,20 @@ Sequencer gSequencer;
 
 void Sequencer::Add(int type)
 {
+	auto item = SequenceItem(type);
 
+	switch (type)
+	{
+	case (int)SequenceEntryTypes::Audio:
+		item.entryData = std::make_unique<AudioSequenceEntryData>();
+		break;
+
+	case (int)SequenceEntryTypes::Camera:
+		item.entryData = std::make_unique<CameraSequenceEntryData>();
+		break;
+	}
+
+	sequencerItems.emplace_back(std::move(item));
 }
 
 void Sequencer::Tick()
@@ -77,14 +90,10 @@ void Sequencer::Render()
 	if (ImGui::Button("Camera"))
 	{
 		Add((int)SequenceEntryTypes::Camera);
-		auto& entry = sequencerItems.back();
-		entry.entryData = new CameraSequenceEntryData();
 	}
 	if (ImGui::Button("Audio"))
 	{
 		Add((int)SequenceEntryTypes::Audio);
-		auto& entry = sequencerItems.back();
-		entry.entryData = std::make_unique<AudioSequenceEntryData>();
 	}
 
 	if (selectedEntry >= 0 && !sequencerItems.empty())
@@ -152,9 +161,7 @@ void Sequencer::ReadInSequencerFile()
 		switch (entryType)
 		{
 		case (int)SequenceEntryTypes::Audio:
-			sequencerItems.push_back(SequenceItem(entryType));
-			auto& entry = sequencerItems.back();
-			entry.entryData = new AudioSequenceEntryData();
+			Add((int)SequenceEntryTypes::Audio);
 			break;
 		}
 
