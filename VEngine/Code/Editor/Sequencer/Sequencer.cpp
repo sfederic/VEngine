@@ -103,9 +103,20 @@ void Sequencer::Render()
 		switch (entry.mType)
 		{
 		case SequenceEntryTypes::Audio:
+		{
 			auto entryData = dynamic_cast<AudioSequenceEntryData*>(entry.entryData.get());
+			assert(entryData);
 			ImGui::InputText("Audio Filename", &entryData->audioFilename);
 			break;
+		}
+		case SequenceEntryTypes::Camera:
+		{
+			auto entryData = dynamic_cast<CameraSequenceEntryData*>(entry.entryData.get());
+			assert(entryData);
+			//Todo: there's some imgui assert error here.
+			ImGui::InputText("Camera", &entryData->cameraName);
+			break;
+		}
 		}
 	}
 
