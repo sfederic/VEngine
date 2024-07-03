@@ -492,7 +492,7 @@ void DebugMenu::RenderVertexPaintMenu()
 			{
 				for (auto& vertex : mesh->GetAllVertices())
 				{
-					vertex.colour = WorldEditor::vertexPaintColour;
+					vertex.colour = colour;
 				}
 
 				mesh->CreateNewVertexBuffer();
