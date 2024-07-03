@@ -1817,6 +1817,9 @@
     <ClInclude Include="Code\Editor\Sequencer\CameraSequenceEntryData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Code\Editor\Sequencer\SequenceItem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

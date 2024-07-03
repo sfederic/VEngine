@@ -10,6 +10,11 @@
 
 Sequencer gSequencer;
 
+void Sequencer::Add(int type)
+{
+
+}
+
 void Sequencer::Tick()
 {
 	if (!isRunning)
@@ -79,7 +84,7 @@ void Sequencer::Render()
 	{
 		Add((int)SequenceEntryTypes::Audio);
 		auto& entry = sequencerItems.back();
-		entry.entryData = new AudioSequenceEntryData();
+		entry.entryData = std::make_unique<AudioSequenceEntryData>();
 	}
 
 	if (selectedEntry >= 0 && !sequencerItems.empty())
@@ -89,7 +94,7 @@ void Sequencer::Render()
 		switch (entry.mType)
 		{
 		case SequenceEntryTypes::Audio:
-			auto entryData = dynamic_cast<AudioSequenceEntryData*>(entry.entryData);
+			auto entryData = dynamic_cast<AudioSequenceEntryData*>(entry.entryData.get());
 			ImGui::InputText("Audio Filename", &entryData->audioFilename);
 			break;
 		}

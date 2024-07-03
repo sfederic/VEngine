@@ -1,24 +1,13 @@
 #pragma once
 
 #include "Editor/ImGuizmo/ImSequencer.h"
+#include "Editor/Sequencer/SequenceItem.h"
 #include "Editor/Sequencer/SequenceEntryData.h"
 #include "Editor/Sequencer/SequenceEntryTypes.h"
 #include <vector>
 #include <cstdio>
 
 //Ref:https://github.com/CedricGuillemet/ImGuizmo/blob/master/example/main.cpp
-
-struct SequenceItem
-{
-	SequenceItem(int type) : mType((SequenceEntryTypes)type) {}
-
-	SequenceEntryData* entryData = nullptr;
-	SequenceEntryTypes mType = SequenceEntryTypes::Audio;
-	int mFrameStart = 0;
-	int mFrameEnd = 60;
-	bool mExpanded = false;
-	bool mIsActive = false;
-};
 
 class Sequencer : public ImSequencer::SequenceInterface
 {
@@ -67,7 +56,7 @@ public:
 		}
 	}
 
-	void Add(int type) override { sequencerItems.push_back(SequenceItem(type)); };
+	void Add(int type) override;
 	void Del(int index) override { sequencerItems.erase(sequencerItems.begin() + index); }
 	void Duplicate(int index) override { sequencerItems.push_back(sequencerItems[index]); }
 

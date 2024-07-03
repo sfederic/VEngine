@@ -382,6 +382,7 @@
     <ClInclude Include="Code\Editor\AssetIconListWidget.h" />
     <ClInclude Include="Code\Editor\imgui\misc\cpp\imgui_stdlib.h" />
     <ClInclude Include="Code\Editor\Sequencer\AudioSequenceEntryData.h" />
+    <ClInclude Include="Code\Editor\Sequencer\SequenceItem.h" />
     <ClInclude Include="Code\Editor\Sequencer\SequenceEntryData.h" />
     <ClInclude Include="Code\Editor\Sequencer\SequenceEntryTypes.h" />
     <ClInclude Include="Code\Render\BlendState.h" />
