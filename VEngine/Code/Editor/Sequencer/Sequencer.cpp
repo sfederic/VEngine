@@ -1,5 +1,7 @@
 #include "vpch.h"
 #include "Sequencer.h"
+#include <QFileDialog>
+#include "Asset/AssetBaseFolders.h"
 #include "Editor/ImGui/imgui.h"
 #include "Editor/ImGui/misc/cpp/imgui_stdlib.h"
 #include "Core/Core.h"
@@ -138,7 +140,18 @@ void Sequencer::ActivateSequencer()
 
 void Sequencer::WriteCurrentSequenceFileOut()
 {
-	Serialiser s("sequencer_test.vseq", OpenMode::Out);
+	QFileDialog dialog;
+	dialog.setFileMode(QFileDialog::AnyFile);
+	const QString filePath = dialog.getSaveFileName(nullptr, "Save sequencer file",
+		QString::fromStdString(AssetBaseFolders::sequencerFiles), nullptr, nullptr,
+		QFileDialog::Option::DontUseNativeDialog);
+
+	if (filePath.isEmpty())
+	{
+		return;
+	}
+
+	Serialiser s(filePath.toStdString(), OpenMode::Out);
 
 	const size_t numberOfItems = sequencerItems.size();
 	s.WriteLine(numberOfItems);
@@ -149,13 +162,26 @@ void Sequencer::WriteCurrentSequenceFileOut()
 		s.Serialise(props);
 		s.WriteLine(L"next");
 	}
+
+	Log("%s sequencer file saved.", filePath.toStdString().c_str());
 }
 
 void Sequencer::ReadInSequencerFile()
 {
+	QFileDialog dialog;
+	dialog.setFileMode(QFileDialog::AnyFile);
+	const QString filePath = dialog.getOpenFileName(nullptr, "Load sequencer file",
+		QString::fromStdString(AssetBaseFolders::sequencerFiles), nullptr, nullptr,
+		QFileDialog::Option::DontUseNativeDialog);
+
+	if (filePath.isEmpty())
+	{
+		return;
+	}
+
 	sequencerItems.clear();
 
-	Deserialiser d("sequencer_test.vseq", OpenMode::In);
+	Deserialiser d(filePath.toStdString(), OpenMode::In);
 
 	size_t numberOfItems = 0;
 	d.ReadLine(numberOfItems);
@@ -180,4 +206,6 @@ void Sequencer::ReadInSequencerFile()
 		auto entryProps = entry.entryData->GetProps();
 		d.Deserialise(entryProps);
 	}
+
+	Log("%s sequencer file loaded.", filePath.toStdString().c_str());
 }
