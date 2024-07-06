@@ -341,7 +341,7 @@ void ProcessAllChildNodes(std::string fbxFilename, FbxNode* node, MeshData& mesh
 			//@Todo: No idea how transparency applies to each material per colour property in DCC.
 
 			Material engineMaterial("test.png", "Default");
-			engineMaterial.materialShaderData = shaderData;
+			engineMaterial.GetMaterialShaderData() = shaderData;
 
 			const std::string materialName =
 				AssetBaseFolders::material +

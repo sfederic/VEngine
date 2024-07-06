@@ -170,22 +170,22 @@ void MeshComponent::SetRastState(const std::string newRastStateName)
 	//If calling before Material::Create() is called, rastStateName is the one.
 	material->rastStateValue.SetValue(newRastStateName);
 	//This set isn't necessary with the above, but fine for after Material::Create() called.
-	material->rastState = Renderer::GetRastState(newRastStateName);
+	material->SetRastState(Renderer::GetRastState(newRastStateName));
 }
 
 void MeshComponent::SetBlendState(const std::string newBlendState)
 {
 	material->blendStateValue.SetValue(newBlendState);
-	material->blendState = Renderer::GetBlendState(newBlendState);
+	material->SetBlendState(Renderer::GetBlendState(newBlendState));
 }
 
 void MeshComponent::SetTexture(const std::string newTextureName)
 {
-	material->defaultTexture = TextureSystem::FindTexture2D(newTextureName);
+	material->SetDefaultTexture(TextureSystem::FindTexture2D(newTextureName));
 	material->defaultTextureData.filename = newTextureName;
 }
 
-std::string MeshComponent::GetTextureFilename()
+std::string MeshComponent::GetTextureFilename() const
 {
 	return material->defaultTextureData.filename;
 }
@@ -197,38 +197,40 @@ void MeshComponent::SetShaderItem(std::string shaderItemName)
 
 void MeshComponent::SetAmbientColour(XMFLOAT3 ambientColour)
 {
-	material->materialShaderData.ambient.x = ambientColour.x;
-	material->materialShaderData.ambient.y = ambientColour.y;
-	material->materialShaderData.ambient.z = ambientColour.z;
+	auto& materialShaderData = material->GetMaterialShaderData();
+	materialShaderData.ambient.x = ambientColour.x;
+	materialShaderData.ambient.y = ambientColour.y;
+	materialShaderData.ambient.z = ambientColour.z;
 }
 
 XMFLOAT3 MeshComponent::GetAmbientColour()
 {
+	auto& materialShaderData = material->GetMaterialShaderData();
 	XMFLOAT3 colour = {};
-	colour.x = material->materialShaderData.ambient.x;
-	colour.y = material->materialShaderData.ambient.y;
-	colour.z = material->materialShaderData.ambient.z;
+	colour.x = materialShaderData.ambient.x;
+	colour.y = materialShaderData.ambient.y;
+	colour.z = materialShaderData.ambient.z;
 	return colour;
 }
 
 void MeshComponent::SetAlpha(float alpha)
 {
-	material->materialShaderData.ambient.w = alpha;
+	material->GetMaterialShaderData().ambient.w = alpha;
 }
 
 float MeshComponent::GetAlpha()
 {
-	return material->materialShaderData.ambient.w;
+	return material->GetMaterialShaderData().ambient.w;
 }
 
 void MeshComponent::SetUseTexture(bool useTexture)
 {
-	material->materialShaderData.useTexture = useTexture;
+	material->GetMaterialShaderData().useTexture = useTexture;
 }
 
 bool MeshComponent::IsUsingTexture()
 {
-	return material->materialShaderData.useTexture;
+	return material->GetMaterialShaderData().useTexture;
 }
 
 void MeshComponent::SetUVRotationSpeed(float speed)
@@ -274,12 +276,12 @@ std::vector<XMFLOAT3> MeshComponent::GetAllVertexPositions()
 
 BlendState& MeshComponent::GetBlendState()
 {
-	return *material->blendState;
+	return material->GetBlendState();
 }
 
 RastState& MeshComponent::GetRastState()
 {
-	return *material->rastState;
+	return material->GetRastState();
 }
 
 bool MeshComponent::IntersectsWithAnyBoundingBoxInWorld()

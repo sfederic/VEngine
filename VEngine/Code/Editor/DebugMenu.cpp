@@ -572,7 +572,7 @@ void DebugMenu::RenderUVMenu()
 
 		for (const auto mesh : WorldEditor::GetPickedActor()->GetComponents<MeshComponent>())
 		{
-			auto& materialShaderData = mesh->GetMaterial().materialShaderData;
+			auto& materialShaderData = mesh->GetMaterial().GetMaterialShaderData();
 
 			static float uvScale[2];
 			uvScale[0] = materialShaderData.uvScale.x;

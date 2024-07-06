@@ -96,13 +96,13 @@ Properties ParticleEmitter::GetProps()
 void ParticleEmitter::SetAlpha(float alpha)
 {
 	auto& material = GetMaterial();
-	material.materialShaderData.ambient.w = alpha;
+	material.GetMaterialShaderData().ambient.w = alpha;
 }
 
 float ParticleEmitter::GetAlpha()
 {
 	auto& material = GetMaterial();
-	return material.materialShaderData.ambient.w;
+	return material.GetMaterialShaderData().ambient.w;
 }
 
 void ParticleEmitter::SetTexture(std::string_view textureFilename)

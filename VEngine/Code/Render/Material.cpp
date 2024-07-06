@@ -64,7 +64,7 @@ void Material::Create()
 	sampler = &Renderer::GetDefaultSampler();
 	rastState = Renderer::GetRastState(rastStateValue.GetValue());
 	blendState = Renderer::GetBlendState(blendStateValue.GetValue());
-	shader = ShaderSystem::FindShaderItem(shaderItemValue.GetValue());
+	shaderItem = ShaderSystem::FindShaderItem(shaderItemValue.GetValue());
 }
 
 void Material::Destroy()
@@ -89,7 +89,7 @@ static void ReassignTexture(void* data)
 	auto meshes = WorldEditor::GetPickedActor()->GetComponents<MeshComponent>();
 	for (auto mesh : meshes)
 	{
-		mesh->GetMaterial().defaultTexture = swapTexture;
+		mesh->GetMaterial().SetDefaultTexture(swapTexture);
 	}
 }
 
@@ -107,7 +107,7 @@ static void ReassignTextureSecondary(void* data)
 	auto meshes = WorldEditor::GetPickedActor()->GetComponents<MeshComponent>();
 	for (auto mesh : meshes)
 	{
-		mesh->GetMaterial().secondaryTexture = swapTexture;
+		mesh->GetMaterial().SetSecondaryTexture(swapTexture);
 	}
 }
 
@@ -127,7 +127,7 @@ static void ReassignRastState(void* data)
 		auto meshes = WorldEditor::GetPickedActor()->GetComponents<MeshComponent>();
 		for (auto mesh : meshes)
 		{
-			mesh->GetMaterial().rastState = foundRastState;
+			mesh->GetMaterial().SetRastState(foundRastState);
 		}
 	}
 }
@@ -148,7 +148,7 @@ static void ReassignBlendState(void* data)
 		auto meshes = WorldEditor::GetPickedActor()->GetComponents<MeshComponent>();
 		for (auto mesh : meshes)
 		{
-			mesh->GetMaterial().blendState = foundBlendState;
+			mesh->GetMaterial().SetBlendState(foundBlendState);
 		}
 	}
 }
@@ -166,7 +166,7 @@ static void ReassignShader(void* data)
 	auto meshes = WorldEditor::GetPickedActor()->GetComponents<MeshComponent>();
 	for (auto mesh : meshes)
 	{
-		mesh->GetMaterial().shader = foundShader;
+		mesh->GetMaterial().SetShaderItem(foundShader);
 	}
 }
 
@@ -200,15 +200,15 @@ Properties Material::GetProps()
 
 ID3D11VertexShader* Material::GetVertexShader()
 {
-	return shader->GetVertexShader();
+	return shaderItem->GetVertexShader();
 }
 
 ID3D11PixelShader* Material::GetPixelShader()
 {
-	return shader->GetPixelShader();
+	return shaderItem->GetPixelShader();
 }
 
 ID3D11InputLayout* Material::GetInputLayout()
 {
-	return shader->GetInputLayout();
+	return shaderItem->GetInputLayout();
 }

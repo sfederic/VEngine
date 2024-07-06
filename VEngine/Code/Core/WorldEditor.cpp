@@ -109,7 +109,7 @@ void HandleActorPicking()
 				auto mesh = dynamic_cast<MeshComponent*>(hit.hitComponent);
 				if (mesh)
 				{
-					mesh->GetMaterial().materialShaderData.useTexture = true;
+					mesh->GetMaterial().GetMaterialShaderData().useTexture = true;
 					mesh->SetTexture(VString::wstos(TextureSystem::selectedTextureInEditor));
 					return;
 				}

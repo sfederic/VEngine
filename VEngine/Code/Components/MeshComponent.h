@@ -73,7 +73,7 @@ public:
 	void SetBlendState(const std::string newBlendState);
 
 	void SetTexture(const std::string newTextureName);
-	std::string GetTextureFilename();
+	std::string GetTextureFilename() const;
 
 	void SetShaderItem(std::string shaderItemName);
 

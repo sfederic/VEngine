@@ -707,7 +707,7 @@ void RenderMeshForShadowPass(MeshComponent* mesh)
 	cbMatrices.SetVS();
 
 	//Set textures
-	context->PSSetSamplers(0, 1, mat.sampler->GetDataAddress());
+	context->PSSetSamplers(0, 1, mat.GetSampler().GetDataAddress());
 	SetShaderResourceFromMaterial(mat);
 
 	//Draw
@@ -736,7 +736,7 @@ void RenderInstanceMeshForShadowPass(InstanceMeshComponent& instanceMesh)
 		cbMatrices.SetVS();
 
 		//Set textures
-		context->PSSetSamplers(0, 1, mat.sampler->GetDataAddress());
+		context->PSSetSamplers(0, 1, mat.GetSampler().GetDataAddress());
 		SetShaderResourceFromMaterial(mat);
 
 		//Draw
@@ -804,7 +804,7 @@ void RenderShadowPass()
 
 		//Set textures
 		Material& mat = mesh->GetMaterial();
-		context->PSSetSamplers(0, 1, mat.sampler->GetDataAddress());
+		context->PSSetSamplers(0, 1, mat.GetSampler().GetDataAddress());
 		SetShaderResourceFromMaterial(mat);
 
 		//Draw
@@ -1133,13 +1133,13 @@ void Renderer::RenderLightProbeViews()
 
 				context->PSSetShader(lightProbeShader->GetPixelShader(), nullptr, 0);
 
-				context->PSSetSamplers(0, 1, material.sampler->GetDataAddress());
+				context->PSSetSamplers(0, 1, material.GetSampler().GetDataAddress());
 
 				SetShaderResourceFromMaterial(material);
 
 				context->IASetVertexBuffers(0, 1, mesh->GetVertexBuffer().GetDataAddress(), &stride, &offset);
 
-				cbMaterial.Map(&material.materialShaderData);
+				cbMaterial.Map(&material.GetMaterialShaderData());
 				cbMaterial.SetPS();
 
 				//Set matrices
@@ -1761,7 +1761,7 @@ void Renderer::RenderParticleEmitters()
 
 		SetBlendStateByName(BlendStates::Transparent);
 
-		SetShaders(emitter->GetMaterial().shader->GetName());
+		SetShaders(emitter->GetMaterial().GetShaderItem().GetName());
 
 		context->PSSetSamplers(0, 1, Renderer::GetDefaultSampler().GetDataAddress());
 
@@ -1784,7 +1784,7 @@ void Renderer::RenderParticleEmitters()
 			cbMatrices.SetVS();
 
 			MaterialShaderData materialShaderData;
-			materialShaderData = emitter->GetMaterial().materialShaderData;
+			materialShaderData = emitter->GetMaterial().GetMaterialShaderData();
 			materialShaderData.ambient.w = particle.alpha;
 			cbMaterial.Map(&materialShaderData);
 			cbMaterial.SetPS();
@@ -2043,25 +2043,25 @@ void SetRenderPipelineStates(MeshComponent* mesh)
 	{
 		context->RSSetState(rastStateMap.find(RastStates::wireframe)->second->GetData());
 	}
-	else if (material.rastState)
+	else
 	{
-		context->RSSetState(material.rastState->GetData());
+		context->RSSetState(material.GetRastState().GetData());
 	}
 
 	constexpr FLOAT blendState[4] = { 0.f };
-	context->OMSetBlendState(material.blendState->GetData(), blendState, 0xFFFFFFFF);
+	context->OMSetBlendState(material.GetBlendState().GetData(), blendState, 0xFFFFFFFF);
 
 	context->VSSetShader(material.GetVertexShader(), nullptr, 0);
 	context->IASetInputLayout(material.GetInputLayout());
 
 	context->PSSetShader(material.GetPixelShader(), nullptr, 0);
 
-	context->PSSetSamplers(0, 1, material.sampler->GetDataAddress());
+	context->PSSetSamplers(0, 1, material.GetSampler().GetDataAddress());
 	SetShaderResourceFromMaterial(material);
 
 	SetVertexBuffer(mesh->GetVertexBuffer());
 
-	cbMaterial.Map(&material.materialShaderData);
+	cbMaterial.Map(&material.GetMaterialShaderData());
 	cbMaterial.SetPS();
 }
 
@@ -2162,10 +2162,10 @@ void SetShaderResourceFromMaterial(Material& material)
 	auto normalMapSRV = normalMapTexture->GetSRV();
 	context->PSSetShaderResources(normalMapTexureRegister, 1, normalMapSRV.GetAddressOf());*/
 
-	auto defaultTextureSRV = material.defaultTexture->GetSRV();
+	auto defaultTextureSRV = material.GetDefaultTexture().GetSRV();
 	context->PSSetShaderResources(defaultTextureRegister, 1, &defaultTextureSRV);
 
-	auto secondaryTextureSRV = material.secondaryTexture->GetSRV();
+	auto secondaryTextureSRV = material.GetSecondaryTexture().GetSRV();
 	context->PSSetShaderResources(secondaryTextureRegister, 1, &secondaryTextureSRV);
 }
 

@@ -19,24 +19,24 @@ void ShaderMatrices::MakeTextureMatrix(Material& material)
 	//Don't animate while editing, fucks up starting uv offsets and rotations
 	if (!Core::gameplayOn)
 	{
-		XMVECTOR finalOffset = XMLoadFloat2(&material.materialShaderData.uvOffset);
-		XMVECTOR scale = XMLoadFloat2(&material.materialShaderData.uvScale);
-		float rotation = XMConvertToRadians(material.materialShaderData.uvRotation);
+		XMVECTOR finalOffset = XMLoadFloat2(&material.GetMaterialShaderData().uvOffset);
+		XMVECTOR scale = XMLoadFloat2(&material.GetMaterialShaderData().uvScale);
+		float rotation = XMConvertToRadians(material.GetMaterialShaderData().uvRotation);
 		texMatrix = XMMatrixAffineTransformation2D(scale, XMVectorSet(0.f, 0.f, 0.f, 1.f), rotation, finalOffset);
 		return;
 	}
 
 	//UV panning
-	XMFLOAT2 offset = material.materialShaderData.uvOffset;
+	XMFLOAT2 offset = material.GetMaterialShaderData().uvOffset;
 	offset.x += material.uvOffsetSpeed.x * Core::GetDeltaTime();
 	offset.y += material.uvOffsetSpeed.y * Core::GetDeltaTime();
-	material.materialShaderData.uvOffset = offset;
+	material.GetMaterialShaderData().uvOffset = offset;
 	XMVECTOR finalOffset = XMLoadFloat2(&offset);
 
-	XMVECTOR scale = XMLoadFloat2(&material.materialShaderData.uvScale);
+	XMVECTOR scale = XMLoadFloat2(&material.GetMaterialShaderData().uvScale);
 
 	//UV rotation
-	float rotation = XMConvertToRadians(material.materialShaderData.uvRotation += material.uvRotationSpeed);
+	float rotation = XMConvertToRadians(material.GetMaterialShaderData().uvRotation += material.uvRotationSpeed);
 
 	texMatrix = XMMatrixAffineTransformation2D(scale, XMVectorSet(0.f, 0.f, 0.f, 1.f), rotation, finalOffset);
 }
