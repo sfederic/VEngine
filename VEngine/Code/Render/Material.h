@@ -15,6 +15,10 @@ class ShaderItem;
 struct ID3D11VertexShader;
 struct ID3D11PixelShader;
 
+//TODO: Multiple materials per mesh: I think the best way of doing this is to have an array of materials in the 
+//shader, while assigning an index value pertaining to each material per vertex. It's pretty costly and difficult
+//to set up though, I don't think simpler games would need it yet.
+
 class Material
 {
 public:
