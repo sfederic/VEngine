@@ -15,6 +15,9 @@ std::set<Keys> currentHeldKeys;
 std::set<Keys> currentDownKeys;
 std::set<Keys> currentUpKeys;
 
+std::set<Keys> pressedSystemKeys;
+std::set<Keys> releasedSystemKeys;
+
 std::multimap<std::string, Keys> keyMap;
 
 bool mouseWheelUp;
@@ -48,6 +51,8 @@ namespace Input
 	{
 		currentUpKeys.clear();
 		currentDownKeys.clear();
+
+		releasedSystemKeys.clear();
 
 		mouseWheelUp = false;
 		mouseWheelDown = false;
@@ -84,6 +89,40 @@ namespace Input
 	bool IsMouseWheelDown()
 	{
 		return mouseWheelDown;
+	}
+
+	void SetSystemKeyDown(Keys key)
+	{
+		pressedSystemKeys.insert(key);
+		releasedSystemKeys.erase(key);
+	}
+
+	void SetSystemKeyUp(Keys key)
+	{
+		releasedSystemKeys.insert(key);
+		pressedSystemKeys.erase(key);
+	}
+
+	bool GetSystemKeyDown(Keys key)
+	{
+		if (blockInput) return false;
+		return pressedSystemKeys.find(key) != pressedSystemKeys.end();
+	}
+
+	bool GetSystemKeyUp(Keys key)
+	{
+		if (blockInput) return false;
+		return releasedSystemKeys.find(key) != releasedSystemKeys.end();
+	}
+
+	std::set<Keys> GetAllPressedSystemKeys()
+	{
+		return pressedSystemKeys;
+	}
+
+	std::set<Keys> GetAllReleasedSystemKeys()
+	{
+		return releasedSystemKeys;
 	}
 
 	void SetKeyDown(Keys key)

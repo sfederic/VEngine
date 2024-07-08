@@ -250,13 +250,13 @@ void Console::Init()
 
 void Console::ConsoleInput()
 {
-	if (Input::GetKeyDown(Keys::BackSpace) && !consoleString.empty())
+	if (Input::GetSystemKeyDown(Keys::BackSpace) && !consoleString.empty())
 	{
 		consoleString.pop_back();
 	}
 	else
 	{
-		auto keys = Input::GetAllUpKeys();
+		auto keys = Input::GetAllReleasedSystemKeys();
 		for (auto key : keys)
 		{
 			consoleString.push_back((int)key);

@@ -211,6 +211,14 @@ void Core::HandleWin32MessagePump(UINT message, WPARAM wparam, LPARAM lparam)
 		PostQuitMessage(0);
 		break;
 
+	case WM_KEYDOWN:
+		Input::SetSystemKeyDown((Keys)wparam);
+		break;
+
+	case WM_KEYUP:
+		Input::SetSystemKeyUp((Keys)wparam);
+		break;
+
 	case WM_MBUTTONUP:
 		Input::SetMiddleMouseUp();
 		break;

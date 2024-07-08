@@ -4,6 +4,10 @@
 #include <string>
 #include "Win32Keys.h"
 
+//Input has the deferentiation of "system" and "gameplay" keys. System means it's coming from the OS' Win32 handling
+//directly, and Gameplay meaning from GameInput's API, primarily used during gameplay. System key input would be 
+//used more for text editing and the like.
+
 namespace Input
 {
 	void Init();
@@ -21,6 +25,13 @@ namespace Input
 	void SetMouseWheelDown();
 	bool IsMouseWheelUp();
 	bool IsMouseWheelDown();
+
+	void SetSystemKeyDown(Keys key);
+	void SetSystemKeyUp(Keys key);
+	bool GetSystemKeyDown(Keys key);
+	bool GetSystemKeyUp(Keys key);
+	std::set<Keys> GetAllPressedSystemKeys();
+	std::set<Keys> GetAllReleasedSystemKeys();
 
 	void SetKeyDown(Keys key);
 	void SetKeyUp(Keys key);
