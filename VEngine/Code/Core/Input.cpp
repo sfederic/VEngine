@@ -17,6 +17,7 @@ std::set<Keys> currentUpKeys;
 
 std::set<Keys> pressedSystemKeys;
 std::set<Keys> releasedSystemKeys;
+std::set<Keys> heldSystemKeys;
 
 std::multimap<std::string, Keys> keyMap;
 
@@ -64,6 +65,7 @@ namespace Input
 	void ResetHeldKeys()
 	{
 		currentHeldKeys.clear();
+		heldSystemKeys.clear();
 	}
 
 	void SetBlockInput(bool value)
@@ -94,12 +96,14 @@ namespace Input
 	void SetSystemKeyDown(Keys key)
 	{
 		pressedSystemKeys.insert(key);
+		heldSystemKeys.insert(key);
 		releasedSystemKeys.erase(key);
 	}
 
 	void SetSystemKeyUp(Keys key)
 	{
 		releasedSystemKeys.insert(key);
+		heldSystemKeys.erase(key);
 		pressedSystemKeys.erase(key);
 	}
 
@@ -113,6 +117,12 @@ namespace Input
 	{
 		if (blockInput) return false;
 		return releasedSystemKeys.find(key) != releasedSystemKeys.end();
+	}
+
+	bool GetSystemKeyHeld(Keys key)
+	{
+		if (blockInput) return false;
+		return heldSystemKeys.find(key) != heldSystemKeys.end();
 	}
 
 	std::set<Keys> GetAllPressedSystemKeys()

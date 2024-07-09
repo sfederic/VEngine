@@ -30,6 +30,7 @@ namespace Input
 	void SetSystemKeyUp(Keys key);
 	bool GetSystemKeyDown(Keys key);
 	bool GetSystemKeyUp(Keys key);
+	bool GetSystemKeyHeld(Keys key);
 	std::set<Keys> GetAllPressedSystemKeys();
 	std::set<Keys> GetAllReleasedSystemKeys();
 
