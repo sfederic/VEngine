@@ -62,8 +62,6 @@ namespace PhysicsSystem
 
 namespace Physics
 {
-	//For now, use this raycast if you only want to test against bounding boxes with no mesh triangle intersects.
-	//@Todo: bring in triangle intersects and flesh out the PhysX raycast. Get rid of older Raycast.
 	bool Raycast(XMFLOAT3 origin, XMFLOAT3 dir, float range, HitResult& hitResult);
 	bool BoxCast(XMFLOAT3 extents, XMFLOAT3 origin, XMFLOAT3 direction, float distance, HitResult& hitResult);
 
