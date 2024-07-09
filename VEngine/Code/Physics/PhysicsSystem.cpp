@@ -288,7 +288,7 @@ std::unordered_map<UID, std::unique_ptr<MeshComponent>>& PhysicsSystem::GetAllPh
 	return physicsMeshes;
 }
 
-bool Physics::Raycast(XMFLOAT3 origin, XMFLOAT3 dir, float range, RaycastHit& hit)
+bool Physics::Raycast(XMFLOAT3 origin, XMFLOAT3 dir, float range, HitResult& hitResult)
 {
 	const PxVec3 pxOrigin(origin.x, origin.y, origin.z);
 	const PxVec3 pxDir(dir.x, dir.y, dir.z);
@@ -298,13 +298,16 @@ bool Physics::Raycast(XMFLOAT3 origin, XMFLOAT3 dir, float range, RaycastHit& hi
 	{
 		const PxRaycastHit& block = hitBuffer.block;
 
+		RaycastHit hit;
 		hit.hitMesh = (MeshComponent*)block.actor->userData;
 		hit.distance = block.distance;
 		hit.normal = XMFLOAT3(block.normal.x, block.normal.y, block.normal.z);
 		hit.position = XMFLOAT3(block.position.x, block.position.y, block.position.z);
 		hit.uv = XMFLOAT2(block.u, block.v);
 
-		HitResult hitResult = RaycastHitToHitResult(hit);
+		hitResult = RaycastHitToHitResult(hit);
+		hitResult.origin = DirectX::XMLoadFloat3(&origin);
+		hitResult.direction = DirectX::XMLoadFloat3(&dir);
 		return Physics::RaycastTriangleIntersect(hitResult);
 	}
 
