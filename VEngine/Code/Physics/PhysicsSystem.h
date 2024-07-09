@@ -44,7 +44,7 @@ namespace PhysicsSystem
 	void Reset();
 	void ReleasePhysicsActor(MeshComponent* mesh);
 	std::vector<PxRigidActor*> GetRigidActors();
-	void CreatePhysicsActor(MeshComponent* mesh, PhysicsType type, Actor* actor);
+	void CreatePhysicsActor(MeshComponent* mesh, PhysicsType type);
 	void CreatePhysicsForDestructibleMesh(DestructibleMeshComponent* mesh, Actor* actor);
 	void CreateCharacterController(CharacterControllerComponent* characterControllerComponent);
 	void CreateConvexPhysicsMesh(MeshComponent* mesh, Actor* actor);
@@ -64,7 +64,7 @@ namespace Physics
 {
 	struct RaycastHit
 	{
-		Actor* hitActor = nullptr;
+		MeshComponent* hitMesh = nullptr;
 
 		XMFLOAT3 normal;
 		XMFLOAT3 position;

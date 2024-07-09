@@ -98,7 +98,7 @@ void PhysicsSystem::Start()
 				}
 				else
 				{
-					PhysicsSystem::CreatePhysicsActor(mesh, physicsType, actor);
+					PhysicsSystem::CreatePhysicsActor(mesh, physicsType);
 				}
 			}
 		}
@@ -157,7 +157,7 @@ void PhysicsSystem::ReleasePhysicsActor(MeshComponent* mesh)
 	rigidActorMap.erase(mesh->GetUID());
 }
 
-void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh, PhysicsType type, Actor* actor)
+void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh, PhysicsType type)
 {
 	PxTransform pxTransform;
 	Transform transform;
@@ -178,7 +178,7 @@ void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh, PhysicsType type, Ac
 
 	//Set actor as user data
 	assert(rigidActor);
-	rigidActor->userData = actor;
+	rigidActor->userData = mesh;
 
 	XMVECTOR extentsVector = mesh->GetBoundsExtents() * mesh->GetLocalScaleV();
 	XMFLOAT3 extents;
@@ -298,7 +298,7 @@ bool Physics::Raycast(XMFLOAT3 origin, XMFLOAT3 dir, float range, RaycastHit& hi
 	{
 		const PxRaycastHit& block = hitBuffer.block;
 
-		hit.hitActor = (Actor*)block.actor->userData;
+		hit.hitMesh = (MeshComponent*)block.actor->userData;
 		hit.distance = block.distance;
 		hit.normal = XMFLOAT3(block.normal.x, block.normal.y, block.normal.z);
 		hit.position = XMFLOAT3(block.position.x, block.position.y, block.position.z);
@@ -324,7 +324,7 @@ XMFLOAT3 Physics::PxVec3ToFloat3(PxVec3 pxVec3)
 HitResult Physics::RaycastHitToHitResult(const RaycastHit& hit)
 {
 	HitResult hitResult;
-	hitResult.hitActor = hit.hitActor;
+	hitResult.hitComponent = hit.hitMesh;
 	hitResult.hitDistance = hit.distance;
 	hitResult.hitNormal = hit.normal;
 	hitResult.hitPos = hit.position;
@@ -345,7 +345,7 @@ bool Physics::BoxCast(XMFLOAT3 extents, XMFLOAT3 origin, XMFLOAT3 direction, flo
 	{
 		PxSweepHit& block = sweepBuffer.block;
 
-		hit.hitActor = (Actor*)block.actor->userData;
+		hit.hitMesh = (MeshComponent*)block.actor->userData;
 		hit.distance = block.distance;
 		hit.normal = XMFLOAT3(block.normal.x, block.normal.y, block.normal.z);
 		hit.position = XMFLOAT3(block.position.x, block.position.y, block.position.z);
