@@ -35,7 +35,7 @@ Properties CharacterControllerComponent::GetProps()
 
 void CharacterControllerComponent::Move(XMFLOAT3 displacement, float deltaTime)
 {
-	auto disp = Physics::Float3ToPxVec3(displacement);
+	auto disp = PhysicsPhysx::Float3ToPxVec3(displacement);
 	PxControllerFilters filters;
 	controller->move(disp, 0.001f, deltaTime, filters);
 

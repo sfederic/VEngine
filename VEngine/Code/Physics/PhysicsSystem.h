@@ -60,7 +60,7 @@ namespace PhysicsSystem
 	std::unordered_map<UID, std::unique_ptr<MeshComponent>>& GetAllPhysicsMeshes();
 };
 
-namespace Physics
+namespace PhysicsPhysx
 {
 	bool Raycast(XMFLOAT3 origin, XMFLOAT3 dir, float range, HitResult& hitResult);
 	bool BoxCast(XMFLOAT3 extents, XMFLOAT3 origin, XMFLOAT3 direction, float distance, HitResult& hitResult);

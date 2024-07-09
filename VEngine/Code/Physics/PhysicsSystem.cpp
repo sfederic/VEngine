@@ -288,7 +288,7 @@ std::unordered_map<UID, std::unique_ptr<MeshComponent>>& PhysicsSystem::GetAllPh
 	return physicsMeshes;
 }
 
-bool Physics::Raycast(XMFLOAT3 origin, XMFLOAT3 dir, float range, HitResult& hitResult)
+bool PhysicsPhysx::Raycast(XMFLOAT3 origin, XMFLOAT3 dir, float range, HitResult& hitResult)
 {
 	const PxVec3 pxOrigin(origin.x, origin.y, origin.z);
 	const PxVec3 pxDir(dir.x, dir.y, dir.z);
@@ -312,23 +312,23 @@ bool Physics::Raycast(XMFLOAT3 origin, XMFLOAT3 dir, float range, HitResult& hit
 	return false;
 }
 
-PxVec3 Physics::Float3ToPxVec3(XMFLOAT3 float3)
+PxVec3 PhysicsPhysx::Float3ToPxVec3(XMFLOAT3 float3)
 {
 	return PxVec3(float3.x, float3.y, float3.z);
 }
 
-XMFLOAT3 Physics::PxVec3ToFloat3(PxVec3 pxVec3)
+XMFLOAT3 PhysicsPhysx::PxVec3ToFloat3(PxVec3 pxVec3)
 {
 	return XMFLOAT3(pxVec3.x, pxVec3.y, pxVec3.z);
 }
 
-bool Physics::BoxCast(XMFLOAT3 extents, XMFLOAT3 origin, XMFLOAT3 direction, float distance, HitResult& hitResult)
+bool PhysicsPhysx::BoxCast(XMFLOAT3 extents, XMFLOAT3 origin, XMFLOAT3 direction, float distance, HitResult& hitResult)
 {
-	const PxVec3 pxExtents = Physics::Float3ToPxVec3(extents);
-	const PxVec3 pxDirection = Physics::Float3ToPxVec3(direction);
+	const PxVec3 pxExtents = PhysicsPhysx::Float3ToPxVec3(extents);
+	const PxVec3 pxDirection = PhysicsPhysx::Float3ToPxVec3(direction);
 
 	//Use identity quaternion for sweep, won't need more than that for now.
-	const PxTransform pose(Physics::Float3ToPxVec3(origin));
+	const PxTransform pose(PhysicsPhysx::Float3ToPxVec3(origin));
 
 	PxSweepBuffer sweepBuffer;
 	if (scene->sweep(PxBoxGeometry(pxExtents), PxTransform(), pxDirection, distance, sweepBuffer))
