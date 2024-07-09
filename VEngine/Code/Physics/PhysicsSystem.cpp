@@ -324,6 +324,7 @@ XMFLOAT3 Physics::PxVec3ToFloat3(PxVec3 pxVec3)
 HitResult Physics::RaycastHitToHitResult(const RaycastHit& hit)
 {
 	HitResult hitResult;
+	hitResult.hitActor = hit.hitMesh->GetOwner();
 	hitResult.hitComponent = hit.hitMesh;
 	hitResult.hitDistance = hit.distance;
 	hitResult.hitNormal = hit.normal;

@@ -152,7 +152,7 @@ void MeshComponent::SplitMeshCreate()
 
 	if (meshDataProxy.vertices.size() > 255)
 	{
-		PhysicsSystem::CreatePhysicsActor(this, PhysicsType::Dynamic, GetOwner());
+		PhysicsSystem::CreatePhysicsActor(this, PhysicsType::Dynamic);
 	}
 	else
 	{
