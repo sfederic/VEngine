@@ -200,7 +200,7 @@ void DuplicateActor()
 {
 	if (Input::GetKeyHeld(Keys::Ctrl))
 	{
-		if (Input::GetKeyDown(Keys::W))
+		if (Input::GetKeyUp(Keys::W))
 		{
 			if (gPickedActor)
 			{
@@ -252,7 +252,7 @@ void SaveWorld()
 	{
 		if (Input::GetKeyHeld(Keys::Ctrl))
 		{
-			if (Input::GetKeyDown(Keys::S))
+			if (Input::GetKeyUp(Keys::S))
 			{
 				FileSystem::SerialiseAllSystems();
 			}
@@ -263,7 +263,7 @@ void SaveWorld()
 void DeleteActor()
 {
 	if (Input::GetKeyUp(Keys::Delete) ||
-		(Input::GetKeyHeld(Keys::Ctrl) && Input::GetKeyDown(Keys::D)))
+		(Input::GetKeyHeld(Keys::Ctrl) && Input::GetKeyUp(Keys::D)))
 	{
 		switch (pickMode)
 		{
@@ -630,7 +630,7 @@ void LoadWorldOnEntranceTriggerClick(Actor* pickedActor)
 
 void QuickMeshChangeMenu()
 {
-	if (Input::GetKeyHeld(Keys::Ctrl) && Input::GetKeyDown(Keys::M))
+	if (Input::GetKeyHeld(Keys::Ctrl) && Input::GetKeyUp(Keys::M))
 	{
 		auto pickedActor = WorldEditor::GetPickedActor();
 		if (pickedActor != nullptr)
@@ -667,7 +667,7 @@ void QuickMeshChangeMenu()
 
 void QuickTextureChangeMenu()
 {
-	if (Input::GetKeyHeld(Keys::Ctrl) && Input::GetKeyDown(Keys::T))
+	if (Input::GetKeyHeld(Keys::Ctrl) && Input::GetKeyUp(Keys::T))
 	{
 		auto pickedActor = WorldEditor::GetPickedActor();
 		if (pickedActor != nullptr)
