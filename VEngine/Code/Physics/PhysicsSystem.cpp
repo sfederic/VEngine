@@ -298,16 +298,14 @@ bool Physics::Raycast(XMFLOAT3 origin, XMFLOAT3 dir, float range, HitResult& hit
 	{
 		const PxRaycastHit& block = hitBuffer.block;
 
-		RaycastHit hit;
-		hit.hitMesh = (MeshComponent*)block.actor->userData;
-		hit.distance = block.distance;
-		hit.normal = XMFLOAT3(block.normal.x, block.normal.y, block.normal.z);
-		hit.position = XMFLOAT3(block.position.x, block.position.y, block.position.z);
-		hit.uv = XMFLOAT2(block.u, block.v);
-
-		hitResult = RaycastHitToHitResult(hit);
+		hitResult.hitComponents.push_back((MeshComponent*)block.actor->userData);
+		hitResult.hitNormal = XMFLOAT3(block.normal.x, block.normal.y, block.normal.z);
+		hitResult.hitPos = XMFLOAT3(block.position.x, block.position.y, block.position.z);
+		hitResult.uv = XMFLOAT2(block.u, block.v);
 		hitResult.origin = DirectX::XMLoadFloat3(&origin);
 		hitResult.direction = DirectX::XMLoadFloat3(&dir);
+		hitResult.range = range;
+
 		return Physics::RaycastTriangleIntersect(hitResult);
 	}
 
@@ -324,37 +322,27 @@ XMFLOAT3 Physics::PxVec3ToFloat3(PxVec3 pxVec3)
 	return XMFLOAT3(pxVec3.x, pxVec3.y, pxVec3.z);
 }
 
-HitResult Physics::RaycastHitToHitResult(const RaycastHit& hit)
+bool Physics::BoxCast(XMFLOAT3 extents, XMFLOAT3 origin, XMFLOAT3 direction, float distance, HitResult& hitResult)
 {
-	HitResult hitResult;
-	hitResult.hitComponents.push_back(hit.hitMesh);
-	hitResult.hitDistance = hit.distance;
-	hitResult.hitNormal = hit.normal;
-	hitResult.hitPos = hit.position;
-	hitResult.uv = hit.uv;
-	return hitResult;
-}
-
-bool Physics::BoxCast(XMFLOAT3 extents, XMFLOAT3 origin, XMFLOAT3 direction, float distance, RaycastHit& hit)
-{
-	PxVec3 pxExtents = Physics::Float3ToPxVec3(extents);
-	PxVec3 pxDirection = Physics::Float3ToPxVec3(direction);
+	const PxVec3 pxExtents = Physics::Float3ToPxVec3(extents);
+	const PxVec3 pxDirection = Physics::Float3ToPxVec3(direction);
 
 	//Use identity quaternion for sweep, won't need more than that for now.
-	PxTransform pose(Physics::Float3ToPxVec3(origin));
+	const PxTransform pose(Physics::Float3ToPxVec3(origin));
 
 	PxSweepBuffer sweepBuffer;
 	if (scene->sweep(PxBoxGeometry(pxExtents), PxTransform(), pxDirection, distance, sweepBuffer))
 	{
-		PxSweepHit& block = sweepBuffer.block;
+		const PxSweepHit& block = sweepBuffer.block;
 
-		hit.hitMesh = (MeshComponent*)block.actor->userData;
-		hit.distance = block.distance;
-		hit.normal = XMFLOAT3(block.normal.x, block.normal.y, block.normal.z);
-		hit.position = XMFLOAT3(block.position.x, block.position.y, block.position.z);
-		hit.uv = XMFLOAT2(0.f, 0.f); //No uv coords for sweeps
+		hitResult.hitComponents.push_back((MeshComponent*)block.actor->userData);
+		hitResult.hitNormal = XMFLOAT3(block.normal.x, block.normal.y, block.normal.z);
+		hitResult.hitPos = XMFLOAT3(block.position.x, block.position.y, block.position.z);
+		hitResult.origin = DirectX::XMLoadFloat3(&origin);
+		hitResult.direction = DirectX::XMLoadFloat3(&direction);
+		hitResult.range = distance;
 
-		return true;
+		return Physics::RaycastTriangleIntersect(hitResult);
 	}
 
 	return false;

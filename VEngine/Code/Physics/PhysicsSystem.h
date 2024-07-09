@@ -62,24 +62,11 @@ namespace PhysicsSystem
 
 namespace Physics
 {
-	//Todo: RaycastHit doesn't need to exist, HitResult is just the better struct.
-	struct RaycastHit
-	{
-		MeshComponent* hitMesh = nullptr;
-
-		XMFLOAT3 normal = XMFLOAT3(0.f, 0.f, 0.f);
-		XMFLOAT3 position = XMFLOAT3(0.f, 0.f, 0.f);
-		XMFLOAT2 uv = XMFLOAT2(0.f, 0.f);
-
-		float distance = 0.f;
-	};
-
 	//For now, use this raycast if you only want to test against bounding boxes with no mesh triangle intersects.
 	//@Todo: bring in triangle intersects and flesh out the PhysX raycast. Get rid of older Raycast.
 	bool Raycast(XMFLOAT3 origin, XMFLOAT3 dir, float range, HitResult& hitResult);
-	bool BoxCast(XMFLOAT3 extents, XMFLOAT3 origin, XMFLOAT3 direction, float distance, RaycastHit& hit);
+	bool BoxCast(XMFLOAT3 extents, XMFLOAT3 origin, XMFLOAT3 direction, float distance, HitResult& hitResult);
 
 	PxVec3 Float3ToPxVec3(XMFLOAT3 float3);
 	XMFLOAT3 PxVec3ToFloat3(PxVec3 pxVec3);
-	HitResult RaycastHitToHitResult(const RaycastHit& hit);
 }
