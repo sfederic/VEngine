@@ -373,6 +373,7 @@
     <ClCompile Include="Code\UI\Game\PauseGameWidget.cpp" />
     <ClCompile Include="Code\Actors\Game\Crusher.cpp" />
     <ClCompile Include="Code\Actors\Game\WindFan.cpp" />
+    <ClCompile Include="Code\Actors\PhysicsTester.cpp" />
     <ClInclude Include="Code\Editor\Sequencer\CameraSequenceEntryData.h" />
     <ClInclude Include="Code\Actors\Game\BloomSeedSoil.h" />
     <ClInclude Include="Code\Actors\Game\BloomSeed.h" />
@@ -780,6 +781,7 @@
     <ClInclude Include="Code\UI\Game\PauseGameWidget.h" />
     <ClInclude Include="Code\Actors\Game\Crusher.h" />
     <ClInclude Include="Code\Actors\Game\WindFan.h" />
+    <ClInclude Include="Code\Actors\PhysicsTester.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
