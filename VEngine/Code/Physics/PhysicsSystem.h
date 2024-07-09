@@ -9,6 +9,7 @@
 #include <string>
 #include <DirectXMath.h>
 #include "Core/UID.h"
+#include "Physics/HitResult.h"
 
 using namespace physx;
 using namespace DirectX;
@@ -79,4 +80,5 @@ namespace Physics
 
 	PxVec3 Float3ToPxVec3(XMFLOAT3 float3);
 	XMFLOAT3 PxVec3ToFloat3(PxVec3 pxVec3);
+	HitResult RaycastHitToHitResult(const RaycastHit& hit);
 }

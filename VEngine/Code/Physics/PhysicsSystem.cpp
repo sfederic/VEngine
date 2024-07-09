@@ -2,13 +2,14 @@
 #include "PhysicsSystem.h"
 #include <cassert>
 #include <PxPhysicsAPI.h>
+#include <PxRigidActor.h>
 #include <characterkinematic/PxControllerManager.h>
 #include "Components/CharacterControllerComponent.h"
 #include "Components/MeshComponent.h"
 #include "Components/DestructibleMeshComponent.h"
-#include <PxRigidActor.h>
 #include "Core/World.h"
 #include "Asset/AssetSystem.h"
+#include "Physics/Raycast.h"
 
 //Store the original mesh UID against the new meshcomponent so that it can use its world matrix in render
 std::unordered_map<UID, std::unique_ptr<MeshComponent>> physicsMeshes;
@@ -289,13 +290,13 @@ std::unordered_map<UID, std::unique_ptr<MeshComponent>>& PhysicsSystem::GetAllPh
 
 bool Physics::Raycast(XMFLOAT3 origin, XMFLOAT3 dir, float range, RaycastHit& hit)
 {
-	PxRaycastBuffer hitBuffer;
-	PxVec3 pxOrigin(origin.x, origin.y, origin.z);
-	PxVec3 pxDir(dir.x, dir.y, dir.z);
+	const PxVec3 pxOrigin(origin.x, origin.y, origin.z);
+	const PxVec3 pxDir(dir.x, dir.y, dir.z);
 
+	PxRaycastBuffer hitBuffer;
 	if (scene->raycast(pxOrigin, pxDir, range, hitBuffer))
 	{
-		PxRaycastHit& block = hitBuffer.block;
+		const PxRaycastHit& block = hitBuffer.block;
 
 		hit.hitActor = (Actor*)block.actor->userData;
 		hit.distance = block.distance;
@@ -303,7 +304,8 @@ bool Physics::Raycast(XMFLOAT3 origin, XMFLOAT3 dir, float range, RaycastHit& hi
 		hit.position = XMFLOAT3(block.position.x, block.position.y, block.position.z);
 		hit.uv = XMFLOAT2(block.u, block.v);
 
-		return true;
+		HitResult hitResult = RaycastHitToHitResult(hit);
+		return Physics::RaycastTriangleIntersect(hitResult);
 	}
 
 	return false;
@@ -317,6 +319,17 @@ PxVec3 Physics::Float3ToPxVec3(XMFLOAT3 float3)
 XMFLOAT3 Physics::PxVec3ToFloat3(PxVec3 pxVec3)
 {
 	return XMFLOAT3(pxVec3.x, pxVec3.y, pxVec3.z);
+}
+
+HitResult Physics::RaycastHitToHitResult(const RaycastHit& hit)
+{
+	HitResult hitResult;
+	hitResult.hitActor = hit.hitActor;
+	hitResult.hitDistance = hit.distance;
+	hitResult.hitNormal = hit.normal;
+	hitResult.hitPos = hit.position;
+	hitResult.uv = hit.uv;
+	return hitResult;
 }
 
 bool Physics::BoxCast(XMFLOAT3 extents, XMFLOAT3 origin, XMFLOAT3 direction, float distance, RaycastHit& hit)
