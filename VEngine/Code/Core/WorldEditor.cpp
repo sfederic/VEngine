@@ -143,7 +143,7 @@ void HandleActorPicking()
 			{
 			case WorldEditor::PickMode::Actor:
 			{
-				if (Input::GetKeyHeld(Keys::Ctrl) || pickedActors.empty())
+				if (Input::GetSystemKeyHeld(Keys::Ctrl) || pickedActors.empty())
 				{
 					pickedActors.insert(hit.hitActor);
 				}
@@ -198,9 +198,9 @@ void HandleActorPicking()
 
 void DuplicateActor()
 {
-	if (Input::GetKeyHeld(Keys::Ctrl))
+	if (Input::GetSystemKeyHeld(Keys::Ctrl))
 	{
-		if (Input::GetKeyUp(Keys::W))
+		if (Input::GetSystemKeyDown(Keys::W))
 		{
 			if (gPickedActor)
 			{
@@ -250,9 +250,9 @@ void SaveWorld()
 {
 	if (!Core::gameplayOn)
 	{
-		if (Input::GetKeyHeld(Keys::Ctrl))
+		if (Input::GetSystemKeyHeld(Keys::Ctrl))
 		{
-			if (Input::GetKeyUp(Keys::S))
+			if (Input::GetSystemKeyUp(Keys::S))
 			{
 				FileSystem::SerialiseAllSystems();
 			}
@@ -262,8 +262,8 @@ void SaveWorld()
 
 void DeleteActor()
 {
-	if (Input::GetKeyUp(Keys::Delete) ||
-		(Input::GetKeyHeld(Keys::Ctrl) && Input::GetKeyUp(Keys::D)))
+	if (Input::GetSystemKeyUp(Keys::Delete) ||
+		(Input::GetSystemKeyHeld(Keys::Ctrl) && Input::GetSystemKeyDown(Keys::D)))
 	{
 		switch (pickMode)
 		{
@@ -377,7 +377,7 @@ void VertexPainting()
 {
 	if (WorldEditor::vertexPaintActive)
 	{
-		if (Input::GetMouseLeftDown() && Input::GetKeyHeld(Keys::Ctrl)) //Set colour of hit vertex to paint colour
+		if (Input::GetMouseLeftDown() && Input::GetSystemKeyHeld(Keys::Ctrl)) //Set colour of hit vertex to paint colour
 		{
 			HitResult hit;
 			if (Physics::RaycastFromScreen(hit))
@@ -454,7 +454,7 @@ void UVPainting()
 	if (!WorldEditor::uvPaintOn) return;
 
 	const bool leftClick = Input::GetMouseLeftDown();
-	const bool rightClick = Input::GetMouseLeftDown() && Input::GetKeyHeld(Keys::Ctrl);
+	const bool rightClick = Input::GetMouseLeftDown() && Input::GetSystemKeyHeld(Keys::Ctrl);
 
 	if (leftClick)
 	{
@@ -630,7 +630,7 @@ void LoadWorldOnEntranceTriggerClick(Actor* pickedActor)
 
 void QuickMeshChangeMenu()
 {
-	if (Input::GetKeyHeld(Keys::Ctrl) && Input::GetKeyUp(Keys::M))
+	if (Input::GetSystemKeyHeld(Keys::Ctrl) && Input::GetSystemKeyUp(Keys::M))
 	{
 		auto pickedActor = WorldEditor::GetPickedActor();
 		if (pickedActor != nullptr)
@@ -667,7 +667,7 @@ void QuickMeshChangeMenu()
 
 void QuickTextureChangeMenu()
 {
-	if (Input::GetKeyHeld(Keys::Ctrl) && Input::GetKeyUp(Keys::T))
+	if (Input::GetSystemKeyHeld(Keys::Ctrl) && Input::GetSystemKeyUp(Keys::T))
 	{
 		auto pickedActor = WorldEditor::GetPickedActor();
 		if (pickedActor != nullptr)
