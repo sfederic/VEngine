@@ -11,13 +11,13 @@ std::vector<GameInputKeyState> gPreviousFrameKeyState;
 IGameInputReading* keyboardInputReading;
 IGameInputReading* mouseInputReading;
 
-std::set<Keys> currentHeldKeys;
-std::set<Keys> currentDownKeys;
-std::set<Keys> currentUpKeys;
+std::unordered_set<Keys> currentHeldKeys;
+std::unordered_set<Keys> currentDownKeys;
+std::unordered_set<Keys> currentUpKeys;
 
-std::set<Keys> pressedSystemKeys;
-std::set<Keys> releasedSystemKeys;
-std::set<Keys> heldSystemKeys;
+std::unordered_set<Keys> pressedSystemKeys;
+std::unordered_set<Keys> releasedSystemKeys;
+std::unordered_set<Keys> heldSystemKeys;
 
 std::multimap<std::string, Keys> keyMap;
 
@@ -125,12 +125,12 @@ namespace Input
 		return heldSystemKeys.find(key) != heldSystemKeys.end();
 	}
 
-	std::set<Keys> GetAllPressedSystemKeys()
+	std::unordered_set<Keys> GetAllPressedSystemKeys()
 	{
 		return pressedSystemKeys;
 	}
 
-	std::set<Keys> GetAllReleasedSystemKeys()
+	std::unordered_set<Keys> GetAllReleasedSystemKeys()
 	{
 		return releasedSystemKeys;
 	}
@@ -300,12 +300,12 @@ namespace Input
 		return currentUpKeys.size();
 	}
 
-	std::set<Keys> GetAllDownKeys()
+	std::unordered_set<Keys> GetAllDownKeys()
 	{
 		return currentDownKeys;
 	}
 
-	std::set<Keys> GetAllUpKeys()
+	std::unordered_set<Keys> GetAllUpKeys()
 	{
 		return currentUpKeys;
 	}
