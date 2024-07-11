@@ -371,7 +371,6 @@
     <ClCompile Include="Code\Editor\Sequencer\Sequencer.cpp" />
     <ClCompile Include="Code\Actors\SequencerTrigger.cpp" />
     <ClCompile Include="Code\UI\Game\PauseGameWidget.cpp" />
-    <ClCompile Include="Code\Actors\Game\WindFan.cpp" />
     <ClInclude Include="Code\Editor\Sequencer\CameraSequenceEntryData.h" />
     <ClInclude Include="Code\Actors\Game\BloomSeedSoil.h" />
     <ClInclude Include="Code\Actors\Game\BloomSeed.h" />
@@ -777,7 +776,6 @@
     <ClInclude Include="Code\Editor\Sequencer\Sequencer.h" />
     <ClInclude Include="Code\Actors\SequencerTrigger.h" />
     <ClInclude Include="Code\UI\Game\PauseGameWidget.h" />
-    <ClInclude Include="Code\Actors\Game\WindFan.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
