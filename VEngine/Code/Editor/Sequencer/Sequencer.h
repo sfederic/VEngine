@@ -77,13 +77,15 @@ public:
 		sequencerItems[index].mExpanded = !sequencerItems[index].mExpanded;
 	}
 
-	void ActivateSequencer();
+	void ActivateSequencer(const std::string sequenceFileName);
 
 private:
 	auto& GetSequenceEntry(int index) { return sequencerItems[index]; }
 
 	void WriteCurrentSequenceFileOutFromDialog();
 	void ReadInSequencerFileFromDialog();
+
+	void ReadInSequencerFile(const std::string sequenceFileName);
 
 	std::vector<SequenceItem> sequencerItems;
 

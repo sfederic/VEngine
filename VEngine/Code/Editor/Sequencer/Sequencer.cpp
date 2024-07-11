@@ -64,10 +64,9 @@ void Sequencer::Tick()
 					item.mIsActive = false;
 					item.entryData->Deactivate();
 				}
-			}*/
+			}
 		}
 	}
-}
 }
 
 void Sequencer::Render()
@@ -128,12 +127,14 @@ void Sequencer::Render()
 		ImSequencer::SEQUENCER_COPYPASTE | ImSequencer::SEQUENCER_CHANGE_FRAME);
 }
 
-void Sequencer::ActivateSequencer()
+void Sequencer::ActivateSequencer(const std::string sequenceFileName)
 {
 	if (isRunning)
 	{
 		return;
 	}
+
+	ReadInSequencerFile(sequenceFileName);
 
 	isRunning = true;
 	currentFrame = _frameMin;
@@ -182,7 +183,12 @@ void Sequencer::ReadInSequencerFileFromDialog()
 
 	sequencerItems.clear();
 
-	Deserialiser d(filePath.toStdString(), OpenMode::In);
+	ReadInSequencerFile(filePath.toStdString());
+}
+
+void Sequencer::ReadInSequencerFile(const std::string sequenceFileName)
+{
+	Deserialiser d(sequenceFileName, OpenMode::In);
 
 	size_t numberOfItems = 0;
 	d.ReadLine(numberOfItems);
@@ -208,5 +214,5 @@ void Sequencer::ReadInSequencerFileFromDialog()
 		d.Deserialise(entryProps);
 	}
 
-	Log("%s sequencer file loaded.", filePath.toStdString().c_str());
+	Log("%s sequencer file loaded.", sequenceFileName.c_str());
 }

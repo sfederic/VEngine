@@ -22,7 +22,7 @@ void SequencerTrigger::Tick(float deltaTime)
 
 	if (boxTrigger->ContainsTarget())
 	{
-		gSequencer.ActivateSequencer();
+		gSequencer.ActivateSequencer(sequencerFile);
 	}
 }
 
