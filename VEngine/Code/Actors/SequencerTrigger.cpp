@@ -2,6 +2,7 @@
 #include "SequencerTrigger.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Editor/Sequencer/Sequencer.h"
+#include "Asset/AssetBaseFolders.h"
 
 SequencerTrigger::SequencerTrigger()
 {
@@ -22,7 +23,7 @@ void SequencerTrigger::Tick(float deltaTime)
 
 	if (boxTrigger->ContainsTarget())
 	{
-		gSequencer.ActivateSequencer(sequencerFile);
+		gSequencer.ActivateSequencer(AssetBaseFolders::sequencerFiles + sequencerFile);
 	}
 }
 
