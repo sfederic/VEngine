@@ -53,6 +53,7 @@ namespace Input
 		currentUpKeys.clear();
 		currentDownKeys.clear();
 
+		pressedSystemKeys.clear();
 		releasedSystemKeys.clear();
 
 		mouseWheelUp = false;
