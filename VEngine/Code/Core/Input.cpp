@@ -19,7 +19,7 @@ std::unordered_set<Keys> pressedSystemKeys;
 std::unordered_set<Keys> releasedSystemKeys;
 std::unordered_set<Keys> heldSystemKeys;
 
-std::multimap<std::string, Keys> keyMap;
+std::unordered_multimap<std::string, Keys> keyMap;
 
 bool mouseWheelUp;
 bool mouseWheelDown;
