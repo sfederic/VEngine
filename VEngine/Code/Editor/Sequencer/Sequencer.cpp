@@ -46,8 +46,10 @@ void Sequencer::Tick()
 	{
 		_currentFrame++;
 
-		for (auto& item : _sequencerItems)
+		for (int sequenceItemIndex = 0; sequenceItemIndex < _sequencerItems.size(); sequenceItemIndex++)
 		{
+			auto& item = _sequencerItems[sequenceItemIndex];
+
 			if (_currentFrame >= item.mFrameStart)
 			{
 				if (!item.mIsActive)
@@ -63,6 +65,7 @@ void Sequencer::Tick()
 				{
 					item.mIsActive = false;
 					item.entryData->Deactivate();
+					_sequencerItems.erase(_sequencerItems.begin() + sequenceItemIndex);
 				}
 			}
 		}
