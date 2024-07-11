@@ -74,12 +74,12 @@ void Sequencer::Render()
 {
 	if (ImGui::Button("Save File"))
 	{
-		WriteCurrentSequenceFileOut();
+		WriteCurrentSequenceFileOutFromDialog();
 	}
 
 	if (ImGui::Button("Open File"))
 	{
-		ReadInSequencerFile();
+		ReadInSequencerFileFromDialog();
 	}
 
 	ImGui::PushItemWidth(130);
@@ -139,7 +139,7 @@ void Sequencer::ActivateSequencer()
 	currentFrame = _frameMin;
 }
 
-void Sequencer::WriteCurrentSequenceFileOut()
+void Sequencer::WriteCurrentSequenceFileOutFromDialog()
 {
 	QFileDialog dialog;
 	dialog.setFileMode(QFileDialog::AnyFile);
@@ -167,7 +167,7 @@ void Sequencer::WriteCurrentSequenceFileOut()
 	Log("%s sequencer file saved.", filePath.toStdString().c_str());
 }
 
-void Sequencer::ReadInSequencerFile()
+void Sequencer::ReadInSequencerFileFromDialog()
 {
 	QFileDialog dialog;
 	dialog.setFileMode(QFileDialog::AnyFile);

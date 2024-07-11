@@ -82,8 +82,8 @@ public:
 private:
 	auto& GetSequenceEntry(int index) { return sequencerItems[index]; }
 
-	void WriteCurrentSequenceFileOut();
-	void ReadInSequencerFile();
+	void WriteCurrentSequenceFileOutFromDialog();
+	void ReadInSequencerFileFromDialog();
 
 	std::vector<SequenceItem> sequencerItems;
 
