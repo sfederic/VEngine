@@ -87,6 +87,8 @@ private:
 
 	void ReadInSequencerFile(const std::string sequenceFileName);
 
+	void Reset();
+
 	std::vector<SequenceItem> _sequencerItems;
 
 	int _frameMin = 0;

@@ -39,7 +39,7 @@ void Sequencer::Tick()
 
 	if (_currentFrame >= _frameMax)
 	{
-		_isRunning = false;
+		Reset();
 	}
 
 	if (_currentFrame < _frameMax)
@@ -215,4 +215,10 @@ void Sequencer::ReadInSequencerFile(const std::string sequenceFileName)
 	}
 
 	Log("%s sequencer file loaded.", sequenceFileName.c_str());
+}
+
+void Sequencer::Reset()
+{
+	_sequencerItems.clear();
+	_isRunning = false;
 }
