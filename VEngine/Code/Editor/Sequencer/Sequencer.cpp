@@ -48,7 +48,7 @@ void Sequencer::Tick()
 
 		for (auto& item : sequencerItems)
 		{
-			if (item.mFrameStart <= currentFrame)
+			if (currentFrame >= item.mFrameStart)
 			{
 				if (!item.mIsActive)
 				{
@@ -57,7 +57,7 @@ void Sequencer::Tick()
 				}
 			}
 
-			/*if (item.mFrameEnd >= currentFrame)
+			if (currentFrame >= item.mFrameEnd)
 			{
 				if (item.mIsActive)
 				{
@@ -67,6 +67,7 @@ void Sequencer::Tick()
 			}*/
 		}
 	}
+}
 }
 
 void Sequencer::Render()
