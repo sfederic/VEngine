@@ -863,9 +863,6 @@
     <ClCompile Include="Code\UI\Game\PauseGameWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\Crusher.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Actors\Game\WindFan.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1806,9 +1803,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Render\ShaderData\ShaderLightProbeData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Actors\Game\Crusher.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\WindFan.h">
