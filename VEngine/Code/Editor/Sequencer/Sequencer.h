@@ -23,7 +23,7 @@ public:
 
 	int GetFrameMin() const override { return _frameMin; }
 	int GetFrameMax() const override { return _frameMax; }
-	int GetItemCount() const override { return (int)sequencerItems.size(); }
+	int GetItemCount() const override { return (int)_sequencerItems.size(); }
 
 	int GetItemTypeCount() const override { return sizeof(SequencerItemTypeNames) / sizeof(char*); }
 	const char* GetItemTypeName(int typeIndex) const override { return SequencerItemTypeNames[typeIndex]; }
@@ -31,13 +31,13 @@ public:
 	const char* GetItemLabel(int index) const override
 	{
 		static char tmps[512];
-		snprintf(tmps, 512, "[%02d] %s", index, SequencerItemTypeNames[(int)sequencerItems[index].mType]);
+		snprintf(tmps, 512, "[%02d] %s", index, SequencerItemTypeNames[(int)_sequencerItems[index].mType]);
 		return tmps;
 	}
 
 	void Get(int index, int** start, int** end, int* type, unsigned int* color) override
 	{
-		SequenceItem& item = sequencerItems[index];
+		SequenceItem& item = _sequencerItems[index];
 		if (color)
 		{
 			*color = 0xFFAA8080; // same color for everyone, return color based on type
@@ -57,48 +57,48 @@ public:
 	}
 
 	void Add(int type) override;
-	void Del(int index) override { sequencerItems.erase(sequencerItems.begin() + index); }
+	void Del(int index) override { _sequencerItems.erase(_sequencerItems.begin() + index); }
 
-	size_t GetCustomHeight(int index) override { return sequencerItems[index].mExpanded ? 300 : 0; }
+	size_t GetCustomHeight(int index) override { return _sequencerItems[index].mExpanded ? 300 : 0; }
 
 	void DoubleClick(int index) override
 	{
-		if (sequencerItems[index].mExpanded)
+		if (_sequencerItems[index].mExpanded)
 		{
-			sequencerItems[index].mExpanded = false;
+			_sequencerItems[index].mExpanded = false;
 			return;
 		}
 
-		for (auto& item : sequencerItems)
+		for (auto& item : _sequencerItems)
 		{
 			item.mExpanded = false;
 		}
 
-		sequencerItems[index].mExpanded = !sequencerItems[index].mExpanded;
+		_sequencerItems[index].mExpanded = !_sequencerItems[index].mExpanded;
 	}
 
 	void ActivateSequencer(const std::string sequenceFileName);
 
 private:
-	auto& GetSequenceEntry(int index) { return sequencerItems[index]; }
+	auto& GetSequenceEntry(int index) { return _sequencerItems[index]; }
 
 	void WriteCurrentSequenceFileOutFromDialog();
 	void ReadInSequencerFileFromDialog();
 
 	void ReadInSequencerFile(const std::string sequenceFileName);
 
-	std::vector<SequenceItem> sequencerItems;
+	std::vector<SequenceItem> _sequencerItems;
 
 	int _frameMin = 0;
 	int _frameMax;
 
-	int currentFrame = 0;
-	int selectedEntry = 0;
-	int firstFrame = 0;
+	int _currentFrame = 0;
+	int _selectedEntry = 0;
+	int _firstFrame = 0;
 
-	bool expanded = true;
+	bool _expanded = true;
 
-	bool isRunning = false;
+	bool _isRunning = false;
 };
 
 extern Sequencer gSequencer;

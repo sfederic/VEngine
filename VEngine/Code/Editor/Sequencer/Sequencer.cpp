@@ -27,28 +27,28 @@ void Sequencer::Add(int type)
 		break;
 	}
 
-	sequencerItems.emplace_back(std::move(item));
+	_sequencerItems.emplace_back(std::move(item));
 }
 
 void Sequencer::Tick()
 {
-	if (!isRunning)
+	if (!_isRunning)
 	{
 		return;
 	}
 
-	if (currentFrame >= _frameMax)
+	if (_currentFrame >= _frameMax)
 	{
-		isRunning = false;
+		_isRunning = false;
 	}
 
-	if (currentFrame < _frameMax)
+	if (_currentFrame < _frameMax)
 	{
-		currentFrame++;
+		_currentFrame++;
 
-		for (auto& item : sequencerItems)
+		for (auto& item : _sequencerItems)
 		{
-			if (currentFrame >= item.mFrameStart)
+			if (_currentFrame >= item.mFrameStart)
 			{
 				if (!item.mIsActive)
 				{
@@ -57,7 +57,7 @@ void Sequencer::Tick()
 				}
 			}
 
-			if (currentFrame >= item.mFrameEnd)
+			if (_currentFrame >= item.mFrameEnd)
 			{
 				if (item.mIsActive)
 				{
@@ -82,7 +82,7 @@ void Sequencer::Render()
 	}
 
 	ImGui::PushItemWidth(130);
-	ImGui::InputInt("Frame ", &currentFrame);
+	ImGui::InputInt("Frame ", &_currentFrame);
 	ImGui::SameLine();
 	ImGui::InputInt("Frame Min", &_frameMin);
 	ImGui::SameLine();
@@ -98,9 +98,9 @@ void Sequencer::Render()
 		Add((int)SequenceEntryTypes::Audio);
 	}
 
-	if (selectedEntry >= 0 && !sequencerItems.empty())
+	if (_selectedEntry >= 0 && !_sequencerItems.empty())
 	{
-		const auto& entry = GetSequenceEntry(selectedEntry);
+		const auto& entry = GetSequenceEntry(_selectedEntry);
 
 		switch (entry.mType)
 		{
@@ -122,22 +122,22 @@ void Sequencer::Render()
 		}
 	}
 
-	ImSequencer::Sequencer(this, &currentFrame, &expanded, &selectedEntry, &firstFrame,
+	ImSequencer::Sequencer(this, &_currentFrame, &_expanded, &_selectedEntry, &_firstFrame,
 		ImSequencer::SEQUENCER_EDIT_STARTEND | ImSequencer::SEQUENCER_ADD | ImSequencer::SEQUENCER_DEL |
 		ImSequencer::SEQUENCER_COPYPASTE | ImSequencer::SEQUENCER_CHANGE_FRAME);
 }
 
 void Sequencer::ActivateSequencer(const std::string sequenceFileName)
 {
-	if (isRunning)
+	if (_isRunning)
 	{
 		return;
 	}
 
 	ReadInSequencerFile(sequenceFileName);
 
-	isRunning = true;
-	currentFrame = _frameMin;
+	_isRunning = true;
+	_currentFrame = _frameMin;
 }
 
 void Sequencer::WriteCurrentSequenceFileOutFromDialog()
@@ -155,10 +155,10 @@ void Sequencer::WriteCurrentSequenceFileOutFromDialog()
 
 	Serialiser s(filePath.toStdString(), OpenMode::Out);
 
-	const size_t numberOfItems = sequencerItems.size();
+	const size_t numberOfItems = _sequencerItems.size();
 	s.WriteLine(numberOfItems);
 
-	for (auto& item : sequencerItems)
+	for (auto& item : _sequencerItems)
 	{
 		auto props = item.entryData->GetProps();
 		s.Serialise(props);
@@ -181,7 +181,7 @@ void Sequencer::ReadInSequencerFileFromDialog()
 		return;
 	}
 
-	sequencerItems.clear();
+	_sequencerItems.clear();
 
 	ReadInSequencerFile(filePath.toStdString());
 }
@@ -209,7 +209,7 @@ void Sequencer::ReadInSequencerFile(const std::string sequenceFileName)
 			break;
 		}
 
-		auto& entry = sequencerItems.back();
+		auto& entry = _sequencerItems.back();
 		auto entryProps = entry.entryData->GetProps();
 		d.Deserialise(entryProps);
 	}
