@@ -256,7 +256,7 @@ void Console::ConsoleInput()
 	}
 	else
 	{
-		auto keys = Input::GetAllReleasedSystemKeys();
+		auto keys = Input::GetAllPressedSystemKeys();
 		for (auto key : keys)
 		{
 			consoleString.push_back((int)key);
