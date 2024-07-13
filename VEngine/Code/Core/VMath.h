@@ -76,6 +76,8 @@ namespace VMath
 	//else the bounds calc will be off center.
 	BoundingOrientedBox CreateBoundingBox(Vertex* vertices, size_t verticesCount);
 
+	XMVECTOR ConvertToHomogenousPosition(const XMVECTOR positionToConvert);
+
 	float Distance(XMVECTOR pos1, XMVECTOR pos2);
 
 	bool IsToRightOfVector(XMVECTOR v0, XMVECTOR v1);

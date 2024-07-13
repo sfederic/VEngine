@@ -404,6 +404,16 @@ namespace VMath
 			XMFLOAT4(0.f, 0.f, 0.f, 1.f));
 	}
 
+	XMVECTOR ConvertToHomogenousPosition(const XMVECTOR positionToConvert)
+	{
+		auto& activeCamera = Camera::GetActiveCamera();
+		const XMMATRIX view = activeCamera.GetViewMatrix();
+		const XMMATRIX proj = activeCamera.GetProjectionMatrix();
+		const XMMATRIX worldMatrix = XMMatrixTranslationFromVector(positionToConvert);
+		const XMMATRIX mvp = worldMatrix * view * proj;
+		return mvp.r[3];
+	}
+
 	float Distance(XMVECTOR pos1, XMVECTOR pos2)
 	{
 		return XMVector3Length(pos1 - pos2).m128_f32[0];
