@@ -118,6 +118,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Code\Editor\Sequencer\ActiveCameraLerpToOffsetPosition.cpp" />
     <ClCompile Include="Code\Editor\Sequencer\CameraSequenceEntryData.cpp" />
     <ClCompile Include="Code\Actors\Game\BloomSeedSoil.cpp" />
     <ClCompile Include="Code\Actors\Game\BloomSeed.cpp" />
@@ -371,6 +372,7 @@
     <ClCompile Include="Code\Editor\Sequencer\Sequencer.cpp" />
     <ClCompile Include="Code\Actors\SequencerTrigger.cpp" />
     <ClCompile Include="Code\UI\Game\PauseGameWidget.cpp" />
+    <ClInclude Include="Code\Editor\Sequencer\ActiveCameraLerpToOffsetPosition.h" />
     <ClInclude Include="Code\Editor\Sequencer\CameraSequenceEntryData.h" />
     <ClInclude Include="Code\Actors\Game\BloomSeedSoil.h" />
     <ClInclude Include="Code\Actors\Game\BloomSeed.h" />

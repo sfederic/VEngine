@@ -869,6 +869,9 @@
     <ClCompile Include="Code\Editor\Sequencer\CameraSequenceEntryData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Editor\Sequencer\ActiveCameraLerpToOffsetPosition.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\main.cpp">
@@ -1806,6 +1809,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Editor\Sequencer\SequenceItem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Editor\Sequencer\ActiveCameraLerpToOffsetPosition.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
