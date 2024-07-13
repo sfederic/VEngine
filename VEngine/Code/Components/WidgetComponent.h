@@ -5,6 +5,7 @@
 
 class Widget;
 
+//Todo: need to think about deleting this class.
 class WidgetComponent : public Component
 {
 public:
