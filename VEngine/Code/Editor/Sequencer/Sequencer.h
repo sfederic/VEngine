@@ -7,6 +7,9 @@
 #include <vector>
 #include <cstdio>
 
+//Todo: I don't like Imguizmo's sequencer too much, there are no nodes per timeline.
+//Look into replacing it https://gitlab.com/GroGy/im-neo-sequencer
+
 //Ref:https://github.com/CedricGuillemet/ImGuizmo/blob/master/example/main.cpp
 
 class Sequencer : public ImSequencer::SequenceInterface
