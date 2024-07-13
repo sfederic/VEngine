@@ -13,7 +13,7 @@ class Sequencer : public ImSequencer::SequenceInterface
 {
 private:
 	//Make sure the ordering here matches with SequenceEntryTypes. Could use VEnum, but this API is very int based.
-	inline const static char* SequencerItemTypeNames[] = { "Audio", "Camera" };
+	inline const static char* SequencerItemTypeNames[] = { "Audio", "Camera", "ActiveCameraLerp" };
 
 public:
 	Sequencer() : _frameMin(0), _frameMax(100) {}

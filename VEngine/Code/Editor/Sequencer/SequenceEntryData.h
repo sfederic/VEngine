@@ -14,6 +14,7 @@ public:
 	SequenceEntryData(int type) : sequenceEntryType(type) {}
 	virtual ~SequenceEntryData() = default;
 
+	virtual void Tick(float deltaTime) {}
 	virtual void Activate() = 0;
 	virtual void Deactivate() = 0;
 

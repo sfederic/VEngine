@@ -9,6 +9,7 @@
 #include "Core/Deserialiser.h"
 #include "AudioSequenceEntryData.h"
 #include "CameraSequenceEntryData.h"
+#include "ActiveCameraLerpToOffsetPosition.h"
 
 Sequencer gSequencer;
 
@@ -24,6 +25,10 @@ void Sequencer::Add(int type)
 
 	case (int)SequenceEntryTypes::Camera:
 		item.entryData = std::make_unique<CameraSequenceEntryData>();
+		break;
+
+	case (int)SequenceEntryTypes::ActiveCameraLerpToOffsetPosition:
+		item.entryData = std::make_unique<ActiveCameraLerpToOffsetPosition>();
 		break;
 	}
 
@@ -50,6 +55,7 @@ void Sequencer::Tick()
 		{
 			auto& item = _sequencerItems[sequenceItemIndex];
 
+			//Activate the entry item
 			if (_currentFrame >= item.mFrameStart)
 			{
 				if (!item.mIsActive)
@@ -59,6 +65,13 @@ void Sequencer::Tick()
 				}
 			}
 
+			//Entry item tick
+			if (item.mIsActive)
+			{
+				item.entryData->Tick(Core::GetDeltaTime());
+			}
+
+			//Deactivate entry item
 			if (_currentFrame >= item.mFrameEnd)
 			{
 				if (item.mIsActive)
@@ -100,6 +113,10 @@ void Sequencer::Render()
 	{
 		Add((int)SequenceEntryTypes::Audio);
 	}
+	if (ImGui::Button("Camera Lerp"))
+	{
+		Add((int)SequenceEntryTypes::ActiveCameraLerpToOffsetPosition);
+	}
 
 	if (_selectedEntry >= 0 && !_sequencerItems.empty())
 	{
@@ -120,6 +137,16 @@ void Sequencer::Render()
 			assert(entryData);
 			//Todo: there's some imgui assert error here.
 			ImGui::InputText("Camera", &entryData->cameraName);
+			break;
+		}
+		case SequenceEntryTypes::ActiveCameraLerpToOffsetPosition:
+		{
+			auto entryData = dynamic_cast<ActiveCameraLerpToOffsetPosition*>(entry.entryData.get());
+			assert(entryData);
+			if (ImGui::Button("Camera Lerp To Position Snapshot"))
+			{
+				entryData->SetPositionToLerpTo();
+			}
 			break;
 		}
 		}

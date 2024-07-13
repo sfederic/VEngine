@@ -3,5 +3,6 @@
 enum class SequenceEntryTypes : int
 {
 	Audio,
-	Camera
+	Camera,
+	ActiveCameraLerpToOffsetPosition
 };
