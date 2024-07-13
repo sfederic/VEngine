@@ -6,6 +6,8 @@
 
 void TitleScreenWidget::Draw(float deltaTime)
 {
+	__super::Draw(deltaTime);
+
 	Text(L"Vagrant Tactics", AlignLayout(300.f, 100.f, Align::Center), TextAlign::Center, Colours::White);
 
 	if (Button(L"Begin", AlignLayout(100.f, 50.f, Align::BottomLeft), 1.f, TextAlign::Center, Colours::White))

@@ -3,6 +3,8 @@
 
 void ScreenFadeWidget::Draw(float deltaTime)
 {
+	__super::Draw(deltaTime);
+
 	auto layout = PercentAlignLayout(0.f, 0.f, 1.f, 1.f);
 
 	FillRect(layout, { 0.f, 0.f, 0.f, fadeValue }, fadeValue);

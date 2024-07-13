@@ -11,6 +11,11 @@
 #include "Render/TextureSystem.h"
 #include "Render/Texture2D.h"
 
+void Widget::Draw(float deltaTime)
+{
+	worldPosition = VMath::ConvertToHomogenousPosition(originalWorldPosition);
+}
+
 void Widget::Destroy()
 {
 	RemoveFromViewport();

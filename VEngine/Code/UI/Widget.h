@@ -33,7 +33,7 @@ public:
 	};
 
 	virtual ~Widget() = default;
-	virtual void Draw(float deltaTime) = 0;
+	virtual void Draw(float deltaTime);
 	virtual void Start() {}
 	void Destroy();
 
@@ -49,7 +49,7 @@ public:
 
 	bool IsStatic() const { return isStaticWidget; }
 
-	void SetWorldPosition(XMVECTOR pos) { worldPosition = pos; }
+	void SetWorldPosition(XMVECTOR pos) { originalWorldPosition = pos; }
 
 	auto GetUID() const { return uid; }
 
@@ -87,6 +87,7 @@ protected:
 
 	//The widget's position in world space to be mapped to screen space (Use Actor::GetHomogeneousPositionV() to set this)
 	XMVECTOR worldPosition = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+	XMVECTOR originalWorldPosition = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 
 	UID uid = GenerateUID();
 

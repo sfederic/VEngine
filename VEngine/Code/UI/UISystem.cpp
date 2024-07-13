@@ -17,6 +17,8 @@ ScreenFadeWidget* UISystem::screenFadeWidget;
 MapInfoWidget* UISystem::mapInfoWidget;
 PauseGameWidget* gPauseGameWidget;
 
+//Todo: this needs to be linked to the dialogue components better so that when you're getting back a widget,
+//you can check if it's valid. Think like a handle.
 std::unordered_map<UID, std::unique_ptr<Widget>> UISystem::widgets;
 
 //Every widget currently being displayed on screen

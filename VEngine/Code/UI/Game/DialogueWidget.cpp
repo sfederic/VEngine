@@ -3,6 +3,8 @@
 
 void DialogueWidget::Draw(float deltaTime)
 {
+	__super::Draw(deltaTime);
+
 	ProgressCurrentText(deltaTime);
 
 	int sx, sy;

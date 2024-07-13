@@ -4,6 +4,8 @@
 
 void PauseGameWidget::Draw(float deltaTime)
 {
+	__super::Draw(deltaTime);
+
 	const auto textLayout = PercentAlignLayout(0.4f, 0.4f, 0.6f, 0.6f);
 	Text(L"Paused", textLayout);
 

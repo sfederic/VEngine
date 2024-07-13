@@ -4,6 +4,8 @@
 
 void HealthWidget::Draw(float deltaTime)
 {
+	__super::Draw(deltaTime);
+
 	int sx, sy;
 	GetScreenSpaceCoords(sx, sy);
 

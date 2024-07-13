@@ -6,6 +6,8 @@
 
 void UVPaintWidget::Draw(float deltaTime)
 {
+	__super::Draw(deltaTime);
+
 	SetTextureFromPickedActor();
 
 	const auto imageLayout = ImageAsOriginalSize(uvPreviewTextureFilename, 0, 0);
