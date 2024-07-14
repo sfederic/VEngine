@@ -39,7 +39,7 @@ void TextureDataWidget::SetValue()
 
 		if (prop.change)
 		{
-			prop.change(value);
+			prop.change(prop);
 		}
 
 		ResetValue();

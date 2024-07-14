@@ -45,7 +45,7 @@ void VectorWidget::SetValue()
 
 	if (prop.change)
 	{
-		prop.change(_vector);
+		prop.change(prop);
 	}
 }
 

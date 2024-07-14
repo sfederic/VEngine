@@ -1,134 +1,19 @@
-BloomSeedSoil
+AudioActor
 1
  Enabled
 1
  Position
-1 -0.5 2
+2 0 2
  Rotation
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
 1
-Audio LinkMove
-cloth_heavy.wav
-Audio LinkRotate
-chainmail1.wav
-BigGridActor
-0
-Can Fall
-1
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-0
-Inspect
-0
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Move Speed
-12
-MoveOnlyXAxis
-0
-MoveOnlyZAxis
-0
 Name
-BloomSeedSoil0
-Obstacle
-1
-Rotate Pitch
-1
-Rotate Roll
-0
-Rotate Speed
-12
-Rotate Yaw
-1
+AudioActor0
 UID
-1939681537
-next
-BloomSeed
-1
- Enabled
-1
- Position
-2 -0 3
- Rotation
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Audio LinkMove
-cloth_heavy.wav
-Audio LinkRotate
-chainmail1.wav
-BigGridActor
-0
-Can Fall
-1
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-0
-Inspect
-0
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Move Speed
-12
-MoveOnlyXAxis
-0
-MoveOnlyZAxis
-0
-Name
-BloomSeed0
-Obstacle
-1
-Planted
-0
-Rotate Pitch
-1
-Rotate Roll
-0
-Rotate Speed
-12
-Rotate Yaw
-1
-UID
-1164018683
+509727370
 next
 Player
 1
@@ -202,92 +87,31 @@ DirectionalLightActor0
 UID
 1443591394
 next
-BoxTriggerComponent
+CameraComponent
 1
-1939681537
-BoxTrigger
+1842864247
+Camera
  Enabled
 1
  Pos
-0 0 0
+1.75 1.75 -2.75
  Rot
 0 0 0 1
  Scale
 1 1 1
  Visible
 1
-Extents
-0.45 0.45 0.45
-Offset
-0 0 0
+FOV
+60
+Far Z
+1000
+Near Z
+0.01
 UID
-1243392275
+2191394895
 next
 MeshComponent
-5
-1164018683
-Mesh
- Enabled
-1
- Pos
-2 -0 3
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_AudioType
-Default
-M_Blend State
-default
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Texture2
-
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cube.vmesh
-Physics Static
-1
-Render Static
-0
-Sort Last
-0
-Trans. Occlude
-0
-UID
-1616147828
-next
+3
 1842864247
 Mesh
  Enabled
@@ -341,6 +165,8 @@ M_UvScale
 Mesh
 char.vmesh
 Physics Static
+1
+Player Traversable
 1
 Render Static
 0
@@ -405,6 +231,8 @@ Mesh
 cube.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
 Sort Last
@@ -468,6 +296,8 @@ Mesh
 node.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
 Sort Last
@@ -477,82 +307,8 @@ Trans. Occlude
 UID
 3614188990
 next
-1939681537
-Mesh
- Enabled
-1
- Pos
-1 -0.5 2
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_AudioType
-Default
-M_Blend State
-default
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Texture2
-
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-mound.vmesh
-Physics Static
-1
-Render Static
-0
-Sort Last
-0
-Trans. Occlude
-0
-UID
-328699825
-next
 DialogueComponent
-3
-1164018683
-Dialogue
- Enabled
 1
- Visible
-1
-File
-
-UID
-1936511359
-next
 1842864247
 Dialogue
  Enabled
@@ -563,17 +319,6 @@ File
 
 UID
 2495667995
-next
-1939681537
-Dialogue
- Enabled
-1
- Visible
-1
-File
-
-UID
-2060138664
 next
 InstanceMeshComponent
 1
@@ -631,6 +376,8 @@ Mesh
 node.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
 Sort Last
@@ -640,28 +387,36 @@ Trans. Occlude
 UID
 1693624439
 next
-CameraComponent
+AudioComponent
 1
-1842864247
-Camera
+509727370
+Audio
  Enabled
 1
  Pos
-1.75 1.75 -2.75
+2 0 2
  Rot
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
 1
-FOV
-60
-Far Z
-1000
-Near Z
-0.01
+Audio Filename
+coin.wav
+Enable Spatial Volume
+0
+Loop
+1
+Pitch
+1
+Play On Start
+1
 UID
-2191394895
+2779888349
+Volume
+1
+Volume Attenuation
+5
 next
 DirectionalLightComponent
 1
@@ -679,9 +434,13 @@ DirectionalLight
 1
 Colour
 1 1 1 1
+Global Ambient
+0.5 0.5 0.5 1
 Intensity
 1
 LightEnabled
+1
+Shadows Enabled
 1
 UID
 1554334306

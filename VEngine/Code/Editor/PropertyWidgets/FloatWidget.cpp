@@ -24,7 +24,7 @@ void FloatWidget::SetValue()
 
 	if (prop.change)
 	{
-		prop.change(_value);
+		prop.change(prop);
 	}
 }
 

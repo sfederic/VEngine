@@ -30,7 +30,7 @@ void StringWidget::SetValue()
 
 	if (prop.change)
 	{
-		prop.change(value);
+		prop.change(prop);
 	}
 
 	clearFocus();

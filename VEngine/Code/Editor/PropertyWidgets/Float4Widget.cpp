@@ -49,7 +49,7 @@ void Float4Widget::SetValue()
 
 	if (prop.change)
 	{
-		prop.change(value);
+		prop.change(prop);
 	}
 }
 

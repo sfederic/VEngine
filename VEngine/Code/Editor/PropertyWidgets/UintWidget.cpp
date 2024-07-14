@@ -28,7 +28,7 @@ void UintWidget::SetValue()
 
 	if (prop.change)
 	{
-		prop.change(value_);
+		prop.change(prop);
 	}
 }
 

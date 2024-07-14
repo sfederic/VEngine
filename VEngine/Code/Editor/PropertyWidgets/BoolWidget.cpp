@@ -31,7 +31,7 @@ void BoolWidget::SetValueBool(int state)
 
 		if (prop.change)
 		{
-			prop.change(value);
+			prop.change(prop);
 		}
 	}
 }

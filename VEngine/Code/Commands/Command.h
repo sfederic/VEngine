@@ -33,7 +33,7 @@ struct Command : ICommand
 			{
 				if (prop.change)
 				{
-					prop.change(data);
+					prop.change(prop);
 				}
 
 				*data = value;

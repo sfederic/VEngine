@@ -72,9 +72,9 @@ void Material::Destroy()
 	MaterialSystem::DestroyMaterial(uid);
 }
 
-static void ReassignTexture(void* data)
+static void ReassignTexture(Property& prop)
 {
-	auto textureData = (TextureData*)data;
+	auto textureData = prop.GetData<TextureData>();
 
 	auto swapTexture = TextureSystem::FindTexture2D(textureData->filename);
 	if (swapTexture == nullptr)
@@ -83,9 +83,6 @@ static void ReassignTexture(void* data)
 		return;
 	}
 
-	//@Todo: these 'get all mesh' calls aren't really right as each mesh component would
-	//have its own properties, but it works ok for simple actors for now.
-	//Could do WorldEditor::GetPickedComponent() here maybe.
 	auto meshes = WorldEditor::GetPickedActor()->GetComponents<MeshComponent>();
 	for (auto mesh : meshes)
 	{
@@ -93,9 +90,9 @@ static void ReassignTexture(void* data)
 	}
 }
 
-static void ReassignTextureSecondary(void* data)
+static void ReassignTextureSecondary(Property& prop)
 {
-	auto textureData = (TextureData*)data;
+	auto textureData = prop.GetData<TextureData>();
 
 	auto swapTexture = TextureSystem::FindTexture2D(textureData->filename);
 	if (swapTexture == nullptr)
@@ -111,9 +108,9 @@ static void ReassignTextureSecondary(void* data)
 	}
 }
 
-static void ReassignRastState(void* data)
+static void ReassignRastState(Property& prop)
 {
-	auto rastState = (VEnum*)data;
+	auto rastState = prop.GetData<VEnum>();
 	auto rastName = rastState->GetValue();
 	RastState* foundRastState = Renderer::GetRastState(rastName);
 	if (foundRastState == nullptr)
@@ -132,9 +129,9 @@ static void ReassignRastState(void* data)
 	}
 }
 
-static void ReassignBlendState(void* data)
+static void ReassignBlendState(Property& prop)
 {
-	auto blendState = (VEnum*)data;
+	auto blendState = prop.GetData<VEnum>();
 	auto blendName = blendState->GetValue();
 	BlendState* foundBlendState = Renderer::GetBlendState(blendName);
 	if (foundBlendState == nullptr)
@@ -153,9 +150,9 @@ static void ReassignBlendState(void* data)
 	}
 }
 
-static void ReassignShader(void* data)
+static void ReassignShader(Property& prop)
 {
-	auto shaderData = (VEnum*)data;
+	auto shaderData = prop.GetData<VEnum>();
 	auto foundShader = ShaderSystem::FindShaderItem(shaderData->GetValue());
 	if (foundShader == nullptr)
 	{

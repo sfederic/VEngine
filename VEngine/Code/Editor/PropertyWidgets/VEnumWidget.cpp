@@ -31,7 +31,7 @@ void VEnumWidget::SetValue()
 
 	if (prop.change)
 	{
-		prop.change(value);
+		prop.change(prop);
 	}
 
 	clearFocus();

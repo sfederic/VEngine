@@ -14,7 +14,7 @@ struct Property
 	// in Tick() where you're constantly looping over bools.
 
 	//Function to call when the set value is changed.
-	std::function<void(void*)> change;
+	std::function<void(Property&)> change;
 
 	std::string name;
 

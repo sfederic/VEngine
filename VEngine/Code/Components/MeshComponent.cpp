@@ -102,9 +102,9 @@ void MeshComponent::Destroy()
 	vertexBuffer.Destroy();
 }
 
-static void ReassignMesh(void* data)
+static void ReassignMesh(Property& prop)
 {
-	auto meshData = (MeshComponentData*)data;
+	auto meshData = prop.GetData<MeshComponentData>();
 	meshData->meshComponent->ReCreate();
 }
 

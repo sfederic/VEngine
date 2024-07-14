@@ -35,7 +35,7 @@ void MeshComponentDataWidget::SetValue()
 
 		setToolTip(filepath);
 
-		prop.change(value);
+		prop.change(prop);
 		ResetValue();
 	}
 }
