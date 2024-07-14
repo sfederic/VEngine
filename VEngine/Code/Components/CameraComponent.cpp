@@ -63,7 +63,6 @@ void CameraComponent::SetLerpToFocusPoint(bool value)
 
 //Only works with translation for now.
 //Ref: https://gdcvault.com/play/1023146/Math-for-Game-Programmers-Juicing
-//@Todo: there's a lot more to do here to give the camera shake a better falloff. Look at ref for ideas.
 XMVECTOR CameraComponent::Shake()
 {
 	if (shakeLevel <= 0.f)
