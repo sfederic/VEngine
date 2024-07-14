@@ -190,8 +190,6 @@ void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh, PhysicsType type)
 	scene->addActor(*rigidActor);
 
 	const auto meshUID = mesh->GetUID();
-	//@Todo: some maps are hitting conflicts on this map. Sort them out then uncomment this assert.
-	//assert(rigidActorMap.find(meshUID) == rigidActorMap.end());
 	rigidActorMap.emplace(meshUID, rigidActor);
 }
 
