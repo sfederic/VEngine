@@ -2,6 +2,8 @@
 
 #include <Windows.h>
 
+//Todo: With GameInput in use, not sure on if the scancode stuff is still a problem.
+
 //All these values are Win32 virtual keys currently in use.
 enum class Keys
 {
@@ -17,7 +19,6 @@ enum class Keys
 	Shift = 0x10,
 	Delete = VK_DELETE,
 	BackSpace = VK_BACK,
-	//@Todo: there's all sorts of scancode shit with Win32 and keyboards that won't make this work internationally.
 	W = 'W',
 	M = 'M',
 	A = 'A',
