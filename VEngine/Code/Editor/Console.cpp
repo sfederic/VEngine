@@ -282,7 +282,7 @@ void Console::Tick()
 
 void Console::InputTick()
 {
-	if (Input::GetKeyUp(Keys::Tilde)) //~ key, like doom and unreal
+	if (Input::GetSystemKeyUp(Keys::Tilde)) //~ key, like doom and unreal
 	{
 		bConsoleActive = !bConsoleActive;
 		consoleString.clear();
