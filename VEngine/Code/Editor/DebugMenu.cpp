@@ -617,7 +617,7 @@ void DebugMenu::RenderUVPaintMenu()
 	}
 	uvPaintWidget->AddToViewport();
 
-	ImGui::Begin("UV Paint");
+	ImGui::Begin("UV Paint (Left click to paint left tri, Left+Ctrl to paint right tri)");
 	if (ImGui::Button("Paint On/off"))
 	{
 		WorldEditor::uvPaintOn = !WorldEditor::uvPaintOn;
