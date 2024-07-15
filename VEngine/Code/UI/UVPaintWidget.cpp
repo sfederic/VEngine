@@ -28,7 +28,8 @@ void UVPaintWidget::Draw(float deltaTime)
 		}
 	}
 
-	Rect(pickerLayout);
+	//Rect for texture picker
+	Rect(pickerLayout, Colours::Green);
 
 	UpdateWorldEditorUVData();
 }
