@@ -39,7 +39,6 @@ void GridNode::DisplayShow() const
 	meshInstanceData.world.r[2].m128_f32[2] = 0.9f;
 }
 
-//@Todo: there are a lot of options to ignore actors here, and future problems.
 void GridNode::RecalcNodeHeight(HitResult& hitResult)
 {
 	const XMVECTOR origin = XMVectorSet((float)xIndex, 20.f, (float)yIndex, 1.f);
