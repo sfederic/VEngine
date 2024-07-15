@@ -4,6 +4,7 @@
 #include <DirectXMath.h>
 #include "Layout.h"
 #include "Core/UID.h"
+#include "Colours.h"
 
 using namespace DirectX;
 
@@ -73,7 +74,7 @@ protected:
 	void Image(std::string_view filename, int x, int y, int w, int h, float alpha = 1.f);
 	bool ImageButton(std::string_view filename, Layout layout, float alpha = 1.f);
 
-	void Rect(Layout layout);
+	void Rect(Layout layout, D2D1_COLOR_F color = Colours::Black, float lineWidth = 1.f, float opacity = 1.f);
 	void FillRect(Layout layout, D2D1_COLOR_F color = { 0.5f, 0.5f, 0.5f, 1.f }, float opacity = 1.0f);
 
 	//Aligns widget via enum with specific width and height

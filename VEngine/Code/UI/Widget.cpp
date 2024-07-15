@@ -233,9 +233,9 @@ bool Widget::ImageButton(std::string_view filename, Layout layout, float alpha)
 	return false;
 }
 
-void Widget::Rect(Layout layout)
+void Widget::Rect(Layout layout, D2D1_COLOR_F color, float lineWidth, float opacity)
 {
-	UISystem::DrawRect(layout);
+	UISystem::DrawRect(layout, color, lineWidth, opacity);
 }
 
 void Widget::FillRect(Layout layout, D2D1_COLOR_F color, float opacity)
