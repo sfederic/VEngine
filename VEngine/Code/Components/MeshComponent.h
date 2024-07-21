@@ -37,9 +37,6 @@ public:
 
 	bool castsShadow = true;
 
-	//whether the mesh is moved by physics system
-	bool isPhysicsStatic = true;
-
 	bool skipPhysicsCreation = false;
 
 	//Whether to make transparent when in between player and camera
@@ -109,10 +106,16 @@ public:
 	void SetRenderStatic(bool renderStatic) { isRenderStatic = renderStatic; }
 	bool IsRenderStatic() const { return isRenderStatic; }
 
+	void SetPhysicsStatic(bool value) { isPhysicsStatic = value; }
+	bool IsPhysicsStatic() const { return isPhysicsStatic; }
+
 private:
 	std::string collisionMeshFilename;
 
 	Material* material = nullptr;
 
 	bool isRenderStatic = true;
+
+	//whether the mesh is moved by physics system
+	bool isPhysicsStatic = true;
 };

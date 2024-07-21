@@ -89,7 +89,7 @@ void PhysicsSystem::Start()
 			else if (mesh && !mesh->skipPhysicsCreation)
 			{
 				PhysicsType physicsType;
-				mesh->isPhysicsStatic ? physicsType = PhysicsType::Static : physicsType = PhysicsType::Dynamic;
+				mesh->IsPhysicsStatic() ? physicsType = PhysicsType::Static : physicsType = PhysicsType::Dynamic;
 
 				if (mesh->UsesCollisonMesh())
 				{

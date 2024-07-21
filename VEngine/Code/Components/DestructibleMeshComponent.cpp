@@ -29,7 +29,7 @@ void DestructibleMeshComponent::Create()
 		//parent all the fractured cell meshes to this to be able to move it around before breaking.
 		this->AddChild(mesh);
 
-		mesh->isPhysicsStatic = false;
+		mesh->SetPhysicsStatic(false);
 
 		mesh->meshDataProxy.boundingBox = &meshData.boundingBox;
 		mesh->meshDataProxy.vertices = meshData.vertices;
