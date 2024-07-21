@@ -177,7 +177,7 @@ bool Physics::Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR end)
 {
 	XMVECTOR direction = XMVector3Normalize(end - origin);
 	float range = XMVector3Length(end - origin).m128_f32[0] + 0.1f;
-	return PhysicsPhysx::Raycast(origin, direction, range, hitResult);
+	return Raycast(hitResult, origin, direction, range);
 }
 
 bool Physics::RaycastTriangleIntersect(HitResult& hitResult)
