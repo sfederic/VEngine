@@ -34,7 +34,7 @@ public:
 	};
 
 	virtual ~Widget() = default;
-	virtual void Draw(float deltaTime);
+	virtual void Draw(float deltaTime) {}
 	virtual void Start() {}
 	void Destroy();
 
