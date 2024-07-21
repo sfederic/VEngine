@@ -278,7 +278,23 @@ void PhysicsSystem::GetTransformFromPhysicsActor(MeshComponent* mesh)
 	Transform transform;
 	PhysxToActorTransform(transform, pxTransform);
 
-	mesh->SetTransform(transform);
+	mesh->SetWorldPosition(transform.position);
+	mesh->SetWorldRotation(XMLoadFloat4(&transform.rotation));
+}
+
+void PhysicsSystem::SetTransformForPhysicsActor(MeshComponent* mesh)
+{
+	//Assert you're not hitting performance problems with static PhysX actors. 
+	//See PxRigidActor::setGlobalPose() comments for more details.
+	assert(!mesh->IsPhysicsStatic());
+
+	const auto uid = mesh->GetUID();
+	auto rigid = rigidActorMap.find(uid)->second;
+
+	PxTransform transform;
+	transform.p = PhysicsPhysx::XMVectorToPxVec3(mesh->GetWorldPositionV());
+	transform.q = PhysicsPhysx::XMVectorToPxQuat(mesh->GetWorldRotationV());
+	rigid->setGlobalPose(transform);
 }
 
 std::unordered_map<UID, std::unique_ptr<MeshComponent>>& PhysicsSystem::GetAllPhysicsMeshes()
@@ -313,6 +329,11 @@ bool PhysicsPhysx::Raycast(XMVECTOR origin, XMVECTOR direction, float range, Hit
 PxVec3 PhysicsPhysx::XMVectorToPxVec3(XMVECTOR xmVector)
 {
 	return PxVec3(xmVector.m128_f32[0], xmVector.m128_f32[1], xmVector.m128_f32[2]);
+}
+
+PxQuat PhysicsPhysx::XMVectorToPxQuat(XMVECTOR xmVector)
+{
+	return PxQuat(xmVector.m128_f32[0], xmVector.m128_f32[1], xmVector.m128_f32[2], xmVector.m128_f32[3]);
 }
 
 PxVec3 PhysicsPhysx::Float3ToPxVec3(XMFLOAT3 float3)

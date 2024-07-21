@@ -56,6 +56,7 @@ namespace PhysicsSystem
 	void ActorToPhysxTransform(const Transform& actorTransform, PxTransform& pxTransform);
 	void PhysxToActorTransform(Transform& actorTransform, const PxTransform& pxTransform);
 	void GetTransformFromPhysicsActor(MeshComponent* mesh);
+	void SetTransformForPhysicsActor(MeshComponent* mesh);
 
 	std::unordered_map<UID, std::unique_ptr<MeshComponent>>& GetAllPhysicsMeshes();
 };
@@ -63,10 +64,10 @@ namespace PhysicsSystem
 namespace PhysicsPhysx
 {
 	bool Raycast(XMVECTOR origin, XMVECTOR direction, float range, HitResult& hitResult);
-	bool RaycastFromScreen(XMVECTOR origin, XMVECTOR direction, float range, HitResult& hitResult);
 	bool BoxCast(XMFLOAT3 extents, XMFLOAT3 origin, XMFLOAT3 direction, float distance, HitResult& hitResult);
 
 	PxVec3 XMVectorToPxVec3(XMVECTOR xmVector);
+	PxQuat XMVectorToPxQuat(XMVECTOR xmVector);
 	PxVec3 Float3ToPxVec3(XMFLOAT3 float3);
 	XMFLOAT3 PxVec3ToFloat3(PxVec3 pxVec3);
 }
