@@ -77,25 +77,25 @@ void Core::Init()
 void Core::Tick()
 {
 	//Reset current world
-	if (Input::GetKeyHeld(Keys::Ctrl))
+	if (Input::GetSystemKeyHeld(Keys::Ctrl))
 	{
-		if (Input::GetKeyUp(Keys::R))
+		if (Input::GetSystemKeyDown(Keys::R))
 		{
 			FileSystem::ReloadCurrentWorld();
 		}
 	}
 
 	//Toggle gameplay on/off
-	if (Input::GetKeyHeld(Keys::Ctrl))
+	if (Input::GetSystemKeyHeld(Keys::Ctrl))
 	{
-		if (Input::GetKeyUp(Keys::P))
+		if (Input::GetSystemKeyDown(Keys::P))
 		{
 			SetGameplayState();
 		}
 	}
 
 	//End game on Esc pressed
-	if (Input::GetKeyDown(Keys::Esc))
+	if (Input::GetSystemKeyDown(Keys::Esc))
 	{
 		if (gameplayOn)
 		{
