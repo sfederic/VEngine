@@ -16,6 +16,7 @@
 #include "Components/Lights/SpotLightComponent.h"
 #include "Components/Lights/DirectionalLightComponent.h"
 #include "Core/World.h"
+#include "Physics/PhysicsSystem.h"
 
 using namespace DirectX;
 
@@ -176,7 +177,7 @@ bool Physics::Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR end)
 {
 	XMVECTOR direction = XMVector3Normalize(end - origin);
 	float range = XMVector3Length(end - origin).m128_f32[0] + 0.1f;
-	return Raycast(hitResult, origin, direction, range, false);
+	return PhysicsPhysx::Raycast(origin, direction, range, hitResult);
 }
 
 bool Physics::RaycastTriangleIntersect(HitResult& hitResult)
