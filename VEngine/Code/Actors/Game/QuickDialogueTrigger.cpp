@@ -32,6 +32,14 @@ void QuickDialogueTrigger::Tick(float deltaTime)
 			SetDialogueComponentText();
 		}
 	}
+	else
+	{
+		if (_dialogueComponent->dialogueWidget->IsInViewport())
+		{
+			const auto widgetWorldPos = VMath::ConvertToHomogenousPosition(XMLoadFloat3(&_dialogueWorldPosition));
+			_dialogueComponent->dialogueWidget->SetWorldPosition(widgetWorldPos);
+		}
+	}
 }
 
 Properties QuickDialogueTrigger::GetProps()
@@ -48,10 +56,9 @@ void QuickDialogueTrigger::SetDialogueComponentText()
 {
 	_dialogueComponent->dialogueWidget->ResetAllValues();
 	_dialogueComponent->dialogueWidget->SetText(_quickDialogueText);
-	_dialogueComponent->dialogueWidget->DeleteOnTextProgressEnd();
 
 	const auto widgetWorldPos = VMath::ConvertToHomogenousPosition(XMLoadFloat3(&_dialogueWorldPosition));
 	_dialogueComponent->dialogueWidget->SetWorldPosition(widgetWorldPos);
 
-	_dialogueComponent->dialogueWidget->AddToViewport();
+	_dialogueComponent->dialogueWidget->AddToViewport(4.f);
 }
