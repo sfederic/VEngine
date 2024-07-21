@@ -324,30 +324,30 @@ void Renderer::Cleanup()
 void Renderer::Tick()
 {
 	//BOUNDING BOXES HOTKEY
-	if (Input::GetKeyHeld(Keys::Ctrl))
+	if (Input::GetSystemKeyHeld(Keys::Ctrl))
 	{
-		if (Input::GetKeyDown(Keys::B))
+		if (Input::GetSystemKeyDown(Keys::B))
 		{
 			drawBoundingBoxes = !drawBoundingBoxes;
 		}
 	}
 
 	//RENDER TRIGGERS HOTKEY
-	if (Input::GetKeyHeld(Keys::Ctrl))
+	if (Input::GetSystemKeyHeld(Keys::Ctrl))
 	{
-		if (Input::GetKeyDown(Keys::Y))
+		if (Input::GetSystemKeyDown(Keys::Y))
 		{
 			drawTriggers = !drawTriggers;
 		}
 	}
 
 	//DRAW ALL AS WIREFRAME HOTKEY
-	if (Input::GetKeyUp(Keys::F3))
+	if (Input::GetSystemKeyUp(Keys::F3))
 	{
 		drawAllAsWireframe = !drawAllAsWireframe;
 	}
 
-	if (Input::GetKeyUp(Keys::F4))
+	if (Input::GetSystemKeyUp(Keys::F4))
 	{
 		VertexColourLightBake();
 	}
