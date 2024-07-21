@@ -62,9 +62,11 @@ namespace PhysicsSystem
 
 namespace PhysicsPhysx
 {
-	bool Raycast(XMFLOAT3 origin, XMFLOAT3 dir, float range, HitResult& hitResult);
+	bool Raycast(XMVECTOR origin, XMVECTOR direction, float range, HitResult& hitResult);
+	bool RaycastFromScreen(XMVECTOR origin, XMVECTOR direction, float range, HitResult& hitResult);
 	bool BoxCast(XMFLOAT3 extents, XMFLOAT3 origin, XMFLOAT3 direction, float distance, HitResult& hitResult);
 
+	PxVec3 XMVectorToPxVec3(XMVECTOR xmVector);
 	PxVec3 Float3ToPxVec3(XMFLOAT3 float3);
 	XMFLOAT3 PxVec3ToFloat3(PxVec3 pxVec3);
 }

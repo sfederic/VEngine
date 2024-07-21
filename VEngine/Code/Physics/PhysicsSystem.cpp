@@ -286,10 +286,10 @@ std::unordered_map<UID, std::unique_ptr<MeshComponent>>& PhysicsSystem::GetAllPh
 	return physicsMeshes;
 }
 
-bool PhysicsPhysx::Raycast(XMFLOAT3 origin, XMFLOAT3 dir, float range, HitResult& hitResult)
+bool PhysicsPhysx::Raycast(XMVECTOR origin, XMVECTOR direction, float range, HitResult& hitResult)
 {
-	const PxVec3 pxOrigin(origin.x, origin.y, origin.z);
-	const PxVec3 pxDir(dir.x, dir.y, dir.z);
+	const PxVec3 pxOrigin = XMVectorToPxVec3(origin);
+	const PxVec3 pxDir = XMVectorToPxVec3(direction);
 
 	PxRaycastBuffer hitBuffer;
 	if (scene->raycast(pxOrigin, pxDir, range, hitBuffer))
@@ -300,14 +300,19 @@ bool PhysicsPhysx::Raycast(XMFLOAT3 origin, XMFLOAT3 dir, float range, HitResult
 		hitResult.hitNormal = XMFLOAT3(block.normal.x, block.normal.y, block.normal.z);
 		hitResult.hitPos = XMFLOAT3(block.position.x, block.position.y, block.position.z);
 		hitResult.uv = XMFLOAT2(block.u, block.v);
-		hitResult.origin = DirectX::XMLoadFloat3(&origin);
-		hitResult.direction = DirectX::XMLoadFloat3(&dir);
+		hitResult.origin = origin;
+		hitResult.direction = direction;
 		hitResult.range = range;
 
 		return Physics::RaycastTriangleIntersect(hitResult);
 	}
 
 	return false;
+}
+
+PxVec3 PhysicsPhysx::XMVectorToPxVec3(XMVECTOR xmVector)
+{
+	return PxVec3(xmVector.m128_f32[0], xmVector.m128_f32[1], xmVector.m128_f32[2]);
 }
 
 PxVec3 PhysicsPhysx::Float3ToPxVec3(XMFLOAT3 float3)
