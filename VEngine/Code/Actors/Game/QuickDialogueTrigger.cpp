@@ -40,6 +40,7 @@ Properties QuickDialogueTrigger::GetProps()
 	props.title = GetTypeName();
 	props.Add("Text", &_quickDialogueText);
 	props.Add("Text Spawn Pos", &_dialogueWorldPosition);
+	props.Add("Previously Activated", &_hasBeenActivated);
 	return props;
 }
 

@@ -24,7 +24,5 @@ private:
 	BoxTriggerComponent* _boxTrigger = nullptr;
 	DialogueComponent* _dialogueComponent = nullptr;
 	DirectX::XMFLOAT3 _dialogueWorldPosition = DirectX::XMFLOAT3(0.f, 0.f, 0.f);
-
-	//Todo: this actor might need to put this as a property to remember what has gone off between world loads.
 	bool _hasBeenActivated = false;
 };
