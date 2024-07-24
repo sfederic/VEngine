@@ -13,6 +13,8 @@ void SkyBox::Create()
 {
 	__super::Create();
 
+	skyboxMesh->skipPhysicsCreation = true;
+
 	skyboxMesh->SetMeshFilename("sky_cylinder.vmesh");
 	skyboxMesh->SetTexture("sky.jpg");;
 	skyboxMesh->SetShaderItem("Unlit");

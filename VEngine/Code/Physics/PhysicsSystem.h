@@ -30,9 +30,6 @@ enum class PhysicsType
 //with the release specific ones. Try find a way to change this with a build file process so that switching to 
 //Release doesn't need Ctrl+V'ing everything.
 
-//@Todo: if non static MeshComponents are inside a skybox for example, they'll explode out because that
-//skybox hasn't disabled its BoundingBox and/or PhysicsComponent. make a flag that turns it off.
-
 //Interface to PhysX systems
 //Ref: https://gameworksdocs.nvidia.com/PhysX/4.1/documentation/physxguide/Index.html
 namespace PhysicsSystem
