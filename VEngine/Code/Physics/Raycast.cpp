@@ -372,7 +372,6 @@ void Physics::DrawDebugLine(XMVECTOR start, XMVECTOR end)
 	Renderer::AddDebugLine(line);
 }
 
-//@Todo: can consolidate the two orientedboxcast functions here
 bool Physics::OrientedBoxCast(HitResult& hit, BoundingOrientedBox& boundsInWorldSpace, bool drawDebug, bool clearDebugDrawWithTimer)
 {
 	if (drawDebug)
