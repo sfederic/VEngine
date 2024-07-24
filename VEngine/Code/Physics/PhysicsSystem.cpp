@@ -256,7 +256,7 @@ void PhysicsSystem::ActorToPhysxTransform(const Transform& actorTransform, PxTra
 		actorTransform.position.y, actorTransform.position.z);
 
 	//@Todo: does scale even work with Physx? right now physics actor scale is being set to 1x1x1 
-	//as there's nothing set to it here, so any scale changes at runtime are reflected.
+	//as there's nothing set to it here, so any scale changes at runtime are NOT reflected.
 	//Ref:https://gameworksdocs.nvidia.com/PhysX/4.0/documentation/PhysXGuide/Manual/Geometry.html#mesh-scaling
 
 	pxTransform.q = PxQuat(actorTransform.rotation.x, actorTransform.rotation.y,
