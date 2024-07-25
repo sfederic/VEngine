@@ -4,6 +4,7 @@
 #include "../ActorSystem.h"
 
 class BoxTriggerComponent;
+class PopupWidget;
 
 //In-world save point the player can interact with to save.
 class SavePoint : public Actor
@@ -18,4 +19,5 @@ public:
 
 private:
 	BoxTriggerComponent* trigger = nullptr;
+	PopupWidget* savePopupWidget = nullptr;
 };

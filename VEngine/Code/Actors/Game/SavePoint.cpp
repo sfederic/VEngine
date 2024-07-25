@@ -4,6 +4,8 @@
 #include "Core/Input.h"
 #include "Gameplay/GameUtils.h"
 #include "Gameplay/GameInstance.h"
+#include "UI/UISystem.h"
+#include "UI/Game/PopupWidget.h"
 
 SavePoint::SavePoint()
 {
@@ -16,6 +18,9 @@ void SavePoint::Start()
 	__super::Start();
 
 	trigger->SetTargetAsPlayer();
+
+	savePopupWidget = UISystem::CreateWidget<PopupWidget>();
+	savePopupWidget->SetPopupText(L"Save?");
 }
 
 void SavePoint::Tick(float deltaTime)
@@ -24,12 +29,18 @@ void SavePoint::Tick(float deltaTime)
 
 	if (trigger->ContainsTarget())
 	{
+		savePopupWidget->AddToViewport();
+
 		if (Input::GetKeyUp(Keys::Enter))
 		{
 			GameInstance::SetContinueMapName(World::worldFilename);
 			GameUtils::SaveGameInstanceData();
 			GameUtils::SaveGameWorldState();
 		}
+	}
+	else
+	{
+		savePopupWidget->RemoveFromViewport();
 	}
 }
 
