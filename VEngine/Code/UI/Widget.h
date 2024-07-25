@@ -64,10 +64,12 @@ protected:
 		D2D1_COLOR_F color = { 0.f, 0.f, 0.f, 1.f }, float opacity = 1.0f);
 
 	bool Button(const std::wstring text, Layout layout, float lineWidth = 1.0f,
-		TextAlign textAlign = TextAlign::Center, D2D1_COLOR_F textColor = { 0.f, 0.f, 0.f, 1.f }, float textOpacity = 1.0f);
+		TextAlign textAlign = TextAlign::Center, D2D1_COLOR_F textColor = { 0.f, 0.f, 0.f, 1.f }, float textOpacity = 1.0f,
+		bool isActive = true);
 
 	bool Button(const std::string text, Layout layout, float lineWidth = 1.0f,
-		TextAlign textAlign = TextAlign::Center, D2D1_COLOR_F textColor = { 0.f, 0.f, 0.f, 1.f }, float textOpacity = 1.0f);
+		TextAlign textAlign = TextAlign::Center, D2D1_COLOR_F textColor = { 0.f, 0.f, 0.f, 1.f }, float textOpacity = 1.0f,
+		bool isActive = true);
 
 	void Image(std::string_view filename, Layout layout, float alpha = 1.f);
 	Layout ImageAsOriginalSize(std::string_view textureFilename, long x, long y, float alpha = 1.f);

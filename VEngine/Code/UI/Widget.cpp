@@ -123,13 +123,20 @@ void Widget::Text(const std::string text, Layout layout, TextAlign align, D2D1_C
 }
 
 bool Widget::Button(const std::wstring text, Layout layout, float lineWidth,
-	TextAlign textAlign, D2D1_COLOR_F textColor, float textOpacity)
+	TextAlign textAlign, D2D1_COLOR_F textColor, float textOpacity, bool isActive)
 {
 	UISystem::FillRect(layout, Colours::Grey);
 	Text(text, layout.rect, textAlign, textColor, textOpacity);
 
 	const int viewportMouseX = Editor::Get().GetViewportMouseX();
 	const int viewportMouseY = Editor::Get().GetViewportMouseY();
+
+	if (!isActive)
+	{
+		//Little greyed out rect to denote the button is inactive.
+		UISystem::FillRect(layout, Colours::Black, 0.3f);
+		return false;
+	}
 
 	if (viewportMouseX > layout.rect.left && viewportMouseX < layout.rect.right)
 	{
@@ -148,9 +155,9 @@ bool Widget::Button(const std::wstring text, Layout layout, float lineWidth,
 	return false;
 }
 
-bool Widget::Button(const std::string text, Layout layout, float lineWidth, TextAlign textAlign, D2D1_COLOR_F textColor, float textOpacity)
+bool Widget::Button(const std::string text, Layout layout, float lineWidth, TextAlign textAlign, D2D1_COLOR_F textColor, float textOpacity, bool isActive)
 {
-	return Button(VString::stows(text), layout, lineWidth, textAlign, textColor, textOpacity);
+	return Button(VString::stows(text), layout, lineWidth, textAlign, textColor, textOpacity, isActive);
 }
 
 void Widget::Image(std::string_view filename, Layout layout, float alpha)
