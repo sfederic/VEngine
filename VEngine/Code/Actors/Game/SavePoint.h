@@ -1,18 +1,21 @@
 #pragma once
+
 #include "../Actor.h"
 #include "../ActorSystem.h"
 
 class BoxTriggerComponent;
 
 //In-world save point the player can interact with to save.
-struct SavePoint : Actor
+class SavePoint : public Actor
 {
+public:
 	ACTOR_SYSTEM(SavePoint);
 
-	BoxTriggerComponent* trigger = nullptr;
-
 	SavePoint();
-	virtual void Start() override;
-	virtual void Tick(float deltaTime) override;
-	virtual Properties GetProps() override;
+	void Start() override;
+	void Tick(float deltaTime) override;
+	Properties GetProps() override;
+
+private:
+	BoxTriggerComponent* trigger = nullptr;
 };

@@ -7,7 +7,7 @@
 
 SavePoint::SavePoint()
 {
-	trigger = BoxTriggerComponent::system.Add("Trigger", this);
+	trigger = CreateComponent<BoxTriggerComponent>("Trigger");
 	SetRootComponent(trigger);
 }
 
