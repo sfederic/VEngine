@@ -14,9 +14,13 @@ void TitleScreenWidget::Draw(float deltaTime)
 	{
 		GameUtils::LoadWorldDeferred("starting_docks.vmap");
 	}
-	else if (Button(L"Continue", AlignLayout(100.f, 50.f, Align::BottomRight), 1.f, TextAlign::Center, Colours::White))
+
+	const auto mapName = GameInstance::GetContinueMapName();
+	const bool continueButtonActive = !mapName.empty();
+	if (Button(L"Continue", AlignLayout(100.f, 50.f, Align::BottomRight), 1.f, TextAlign::Center,
+		Colours::White, 1.f, continueButtonActive))
 	{
 		GameUtils::LoadGameInstanceData();
-		GameUtils::LoadWorldDeferred(GameInstance::GetContinueMapName());
+		GameUtils::LoadWorldDeferred(mapName);
 	}
 }
