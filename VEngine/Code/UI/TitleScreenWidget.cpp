@@ -12,7 +12,7 @@ void TitleScreenWidget::Draw(float deltaTime)
 
 	if (Button(L"Begin", AlignLayout(100.f, 50.f, Align::BottomLeft), 1.f, TextAlign::Center, Colours::White))
 	{
-		GameUtils::LoadWorldDeferred("starting_docks.vmap");
+		GameUtils::LoadWorldDeferred("starting_dock.vmap");
 	}
 
 	const auto mapName = GameInstance::GetContinueMapName();
