@@ -122,7 +122,7 @@ void Widget::Text(const std::string text, Layout layout, TextAlign align, D2D1_C
 	Text(VString::stows(text), layout, align, color, opacity);
 }
 
-bool Widget::Button(const std::wstring text, Layout layout, float lineWidth,
+bool Widget::Button(const std::wstring text, Layout layout,
 	TextAlign textAlign, D2D1_COLOR_F textColor, float textOpacity, bool isActive)
 {
 	UISystem::FillRect(layout, Colours::Grey);
@@ -143,7 +143,7 @@ bool Widget::Button(const std::wstring text, Layout layout, float lineWidth,
 		if (viewportMouseY > layout.rect.top && viewportMouseY < layout.rect.bottom)
 		{
 			//Hover animation/image
-			UISystem::DrawRect(layout, Colours::Black, 2.0f);
+			UISystem::DrawRect(layout, Colours::Black);
 
 			if (Input::GetMouseLeftUp())
 			{
@@ -155,9 +155,9 @@ bool Widget::Button(const std::wstring text, Layout layout, float lineWidth,
 	return false;
 }
 
-bool Widget::Button(const std::string text, Layout layout, float lineWidth, TextAlign textAlign, D2D1_COLOR_F textColor, float textOpacity, bool isActive)
+bool Widget::Button(const std::string text, Layout layout, TextAlign textAlign, D2D1_COLOR_F textColor, float textOpacity, bool isActive)
 {
-	return Button(VString::stows(text), layout, lineWidth, textAlign, textColor, textOpacity, isActive);
+	return Button(VString::stows(text), layout, textAlign, textColor, textOpacity, isActive);
 }
 
 void Widget::Image(std::string_view filename, Layout layout, float alpha)

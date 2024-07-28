@@ -26,7 +26,7 @@ void TitleScreenWidget::Draw(float deltaTime)
 		return;
 	}
 
-	if (Button(L"Begin", AlignLayout(100.f, 50.f, Align::BottomLeft), 1.f, TextAlign::Center, Colours::White))
+	if (Button(L"Begin", AlignLayout(100.f, 50.f, Align::BottomLeft), TextAlign::Center, Colours::White))
 	{
 		_isInteractable = false;
 		SetToFadeOut();
@@ -35,7 +35,7 @@ void TitleScreenWidget::Draw(float deltaTime)
 
 	const auto mapName = GameInstance::GetContinueMapName();
 	const bool continueButtonActive = !mapName.empty();
-	if (Button(L"Continue", AlignLayout(100.f, 50.f, Align::BottomRight), 1.f, TextAlign::Center,
+	if (Button(L"Continue", AlignLayout(100.f, 50.f, Align::BottomRight), TextAlign::Center,
 		Colours::White, 1.f, continueButtonActive))
 	{
 		_isInteractable = false;
