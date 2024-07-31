@@ -9,14 +9,13 @@ public:
 	ACTOR_SYSTEM(CorkscrewLift);
 
 	void Create() override;
-
-	Properties GetProps() override
-	{
-		auto props = __super::GetProps();
-		props.title = GetTypeName();
-		return props;
-	}
+	Properties GetProps() override;
 
 	void OnLinkRotateRight() override;
 	void OnLinkRotateLeft() override;
+
+private:
+	int rotationIncrementIndex = 0;
+	int minRotationIncrement = 0;
+	int maxRotationIncrement = 3;
 };
