@@ -2,6 +2,16 @@
 #include "CorkscrewLift.h"
 #include "Core/VMath.h"
 
+void CorkscrewLift::Create()
+{
+	__super::Create();
+
+	canBeMovedInLink = false;
+	canBeRotatedPitchXAxis = false;
+	canBeRotatedRollZAxis = false;
+	canFall = false;
+}
+
 void CorkscrewLift::OnLinkRotateRight()
 {
 	__super::OnLinkRotateRight();

@@ -8,6 +8,8 @@ class CorkscrewLift : public GridActor
 public:
 	ACTOR_SYSTEM(CorkscrewLift);
 
+	void Create() override;
+
 	Properties GetProps() override
 	{
 		auto props = __super::GetProps();
