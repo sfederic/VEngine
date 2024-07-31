@@ -3,3 +3,4 @@
 // For more information see https://go.microsoft.com/fwlink/?linkid=865984
 #define ACTOR_SYSTEM(type)
 #define COMPONENT_SYSTEM(type) inline static ComponentSystem<type> system; virtual void Destroy() override { system.Remove(index); }
+#define DEFAULT_PROPS Properties GetProps() override { auto props = __super::GetProps(); props.title = GetTypeName(); return props; }
