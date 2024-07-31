@@ -875,6 +875,9 @@
     <ClCompile Include="Code\Actors\Game\QuickDialogueTrigger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Actors\Game\CorkscrewLift.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\main.cpp">
@@ -1818,6 +1821,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\QuickDialogueTrigger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Actors\Game\CorkscrewLift.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
