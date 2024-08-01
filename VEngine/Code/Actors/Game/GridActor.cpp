@@ -133,6 +133,9 @@ void GridActor::FallCheck()
 	{
 		RecalcCurrentNodeDontIgnoreThis();
 		inFall = false;
+
+		auto node = GetCurrentNode();
+		node->active = true;
 	}
 	else
 	{
@@ -142,6 +145,9 @@ void GridActor::FallCheck()
 			inFall = true;
 			RecalcCurrentNodePosition();
 			nextPos = GetCurrentNode()->GetWorldPosV();
+
+			auto node = GetCurrentNode();
+			node->active = false;
 		}
 	}
 }
@@ -190,7 +196,7 @@ void GridActor::Tick(float deltaTime)
 
 	if (!isSubmerged)
 	{
-		FallCheck(deltaTime);
+		FallCheck();
 	}
 
 	if (inFall)
