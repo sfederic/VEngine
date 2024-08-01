@@ -3,6 +3,9 @@
 #include <GameInput.h>
 #include "Core/Debug.h"
 
+//Todo: maybe think about getting rid of GameInput. It always loses keyboard and mouse focus when you
+//minimize the window or do other things. Very sporadic.
+
 IGameInput* gGameInput;
 IGameInputDevice* gGamepad;
 
