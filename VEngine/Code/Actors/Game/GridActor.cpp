@@ -117,7 +117,7 @@ void GridActor::CheckSetIsRotating()
 	}
 }
 
-void GridActor::FallCheck(float)
+void GridActor::FallCheck()
 {
 	if (!canFall)
 	{

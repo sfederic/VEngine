@@ -216,5 +216,5 @@ private:
 	void CheckSetIsMoving();
 	void CheckSetIsRotating();
 
-	void FallCheck(float deltaTime);
+	void FallCheck();
 };
