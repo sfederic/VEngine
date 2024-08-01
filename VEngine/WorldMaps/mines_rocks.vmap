@@ -1,19 +1,588 @@
-DirectionalLightActor
+GridActor
+9
+ Enabled
+1
+ Position
+1 0 5
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Audio LinkMove
+cloth_heavy.wav
+Audio LinkRotate
+chainmail1.wav
+BigGridActor
+0
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+MoveOnlyXAxis
+0
+MoveOnlyZAxis
+0
+Name
+GridActor0
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Roll
+0
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+1696898046
+next
+ Enabled
+1
+ Position
+1 0 9
+ Rotation
+0.707229 0 0 0.706985
+ Scale
+1 0.999996 0.999996
+ Visible
+1
+Audio LinkMove
+cloth_heavy.wav
+Audio LinkRotate
+chainmail1.wav
+BigGridActor
+0
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+MoveOnlyXAxis
+0
+MoveOnlyZAxis
+0
+Name
+GridActor1
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Roll
+0
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+3816620033
+next
+ Enabled
+1
+ Position
+3 0 7
+ Rotation
+0.5 0.5 0.5 -0.5
+ Scale
+1 0.999999 0.999999
+ Visible
+1
+Audio LinkMove
+cloth_heavy.wav
+Audio LinkRotate
+chainmail1.wav
+BigGridActor
+0
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+MoveOnlyXAxis
+0
+MoveOnlyZAxis
+0
+Name
+GridActor2
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Roll
+0
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+2926814807
+next
+ Enabled
+1
+ Position
+4 0 5
+ Rotation
+0 0.707318 0 0.706895
+ Scale
+1 1 1
+ Visible
+1
+Audio LinkMove
+cloth_heavy.wav
+Audio LinkRotate
+chainmail1.wav
+BigGridActor
+0
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+MoveOnlyXAxis
+0
+MoveOnlyZAxis
+0
+Name
+GridActor3
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Roll
+0
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+1358701403
+next
+ Enabled
+1
+ Position
+1 0 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Audio LinkMove
+cloth_heavy.wav
+Audio LinkRotate
+chainmail1.wav
+BigGridActor
+0
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+MoveOnlyXAxis
+0
+MoveOnlyZAxis
+0
+Name
+GridActor4
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Roll
+0
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+3946209406
+next
+ Enabled
+1
+ Position
+1 3 13
+ Rotation
+0 1 0 -0.000244163
+ Scale
+1.00001 1 1.00001
+ Visible
+1
+Audio LinkMove
+cloth_heavy.wav
+Audio LinkRotate
+chainmail1.wav
+BigGridActor
+0
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+MoveOnlyXAxis
+0
+MoveOnlyZAxis
+0
+Name
+GridActor5
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Roll
+0
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+4158024847
+next
+ Enabled
+1
+ Position
+4 3 11
+ Rotation
+0.707229 0 0 0.706985
+ Scale
+1 0.999998 0.999998
+ Visible
+1
+Audio LinkMove
+cloth_heavy.wav
+Audio LinkRotate
+chainmail1.wav
+BigGridActor
+0
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+MoveOnlyXAxis
+0
+MoveOnlyZAxis
+0
+Name
+GridActor6
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Roll
+0
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+3472035028
+next
+ Enabled
+1
+ Position
+3 3 13
+ Rotation
+0 0 1 0.000299015
+ Scale
+0.999994 0.999994 1
+ Visible
+1
+Audio LinkMove
+cloth_heavy.wav
+Audio LinkRotate
+chainmail1.wav
+BigGridActor
+0
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+MoveOnlyXAxis
+0
+MoveOnlyZAxis
+0
+Name
+GridActor7
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Roll
+0
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+2610772027
+next
+ Enabled
+1
+ Position
+0 3 11
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Audio LinkMove
+cloth_heavy.wav
+Audio LinkRotate
+chainmail1.wav
+BigGridActor
+0
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+MoveOnlyXAxis
+0
+MoveOnlyZAxis
+0
+Name
+GridActor8
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Roll
+0
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+2164988490
+next
+Player
 1
  Enabled
 1
  Position
-0 5 0
+2 0 0
  Rotation
-0.608762 0 -0 0.793353
+-0 0 -0 1
  Scale
-0.999995 0.999997 1
+1 1 1
  Visible
 1
 Name
-DirectionalLightActor0
+Player0
 UID
-2804688616
+1102344030
 next
 EntranceTrigger
 2
@@ -96,467 +665,6 @@ Size Y
 UID
 3351852683
 next
-GridActor
-9
- Enabled
-1
- Position
-1 0 5
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Can Fall
-1
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-0
-Inspect
-0
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Move Speed
-12
-Name
-GridActor0
-Obstacle
-1
-Rotate Pitch
-1
-Rotate Speed
-12
-Rotate Yaw
-1
-UID
-1696898046
-next
- Enabled
-1
- Position
-1 0 9
- Rotation
-0.707229 0 0 0.706985
- Scale
-1 0.999996 0.999996
- Visible
-1
-Can Fall
-1
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-0
-Inspect
-0
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Move Speed
-12
-Name
-GridActor1
-Obstacle
-1
-Rotate Pitch
-1
-Rotate Speed
-12
-Rotate Yaw
-1
-UID
-3816620033
-next
- Enabled
-1
- Position
-3 0 7
- Rotation
-0.5 0.5 0.5 -0.5
- Scale
-1 0.999999 0.999999
- Visible
-1
-Can Fall
-1
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-0
-Inspect
-0
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Move Speed
-12
-Name
-GridActor2
-Obstacle
-1
-Rotate Pitch
-1
-Rotate Speed
-12
-Rotate Yaw
-1
-UID
-2926814807
-next
- Enabled
-1
- Position
-4 0 5
- Rotation
-0 0.707318 0 0.706895
- Scale
-1 1 1
- Visible
-1
-Can Fall
-1
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-0
-Inspect
-0
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Move Speed
-12
-Name
-GridActor3
-Obstacle
-1
-Rotate Pitch
-1
-Rotate Speed
-12
-Rotate Yaw
-1
-UID
-1358701403
-next
- Enabled
-1
- Position
-1 0 2
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Can Fall
-1
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-0
-Inspect
-0
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Move Speed
-12
-Name
-GridActor4
-Obstacle
-1
-Rotate Pitch
-1
-Rotate Speed
-12
-Rotate Yaw
-1
-UID
-3946209406
-next
- Enabled
-1
- Position
-1 3 13
- Rotation
-0 1 0 -0.000244163
- Scale
-1.00001 1 1.00001
- Visible
-1
-Can Fall
-1
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-0
-Inspect
-0
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Move Speed
-12
-Name
-GridActor5
-Obstacle
-1
-Rotate Pitch
-1
-Rotate Speed
-12
-Rotate Yaw
-1
-UID
-4158024847
-next
- Enabled
-1
- Position
-4 3 11
- Rotation
-0.707229 0 0 0.706985
- Scale
-1 0.999998 0.999998
- Visible
-1
-Can Fall
-1
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-0
-Inspect
-0
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Move Speed
-12
-Name
-GridActor6
-Obstacle
-1
-Rotate Pitch
-1
-Rotate Speed
-12
-Rotate Yaw
-1
-UID
-3472035028
-next
- Enabled
-1
- Position
-3 3 14
- Rotation
-0 0 1 0.000299015
- Scale
-0.999995 0.999995 1
- Visible
-1
-Can Fall
-1
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-0
-Inspect
-0
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Move Speed
-12
-Name
-GridActor7
-Obstacle
-1
-Rotate Pitch
-1
-Rotate Speed
-12
-Rotate Yaw
-1
-UID
-2610772027
-next
- Enabled
-1
- Position
-0 3 11
- Rotation
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Can Fall
-1
-Destruct
-1
-DisableGridInteract
-0
-Health
-1
-Ignore Rotate Check
-0
-Inspect
-0
-Interact
-1
-Interact Text
-
-InteractKnownText
-
-Link Movement
-1
-Link Rotation
-1
-Move Axis Neg.
-1 1
-Move Axis Pos.
-1 1
-Move Speed
-12
-Name
-GridActor8
-Obstacle
-1
-Rotate Pitch
-1
-Rotate Speed
-12
-Rotate Yaw
-1
-UID
-2164988490
-next
 MeshActor
 8
  Enabled
@@ -637,11 +745,11 @@ next
  Enabled
 1
  Position
-2 2 9
+2 1 9
  Rotation
 -0 0 -0 1
  Scale
-1 1 1
+1 3 1
  Visible
 1
 Name
@@ -652,11 +760,11 @@ next
  Enabled
 1
  Position
-3 5 14
+3 4 14
  Rotation
 -0 0 -0 1
  Scale
-1 1 1
+1 3 1
  Visible
 1
 Name
@@ -667,11 +775,11 @@ next
  Enabled
 1
  Position
-1 5 14
+1 4 14
  Rotation
 -0 0 -0 1
  Scale
-1 1 1
+1 3 1
  Visible
 1
 Name
@@ -679,22 +787,73 @@ cube7
 UID
 857295150
 next
-Player
+DirectionalLightActor
 1
  Enabled
 1
  Position
-2 0 0
+0 5 0
  Rotation
--0 0 -0 1
+0.608762 0 -0 0.793353
+ Scale
+0.999995 0.999997 1
+ Visible
+1
+Name
+DirectionalLightActor0
+UID
+2804688616
+next
+ConditionComponent
+2
+3726830678
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+1044648056
+next
+4013995611
+Condition
+ Enabled
+1
+ Visible
+1
+Condition
+
+Condition Arg
+
+UID
+2691979857
+next
+CameraComponent
+1
+1102344030
+Camera
+ Enabled
+1
+ Pos
+1.75 1.75 -2.75
+ Rot
+0 0 0 1
  Scale
 1 1 1
  Visible
 1
-Name
-Player0
+FOV
+60
+Far Z
+1000
+Near Z
+0.01
 UID
-1102344030
+2728263625
 next
 BoxTriggerComponent
 2
@@ -736,56 +895,1242 @@ Offset
 UID
 2995227757
 next
-CameraComponent
-1
-1102344030
-Camera
+MeshComponent
+19
+1696898046
+Mesh
  Enabled
 1
  Pos
-1.75 1.75 -2.75
+1 0 5
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_AudioType
+Default
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Floors/stone_wall_indoor.jpg
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+rock2.vmesh
+Physics Static
+1
+Player Traversable
+1
+Render Static
+0
+Sort Last
+0
+Trans. Occlude
+0
+UID
+2058301583
+next
+3816620033
+Mesh
+ Enabled
+1
+ Pos
+1 0 9
+ Rot
+0.707229 0 0 0.706985
+ Scale
+1 0.999996 0.999996
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_AudioType
+Default
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Floors/stone_wall_indoor.jpg
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+rock2.vmesh
+Physics Static
+1
+Player Traversable
+1
+Render Static
+0
+Sort Last
+0
+Trans. Occlude
+0
+UID
+3965312083
+next
+2926814807
+Mesh
+ Enabled
+1
+ Pos
+3 0 7
+ Rot
+0.5 0.5 0.5 -0.5
+ Scale
+1 0.999999 0.999999
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_AudioType
+Default
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Floors/stone_wall_indoor.jpg
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+rock2.vmesh
+Physics Static
+1
+Player Traversable
+1
+Render Static
+0
+Sort Last
+0
+Trans. Occlude
+0
+UID
+3755673072
+next
+1358701403
+Mesh
+ Enabled
+1
+ Pos
+4 0 5
+ Rot
+0 0.707318 0 0.706895
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_AudioType
+Default
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Floors/stone_wall_indoor.jpg
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+rock2.vmesh
+Physics Static
+1
+Player Traversable
+1
+Render Static
+0
+Sort Last
+0
+Trans. Occlude
+0
+UID
+1339804041
+next
+3946209406
+Mesh
+ Enabled
+1
+ Pos
+1 0 2
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_AudioType
+Default
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Floors/stone_wall_indoor.jpg
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+rock2.vmesh
+Physics Static
+1
+Player Traversable
+1
+Render Static
+0
+Sort Last
+0
+Trans. Occlude
+0
+UID
+214496646
+next
+4158024847
+Mesh
+ Enabled
+1
+ Pos
+1 3 13
+ Rot
+0 1 0 -0.000244163
+ Scale
+1.00001 1 1.00001
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_AudioType
+Default
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Floors/stone_wall_indoor.jpg
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+rock2.vmesh
+Physics Static
+1
+Player Traversable
+1
+Render Static
+0
+Sort Last
+0
+Trans. Occlude
+0
+UID
+2354089535
+next
+3472035028
+Mesh
+ Enabled
+1
+ Pos
+4 3 11
+ Rot
+0.707229 0 0 0.706985
+ Scale
+1 0.999998 0.999998
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_AudioType
+Default
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Floors/stone_wall_indoor.jpg
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+rock2.vmesh
+Physics Static
+1
+Player Traversable
+1
+Render Static
+0
+Sort Last
+0
+Trans. Occlude
+0
+UID
+4087610877
+next
+2610772027
+Mesh
+ Enabled
+1
+ Pos
+3 3 13
+ Rot
+0 0 1 0.000299015
+ Scale
+0.999994 0.999994 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_AudioType
+Default
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Floors/stone_wall_indoor.jpg
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+rock2.vmesh
+Physics Static
+1
+Player Traversable
+1
+Render Static
+0
+Sort Last
+0
+Trans. Occlude
+0
+UID
+3047884327
+next
+2164988490
+Mesh
+ Enabled
+1
+ Pos
+0 3 11
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_AudioType
+Default
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Floors/stone_wall_indoor.jpg
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+rock2.vmesh
+Physics Static
+1
+Player Traversable
+1
+Render Static
+0
+Sort Last
+0
+Trans. Occlude
+0
+UID
+2595399829
+next
+3067499963
+Mesh
+ Enabled
+1
+ Pos
+2 -0.5 3
+ Rot
+-0 0 -0 1
+ Scale
+5 1 5
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_AudioType
+Default
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Floors/ground.jpg
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Physics Static
+1
+Player Traversable
+1
+Render Static
+1
+Sort Last
+0
+Trans. Occlude
+0
+UID
+4082919659
+next
+3750453930
+Mesh
+ Enabled
+1
+ Pos
+2 -0.5 8
+ Rot
+-0 0 -0 1
+ Scale
+5 1 5
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_AudioType
+Default
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Floors/ground.jpg
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Physics Static
+1
+Player Traversable
+1
+Render Static
+1
+Sort Last
+0
+Trans. Occlude
+0
+UID
+1099873876
+next
+543254348
+Mesh
+ Enabled
+1
+ Pos
+2 -0.5 0
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_AudioType
+Default
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+node.vmesh
+Physics Static
+1
+Player Traversable
+1
+Render Static
+1
+Sort Last
+0
+Trans. Occlude
+0
+UID
+3344629021
+next
+1039782377
+Mesh
+ Enabled
+1
+ Pos
+2 1 12
+ Rot
+-0 0 -0 1
+ Scale
+5 3 5
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_AudioType
+Default
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Floors/ground.jpg
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Physics Static
+1
+Player Traversable
+1
+Render Static
+1
+Sort Last
+0
+Trans. Occlude
+0
+UID
+1563032933
+next
+3244830995
+Mesh
+ Enabled
+1
+ Pos
+2 2.5 17
+ Rot
+-0 0 -0 1
+ Scale
+5 6 5
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_AudioType
+Default
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+Floors/ground.jpg
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Physics Static
+1
+Player Traversable
+1
+Render Static
+1
+Sort Last
+0
+Trans. Occlude
+0
+UID
+3290864956
+next
+3940145262
+Mesh
+ Enabled
+1
+ Pos
+2 1 9
+ Rot
+-0 0 -0 1
+ Scale
+1 3 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_AudioType
+Default
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Physics Static
+1
+Player Traversable
+1
+Render Static
+1
+Sort Last
+0
+Trans. Occlude
+0
+UID
+983163548
+next
+2572891162
+Mesh
+ Enabled
+1
+ Pos
+3 4 14
+ Rot
+-0 0 -0 1
+ Scale
+1 3 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_AudioType
+Default
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Physics Static
+1
+Player Traversable
+1
+Render Static
+1
+Sort Last
+0
+Trans. Occlude
+0
+UID
+4218242208
+next
+857295150
+Mesh
+ Enabled
+1
+ Pos
+1 4 14
+ Rot
+-0 0 -0 1
+ Scale
+1 3 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_AudioType
+Default
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Physics Static
+1
+Player Traversable
+1
+Render Static
+1
+Sort Last
+0
+Trans. Occlude
+0
+UID
+3906617558
+next
+1102344030
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+-0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_AudioType
+Default
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+char.vmesh
+Physics Static
+1
+Player Traversable
+1
+Render Static
+0
+Sort Last
+0
+Trans. Occlude
+0
+UID
+398776625
+next
+1102344030
+LinkEffectMesh
+ Enabled
+1
+ Pos
+0 0 0
  Rot
 0 0 0 1
  Scale
 1 1 1
  Visible
 1
-FOV
-60
-Far Z
-1000
-Near Z
-0.01
+Casts Shadow
+0
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 0
+M_AudioType
+Default
+M_Blend State
+transparent
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+DefaultClip
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+UI/spellbinding_circle.png
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Physics Static
+1
+Player Traversable
+1
+Render Static
+1
+Sort Last
+0
+Trans. Occlude
+0
 UID
-2728263625
-next
-ConditionComponent
-2
-3726830678
-Condition
- Enabled
-1
- Visible
-1
-Condition
-
-Condition Arg
-
-UID
-1044648056
-next
-4013995611
-Condition
- Enabled
-1
- Visible
-1
-Condition
-
-Condition Arg
-
-UID
-2691979857
+1626893701
 next
 DialogueComponent
 10
@@ -899,44 +2244,6 @@ File
 UID
 900464511
 next
-DirectionalLightComponent
-1
-2804688616
-DirectionalLight
- Enabled
-1
- Pos
-0 5 0
- Rot
-0.608762 0 -0 0.793353
- Scale
-0.999995 0.999997 1
- Visible
-1
-Colour
-1 1 1 1
-LightEnabled
-1
-UID
-4160264810
-next
-EmptyComponent
-1
-1102344030
-Root
- Enabled
-1
- Pos
-2 0 0
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-UID
-1399626222
-next
 InstanceMeshComponent
 1
 3351852683
@@ -959,8 +2266,10 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
-default
+transparent
 M_Metallic
 0
 M_Rast State
@@ -973,6 +2282,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -987,1003 +2298,61 @@ M_UvScale
 1 1
 Mesh
 node.vmesh
-Static
+Physics Static
 1
+Player Traversable
+1
+Render Static
+1
+Sort Last
+0
 Trans. Occlude
 0
 UID
 1373592248
 next
-MeshComponent
-18
-1696898046
-Mesh
+DirectionalLightComponent
+1
+2804688616
+DirectionalLight
  Enabled
 1
  Pos
-1 0 5
+0 5 0
  Rot
--0 0 -0 1
+0.608762 0 -0 0.793353
  Scale
-1 1 1
+0.999995 0.999997 1
  Visible
 1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
+Colour
 1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Floors/stone_wall_indoor.jpg
-M_Use Texture
+Global Ambient
+0.5 0.5 0.5 1
+Intensity
 1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-rock2.vmesh
-Static
+LightEnabled
 1
-Trans. Occlude
-0
+Shadows Enabled
+1
 UID
-2058301583
+4160264810
 next
-3816620033
-Mesh
- Enabled
+EmptyComponent
 1
- Pos
-1 0 9
- Rot
-0.707229 0 0 0.706985
- Scale
-1 0.999996 0.999996
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Floors/stone_wall_indoor.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-rock2.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-3965312083
-next
-2926814807
-Mesh
- Enabled
-1
- Pos
-3 0 7
- Rot
-0.5 0.5 0.5 -0.5
- Scale
-1 0.999999 0.999999
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Floors/stone_wall_indoor.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-rock2.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-3755673072
-next
-1358701403
-Mesh
- Enabled
-1
- Pos
-4 0 5
- Rot
-0 0.707318 0 0.706895
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Floors/stone_wall_indoor.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-rock2.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-1339804041
-next
-3946209406
-Mesh
- Enabled
-1
- Pos
-1 0 2
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Floors/stone_wall_indoor.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-rock2.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-214496646
-next
-4158024847
-Mesh
- Enabled
-1
- Pos
-1 3 13
- Rot
-0 1 0 -0.000244163
- Scale
-1.00001 1 1.00001
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Floors/stone_wall_indoor.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-rock2.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-2354089535
-next
-3472035028
-Mesh
- Enabled
-1
- Pos
-4 3 11
- Rot
-0.707229 0 0 0.706985
- Scale
-1 0.999998 0.999998
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Floors/stone_wall_indoor.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-rock2.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-4087610877
-next
-2610772027
-Mesh
- Enabled
-1
- Pos
-3 3 14
- Rot
-0 0 1 0.000299015
- Scale
-0.999995 0.999995 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Floors/stone_wall_indoor.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-rock2.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-3047884327
-next
-2164988490
-Mesh
- Enabled
-1
- Pos
-0 3 11
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Floors/stone_wall_indoor.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-rock2.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-2595399829
-next
-3067499963
-Mesh
- Enabled
-1
- Pos
-2 -0.5 3
- Rot
--0 0 -0 1
- Scale
-5 1 5
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Floors/ground.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-node.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-4082919659
-next
-3750453930
-Mesh
- Enabled
-1
- Pos
-2 -0.5 8
- Rot
--0 0 -0 1
- Scale
-5 1 5
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Floors/ground.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-node.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-1099873876
-next
-543254348
-Mesh
- Enabled
-1
- Pos
-2 -0.5 0
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-node.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-3344629021
-next
-1039782377
-Mesh
- Enabled
-1
- Pos
-2 1 12
- Rot
--0 0 -0 1
- Scale
-5 3 5
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Floors/ground.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cube.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-1563032933
-next
-3244830995
-Mesh
- Enabled
-1
- Pos
-2 2.5 17
- Rot
--0 0 -0 1
- Scale
-5 6 5
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-Floors/ground.jpg
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cube.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-3290864956
-next
-3940145262
-Mesh
- Enabled
-1
- Pos
-2 2 9
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cube.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-983163548
-next
-2572891162
-Mesh
- Enabled
-1
- Pos
-3 5 14
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cube.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-4218242208
-next
-857295150
-Mesh
- Enabled
-1
- Pos
-1 5 14
- Rot
--0 0 -0 1
- Scale
-1 1 1
- Visible
-1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-cube.vmesh
-Static
-1
-Trans. Occlude
-0
-UID
-3906617558
-next
 1102344030
-Mesh
+Root
  Enabled
 1
  Pos
-0 0 0
+2 0 0
  Rot
--0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
 1
-Casts Shadow
-1
-Grid Ignore
-0
-Grid Obst.
-0
-M_Ambient
-1 1 1 1
-M_Blend State
-null
-M_Metallic
-0
-M_Rast State
-solid
-M_Shader
-Default
-M_Smoothness
-0
-M_Specular
-1 1 1 1
-M_Texture
-test.png
-M_Use Texture
-1
-M_UvOffset
-0 0
-M_UvOffsetSpeed
-0 0
-M_UvRotation
-0
-M_UvRotationSpeed
-0
-M_UvScale
-1 1
-Mesh
-char.vmesh
-Static
-1
-Trans. Occlude
-0
 UID
-398776625
+1399626222
 next
 end
