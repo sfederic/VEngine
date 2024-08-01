@@ -12,6 +12,16 @@ void CorkscrewLift::Create()
 	canFall = false;
 }
 
+void CorkscrewLift::OnLinkRotate()
+{
+	//Don't play and spite sheet or audio calls if the actor can't rotate. 
+	if (rotationIncrementIndex < maxRotationIncrement &&
+		rotationIncrementIndex > minRotationIncrement)
+	{
+		return __super::OnLinkRotate();
+	}
+}
+
 void CorkscrewLift::OnLinkRotateRight()
 {
 	__super::OnLinkRotateRight();
@@ -22,6 +32,12 @@ void CorkscrewLift::OnLinkRotateRight()
 
 		const auto pos = GetPositionV() + VMath::GlobalUpVector();
 		SetNextPos(pos);
+
+		//Play the audio here because it'll skip in this class's OnLinkRotate()
+		if (rotationIncrementIndex == 1)
+		{
+			GridActor::OnLinkRotate();
+		}
 	}
 	else
 	{
@@ -39,6 +55,12 @@ void CorkscrewLift::OnLinkRotateLeft()
 
 		const auto pos = GetPositionV() - VMath::GlobalUpVector();
 		SetNextPos(pos);
+
+		//Play the audio here because it'll skip in this class's OnLinkRotate()
+		if (rotationIncrementIndex == maxRotationIncrement - 1)
+		{
+			GridActor::OnLinkRotate();
+		}
 	}
 	else
 	{
