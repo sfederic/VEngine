@@ -58,9 +58,10 @@ void Texture2D::Create()
 
 void Texture2D::SetBufferNames()
 {
-	const std::string dataName = "resource_" + filename + std::to_string(GenerateUID());
+	//Todo: names still clash in the d3d11 debug log even though they should be unique. I don't get it.
+	/*const std::string dataName = "resource_" + filename + std::to_string(GenerateUID());
 	RenderUtils::SetResourceName(data.Get(), dataName);
 
 	const std::string srvName = "srv_" + filename + std::to_string(GenerateUID());
-	RenderUtils::SetResourceName(srv.Get(), srvName);
+	RenderUtils::SetResourceName(srv.Get(), srvName);*/
 }
