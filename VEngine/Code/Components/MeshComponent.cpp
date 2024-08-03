@@ -195,6 +195,11 @@ void MeshComponent::SetShaderItem(std::string shaderItemName)
 	material->shaderItemValue.SetValue(shaderItemName);
 }
 
+auto MeshComponent::GetShaderItemName()
+{
+	return material->GetShaderItem().GetName();
+}
+
 void MeshComponent::SetAmbientColour(XMFLOAT3 ambientColour)
 {
 	auto& materialShaderData = material->GetMaterialShaderData();
