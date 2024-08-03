@@ -46,11 +46,13 @@ void Engine::Init(int argc, char* argv[])
 
 	Camera::SetEditorCameraAsActive();
 
-	auto coreInit = std::async(std::launch::async, []() { Core::Init(); });
-	auto consoleInit = std::async(std::launch::async, []() { Console::Init(); });
+	//Keep core and audio inits here non-async. The reason is that XAudio is waiting on CoInitializeEx(),
+	//and the threading makes it act funny when COINIT_APARTMENTTHREADED is an arg, which is used because of Qt
+	//working with Windows native file dialogs.
+	Core::Init();
+	AudioSystem::Init();
 
-	coreInit.wait();
-	auto audioInit = std::async(std::launch::async, []() { AudioSystem::Init(); });
+	auto consoleInit = std::async(std::launch::async, []() { Console::Init(); });
 
 	auto physicsInit = std::async(std::launch::async, []() { PhysicsSystem::Init(); });
 	auto fbxInit = std::async(std::launch::async, []() { FBXLoader::Init(); });
@@ -64,7 +66,6 @@ void Engine::Init(int argc, char* argv[])
 	auto debugMenuInit = std::async(std::launch::async, []() { debugMenu.Init(); });
 	auto uiInit = std::async(std::launch::async, []() { UISystem::Init(Renderer::GetSwapchain()); });
 
-	audioInit.wait();
 	physicsInit.wait();
 	fbxInit.wait();
 	uiInit.wait();
