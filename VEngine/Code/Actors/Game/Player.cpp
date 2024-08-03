@@ -1309,6 +1309,8 @@ void Player::EnableLinkEffectMeshForHover(MeshComponent* linkMesh)
 	//will only show one side of the link effect mesh.
 	linkEffectMesh->SetRastState(linkMesh->GetRastState().GetName());
 
+	linkEffectMesh->SetShaderItem(linkMesh->GetMaterial().GetShaderItem().GetName());
+
 	linkEffectMesh->SetMeshFilename(linkMesh->GetMeshFilename());
 	linkEffectMesh->ReCreate();
 }
@@ -1325,6 +1327,8 @@ void Player::EnableLinkEffectMeshForSelect(MeshComponent* linkMesh)
 	linkEffectMesh->SetWorldPosition(linkMesh->GetWorldPositionV());
 
 	linkEffectMesh->SetRastState(linkMesh->GetRastState().GetName());
+
+	linkEffectMesh->SetShaderItem(linkMesh->GetMaterial().GetShaderItem().GetName());
 
 	linkEffectMesh->SetMeshFilename(linkMesh->GetMeshFilename());
 	linkEffectMesh->ReCreate();
