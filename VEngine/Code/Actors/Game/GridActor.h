@@ -71,8 +71,6 @@ protected:
 
 	//This bool is to denote larger grid actors that need multiple or all nodes on the grid recalculated
 	//every time this particular grid actor is moved or rotated.
-	//Todo: this bool also needs a check for actors to not be able to move into other actors (Note: there might not
-	//be a way to get around this, so see how it goes)
 	bool bigGridActor = false;
 
 	//This bool is for rotating grid actors (e.g. actors stuck on walls) on their z-axis. Because the controls for rotation need
