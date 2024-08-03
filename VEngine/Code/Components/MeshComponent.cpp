@@ -195,7 +195,7 @@ void MeshComponent::SetShaderItem(std::string shaderItemName)
 	material->shaderItemValue.SetValue(shaderItemName);
 }
 
-auto MeshComponent::GetShaderItemName()
+std::string MeshComponent::GetShaderItemName()
 {
 	return material->GetShaderItem().GetName();
 }
