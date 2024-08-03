@@ -379,6 +379,46 @@ bool GridActor::CheckNextNodeMoveIsValid(const XMVECTOR nextMoveDirection)
 		}
 	}
 
+	//Big grid actor bounds check against all meshes of other grid actors
+	if (bigGridActor)
+	{
+		//Going to trick the bounds in world space creation so that it's working with the future position.
+		//Make sure to reset back to original position at end of the code block and returns.
+		SetPosition(nextPos);
+
+		for (auto mesh : GetComponents<MeshComponent>())
+		{
+			for (auto& gridActor : GridActor::system.GetActors())
+			{
+				//Ignore self
+				if (gridActor.get() == this)
+				{
+					continue;
+				}
+
+				for (auto gridActorMesh : gridActor->GetComponents<MeshComponent>())
+				{
+					auto bounds = mesh->GetBoundsInWorldSpace();
+					//Shrink extents down so we're not colliding with every bounds edge in the world.
+					bounds.Extents.x -= 0.1f;
+					bounds.Extents.y -= 0.1f;
+					bounds.Extents.z -= 0.1f;
+
+					if (bounds.Intersects(gridActorMesh->GetBoundsInWorldSpace()))
+					{
+						Log("[%s] big grid actor can't move. Intersecting with [%s].",
+							GetName().c_str(), gridActor->GetName().c_str());
+						SetPosition(currentPos);
+						nextPos = GetPositionV();
+						return false;
+					}
+				}
+			}
+		}
+
+		SetPosition(currentPos);
+	}
+
 	//Note that both bools can be set to true, in which case z axis will take precedence.
 	if (moveConstrainedToZAxis)
 	{
