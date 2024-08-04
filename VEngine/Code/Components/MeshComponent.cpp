@@ -302,3 +302,9 @@ bool MeshComponent::IntersectsWithAnyBoundingBoxInWorld()
 
 	return false;
 }
+
+void MeshComponent::ReCreateAsPhysicsActor()
+{
+	PhysicsSystem::ReleasePhysicsActor(this);
+	PhysicsSystem::CreatePhysicsActor(this);
+}

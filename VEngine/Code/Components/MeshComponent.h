@@ -83,6 +83,8 @@ public:
 	void SetPhysicsStatic(bool value) { isPhysicsStatic = value; }
 	bool IsPhysicsStatic() const { return isPhysicsStatic; }
 
+	void ReCreateAsPhysicsActor();
+
 public:
 	MeshComponentData meshComponentData;
 	MeshDataProxy meshDataProxy;
@@ -119,6 +121,7 @@ public:
 
 	bool isRenderStatic = true;
 
+private:
 	//whether the mesh is moved by physics system
 	bool isPhysicsStatic = true;
 };
