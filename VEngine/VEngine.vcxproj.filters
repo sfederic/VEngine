@@ -878,6 +878,9 @@
     <ClCompile Include="Code\Actors\Game\CorkscrewLift.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Actors\Game\PhysicsDoorGridActor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\main.cpp">
@@ -1824,6 +1827,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\CorkscrewLift.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Actors\Game\PhysicsDoorGridActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
