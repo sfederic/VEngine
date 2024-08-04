@@ -17,7 +17,8 @@ std::unordered_map<UID, std::unique_ptr<MeshComponent>> physicsMeshes;
 void NormaliseExtents(float& x, float& y, float& z);
 
 //Maps meshcomponent UIDs to rigid actors
-std::unordered_map<UID, PxRigidActor*> rigidActorMap;
+std::unordered_map<UID, PxRigidStatic*> rigidStaticMap;
+std::unordered_map<UID, PxRigidDynamic*> rigidDynamicMap;
 
 PxDefaultAllocator allocator;
 
@@ -131,27 +132,59 @@ void PhysicsSystem::Cleanup()
 
 void PhysicsSystem::Reset()
 {
-	for (auto& rigidActorIt : rigidActorMap)
+	for (auto& rigidActorIt : rigidDynamicMap)
 	{
 		rigidActorIt.second->release();
 	}
+	rigidDynamicMap.clear();
 
-	rigidActorMap.clear();
+	for (auto& rigidActorIt : rigidStaticMap)
+	{
+		rigidActorIt.second->release();
+	}
+	rigidStaticMap.clear();
 }
 
 void PhysicsSystem::ReleasePhysicsActor(MeshComponent* mesh)
 {
-	auto rigidActorIt = rigidActorMap.find(mesh->GetUID());
-	if (rigidActorIt == rigidActorMap.end())
+	PhysicsType physicsType =
+		mesh->IsPhysicsStatic() ? physicsType = PhysicsType::Static : physicsType = PhysicsType::Dynamic;
+
+	switch (physicsType)
 	{
-		return;
+	case PhysicsType::Static:
+	{
+		auto rigidStaticIt = rigidStaticMap.find(mesh->GetUID());
+		if (rigidStaticIt == rigidStaticMap.end())
+		{
+			return;
+		}
+
+		auto rigidStatic = rigidStaticIt->second;
+
+		scene->removeActor(*rigidStatic);
+		rigidStatic->release();
+		rigidStaticMap.erase(mesh->GetUID());
+
+		break;
 	}
+	case PhysicsType::Dynamic:
+	{
+		auto rigidDynamicIt = rigidDynamicMap.find(mesh->GetUID());
+		if (rigidDynamicIt == rigidDynamicMap.end())
+		{
+			return;
+		}
 
-	auto rigidActor = rigidActorIt->second;
+		auto rigidDynamic = rigidDynamicIt->second;
 
-	scene->removeActor(*rigidActor);
-	rigidActor->release();
-	rigidActorMap.erase(mesh->GetUID());
+		scene->removeActor(*rigidDynamic);
+		rigidDynamic->release();
+		rigidDynamicMap.erase(mesh->GetUID());
+
+		break;
+	}
+	}
 }
 
 void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh)
@@ -161,7 +194,11 @@ void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh)
 	transform.Decompose(mesh->GetWorldMatrix());
 	ActorToPhysxTransform(transform, pxTransform);
 
-	PxRigidActor* rigidActor = nullptr;
+	const XMVECTOR extentsVector = mesh->GetBoundsExtents() * mesh->GetLocalScaleV();
+	XMFLOAT3 extents;
+	XMStoreFloat3(&extents, extentsVector);
+	NormaliseExtents(extents.x, extents.y, extents.z);
+	PxShape* box = physics->createShape(PxBoxGeometry(extents.x, extents.y, extents.z), *material);
 
 	PhysicsType physicsType =
 		mesh->IsPhysicsStatic() ? physicsType = PhysicsType::Static : physicsType = PhysicsType::Dynamic;
@@ -169,29 +206,24 @@ void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh)
 	switch (physicsType)
 	{
 	case PhysicsType::Static:
-		rigidActor = physics->createRigidStatic(pxTransform);
-		break;
-
-	case PhysicsType::Dynamic:
-		rigidActor = physics->createRigidDynamic(pxTransform);
+	{
+		auto rigidStatic = physics->createRigidStatic(pxTransform);
+		rigidStatic->userData = mesh;
+		rigidStatic->attachShape(*box);
+		scene->addActor(*rigidStatic);
+		rigidStaticMap.emplace(mesh->GetUID(), rigidStatic);
 		break;
 	}
-
-	//Set actor as user data
-	assert(rigidActor);
-	rigidActor->userData = mesh;
-
-	XMVECTOR extentsVector = mesh->GetBoundsExtents() * mesh->GetLocalScaleV();
-	XMFLOAT3 extents;
-	XMStoreFloat3(&extents, extentsVector);
-	NormaliseExtents(extents.x, extents.y, extents.z);
-	PxShape* box = physics->createShape(PxBoxGeometry(extents.x, extents.y, extents.z), *material);
-
-	rigidActor->attachShape(*box);
-	scene->addActor(*rigidActor);
-
-	const auto meshUID = mesh->GetUID();
-	rigidActorMap.emplace(meshUID, rigidActor);
+	case PhysicsType::Dynamic:
+	{
+		auto rigidDynamic = physics->createRigidDynamic(pxTransform);
+		rigidDynamic->userData = mesh;
+		rigidDynamic->attachShape(*box);
+		scene->addActor(*rigidDynamic);
+		rigidDynamicMap.emplace(mesh->GetUID(), rigidDynamic);
+		break;
+	}
+	}
 }
 
 void PhysicsSystem::CreatePhysicsForDestructibleMesh(DestructibleMeshComponent* mesh, Actor* actor)
@@ -272,12 +304,33 @@ void PhysicsSystem::PhysxToActorTransform(Transform& actorTransform, const PxTra
 
 void PhysicsSystem::GetTransformFromPhysicsActor(MeshComponent* mesh)
 {
-	const auto uid = mesh->GetUID();
-	auto rigid = rigidActorMap.find(uid)->second;
+	PhysicsType physicsType =
+		mesh->IsPhysicsStatic() ? physicsType = PhysicsType::Static : physicsType = PhysicsType::Dynamic;
 
-	PxTransform pxTransform = rigid->getGlobalPose();
+	const auto uid = mesh->GetUID();
 	Transform transform;
-	PhysxToActorTransform(transform, pxTransform);
+
+	switch (physicsType)
+	{
+	case PhysicsType::Static:
+	{
+		auto rigidStatic = rigidStaticMap.find(uid)->second;
+
+		PxTransform pxTransform = rigidStatic->getGlobalPose();
+		PhysxToActorTransform(transform, pxTransform);
+
+		break;
+	}
+	case PhysicsType::Dynamic:
+	{
+		auto rigidDynamic = rigidDynamicMap.find(uid)->second;
+
+		PxTransform pxTransform = rigidDynamic->getGlobalPose();
+		PhysxToActorTransform(transform, pxTransform);
+
+		break;
+	}
+	}
 
 	mesh->SetWorldPosition(transform.position);
 	mesh->SetWorldRotation(XMLoadFloat4(&transform.rotation));
@@ -290,12 +343,22 @@ void PhysicsSystem::SetTransformForPhysicsActor(MeshComponent* mesh)
 	assert(!mesh->IsPhysicsStatic());
 
 	const auto uid = mesh->GetUID();
-	auto rigid = rigidActorMap.find(uid)->second;
+	auto rigidDynamic = rigidDynamicMap.find(uid)->second;
 
 	PxTransform transform;
 	transform.p = PhysicsPhysx::XMVectorToPxVec3(mesh->GetWorldPositionV());
 	transform.q = PhysicsPhysx::XMVectorToPxQuat(mesh->GetWorldRotationV());
-	rigid->setGlobalPose(transform);
+	rigidDynamic->setGlobalPose(transform);
+}
+
+void PhysicsSystem::AddForceToMesh(MeshComponent* mesh, XMVECTOR forceDirection)
+{
+	assert(!mesh->IsPhysicsStatic());
+
+	const auto uid = mesh->GetUID();
+	const auto rigid = rigidDynamicMap.find(uid)->second;
+	const auto force = PhysicsPhysx::XMVectorToPxVec3(forceDirection);
+	rigid->addForce(force);
 }
 
 std::unordered_map<UID, std::unique_ptr<MeshComponent>>& PhysicsSystem::GetAllPhysicsMeshes()
@@ -371,16 +434,6 @@ bool PhysicsPhysx::BoxCast(XMFLOAT3 extents, XMFLOAT3 origin, XMFLOAT3 direction
 	}
 
 	return false;
-}
-
-std::vector<PxRigidActor*> PhysicsSystem::GetRigidActors()
-{
-	std::vector<PxRigidActor*> actors;
-	for (const auto& [key, value] : rigidActorMap)
-	{
-		actors.emplace_back(value);
-	}
-	return actors;
 }
 
 //Extents can be 0 or less than because of the planes and walls, Physx wants extents above 0.

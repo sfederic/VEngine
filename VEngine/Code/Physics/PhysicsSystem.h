@@ -55,6 +55,8 @@ namespace PhysicsSystem
 	void GetTransformFromPhysicsActor(MeshComponent* mesh);
 	void SetTransformForPhysicsActor(MeshComponent* mesh);
 
+	void AddForceToMesh(MeshComponent* mesh, XMVECTOR forceDirection);
+
 	std::unordered_map<UID, std::unique_ptr<MeshComponent>>& GetAllPhysicsMeshes();
 };
 
