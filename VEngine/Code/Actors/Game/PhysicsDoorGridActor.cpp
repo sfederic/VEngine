@@ -33,6 +33,8 @@ void PhysicsDoorGridActor::OnLinkMove()
 			mesh->ignoreGridRaycasts = true;
 			mesh->SetPhysicsStatic(false);
 			mesh->ReCreateAsPhysicsActor();
+
+			mesh->AddForce(GetForwardVectorV());
 		}
 
 		Player::system.GetOnlyActor()->ResetLinkedGridActor();
