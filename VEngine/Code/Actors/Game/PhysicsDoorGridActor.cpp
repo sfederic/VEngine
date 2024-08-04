@@ -31,9 +31,7 @@ void PhysicsDoorGridActor::OnLinkMove()
 		{
 			mesh->canBeLinkedTo = false;
 			mesh->ignoreGridRaycasts = true;
-			mesh->SetPhysicsStatic(false);
-			mesh->ReCreateAsPhysicsActor();
-
+			mesh->ReCreateAsPhysicsActor(false);
 			mesh->AddForce(GetForwardVectorV());
 		}
 
