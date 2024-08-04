@@ -211,6 +211,8 @@ void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh)
 		rigidStatic->userData = mesh;
 		rigidStatic->attachShape(*box);
 		scene->addActor(*rigidStatic);
+		//make sure neither static or dynamic actors are in the their opposite map
+		assert(rigidDynamicMap.find(mesh->GetUID()) == rigidDynamicMap.end());
 		rigidStaticMap.emplace(mesh->GetUID(), rigidStatic);
 		break;
 	}
@@ -220,6 +222,7 @@ void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh)
 		rigidDynamic->userData = mesh;
 		rigidDynamic->attachShape(*box);
 		scene->addActor(*rigidDynamic);
+		assert(rigidStaticMap.find(mesh->GetUID()) == rigidStaticMap.end());
 		rigidDynamicMap.emplace(mesh->GetUID(), rigidDynamic);
 		break;
 	}
