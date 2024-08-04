@@ -83,7 +83,7 @@ public:
 	void SetPhysicsStatic(bool value) { isPhysicsStatic = value; }
 	bool IsPhysicsStatic() const { return isPhysicsStatic; }
 
-	void ReCreateAsPhysicsActor();
+	void ReCreateAsPhysicsActor(bool newPhysicsStaticValue);
 	void AddForce(XMVECTOR direction);
 
 public:

@@ -303,9 +303,12 @@ bool MeshComponent::IntersectsWithAnyBoundingBoxInWorld()
 	return false;
 }
 
-void MeshComponent::ReCreateAsPhysicsActor()
+void MeshComponent::ReCreateAsPhysicsActor(bool newPhysicsStaticValue)
 {
 	PhysicsSystem::ReleasePhysicsActor(this);
+	//Because recreated physics meshes can potentially swap over from dynamic to static Physx mappings,
+	//keep this set here and make sure there are no preceding sets before releasing the physics actor.
+	SetPhysicsStatic(newPhysicsStaticValue);
 	PhysicsSystem::CreatePhysicsActor(this);
 }
 
