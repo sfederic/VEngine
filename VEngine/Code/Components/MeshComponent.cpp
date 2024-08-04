@@ -308,3 +308,8 @@ void MeshComponent::ReCreateAsPhysicsActor()
 	PhysicsSystem::ReleasePhysicsActor(this);
 	PhysicsSystem::CreatePhysicsActor(this);
 }
+
+void MeshComponent::AddForce(XMVECTOR direction)
+{
+	PhysicsSystem::AddForceToMesh(this, direction);
+}

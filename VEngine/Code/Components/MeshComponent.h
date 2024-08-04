@@ -84,6 +84,7 @@ public:
 	bool IsPhysicsStatic() const { return isPhysicsStatic; }
 
 	void ReCreateAsPhysicsActor();
+	void AddForce(XMVECTOR direction);
 
 public:
 	MeshComponentData meshComponentData;
