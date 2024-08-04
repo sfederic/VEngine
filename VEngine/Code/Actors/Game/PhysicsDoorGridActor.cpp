@@ -2,6 +2,8 @@
 #include "PhysicsDoorGridActor.h"
 #include "Components/MeshComponent.h"
 #include "Actors/Game/Player.h"
+#include "Actors/Game/Grid.h"
+#include "Physics/HitResult.h"
 
 void PhysicsDoorGridActor::Create()
 {
@@ -34,5 +36,8 @@ void PhysicsDoorGridActor::OnLinkMove()
 		}
 
 		Player::system.GetOnlyActor()->ResetLinkedGridActor();
+
+		HitResult hit(this);
+		Grid::system.GetOnlyActor()->RecalcAllNodes(hit, true);
 	}
 }
