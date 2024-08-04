@@ -41,7 +41,7 @@ namespace PhysicsSystem
 	void Reset();
 	void ReleasePhysicsActor(MeshComponent* mesh);
 	std::vector<PxRigidActor*> GetRigidActors();
-	void CreatePhysicsActor(MeshComponent* mesh, PhysicsType type);
+	void CreatePhysicsActor(MeshComponent* mesh);
 	void CreatePhysicsForDestructibleMesh(DestructibleMeshComponent* mesh, Actor* actor);
 	void CreateCharacterController(CharacterControllerComponent* characterControllerComponent);
 	void CreateConvexPhysicsMesh(MeshComponent* mesh, Actor* actor);

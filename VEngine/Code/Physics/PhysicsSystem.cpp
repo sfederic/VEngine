@@ -88,9 +88,6 @@ void PhysicsSystem::Start()
 			}
 			else if (mesh && !mesh->skipPhysicsCreation)
 			{
-				PhysicsType physicsType;
-				mesh->IsPhysicsStatic() ? physicsType = PhysicsType::Static : physicsType = PhysicsType::Dynamic;
-
 				if (mesh->UsesCollisonMesh())
 				{
 					const std::string collisionMeshFilename = mesh->GetCollisionMeshFilename();
@@ -98,7 +95,7 @@ void PhysicsSystem::Start()
 				}
 				else
 				{
-					PhysicsSystem::CreatePhysicsActor(mesh, physicsType);
+					PhysicsSystem::CreatePhysicsActor(mesh);
 				}
 			}
 		}
@@ -157,7 +154,7 @@ void PhysicsSystem::ReleasePhysicsActor(MeshComponent* mesh)
 	rigidActorMap.erase(mesh->GetUID());
 }
 
-void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh, PhysicsType type)
+void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh)
 {
 	PxTransform pxTransform;
 	Transform transform;
@@ -165,7 +162,11 @@ void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh, PhysicsType type)
 	ActorToPhysxTransform(transform, pxTransform);
 
 	PxRigidActor* rigidActor = nullptr;
-	switch (type)
+
+	PhysicsType physicsType =
+		mesh->IsPhysicsStatic() ? physicsType = PhysicsType::Static : physicsType = PhysicsType::Dynamic;
+
+	switch (physicsType)
 	{
 	case PhysicsType::Static:
 		rigidActor = physics->createRigidStatic(pxTransform);
