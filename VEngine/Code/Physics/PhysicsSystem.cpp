@@ -354,6 +354,7 @@ void PhysicsSystem::SetTransformForPhysicsActor(MeshComponent* mesh)
 	rigidDynamic->setGlobalPose(transform);
 }
 
+//Todo: is adding force not working?
 void PhysicsSystem::AddForceToMesh(MeshComponent* mesh, XMVECTOR forceDirection)
 {
 	assert(!mesh->IsPhysicsStatic());
