@@ -150,6 +150,7 @@ void MeshComponent::SplitMeshCreate()
 	BoundingBox::CreateFromPoints(bb, meshDataProxy.vertices.size(),
 		&meshDataProxy.vertices.at(0).pos, sizeof(Vertex));
 
+	//This '255' I think is the limit on how many vertices PhysX can process for a convex mesh.
 	if (meshDataProxy.vertices.size() > 255)
 	{
 		PhysicsSystem::CreatePhysicsActor(this);
