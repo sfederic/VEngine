@@ -16,7 +16,6 @@ struct AssetBaseFolders
 	inline static const std::string audio = "Audio/";
 	inline static const std::string cutscene = "Cutscenes/";
 	inline static const std::string dialogue = "Dialogue/";
-	inline static const std::string journalEntry = "JournalEntries/";
 	inline static const std::string material = "Materials/";
 	inline static const std::string vertexColourData = "VertexColourData/";
 	inline static const std::string sequencerFiles = "SequencerFiles/";
