@@ -80,7 +80,7 @@ void PhysicsSystem::Start()
 			auto dMesh = dynamic_cast<DestructibleMeshComponent*>(mesh);
 			if (dMesh)
 			{
-				PhysicsSystem::CreatePhysicsForDestructibleMesh(dMesh, actor);
+				PhysicsSystem::CreatePhysicsForDestructibleMesh(dMesh);
 
 				for (auto cell : dMesh->meshCells)
 				{
@@ -229,11 +229,11 @@ void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh)
 	}
 }
 
-void PhysicsSystem::CreatePhysicsForDestructibleMesh(DestructibleMeshComponent* mesh, Actor* actor)
+void PhysicsSystem::CreatePhysicsForDestructibleMesh(DestructibleMeshComponent* mesh)
 {
 	for (auto cell : mesh->meshCells)
 	{
-		CreateConvexPhysicsMesh(cell, actor);
+		CreateConvexPhysicsMesh(cell);
 	}
 }
 
@@ -261,9 +261,40 @@ void PhysicsSystem::CreateCharacterController(CharacterControllerComponent* char
 	characterControllerComponent->SetController(controller);
 }
 
-//@Todo: replace with physx 5.3 cooking code
-void PhysicsSystem::CreateConvexPhysicsMesh(MeshComponent* mesh, Actor* actor)
+//Todo: Convex physics bodies don't collide with anything. PhysX mesh is probably wrong. Use their debugger to check out.
+//Also there's no split here between rigid and dynamic bodies. Fix that too once the above is fixed.
+void PhysicsSystem::CreateConvexPhysicsMesh(MeshComponent* mesh)
 {
+	PxConvexMeshDesc convexDesc;
+	convexDesc.points.count = mesh->meshDataProxy.GetVertices().size();
+	convexDesc.points.stride = sizeof(Vertex);
+	convexDesc.points.data = mesh->meshDataProxy.GetVertices().data();
+	convexDesc.flags = PxConvexFlag::eCOMPUTE_CONVEX |
+		PxConvexFlag::eDISABLE_MESH_VALIDATION | PxConvexFlag::eFAST_INERTIA_COMPUTATION;
+
+	PxTolerancesScale scale;
+	PxCookingParams params(scale);
+
+	PxDefaultMemoryOutputStream buf;
+	PxConvexMeshCookingResult::Enum result;
+	if (!PxCookConvexMesh(params, convexDesc, buf, &result))
+	{
+		throw new std::exception("no cooking");
+	}
+	PxDefaultMemoryInputData input(buf.getData(), buf.getSize());
+	PxConvexMesh* convexMesh = physics->createConvexMesh(input);
+
+	Transform transform;
+	transform.Decompose(mesh->GetWorldMatrix());
+	PxTransform pxTransform;
+	ActorToPhysxTransform(transform, pxTransform);
+
+	PxRigidDynamic* aConvexActor = physics->createRigidDynamic(pxTransform);
+	auto geom = PxConvexMeshGeometry(convexMesh);
+	PxRigidActorExt::createExclusiveShape(*aConvexActor, geom, *material);
+	scene->addActor(*aConvexActor);
+
+	rigidDynamicMap.emplace(mesh->GetUID(), aConvexActor);
 }
 
 void PhysicsSystem::CreateConvexPhysicsMeshFromCollisionMesh(MeshComponent* mesh,
@@ -280,7 +311,7 @@ void PhysicsSystem::CreateConvexPhysicsMeshFromCollisionMesh(MeshComponent* mesh
 	collisionMesh->meshDataProxy = AssetSystem::ReadVMeshAssetFromFile(filename);
 	collisionMesh->CreateVertexBuffer();
 
-	CreateConvexPhysicsMesh(collisionMesh, actor);
+	CreateConvexPhysicsMesh(collisionMesh);
 
 	assert(physicsMeshes.find(mesh->GetUID()) == physicsMeshes.end());
 	physicsMeshes.emplace(collisionMesh->GetUID(), collisionMesh);

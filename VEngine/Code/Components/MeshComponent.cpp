@@ -156,7 +156,7 @@ void MeshComponent::SplitMeshCreate()
 	}
 	else
 	{
-		PhysicsSystem::CreateConvexPhysicsMesh(this, GetOwner());
+		PhysicsSystem::CreateConvexPhysicsMesh(this);
 	}
 }
 

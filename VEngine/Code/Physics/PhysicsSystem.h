@@ -40,11 +40,10 @@ namespace PhysicsSystem
 	void Cleanup();
 	void Reset();
 	void ReleasePhysicsActor(MeshComponent* mesh);
-	std::vector<PxRigidActor*> GetRigidActors();
 	void CreatePhysicsActor(MeshComponent* mesh);
-	void CreatePhysicsForDestructibleMesh(DestructibleMeshComponent* mesh, Actor* actor);
+	void CreatePhysicsForDestructibleMesh(DestructibleMeshComponent* mesh);
 	void CreateCharacterController(CharacterControllerComponent* characterControllerComponent);
-	void CreateConvexPhysicsMesh(MeshComponent* mesh, Actor* actor);
+	void CreateConvexPhysicsMesh(MeshComponent* mesh);
 
 	//"Collision mesh" meaning a rough bounds mesh made in DCC tool. Pass in the mesh you want to 
 	//attach the physics actor to, with the filename being the collision mesh.
