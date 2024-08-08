@@ -183,7 +183,8 @@ VEngine uses DirectX 11 for 3D/2D rendering and DirectWrite + Direct2D for in-ga
 
 ### FBX Importing
 
-VEngine uses the official FBX SDK to import models and animations. While not very robust, details can be gleamed in https://github.com/sfederic/VEngine/blob/7259295eb490466392d2f999852f023e92c7182a/VEngine/Code/Asset/FBXLoader.cpp
+VEngine uses the official FBX SDK to import models and animations. While not very robust, details can be gleamed at
+* https://github.com/sfederic/VEngine/blob/7259295eb490466392d2f999852f023e92c7182a/VEngine/Code/Asset/FBXLoader.cpp
 
 ### Game UI
 
@@ -204,17 +205,18 @@ struct EnemyText : Widget
 
 ### Physically Based Shading
 
-While not a huge component of the engine, the implementations were taken from EA's Frostbite engine [https://www.ea.com/frostbite/news/moving-frostbite-to-pb].
+Implementations were inspired by EA's Frostbite engine.
+* https://www.ea.com/frostbite/news/moving-frostbite-to-pb
 
 ### Global Illumination
 
-VEngine uses a very simple Global Illumination technique using light probes spread around a level uniformly. Leveraging the DirectXSH spherical harmonics library (good reference for DirectX 11 [https://interplayoflight.wordpress.com/2021/12/31/occlusion-and-directionality-in-image-based-lighting-implementation-details/]), each probe takes a cubemap snapshot of its surroundings an encodes it using spherical harmonics. Actors then just find their closest probe and apply its colours per vertex normal.
+VEngine uses a simple Global Illumination technique using light probes spread around a level uniformly. Leveraging the DirectXSH spherical harmonics library, each probe takes a cubemap snapshot of its surroundings an encodes it using spherical harmonics. Static meshes are assigned an index into the light probe map built up, while dynamic meshes find their closest probe and apply its colours per vertex normal.
 
-References for this system were mainly taken from Bluepoint's Shadow of the Colossus [https://gdcvault.com/play/1027011/Advanced-Graphics-Summit-Lifting-the] and Sonic Unleashed [https://www.gdcvault.com/play/1428/Global-Illumination-in-SONIC].
+References for this system were mainly taken from Bluepoint's Shadow of the Colossus and Sonic Unleashed. 
+* https://gdcvault.com/play/1027011/Advanced-Graphics-Summit-Lifting-the
+* https://www.gdcvault.com/play/1428/Global-Illumination-in-SONIC
 
 ### Skeletal Animation (FBX) with Blender Workflow
-
-- Nice tutorial on the general gist of multiple animations from Blender to Unity [https://www.zuluonezero.net/2021/11/16/exporting-multiple-animations-from-blender-to-unity/]
 
 To import skeletal .fbx animations via Blender:
 
@@ -303,6 +305,7 @@ Below is a collection of the most influential articles, tutorials, talks and con
 ### Animation 
 
 - https://blog.demofox.org/2012/09/21/anatomy-of-a-skeletal-animation-system-part-1/
+- https://www.zuluonezero.net/2021/11/16/exporting-multiple-animations-from-blender-to-unity/
 
 ### Mesh Slicing
 
