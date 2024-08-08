@@ -1,7 +1,5 @@
 # VEngine
 
-_Note that this repository isn't for general use, it's more of an open source snapshot of an intermediate engine being developed alongside a game. Feel free to go through and take snippets of code and apply them to your own projects._
-
 ![image](https://github.com/sfederic/Engine/assets/45758254/ae28fc21-0288-45ae-bd82-1c61020f7221)
 
 ## Build/Usage Notes
@@ -39,9 +37,9 @@ DirectXTK (directxtk_desktop_win10) ver. 2021.8.2.1 - https://github.com/microso
 
 ## Overview
 
-As this engine is more of a learning project for onlookers and myself, the techincal outset of the engine was to keep it simple and mostly in C++ with minimal use of other programming languages; that means usage of the C++ standard library and attempted usage of modern C++ concepts.
+The techincal outset of the engine was to keep it simple and mostly in C++ with minimal use of other programming languages. That means usage of the C++ standard library and attempted usage of modern C++ concepts.
 
-Below is a quick outline of various concepts the engine uses.
+Below is a quick outline of various concepts the engine uses, from game object component models, rendering and asset workflows.
 
 ## Game Object Model
 
