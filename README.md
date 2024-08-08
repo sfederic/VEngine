@@ -47,8 +47,6 @@ Below is a quick outline of various concepts the engine uses, from game object c
 
 The engine uses an Actor/Component model similar to Unity and Unreal. The inspiration came from Rare's presentation on Actor Ticks in UE4 in Sea of Thieves [https://www.youtube.com/watch?v=CBP5bpwkO54].
 
-(A good starting reference on Game Object Models https://www.youtube.com/watch?v=jjEsB611kxs)
-
 An inherited actor will be defined with a system via a macro.
 
 ```cpp
