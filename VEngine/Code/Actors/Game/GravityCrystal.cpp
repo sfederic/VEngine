@@ -84,3 +84,10 @@ void GravityCrystal::Tick(float deltaTime)
 		}
 	}
 }
+
+Properties GravityCrystal::GetProps()
+{
+	auto props = __super::GetProps();
+	props.title = GetTypeName();
+	return props;
+}
