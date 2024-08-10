@@ -5,6 +5,7 @@
 class BoxTriggerComponent;
 class MeshComponent;
 
+//Todo: This is a bit of a weird grid actor. Potential for a lot of in-game bugs, think about deleting it.
 class GravityCrystal : public GridActor
 {
 public:
@@ -13,6 +14,7 @@ public:
 	GravityCrystal();
 	void Create() override;
 	void Tick(float deltaTime);
+	Properties GetProps() override;
 
 private:
 	std::set<GridActor*> previouslyContainedActors;
