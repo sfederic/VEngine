@@ -118,6 +118,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Code\Actors\Game\BombRock.cpp" />
     <ClCompile Include="Code\Editor\Sequencer\ActiveCameraLerpToOffsetPosition.cpp" />
     <ClCompile Include="Code\Editor\Sequencer\CameraSequenceEntryData.cpp" />
     <ClCompile Include="Code\Actors\Game\BloomSeedSoil.cpp" />
@@ -375,6 +376,7 @@
     <ClCompile Include="Code\Actors\Game\QuickDialogueTrigger.cpp" />
     <ClCompile Include="Code\Actors\Game\CorkscrewLift.cpp" />
     <ClCompile Include="Code\Actors\Game\PhysicsDoorGridActor.cpp" />
+    <ClInclude Include="Code\Actors\Game\BombRock.h" />
     <ClInclude Include="Code\Editor\Sequencer\ActiveCameraLerpToOffsetPosition.h" />
     <ClInclude Include="Code\Editor\Sequencer\CameraSequenceEntryData.h" />
     <ClInclude Include="Code\Actors\Game\BloomSeedSoil.h" />
