@@ -4,16 +4,15 @@
 #include <string>
 #include "Win32Keys.h"
 
-//Input has the differentiation of "system" and "gameplay" keys. System means it's coming from the OS' Win32 handling
-//directly, and Gameplay meaning from GameInput's API, primarily used during gameplay. System key input would be 
-//used more for text editing and the like.
+//Todo: Input has the differentiation of "system" and "gameplay" keys. System means it's coming from the OS' Win32 handling
+//directly. There are calls to use "gameplay" keys in Input, but it's still using Win32 for now, previously was using
+//GameInput, Microsoft's package. Keep an eye on the state of that package, or maybe use SDL2 or something for 
+//controller input later down the line.
 
 namespace Input
 {
 	void Init();
 	void Reset();
-
-	void PollInput();
 
 	//Used for when Qt or ImGui might take away input WndProc focus from the program with a QtDialog for example,
 	//meaning that hotkeys to access such dialogs will be stuck as held as held keys aren't cleared every frame.
@@ -33,9 +32,6 @@ namespace Input
 	bool GetSystemKeyHeld(Keys key);
 	std::unordered_set<Keys> GetAllPressedSystemKeys();
 	std::unordered_set<Keys> GetAllReleasedSystemKeys();
-
-	void SetKeyDown(Keys key);
-	void SetKeyUp(Keys key);
 
 	bool GetKeyDown(std::string keyMapping);
 	bool GetKeyUp(std::string keyMapping);
@@ -61,10 +57,4 @@ namespace Input
 	bool GetMouseRightDown();
 	bool GetMouseMiddleUp();
 	bool GetMouseMiddleDown();
-
-	size_t GetNumCurrentKeysDown();
-	size_t GetNumCurrentKeysUp();
-
-	std::unordered_set<Keys> GetAllDownKeys();
-	std::unordered_set<Keys> GetAllUpKeys();
 }

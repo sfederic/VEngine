@@ -1,22 +1,6 @@
 #include "vpch.h"
 #include "Input.h"
-#include <GameInput.h>
 #include "Core/Debug.h"
-
-//Todo: maybe think about getting rid of GameInput. It always loses keyboard and mouse focus when you
-//minimize the window or do other things. Very sporadic.
-
-IGameInput* gGameInput;
-IGameInputDevice* gGamepad;
-
-std::vector<GameInputKeyState> gPreviousFrameKeyState;
-
-IGameInputReading* keyboardInputReading;
-IGameInputReading* mouseInputReading;
-
-std::unordered_set<Keys> currentHeldKeys;
-std::unordered_set<Keys> currentDownKeys;
-std::unordered_set<Keys> currentUpKeys;
 
 std::unordered_set<Keys> pressedSystemKeys;
 std::unordered_set<Keys> releasedSystemKeys;
@@ -35,27 +19,17 @@ bool mouseMiddleDown;
 
 bool blockInput;
 
-void PollKeyboardInput();
 void InitKeyMap();
 
 namespace Input
 {
-	void PollInput()
-	{
-		PollKeyboardInput();
-	}
-
 	void Init()
 	{
-		HR(GameInputCreate(&gGameInput));
 		InitKeyMap();
 	}
 
 	void Reset()
 	{
-		currentUpKeys.clear();
-		currentDownKeys.clear();
-
 		pressedSystemKeys.clear();
 		releasedSystemKeys.clear();
 
@@ -68,7 +42,6 @@ namespace Input
 
 	void ResetHeldKeys()
 	{
-		currentHeldKeys.clear();
 		heldSystemKeys.clear();
 	}
 
@@ -139,26 +112,12 @@ namespace Input
 		return releasedSystemKeys;
 	}
 
-	void SetKeyDown(Keys key)
-	{
-		currentDownKeys.insert(key);
-		currentHeldKeys.insert(key);
-		currentUpKeys.erase(key);
-	}
-
-	void SetKeyUp(Keys key)
-	{
-		currentUpKeys.insert(key);
-		currentDownKeys.erase(key);
-		currentHeldKeys.erase(key);
-	}
-
 	bool GetKeyDown(std::string keyMapping)
 	{
 		auto mappingIt = keyMap.find(keyMapping);
 		if (mappingIt != keyMap.end())
 		{
-			if (currentDownKeys.contains(mappingIt->second))
+			if (pressedSystemKeys.contains(mappingIt->second))
 			{
 				return true;
 			}
@@ -171,7 +130,7 @@ namespace Input
 		auto mappingIt = keyMap.find(keyMapping);
 		if (mappingIt != keyMap.end())
 		{
-			if (currentUpKeys.contains(mappingIt->second))
+			if (releasedSystemKeys.contains(mappingIt->second))
 			{
 				return true;
 			}
@@ -184,7 +143,7 @@ namespace Input
 		auto mappingIt = keyMap.find(keyMapping);
 		if (mappingIt != keyMap.end())
 		{
-			if (currentHeldKeys.contains(mappingIt->second))
+			if (heldSystemKeys.contains(mappingIt->second))
 			{
 				return true;
 			}
@@ -195,31 +154,31 @@ namespace Input
 	bool GetKeyDown(Keys key)
 	{
 		if (blockInput) return false;
-		return currentDownKeys.find(key) != currentDownKeys.end();
+		return pressedSystemKeys.find(key) != pressedSystemKeys.end();
 	}
 
 	bool GetKeyUp(Keys key)
 	{
 		if (blockInput) return false;
-		return currentUpKeys.find(key) != currentUpKeys.end();
+		return pressedSystemKeys.find(key) != pressedSystemKeys.end();
 	}
 
 	bool GetKeyHeld(Keys key)
 	{
 		if (blockInput) return false;
-		return currentHeldKeys.find(key) != currentHeldKeys.end();
+		return heldSystemKeys.find(key) != heldSystemKeys.end();
 	}
 
 	bool GetAnyKeyDown()
 	{
 		if (blockInput) return false;
-		return currentDownKeys.size();
+		return pressedSystemKeys.size();
 	}
 
 	bool GetAnyKeyUp()
 	{
 		if (blockInput) return false;
-		return currentUpKeys.size();
+		return releasedSystemKeys.size();
 	}
 
 	void SetLeftMouseDown()
@@ -293,59 +252,6 @@ namespace Input
 		if (blockInput) return false;
 		return mouseMiddleDown;
 	}
-
-	size_t GetNumCurrentKeysDown()
-	{
-		return currentDownKeys.size();
-	}
-
-	size_t GetNumCurrentKeysUp()
-	{
-		return currentUpKeys.size();
-	}
-
-	std::unordered_set<Keys> GetAllDownKeys()
-	{
-		return currentDownKeys;
-	}
-
-	std::unordered_set<Keys> GetAllUpKeys()
-	{
-		return currentUpKeys;
-	}
-}
-
-void PollKeyboardInput()
-{
-	const auto ScanCodeToVirtualKey = [](UINT scanCode) -> Keys
-		{
-			const UINT key = MapVirtualKeyA(scanCode, MAPVK_VSC_TO_VK);
-			return (Keys)key;
-		};
-
-	HR(gGameInput->GetCurrentReading(GameInputKindKeyboard, gGamepad, &keyboardInputReading));
-
-	const uint32_t keyCount = keyboardInputReading->GetKeyCount();
-	std::vector<GameInputKeyState> keyStates(keyCount);
-	keyboardInputReading->GetKeyState(keyCount, keyStates.data());
-
-	for (const auto& keyState : keyStates)
-	{
-		const Keys key = ScanCodeToVirtualKey(keyState.scanCode);
-		Input::SetKeyDown(key);
-	}
-
-	//Set key up if doesn't exist on current frame.
-	for (const auto& keyState : gPreviousFrameKeyState)
-	{
-		const auto key = ScanCodeToVirtualKey(keyState.scanCode);
-		if (!Input::GetKeyDown(key))
-		{
-			Input::SetKeyUp(key);
-		}
-	}
-
-	gPreviousFrameKeyState = keyStates;
 }
 
 void InitKeyMap()
