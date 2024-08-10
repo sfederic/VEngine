@@ -8,6 +8,6 @@ class Crushable : public GridActor
 public:
 	ACTOR_SYSTEM(Crushable);
 
-	void Crushed();
+	virtual void Crushed();
 	void Attacked() override;
 };

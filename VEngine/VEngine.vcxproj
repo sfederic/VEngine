@@ -376,6 +376,7 @@
     <ClCompile Include="Code\Actors\Game\QuickDialogueTrigger.cpp" />
     <ClCompile Include="Code\Actors\Game\CorkscrewLift.cpp" />
     <ClCompile Include="Code\Actors\Game\PhysicsDoorGridActor.cpp" />
+    <ClCompile Include="Code\Actors\Game\OrientedCrushable.cpp" />
     <ClInclude Include="Code\Actors\Game\BombRock.h" />
     <ClInclude Include="Code\Editor\Sequencer\ActiveCameraLerpToOffsetPosition.h" />
     <ClInclude Include="Code\Editor\Sequencer\CameraSequenceEntryData.h" />
@@ -786,6 +787,7 @@
     <ClInclude Include="Code\Actors\Game\QuickDialogueTrigger.h" />
     <ClInclude Include="Code\Actors\Game\CorkscrewLift.h" />
     <ClInclude Include="Code\Actors\Game\PhysicsDoorGridActor.h" />
+    <ClInclude Include="Code\Actors\Game\OrientedCrushable.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
