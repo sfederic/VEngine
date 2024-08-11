@@ -333,6 +333,7 @@ void FileSystem::LoadWorld(std::string worldName)
 
 	WorldFunctions::CallWorldStartFunction(World::worldFilename);
 
+	Profile::Reset();
 	debugMenu.AddNotification(VString::wformat(L"%S world loaded", World::worldFilename.c_str()));
 
 	double endTime = Profile::QuickEnd(startTime);
