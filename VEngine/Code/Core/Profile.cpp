@@ -4,15 +4,6 @@
 
 std::unordered_map<std::string, TimeFrame> Profile::timeFrames;
 
-TimeFrame::TimeFrame()
-{
-}
-
-TimeFrame::TimeFrame(__int64 _startTime)
-{
-	startTime = _startTime;
-}
-
 void TimeFrame::SetElapsedTime()
 {
 	__int64 cpuFreq = 0;
@@ -33,7 +24,7 @@ void TimeFrame::SetElapsedTime()
 	startTime = 0;
 }
 
-double TimeFrame::GetAverageTime()
+double TimeFrame::GetAverageTime() const
 {
 	double averageTime = 0.0;
 
@@ -42,8 +33,7 @@ double TimeFrame::GetAverageTime()
 		averageTime += elapsedTimes[i];
 	}
 
-	double retVal = averageTime / (double)maxSampleSize;
-	return retVal;
+	return averageTime / (double)maxSampleSize;
 }
 
 void Profile::Reset()
@@ -77,8 +67,7 @@ double Profile::QuickEnd(__int64 startTime)
 	QueryPerformanceFrequency((LARGE_INTEGER*)&cpuFreq);
 	double ticks = 1.0 / (double)cpuFreq;
 
-	double elapsedTime = ticks * double(endTime - startTime);
-	return elapsedTime;
+	return ticks * double(endTime - startTime);
 }
 
 void Profile::Start(std::source_location location)

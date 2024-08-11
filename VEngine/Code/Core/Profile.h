@@ -10,13 +10,13 @@ struct TimeFrame
 	__int64 startTime = 0;
 	__int64 endTime = 0;
 
-	double elapsedTimes[maxSampleSize] {};
+	double elapsedTimes[maxSampleSize]{};
 	int currentElapsedTimeIndex = 0;
-	
-	TimeFrame();
-	TimeFrame(__int64 _startTime);
+
+	TimeFrame() {}
+	TimeFrame(__int64 _startTime) : startTime(_startTime) {}
 	void SetElapsedTime();
-	double GetAverageTime();
+	double GetAverageTime() const;
 };
 
 namespace Profile
