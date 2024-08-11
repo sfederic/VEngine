@@ -802,7 +802,7 @@ void DebugMenu::RenderProfileMenu()
 
 		//Sort TimeFrames in order of average time
 		std::map<double, std::string> averageTimes;
-		for (auto& [functionName, timeFrame] : Profile::timeFrames)
+		for (auto& [functionName, timeFrame] : Profile::GetTimeFrames())
 		{
 			averageTimes.emplace(timeFrame.GetAverageTime(), functionName);
 		}

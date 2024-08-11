@@ -22,7 +22,7 @@ struct TimeFrame
 
 namespace Profile
 {
-	extern std::unordered_map<std::string, TimeFrame> timeFrames;
+	std::unordered_map<std::string, TimeFrame> GetTimeFrames();
 
 	void Start(std::source_location location = std::source_location::current());
 	void Start(std::string funcName);

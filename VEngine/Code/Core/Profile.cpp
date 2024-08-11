@@ -2,7 +2,7 @@
 #include "Profile.h"
 #include <source_location>
 
-std::unordered_map<std::string, TimeFrame> Profile::timeFrames;
+std::unordered_map<std::string, TimeFrame> timeFrames;
 
 void TimeFrame::SetElapsedTime()
 {
@@ -68,6 +68,11 @@ double Profile::QuickEnd(__int64 startTime)
 	double ticks = 1.0 / (double)cpuFreq;
 
 	return ticks * double(endTime - startTime);
+}
+
+std::unordered_map<std::string, TimeFrame> Profile::GetTimeFrames()
+{
+	return timeFrames;
 }
 
 void Profile::Start(std::source_location location)
