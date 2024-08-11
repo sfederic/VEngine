@@ -304,9 +304,6 @@ void Console::InputTick()
 
 void Console::ExecuteString()
 {
-	//Get rid of the return carrige character
-	consoleString.pop_back();
-
 	auto executeIt = executeMap.find(consoleString);
 	if (executeIt != executeMap.end())
 	{
