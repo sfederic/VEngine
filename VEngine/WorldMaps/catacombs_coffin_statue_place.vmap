@@ -1,9 +1,224 @@
+OrientationLock
+3
+ Enabled
+1
+ Position
+5 0 5
+ Rotation
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Audio LinkMove
+cloth_heavy.wav
+Audio LinkRotate
+chainmail1.wav
+BigGridActor
+0
+Can Fall
+1
+Destruct
+1
+Dir Forward
+0 0 0
+Dir Right
+0 0 0
+Dir Up
+0 0 0
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Linked GridActor
+
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+MoveOnlyXAxis
+0
+MoveOnlyZAxis
+0
+Name
+OrientationLock1451968903
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Roll
+0
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+3287251589
+next
+ Enabled
+1
+ Position
+2 0 1
+ Rotation
+0.707107 0.707107 -2.03255e-08 2.00199e-07
+ Scale
+0.999986 0.99999 0.999984
+ Visible
+1
+Audio LinkMove
+cloth_heavy.wav
+Audio LinkRotate
+chainmail1.wav
+BigGridActor
+0
+Can Fall
+1
+Destruct
+1
+Dir Forward
+0 0 1
+Dir Right
+0 0 0
+Dir Up
+0 0 0
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Linked GridActor
+
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+MoveOnlyXAxis
+0
+MoveOnlyZAxis
+0
+Name
+OrientationLock2385997592
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Roll
+0
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+1086886383
+next
+ Enabled
+1
+ Position
+6 0 7
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Audio LinkMove
+cloth_heavy.wav
+Audio LinkRotate
+chainmail1.wav
+BigGridActor
+0
+Can Fall
+1
+Destruct
+1
+Dir Forward
+0 0 0
+Dir Right
+0 0 0
+Dir Up
+0 0 0
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Linked GridActor
+
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+MoveOnlyXAxis
+0
+MoveOnlyZAxis
+0
+Name
+OrientationLock2
+Obstacle
+1
+Rotate Pitch
+1
+Rotate Roll
+0
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+1887401138
+next
 Player
 1
  Enabled
 1
  Position
-5 1.90735e-06 0
+4 0.15 2
  Rotation
 0 5.06639e-07 0 -0.999999
  Scale
@@ -36,27 +251,8 @@ Size Y
 UID
 3892693589
 next
-DebugNoteActor
-1
- Enabled
-1
- Position
-4 -0 6
- Rotation
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Name
-DebugNoteActor0
-Note Text
-
-UID
-6792413
-next
 MeshActor
-41
+42
  Enabled
 1
  Position
@@ -645,41 +841,56 @@ next
  Enabled
 1
  Position
-6 0 6
+2.5 0.5 2
  Rotation
 -0 0 -0 1
  Scale
-1 1 1
+0.5 0.5 0.5
  Visible
 1
 Name
-statue_orientation39
+MeshActor39
 UID
-372924573
+2563015747
 next
  Enabled
 1
  Position
-4 0 4
+2.5 0.5 4
  Rotation
--0 0 -0 1
+0 0.707107 0 -0.707107
  Scale
-1 1 1
+0.499999 0.5 0.499999
  Visible
 1
 Name
-statue_orientation40
+MeshActor40
 UID
-1687002292
+825277634
+next
+ Enabled
+1
+ Position
+7.5 0.5 6
+ Rotation
+-0 0.707107 -0 0.707107
+ Scale
+0.499995 0.5 0.499995
+ Visible
+1
+Name
+MeshActor41
+UID
+2385338056
 next
 DirectionalLightActor
 1
  Enabled
 1
  Position
-10 1 11
+5 4 5
  Rotation
--0 0 -0 1
+0.35364 0.353467 -0.146238 0.853589
  Scale
 1 1 1
  Visible
@@ -712,8 +923,462 @@ Size Z
 UID
 4228273257
 next
+OrientationTrigger
+3
+ Enabled
+1
+ Position
+4 0 2
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+OrientationTrigger2
+UID
+1658607527
+next
+ Enabled
+1
+ Position
+4 0 4
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+OrientationTrigger1
+UID
+2363900061
+next
+ Enabled
+1
+ Position
+6 0 6
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Name
+OrientationTrigger1447122455
+UID
+1020780019
+next
+CameraComponent
+1
+1501178535
+Camera
+ Enabled
+1
+ Pos
+1.75 1.75 -2.75
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+FOV
+60
+Far Z
+1000
+Near Z
+0.01
+UID
+1818006893
+next
+BoxTriggerComponent
+3
+1658607527
+BoxTrigger
+ Enabled
+1
+ Pos
+4 0 2
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+1795249467
+next
+2363900061
+BoxTrigger
+ Enabled
+1
+ Pos
+4 0 4
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+196405619
+next
+1020780019
+BoxTrigger
+ Enabled
+1
+ Pos
+6 0 6
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Extents
+0.45 0.45 0.45
+Offset
+0 0 0
+UID
+1623965228
+next
 MeshComponent
-42
+47
+3287251589
+Mesh
+ Enabled
+1
+ Pos
+5 0 5
+ Rot
+0 0 0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_AudioType
+Default
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+statue_orientation.vmesh
+Physics Static
+1
+Player Traversable
+1
+Render Static
+0
+Sort Last
+0
+Trans. Occlude
+0
+UID
+1660795310
+next
+1086886383
+Mesh
+ Enabled
+1
+ Pos
+2 0 1
+ Rot
+0.707107 0.707107 -2.03255e-08 2.00199e-07
+ Scale
+0.999986 0.99999 0.999984
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_AudioType
+Default
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+statue_orientation.vmesh
+Physics Static
+1
+Player Traversable
+1
+Render Static
+0
+Sort Last
+0
+Trans. Occlude
+0
+UID
+3526923064
+next
+1887401138
+Mesh
+ Enabled
+1
+ Pos
+6 0 7
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_AudioType
+Default
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+statue_orientation.vmesh
+Physics Static
+1
+Player Traversable
+1
+Render Static
+0
+Sort Last
+0
+Trans. Occlude
+0
+UID
+2773468517
+next
+1501178535
+Mesh
+ Enabled
+1
+ Pos
+0 0 0
+ Rot
+0 -0.707108 0 0.707108
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_AudioType
+Default
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+char.vmesh
+Physics Static
+1
+Player Traversable
+1
+Render Static
+0
+Sort Last
+0
+Trans. Occlude
+0
+UID
+3358872652
+next
+1501178535
+LinkEffectMesh
+ Enabled
+1
+ Pos
+5 0 5
+ Rot
+0 0 0 1
+ Scale
+1.05 1.05 1.05
+ Visible
+1
+Casts Shadow
+0
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 0
+M_AudioType
+Default
+M_Blend State
+transparent
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+DefaultClip
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+UI/spellbinding_circle.png
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0.0938526 0.0625684
+M_UvOffsetSpeed
+0.075 0.05
+M_UvRotation
+3.35
+M_UvRotationSpeed
+0.05
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+Physics Static
+1
+Player Traversable
+1
+Render Static
+1
+Sort Last
+0
+Trans. Occlude
+0
+UID
+157824319
+next
 3120072159
 Mesh
  Enabled
@@ -734,6 +1399,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -748,6 +1415,8 @@ M_Specular
 1 1 1 1
 M_Texture
 Floors/floor_cellar.jpg
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -764,8 +1433,12 @@ Mesh
 grid.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
@@ -791,6 +1464,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -805,6 +1480,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -821,8 +1498,12 @@ Mesh
 coffin_1.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
@@ -848,6 +1529,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -862,6 +1545,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -878,8 +1563,12 @@ Mesh
 coffin_1.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
@@ -905,6 +1594,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -919,6 +1610,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -935,8 +1628,12 @@ Mesh
 coffin_2.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
@@ -962,6 +1659,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -976,6 +1675,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -992,8 +1693,12 @@ Mesh
 coffin_1.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
@@ -1019,6 +1724,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1033,6 +1740,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1049,8 +1758,12 @@ Mesh
 coffin_2.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
@@ -1076,6 +1789,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1090,6 +1805,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1106,8 +1823,12 @@ Mesh
 coffin_1.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
@@ -1133,6 +1854,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1147,6 +1870,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1163,8 +1888,12 @@ Mesh
 cube.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
@@ -1190,6 +1919,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1204,6 +1935,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1220,8 +1953,12 @@ Mesh
 cube.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
@@ -1247,6 +1984,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1261,6 +2000,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1277,8 +2018,12 @@ Mesh
 cube.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
@@ -1304,6 +2049,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1318,6 +2065,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1334,8 +2083,12 @@ Mesh
 cube.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
@@ -1361,6 +2114,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1375,6 +2130,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1391,8 +2148,12 @@ Mesh
 cube.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
@@ -1418,6 +2179,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1432,6 +2195,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1448,8 +2213,12 @@ Mesh
 cube.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
@@ -1475,6 +2244,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1489,6 +2260,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1505,8 +2278,12 @@ Mesh
 cube.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
@@ -1532,6 +2309,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1546,6 +2325,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1562,8 +2343,12 @@ Mesh
 cube.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
@@ -1589,6 +2374,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1603,6 +2390,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1619,8 +2408,12 @@ Mesh
 cube.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
@@ -1646,6 +2439,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1660,6 +2455,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1676,8 +2473,12 @@ Mesh
 cube.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
@@ -1703,6 +2504,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1717,6 +2520,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1733,8 +2538,12 @@ Mesh
 cube.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
@@ -1760,6 +2569,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1774,6 +2585,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1790,8 +2603,12 @@ Mesh
 cube.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
@@ -1817,6 +2634,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1831,6 +2650,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1847,8 +2668,12 @@ Mesh
 cube.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
@@ -1874,6 +2699,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1888,6 +2715,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1904,8 +2733,12 @@ Mesh
 cube.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
@@ -1931,6 +2764,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -1945,6 +2780,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -1961,8 +2798,12 @@ Mesh
 cube.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
@@ -1988,6 +2829,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -2002,6 +2845,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -2018,8 +2863,12 @@ Mesh
 cube.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
@@ -2045,6 +2894,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -2059,6 +2910,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -2075,8 +2928,12 @@ Mesh
 cube.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
@@ -2102,6 +2959,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -2116,6 +2975,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -2132,8 +2993,12 @@ Mesh
 cube.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
@@ -2159,6 +3024,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -2173,6 +3040,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -2189,8 +3058,12 @@ Mesh
 cube.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
@@ -2216,6 +3089,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -2230,6 +3105,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -2246,8 +3123,12 @@ Mesh
 cube.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
@@ -2273,6 +3154,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -2287,6 +3170,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -2303,8 +3188,12 @@ Mesh
 cube.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
@@ -2330,6 +3219,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -2344,6 +3235,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -2360,8 +3253,12 @@ Mesh
 cube.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
@@ -2387,6 +3284,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -2401,6 +3300,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -2417,8 +3318,12 @@ Mesh
 cube.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
@@ -2444,6 +3349,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -2458,6 +3365,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -2474,8 +3383,12 @@ Mesh
 cube.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
@@ -2501,6 +3414,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -2515,6 +3430,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -2531,8 +3448,12 @@ Mesh
 cube.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
@@ -2558,6 +3479,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -2572,6 +3495,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -2588,8 +3513,12 @@ Mesh
 cube.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
@@ -2615,6 +3544,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -2629,6 +3560,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -2645,8 +3578,12 @@ Mesh
 cube.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
@@ -2672,6 +3609,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -2686,6 +3625,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -2702,8 +3643,12 @@ Mesh
 cube.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
@@ -2729,6 +3674,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -2743,6 +3690,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -2759,8 +3708,12 @@ Mesh
 cube.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
@@ -2786,6 +3739,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -2800,6 +3755,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -2816,8 +3773,12 @@ Mesh
 cube.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
@@ -2843,6 +3804,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -2857,6 +3820,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -2873,8 +3838,12 @@ Mesh
 cube.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
@@ -2900,6 +3869,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -2914,6 +3885,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -2930,23 +3903,27 @@ Mesh
 cube.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
 2655833792
 next
-372924573
+2563015747
 Mesh
  Enabled
 1
  Pos
-6 0 6
+2.5 0.5 2
  Rot
 -0 0 -0 1
  Scale
-1 1 1
+0.5 0.5 0.5
  Visible
 1
 Casts Shadow
@@ -2957,6 +3934,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -2971,6 +3950,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -2987,23 +3968,27 @@ Mesh
 statue_orientation.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
-1414096368
+1955070412
 next
-1687002292
+825277634
 Mesh
  Enabled
 1
  Pos
-4 0 4
+2.5 0.5 4
  Rot
--0 0 -0 1
+0 0.707107 0 -0.707107
  Scale
-1 1 1
+0.499999 0.5 0.499999
  Visible
 1
 Casts Shadow
@@ -3014,6 +3999,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -3028,6 +4015,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -3044,23 +4033,27 @@ Mesh
 statue_orientation.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
-3489282054
+4030988522
 next
-1501178535
+2385338056
 Mesh
  Enabled
 1
  Pos
-0 0 0
+7.5 0.5 6
  Rot
--0 5.96042e-08 0 -1
+-0 0.707107 -0 0.707107
  Scale
-1 1 1
+0.499995 0.5 0.499995
  Visible
 1
 Casts Shadow
@@ -3071,6 +4064,8 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
 default
 M_Metallic
@@ -3085,6 +4080,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -3098,18 +4095,55 @@ M_UvRotationSpeed
 M_UvScale
 1 1
 Mesh
-char.vmesh
+statue_orientation.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
+1
+Sort Last
 0
 Trans. Occlude
 0
 UID
-3358872652
+2931202969
 next
 DialogueComponent
+4
+3287251589
+Dialogue
+ Enabled
 1
+ Visible
+1
+File
+
+UID
+3157999440
+next
+1086886383
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+1435679896
+next
+1887401138
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+1678931638
+next
 1501178535
 Dialogue
  Enabled
@@ -3134,7 +4168,7 @@ NodeMesh
  Scale
 1 1 1
  Visible
-1
+0
 Casts Shadow
 1
 Grid Ignore
@@ -3143,8 +4177,10 @@ Grid Obst.
 0
 M_Ambient
 1 1 1 1
+M_AudioType
+Default
 M_Blend State
-default
+transparent
 M_Metallic
 0
 M_Rast State
@@ -3157,6 +4193,8 @@ M_Specular
 1 1 1 1
 M_Texture
 test.png
+M_Texture2
+
 M_Use Texture
 1
 M_UvOffset
@@ -3173,35 +4211,16 @@ Mesh
 node.vmesh
 Physics Static
 1
+Player Traversable
+1
 Render Static
 1
+Sort Last
+0
 Trans. Occlude
 0
 UID
 2745299492
-next
-CameraComponent
-1
-1501178535
-Camera
- Enabled
-1
- Pos
-1.75 1.75 -2.75
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-FOV
-60
-Far Z
-1000
-Near Z
-0.01
-UID
-1818006893
 next
 DirectionalLightComponent
 1
@@ -3210,38 +4229,42 @@ DirectionalLight
  Enabled
 1
  Pos
-10 1 11
+5 4 5
  Rot
--0 0 -0 1
+0.35364 0.353467 -0.146238 0.853589
  Scale
 1 1 1
  Visible
 1
 Colour
 1 1 1 1
+Global Ambient
+0.5 0.5 0.5 1
 Intensity
 1
 LightEnabled
+1
+Shadows Enabled
 1
 UID
 2199857469
 next
 EmptyComponent
-3
-6792413
+2
+1501178535
 Root
  Enabled
 1
  Pos
-4 -0 6
+4 0.15 2
  Rot
-0 0 0 1
+0 5.06639e-07 0 -0.999999
  Scale
 1 1 1
  Visible
 1
 UID
-2748358267
+3072851232
 next
 4228273257
 Root
@@ -3257,20 +4280,5 @@ Root
 1
 UID
 3686539085
-next
-1501178535
-Root
- Enabled
-1
- Pos
-5 1.90735e-06 0
- Rot
-0 5.06639e-07 0 -0.999999
- Scale
-1 1 1
- Visible
-1
-UID
-3072851232
 next
 end
