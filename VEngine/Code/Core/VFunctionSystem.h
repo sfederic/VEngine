@@ -8,6 +8,12 @@ private:
 	std::map<std::string, IFunction*> functionMap;
 
 public:
+	static auto& Get()
+	{
+		static VFunctionSystem instance;
+		return instance;
+	}
+
 	void AddFunction(std::string name, IFunction* func)
 	{
 		functionMap.insert(std::make_pair(name, func));
@@ -20,5 +26,3 @@ public:
 
 	std::vector<std::string> GetFunctionNames();
 };
-
-extern VFunctionSystem* functionSystem;
