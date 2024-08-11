@@ -807,6 +807,7 @@ void DebugMenu::RenderProfileMenu()
 			averageTimes.emplace(timeFrame.GetAverageTime(), functionName);
 		}
 
+		//Iterator instead of range loop here because we want highest times first.
 		for (auto averageTimesIt = averageTimes.rbegin(); averageTimesIt != averageTimes.rend(); averageTimesIt++)
 		{
 			ImGui::Text(averageTimesIt->second.c_str());
