@@ -7,10 +7,11 @@ struct TimeFrame
 {
 	const static int maxSampleSize = 60; //make this match the FPS of the program
 
+	double elapsedTimes[maxSampleSize]{};
+
 	__int64 startTime = 0;
 	__int64 endTime = 0;
 
-	double elapsedTimes[maxSampleSize]{};
 	int currentElapsedTimeIndex = 0;
 
 	TimeFrame() {}
