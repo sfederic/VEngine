@@ -156,6 +156,7 @@ void Core::EndGame()
 	SpriteSystem::Reset();
 	PhysicsSystem::Reset();
 	Timer::Cleanup();
+	Profile::Reset();
 
 	AudioSystem::DeleteLoadedAudioAndChannels();
 	AudioSystem::StopPersistentTracks();
