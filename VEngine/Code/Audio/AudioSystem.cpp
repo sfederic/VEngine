@@ -7,12 +7,12 @@
 #include "Core/Log.h"
 #include "Components/AudioComponent.h"
 
-#define fourccRIFF 'FFIR'
-#define fourccDATA 'atad'
-#define fourccFMT ' tmf'
-#define fourccWAVE 'EVAW'
-#define fourccXWMA 'AMWX'
-#define fourccDPDS 'sdpd'
+constexpr auto fourccRIFF = 'FFIR';
+constexpr auto fourccDATA = 'atad';
+constexpr auto fourccFMT = ' tmf';
+constexpr auto fourccWAVE = 'EVAW';
+constexpr auto fourccXWMA = 'AMWX';
+constexpr auto fourccDPDS = 'sdpd';
 
 UID nextChannelID = 0;
 
