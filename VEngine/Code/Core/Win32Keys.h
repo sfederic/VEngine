@@ -2,8 +2,6 @@
 
 #include <Windows.h>
 
-//Todo: With GameInput in use, not sure on if the scancode stuff is still a problem.
-
 //All these values are Win32 virtual keys currently in use.
 enum class Keys
 {
