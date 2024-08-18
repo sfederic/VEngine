@@ -2,8 +2,6 @@
 
 #include <functional>
 
-//Todo: Could Timers be replaced with C++'s coroutines?
-
 struct TimerItem
 {
 	std::function<void()> functionToCall;
