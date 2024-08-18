@@ -767,9 +767,6 @@
     <ClCompile Include="Code\Actors\Game\TwinOrientationLock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\GravityCrystal.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Actors\OcclusionWall.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1695,9 +1692,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\TwinOrientationLock.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Actors\Game\GravityCrystal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\GridLayout.h">
