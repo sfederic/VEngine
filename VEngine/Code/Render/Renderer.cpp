@@ -2363,11 +2363,7 @@ void VertexColourLightBake()
 		const auto meshWorldMatrix = mesh->GetWorldMatrix();
 		auto& vertices = mesh->GetAllVertices();
 
-		//Set all vertices to a default grey
-		for (auto& vertex : vertices)
-		{
-			vertex.colour = XMFLOAT4(0.3f, 0.3f, 0.3f, 1.f);
-		}
+		const auto defaultGrey = XMVectorSet(0.3f, 0.3f, 0.3f, 1.f);
 
 		for (const auto& dLight : DirectionalLightComponent::system.GetComponents())
 		{
@@ -2387,9 +2383,10 @@ void VertexColourLightBake()
 
 				const auto rayOrigin = worldSpaceVertexPos + (normal * 0.1f);
 				const auto dLightDirection = dLight->GetForwardVectorV();
-				if (!Physics::Raycast(vertexRayHit, rayOrigin, -dLightDirection, 50.f))
+				if (Physics::Raycast(vertexRayHit, rayOrigin, -dLightDirection, 50.f))
 				{
-					vertex.colour = XMFLOAT4(1.f, 1.f, 1.f, 1.f);
+					const auto result = XMLoadFloat4(&vertex.colour) * defaultGrey;
+					XMStoreFloat4(&vertex.colour, result);
 				}
 			}
 		}
@@ -2413,9 +2410,10 @@ void VertexColourLightBake()
 				const auto vertexToLightDirection =
 					XMVector3Normalize(pointLight->GetWorldPositionV() - worldSpaceVertexPos);
 				const auto rayOrigin = worldSpaceVertexPos + (normal * 0.1f);
-				if (!Physics::Raycast(vertexRayHit, rayOrigin, pointLight->GetWorldPositionV()))
+				if (Physics::Raycast(vertexRayHit, rayOrigin, pointLight->GetWorldPositionV()))
 				{
-					vertex.colour = XMFLOAT4(1.f, 1.f, 1.f, 1.f);
+					const auto result = XMLoadFloat4(&vertex.colour) * defaultGrey;
+					XMStoreFloat4(&vertex.colour, result);
 				}
 			}
 		}
@@ -2445,9 +2443,10 @@ void VertexColourLightBake()
 						XMVector3Normalize(rayOrigin - spotLightWorldPos)).m128_f32[0]);
 				if (angleBetweenSpotLightForwardAndRaycastDirection <= spotLight->GetLightData().spotAngle)
 				{
-					if (!Physics::Raycast(vertexRayHit, rayOrigin, spotLight->GetWorldPositionV()))
+					if (Physics::Raycast(vertexRayHit, rayOrigin, spotLight->GetWorldPositionV()))
 					{
-						vertex.colour = XMFLOAT4(1.f, 1.f, 1.f, 1.f);
+						const auto result = XMLoadFloat4(&vertex.colour) * defaultGrey;
+						XMStoreFloat4(&vertex.colour, result);
 					}
 				}
 			}
