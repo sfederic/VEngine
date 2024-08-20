@@ -626,21 +626,6 @@ void DebugMenu::RenderUVPaintMenu()
 			ClearAllStaticNotifications();
 	}
 
-	ImGui::InputText("Texture", (char*)uvPaintMenuTextureFilename.c_str(), uvPaintMenuTextureFilename.capacity() + 1);
-	if (ImGui::Button("Set Texture"))
-	{
-		uvPaintWidget->uvPreviewTextureFilename = uvPaintMenuTextureFilename;
-		auto actor = WorldEditor::GetPickedActor();
-		if (actor)
-		{
-			auto mesh = actor->GetFirstComponentOfTypeAllowNull<MeshComponent>();
-			if (mesh)
-			{
-				mesh->SetTexture(uvPaintMenuTextureFilename);
-			}
-		}
-	}
-
 	ImGui::InputFloat("Picker Width", &uvPaintWidget->uvPickerWidth);
 	ImGui::InputFloat("Picker Height", &uvPaintWidget->uvPickerHeight);
 
