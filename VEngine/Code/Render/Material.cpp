@@ -83,10 +83,14 @@ static void ReassignTexture(Property& prop)
 		return;
 	}
 
-	auto meshes = WorldEditor::GetPickedActor()->GetComponents<MeshComponent>();
-	for (auto mesh : meshes)
+	auto actor = World::GetActorByUIDAllowNull(prop.ownerUID);
+	if (actor)
 	{
-		mesh->GetMaterial().SetDefaultTexture(swapTexture);
+		auto meshes = actor->GetComponents<MeshComponent>();
+		for (auto mesh : meshes)
+		{
+			mesh->GetMaterial().SetDefaultTexture(swapTexture);
+		}
 	}
 }
 
@@ -101,10 +105,14 @@ static void ReassignTextureSecondary(Property& prop)
 		return;
 	}
 
-	auto meshes = WorldEditor::GetPickedActor()->GetComponents<MeshComponent>();
-	for (auto mesh : meshes)
+	auto actor = World::GetActorByUIDAllowNull(prop.ownerUID);
+	if (actor)
 	{
-		mesh->GetMaterial().SetSecondaryTexture(swapTexture);
+		auto meshes = actor->GetComponents<MeshComponent>();
+		for (auto mesh : meshes)
+		{
+			mesh->GetMaterial().SetSecondaryTexture(swapTexture);
+		}
 	}
 }
 
