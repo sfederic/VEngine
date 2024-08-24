@@ -12,7 +12,9 @@ void MapProjectionActor::Create()
 {
 	__super::Create();
 
+	//Todo: placeholder values.
 	_mesh->SetMeshFilename("cube.vmesh");
+	_mesh->SetTexture("UI/spellbinding_circle.png");
 }
 
 Properties MapProjectionActor::GetProps()
