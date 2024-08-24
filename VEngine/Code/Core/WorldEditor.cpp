@@ -109,8 +109,13 @@ void HandleActorPicking()
 				auto mesh = dynamic_cast<MeshComponent*>(hit.hitComponent);
 				if (mesh)
 				{
+					auto meshProps = mesh->GetProps();
+					auto textureDataProperty = meshProps.GetProperty("M_Texture");
+					CommandSystem::Get().AddCommand<TextureData>(*textureDataProperty);
+
 					mesh->GetMaterial().GetMaterialShaderData().useTexture = true;
 					mesh->SetTexture(VString::wstos(TextureSystem::selectedTextureInEditor));
+
 					return;
 				}
 			}
