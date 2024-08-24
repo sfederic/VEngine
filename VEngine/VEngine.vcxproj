@@ -118,6 +118,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Code\Actors\Game\MapProjectionCrystal.cpp" />
     <ClCompile Include="Code\Actors\Game\BombRock.cpp" />
     <ClCompile Include="Code\Editor\Sequencer\ActiveCameraLerpToOffsetPosition.cpp" />
     <ClCompile Include="Code\Editor\Sequencer\CameraSequenceEntryData.cpp" />
@@ -375,6 +376,7 @@
     <ClCompile Include="Code\Actors\Game\CorkscrewLift.cpp" />
     <ClCompile Include="Code\Actors\Game\PhysicsDoorGridActor.cpp" />
     <ClCompile Include="Code\Actors\Game\OrientedCrushable.cpp" />
+    <ClInclude Include="Code\Actors\Game\MapProjectionCrystal.h" />
     <ClInclude Include="Code\Actors\Game\BombRock.h" />
     <ClInclude Include="Code\Editor\Sequencer\ActiveCameraLerpToOffsetPosition.h" />
     <ClInclude Include="Code\Editor\Sequencer\CameraSequenceEntryData.h" />

@@ -659,9 +659,6 @@
     <ClCompile Include="Code\Actors\Game\OrientationTrigger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\CrystalPlacement.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Actors\Game\GridActorOffsetMesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -882,6 +879,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Actors\Game\OrientedCrushable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Actors\Game\MapProjectionCrystal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1583,9 +1583,6 @@
     <ClInclude Include="Code\Actors\Game\OrientationTrigger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\Game\CrystalPlacement.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Code\Actors\Game\GridActorOffsetMesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -1836,6 +1833,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\OrientedCrushable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Actors\Game\MapProjectionCrystal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
