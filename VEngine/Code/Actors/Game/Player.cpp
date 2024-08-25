@@ -274,10 +274,6 @@ void Player::HighlightLinkableGridActor()
 		auto gridActor = hit.GetClosestHitActorAs<GridActor>(playerPos);
 		if (gridActor)
 		{
-			highlightedGridActor = gridActor;
-
-			gridActor->OnPlayerLinkHover();
-
 			if (gridActor->IsLinked())
 			{
 				return;
@@ -292,8 +288,9 @@ void Player::HighlightLinkableGridActor()
 				return;
 			}
 
+			highlightedGridActor = gridActor;
+			gridActor->OnPlayerLinkHover();
 			EnableLinkEffectMeshForHover(&highlightedGridActor->GetMesh());
-
 			previousHighlightedGridActor = highlightedGridActor;
 		}
 		else
