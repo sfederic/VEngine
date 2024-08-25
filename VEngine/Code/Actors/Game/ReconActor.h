@@ -10,6 +10,8 @@ public:
 
 	Properties GetProps() override;
 
+	auto GetReconText() { return reconText; }
+
 private:
 	std::wstring reconText;
 };

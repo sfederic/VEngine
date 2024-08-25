@@ -11,6 +11,7 @@
 #include "Actors/Game/NPC.h"
 #include "Actors/Game/InspectionTrigger.h"
 #include "Actors/Game/FenceActor.h"
+#include "Actors/Game/ReconActor.h"
 #include "Actors/Game/PlayerCameraTrigger.h"
 #include "Grid.h"
 #include "GridActor.h"
@@ -1336,6 +1337,16 @@ void Player::ReconSnapshot()
 	if (reconModeOn && Input::GetKeyUp("ReconSnapshot"))
 	{
 		Renderer::PlayerPhotoCapture(std::to_wstring(GenerateUID()));
+
+		HitResult reconHit(this);
+		if (Physics::Raycast(reconHit, camera->GetWorldPositionV(), camera->GetForwardVectorV(), 10.f))
+		{
+			auto reconActor = reconHit.GetHitActorAs<ReconActor>();
+			if (reconActor)
+			{
+				reconWidget->SetReconText(reconActor->GetReconText());
+			}
+		}
 	}
 }
 
