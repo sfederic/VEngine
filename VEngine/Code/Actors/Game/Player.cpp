@@ -18,6 +18,7 @@
 #include "Components/MeshComponent.h"
 #include "Render/RastState.h"
 #include "Render/BlendStates.h"
+#include "Render/Renderer.h"
 #include "Render/Material.h"
 #include "UI/UISystem.h"
 #include "UI/Game/DialogueWidget.h"
@@ -114,7 +115,9 @@ void Player::Tick(float deltaTime)
 	LinkToGridActor();
 
 	ToggleGrid();
+
 	ToggleReconMode();
+	ReconSnapshot();
 
 	MovementInput(deltaTime);
 	RotationInput(deltaTime);
@@ -1309,6 +1312,14 @@ void Player::ToggleReconMode()
 
 			_mesh->SetVisibility(true);
 		}
+	}
+}
+
+void Player::ReconSnapshot()
+{
+	if (reconModeOn && Input::GetKeyUp(Keys::Down))
+	{
+		Renderer::PlayerPhotoCapture(std::to_wstring(GenerateUID()));
 	}
 }
 

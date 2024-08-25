@@ -135,6 +135,7 @@ private:
 	bool IsInInteraction() const;
 
 	void ToggleReconMode();
+	void ReconSnapshot();
 	bool reconModeOn = false;
 
 	//Link effect logic to use on grid actor link select hover.
