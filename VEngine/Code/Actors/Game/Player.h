@@ -137,6 +137,7 @@ private:
 	bool IsInInteraction() const;
 
 	void ToggleReconMode();
+	void DisplayReconInfo();
 	void ReconSnapshot();
 	bool reconModeOn = false;
 

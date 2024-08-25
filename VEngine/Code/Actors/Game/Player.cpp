@@ -121,6 +121,7 @@ void Player::Tick(float deltaTime)
 
 	ToggleReconMode();
 	ReconSnapshot();
+	DisplayReconInfo();
 
 	MovementInput(deltaTime);
 	RotationInput(deltaTime);
@@ -1332,12 +1333,10 @@ void Player::ToggleReconMode()
 	}
 }
 
-void Player::ReconSnapshot()
+void Player::DisplayReconInfo()
 {
-	if (reconModeOn && Input::GetKeyUp("ReconSnapshot"))
+	if (reconModeOn && reconWidget->IsInViewport())
 	{
-		Renderer::PlayerPhotoCapture(std::to_wstring(GenerateUID()));
-
 		HitResult reconHit(this);
 		if (Physics::Raycast(reconHit, camera->GetWorldPositionV(), camera->GetForwardVectorV(), 10.f))
 		{
@@ -1347,6 +1346,14 @@ void Player::ReconSnapshot()
 				reconWidget->SetReconText(reconActor->GetReconText());
 			}
 		}
+	}
+}
+
+void Player::ReconSnapshot()
+{
+	if (reconModeOn && Input::GetKeyUp("ReconSnapshot"))
+	{
+		Renderer::PlayerPhotoCapture(std::to_wstring(GenerateUID()))
 	}
 }
 
