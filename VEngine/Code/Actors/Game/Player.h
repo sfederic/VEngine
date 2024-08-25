@@ -6,6 +6,7 @@
 
 class DialogueComponent;
 class InteractWidget;
+class ReconWidget;
 class GridActor;
 class MeshComponent;
 class CameraComponent;
@@ -34,6 +35,7 @@ public:
 	DialogueComponent* currentlyActiveDialogueComponent = nullptr;
 
 	InteractWidget* interactWidget = nullptr;
+	ReconWidget* reconWidget = nullptr;
 
 	GridActor* gridActorInteractingWith = nullptr;
 

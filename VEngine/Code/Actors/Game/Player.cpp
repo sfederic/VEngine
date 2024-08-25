@@ -23,6 +23,7 @@
 #include "UI/UISystem.h"
 #include "UI/Game/DialogueWidget.h"
 #include "UI/Game/InteractWidget.h"
+#include "UI/Game/ReconWidget.h"
 #include "Gameplay/GameUtils.h"
 
 //Distance the player can ray/box cast to a grid actor to link to.
@@ -85,6 +86,7 @@ void Player::Start()
 
 	//Setup widgets
 	interactWidget = UISystem::CreateWidget<InteractWidget>();
+	reconWidget = UISystem::CreateWidget<ReconWidget>();
 }
 
 void Player::End()
@@ -1314,6 +1316,8 @@ void Player::ToggleReconMode()
 			camera->SetTargetActor(nullptr);
 
 			_mesh->SetVisibility(false);
+
+			reconWidget->AddToViewport();
 		}
 		else
 		{
@@ -1321,6 +1325,8 @@ void Player::ToggleReconMode()
 			camera->SetTargetActor(this);
 
 			_mesh->SetVisibility(true);
+
+			reconWidget->RemoveFromViewport();
 		}
 	}
 }
