@@ -307,6 +307,11 @@ void Player::HighlightLinkableGridActor()
 
 void Player::PrimaryAction()
 {
+	if (reconModeOn)
+	{
+		return;
+	}
+
 	if (!CheckIfMovementAndRotationStopped())
 	{
 		return;
@@ -643,6 +648,11 @@ bool Player::AttackGridActorBasedOnNode()
 
 void Player::LinkToGridActor()
 {
+	if (reconModeOn)
+	{
+		return;
+	}
+
 	if (IsInInteraction())
 	{
 		return;
