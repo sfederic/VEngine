@@ -2029,7 +2029,7 @@ void Renderer::PlayerPhotoCapture(std::wstring outputFilename)
 	HR(swapchain->GetBuffer(0, IID_PPV_ARGS(photoCaptureBackBuffer.GetAddressOf())));
 	assert(photoCaptureBackBuffer);
 
-	std::wstring imageFile = L"Textures/" + outputFilename;
+	std::wstring imageFile = L"Textures/" + outputFilename + L".jpg";
 	HR(SaveWICTextureToFile(context.Get(), photoCaptureBackBuffer.Get(), GUID_ContainerFormatJpeg, imageFile.c_str()));
 	Log("Photo taken [%S]", imageFile.c_str());
 }
