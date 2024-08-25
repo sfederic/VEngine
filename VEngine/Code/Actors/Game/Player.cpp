@@ -1346,6 +1346,10 @@ void Player::DisplayReconInfo()
 				reconWidget->SetReconText(reconActor->GetReconText());
 			}
 		}
+		else
+		{
+			reconWidget->SetReconText(L"No info");
+		}
 	}
 }
 
