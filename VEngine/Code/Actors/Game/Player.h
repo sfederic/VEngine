@@ -25,6 +25,7 @@ private:
 	XMVECTOR nextCameraPosition = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 	XMVECTOR cameraLinkActiveLocalPosition = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 	XMVECTOR cameraStartingLocalPosition = XMVectorSet(1.75f, 1.75f, -2.75f, 1.f);
+	XMVECTOR cameraReconModeLocalPosition = XMVectorSet(0.f, 0.25f, 0.15f, 1.f);
 
 public:
 	std::set<Actor*> previousHitTransparentActors;
@@ -132,6 +133,9 @@ private:
 	void OnMoveAndRotateEnd();
 
 	bool IsInInteraction() const;
+
+	void ToggleReconMode();
+	bool reconModeOn = false;
 
 	//Link effect logic to use on grid actor link select hover.
 	void EnableLinkEffectMeshForHover(MeshComponent* linkMesh);

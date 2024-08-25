@@ -114,6 +114,7 @@ void Player::Tick(float deltaTime)
 	LinkToGridActor();
 
 	ToggleGrid();
+	ToggleReconMode();
 
 	MovementInput(deltaTime);
 	RotationInput(deltaTime);
@@ -1286,6 +1287,29 @@ void Player::OnMoveAndRotateEnd()
 bool Player::IsInInteraction() const
 {
 	return inInteraction || inConversation || inInspection;
+}
+
+void Player::ToggleReconMode()
+{
+	if (Input::GetKeyUp(Keys::R))
+	{
+		reconModeOn = !reconModeOn;
+
+		if (reconModeOn)
+		{
+			SetNextCameraPosition(cameraReconModeLocalPosition);
+			camera->SetTargetActor(nullptr);
+
+			_mesh->SetVisibility(false);
+		}
+		else
+		{
+			SetNextCameraPosition(cameraStartingLocalPosition);
+			camera->SetTargetActor(this);
+
+			_mesh->SetVisibility(true);
+		}
+	}
 }
 
 void Player::EnableLinkEffectMeshForHover(MeshComponent* linkMesh)
