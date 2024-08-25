@@ -14,12 +14,21 @@ static std::string heldPlayerItem;
 
 //Used when continuing from game save files
 static std::string mapToLoadOnContinue;
+
+//PLAYER UPGRADES
+bool gBigActorLinkUpgrade;
+
 //...
 
 Properties GameInstance::GetGlobalProps()
 {
 	Properties props("GameInstance");
+
 	props.Add("MapToLoadOnContinue", &mapToLoadOnContinue);
+
+	//PLAYER UPGRADES
+	props.Add("BigActorLinkUpgrade", &gBigActorLinkUpgrade);
+
 	return props;
 }
 

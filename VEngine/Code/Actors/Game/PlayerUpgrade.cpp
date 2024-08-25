@@ -8,3 +8,11 @@ PlayerUpgrade::PlayerUpgrade()
 	_upgradeMesh->SetMeshFilename("cube.vmesh");
 	SetRootComponent(_upgradeMesh);
 }
+
+Properties PlayerUpgrade::GetProps()
+{
+	auto props = __super::GetProps();
+	props.title = GetTypeName();
+	props.Add("Upgrade Name", &_upgradeGlobalMappingName);
+	return props;
+}

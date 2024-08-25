@@ -11,7 +11,9 @@ public:
 	ACTOR_SYSTEM(PlayerUpgrade);
 
 	PlayerUpgrade();
+	Properties GetProps() override;
 
 private:
+	std::string _upgradeGlobalMappingName;
 	MeshComponent* _upgradeMesh = nullptr;
 };
