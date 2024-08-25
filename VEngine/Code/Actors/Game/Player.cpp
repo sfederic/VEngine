@@ -1304,7 +1304,7 @@ bool Player::IsInInteraction() const
 
 void Player::ToggleReconMode()
 {
-	if (Input::GetKeyUp("ReconToggle"))
+	if (Input::GetKeyUp("ToggleRecon"))
 	{
 		reconModeOn = !reconModeOn;
 
