@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "PlayerUpgrade.h"
 #include "Gameplay/GameInstance.h"
+#include "Gameplay/GameUtils.h"
 #include "Core/Log.h"
 
 void PlayerUpgrade::Create()
@@ -29,6 +30,8 @@ void PlayerUpgrade::Interact()
 		*upgradeProperty = true;
 		Log("[%s] added as player upgrade.", _upgradeGlobalMappingName.c_str());
 	}
+
+	GameUtils::PlayAudioOneShot("upgrade_gained.wav");
 
 	DeferDestroy();
 }
