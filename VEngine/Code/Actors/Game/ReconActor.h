@@ -7,4 +7,9 @@ class ReconActor : public GridActor
 {
 public:
 	ACTOR_SYSTEM(ReconActor);
+
+	Properties GetProps() override;
+
+private:
+	std::wstring reconText;
 };
