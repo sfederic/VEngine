@@ -33,5 +33,7 @@ void PlayerUpgrade::Interact()
 
 	GameUtils::PlayAudioOneShot("upgrade_gained.wav");
 
+	RecalcCurrentNodePosition();
+
 	DeferDestroy();
 }
