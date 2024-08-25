@@ -1353,7 +1353,7 @@ void Player::ReconSnapshot()
 {
 	if (reconModeOn && Input::GetKeyUp("ReconSnapshot"))
 	{
-		Renderer::PlayerPhotoCapture(std::to_wstring(GenerateUID()))
+		Renderer::PlayerPhotoCapture(std::to_wstring(GenerateUID()));
 	}
 }
 
