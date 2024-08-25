@@ -10,7 +10,6 @@ class PlayerUpgrade : public GridActor
 public:
 	ACTOR_SYSTEM(PlayerUpgrade);
 
-	PlayerUpgrade();
 	void Create() override;
 	Properties GetProps() override;
 
@@ -18,5 +17,4 @@ public:
 
 private:
 	std::string _upgradeGlobalMappingName;
-	MeshComponent* _upgradeMesh = nullptr;
 };
