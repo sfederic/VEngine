@@ -29,4 +29,6 @@ void PlayerUpgrade::Interact()
 		*upgradeProperty = true;
 		Log("[%s] added as player upgrade.", _upgradeGlobalMappingName.c_str());
 	}
+
+	DeferDestroy();
 }
