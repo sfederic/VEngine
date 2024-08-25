@@ -379,6 +379,7 @@
     <ClCompile Include="Code\Actors\Game\MapProjectionActor.cpp" />
     <ClCompile Include="Code\Actors\Game\ReconActor.cpp" />
     <ClCompile Include="Code\UI\Game\ReconWidget.cpp" />
+    <ClCompile Include="Code\Actors\Game\PlayerUpgrade.cpp" />
     <ClInclude Include="Code\Actors\Game\MapProjectionCrystal.h" />
     <ClInclude Include="Code\Actors\Game\BombRock.h" />
     <ClInclude Include="Code\Editor\Sequencer\ActiveCameraLerpToOffsetPosition.h" />
@@ -792,6 +793,7 @@
     <ClInclude Include="Code\Actors\Game\MapProjectionActor.h" />
     <ClInclude Include="Code\Actors\Game\ReconActor.h" />
     <ClInclude Include="Code\UI\Game\ReconWidget.h" />
+    <ClInclude Include="Code\Actors\Game\PlayerUpgrade.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
