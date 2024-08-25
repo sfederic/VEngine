@@ -1304,7 +1304,7 @@ bool Player::IsInInteraction() const
 
 void Player::ToggleReconMode()
 {
-	if (Input::GetKeyUp(Keys::R))
+	if (Input::GetKeyUp("ReconToggle"))
 	{
 		reconModeOn = !reconModeOn;
 
@@ -1327,7 +1327,7 @@ void Player::ToggleReconMode()
 
 void Player::ReconSnapshot()
 {
-	if (reconModeOn && Input::GetKeyUp(Keys::Down))
+	if (reconModeOn && Input::GetKeyUp("ReconSnapshot"))
 	{
 		Renderer::PlayerPhotoCapture(std::to_wstring(GenerateUID()));
 	}

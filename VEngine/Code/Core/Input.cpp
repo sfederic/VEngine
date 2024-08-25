@@ -267,6 +267,8 @@ void InitKeyMap()
 	keyMap.emplace("Link", Keys::Enter);
 	keyMap.emplace("Unlink", Keys::BackSpace);
 	keyMap.emplace("ToggleGrid", Keys::Space);
+	keyMap.emplace("ToggleRecon", Keys::R);
 	keyMap.emplace("Interact", Keys::Down);
+	keyMap.emplace("ReconSnapshot", Keys::Down);
 	keyMap.emplace("OpenJournal", Keys::J);
 }
