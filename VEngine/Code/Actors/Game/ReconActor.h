@@ -13,5 +13,5 @@ public:
 	auto GetReconText() { return reconText; }
 
 private:
-	std::wstring reconText;
+	std::wstring reconText = L"No info to display";
 };
