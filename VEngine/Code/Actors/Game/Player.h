@@ -6,6 +6,7 @@
 
 class DialogueComponent;
 class InteractWidget;
+class PlayerUpgradeInfoWidget;
 class ReconWidget;
 class GridActor;
 class MeshComponent;
@@ -36,6 +37,7 @@ public:
 
 	InteractWidget* interactWidget = nullptr;
 	ReconWidget* reconWidget = nullptr;
+	PlayerUpgradeInfoWidget* upgradeInfoWidget = nullptr;
 
 	GridActor* gridActorInteractingWith = nullptr;
 
@@ -140,6 +142,8 @@ private:
 	void DisplayReconInfo();
 	void ReconSnapshot();
 	bool reconModeOn = false;
+
+	void ToggleUpgradeInfoWidget();
 
 	//Link effect logic to use on grid actor link select hover.
 	void EnableLinkEffectMeshForHover(MeshComponent* linkMesh);

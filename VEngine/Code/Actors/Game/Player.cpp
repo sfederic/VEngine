@@ -25,6 +25,7 @@
 #include "UI/Game/DialogueWidget.h"
 #include "UI/Game/InteractWidget.h"
 #include "UI/Game/ReconWidget.h"
+#include "UI/Game/PlayerUpgradeInfoWidget.h"
 #include "Gameplay/GameUtils.h"
 
 //Distance the player can ray/box cast to a grid actor to link to.
@@ -88,6 +89,7 @@ void Player::Start()
 	//Setup widgets
 	interactWidget = UISystem::CreateWidget<InteractWidget>();
 	reconWidget = UISystem::CreateWidget<ReconWidget>();
+	upgradeInfoWidget = UISystem::CreateWidget<PlayerUpgradeInfoWidget>();
 }
 
 void Player::End()
@@ -122,6 +124,8 @@ void Player::Tick(float deltaTime)
 	ToggleReconMode();
 	ReconSnapshot();
 	DisplayReconInfo();
+
+	ToggleUpgradeInfoWidget();
 
 	MovementInput(deltaTime);
 	RotationInput(deltaTime);
@@ -1355,6 +1359,14 @@ void Player::ReconSnapshot()
 	if (reconModeOn && Input::GetKeyUp("ReconSnapshot"))
 	{
 		Renderer::PlayerPhotoCapture(std::to_wstring(GenerateUID()));
+	}
+}
+
+void Player::ToggleUpgradeInfoWidget()
+{
+	if (Input::GetKeyUp(Keys::Z))
+	{
+		upgradeInfoWidget->ToggleInViewport();
 	}
 }
 
