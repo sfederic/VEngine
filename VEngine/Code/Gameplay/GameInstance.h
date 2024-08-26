@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <set>
 #include "Core/Properties.h"
 #include "Core/Log.h"
 
@@ -20,6 +21,8 @@ namespace GameInstance
 	std::string GetHeldPlayerItem();
 	void SetHeldPlayerItem(std::string_view heldItem);
 	void ClearHeldPlayerItem();
+
+	std::set<std::string> GetAllPlayerUpgradeNames();
 
 	template <typename T>
 	T* GetGlobalProp(const std::string name)

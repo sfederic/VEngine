@@ -9,6 +9,10 @@ bool GameInstance::useGameSaves = false;
 //GAME SPECIFIC VARS
 static std::string heldPlayerItem;
 
+std::set<std::string> gPlayerUpgradeNames = {
+	"BigActorLinkUpgrade"
+};
+
 //Global properties
 //...
 
@@ -45,6 +49,11 @@ void GameInstance::SetHeldPlayerItem(std::string_view heldItem)
 void GameInstance::ClearHeldPlayerItem()
 {
 	heldPlayerItem.clear();
+}
+
+std::set<std::string> GameInstance::GetAllPlayerUpgradeNames()
+{
+	return gPlayerUpgradeNames;
 }
 
 std::string GameInstance::GetContinueMapName()
