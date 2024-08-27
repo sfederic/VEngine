@@ -75,6 +75,15 @@ void GridActorTeleporter::Tick(float deltaTime)
 			}
 		}
 	}
+	else
+	{
+		//When nothing in either trigger, reset the main teleporter.
+		if (boxTrigger->GetAllContainedActors<GridActor>().empty() ||
+			_otherTeleporter->boxTrigger->GetAllContainedActors<GridActor>().empty())
+		{
+			_teleporterUsed = false;
+		}
+	}
 }
 
 Properties GridActorTeleporter::GetProps()
