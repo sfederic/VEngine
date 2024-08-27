@@ -35,7 +35,13 @@ void GridActorTeleporter::Tick(float deltaTime)
 {
 	__super::Tick(deltaTime);
 
-	if (!_teleporterUsed && _otherTeleporter != nullptr)
+	//This is a check for the other teleporter, so that an empty teleporter name won't have two ticks running.
+	if (_otherTeleporter == nullptr)
+	{
+		return;
+	}
+
+	if (!_teleporterUsed)
 	{
 		for (auto gridActor : boxTrigger->GetAllContainedActors<GridActor>())
 		{
