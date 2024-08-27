@@ -29,6 +29,6 @@ public:
 	BoxTriggerComponent* boxTrigger = nullptr;
 
 private:
-	//This will trigger when both grid actors are in both teleporters.
+	//This is used as a 'cooldown' bool so that both grid actors aren't teleporting non-stop between teleporters.
 	bool _teleporterUsed = false;
 };
