@@ -27,6 +27,7 @@
 #include "UI/Game/ReconWidget.h"
 #include "UI/Game/PlayerUpgradeInfoWidget.h"
 #include "Gameplay/GameUtils.h"
+#include "Gameplay/GameInstance.h"
 
 //Distance the player can ray/box cast to a grid actor to link to.
 constexpr float linkDistance = 5.f;
@@ -1172,6 +1173,15 @@ void Player::SetInteractWidgetText(std::wstring_view interactText)
 
 void Player::SetLinkedGridActor(GridActor& gridActor)
 {
+	if (gridActor.IsBigGridActor())
+	{
+		if (!CheckIfUpgradeExists("BigActorLinkUpgrade"))
+		{
+			Log("Can't link to big grid actor. Upgrade not set.");
+			return;
+		}
+	}
+
 	nextCameraPosition = cameraLinkActiveLocalPosition;
 
 	ResetHighlightedActor();
@@ -1367,6 +1377,15 @@ void Player::ToggleUpgradeInfoWidget()
 	if (Input::GetKeyUp(Keys::Z))
 	{
 		upgradeInfoWidget->ToggleInViewport();
+	}
+}
+
+bool Player::CheckIfUpgradeExists(std::string upgradeName)
+{
+	const bool* upgradeProp = GameInstance::GetGlobalProp<bool>(upgradeName);
+	if (upgradeProp != nullptr)
+	{
+		return *upgradeProp;
 	}
 }
 

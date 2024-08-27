@@ -145,6 +145,8 @@ private:
 
 	void ToggleUpgradeInfoWidget();
 
+	bool CheckIfUpgradeExists(std::string upgradeName);
+
 	//Link effect logic to use on grid actor link select hover.
 	void EnableLinkEffectMeshForHover(MeshComponent* linkMesh);
 	//Link effect logic to use on grid actor link select.
