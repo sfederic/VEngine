@@ -210,6 +210,8 @@ public:
 
 	auto GetDialogueComponent() { return dialogueComponent; }
 
+	bool IsBigGridActor() const { return bigGridActor; }
+
 private:
 	void SpawnDustSpriteSheet() const;
 
