@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "GridActorTeleporter.h"
 #include "Components/BoxTriggerComponent.h"
+#include "Components/MeshComponent.h"
 #include "Actors/Game/GridActor.h"
 #include "Gameplay/GameUtils.h"
 #include "Actors/Game/Player.h"
@@ -9,6 +10,18 @@ GridActorTeleporter::GridActorTeleporter()
 {
 	boxTrigger = CreateComponent<BoxTriggerComponent>("BoxTrigger");
 	SetRootComponent(boxTrigger);
+
+	_teleporterMesh = CreateComponent<MeshComponent>("Mesh");
+	AddChildToRoot(_teleporterMesh);
+}
+
+void GridActorTeleporter::Create()
+{
+	__super::Create();
+
+	_teleporterMesh->SetMeshFilename("node.vmesh");
+	_teleporterMesh->SetTexture("UI/spellbinding_circle.png");
+	_teleporterMesh->SetLocalPosition(0.f, -0.4f, 0.f);
 }
 
 void GridActorTeleporter::Start()
