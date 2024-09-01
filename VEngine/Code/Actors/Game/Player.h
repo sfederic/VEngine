@@ -24,7 +24,7 @@ public:
 	XMVECTOR nextHopPos = XMVectorZero();
 
 private:
-	XMVECTOR nextCameraPosition = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+	XMVECTOR nextCameraLocalPosition = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 	XMVECTOR cameraLinkActiveLocalPosition = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 	XMVECTOR cameraStartingLocalPosition = XMVectorSet(1.75f, 1.75f, -2.75f, 1.f);
 	XMVECTOR cameraReconModeLocalPosition = XMVectorSet(0.f, 0.25f, 0.15f, 1.f);
@@ -84,7 +84,7 @@ public:
 
 	void SetNextPosAndRotToCurrent();
 
-	void SetNextCameraPosition(XMVECTOR pos) { nextCameraPosition = pos; }
+	void SetNextCameraPosition(XMVECTOR pos) { nextCameraLocalPosition = pos; }
 	XMVECTOR GetCameraLocalPosition();
 	void ResetCameraPosAndTargetToPlayer();
 	void SetCameraTargetActor(Actor* target);
@@ -96,6 +96,7 @@ public:
 
 private:
 	float nextCameraFOV = 0.f;
+	int cameraZoomLevel = 0;
 
 	bool isInputLinkedToGridActor = false;
 	GridActor* linkedGridActor = nullptr;
@@ -106,6 +107,7 @@ private:
 
 	void PrimaryAction();
 	void LerpPlayerCameraFOV(float deltaTime);
+	void ZoomCameraInAndOut();
 
 	//PrimaryAction actor check functions
 	bool DialogueCheck(Actor* hitActor);

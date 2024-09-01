@@ -85,7 +85,7 @@ void Player::Start()
 	camera->SetTargetActor(this);
 	nextCameraFOV = camera->GetFOV();
 	camera->SetAsActiveCamera();
-	nextCameraPosition = camera->GetLocalPositionV();
+	nextCameraLocalPosition = camera->GetLocalPositionV();
 
 	//Setup widgets
 	interactWidget = UISystem::CreateWidget<InteractWidget>();
@@ -133,6 +133,7 @@ void Player::Tick(float deltaTime)
 
 	PrimaryAction();
 
+	ZoomCameraInAndOut();
 	LerpPlayerCameraFOV(deltaTime);
 	MakeOccludingMeshBetweenCameraAndPlayerTransparent();
 
@@ -164,7 +165,7 @@ void Player::Tick(float deltaTime)
 
 	//Lerp camera position
 	camera->SetLocalPosition(
-		VMath::VectorConstantLerp(camera->GetLocalPositionV(), nextCameraPosition, deltaTime, 14.f));
+		VMath::VectorConstantLerp(camera->GetLocalPositionV(), nextCameraLocalPosition, deltaTime, 14.f));
 
 	UpdateLinkEffectMesh();
 }
@@ -386,6 +387,27 @@ void Player::LerpPlayerCameraFOV(float deltaTime)
 	if (camera->GetFOV() != nextCameraFOV)
 	{
 		camera->SetFOV(std::lerp(camera->GetFOV(), nextCameraFOV, 4.f * deltaTime));
+	}
+}
+
+void Player::ZoomCameraInAndOut()
+{
+	if (Input::GetKeyHeld(Keys::Shift))
+	{
+		if (Input::GetKeyDown(Keys::Down) && cameraZoomLevel <= 2)
+		{
+			auto localPos = camera->GetLocalPositionV();
+			localPos += (cameraStartingLocalPosition / 2);
+			SetNextCameraPosition(localPos);
+			cameraZoomLevel++;
+		}
+		else if (Input::GetKeyDown(Keys::Up) && cameraZoomLevel >= 0)
+		{
+			auto localPos = camera->GetLocalPositionV();
+			localPos -= (cameraStartingLocalPosition / 2);
+			SetNextCameraPosition(localPos);
+			cameraZoomLevel--;
+		}
 	}
 }
 
@@ -1182,7 +1204,7 @@ void Player::SetLinkedGridActor(GridActor& gridActor)
 		}
 	}
 
-	nextCameraPosition = cameraLinkActiveLocalPosition;
+	nextCameraLocalPosition = cameraLinkActiveLocalPosition;
 
 	ResetHighlightedActor();
 
@@ -1235,7 +1257,7 @@ void Player::ResetLinkedGridActor()
 
 	if (!CheckIfPlayerIsInsidePlayerCameraTriggerAndReset())
 	{
-		nextCameraPosition = cameraStartingLocalPosition;
+		nextCameraLocalPosition = cameraStartingLocalPosition;
 		camera->SetTargetActor(this);
 	}
 
@@ -1525,7 +1547,7 @@ XMVECTOR Player::GetCameraLocalPosition()
 
 void Player::ResetCameraPosAndTargetToPlayer()
 {
-	nextCameraPosition = cameraStartingLocalPosition;
+	nextCameraLocalPosition = cameraStartingLocalPosition;
 	camera->SetTargetActor(this);
 	camera->SetLerpToFocusPoint(false);
 	SetDefaultCameraFOV();
