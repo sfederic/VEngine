@@ -98,7 +98,7 @@ void PhysicsSystem::Start()
 				}
 				else
 				{
-					PhysicsSystem::CreatePhysicsActor(mesh);
+					PhysicsSystem::CreatePhysicsActor(mesh, mesh->GetPhysicsShape());
 				}
 			}
 		}
