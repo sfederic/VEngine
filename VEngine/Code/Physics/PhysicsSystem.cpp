@@ -212,7 +212,7 @@ void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh, const PhysicsActorSh
 		}
 		case PhysicsActorShape::Sphere:
 		{
-			shape = physics->createShape(PxSphereGeometry(extents.x * 2.f), *material);
+			shape = physics->createShape(PxSphereGeometry(extents.x), *material);
 			break;
 		}
 	}
