@@ -10,6 +10,8 @@
 #include <DirectXMath.h>
 #include "Core/UID.h"
 #include "Physics/HitResult.h"
+#include "Physics/PhysicsActorShape.h"
+#include "Physics/PhysicsType.h"
 
 using namespace physx;
 using namespace DirectX;
@@ -19,12 +21,6 @@ class DestructibleMeshComponent;
 class CharacterControllerComponent;
 struct Transform;
 class Actor;
-
-enum class PhysicsType
-{
-	Static,
-	Dynamic
-};
 
 //@Todo: Switching the project config to Release works bu the entire PhysX debug dlls and libs have to be replaced 
 //with the release specific ones. Try find a way to change this with a build file process so that switching to 
@@ -40,7 +36,7 @@ namespace PhysicsSystem
 	void Cleanup();
 	void Reset();
 	void ReleasePhysicsActor(MeshComponent* mesh);
-	void CreatePhysicsActor(MeshComponent* mesh);
+	void CreatePhysicsActor(MeshComponent* mesh, const PhysicsActorShape physicsActorShape);
 	void CreatePhysicsForDestructibleMesh(DestructibleMeshComponent* mesh);
 	void CreateCharacterController(CharacterControllerComponent* characterControllerComponent);
 	void CreateConvexPhysicsMesh(MeshComponent* mesh);

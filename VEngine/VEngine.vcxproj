@@ -399,6 +399,7 @@
     <ClInclude Include="Code\Editor\Sequencer\SequenceEntryData.h" />
     <ClInclude Include="Code\Editor\Sequencer\SequenceEntryTypes.h" />
     <ClInclude Include="Code\Physics\PhysicsActorShape.h" />
+    <ClInclude Include="Code\Physics\PhysicsType.h" />
     <ClInclude Include="Code\Render\BlendState.h" />
     <ClInclude Include="Code\Render\ShaderData\ShaderCameraData.h" />
     <ClInclude Include="Code\Render\ShaderData\ShaderLightProbeData.h" />
