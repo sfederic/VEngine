@@ -2,14 +2,6 @@
 #include "CharacterControllerComponent.h"
 #include "Physics/PhysicsSystem.h"
 
-CharacterControllerComponent::CharacterControllerComponent()
-{
-}
-
-void CharacterControllerComponent::Start()
-{
-}
-
 void CharacterControllerComponent::Tick(float deltaTime)
 {
 	if (useGravity)

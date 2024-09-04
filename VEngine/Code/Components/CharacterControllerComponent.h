@@ -10,19 +10,17 @@ class CharacterControllerComponent : public SpatialComponent
 public:
 	COMPONENT_SYSTEM(CharacterControllerComponent);
 
-	CharacterControllerComponent();
 	void Tick(float deltaTime) override;
-	void Start() override;
 	void Create() override;
 	Properties GetProps() override;
 
 	void Move(XMFLOAT3 displacement, float deltaTime);
 
 	void SetController(physx::PxController* _controller) { controller = _controller; }
-	auto GetHeight() { return height; }
-	auto GetRadius() { return radius; }
+	auto GetHeight() const { return height; }
+	auto GetRadius() const { return radius; }
 
-	bool GetGravityState() { return useGravity; }
+	bool GetGravityState() const { return useGravity; }
 	void SetGravityState(bool state) { useGravity = state; }
 
 private:
