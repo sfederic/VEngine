@@ -200,7 +200,22 @@ void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh, const PhysicsActorSh
 	XMFLOAT3 extents;
 	XMStoreFloat3(&extents, extentsVector);
 	NormaliseExtents(extents.x, extents.y, extents.z);
-	PxShape* box = physics->createShape(PxBoxGeometry(extents.x, extents.y, extents.z), *material);
+
+	PxShape* shape = nullptr;
+
+	switch (physicsActorShape)
+	{
+		case PhysicsActorShape::Box:
+		{
+			shape = physics->createShape(PxBoxGeometry(extents.x, extents.y, extents.z), *material);
+			break;
+		}
+		case PhysicsActorShape::Sphere:
+		{
+			shape = physics->createShape(PxSphereGeometry(extents.x * 2.f), *material);
+			break;
+		}
+	}
 
 	PhysicsType physicsType =
 		mesh->IsPhysicsStatic() ? physicsType = PhysicsType::Static : physicsType = PhysicsType::Dynamic;
@@ -211,7 +226,7 @@ void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh, const PhysicsActorSh
 	{
 		auto rigidStatic = physics->createRigidStatic(pxTransform);
 		rigidStatic->userData = mesh;
-		rigidStatic->attachShape(*box);
+		rigidStatic->attachShape(*shape);
 		scene->addActor(*rigidStatic);
 		//make sure neither static or dynamic actors are in the their opposite map
 		assert(rigidDynamicMap.find(mesh->GetUID()) == rigidDynamicMap.end());
@@ -222,7 +237,7 @@ void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh, const PhysicsActorSh
 	{
 		auto rigidDynamic = physics->createRigidDynamic(pxTransform);
 		rigidDynamic->userData = mesh;
-		rigidDynamic->attachShape(*box);
+		rigidDynamic->attachShape(*shape);
 		scene->addActor(*rigidDynamic);
 		assert(rigidStaticMap.find(mesh->GetUID()) == rigidStaticMap.end());
 		rigidDynamicMap.emplace(mesh->GetUID(), rigidDynamic);
