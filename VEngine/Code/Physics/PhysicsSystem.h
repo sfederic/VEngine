@@ -13,9 +13,6 @@
 #include "Physics/PhysicsActorShape.h"
 #include "Physics/PhysicsType.h"
 
-using namespace physx;
-using namespace DirectX;
-
 class MeshComponent;
 class DestructibleMeshComponent;
 class CharacterControllerComponent;
@@ -45,8 +42,8 @@ namespace PhysicsSystem
 	//attach the physics actor to, with the filename being the collision mesh.
 	void CreateConvexPhysicsMeshFromCollisionMesh(MeshComponent* mesh, Actor* actor, const std::string filename);
 
-	void ActorToPhysxTransform(const Transform& actorTransform, PxTransform& pxTransform);
-	void PhysxToActorTransform(Transform& actorTransform, const PxTransform& pxTransform);
+	void ActorToPhysxTransform(const Transform& actorTransform, physx::PxTransform& pxTransform);
+	void PhysxToActorTransform(Transform& actorTransform, const physx::PxTransform& pxTransform);
 	void GetTransformFromPhysicsActor(MeshComponent* mesh);
 	void SetTransformForPhysicsActor(MeshComponent* mesh);
 
@@ -60,8 +57,8 @@ namespace PhysicsPhysx
 	bool Raycast(XMVECTOR origin, XMVECTOR direction, float range, HitResult& hitResult);
 	bool BoxCast(XMFLOAT3 extents, XMFLOAT3 origin, XMFLOAT3 direction, float distance, HitResult& hitResult);
 
-	PxVec3 XMVectorToPxVec3(XMVECTOR xmVector);
-	PxQuat XMVectorToPxQuat(XMVECTOR xmVector);
-	PxVec3 Float3ToPxVec3(XMFLOAT3 float3);
-	XMFLOAT3 PxVec3ToFloat3(PxVec3 pxVec3);
+	physx::PxVec3 XMVectorToPxVec3(XMVECTOR xmVector);
+	physx::PxQuat XMVectorToPxQuat(XMVECTOR xmVector);
+	physx::PxVec3 Float3ToPxVec3(XMFLOAT3 float3);
+	XMFLOAT3 PxVec3ToFloat3(physx::PxVec3 pxVec3);
 }

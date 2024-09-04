@@ -11,6 +11,8 @@
 #include "Asset/AssetSystem.h"
 #include "Physics/Raycast.h"
 
+using namespace physx;
+
 //Store the original mesh UID against the new meshcomponent so that it can use its world matrix in render
 std::unordered_map<UID, std::unique_ptr<MeshComponent>> physicsMeshes;
 
