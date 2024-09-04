@@ -187,7 +187,7 @@ void PhysicsSystem::ReleasePhysicsActor(MeshComponent* mesh)
 	}
 }
 
-void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh)
+void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh, const PhysicsActorShape physicsActorShape)
 {
 	PxTransform pxTransform;
 	Transform transform;

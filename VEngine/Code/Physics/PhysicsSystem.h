@@ -36,7 +36,7 @@ namespace PhysicsSystem
 	void Cleanup();
 	void Reset();
 	void ReleasePhysicsActor(MeshComponent* mesh);
-	void CreatePhysicsActor(MeshComponent* mesh, const PhysicsActorShape physicsActorShape);
+	void CreatePhysicsActor(MeshComponent* mesh, const PhysicsActorShape physicsActorShape = PhysicsActorShape::Box);
 	void CreatePhysicsForDestructibleMesh(DestructibleMeshComponent* mesh);
 	void CreateCharacterController(CharacterControllerComponent* characterControllerComponent);
 	void CreateConvexPhysicsMesh(MeshComponent* mesh);
