@@ -1880,6 +1880,9 @@
     <ClInclude Include="Code\Actors\Game\PlayerTeleporter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Code\Physics\PhysicsActorShape.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
