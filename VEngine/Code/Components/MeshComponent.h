@@ -5,6 +5,7 @@
 #include "Render/ShaderItem.h"
 #include "Render/VertexBuffer.h"
 #include "Render/MeshDataProxy.h"
+#include "Physics/PhysicsActorShape.h"
 
 class Material;
 class Skeleton;
@@ -86,6 +87,9 @@ public:
 	void ReCreateAsPhysicsActor(bool newPhysicsStaticValue);
 	void AddForce(XMVECTOR direction);
 
+	void SetPhysicsShape(PhysicsActorShape shape) { physicsShape = shape; }
+	auto GetPhysicsShape() const { return physicsShape; }
+
 public:
 	MeshComponentData meshComponentData;
 	MeshDataProxy meshDataProxy;
@@ -96,6 +100,8 @@ public:
 
 private:
 	Material* material = nullptr;
+
+	PhysicsActorShape physicsShape = PhysicsActorShape::Box;
 
 public:
 	//Cached indexes into the diffuse light probe map for static meshes, so that they're not constantly
