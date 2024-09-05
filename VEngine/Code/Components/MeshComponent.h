@@ -104,6 +104,11 @@ private:
 	PhysicsActorShape physicsShape = PhysicsActorShape::Box;
 
 public:
+	//PhysX physics material variables
+	float physicsRestitution = 0.15f;
+	float physicsDynamicFriction = 0.5f;
+	float physicsStaticFriction = 0.5f;
+
 	//Cached indexes into the diffuse light probe map for static meshes, so that they're not constantly
 	//searching out their closest light probe to take data from.
 	int cachedLightProbeMapIndex = 0; //0 should be safe as a default, but it can cause problems.

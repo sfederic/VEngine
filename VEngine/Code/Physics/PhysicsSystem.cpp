@@ -16,6 +16,8 @@ using namespace physx;
 //Store the original mesh UID against the new meshcomponent so that it can use its world matrix in render
 std::unordered_map<UID, std::unique_ptr<MeshComponent>> physicsMeshes;
 
+std::unordered_map<UID, PxMaterial*> physicsMaterials;
+
 void NormaliseExtents(float& x, float& y, float& z);
 
 //Maps meshcomponent UIDs to rigid actors
@@ -31,8 +33,6 @@ PxFoundation* foundation = nullptr;
 PxPhysics* physics = nullptr;
 PxDefaultCpuDispatcher* dispatcher = nullptr;
 PxScene* scene = nullptr;
-PxMaterial* material = nullptr;
-PxMaterial* destructibleMaterial = nullptr;
 PxPvd* pvd = nullptr;
 PxControllerManager* controllerManager = nullptr;
 
@@ -58,12 +58,6 @@ void PhysicsSystem::Init()
 	sceneDesc.cpuDispatcher = dispatcher;
 	sceneDesc.filterShader = PxDefaultSimulationFilterShader;
 	scene = physics->createScene(sceneDesc);
-
-	//Default material
-	material = physics->createMaterial(0.5f, 0.5f, 0.f);
-
-	//Destructible material
-	destructibleMaterial = physics->createMaterial(0.f, 0.f, 0.f);
 
 	//Player capsule controller
 	controllerManager = PxCreateControllerManager(*scene);
@@ -149,6 +143,12 @@ void PhysicsSystem::Reset()
 
 void PhysicsSystem::ReleasePhysicsActor(MeshComponent* mesh)
 {
+	auto physicsMatIt = physicsMaterials.find(mesh->GetUID());
+	if (physicsMatIt != physicsMaterials.end())
+	{
+		physicsMatIt->second->release();
+	}
+
 	PhysicsType physicsType =
 		mesh->IsPhysicsStatic() ? physicsType = PhysicsType::Static : physicsType = PhysicsType::Dynamic;
 
@@ -201,18 +201,22 @@ void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh, const PhysicsActorSh
 	XMStoreFloat3(&extents, extentsVector);
 	NormaliseExtents(extents.x, extents.y, extents.z);
 
+	PxMaterial* physicsMaterial = physics->createMaterial(mesh->physicsStaticFriction, mesh->physicsDynamicFriction,
+		mesh->physicsRestitution);
+	physicsMaterials.emplace(mesh->GetUID(), physicsMaterial);
+
 	PxShape* shape = nullptr;
 
 	switch (physicsActorShape)
 	{
 		case PhysicsActorShape::Box:
 		{
-			shape = physics->createShape(PxBoxGeometry(extents.x, extents.y, extents.z), *material);
+			shape = physics->createShape(PxBoxGeometry(extents.x, extents.y, extents.z), *physicsMaterial);
 			break;
 		}
 		case PhysicsActorShape::Sphere:
 		{
-			shape = physics->createShape(PxSphereGeometry(extents.x), *material);
+			shape = physics->createShape(PxSphereGeometry(extents.x), *physicsMaterial);
 			break;
 		}
 	}
@@ -265,7 +269,9 @@ void PhysicsSystem::CreateCharacterController(CharacterControllerComponent* char
 	desc.nonWalkableMode = PxControllerNonWalkableMode::ePREVENT_CLIMBING_AND_FORCE_SLIDING;
 	desc.contactOffset = 0.5f;
 	desc.upDirection = PxVec3(0.f, 1.f, 0.f);
-	desc.material = material;
+	//Todo: character controller also needs a set of fields like meshcomponent. Maybe consolidate into
+	//one struct, like a struct PhysicsFloats or something.
+	desc.material = physics->createMaterial(0.5f, 0.5f, 0.1f);
 
 	auto pos = characterControllerComponent->GetWorldPositionV();
 	desc.position.x = pos.m128_f32[0];
@@ -305,6 +311,10 @@ void PhysicsSystem::CreateConvexPhysicsMesh(MeshComponent* mesh)
 	transform.Decompose(mesh->GetWorldMatrix());
 	PxTransform pxTransform;
 	ActorToPhysxTransform(transform, pxTransform);
+
+	PxMaterial* material = physics->createMaterial(mesh->physicsStaticFriction, mesh->physicsDynamicFriction,
+		mesh->physicsRestitution);
+	physicsMaterials.emplace(mesh->GetUID(), material);
 
 	PxRigidDynamic* aConvexActor = physics->createRigidDynamic(pxTransform);
 	auto geom = PxConvexMeshGeometry(convexMesh);

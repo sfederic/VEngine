@@ -123,6 +123,10 @@ Properties MeshComponent::GetProps()
 	props.Add("Player Traversable", &canPlayerTraverse);
 	props.Add("Sort Last", &alwaysSortLast);
 
+	props.Add("P_Restitution", &physicsRestitution);
+	props.Add("P_DynamicFriction", &physicsDynamicFriction);
+	props.Add("P_StaticFriction", &physicsStaticFriction);
+
 	auto materialProps = material->GetProps();
 	materialProps.SetAllPropertyOwnerUIDs(props.ownerUID);
 	props.Merge(materialProps);
