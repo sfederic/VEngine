@@ -34,6 +34,7 @@ PxPhysics* physics = nullptr;
 PxDefaultCpuDispatcher* dispatcher = nullptr;
 PxScene* scene = nullptr;
 PxPvd* pvd = nullptr;
+PxMaterial* defaultMaterial;
 PxControllerManager* controllerManager = nullptr;
 
 void PhysicsSystem::Init()
@@ -51,6 +52,9 @@ void PhysicsSystem::Init()
 
 	dispatcher = PxDefaultCpuDispatcherCreate(2);
 	assert(dispatcher);
+
+	//Default material
+	defaultMaterial = physics->createMaterial(0.5f, 0.5f, 0.1f);
 
 	//Create scene
 	PxSceneDesc sceneDesc(physics->getTolerancesScale());
@@ -269,9 +273,7 @@ void PhysicsSystem::CreateCharacterController(CharacterControllerComponent* char
 	desc.nonWalkableMode = PxControllerNonWalkableMode::ePREVENT_CLIMBING_AND_FORCE_SLIDING;
 	desc.contactOffset = 0.5f;
 	desc.upDirection = PxVec3(0.f, 1.f, 0.f);
-	//Todo: character controller also needs a set of fields like meshcomponent. Maybe consolidate into
-	//one struct, like a struct PhysicsFloats or something.
-	desc.material = physics->createMaterial(0.5f, 0.5f, 0.1f);
+	desc.material = defaultMaterial;
 
 	auto pos = characterControllerComponent->GetWorldPositionV();
 	desc.position.x = pos.m128_f32[0];
