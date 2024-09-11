@@ -16,7 +16,7 @@ void TestPhysicsSpawner::Start()
 	for (int i = 0; i < 10; i++)
 	{
 		const auto spawnPos = meshSpawnTrigger->GetRandomPointInTrigger();
-		auto mesh = MeshComponent::system.Add(std::to_string(i), this);
+		auto mesh = MeshComponent::system.Add(GetName() + std::to_string(i), this);
 		mesh->SetWorldPosition(spawnPos);
 		mesh->SetMeshFilename("sphere.vmesh");
 		mesh->SetWorldScale(0.35f);
