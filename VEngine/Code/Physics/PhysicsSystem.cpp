@@ -324,9 +324,9 @@ void PhysicsSystem::CreateConvexPhysicsMesh(MeshComponent* mesh)
 void PhysicsSystem::CreateConvexPhysicsMeshFromCollisionMesh(MeshComponent* mesh, const std::string filename)
 {
 	auto collisionMesh = new MeshComponent();
-
-	const auto meshTransform = mesh->GetTransform();
-	collisionMesh->SetTransform(meshTransform);
+	collisionMesh->SetWorldPosition(mesh->GetWorldPositionV());
+	collisionMesh->SetWorldScale(mesh->GetWorldScaleV());
+	collisionMesh->SetWorldRotation(mesh->GetWorldRotationV());
 
 	//Set the UID to the actual mesh so that the physics actor is connected to the mesh, not the collision mesh.
 	collisionMesh->SetUID(mesh->GetUID());
