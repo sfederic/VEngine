@@ -40,7 +40,7 @@ namespace PhysicsSystem
 
 	//"Collision mesh" meaning a rough bounds mesh made in DCC tool. Pass in the mesh you want to 
 	//attach the physics actor to, with the filename being the collision mesh.
-	void CreateConvexPhysicsMeshFromCollisionMesh(MeshComponent* mesh, Actor* actor, const std::string filename);
+	void CreateConvexPhysicsMeshFromCollisionMesh(MeshComponent* mesh, const std::string filename);
 
 	void ActorToPhysxTransform(const Transform& actorTransform, physx::PxTransform& pxTransform);
 	void PhysxToActorTransform(Transform& actorTransform, const physx::PxTransform& pxTransform);

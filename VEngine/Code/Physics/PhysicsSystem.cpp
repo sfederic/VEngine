@@ -71,34 +71,29 @@ void PhysicsSystem::Init()
 //Setup physics actors on gameplay start
 void PhysicsSystem::Start()
 {
-	auto actors = World::GetAllActorsInWorld();
-	for (auto actor : actors)
+	for (auto& mesh : MeshComponent::system.GetComponents())
 	{
-		auto meshes = actor->GetComponents<MeshComponent>();
-		for (auto mesh : meshes)
+		if (!mesh->skipPhysicsCreation)
 		{
-			auto dMesh = dynamic_cast<DestructibleMeshComponent*>(mesh);
-			if (dMesh)
+			if (mesh->UsesCollisonMesh())
 			{
-				PhysicsSystem::CreatePhysicsForDestructibleMesh(dMesh);
+				const std::string collisionMeshFilename = mesh->GetCollisionMeshFilename();
+				PhysicsSystem::CreateConvexPhysicsMeshFromCollisionMesh(mesh.get(), collisionMeshFilename);
+			}
+			else
+			{
+				PhysicsSystem::CreatePhysicsActor(mesh.get(), mesh->GetPhysicsShape());
+			}
+		}
+	}
 
-				for (auto cell : dMesh->meshCells)
-				{
-					dMesh->RemoveChild(cell);
-				}
-			}
-			else if (mesh && !mesh->skipPhysicsCreation)
-			{
-				if (mesh->UsesCollisonMesh())
-				{
-					const std::string collisionMeshFilename = mesh->GetCollisionMeshFilename();
-					PhysicsSystem::CreateConvexPhysicsMeshFromCollisionMesh(mesh, actor, collisionMeshFilename);
-				}
-				else
-				{
-					PhysicsSystem::CreatePhysicsActor(mesh, mesh->GetPhysicsShape());
-				}
-			}
+	for (auto& destructibleMesh : DestructibleMeshComponent::system.GetComponents())
+	{
+		PhysicsSystem::CreatePhysicsForDestructibleMesh(destructibleMesh.get());
+
+		for (auto cell : destructibleMesh->meshCells)
+		{
+			destructibleMesh->RemoveChild(cell);
 		}
 	}
 }
@@ -326,13 +321,12 @@ void PhysicsSystem::CreateConvexPhysicsMesh(MeshComponent* mesh)
 	rigidDynamicMap.emplace(mesh->GetUID(), aConvexActor);
 }
 
-void PhysicsSystem::CreateConvexPhysicsMeshFromCollisionMesh(MeshComponent* mesh,
-	Actor* actor, const std::string filename)
+void PhysicsSystem::CreateConvexPhysicsMeshFromCollisionMesh(MeshComponent* mesh, const std::string filename)
 {
 	auto collisionMesh = new MeshComponent();
 
-	auto actorTransform = actor->GetTransform();
-	collisionMesh->SetTransform(actorTransform);
+	const auto meshTransform = mesh->GetTransform();
+	collisionMesh->SetTransform(meshTransform);
 
 	//Set the UID to the actual mesh so that the physics actor is connected to the mesh, not the collision mesh.
 	collisionMesh->SetUID(mesh->GetUID());
