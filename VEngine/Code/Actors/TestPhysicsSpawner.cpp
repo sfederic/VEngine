@@ -2,27 +2,34 @@
 #include "TestPhysicsSpawner.h"
 #include "Components/MeshComponent.h"
 #include "Components/BoxTriggerComponent.h"
+#include "Core/VMath.h"
 
 TestPhysicsSpawner::TestPhysicsSpawner()
 {
 	meshSpawnTrigger = CreateComponent<BoxTriggerComponent>("Spawner");
-	SetRootComponent(meshSpawnTrigger);
+	AddChildToRoot(meshSpawnTrigger);
 }
 
-void TestPhysicsSpawner::Start()
+void TestPhysicsSpawner::Tick(float deltaTime)
 {
-	__super::Start();
+	__super::Tick(deltaTime);
 
-	for (int i = 0; i < 25; i++)
+	if (!hasBeenEmptied && VMath::VecEqual(GetUpVectorV(), -VMath::GlobalUpVector()))
 	{
-		const auto spawnPos = meshSpawnTrigger->GetRandomPointInTrigger();
-		auto mesh = MeshComponent::system.Add(GetName() + "Mesh" + std::to_string(i), this);
-		mesh->SetWorldPosition(spawnPos);
-		mesh->SetMeshFilename("sphere.vmesh");
-		mesh->SetWorldScale(0.1f);
-		mesh->SetPhysicsStatic(false);
-		mesh->SetPhysicsShape(PhysicsActorShape::Sphere);
-		mesh->Create();
+		for (int i = 0; i < 20; i++)
+		{
+			const auto spawnPos = meshSpawnTrigger->GetRandomPointInTrigger();
+			auto mesh = MeshComponent::system.Add(GetName() + "Mesh" + std::to_string(i), this);
+			mesh->SetWorldPosition(spawnPos);
+			mesh->SetMeshFilename("sphere.vmesh");
+			mesh->SetWorldScale(0.1f);
+			mesh->SetPhysicsStatic(false);
+			mesh->SetPhysicsShape(PhysicsActorShape::Sphere);
+			mesh->Create();
+			mesh->ReCreateAsPhysicsActor(mesh->IsPhysicsStatic());
+		}
+
+		hasBeenEmptied = true;
 	}
 }
 

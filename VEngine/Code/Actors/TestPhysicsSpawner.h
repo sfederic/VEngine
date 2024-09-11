@@ -1,18 +1,19 @@
 #pragma once
 
-#include "Actor.h"
-#include "ActorSystem.h"
+#include "Actors/Game/GridActor.h"
 
-class TestPhysicsSpawner : public Actor
+class TestPhysicsSpawner : public GridActor
 {
 public:
 	ACTOR_SYSTEM(TestPhysicsSpawner);
 
 	TestPhysicsSpawner();
-	void Start() override;
+	void Tick(float deltaTime) override;
 	void End() override;
 	DEFAULT_PROPS;
 
 private:
 	class BoxTriggerComponent* meshSpawnTrigger = nullptr;
+
+	bool hasBeenEmptied = false;
 };
