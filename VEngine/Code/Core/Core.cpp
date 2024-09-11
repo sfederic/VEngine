@@ -134,10 +134,10 @@ void Core::StartGame()
 	gameplayOn = true;
 	initialStartingWorldFromEditor = World::worldFilename;
 
-	PhysicsSystem::Start();
-
 	World::StartAllComponents();
 	World::WakeAndStartAllActors();
+
+	PhysicsSystem::Start();
 
 	SkeletalMeshComponent::StartAllAnimations();
 
