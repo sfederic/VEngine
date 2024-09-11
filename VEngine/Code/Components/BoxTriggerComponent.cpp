@@ -62,14 +62,14 @@ XMVECTOR BoxTriggerComponent::GetRandomPointInTrigger()
 	XMFLOAT3 pos;
 	XMStoreFloat3(&pos, GetWorldPositionV());
 
-	float lowX = pos.x - boundingBox.Extents.x;
-	float highX = pos.x + boundingBox.Extents.x;
+	const float lowX = pos.x - boundingBox.Extents.x;
+	const float highX = pos.x + boundingBox.Extents.x;
 
-	float lowY = pos.y - boundingBox.Extents.y;
-	float highY = pos.y + boundingBox.Extents.y;
+	const float lowY = pos.y - boundingBox.Extents.y;
+	const float highY = pos.y + boundingBox.Extents.y;
 
-	float lowZ = pos.z - boundingBox.Extents.z;
-	float highZ = pos.z + boundingBox.Extents.z;
+	const float lowZ = pos.z - boundingBox.Extents.z;
+	const float highZ = pos.z + boundingBox.Extents.z;
 
 	XMFLOAT3 result{};
 	result.x = VMath::RandomRange(lowX, highX);
