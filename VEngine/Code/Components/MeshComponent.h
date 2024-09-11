@@ -70,8 +70,8 @@ public:
 	std::vector<XMFLOAT3> GetAllVertexPositions();
 
 	void SetCollisionMeshFilename(std::string_view filename) { collisionMeshFilename = filename; }
-	std::string GetCollisionMeshFilename() { return collisionMeshFilename; }
-	bool UsesCollisonMesh() { return !collisionMeshFilename.empty(); }
+	std::string GetCollisionMeshFilename() const { return collisionMeshFilename; }
+	bool UsesCollisonMesh() const { return !collisionMeshFilename.empty(); }
 
 	BlendState& GetBlendState();
 	RastState& GetRastState();
