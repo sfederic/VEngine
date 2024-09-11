@@ -59,7 +59,7 @@ void BoxTriggerComponent::SetTargetAsPlayer()
 
 XMVECTOR BoxTriggerComponent::GetRandomPointInTrigger()
 {
-	XMFLOAT3 pos;
+	XMFLOAT3 pos{};
 	XMStoreFloat3(&pos, GetWorldPositionV());
 
 	const float lowX = pos.x - boundingBox.Extents.x;
@@ -76,7 +76,7 @@ XMVECTOR BoxTriggerComponent::GetRandomPointInTrigger()
 	result.y = VMath::RandomRange(lowY, highY);
 	result.z = VMath::RandomRange(lowZ, highZ);
 
-	return XMLoadFloat3(&pos);
+	return XMLoadFloat3(&result);
 }
 
 bool BoxTriggerComponent::IntersectsWithAnyBoundingBoxInWorld()
