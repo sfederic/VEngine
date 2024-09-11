@@ -10,6 +10,7 @@ public:
 
 	TestPhysicsSpawner();
 	void Start() override;
+	void End() override;
 	DEFAULT_PROPS;
 
 private:
