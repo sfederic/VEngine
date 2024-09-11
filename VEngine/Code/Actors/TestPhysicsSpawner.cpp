@@ -21,6 +21,7 @@ void TestPhysicsSpawner::Start()
 		mesh->SetMeshFilename("sphere.vmesh");
 		mesh->SetWorldScale(0.1f);
 		mesh->SetPhysicsStatic(false);
+		mesh->SetPhysicsShape(PhysicsActorShape::Sphere);
 		mesh->Create();
 	}
 }
