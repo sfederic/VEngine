@@ -7,10 +7,8 @@
 
 struct Properties
 {
-	//PROPERTIES FOR TEXT
-	std::map<std::string, Property> propMap;
 	std::string title;
-
+	std::map<std::string, Property> propMap;
 	UID ownerUID = 0;
 
 	Properties() {}
@@ -20,7 +18,7 @@ struct Properties
 		title = title_;
 	}
 
-	bool Find(std::string name)
+	bool Find(const std::string& name)
 	{
 		return propMap.find(name) != propMap.end();
 	}
@@ -90,14 +88,12 @@ struct Properties
 	template <typename T>
 	bool CheckType(const std::string& name)
 	{
-		assert(propMap.find(name) != propMap.end());
 		return propMap.find(name)->second.info.value() == typeid(T);
 	}
 
 	template <typename T>
 	T* GetData(const std::string& name)
 	{
-		assert(propMap.find(name) != propMap.end());
 		return reinterpret_cast<T*>(propMap.find(name)->second.data);
 	}
 
@@ -114,13 +110,11 @@ struct Properties
 
 	std::type_index GetType(const std::string& name)
 	{
-		assert(propMap.find(name) != propMap.end());
 		return propMap.find(name)->second.info.value();
 	}
 
 	Property* GetProperty(const std::string& name)
 	{
-		assert(propMap.find(name) != propMap.end());
 		return &propMap.find(name)->second;
 	}
 
