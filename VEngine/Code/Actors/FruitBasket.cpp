@@ -1,16 +1,16 @@
 #include "vpch.h"
-#include "TestPhysicsSpawner.h"
+#include "FruitBasket.h"
 #include "Components/MeshComponent.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Core/VMath.h"
 
-TestPhysicsSpawner::TestPhysicsSpawner()
+FruitBasket::FruitBasket()
 {
 	meshSpawnTrigger = CreateComponent<BoxTriggerComponent>("Spawner");
 	AddChildToRoot(meshSpawnTrigger);
 }
 
-void TestPhysicsSpawner::Tick(float deltaTime)
+void FruitBasket::Tick(float deltaTime)
 {
 	__super::Tick(deltaTime);
 
@@ -33,7 +33,7 @@ void TestPhysicsSpawner::Tick(float deltaTime)
 	}
 }
 
-void TestPhysicsSpawner::End()
+void FruitBasket::End()
 {
 	for (auto mesh : GetComponents<MeshComponent>())
 	{

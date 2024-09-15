@@ -908,7 +908,7 @@
     <ClCompile Include="Code\Actors\SpherePhysicsActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\TestPhysicsSpawner.cpp">
+    <ClCompile Include="Code\Actors\FruitBasket.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1895,7 +1895,7 @@
     <ClInclude Include="Code\Actors\SpherePhysicsActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\TestPhysicsSpawner.h">
+    <ClInclude Include="Code\Actors\FruitBasket.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -2,12 +2,14 @@
 
 #include "Actors/Game/GridActor.h"
 
-class TestPhysicsSpawner : public GridActor
+//Fruitbasket is an actor holding fruits that are spawned as physics when flipped upside down.
+//It's a "fruit basket", but you can use it for anything.
+class FruitBasket : public GridActor
 {
 public:
-	ACTOR_SYSTEM(TestPhysicsSpawner);
+	ACTOR_SYSTEM(FruitBasket);
 
-	TestPhysicsSpawner();
+	FruitBasket();
 	void Tick(float deltaTime) override;
 	void End() override;
 	DEFAULT_PROPS;

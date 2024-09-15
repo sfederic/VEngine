@@ -384,7 +384,7 @@
     <ClCompile Include="Code\Actors\Game\GridActorTeleporter.cpp" />
     <ClCompile Include="Code\Actors\Game\PlayerTeleporter.cpp" />
     <ClCompile Include="Code\Actors\SpherePhysicsActor.cpp" />
-    <ClCompile Include="Code\Actors\TestPhysicsSpawner.cpp" />
+    <ClCompile Include="Code\Actors\FruitBasket.cpp" />
     <ClInclude Include="Code\Actors\Game\MapProjectionCrystal.h" />
     <ClInclude Include="Code\Actors\Game\BombRock.h" />
     <ClInclude Include="Code\Editor\Sequencer\ActiveCameraLerpToOffsetPosition.h" />
@@ -805,7 +805,7 @@
     <ClInclude Include="Code\Actors\Game\GridActorTeleporter.h" />
     <ClInclude Include="Code\Actors\Game\PlayerTeleporter.h" />
     <ClInclude Include="Code\Actors\SpherePhysicsActor.h" />
-    <ClInclude Include="Code\Actors\TestPhysicsSpawner.h" />
+    <ClInclude Include="Code\Actors\FruitBasket.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
