@@ -41,3 +41,10 @@ void FruitBasket::End()
 		mesh->Remove();
 	}
 }
+
+Properties FruitBasket::GetProps()
+{
+	auto props = __super::GetProps();
+	props.title = GetTypeName();
+	return props;
+}

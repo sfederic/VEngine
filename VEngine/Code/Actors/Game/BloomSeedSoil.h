@@ -14,7 +14,7 @@ public:
 	BloomSeedSoil();
 	void Create() override;
 	void Tick(float deltaTime) override;
-	DEFAULT_PROPS;
+	Properties GetProps() override;
 
 private:
 	BoxTriggerComponent* boxTrigger = nullptr;

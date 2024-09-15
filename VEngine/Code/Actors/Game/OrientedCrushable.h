@@ -7,7 +7,7 @@ class OrientedCrushable : public Crushable
 {
 public:
 	ACTOR_SYSTEM(OrientedCrushable);
-	DEFAULT_PROPS;
+	Properties GetProps() override;
 
 	void Crushed() override;
 };

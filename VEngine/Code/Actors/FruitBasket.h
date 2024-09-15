@@ -12,7 +12,7 @@ public:
 	FruitBasket();
 	void Tick(float deltaTime) override;
 	void End() override;
-	DEFAULT_PROPS;
+	Properties GetProps() override;
 
 private:
 	class BoxTriggerComponent* meshSpawnTrigger = nullptr;

@@ -34,3 +34,10 @@ void BloomSeedSoil::Tick(float deltaTime)
 		}
 	}
 }
+
+Properties BloomSeedSoil::GetProps()
+{
+	auto props = __super::GetProps();
+	props.title = GetTypeName();
+	return props;
+}

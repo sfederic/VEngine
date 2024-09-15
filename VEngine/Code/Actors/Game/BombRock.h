@@ -7,7 +7,7 @@ class BombRock : public Explosive
 {
 public:
 	ACTOR_SYSTEM(BombRock);
-	DEFAULT_PROPS;
+	Properties GetProps() override;
 
 	void OnLinkDeactivate() override;
 };
