@@ -361,6 +361,9 @@ void FileSystem::ResetWorldState()
 	CommandSystem::Get().Reset();
 	Input::Reset();
 
+	//A world reset should call End() for all actors. Liken it to ending the game.
+	World::EndAllActors();
+
 	//Set player camera on world change as active if in-gameplay
 	if (Core::gameplayOn)
 	{
