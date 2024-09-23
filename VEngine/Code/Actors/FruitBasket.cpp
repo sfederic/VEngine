@@ -42,6 +42,8 @@ void FruitBasket::End()
 		RemoveComponent(mesh);
 		mesh->Remove();
 	}
+
+	physicsMeshes.clear();
 }
 
 Properties FruitBasket::GetProps()
