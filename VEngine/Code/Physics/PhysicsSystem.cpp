@@ -138,6 +138,12 @@ void PhysicsSystem::Reset()
 		rigidActorIt.second->release();
 	}
 	rigidStaticMap.clear();
+
+	for (auto& physicsMaterialIt : physicsMaterials)
+	{
+		physicsMaterialIt.second->release();
+	}
+	physicsMaterials.clear();
 }
 
 void PhysicsSystem::ReleasePhysicsActor(MeshComponent* mesh)
@@ -202,6 +208,7 @@ void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh, const PhysicsActorSh
 
 	PxMaterial* physicsMaterial = physics->createMaterial(mesh->physicsStaticFriction, mesh->physicsDynamicFriction,
 		mesh->physicsRestitution);
+	assert(physicsMaterials.find(mesh->GetUID()) == physicsMaterials.end());
 	physicsMaterials.emplace(mesh->GetUID(), physicsMaterial);
 
 	PxShape* shape = nullptr;
