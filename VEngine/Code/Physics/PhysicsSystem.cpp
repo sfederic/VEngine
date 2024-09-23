@@ -315,6 +315,7 @@ void PhysicsSystem::CreateConvexPhysicsMesh(MeshComponent* mesh)
 
 	PxMaterial* material = physics->createMaterial(mesh->physicsStaticFriction, mesh->physicsDynamicFriction,
 		mesh->physicsRestitution);
+	assert(physicsMaterials.find(mesh->GetUID()) == physicsMaterials.end());
 	physicsMaterials.emplace(mesh->GetUID(), material);
 
 	PxRigidDynamic* aConvexActor = physics->createRigidDynamic(pxTransform);
