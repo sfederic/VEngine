@@ -139,11 +139,11 @@ void PhysicsSystem::Reset()
 	}
 	rigidStaticMap.clear();
 
-	for (auto& physicsMaterialIt : physicsMaterials)
+	for (auto& physicsMeshIt : physicsMeshes)
 	{
-		physicsMaterialIt.second->release();
+		physicsMeshIt.second->Remove();
 	}
-	physicsMaterials.clear();
+	physicsMeshes.clear();
 }
 
 void PhysicsSystem::ReleasePhysicsActor(MeshComponent* mesh)
