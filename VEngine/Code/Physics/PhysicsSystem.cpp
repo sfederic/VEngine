@@ -141,6 +141,10 @@ void PhysicsSystem::Reset()
 		rigidActorIt.second->release();
 	}
 	rigidStaticMap.clear();
+
+	//Physics materials should all be cleared in ReleasePhysicsActor(), but the map still needs to be cleared
+	//at this point to deal with the leftover UIDs that will conflict when resetting the game.
+	physicsMaterials.clear();
 }
 
 void PhysicsSystem::ReleasePhysicsActor(MeshComponent* mesh)
