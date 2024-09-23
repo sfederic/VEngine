@@ -27,6 +27,8 @@ void FruitBasket::Tick(float deltaTime)
 			mesh->SetPhysicsShape(PhysicsActorShape::Sphere);
 			mesh->Create();
 			mesh->ReCreateAsPhysicsActor(mesh->IsPhysicsStatic());
+
+			physicsMeshes.push_back(mesh);
 		}
 
 		hasBeenEmptied = true;
@@ -35,7 +37,7 @@ void FruitBasket::Tick(float deltaTime)
 
 void FruitBasket::End()
 {
-	for (auto mesh : GetComponents<MeshComponent>())
+	for (auto mesh : physicsMeshes)
 	{
 		RemoveComponent(mesh);
 		mesh->Remove();

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Actors/Game/GridActor.h"
+#include <vector>
 
 //Fruitbasket is an actor holding fruits that are spawned as physics when flipped upside down.
 //It's a "fruit basket", but you can use it for anything.
@@ -15,6 +16,8 @@ public:
 	Properties GetProps() override;
 
 private:
+	std::vector<MeshComponent*> physicsMeshes;
+
 	class BoxTriggerComponent* meshSpawnTrigger = nullptr;
 
 	bool hasBeenEmptied = false;
