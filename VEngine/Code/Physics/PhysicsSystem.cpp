@@ -14,6 +14,9 @@
 using namespace physx;
 
 //Store the original mesh UID against the new meshcomponent so that it can use its world matrix in render
+//Todo: Pretty sure Physics Meshes don't need to be deleted on PhysicsSystem::Reset() or Cleanup(),
+//although I'm not 100% sure. I think the MeshComponent system will clean it up, and the emplace()
+//will replace existing meshes on subsequent game starts.
 std::unordered_map<UID, std::unique_ptr<MeshComponent>> physicsMeshes;
 
 std::unordered_map<UID, PxMaterial*> physicsMaterials;
@@ -138,12 +141,6 @@ void PhysicsSystem::Reset()
 		rigidActorIt.second->release();
 	}
 	rigidStaticMap.clear();
-
-	for (auto& physicsMeshIt : physicsMeshes)
-	{
-		physicsMeshIt.second->Remove();
-	}
-	physicsMeshes.clear();
 }
 
 void PhysicsSystem::ReleasePhysicsActor(MeshComponent* mesh)
