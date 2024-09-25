@@ -1353,6 +1353,9 @@ void Player::ToggleReconMode()
 			_mesh->SetVisibility(false);
 
 			reconWidget->AddToViewport();
+
+			linkEffectMeshSetAlpha = false;
+			ResetHighlightedActor();
 		}
 		else
 		{
@@ -1362,6 +1365,9 @@ void Player::ToggleReconMode()
 			_mesh->SetVisibility(true);
 
 			reconWidget->RemoveFromViewport();
+
+			//re-highlight the grid actor the player may be facing on recon mode exit
+			HighlightLinkableGridActor();
 		}
 	}
 }
