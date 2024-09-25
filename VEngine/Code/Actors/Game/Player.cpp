@@ -1413,6 +1413,11 @@ bool Player::CheckIfUpgradeExists(std::string upgradeName)
 
 void Player::EnableLinkEffectMeshForHover(MeshComponent* linkMesh)
 {
+	if (reconModeOn)
+	{
+		return;
+	}
+
 	linkEffectMeshSetAlpha = true;
 	linkEffectMesh->SetVisibility(true);
 
