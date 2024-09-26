@@ -93,6 +93,8 @@ void Widget::GetScreenSpaceCoords(int& sx, int& sy)
 
 void Widget::Text(const std::wstring text, Layout layout, TextAlign align, D2D1_COLOR_F color, float opacity)
 {
+	activeWidgetControlLayouts.emplace_back(layout);
+
 	DWRITE_TEXT_ALIGNMENT endAlignment{};
 
 	switch (align)
@@ -125,6 +127,8 @@ void Widget::Text(const std::string text, Layout layout, TextAlign align, D2D1_C
 bool Widget::Button(const std::wstring text, Layout layout,
 	TextAlign textAlign, D2D1_COLOR_F textColor, float textOpacity, bool isActive)
 {
+	activeWidgetControlLayouts.emplace_back(layout);
+
 	UISystem::FillRect(layout, Colours::Grey);
 	Text(text, layout.rect, textAlign, textColor, textOpacity);
 
@@ -162,6 +166,8 @@ bool Widget::Button(const std::string text, Layout layout, TextAlign textAlign, 
 
 void Widget::Image(std::string_view filename, Layout layout, float alpha)
 {
+	activeWidgetControlLayouts.emplace_back(layout);
+
 	Sprite sprite = {};
 	sprite.textureFilename = filename;
 	sprite.dstRect = { (long)layout.rect.left, (long)layout.rect.top, (long)layout.rect.right, (long)layout.rect.bottom };
@@ -191,6 +197,9 @@ Layout Widget::ImageAsOriginalSize(std::string_view textureFilename, long x, lon
 	imageLayout.rect.top = (float)y;
 	imageLayout.rect.right = (float)texWidth;
 	imageLayout.rect.bottom = (float)texHeight;
+
+	activeWidgetControlLayouts.emplace_back(imageLayout);
+
 	return imageLayout;
 }
 
@@ -202,11 +211,20 @@ void Widget::Image(std::string_view filename, int x, int y, int w, int h, float 
 	sprite.srcRect = { 0, 0, w, h };
 	sprite.colour.w = alpha;
 
+	Layout imageLayout;
+	imageLayout.rect.left = (float)x;
+	imageLayout.rect.top = (float)y;
+	imageLayout.rect.right = (float)x + w;
+	imageLayout.rect.bottom = (float)y + h;
+	activeWidgetControlLayouts.emplace_back(imageLayout);
+
 	SpriteSystem::CreateScreenSprite(sprite);
 }
 
 bool Widget::ImageButton(std::string_view filename, Layout layout, float alpha)
 {
+	activeWidgetControlLayouts.emplace_back(layout);
+
 	Sprite sprite = {};
 	sprite.textureFilename = filename;
 	sprite.dstRect = { (long)layout.rect.left, (long)layout.rect.top, (long)layout.rect.right, (long)layout.rect.bottom };
@@ -237,11 +255,13 @@ bool Widget::ImageButton(std::string_view filename, Layout layout, float alpha)
 
 void Widget::Rect(Layout layout, D2D1_COLOR_F color, float lineWidth, float opacity)
 {
+	activeWidgetControlLayouts.emplace_back(layout);
 	UISystem::DrawRect(layout, color, lineWidth, opacity);
 }
 
 void Widget::FillRect(Layout layout, D2D1_COLOR_F color, float opacity)
 {
+	activeWidgetControlLayouts.emplace_back(layout);
 	UISystem::FillRect(layout, color, opacity);
 }
 

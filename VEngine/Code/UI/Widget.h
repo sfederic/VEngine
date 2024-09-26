@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <vector>
 #include <DirectXMath.h>
 #include "Layout.h"
 #include "Core/UID.h"
@@ -92,6 +93,9 @@ protected:
 	Layout CenterLayoutOnScreenSpaceCoords(float w, float h, float sx, float sy);
 
 	std::string widgetName;
+
+	//This is every widget control's layout defined through each widget's draw function.
+	std::vector<Layout> activeWidgetControlLayouts;
 
 	//The widget's position in world space to be mapped to screen space (Use Actor::GetHomogeneousPositionV() to set this)
 	XMVECTOR worldPosition = XMVectorSet(0.f, 0.f, 0.f, 1.f);
