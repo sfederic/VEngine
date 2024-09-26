@@ -39,6 +39,10 @@ public:
 	virtual ~Widget() = default;
 	virtual void Draw(float deltaTime) {}
 	virtual void Start() {}
+
+	//Called at end of frame to clean up any widget internals.
+	virtual void End();
+
 	void Destroy();
 
 	void AddToViewport(float removeTimer = 0.f);

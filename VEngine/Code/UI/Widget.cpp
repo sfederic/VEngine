@@ -11,6 +11,11 @@
 #include "Render/TextureSystem.h"
 #include "Render/Texture2D.h"
 
+void Widget::End()
+{
+	activeWidgetControlLayouts.clear();
+}
+
 void Widget::Destroy()
 {
 	RemoveFromViewport();

@@ -11,6 +11,8 @@
 #include "UI/Game/PauseGameWidget.h"
 #include "Core/SystemStates.h"
 
+void EndAllWidgets();
+
 static SystemStates systemState = SystemStates::Unloaded;
 
 ScreenFadeWidget* UISystem::screenFadeWidget;
@@ -153,9 +155,26 @@ void UISystem::DrawAllWidgets(float deltaTime)
 	}
 }
 
+void EndAllWidgets()
+{
+	//Todo: maybe throw a DEBUG #ifdef here. Clearing std::vectors every frame for widgets might not be great.
+	
+	//Same for loop use case as UISystem::DrawAllWidgets()
+	for (int i = 0; i < UISystem::widgetsInViewport.size(); i++)
+	{
+		auto widget = UISystem::widgetsInViewport[i];
+		if (widget->render)
+		{
+			widget->End();
+		}
+	}
+}
+
 void UISystem::EndDraw()
 {
 	d2dRenderTarget->EndDraw();
+
+	EndAllWidgets();
 }
 
 void UISystem::Cleanup()
