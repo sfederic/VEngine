@@ -62,6 +62,9 @@ public:
 	auto GetUID() const { return uid; }
 	auto GetName() const { return widgetName; }
 
+	void DrawDebugRectsForAllActiveLayouts();
+	std::vector<Layout> GetAllActiveControlLayouts() const;
+
 protected:
 	void GetScreenSpaceCoords(int& sx, int& sy);
 

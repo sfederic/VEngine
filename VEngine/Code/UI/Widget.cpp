@@ -91,6 +91,19 @@ bool Widget::IsMouseInLayout(Layout layout)
 	return false;
 }
 
+void Widget::DrawDebugRectsForAllActiveLayouts()
+{
+	for (const auto& layout : activeWidgetControlLayouts)
+	{
+		Rect(layout, Colours::Magneta);
+	}
+}
+
+std::vector<Layout> Widget::GetAllActiveControlLayouts() const
+{
+	return activeWidgetControlLayouts;
+}
+
 void Widget::GetScreenSpaceCoords(int& sx, int& sy)
 {
 	VMath::HomogenousWorldPosToScreenSpaceCoords(worldPosition, sx, sy);

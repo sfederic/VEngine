@@ -688,20 +688,31 @@ void DebugMenu::RenderWidgetDetailsMenu()
 
 	ImGui::Begin("Widget Details");
 
-	const auto widgetsInViewport = UISystem::GetAllWidgetsInViewport();
+	const std::vector<Widget*> widgetsInViewport = UISystem::GetAllWidgetsInViewport();
 
 	if (widgetsInViewport.empty())
 	{
 		ImGui::Text("No Widgets in viewport.");
 	}
 
-	const int mousePosX = Editor::Get().GetViewportMouseX();
-	const int mousePosY = Editor::Get().GetViewportMouseY();
+	const int mouseViewportPosX = Editor::Get().GetViewportMouseX();
+	const int mouseViewportPosY = Editor::Get().GetViewportMouseY();
 
-	ImGui::SetWindowPos(ImVec2(mousePosX, mousePosY));
+	ImGui::SetWindowPos(ImVec2(mouseViewportPosX, mouseViewportPosY));
 
 	for (Widget* widget : widgetsInViewport)
 	{
+		widget->DrawDebugRectsForAllActiveLayouts();
+
+		for (const auto& layout : widget->GetAllActiveControlLayouts())
+		{
+			if (layout.IsPosInLayout(mouseViewportPosX, mouseViewportPosY))
+			{
+				const std::string widgetName = widget->GetName();
+				ImGui::Text(widgetName.c_str());
+				break;
+			}
+		}
 	}
 
 	ImGui::End();
