@@ -41,4 +41,16 @@ struct Layout
 	{
 		rect.bottom = rect.top + spacing;
 	}
+
+	bool IsPosInLayout(int x, int y) const
+	{
+		if (x > rect.left && x < rect.right)
+		{
+			if (y > rect.top && y < rect.bottom)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 };
