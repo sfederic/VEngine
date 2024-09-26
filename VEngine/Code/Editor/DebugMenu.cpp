@@ -679,6 +679,8 @@ void DebugMenu::RenderUVPaintMenu()
 	ImGui::End();
 }
 
+//Todo: there's an issue here where because DebugMenu::Tick() is called before Direct2D ends its frame,
+//ImGui is drawn underneath Widgets. It's not terrible, still usable but it doesn't look clean.
 void DebugMenu::RenderWidgetDetailsMenu()
 {
 	if (!widgetDetailsMenuOpen)
