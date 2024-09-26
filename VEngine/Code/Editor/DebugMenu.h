@@ -39,6 +39,7 @@ public:
 	bool uvMenuOpen = false;
 	bool uvPaintMenuOpen = false;
 	bool sequencerOpen = false;
+	bool widgetDetailsMenuOpen = false;
 
 	//Whether the Imgui windows have been clicked
 	bool hasMouseFocus = false;
@@ -74,6 +75,7 @@ private:
 	void RenderVertexPaintMenu();
 	void RenderUVMenu();
 	void RenderUVPaintMenu();
+	void RenderWidgetDetailsMenu();
 
 	void RenderTexturePlacementMenu();
 	void RenderMaterialPlacementMenu();

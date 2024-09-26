@@ -64,4 +64,6 @@ namespace UISystem
 	//has a mouse-based control scheme on the camera or itself).
 	void SetWidgetControlActive(bool active);
 	bool GetWidgetControlActive();
+
+	std::vector<Widget*> GetAllWidgetsInViewport();
 };

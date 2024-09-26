@@ -93,6 +93,7 @@ void DebugMenu::Tick(float deltaTime)
 	RenderVertexPaintMenu();
 	RenderUVMenu();
 	RenderUVPaintMenu();
+	RenderWidgetDetailsMenu();
 
 	ImGui::EndFrame();
 
@@ -673,6 +674,34 @@ void DebugMenu::RenderUVPaintMenu()
 	{
 		AssetSystem::CreateVMeshFromInWorldMesh();
 		Log("Exported .vmesh for picked actor UV painting.");
+	}
+
+	ImGui::End();
+}
+
+void DebugMenu::RenderWidgetDetailsMenu()
+{
+	if (!widgetDetailsMenuOpen)
+	{
+		return;
+	}
+
+	ImGui::Begin("Widget Details");
+
+	const auto widgetsInViewport = UISystem::GetAllWidgetsInViewport();
+
+	if (widgetsInViewport.empty())
+	{
+		ImGui::Text("No Widgets in viewport.");
+	}
+
+	const int mousePosX = Editor::Get().GetViewportMouseX();
+	const int mousePosY = Editor::Get().GetViewportMouseY();
+
+	ImGui::SetWindowPos(ImVec2(mousePosX, mousePosY));
+
+	for (Widget* widget : widgetsInViewport)
+	{
 	}
 
 	ImGui::End();

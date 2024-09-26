@@ -223,6 +223,11 @@ bool UISystem::GetWidgetControlActive()
 	return widgetControlActive;
 }
 
+std::vector<Widget*> UISystem::GetAllWidgetsInViewport()
+{
+	return widgetsInViewport;
+}
+
 void ResetWidgets()
 {
 	for (auto it = UISystem::widgets.cbegin(); it != UISystem::widgets.cend();)

@@ -55,6 +55,10 @@ void Console::Init()
 		std::make_pair([]() { RunWorldLoadTest(); },
 			"Load every world in the world maps folder in sequence."));
 
+	executeMap.emplace(L"WIDGET",
+		std::make_pair([]() { debugMenu.widgetDetailsMenuOpen = !debugMenu.widgetDetailsMenuOpen; },
+			"Mouse-over debug details for all rendered widgets in viewport."));
+
 	executeMap.emplace(L"LS",
 		std::make_pair([]() { debugMenu.consoleCommandsMenuOpen = !debugMenu.consoleCommandsMenuOpen; },
 			"List all console commands"));
