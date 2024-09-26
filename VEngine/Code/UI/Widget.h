@@ -33,6 +33,8 @@ public:
 		BottomRight,
 	};
 
+	Widget() {}
+	Widget(std::string_view widgetName_) : widgetName(widgetName_) {}
 	virtual ~Widget() = default;
 	virtual void Draw(float deltaTime) {}
 	virtual void Start() {}
@@ -53,6 +55,7 @@ public:
 	void SetWorldPosition(XMVECTOR pos) { worldPosition = pos; }
 
 	auto GetUID() const { return uid; }
+	auto GetName() const { return widgetName; }
 
 protected:
 	void GetScreenSpaceCoords(int& sx, int& sy);
@@ -87,6 +90,8 @@ protected:
 
 	Layout CenterLayoutOnScreenSpaceCoords(float w, float h);
 	Layout CenterLayoutOnScreenSpaceCoords(float w, float h, float sx, float sy);
+
+	std::string widgetName;
 
 	//The widget's position in world space to be mapped to screen space (Use Actor::GetHomogeneousPositionV() to set this)
 	XMVECTOR worldPosition = XMVectorSet(0.f, 0.f, 0.f, 1.f);
