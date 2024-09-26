@@ -6,5 +6,6 @@
 class PlayerUpgradeInfoWidget : public Widget
 {
 public:
+	PlayerUpgradeInfoWidget() : Widget("PlayerUpgradeInfoWidget") {}
 	void Draw(float deltaTime) override;
 };

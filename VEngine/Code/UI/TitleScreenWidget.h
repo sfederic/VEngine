@@ -6,6 +6,7 @@
 class TitleScreenWidget : public Widget
 {
 public:
+	TitleScreenWidget() : Widget("TitleScreenWidget") {}
 	void Start() override;
 	void Draw(float deltaTime) override;
 

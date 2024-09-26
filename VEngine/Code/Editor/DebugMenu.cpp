@@ -710,8 +710,8 @@ void DebugMenu::RenderWidgetDetailsMenu()
 		{
 			if (layout.IsPosInLayout(mouseViewportPosX, mouseViewportPosY))
 			{
-				const std::string widgetName = widget->GetName();
-				ImGui::Text(widgetName.c_str());
+				const std::string widgetClassName = widget->GetWidgetClassName();
+				ImGui::Text(widgetClassName.c_str());
 				break;
 			}
 		}

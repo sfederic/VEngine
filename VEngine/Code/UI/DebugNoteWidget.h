@@ -6,6 +6,7 @@
 class DebugNoteWidget : public Widget
 {
 public:
+	DebugNoteWidget() : Widget("DebugNoteWidget") {}
 	void Draw(float deltaTime) override;
 	void SetNoteText(std::wstring_view text) { noteText = text; }
 

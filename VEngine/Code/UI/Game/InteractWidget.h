@@ -6,6 +6,7 @@
 class InteractWidget : public Widget
 {
 public:
+	InteractWidget() : Widget("InteractWidget") {}
 	std::wstring interactText;
 	void Draw(float deltaTime) override;
 };

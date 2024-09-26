@@ -6,7 +6,8 @@
 class PopupWidget : public Widget
 {
 public:
-	virtual void Draw(float deltaTime) override;
+	PopupWidget() : Widget("PopupWidget") {}
+	void Draw(float deltaTime) override;
 
 	void SetPopupText(std::wstring_view text) { popupText = text; }
 

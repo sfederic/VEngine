@@ -34,8 +34,7 @@ public:
 		BottomRight,
 	};
 
-	Widget() {}
-	Widget(std::string_view widgetName_) : widgetName(widgetName_) {}
+	Widget(std::string_view className) : widgetClassName(className) {}
 	virtual ~Widget() = default;
 	virtual void Draw(float deltaTime) {}
 	virtual void Start() {}
@@ -60,7 +59,7 @@ public:
 	void SetWorldPosition(XMVECTOR pos) { worldPosition = pos; }
 
 	auto GetUID() const { return uid; }
-	auto GetName() const { return widgetName; }
+	auto GetWidgetClassName() const { return widgetClassName; }
 
 	void DrawDebugRectsForAllActiveLayouts();
 	std::vector<Layout> GetAllActiveControlLayouts() const;
@@ -99,7 +98,7 @@ protected:
 	Layout CenterLayoutOnScreenSpaceCoords(float w, float h);
 	Layout CenterLayoutOnScreenSpaceCoords(float w, float h, float sx, float sy);
 
-	std::string widgetName;
+	std::string widgetClassName;
 
 	//This is every widget control's layout defined through each widget's draw function.
 	std::vector<Layout> activeWidgetControlLayouts;

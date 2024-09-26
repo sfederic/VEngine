@@ -6,6 +6,7 @@
 class DialogueWidget : public Widget
 {
 public:
+	DialogueWidget() : Widget("DialogueWidget") {}
 	void Draw(float deltaTime) override;
 	void SetText(std::wstring_view text) { fullDialogueText = text; }
 

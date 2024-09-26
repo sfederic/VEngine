@@ -17,7 +17,8 @@ private:
 	FadeValue fade = FadeValue::FadeOut;
 
 public:
-	virtual void Draw(float deltaTime) override;
+	ScreenFadeWidget() : Widget("ScreenFadeWidget") {}
+	void Draw(float deltaTime) override;
 	void SetToFadeIn();
 	void SetToFadeOut();
 };

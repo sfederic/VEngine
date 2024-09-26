@@ -4,6 +4,7 @@
 class HealthWidget : public Widget
 {
 public:
+	HealthWidget() : Widget("HealthWidget") {}
 	int healthPoints = 0;
 	int maxHealthPoints = 1;
 

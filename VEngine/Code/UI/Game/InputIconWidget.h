@@ -6,6 +6,7 @@
 class InputIconWidget : public Widget
 {
 public:
+	InputIconWidget() : Widget("InputIconWidget") {}
 	void Draw(float deltaTime) override;
 	void SetIconImageFilename(std::string_view filename) { iconImageFilename = filename; }
 

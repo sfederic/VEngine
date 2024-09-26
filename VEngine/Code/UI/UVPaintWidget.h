@@ -11,7 +11,7 @@
 class UVPaintWidget : public Widget
 {
 public:
-	UVPaintWidget()
+	UVPaintWidget() : Widget("UVPaintWidget")
 	{
 		SetTextureFromPickedActor();
 		isStaticWidget = true;
