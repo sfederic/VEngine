@@ -1493,7 +1493,7 @@ void RenderLightMeshes()
 	{
 		if (!directionalLight->IsActive())
 		{
-			return;
+			continue;
 		}
 
 		shaderMatrices.model = directionalLight->GetWorldMatrix();
@@ -1511,7 +1511,7 @@ void RenderLightMeshes()
 	{
 		if (!pointLight->IsActive())
 		{
-			return;
+			continue;
 		}
 
 		shaderMatrices.model = pointLight->GetWorldMatrix();
@@ -1529,7 +1529,7 @@ void RenderLightMeshes()
 	{
 		if (!spotLight->IsActive())
 		{
-			return;
+			continue;
 		}
 
 		shaderMatrices.model = spotLight->GetWorldMatrix();
