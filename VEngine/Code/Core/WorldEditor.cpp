@@ -283,6 +283,7 @@ void DeleteActor()
 					//Destroy all multiple picked actors
 					for (auto actor : pickedActors)
 					{
+						CommandSystem::Get().AddDeleteActorCommand(actor);
 						actor->Remove();
 					}
 				}
@@ -290,6 +291,7 @@ void DeleteActor()
 				{
 					debugMenu.AddNotification(VString::wformat(
 						L"Destroyed actor [%S]", gPickedActor->GetName().c_str()));
+					CommandSystem::Get().AddDeleteActorCommand(gPickedActor);
 					gPickedActor->Remove();
 				}
 			}

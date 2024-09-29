@@ -249,10 +249,58 @@ public:
 		}
 	}
 
+	void AddDeletedActor(Actor* actorToDelete) override
+	{
+		auto duplicateActor = new T();
+		duplicateActor->SetActorSystem(this);
+
+		auto newActorProps = duplicateActor->GetAllProps();
+		auto deletedActorProps = actorToDelete->GetAllProps();
+		Properties::CopyProperties(deletedActorProps, newActorProps);
+
+		duplicateActor->Create();
+		duplicateActor->CreateAllComponents();
+		duplicateActor->PostCreate();
+
+		deletedActors.push_back(duplicateActor);
+	}
+
+	Actor* GetLastDeletedActor() override
+	{
+		if (deletedActors.empty())
+		{
+			return nullptr;
+		}
+		return (Actor*)deletedActors.back();
+	}
+
+	void PopBackLastDeletedActor() override
+	{
+		auto actor = deletedActors.back();
+
+		//Temporarily add actor to world so that the component deletes can find the actor by UID in world.
+		World::AddActorToWorld(actor);
+
+		auto components = actor->GetAllComponents();
+		for (int i = 0; i < components.size(); i++)
+		{
+			Component* component = components[i];
+			actor->RemoveComponent(component);
+			component->Remove();
+		}
+
+		World::RemoveActorFromWorld(actor);
+
+		//This will cause leaks calling this and not cleaning the actor up properly,
+		//it shouldn't matter too much as it's just in the editor but keep an eye on it.
+		deletedActors.pop_back();
+	}
+
 private:
 	std::vector<std::unique_ptr<T>> actors;
+	std::vector<Actor*> deletedActors;
 	std::unordered_set<size_t> actorIndexToDeferDestroy;
 };
 
 #define ACTOR_SYSTEM(type) inline static ActorSystem<type> system; \
-virtual void Remove() override { Destroy(); system.Remove(GetSystemIndex()); } \
+virtual void Remove() override { __super::Remove(); Destroy(); system.Remove(GetSystemIndex()); } \

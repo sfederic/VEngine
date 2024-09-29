@@ -77,7 +77,7 @@ public:
 	//Do not override this directly. ACTOR_SYSTEM macro overrides instead.
 	virtual void Destroy() {}
 
-	virtual void Remove() {}
+	virtual void Remove();
 
 	//Flags actor to be destroyed at end of frame.
 	void DeferDestroy();

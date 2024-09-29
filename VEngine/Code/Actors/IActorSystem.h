@@ -24,6 +24,10 @@ public:
 	virtual void DeferActorForDestroy(size_t index) = 0;
 	virtual void DestroyDeferredActors() = 0;
 
+	virtual void AddDeletedActor(Actor* actorToDelete) = 0;
+	virtual Actor* GetLastDeletedActor() = 0;
+	virtual void PopBackLastDeletedActor() = 0;
+
 	//Destroys an actor through its linked ActorSystem when its base class does not ACTOR_SYSTEM() defined.
 	virtual void RemoveInterfaceActor(Actor* actor) = 0;
 

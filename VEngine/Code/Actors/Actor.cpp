@@ -175,6 +175,15 @@ std::vector<Properties> Actor::GetAllProps()
 	return propsVector;
 }
 
+void Actor::Remove()
+{
+	//Because new deleted actors thrown onto the undo list will still have their components around from
+	//their new duplicate actor, set all components as inactive.
+	SetActive(false);
+
+	actorSystem->AddDeletedActor(this);
+}
+
 void Actor::DeferDestroy()
 {
 	deferredForDestroy = true;

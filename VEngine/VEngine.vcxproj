@@ -120,6 +120,7 @@
   <ItemGroup>
     <ClCompile Include="Code\Actors\Game\MapProjectionCrystal.cpp" />
     <ClCompile Include="Code\Actors\Game\BombRock.cpp" />
+    <ClCompile Include="Code\Commands\UndoActorDeleteCommand.cpp" />
     <ClCompile Include="Code\Editor\Sequencer\ActiveCameraLerpToOffsetPosition.cpp" />
     <ClCompile Include="Code\Editor\Sequencer\CameraSequenceEntryData.cpp" />
     <ClCompile Include="Code\Actors\Game\BloomSeedSoil.cpp" />
@@ -387,6 +388,7 @@
     <ClCompile Include="Code\Actors\FruitBasket.cpp" />
     <ClInclude Include="Code\Actors\Game\MapProjectionCrystal.h" />
     <ClInclude Include="Code\Actors\Game\BombRock.h" />
+    <ClInclude Include="Code\Commands\UndoActorDeleteCommand.h" />
     <ClInclude Include="Code\Editor\Sequencer\ActiveCameraLerpToOffsetPosition.h" />
     <ClInclude Include="Code\Editor\Sequencer\CameraSequenceEntryData.h" />
     <ClInclude Include="Code\Actors\Game\BloomSeedSoil.h" />

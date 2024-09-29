@@ -4,6 +4,8 @@
 #include <memory>
 #include "Commands/Command.h"
 
+class Actor;
+
 class CommandSystem
 {
 public:
@@ -17,8 +19,9 @@ public:
 	void AddCommand(Property& prop)
 	{
 		commands.emplace_back(std::make_unique<Command<T>>(prop));
-		commandIndex = commands.size() - 1;
 	}
+
+	void AddDeleteActorCommand(Actor* actorToDelete);
 
 	void Tick();
 	void Reset();
