@@ -1261,12 +1261,18 @@ void RenderBounds()
 
 		for (auto& mesh : MeshComponent::system.GetComponents())
 		{
-			DrawBoundingBox(mesh.get(), debugBox);
+			if (mesh->IsActive())
+			{
+				DrawBoundingBox(mesh.get(), debugBox);
+			}
 		}
 
 		for (auto& skeletalMesh : SkeletalMeshComponent::system.GetComponents())
 		{
-			DrawBoundingBox(skeletalMesh.get(), debugBox);
+			if (skeletalMesh->IsActive())
+			{
+				DrawBoundingBox(skeletalMesh.get(), debugBox);
+			}
 		}
 
 		for (auto& boxData : debugOrientedBoxesOnTimerToRender)
