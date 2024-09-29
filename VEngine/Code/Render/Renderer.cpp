@@ -1491,6 +1491,11 @@ void RenderLightMeshes()
 
 	for (auto& directionalLight : DirectionalLightComponent::system.GetComponents())
 	{
+		if (!directionalLight->IsActive())
+		{
+			return;
+		}
+
 		shaderMatrices.model = directionalLight->GetWorldMatrix();
 		shaderMatrices.MakeModelViewProjectionMatrix();
 		cbMatrices.Map(&shaderMatrices);
@@ -1504,6 +1509,11 @@ void RenderLightMeshes()
 
 	for (auto& pointLight : PointLightComponent::system.GetComponents())
 	{
+		if (!pointLight->IsActive())
+		{
+			return;
+		}
+
 		shaderMatrices.model = pointLight->GetWorldMatrix();
 		shaderMatrices.MakeModelViewProjectionMatrix();
 		cbMatrices.Map(&shaderMatrices);
@@ -1517,6 +1527,11 @@ void RenderLightMeshes()
 
 	for (auto& spotLight : SpotLightComponent::system.GetComponents())
 	{
+		if (!spotLight->IsActive())
+		{
+			return;
+		}
+
 		shaderMatrices.model = spotLight->GetWorldMatrix();
 		shaderMatrices.MakeModelViewProjectionMatrix();
 		cbMatrices.Map(&shaderMatrices);
