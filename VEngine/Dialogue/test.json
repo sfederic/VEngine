@@ -1,8 +1,8 @@
 {
-  "CharacterLine01": [
+  "ReconTestLine": [
       {
-        "EN": "Hello Baby",
-        "JP": "うーん"
+        "EN": "No Information to display",
+        "JP": "表示する情報がありません"
       }
-    ]
+  ]
 }
