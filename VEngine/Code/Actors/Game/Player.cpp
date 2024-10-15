@@ -1388,7 +1388,7 @@ void Player::DisplayReconInfo()
 		}
 		else
 		{
-			const auto reconText = Localise::GetString("ReconTestLine");
+			const auto reconText = Localise::GetString("ReconTestLine2", "test.json");
 			reconWidget->SetReconText(reconText);
 		}
 	}
