@@ -42,6 +42,9 @@ std::wstring Localise::GetString(const std::string& key, const std::string& file
 	}
 
 	const std::wstring ouputValue = stringObject.value(gLanguage.c_str()).toString().toStdWString();
+
+	file.close();
+
 	return ouputValue;
 }
 
