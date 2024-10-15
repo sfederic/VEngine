@@ -9,8 +9,16 @@
 
 std::string gLanguage = "EN";
 
+std::unordered_map<std::string, std::wstring> gLocalisedStringsCache;
+
 std::wstring Localise::GetString(const std::string& key, const std::string& filename)
 {
+	auto stringCacheIt = gLocalisedStringsCache.find(key);
+	if (stringCacheIt != gLocalisedStringsCache.end())
+	{
+		return stringCacheIt->second;
+	}
+
 	const std::string filePath = AssetBaseFolders::dialogue + filename;
 	QFile file(filePath.c_str());
 
@@ -41,7 +49,9 @@ std::wstring Localise::GetString(const std::string& key, const std::string& file
 		return L"LANGUAGE_KEY_NOT_FOUND";
 	}
 
-	const std::wstring ouputValue = stringObject.value(gLanguage.c_str()).toString().toStdWString();
+	std::wstring ouputValue = stringObject.value(gLanguage.c_str()).toString().toStdWString();
+
+	gLocalisedStringsCache.emplace(key, ouputValue);
 
 	file.close();
 
