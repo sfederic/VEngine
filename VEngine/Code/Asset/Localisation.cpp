@@ -18,11 +18,16 @@ std::wstring Localise::GetString(const std::string& key)
 		return L"NOT_FOUND";
 	}
 
-	const QJsonDocument doc = QJsonDocument::fromJson(file.readAll());
-	const QJsonObject rootObject = doc.object();
-	const QJsonObject foundObject = rootObject.value(key.c_str()).toObject();
+	QJsonDocument doc = QJsonDocument::fromJson(file.readAll());
+
+	//Get the root JSON element in the file
+	QJsonObject rootObject = doc.object();
 	
-	const std::wstring ouputValue = foundObject.value(gLanguage.c_str()).toString().toStdWString();
+	//Find object the matching key
+	QJsonArray stringArray = rootObject.value(key.c_str()).toArray();
+
+	QJsonObject stringObject = stringArray[0].toObject();
+	const std::wstring ouputValue = stringObject.value(gLanguage.c_str()).toString().toStdWString();
 	return ouputValue;
 }
 
