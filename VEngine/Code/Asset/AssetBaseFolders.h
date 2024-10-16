@@ -3,7 +3,7 @@
 #include <string>
 
 //Base folder starting paths for corresponding assets.
-struct AssetBaseFolders
+namespace AssetBaseFolders
 {
 	inline static const std::string fbxFiles = "FBXFiles/";
 	inline static const std::string animationFBXFiles = "AnimationFBXFiles/";

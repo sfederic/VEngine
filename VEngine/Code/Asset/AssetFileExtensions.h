@@ -3,7 +3,7 @@
 #include <string>
 
 //File extensions for engine specific formats
-struct AssetFileExtensions
+namespace AssetFileExtensions
 {
 	inline static const std::string mesh = ".vmesh";
 	inline static const std::string actorTemplate = ".actor";
