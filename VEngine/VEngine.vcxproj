@@ -386,7 +386,7 @@
     <ClCompile Include="Code\Actors\Game\PlayerTeleporter.cpp" />
     <ClCompile Include="Code\Actors\SpherePhysicsActor.cpp" />
     <ClCompile Include="Code\Actors\FruitBasket.cpp" />
-    <ClCompile Include="Code\Asset\Localisation.cpp" />
+    <ClCompile Include="Code\Locale\Localisation.cpp" />
     <ClInclude Include="Code\Actors\Game\MapProjectionCrystal.h" />
     <ClInclude Include="Code\Actors\Game\BombRock.h" />
     <ClInclude Include="Code\Commands\UndoActorDeleteCommand.h" />
@@ -809,7 +809,7 @@
     <ClInclude Include="Code\Actors\Game\PlayerTeleporter.h" />
     <ClInclude Include="Code\Actors\SpherePhysicsActor.h" />
     <ClInclude Include="Code\Actors\FruitBasket.h" />
-    <ClInclude Include="Code\Asset\Localisation.h" />
+    <ClInclude Include="Code\Locale\Localisation.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />

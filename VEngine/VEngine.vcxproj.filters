@@ -914,7 +914,7 @@
     <ClCompile Include="Code\Commands\UndoActorDeleteCommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Asset\Localisation.cpp">
+    <ClCompile Include="Code\Locale\Localisation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1907,7 +1907,7 @@
     <ClInclude Include="Code\Commands\UndoActorDeleteCommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Asset\Localisation.h">
+    <ClInclude Include="Code\Locale\Localisation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

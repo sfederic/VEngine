@@ -28,7 +28,7 @@
 #include "UI/Game/PlayerUpgradeInfoWidget.h"
 #include "Gameplay/GameUtils.h"
 #include "Gameplay/GameInstance.h"
-#include "Asset/Localisation.h"
+#include "Locale/Localisation.h"
 
 //Distance the player can ray/box cast to a grid actor to link to.
 constexpr float linkDistance = 5.f;
@@ -1388,7 +1388,8 @@ void Player::DisplayReconInfo()
 		}
 		else
 		{
-			const auto reconText = Localise::GetString("ReconTestLine2", "test.json");
+			const auto reconText = Localise::GetString("PlayerReconNoInformation",
+				Localise::Filenames::reconActorLines);
 			reconWidget->SetReconText(reconText);
 		}
 	}

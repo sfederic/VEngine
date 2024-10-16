@@ -16,4 +16,11 @@ namespace Localise
 	{
 		inline static const std::string reconActorLines = "ReconActorLines.json";
 	}
+
+	namespace Locales
+	{
+		inline static const std::string english = "EN";
+		inline static const std::string japanese = "JP";
+		inline static const std::string french = "FR";
+	}
 };
