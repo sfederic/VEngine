@@ -41,6 +41,10 @@ void Console::Init()
 
 	//Debug Menu Commands
 
+	executeMap.emplace(L"LOCALE",
+		std::make_pair([]() { debugMenu.localeMenuOpen = !debugMenu.localeMenuOpen; },
+			"Set localisation language."));
+
 	executeMap.emplace(L"CLEAR",
 		std::make_pair([]() {
 			World::DestroyAllActorsAndComponentsInWorld();

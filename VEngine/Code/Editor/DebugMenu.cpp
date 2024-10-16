@@ -13,6 +13,7 @@
 #include "Core/Profile.h"
 #include "Core/WorldEditor.h"
 #include "Actors/Actor.h"
+#include "Locale/Localisation.h"
 #include "Components/MeshComponent.h"
 #include "Components/InstanceMeshComponent.h"
 #include "Components/SkeletalMeshComponent.h"
@@ -94,6 +95,7 @@ void DebugMenu::Tick(float deltaTime)
 	RenderUVMenu();
 	RenderUVPaintMenu();
 	RenderWidgetDetailsMenu();
+	RenderLocaleMenu();
 
 	ImGui::EndFrame();
 
@@ -715,6 +717,28 @@ void DebugMenu::RenderWidgetDetailsMenu()
 				break;
 			}
 		}
+	}
+
+	ImGui::End();
+}
+
+void DebugMenu::RenderLocaleMenu()
+{
+	if (!localeMenuOpen) return;
+
+	ImGui::Begin("Locale Menu");
+
+	if (ImGui::Button("English"))
+	{
+		Localise::SetLanguage(Localise::Locales::english);
+	}
+	if (ImGui::Button("Japanese"))
+	{
+		Localise::SetLanguage(Localise::Locales::japanese);
+	}
+	if (ImGui::Button("French"))
+	{
+		Localise::SetLanguage(Localise::Locales::french);
 	}
 
 	ImGui::End();
