@@ -13,7 +13,7 @@
 #include "Core/Profile.h"
 #include "Core/WorldEditor.h"
 #include "Actors/Actor.h"
-#include "Locale/Localisation.h"
+#include "Localisation/Localisation.h"
 #include "Components/MeshComponent.h"
 #include "Components/InstanceMeshComponent.h"
 #include "Components/SkeletalMeshComponent.h"

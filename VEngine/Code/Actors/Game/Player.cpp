@@ -28,7 +28,7 @@
 #include "UI/Game/PlayerUpgradeInfoWidget.h"
 #include "Gameplay/GameUtils.h"
 #include "Gameplay/GameInstance.h"
-#include "Locale/Localisation.h"
+#include "Localisation/Localisation.h"
 
 //Distance the player can ray/box cast to a grid actor to link to.
 constexpr float linkDistance = 5.f;

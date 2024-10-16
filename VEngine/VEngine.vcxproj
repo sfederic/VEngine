@@ -386,7 +386,7 @@
     <ClCompile Include="Code\Actors\Game\PlayerTeleporter.cpp" />
     <ClCompile Include="Code\Actors\SpherePhysicsActor.cpp" />
     <ClCompile Include="Code\Actors\FruitBasket.cpp" />
-    <ClCompile Include="Code\Locale\Localisation.cpp" />
+    <ClCompile Include="Code\Localisation\Localisation.cpp" />
     <ClInclude Include="Code\Actors\Game\MapProjectionCrystal.h" />
     <ClInclude Include="Code\Actors\Game\BombRock.h" />
     <ClInclude Include="Code\Commands\UndoActorDeleteCommand.h" />
@@ -403,8 +403,8 @@
     <ClInclude Include="Code\Editor\Sequencer\SequenceItem.h" />
     <ClInclude Include="Code\Editor\Sequencer\SequenceEntryData.h" />
     <ClInclude Include="Code\Editor\Sequencer\SequenceEntryTypes.h" />
-    <ClInclude Include="Code\Locale\Locales.h" />
-    <ClInclude Include="Code\Locale\LocalisationFiles.h" />
+    <ClInclude Include="Code\Localisation\Locales.h" />
+    <ClInclude Include="Code\Localisation\LocalisationFiles.h" />
     <ClInclude Include="Code\Physics\PhysicsActorShape.h" />
     <ClInclude Include="Code\Physics\PhysicsType.h" />
     <ClInclude Include="Code\Render\BlendState.h" />
@@ -811,7 +811,7 @@
     <ClInclude Include="Code\Actors\Game\PlayerTeleporter.h" />
     <ClInclude Include="Code\Actors\SpherePhysicsActor.h" />
     <ClInclude Include="Code\Actors\FruitBasket.h" />
-    <ClInclude Include="Code\Locale\Localisation.h" />
+    <ClInclude Include="Code\Localisation\Localisation.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
