@@ -4,15 +4,16 @@
 #include <qlineedit.h>
 #include "IPropertyWidget.h"
 
-struct StringWidget : public QLineEdit, IPropertyWidget
+class StringWidget : public QLineEdit, public IPropertyWidget
 {
-	std::string* value;
-
+public:
 	StringWidget(Property& value_);
 	void SetValue();
-	virtual void ResetValue() override;
+	void ResetValue() override;
 
 private:
 	void SetDirectoryFilenamesAutoComplete(const std::string& directoryPath);
 	void SetActorWorldListAutoComplete();
+
+	std::string* value;
 };
