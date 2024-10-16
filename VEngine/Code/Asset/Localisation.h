@@ -11,4 +11,9 @@ namespace Localise
 {
 	std::wstring GetString(const std::string& key, const std::string& filename);
 	void SetLanguage(const std::string_view language);
+
+	namespace Filenames
+	{
+		inline static const std::string reconActorLines = "ReconActorLines.json";
+	}
 };

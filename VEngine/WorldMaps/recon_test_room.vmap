@@ -17,16 +17,16 @@ Size X
 Size Y
 5
 UID
-2650443863
+2383415537
 next
 Player
 1
  Enabled
 1
  Position
-0 0 0
+2 0 0
  Rotation
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
@@ -34,7 +34,74 @@ Player
 Name
 Player0
 UID
-147722482
+3413671929
+next
+ReconActor
+1
+ Enabled
+1
+ Position
+2 0 3
+ Rotation
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Audio LinkMove
+cloth_heavy.wav
+Audio LinkRotate
+chainmail1.wav
+BigGridActor
+0
+Can Fall
+1
+Destruct
+1
+DisableGridInteract
+0
+Health
+1
+Ignore Rotate Check
+0
+Inspect
+0
+Interact
+1
+Interact Text
+
+InteractKnownText
+
+Link Movement
+1
+Link Rotation
+1
+Move Axis Neg.
+1 1
+Move Axis Pos.
+1 1
+Move Speed
+12
+MoveOnlyXAxis
+0
+MoveOnlyZAxis
+0
+Name
+ReconActor0
+Obstacle
+1
+Recon Text Key
+ReconActorNoInformation
+Rotate Pitch
+1
+Rotate Roll
+0
+Rotate Speed
+12
+Rotate Yaw
+1
+UID
+3275074897
 next
 MeshActor
 1
@@ -51,7 +118,7 @@ MeshActor
 Name
 MeshActor0
 UID
-2044227304
+531040225
 next
 DirectionalLightActor
 1
@@ -68,43 +135,11 @@ DirectionalLightActor
 Name
 DirectionalLightActor0
 UID
-3843264505
-next
-PointLightActor
-2
- Enabled
-1
- Position
-4 -0 3
- Rotation
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Name
-PointLightActor0
-UID
-3879107878
-next
- Enabled
-1
- Position
--0 -0 4
- Rotation
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Name
-PointLightActor1
-UID
-2716591422
+3633627051
 next
 CameraComponent
 1
-147722482
+3413671929
 Camera
  Enabled
 1
@@ -123,11 +158,11 @@ Far Z
 Near Z
 0.01
 UID
-3619594949
+3304295427
 next
 MeshComponent
-3
-147722482
+4
+3413671929
 Mesh
  Enabled
 1
@@ -196,9 +231,9 @@ Sort Last
 Trans. Occlude
 0
 UID
-3465825960
+1408207205
 next
-147722482
+3413671929
 LinkEffectMesh
  Enabled
 1
@@ -267,9 +302,80 @@ Sort Last
 Trans. Occlude
 0
 UID
-1304920997
+1193325323
 next
-2044227304
+3275074897
+Mesh
+ Enabled
+1
+ Pos
+2 0 3
+ Rot
+-0 0 -0 1
+ Scale
+1 1 1
+ Visible
+1
+Casts Shadow
+1
+Grid Ignore
+0
+Grid Obst.
+0
+M_Ambient
+1 1 1 1
+M_AudioType
+Default
+M_Blend State
+default
+M_Metallic
+0
+M_Rast State
+solid
+M_Shader
+Default
+M_Smoothness
+0
+M_Specular
+1 1 1 1
+M_Texture
+test.png
+M_Texture2
+
+M_Use Texture
+1
+M_UvOffset
+0 0
+M_UvOffsetSpeed
+0 0
+M_UvRotation
+0
+M_UvRotationSpeed
+0
+M_UvScale
+1 1
+Mesh
+cube.vmesh
+P_DynamicFriction
+0.5
+P_Restitution
+0.15
+P_StaticFriction
+0.5
+Physics Static
+1
+Player Traversable
+1
+Render Static
+0
+Sort Last
+0
+Trans. Occlude
+0
+UID
+1056641988
+next
+531040225
 Mesh
  Enabled
 1
@@ -338,11 +444,11 @@ Sort Last
 Trans. Occlude
 0
 UID
-1287318906
+3741457019
 next
 DialogueComponent
-1
-147722482
+2
+3413671929
 Dialogue
  Enabled
 1
@@ -351,11 +457,22 @@ Dialogue
 File
 
 UID
-2291916260
+3338150037
+next
+3275074897
+Dialogue
+ Enabled
+1
+ Visible
+1
+File
+
+UID
+3978537608
 next
 InstanceMeshComponent
 1
-2650443863
+2383415537
 NodeMesh
  Enabled
 1
@@ -424,11 +541,11 @@ Sort Last
 Trans. Occlude
 0
 UID
-968185250
+650831457
 next
 DirectionalLightComponent
 1
-3843264505
+3633627051
 DirectionalLight
  Enabled
 1
@@ -451,71 +568,23 @@ LightEnabled
 Shadows Enabled
 1
 UID
-467265965
-next
-PointLightComponent
-2
-3879107878
-PointLight
- Enabled
-1
- Pos
-4 -0 3
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Colour
-1 1 1 1
-Intensity
-25
-LightEnabled
-1
-Range
-100
-UID
-2846496249
-next
-2716591422
-PointLight
- Enabled
-1
- Pos
--0 -0 4
- Rot
-0 0 0 1
- Scale
-1 1 1
- Visible
-1
-Colour
-1 1 1 1
-Intensity
-25
-LightEnabled
-1
-Range
-100
-UID
-3370562805
+1799782297
 next
 EmptyComponent
 1
-147722482
+3413671929
 Root
  Enabled
 1
  Pos
-0 0 0
+2 0 0
  Rot
-0 0 0 1
+-0 0 -0 1
  Scale
 1 1 1
  Visible
 1
 UID
-3397893947
+4269704548
 next
 end
