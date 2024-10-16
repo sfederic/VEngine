@@ -1,6 +1,8 @@
 #pragma once
 
 #include <string>
+#include "LocalisationFiles.h"
+#include "Locales.h"
 
 //Todo: "Localisation" here is veeeery simple. Dialogue files are the option right now when you need
 //multiple lines of text and events to go through. The localisation functions here basically only
@@ -11,16 +13,4 @@ namespace Localise
 {
 	std::wstring GetString(const std::string& key, const std::string& filename);
 	void SetLanguage(const std::string_view language);
-
-	namespace Filenames
-	{
-		inline static const std::string reconActorLines = "ReconActorLines.json";
-	}
-
-	namespace Locales
-	{
-		inline static const std::string english = "EN";
-		inline static const std::string japanese = "JP";
-		inline static const std::string french = "FR";
-	}
 };

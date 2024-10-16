@@ -730,15 +730,15 @@ void DebugMenu::RenderLocaleMenu()
 
 	if (ImGui::Button("English"))
 	{
-		Localise::SetLanguage(Localise::Locales::english);
+		Localise::SetLanguage(Locales::english);
 	}
 	if (ImGui::Button("Japanese"))
 	{
-		Localise::SetLanguage(Localise::Locales::japanese);
+		Localise::SetLanguage(Locales::japanese);
 	}
 	if (ImGui::Button("French"))
 	{
-		Localise::SetLanguage(Localise::Locales::french);
+		Localise::SetLanguage(Locales::french);
 	}
 
 	ImGui::End();

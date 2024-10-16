@@ -1910,6 +1910,12 @@
     <ClInclude Include="Code\Locale\Localisation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Code\Locale\LocalisationFiles.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Locale\Locales.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

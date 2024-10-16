@@ -19,5 +19,5 @@ Properties ReconActor::GetProps()
 
 void ReconActor::SetReconText()
 {
-	reconText = Localise::GetString(reconTextKey, Localise::Filenames::reconActorLines);
+	reconText = Localise::GetString(reconTextKey, LocalisationFiles::reconActorLines);
 }

@@ -7,7 +7,7 @@
 #include <qjsonobject.h>
 #include "Asset/AssetBaseFolders.h"
 
-std::string gLanguage = Localise::Locales::english;
+std::string gLanguage = Locales::english;
 
 std::unordered_map<std::string, std::wstring> gLocalisedStringsCache;
 

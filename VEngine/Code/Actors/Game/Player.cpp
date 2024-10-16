@@ -1389,7 +1389,7 @@ void Player::DisplayReconInfo()
 		else
 		{
 			const auto reconText = Localise::GetString("PlayerReconNoInformation",
-				Localise::Filenames::reconActorLines);
+				LocalisationFiles::reconActorLines);
 			reconWidget->SetReconText(reconText);
 		}
 	}
