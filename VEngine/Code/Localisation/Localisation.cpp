@@ -62,4 +62,8 @@ void Localise::SetLanguage(const std::string_view language)
 {
 	gLanguage = language;
 	Log("Locale set to [%s]", language.data());
+	
+	//Clear out the string cache because if locales are changed, keys will be fetching 
+	//previous values from the previously set locale.
+	gLocalisedStringsCache.clear();
 }
