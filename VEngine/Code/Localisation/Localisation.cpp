@@ -61,4 +61,5 @@ std::wstring Localise::GetString(const std::string& key, const std::string& file
 void Localise::SetLanguage(const std::string_view language)
 {
 	gLanguage = language;
+	Log("Locale set to [%s]", language.data());
 }
