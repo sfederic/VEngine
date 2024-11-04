@@ -30,6 +30,11 @@ protected:
 	//this is the actor the player's camera will focus on instead of itself.
 	Actor* actorForPlayerFocusOnLink = nullptr;
 
+	XMVECTOR nextPos = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+	XMVECTOR nextRot = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+
+	XMVECTOR nextMoveCardinalDirection = XMVectorZero();
+
 	//These two are all the axis valid axis a GridActor can move on.
 	//1 or -1 denotes a valid direction (based on the axis type), 0 denotes it can't move in that cardinal direction.
 	XMFLOAT2 validPositiveMovementAxis = XMFLOAT2(1.f, 1.f);
