@@ -17,6 +17,8 @@ public:
 
 protected:
 	std::wstring interactText;
+	std::string interactTextKey;
+
 	std::wstring interactKnownText;
 
 	std::string linkMoveAudio = "cloth_heavy.wav";
@@ -39,11 +41,6 @@ protected:
 	//1 or -1 denotes a valid direction (based on the axis type), 0 denotes it can't move in that cardinal direction.
 	XMFLOAT2 validPositiveMovementAxis = XMFLOAT2(1.f, 1.f);
 	XMFLOAT2 validNegativeMovementAxis = XMFLOAT2(1.f, 1.f);
-
-	XMVECTOR nextPos = XMVectorSet(0.f, 0.f, 0.f, 1.f);
-	XMVECTOR nextRot = XMVectorSet(0.f, 0.f, 0.f, 1.f);
-
-	XMVECTOR nextMoveCardinalDirection = XMVectorZero();
 
 	float moveSpeed = 12.f;
 	float rotateSpeed = 12.f;
@@ -208,7 +205,9 @@ public:
 	void DisableAllInteractivity();
 	auto GetPlayerFocusActor() { return actorForPlayerFocusOnLink; }
 	bool IsInspectable() const { return isInspectable; }
+
 	auto GetInteractText() { return interactText; }
+	void SetInteractText();
 
 	//Note that this is the main mesh of the grid actor. Any link effects need to use this mesh.
 	auto& GetMesh() { return *_mesh; }

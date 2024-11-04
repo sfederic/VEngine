@@ -14,6 +14,7 @@
 #include "Physics/Raycast.h"
 #include "Gameplay/GameUtils.h"
 #include "Particle/SpriteSheet.h"
+#include "Localisation/Localisation.h"
 
 GridActor::GridActor()
 {
@@ -28,6 +29,8 @@ void GridActor::Create()
 	__super::Create();
 
 	_mesh->SetRenderStatic(false);
+
+	SetInteractText();
 }
 
 bool GridActor::CheckNextRotationBoundsIntersect()
@@ -222,7 +225,7 @@ Properties GridActor::GetProps()
 	props.Add("Health", &health);
 	props.Add("Interact", &isInteractable);
 	props.Add("Inspect", &isInspectable);
-	props.Add("Interact Text", &interactText);
+	props.Add("Interact Text", &interactTextKey).change = [&](Property&) { SetInteractText(); };
 	props.Add("InteractKnownText", &interactKnownText);
 	props.Add("DisableGridInteract", &disableGridInteract);
 	props.Add("Obstacle", &isGridObstacle);
@@ -576,6 +579,11 @@ void GridActor::DisableAllInteractivity()
 	canBeRotatedYawYAxis = false;
 	canBeRotatedPitchXAxis = false;
 	ignoreRotationValidCheck = true;
+}
+
+void GridActor::SetInteractText()
+{
+	interactText = Localise::GetString(interactTextKey, LocalisationFiles::gridActorInteractLines);
 }
 
 void GridActor::SpawnDustSpriteSheet() const

@@ -4,5 +4,6 @@
 
 namespace LocalisationFiles
 {
-	inline static const std::string reconActorLines = "ReconActorLines.json";
+	inline const std::string reconActorLines = "ReconActorLines.json";
+	inline const std::string gridActorInteractLines = "GridActorInteractLines.json";
 }
