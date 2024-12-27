@@ -3,17 +3,10 @@
 #include <vector>
 #include <string>
 #include "Core/Log.h"
+#include "DebugNotification.h"
 
 struct Properties;
 class UVPaintWidget;
-
-struct DebugNotification
-{
-	DebugNotification(std::wstring_view note) : text(note) {}
-	std::wstring text;
-	float timeOnScreen = 0.f;
-	bool staticNotification = false; //Means the message won't get removed on timer.
-};
 
 class DebugMenu
 {

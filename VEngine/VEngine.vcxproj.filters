@@ -1916,6 +1916,9 @@
     <ClInclude Include="Code\Localisation\Locales.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Code\Editor\DebugNotification.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
