@@ -19,6 +19,7 @@
 #include "Render/MaterialSystem.h"
 #include "Audio/AudioSystem.h"
 #include "Render/SpriteSystem.h"
+#include "Render/DebugMeshMananger.h"
 #include "UI/UISystem.h"
 #include "UI/Game/MapInfoWidget.h"
 #include "Gameplay/GameInstance.h"
@@ -54,7 +55,7 @@ void World::Start()
 	ResetUIDCache();
 
 	TextureSystem::CreateAllTextures();
-	MeshComponent::CreateDebugMeshes();
+	DebugMeshManager::CreateDebugMeshes();
 
 	for (auto actorSystem : activeActorSystems)
 	{
@@ -338,7 +339,7 @@ void World::Cleanup()
 		actorSystem->Cleanup();
 	}
 
-	MeshComponent::DestroyDebugMeshes();
+	DebugMeshManager::DestroyDebugMeshes();
 
 	Timer::Cleanup();
 	PhysicsSystem::Reset();

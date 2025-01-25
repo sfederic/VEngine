@@ -387,6 +387,7 @@
     <ClCompile Include="Code\Actors\SpherePhysicsActor.cpp" />
     <ClCompile Include="Code\Actors\FruitBasket.cpp" />
     <ClCompile Include="Code\Localisation\Localisation.cpp" />
+    <ClCompile Include="Code\Render\DebugMeshMananger.cpp" />
     <ClInclude Include="Code\Actors\Game\MapProjectionCrystal.h" />
     <ClInclude Include="Code\Actors\Game\BombRock.h" />
     <ClInclude Include="Code\Commands\UndoActorDeleteCommand.h" />
@@ -813,6 +814,7 @@
     <ClInclude Include="Code\Actors\SpherePhysicsActor.h" />
     <ClInclude Include="Code\Actors\FruitBasket.h" />
     <ClInclude Include="Code\Localisation\Localisation.h" />
+    <ClInclude Include="Code\Render\DebugMeshMananger.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />

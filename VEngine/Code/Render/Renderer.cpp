@@ -10,6 +10,7 @@
 #include "Components/InstanceMeshComponent.h"
 #include "Components/Lights/DirectionalLightComponent.h"
 #include "Render/Texture2D.h"
+#include "Render/DebugMeshMananger.h"
 #include "Components/AudioComponent.h"
 #include "Components/Lights/PointLightComponent.h"
 #include "Components/Lights/SpotLightComponent.h"
@@ -1244,7 +1245,7 @@ void RenderInstanceMeshComponents()
 //Remember that when rendering bounds, the Extents needs to be doubled.
 void RenderBounds()
 {
-	auto debugBox = MeshComponent::GetDebugMesh("DebugBox");
+	auto debugBox = DebugMeshManager::GetDebugMesh("DebugBox");
 	MaterialShaderData materialShaderData;
 
 	if (Renderer::drawBoundingBoxes)
@@ -1421,7 +1422,7 @@ void RenderCharacterControllers()
 {
 	if (Core::gameplayOn) return;
 
-	auto debugCapsule = MeshComponent::GetDebugMesh("DebugCapsule");
+	auto debugCapsule = DebugMeshManager::GetDebugMesh("DebugCapsule");
 	MaterialShaderData materialShaderData;
 
 	SetRastStateByName(RastStates::wireframe);
@@ -1447,7 +1448,7 @@ void RenderCameraMeshes()
 {
 	if (Core::gameplayOn) return;
 
-	auto debugCamera = MeshComponent::GetDebugMesh("DebugCamera");
+	auto debugCamera = DebugMeshManager::GetDebugMesh("DebugCamera");
 	MaterialShaderData materialShaderData;
 
 	SetRastStateByName(RastStates::wireframe);
@@ -1473,9 +1474,9 @@ void RenderLightMeshes()
 {
 	if (Core::gameplayOn) return;
 
-	auto debugSphere = MeshComponent::GetDebugMesh("DebugSphere");
-	auto debugIcoSphere = MeshComponent::GetDebugMesh("DebugIcoSphere");
-	auto debugCone = MeshComponent::GetDebugMesh("DebugCone");
+	auto debugSphere = DebugMeshManager::GetDebugMesh("DebugSphere");
+	auto debugIcoSphere = DebugMeshManager::GetDebugMesh("DebugIcoSphere");
+	auto debugCone = DebugMeshManager::GetDebugMesh("DebugCone");
 
 	SetRastStateByName(RastStates::wireframe);
 	SetShaders("SolidColour");
@@ -1552,7 +1553,7 @@ void RenderAudioComponents()
 	cbMaterial.Map(&materialShaderData);
 	cbMaterial.SetPS();
 
-	const auto debugIcoSphere = MeshComponent::GetDebugMesh("DebugIcoSphere");
+	const auto debugIcoSphere = DebugMeshManager::GetDebugMesh("DebugIcoSphere");
 	SetVertexBuffer(debugIcoSphere->GetVertexBuffer());
 
 	for (const auto& audioComponent : AudioComponent::system.GetComponents())

@@ -17,10 +17,6 @@ class MeshComponent : public SpatialComponent
 public:
 	COMPONENT_SYSTEM(MeshComponent);
 
-	//Debug meshes are used by the renderer to display things like bounds, camera, lights, etc.
-	static void CreateDebugMeshes();
-	static void DestroyDebugMeshes();
-	static MeshComponent* GetDebugMesh(std::string name);
 	static std::vector<MeshComponent*> GetAllStaticMeshes();
 
 	MeshComponent();

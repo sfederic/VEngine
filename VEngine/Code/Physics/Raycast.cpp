@@ -6,6 +6,7 @@
 #include "Render/Line.h"
 #include "Render/RastStates.h"
 #include "Render/RastState.h"
+#include "Render/DebugMeshMananger.h"
 #include "Editor/Editor.h"
 #include "Core/VMath.h"
 #include "Core/Core.h"
@@ -269,7 +270,7 @@ bool Physics::RaycastTriangleIntersect(HitResult& hitResult)
 
 	const auto setDebugMesh = [&](SpatialComponent* component, std::string_view debugMeshName)
 		{
-			auto debugMesh = MeshComponent::GetDebugMesh("DebugIcoSphere");
+			auto debugMesh = DebugMeshManager::GetDebugMesh("DebugIcoSphere");
 			debugMesh->transform = component->transform;
 			debugMesh->SetOwnerUID(component->GetOwnerUID());
 			checkMeshVerticesCollision(*debugMesh);
