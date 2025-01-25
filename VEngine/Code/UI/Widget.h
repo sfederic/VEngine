@@ -7,8 +7,6 @@
 #include "Core/UID.h"
 #include "Colours.h"
 
-using namespace DirectX;
-
 //Base widget class for in-game UI.
 class Widget
 {
@@ -56,7 +54,7 @@ public:
 
 	bool IsStatic() const { return isStaticWidget; }
 
-	void SetWorldPosition(XMVECTOR pos) { worldPosition = pos; }
+	void SetWorldPosition(DirectX::XMVECTOR pos) { worldPosition = pos; }
 
 	auto GetUID() const { return uid; }
 	auto GetWidgetClassName() const { return widgetClassName; }
@@ -104,7 +102,7 @@ protected:
 	std::vector<Layout> activeWidgetControlLayouts;
 
 	//The widget's position in world space to be mapped to screen space (Use Actor::GetHomogeneousPositionV() to set this)
-	XMVECTOR worldPosition = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+	DirectX::XMVECTOR worldPosition = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 
 	UID uid = GenerateUID();
 
