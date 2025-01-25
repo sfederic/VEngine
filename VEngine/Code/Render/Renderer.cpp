@@ -502,14 +502,14 @@ void CreateBlendStates()
 
 void CreateConstantBuffers()
 {
-	const int cbMatrixRegister = 0;
-	const int cbMaterialRegister = 1;
-	const int cbSkinningRegister = 2;
-	const int cbLightsRegister = 3;
-	const int cbTimeRegister = 4;
-	const int cbMeshDataRegister = 5;
-	const int cbCameraDataRegister = 6;
-	const int cbLightProbeDataRegister = 7;
+	constexpr int cbMatrixRegister = 0;
+	constexpr int cbMaterialRegister = 1;
+	constexpr int cbSkinningRegister = 2;
+	constexpr int cbLightsRegister = 3;
+	constexpr int cbTimeRegister = 4;
+	constexpr int cbMeshDataRegister = 5;
+	constexpr int cbCameraDataRegister = 6;
+	constexpr int cbLightProbeDataRegister = 7;
 
 	shaderMatrices.Create();
 
