@@ -12,7 +12,7 @@ void ActorSystemCache::AddSystem(std::type_index type, IActorSystem* actorSystem
 	nameToSystemMap.emplace(actorSystem->GetName(), actorSystem);
 }
 
-IActorSystem* ActorSystemCache::GetSystem(std::string systemName)
+IActorSystem* ActorSystemCache::GetSystem(const std::string& systemName)
 {
 	auto asIt = nameToSystemMap.find(systemName);
 	if (asIt == nameToSystemMap.end())
