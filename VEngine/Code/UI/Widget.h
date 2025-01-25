@@ -48,9 +48,9 @@ public:
 	void RemoveFromViewportAndDelete();
 	void ToggleInViewport();
 
-	bool IsInViewport();
+	bool IsInViewport() const;
 
-	bool IsMouseInLayout(Layout layout);
+	bool IsMouseInLayout(Layout layout) const;
 
 	bool IsStatic() const { return isStaticWidget; }
 
@@ -65,17 +65,17 @@ public:
 protected:
 	void GetScreenSpaceCoords(int& sx, int& sy);
 
-	void Text(const std::wstring text, Layout layout, TextAlign align = TextAlign::Center,
+	void Text(const std::wstring& text, Layout layout, TextAlign align = TextAlign::Center,
 		D2D1_COLOR_F color = { 0.f, 0.f, 0.f, 1.f }, float opacity = 1.0f);
 
-	void Text(const std::string text, Layout layout, TextAlign align = TextAlign::Center,
+	void Text(const std::string& text, Layout layout, TextAlign align = TextAlign::Center,
 		D2D1_COLOR_F color = { 0.f, 0.f, 0.f, 1.f }, float opacity = 1.0f);
 
-	bool Button(const std::wstring text, Layout layout,
+	bool Button(const std::wstring& text, Layout layout,
 		TextAlign textAlign = TextAlign::Center, D2D1_COLOR_F textColor = { 0.f, 0.f, 0.f, 1.f }, float textOpacity = 1.0f,
 		bool isActive = true);
 
-	bool Button(const std::string text, Layout layout,
+	bool Button(const std::string& text, Layout layout,
 		TextAlign textAlign = TextAlign::Center, D2D1_COLOR_F textColor = { 0.f, 0.f, 0.f, 1.f }, float textOpacity = 1.0f,
 		bool isActive = true);
 

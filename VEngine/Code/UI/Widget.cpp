@@ -62,7 +62,7 @@ void Widget::ToggleInViewport()
 	}
 }
 
-bool Widget::IsInViewport()
+bool Widget::IsInViewport() const
 {
 	for (Widget* widget : UISystem::widgetsInViewport)
 	{
@@ -75,7 +75,7 @@ bool Widget::IsInViewport()
 	return false;
 }
 
-bool Widget::IsMouseInLayout(Layout layout)
+bool Widget::IsMouseInLayout(Layout layout) const
 {
 	const int viewportMouseX = Editor::Get().GetViewportMouseX();
 	const int viewportMouseY = Editor::Get().GetViewportMouseY();
@@ -109,7 +109,7 @@ void Widget::GetScreenSpaceCoords(int& sx, int& sy)
 	VMath::HomogenousWorldPosToScreenSpaceCoords(worldPosition, sx, sy);
 }
 
-void Widget::Text(const std::wstring text, Layout layout, TextAlign align, D2D1_COLOR_F color, float opacity)
+void Widget::Text(const std::wstring& text, Layout layout, TextAlign align, D2D1_COLOR_F color, float opacity)
 {
 	activeWidgetControlLayouts.emplace_back(layout);
 
@@ -137,12 +137,12 @@ void Widget::Text(const std::wstring text, Layout layout, TextAlign align, D2D1_
 	UISystem::TextDraw(text, layout, endAlignment, color, opacity);
 }
 
-void Widget::Text(const std::string text, Layout layout, TextAlign align, D2D1_COLOR_F color, float opacity)
+void Widget::Text(const std::string& text, Layout layout, TextAlign align, D2D1_COLOR_F color, float opacity)
 {
 	Text(VString::stows(text), layout, align, color, opacity);
 }
 
-bool Widget::Button(const std::wstring text, Layout layout,
+bool Widget::Button(const std::wstring& text, Layout layout,
 	TextAlign textAlign, D2D1_COLOR_F textColor, float textOpacity, bool isActive)
 {
 	activeWidgetControlLayouts.emplace_back(layout);
@@ -177,7 +177,7 @@ bool Widget::Button(const std::wstring text, Layout layout,
 	return false;
 }
 
-bool Widget::Button(const std::string text, Layout layout, TextAlign textAlign, D2D1_COLOR_F textColor, float textOpacity, bool isActive)
+bool Widget::Button(const std::string& text, Layout layout, TextAlign textAlign, D2D1_COLOR_F textColor, float textOpacity, bool isActive)
 {
 	return Button(VString::stows(text), layout, textAlign, textColor, textOpacity, isActive);
 }
