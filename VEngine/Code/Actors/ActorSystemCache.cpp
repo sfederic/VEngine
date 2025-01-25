@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "ActorSystemCache.h"
 #include "IActorSystem.h"
+#include <cassert>
 
 void ActorSystemCache::AddSystem(std::type_index type, IActorSystem* actorSystem)
 {
@@ -27,20 +28,22 @@ IActorSystem* ActorSystemCache::GetSystem(std::type_index actorType)
 	return typeToSystemMap.find(actorType)->second;
 }
 
-std::vector<IActorSystem*> ActorSystemCache::GetAllSystems()
+std::vector<IActorSystem*> ActorSystemCache::GetAllSystems() const
 {
 	std::vector<IActorSystem*> systems;
-	for (const auto& [key, value] : nameToSystemMap)
+    systems.reserve(nameToSystemMap.size());
+    for (const auto& [_, value] : nameToSystemMap)
 	{
 		systems.emplace_back(value);
 	}
 	return systems;
 }
 
-std::vector<std::string> ActorSystemCache::GetAllActorSystemNames()
+std::vector<std::string> ActorSystemCache::GetAllActorSystemNames() const
 {
 	std::vector<std::string> names;
-	for (auto& systemPair : nameToSystemMap)
+    names.reserve(nameToSystemMap.size());
+    for (const auto& systemPair : nameToSystemMap)
 	{
 		names.emplace_back(systemPair.first);
 	}

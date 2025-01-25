@@ -17,11 +17,11 @@ public:
 	}
 
 	void AddSystem(std::type_index type, IActorSystem* actorSystem);
-	IActorSystem* GetSystem(std::string systemName);
+	IActorSystem* GetSystem(const std::string& systemName);
 	IActorSystem* GetSystem(std::type_index actorType);
 
-	std::vector<IActorSystem*> GetAllSystems();
-	std::vector<std::string> GetAllActorSystemNames();
+	std::vector<IActorSystem*> GetAllSystems() const;
+	std::vector<std::string> GetAllActorSystemNames() const;
 
 private:
 	std::unordered_map<std::optional<std::type_index>, IActorSystem*> typeToSystemMap;
