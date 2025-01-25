@@ -39,9 +39,9 @@ void IncrementalRotator::OnLinkRotateLeft()
 
 	if (CheckActorToRotate())
 	{
-		XMVECTOR newNextRot = XMQuaternionMultiply(actorToRotate->GetNextRot(),
+		DirectX::XMVECTOR newNextRot = DirectX::XMQuaternionMultiply(actorToRotate->GetNextRot(),
 			DirectX::XMQuaternionRotationAxis(XMLoadFloat3(&rotateDirection),
-				XMConvertToRadians(rotationIncrement)));
+				DirectX::XMConvertToRadians(rotationIncrement)));
 		actorToRotate->SetNextRot(newNextRot);
 
 		isActorRotating = true;
@@ -54,9 +54,9 @@ void IncrementalRotator::OnLinkRotateRight()
 
 	if (CheckActorToRotate())
 	{
-		XMVECTOR newNextRot = XMQuaternionMultiply(actorToRotate->GetNextRot(),
+		DirectX::XMVECTOR newNextRot = DirectX::XMQuaternionMultiply(actorToRotate->GetNextRot(),
 			DirectX::XMQuaternionRotationAxis(XMLoadFloat3(&rotateDirection),
-				XMConvertToRadians(-rotationIncrement)));
+				DirectX::XMConvertToRadians(-rotationIncrement)));
 		actorToRotate->SetNextRot(newNextRot);
 
 		isActorRotating = true;

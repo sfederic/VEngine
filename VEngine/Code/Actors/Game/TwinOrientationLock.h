@@ -24,6 +24,6 @@ private:
 	Actor* actor1 = nullptr;
 
 	//Orientations will have to work off of ony one axis on this actor (e.g. up, right forward).
-	XMFLOAT3 orientation0 = XMFLOAT3(1.f, 0.f, 0.f);
-	XMFLOAT3 orientation1 = XMFLOAT3(-1.f, 0.f, 0.f);
+	DirectX::XMFLOAT3 orientation0 = DirectX::XMFLOAT3(1.f, 0.f, 0.f);
+	DirectX::XMFLOAT3 orientation1 = DirectX::XMFLOAT3(-1.f, 0.f, 0.f);
 };

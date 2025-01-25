@@ -54,7 +54,7 @@ void WaterSource::Deactivate()
 	SetVisibility(false);
 }
 
-bool WaterSource::Contains(XMVECTOR point)
+bool WaterSource::Contains(DirectX::XMVECTOR point)
 {
 	return boxTrigger->Contains(point);
 }

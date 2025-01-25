@@ -2,6 +2,8 @@
 #include "Pulley.h"
 #include "Core/Log.h"
 
+using namespace DirectX;
+
 void Pulley::Start()
 {
 	__super::Start();

@@ -19,7 +19,7 @@ public:
 	void Activate() override;
 	void Deactivate() override;
 
-	bool Contains(XMVECTOR point);
+	bool Contains(DirectX::XMVECTOR point);
 
 private:
 	void DouseGridActorsInTrigger();

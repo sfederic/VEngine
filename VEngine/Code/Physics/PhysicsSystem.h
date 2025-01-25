@@ -47,18 +47,18 @@ namespace PhysicsSystem
 	void GetTransformFromPhysicsActor(MeshComponent* mesh);
 	void SetTransformForPhysicsActor(MeshComponent* mesh);
 
-	void AddForceToMesh(MeshComponent* mesh, XMVECTOR forceDirection);
+	void AddForceToMesh(MeshComponent* mesh, DirectX::XMVECTOR forceDirection);
 
 	std::unordered_map<UID, std::unique_ptr<MeshComponent>>& GetAllPhysicsMeshes();
 };
 
 namespace PhysicsPhysx
 {
-	bool Raycast(XMVECTOR origin, XMVECTOR direction, float range, HitResult& hitResult);
-	bool BoxCast(XMFLOAT3 extents, XMFLOAT3 origin, XMFLOAT3 direction, float distance, HitResult& hitResult);
+	bool Raycast(DirectX::XMVECTOR origin, DirectX::XMVECTOR direction, float range, HitResult& hitResult);
+	bool BoxCast(DirectX::XMFLOAT3 extents, DirectX::XMFLOAT3 origin, DirectX::XMFLOAT3 direction, float distance, HitResult& hitResult);
 
-	physx::PxVec3 XMVectorToPxVec3(XMVECTOR xmVector);
-	physx::PxQuat XMVectorToPxQuat(XMVECTOR xmVector);
-	physx::PxVec3 Float3ToPxVec3(XMFLOAT3 float3);
-	XMFLOAT3 PxVec3ToFloat3(physx::PxVec3 pxVec3);
+	physx::PxVec3 XMVectorToPxVec3(DirectX::XMVECTOR xmVector);
+	physx::PxQuat XMVectorToPxQuat(DirectX::XMVECTOR xmVector);
+	physx::PxVec3 Float3ToPxVec3(DirectX::XMFLOAT3 float3);
+	DirectX::XMFLOAT3 PxVec3ToFloat3(physx::PxVec3 pxVec3);
 }

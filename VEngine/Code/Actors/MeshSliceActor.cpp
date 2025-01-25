@@ -18,7 +18,7 @@ Properties MeshSliceActor::GetProps()
 	return props;
 }
 
-void MeshSliceActor::SliceMesh(XMVECTOR planeCenter, XMVECTOR planeNormal)
+void MeshSliceActor::SliceMesh(DirectX::XMVECTOR planeCenter, DirectX::XMVECTOR planeNormal)
 {
 	sliceableMesh->SliceMesh(planeCenter, planeNormal);
 

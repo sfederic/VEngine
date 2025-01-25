@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GridActor.h"
+#include <DirectXMath.h>
 
 class Lift;
 
@@ -18,10 +19,10 @@ public:
 	void OnLinkRotateRight() override;
 
 private:
-	void MoveLinkedLiftAndContainedActors(const XMVECTOR direction);
+	void MoveLinkedLiftAndContainedActors(const DirectX::XMVECTOR direction);
 
 	std::string linkedLiftName;
 	Lift* linkedLift = nullptr;
 
-	XMFLOAT3 moveDirection = XMFLOAT3(0.f, 1.f, 0.f);
+	DirectX::XMFLOAT3 moveDirection = DirectX::XMFLOAT3(0.f, 1.f, 0.f);
 };

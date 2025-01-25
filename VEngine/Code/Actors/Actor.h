@@ -12,8 +12,6 @@ class Component;
 class SpatialComponent;
 class IActorSystem;
 
-using namespace DirectX;
-
 class Actor
 {
 public:

@@ -22,7 +22,7 @@ void PowerCrystalSlot::Tick(float deltaTime)
 	__super::Tick(deltaTime);
 
 	HitResult hit(this);
-	if (Physics::SimpleBoxCast(GetPositionV(), XMFLOAT3(0.5f, 0.5f, 0.5f), hit, true, true))
+	if (Physics::SimpleBoxCast(GetPositionV(), DirectX::XMFLOAT3(0.5f, 0.5f, 0.5f), hit, true, true))
 	{
 		for (auto actor : hit.hitActors)
 		{

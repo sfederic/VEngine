@@ -13,7 +13,7 @@ public:
 	Properties GetProps() override;
 	void Destroy() override;
 
-	void SetPosition(XMVECTOR newPosition);
+	void SetPosition(DirectX::XMVECTOR newPosition);
 	void AddToViewport();
 	void RemoveFromViewport();
 

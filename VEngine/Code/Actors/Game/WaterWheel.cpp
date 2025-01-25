@@ -2,6 +2,8 @@
 #include "WaterWheel.h"
 #include "WaterVolume.h"
 
+using namespace DirectX;
+
 void WaterWheel::Create()
 {
 	__super::Create();

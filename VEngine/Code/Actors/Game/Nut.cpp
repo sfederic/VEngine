@@ -3,6 +3,8 @@
 #include "Physics/Raycast.h"
 #include "Bolt.h"
 
+using namespace DirectX;
+
 void Nut::Create()
 {
 	__super::Create();
@@ -28,7 +30,7 @@ void Nut::OnLinkRotateRight()
 }
 
 //@Todo: this logic still needs work. Come back to it after more puzzles are done.
-void Nut::CheckIfConnectedToBolt(const XMVECTOR moveDirection)
+void Nut::CheckIfConnectedToBolt(const DirectX::XMVECTOR moveDirection)
 {
 	HitResult hit(this);
 	if (Physics::Raycast(hit, GetPositionV(), moveDirection, 10.f))

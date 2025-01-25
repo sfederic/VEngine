@@ -2,6 +2,8 @@
 #include "LiftCrank.h"
 #include "Lift.h"
 
+using namespace DirectX;
+
 void LiftCrank::Create()
 {
 	__super::Create();
@@ -45,7 +47,7 @@ void LiftCrank::OnLinkRotateRight()
 	MoveLinkedLiftAndContainedActors(-moveDirectionV);
 }
 
-void LiftCrank::MoveLinkedLiftAndContainedActors(const XMVECTOR direction)
+void LiftCrank::MoveLinkedLiftAndContainedActors(const DirectX::XMVECTOR direction)
 {
 	if (linkedLift)
 	{

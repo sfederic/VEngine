@@ -16,7 +16,7 @@ struct Sprite
 	//Destination Rect is the pixel dimensions and positions to render the texture at.
 	VRect dstRect;
 
-	XMFLOAT4 colour = XMFLOAT4(1.f, 1.f, 1.f, 1.f);
+	DirectX::XMFLOAT4 colour = DirectX::XMFLOAT4(1.f, 1.f, 1.f, 1.f);
 
 	float angle = 0.f;
 	float z = 0.f;

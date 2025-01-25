@@ -26,8 +26,8 @@ private:
 
 	BoxTriggerComponent* boxTrigger = nullptr;
 
-	XMVECTOR initialLocalCameraPos = XMVectorSet(0.f, 0.f, 0.f, 1.f);
-	XMFLOAT3 newLocalCameraPos = XMFLOAT3(1.f, 1.f, -1.f);
+	DirectX::XMVECTOR initialLocalCameraPos = DirectX::XMVectorSet(0.f, 0.f, 0.f, 1.f);
+	DirectX::XMFLOAT3 newLocalCameraPos = DirectX::XMFLOAT3(1.f, 1.f, -1.f);
 
 	Actor* newTargetActor = nullptr;
 	Actor* initialTargetActor = nullptr;

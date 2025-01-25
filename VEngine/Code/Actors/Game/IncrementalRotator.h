@@ -19,7 +19,7 @@ private:
 
 	std::string actorNameToRotate;
 	GridActor* actorToRotate = nullptr;
-	XMFLOAT3 rotateDirection = XMFLOAT3(0.f, 1.f, 0.f);
+	DirectX::XMFLOAT3 rotateDirection = DirectX::XMFLOAT3(0.f, 1.f, 0.f);
 	float rotationIncrement = 90.f; //In degrees
 	bool isActorRotating = false;
 };

@@ -17,7 +17,7 @@ public:
 	void Tick(float deltaTime) override;
 	Properties GetProps() override;
 
-	bool Contains(XMVECTOR point);
+	bool Contains(DirectX::XMVECTOR point);
 	std::vector<GridActor*> GetAllGridActorsWithinVolume();
 
 private:

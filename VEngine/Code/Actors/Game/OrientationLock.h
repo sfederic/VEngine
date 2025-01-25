@@ -18,9 +18,9 @@ public:
 private:
 	//These orientations need to match for the connected actor to activate.
 	//If a direction is zeroed out, then it won't count towards that orientation need.
-	XMFLOAT3 forward = XMFLOAT3(0.f, 0.f, 0.f);
-	XMFLOAT3 up = XMFLOAT3(0.f, 0.f, 0.f);
-	XMFLOAT3 right = XMFLOAT3(0.f, 0.f, 0.f);
+	DirectX::XMFLOAT3 forward = DirectX::XMFLOAT3(0.f, 0.f, 0.f);
+	DirectX::XMFLOAT3 up = DirectX::XMFLOAT3(0.f, 0.f, 0.f);
+	DirectX::XMFLOAT3 right = DirectX::XMFLOAT3(0.f, 0.f, 0.f);
 
 	GridActor* linkedGridActor = nullptr;
 

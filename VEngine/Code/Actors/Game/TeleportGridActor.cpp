@@ -2,6 +2,8 @@
 #include "TeleportGridActor.h"
 #include "Physics/Raycast.h"
 
+using namespace DirectX;
+
 void TeleportGridActor::OnLinkMove()
 {
 	__super::OnLinkMove();

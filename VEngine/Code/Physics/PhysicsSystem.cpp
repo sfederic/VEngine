@@ -418,7 +418,7 @@ void PhysicsSystem::SetTransformForPhysicsActor(MeshComponent* mesh)
 }
 
 //Todo: is adding force not working?
-void PhysicsSystem::AddForceToMesh(MeshComponent* mesh, XMVECTOR forceDirection)
+void PhysicsSystem::AddForceToMesh(MeshComponent* mesh, DirectX::XMVECTOR forceDirection)
 {
 	assert(!mesh->IsPhysicsStatic());
 
@@ -433,7 +433,7 @@ std::unordered_map<UID, std::unique_ptr<MeshComponent>>& PhysicsSystem::GetAllPh
 	return physicsMeshes;
 }
 
-bool PhysicsPhysx::Raycast(XMVECTOR origin, XMVECTOR direction, float range, HitResult& hitResult)
+bool PhysicsPhysx::Raycast(DirectX::XMVECTOR origin, DirectX::XMVECTOR direction, float range, HitResult& hitResult)
 {
 	const PxVec3 pxOrigin = XMVectorToPxVec3(origin);
 	const PxVec3 pxDir = XMVectorToPxVec3(direction);
@@ -457,27 +457,27 @@ bool PhysicsPhysx::Raycast(XMVECTOR origin, XMVECTOR direction, float range, Hit
 	return false;
 }
 
-PxVec3 PhysicsPhysx::XMVectorToPxVec3(XMVECTOR xmVector)
+PxVec3 PhysicsPhysx::XMVectorToPxVec3(DirectX::XMVECTOR xmVector)
 {
 	return PxVec3(xmVector.m128_f32[0], xmVector.m128_f32[1], xmVector.m128_f32[2]);
 }
 
-PxQuat PhysicsPhysx::XMVectorToPxQuat(XMVECTOR xmVector)
+PxQuat PhysicsPhysx::XMVectorToPxQuat(DirectX::XMVECTOR xmVector)
 {
 	return PxQuat(xmVector.m128_f32[0], xmVector.m128_f32[1], xmVector.m128_f32[2], xmVector.m128_f32[3]);
 }
 
-PxVec3 PhysicsPhysx::Float3ToPxVec3(XMFLOAT3 float3)
+PxVec3 PhysicsPhysx::Float3ToPxVec3(DirectX::XMFLOAT3 float3)
 {
 	return PxVec3(float3.x, float3.y, float3.z);
 }
 
-XMFLOAT3 PhysicsPhysx::PxVec3ToFloat3(PxVec3 pxVec3)
+DirectX::XMFLOAT3 PhysicsPhysx::PxVec3ToFloat3(PxVec3 pxVec3)
 {
 	return XMFLOAT3(pxVec3.x, pxVec3.y, pxVec3.z);
 }
 
-bool PhysicsPhysx::BoxCast(XMFLOAT3 extents, XMFLOAT3 origin, XMFLOAT3 direction, float distance, HitResult& hitResult)
+bool PhysicsPhysx::BoxCast(DirectX::XMFLOAT3 extents, DirectX::XMFLOAT3 origin, DirectX::XMFLOAT3 direction, float distance, HitResult& hitResult)
 {
 	const PxVec3 pxExtents = PhysicsPhysx::Float3ToPxVec3(extents);
 	const PxVec3 pxDirection = PhysicsPhysx::Float3ToPxVec3(direction);

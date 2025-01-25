@@ -32,15 +32,15 @@ protected:
 	//this is the actor the player's camera will focus on instead of itself.
 	Actor* actorForPlayerFocusOnLink = nullptr;
 
-	XMVECTOR nextPos = XMVectorSet(0.f, 0.f, 0.f, 1.f);
-	XMVECTOR nextRot = XMVectorSet(0.f, 0.f, 0.f, 1.f);
+	DirectX::XMVECTOR nextPos = DirectX::XMVectorSet(0.f, 0.f, 0.f, 1.f);
+	DirectX::XMVECTOR nextRot = DirectX::XMVectorSet(0.f, 0.f, 0.f, 1.f);
 
-	XMVECTOR nextMoveCardinalDirection = XMVectorZero();
+	DirectX::XMVECTOR nextMoveCardinalDirection = DirectX::XMVectorZero();
 
 	//These two are all the axis valid axis a GridActor can move on.
 	//1 or -1 denotes a valid direction (based on the axis type), 0 denotes it can't move in that cardinal direction.
-	XMFLOAT2 validPositiveMovementAxis = XMFLOAT2(1.f, 1.f);
-	XMFLOAT2 validNegativeMovementAxis = XMFLOAT2(1.f, 1.f);
+	DirectX::XMFLOAT2 validPositiveMovementAxis = DirectX::XMFLOAT2(1.f, 1.f);
+	DirectX::XMFLOAT2 validNegativeMovementAxis = DirectX::XMFLOAT2(1.f, 1.f);
 
 	float moveSpeed = 12.f;
 	float rotateSpeed = 12.f;
@@ -166,7 +166,7 @@ public:
 	void RecalcCurrentNodePosition();
 	void RecalcCurrentNodeDontIgnoreThis();
 
-	bool CheckNextNodeMoveIsValid(const XMVECTOR nextMoveDirection);
+	bool CheckNextNodeMoveIsValid(const DirectX::XMVECTOR nextMoveDirection);
 
 	//Get forward face in grid terms based on forward vector and current grid position.
 	ForwardFace GetCurrentForwardFace();
@@ -176,20 +176,20 @@ public:
 	//This will pop the grid actor aligned onto the grid in world space if it's out.
 	void RoundPosition();
 
-	XMVECTOR GetNextRot() const { return nextRot; }
-	XMVECTOR GetNextPos() const { return nextPos; }
-	void SetNextRot(XMVECTOR rot) { nextRot = rot; }
-	void AddNextRot(XMVECTOR axis, float angle);
-	void SetNextPos(XMVECTOR pos) { nextPos = pos; }
+	DirectX::XMVECTOR GetNextRot() const { return nextRot; }
+	DirectX::XMVECTOR GetNextPos() const { return nextPos; }
+	void SetNextRot(DirectX::XMVECTOR rot) { nextRot = rot; }
+	void AddNextRot(DirectX::XMVECTOR axis, float angle);
+	void SetNextPos(DirectX::XMVECTOR pos) { nextPos = pos; }
 	void ResetNextPos();
 	void ResetNextRot();
 
 	void SetMeshFilename(std::string_view filename);
 
-	void AddNextRotation(XMVECTOR axis, float angle);
-	void AddNextPosition(XMVECTOR offset);
+	void AddNextRotation(DirectX::XMVECTOR axis, float angle);
+	void AddNextPosition(DirectX::XMVECTOR offset);
 
-	bool IsNextMoveAxisValid(XMVECTOR direction);
+	bool IsNextMoveAxisValid(DirectX::XMVECTOR direction);
 
 	bool IsLinked() const { return isLinked; }
 	bool CanBeMovedInLink() const { return canBeMovedInLink; }

@@ -35,7 +35,7 @@ void WidgetComponent::RemoveFromViewport()
 	}
 }
 
-void WidgetComponent::SetPosition(XMVECTOR newPosition)
+void WidgetComponent::SetPosition(DirectX::XMVECTOR newPosition)
 {
 	if (widget)
 	{

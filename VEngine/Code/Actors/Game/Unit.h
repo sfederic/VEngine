@@ -63,7 +63,7 @@ public:
 	bool Attack();
 	void WindUpAttack();
 	void ShowUnitMovementPath();
-	void SetUnitLookAt(XMVECTOR lookAtPoint);
+	void SetUnitLookAt(DirectX::XMVECTOR lookAtPoint);
 
 	//This is for ending Unit's movement that turn.
 	void SetMovePathIndexToMax();

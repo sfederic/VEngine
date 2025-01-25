@@ -17,7 +17,7 @@ public:
 	void OnLinkRotate() override;
 
 private:
-	XMFLOAT3 pushDirection = XMFLOAT3(1.f, 0.f, 0.f); //The direction in which actors in the water volume will be pushed.
+	DirectX::XMFLOAT3 pushDirection = DirectX::XMFLOAT3(1.f, 0.f, 0.f); //The direction in which actors in the water volume will be pushed.
 	std::string waterVolumeName;
 	WaterVolume* waterVolume = nullptr;
 };

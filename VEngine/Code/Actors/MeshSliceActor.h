@@ -13,7 +13,7 @@ public:
 	MeshSliceActor();
 	Properties GetProps() override;
 
-	void SliceMesh(XMVECTOR planeCenter, XMVECTOR planeNormal);
+	void SliceMesh(DirectX::XMVECTOR planeCenter, DirectX::XMVECTOR planeNormal);
 
 private:
 	SliceableMeshComponent* sliceableMesh = nullptr;

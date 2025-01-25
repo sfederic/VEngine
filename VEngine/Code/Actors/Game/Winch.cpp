@@ -1,6 +1,8 @@
 #include "vpch.h"
 #include "Winch.h"
 
+using namespace DirectX;
+
 void Winch::Create()
 {
 	__super::Create();
@@ -31,7 +33,7 @@ void Winch::OnLinkRotateLeft()
 
 	if (linkedActor)
 	{
-		const XMVECTOR nextPosition = linkedActor->GetPositionV() + XMLoadFloat3(&moveDirection) * moveIncrement;
+		const DirectX::XMVECTOR nextPosition = linkedActor->GetPositionV() + XMLoadFloat3(&moveDirection) * moveIncrement;
 		linkedActor->SetNextPos(nextPosition);
 	}
 }
@@ -42,7 +44,7 @@ void Winch::OnLinkRotateRight()
 
 	if (linkedActor)
 	{
-		const XMVECTOR nextPosition = linkedActor->GetPositionV() - XMLoadFloat3(&moveDirection) * moveIncrement;
+		const DirectX::XMVECTOR nextPosition = linkedActor->GetPositionV() - XMLoadFloat3(&moveDirection) * moveIncrement;
 		linkedActor->SetNextPos(nextPosition);
 	}
 }

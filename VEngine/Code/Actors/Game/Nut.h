@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GridActor.h"
+#include <DirectXMath.h>
 
 //Metallic nut, not the squirrel nut.
 class Nut : public GridActor
@@ -14,5 +15,5 @@ public:
 	void OnLinkRotateRight() override;
 
 private:
-	void CheckIfConnectedToBolt(const XMVECTOR moveDirection);
+	void CheckIfConnectedToBolt(const DirectX::XMVECTOR moveDirection);
 };

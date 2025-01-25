@@ -45,7 +45,7 @@ public:
 
 	uint32_t GetProbeCount();
 	LightProbeInstanceData GetProbeByIndex(int index);
-	LightProbeInstanceData FindClosestProbe(XMVECTOR pos);
+	LightProbeInstanceData FindClosestProbe(DirectX::XMVECTOR pos);
 	void WriteProbeDataToFile();
 
 	ID3D11Buffer* GetStructuredBuffer() { return structuredBuffer.Get(); }

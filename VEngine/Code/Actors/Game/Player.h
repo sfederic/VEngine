@@ -19,15 +19,15 @@ class Player : public Actor
 public:
 	ACTOR_SYSTEM(Player);
 
-	XMVECTOR nextPos = XMVectorSet(0.f, 0.f, 0.f, 1.f);
-	XMVECTOR nextRot = XMVectorSet(0.f, 0.f, 0.f, 1.f);
-	XMVECTOR nextHopPos = XMVectorZero();
+	DirectX::XMVECTOR nextPos = DirectX::XMVectorSet(0.f, 0.f, 0.f, 1.f);
+	DirectX::XMVECTOR nextRot = DirectX::XMVectorSet(0.f, 0.f, 0.f, 1.f);
+	DirectX::XMVECTOR nextHopPos = DirectX::XMVectorZero();
 
 private:
-	XMVECTOR nextCameraLocalPosition = XMVectorSet(0.f, 0.f, 0.f, 1.f);
-	XMVECTOR cameraLinkActiveLocalPosition = XMVectorSet(0.f, 0.f, 0.f, 1.f);
-	XMVECTOR cameraStartingLocalPosition = XMVectorSet(1.75f, 1.75f, -2.75f, 1.f);
-	XMVECTOR cameraReconModeLocalPosition = XMVectorSet(0.f, 0.25f, 0.15f, 1.f);
+	DirectX::XMVECTOR nextCameraLocalPosition = DirectX::XMVectorSet(0.f, 0.f, 0.f, 1.f);
+	DirectX::XMVECTOR cameraLinkActiveLocalPosition = DirectX::XMVectorSet(0.f, 0.f, 0.f, 1.f);
+	DirectX::XMVECTOR cameraStartingLocalPosition = DirectX::XMVectorSet(1.75f, 1.75f, -2.75f, 1.f);
+	DirectX::XMVECTOR cameraReconModeLocalPosition = DirectX::XMVectorSet(0.f, 0.25f, 0.15f, 1.f);
 
 public:
 	std::set<Actor*> previousHitTransparentActors;
@@ -65,13 +65,13 @@ public:
 	void Tick(float deltaTime) override;
 	Properties GetProps() override;
 
-	XMVECTOR GetMeshForward();
-	XMVECTOR GetMeshRight();
+	DirectX::XMVECTOR GetMeshForward();
+	DirectX::XMVECTOR GetMeshRight();
 
 	void SetDefaultCameraFOV();
 	void SetZoomedInCameraFOV();
 
-	void CheckNextMoveNode(const XMVECTOR previousPos);
+	void CheckNextMoveNode(const DirectX::XMVECTOR previousPos);
 	GridNode* GetCurrentNode();
 	void SetGridIndices();
 	void GetGridIndices(int& x, int& y);
@@ -84,8 +84,8 @@ public:
 
 	void SetNextPosAndRotToCurrent();
 
-	void SetNextCameraPosition(XMVECTOR pos) { nextCameraLocalPosition = pos; }
-	XMVECTOR GetCameraLocalPosition();
+	void SetNextCameraPosition(DirectX::XMVECTOR pos) { nextCameraLocalPosition = pos; }
+	DirectX::XMVECTOR GetCameraLocalPosition();
 	void ResetCameraPosAndTargetToPlayer();
 	void SetCameraTargetActor(Actor* target);
 	Actor& GetCameraTargetActor();
@@ -161,7 +161,7 @@ private:
 	bool CheckIfMeshCanBeLinkedTo(GridActor* gridActorToLinkTo);
 
 	//Cute little hop animation when jumping off higher nodes. Think like Pokémon Blue when you jump.
-	void CuteHopToLowerNode(const XMFLOAT3 nextNodePos);
+	void CuteHopToLowerNode(const DirectX::XMFLOAT3 nextNodePos);
 	bool inHop = false;
 	bool hopLanding = false;
 
