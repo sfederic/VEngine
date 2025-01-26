@@ -1,9 +1,11 @@
 #include "vpch.h"
+
+import Core.Debug;
+
 #include "SpriteSystem.h"
 #include "Renderer.h"
 #include "RenderUtils.h"
 #include "TextureSystem.h"
-#include "Core/Debug.h"
 #include "Render/Vertex.h"
 #include "Render/MeshData.h"
 #include "Render/Texture2D.h"

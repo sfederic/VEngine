@@ -1,7 +1,9 @@
 #include "vpch.h"
+
+import Core.Debug;
+
 #include "RenderTarget.h"
 #include "Render/RenderUtils.h"
-#include "Core/Debug.h"
 #include "Renderer.h"
 
 void RenderTarget::Create(uint32_t width, uint32_t height)

@@ -1,9 +1,11 @@
 #include "vpch.h"
+
+import Core.Debug;
+
 #include "AudioSystem.h"
 #include <filesystem>
 #include "AudioBase.h"
 #include "AudioChannel.h"
-#include "Core/Debug.h"
 #include "Core/Log.h"
 #include "Components/AudioComponent.h"
 

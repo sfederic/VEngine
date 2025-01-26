@@ -1,9 +1,11 @@
 #include "vpch.h"
+
+import Core.Debug;
+
 #include "Core.h"
 #include "Audio/AudioSystem.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Core/Camera.h"
-#include "Core/Debug.h"
 #include "Core/FileSystem.h"
 #include "Core/Input.h"
 #include "Core/Profile.h"

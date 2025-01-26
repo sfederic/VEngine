@@ -1,7 +1,9 @@
 #include "vpch.h"
+
+import Core.Debug;
+
 #include "RenderUtils.h"
 #include "Texture2D.h"
-#include "Core/Debug.h"
 #include "Core/VString.h"
 #include "MeshDataProxy.h"
 #include "MeshData.h"

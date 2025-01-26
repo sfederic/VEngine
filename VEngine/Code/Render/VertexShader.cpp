@@ -1,7 +1,9 @@
 #include "vpch.h"
+
+import Core.Debug;
+
 #include "VertexShader.h"
 #include "Renderer.h"
-#include "Core/Debug.h"
 #include <d3dcompiler.h>
 
 void VertexShader::Create(const std::wstring filename)

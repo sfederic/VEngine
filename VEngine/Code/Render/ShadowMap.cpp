@@ -1,6 +1,8 @@
 #include "vpch.h"
+
+import Core.Debug;
+
 #include "ShadowMap.h"
-#include "Core/Debug.h"
 #include <cassert>
 #include "Core/VMath.h"
 #include "Components/Lights/DirectionalLightComponent.h"

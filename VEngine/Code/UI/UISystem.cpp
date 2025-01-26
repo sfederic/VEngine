@@ -1,8 +1,10 @@
 #include "vpch.h"
+
+import Core.Debug;
+
 #include "UISystem.h"
 #include <cassert>
 #include <dxgi1_6.h>
-#include "Core/Debug.h"
 #include "Core/Input.h"
 #include "Core/Core.h"
 #include "UI/Widget.h"

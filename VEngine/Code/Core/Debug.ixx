@@ -1,9 +1,9 @@
-#include "vpch.h"
-#include "Debug.h"
+module;
 #include <source_location>
 #include <comdef.h>
+export module Core.Debug;
 
-void HR(HRESULT hr)
+export void HR(HRESULT hr)
 {
 	const std::source_location& location = std::source_location::current();
 

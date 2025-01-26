@@ -1,8 +1,10 @@
 #include "vpch.h"
+
+import Core.Debug;
+
 #include "Win32Editor.h"
 #include "imgui_forward_declare.h"
 #include "Core/Core.h"
-#include "Core/Debug.h"
 
 MSG msg;
 HWND window;

@@ -1,7 +1,9 @@
 #include "vpch.h"
+
+import Core.Debug;
+
 #include "Texture2D.h"
 #include "Asset/AssetBaseFolders.h"
-#include "Core/Debug.h"
 #include "Render/RenderUtils.h"
 #include "Render/Renderer.h"
 #include <WICTextureLoader.h>

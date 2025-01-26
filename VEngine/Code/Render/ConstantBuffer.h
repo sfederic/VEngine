@@ -1,7 +1,8 @@
 #pragma once
 
+import Core.Debug;
+
 #include "RenderUtils.h"
-#include "Core/Debug.h"
 #include <wrl.h>
 
 struct ID3D11Buffer;
