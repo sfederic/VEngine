@@ -1,15 +1,15 @@
 #include "vpch.h"
 #include "Widget.h"
-#include "Core/Input.h"
-#include "Render/Renderer.h"
-#include "Editor/Editor.h"
-#include "Render/SpriteSystem.h"
-#include "Core/Timer.h"
-#include "Core/VString.h"
-#include "Core/VMath.h"
 #include "UISystem.h"
-#include "Render/TextureSystem.h"
+#include "Core/Input.h"
+#include "Core/Timer.h"
+#include "Core/VMath.h"
+#include "Core/VString.h"
+#include "Editor/Editor.h"
+#include "Render/Renderer.h"
+#include "Render/SpriteSystem.h"
 #include "Render/Texture2D.h"
+#include "Render/TextureSystem.h"
 
 void Widget::End()
 {
@@ -104,7 +104,7 @@ std::vector<Layout> Widget::GetAllActiveControlLayouts() const
 	return activeWidgetControlLayouts;
 }
 
-void Widget::GetScreenSpaceCoords(int& sx, int& sy)
+void Widget::GetScreenSpaceCoords(int& sx, int& sy) const
 {
 	VMath::HomogenousWorldPosToScreenSpaceCoords(worldPosition, sx, sy);
 }
@@ -351,13 +351,13 @@ Layout Widget::AlignLayout(float w, float h, Align align)
 
 Layout Widget::PercentAlignLayout(float left, float top, float right, float bottom)
 {
-	float vw = Renderer::GetViewportWidth();
-	float vh = Renderer::GetViewportHeight();
+	const float vw = Renderer::GetViewportWidth();
+	const float vh = Renderer::GetViewportHeight();
 
-	float endLeft = vw * left;
-	float endTop = vh * top;
-	float endRight = vw * right;
-	float endBottom = vh * bottom;
+	const float endLeft = vw * left;
+	const float endTop = vh * top;
+	const float endRight = vw * right;
+	const float endBottom = vh * bottom;
 	D2D1_RECT_F rect = { endLeft, endTop, endRight, endBottom };
 
 	if (rect.left < 0.f) rect.left = 0.f;
@@ -380,8 +380,8 @@ Layout Widget::CenterLayoutOnScreenSpaceCoords(float w, float h, float sx, float
 {
 	D2D1_RECT_F rect = { sx - w, sy - h, sx + w, sy + h };
 
-	float vw = Renderer::GetViewportWidth();
-	float vh = Renderer::GetViewportHeight();
+	const float vw = Renderer::GetViewportWidth();
+	const float vh = Renderer::GetViewportHeight();
 
 	if (rect.left < 0.f) rect.left = 0.f;
 	if (rect.top < 0.f) rect.top = 0.f;

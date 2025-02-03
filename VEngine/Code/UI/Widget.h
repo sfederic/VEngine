@@ -63,7 +63,7 @@ public:
 	std::vector<Layout> GetAllActiveControlLayouts() const;
 
 protected:
-	void GetScreenSpaceCoords(int& sx, int& sy);
+	void GetScreenSpaceCoords(int& sx, int& sy) const;
 
 	void Text(const std::wstring& text, Layout layout, TextAlign align = TextAlign::Center,
 		D2D1_COLOR_F color = { 0.f, 0.f, 0.f, 1.f }, float opacity = 1.0f);
