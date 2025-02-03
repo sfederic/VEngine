@@ -22,16 +22,24 @@ public:
 
 	std::string GetName() const { return name; }
 
-	float GetStartTime(int jointIndex)
+	double GetStartTime(int jointIndex)
 	{
-		if (frames[jointIndex].empty()) return 0.f;
-		return frames[jointIndex].front().time;
+		const auto& frame = frames.find(jointIndex)->second;
+		if (frame.empty())
+		{
+			return 0.f;
+		}
+		return frame.front().time;
 	}
 
-	float GetEndTime(int jointIndex)
+	double GetEndTime(int jointIndex)
 	{
-		if (frames[jointIndex].empty()) return 0.f;
-		return frames[jointIndex].back().time;
+		const auto& frame = frames.find(jointIndex)->second;
+		if (frame.empty())
+		{
+			return 0.f;
+		}
+		return frame.back().time;
 	}
 
 	auto& GetFrame(int jointIndex) { return frames.find(jointIndex)->second; }
