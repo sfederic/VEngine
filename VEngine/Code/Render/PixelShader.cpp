@@ -5,7 +5,6 @@
 
 void PixelShader::Create(const std::wstring filename)
 {
-	hlslFilepath = filename;
 	ReadData(filename);
 
 	HR(Renderer::GetDevice().CreatePixelShader(
