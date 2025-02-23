@@ -5,6 +5,7 @@
 #include <qboxlayout.h>
 #include <qscrollarea.h>
 #include "Actors/Actor.h"
+#include "Components/Component.h"
 #include "PropertyWidgets/BoolWidget.h" 
 #include "PropertyWidgets/Float2Widget.h"
 #include "PropertyWidgets/Float3Widget.h"

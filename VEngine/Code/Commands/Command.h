@@ -1,7 +1,9 @@
 #pragma once
 
 #include "ICommand.h"
+#include "Actors/Actor.h"
 #include "Core/Property.h"
+#include "Core/Properties.h"
 #include "Core/World.h"
 
 template <typename T>

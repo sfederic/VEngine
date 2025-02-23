@@ -5,6 +5,7 @@
 #include "Editor/ImGui/imgui.h"
 #include "Editor/ImGui/misc/cpp/imgui_stdlib.h"
 #include "Core/Core.h"
+#include "Core/Log.h"
 #include "Core/Serialiser.h"
 #include "Core/Deserialiser.h"
 #include "AudioSequenceEntryData.h"

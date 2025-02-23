@@ -1,5 +1,6 @@
 #include "vpch.h"
 #include "StringWidget.h"
+#include "Actors/Actor.h"
 #include <filesystem>
 #include <qcompleter.h>
 #include "Core/World.h"

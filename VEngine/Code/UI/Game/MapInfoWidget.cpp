@@ -1,6 +1,7 @@
 #include "vpch.h"
 #include "MapInfoWidget.h"
 #include "Gameplay/WorldFunctions.h"
+#include "Core/World.h"
 
 void MapInfoWidget::Draw(float deltaTime)
 {

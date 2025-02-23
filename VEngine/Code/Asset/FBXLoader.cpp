@@ -4,9 +4,8 @@
 #include <fbxsdk.h>
 #include <cassert>
 #include <filesystem>
-#include "Core/VMath.h"
+#include "Core/VString.h"
 #include "AssetBaseFolders.h"
-#include "AssetFileExtensions.h"
 #include "Animation/BoneWeights.h"
 #include "Animation/Animation.h"
 #include "Animation/AnimFrame.h"
@@ -14,9 +13,15 @@
 #include "Animation/Skeleton.h"
 #include "Render/Vertex.h"
 #include "Render/MeshData.h"
+#include "Render/ShaderData/MaterialShaderData.h"
 #include "Render/Material.h"
+#include "Core/Serialiser.h"
+#include "Core/Log.h"
+#include "Core/VMath.h"
+#include "AssetFileExtensions.h"
 
 using namespace fbxsdk;
+using namespace DirectX;
 
 FbxManager* manager;
 FbxIOSettings* ioSetting;

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Actor.h"
+#include "ActorSystem.h"
 
 class MeshComponent;
 

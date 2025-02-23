@@ -2,6 +2,7 @@
 #include "Component.h"
 #include "Core/Log.h"
 #include "Core/World.h"
+#include "Components/IComponentSystem.h"
 
 Properties Component::GetProps()
 {

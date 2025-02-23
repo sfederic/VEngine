@@ -1,6 +1,8 @@
 #include "vpch.h"
 #include "BinaryDeserialiser.h"
 #include "Core/VEnum.h"
+#include "Core/VString.h"
+#include "Core/Properties.h"
 
 void BinaryDeserialiser::Deserialise(Properties& props)
 {

@@ -5,6 +5,7 @@
 #include <qpushbutton.h>
 #include <qfiledialog.h>
 #include <qcombobox.h>
+#include "Actors/Actor.h"
 #include "Core/World.h"
 #include "Asset/AssetBaseFolders.h"
 #include "Gameplay/ConditionSystem.h"

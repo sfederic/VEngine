@@ -13,6 +13,7 @@
 #include "Core/Profile.h"
 #include "Core/WorldEditor.h"
 #include "Actors/Actor.h"
+#include "Actors/IActorSystem.h"
 #include "Localisation/Localisation.h"
 #include "Components/MeshComponent.h"
 #include "Components/InstanceMeshComponent.h"
@@ -490,17 +491,17 @@ void DebugMenu::RenderVertexPaintMenu()
 	}
 
 	auto SetMeshVertexColours = [&](XMFLOAT4 colour)
+	{
+		for (auto& mesh : MeshComponent::system.GetComponents())
 		{
-			for (auto& mesh : MeshComponent::system.GetComponents())
+			for (auto& vertex : mesh->GetAllVertices())
 			{
-				for (auto& vertex : mesh->GetAllVertices())
-				{
-					vertex.colour = colour;
-				}
-
-				mesh->CreateNewVertexBuffer();
+				vertex.colour = colour;
 			}
-		};
+
+			mesh->CreateNewVertexBuffer();
+		}
+	};
 
 	if (ImGui::Button("Reset all vertex colours in world"))
 	{

@@ -3,6 +3,9 @@
 #include <fstream>
 #include "Core/OpenMode.h"
 
+struct Property;
+struct Properties;
+
 class Serialiser
 {
 private:

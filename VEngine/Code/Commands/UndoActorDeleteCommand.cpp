@@ -1,5 +1,10 @@
 #include "vpch.h"
 #include "UndoActorDeleteCommand.h"
+#include "Actors/IActorSystem.h"
+#include "Actors/Actor.h"
+#include "Core/Properties.h"
+#include "Core/World.h"
+#include "Editor/Editor.h"
 
 void UndoActorDeleteCommand::Execute()
 {
@@ -10,7 +15,7 @@ void UndoActorDeleteCommand::Execute()
 	}
 
 	//Make sure all components are active when/if previously not before props are copied over
-	lastDeletedActor->SetActive(true); 
+	lastDeletedActor->SetActive(true);
 
 	const auto transform = lastDeletedActor->GetTransform();
 	auto undoActor = _actorSystem->SpawnActor(transform);
