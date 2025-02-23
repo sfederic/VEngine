@@ -32,6 +32,18 @@ void ReadVertexColours(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounte
 XMFLOAT4 FBXDouble3ToXMFloat3(const fbxsdk::FbxDouble3& fbxDouble);
 
 std::vector<XMFLOAT3> ProcessControlPoints(FbxMesh* currMesh);
+void ProcessTriangle(FbxMesh* mesh, int triangleIndex, int& polyIndexCounter, MeshData& meshData, const std::unordered_map<int, BoneWeights>& boneWeightsMap);
+void ProcessMaterials(FbxNode* node, const std::string& fbxFilename);
+void ProcessMaterial(FbxSurfacePhong* fbxMaterial, const std::string& fbxFilename);
+void SetTangents(Vertex* verts[3]);
+void FlipVertexFaceOrder(MeshData& meshData);
+void ProcessChildNodes(std::string fbxFilename, FbxNode* node, MeshData& meshData);
+void ProcessVertexWeights(FbxCluster* cluster, int i, int currentJointIndex, std::unordered_map<int, BoneWeights>& boneWeightsMap);
+void SetInverseBindPose(MeshData& meshData, int currentJointIndex, const FbxAMatrix& linkMatrix, const FbxAMatrix& clusterMatrix);
+void ProcessMesh(FbxNode* node, MeshData& meshData, const std::string& fbxFilename);
+void ProcessBoneWeights(FbxMesh* mesh, MeshData& meshData, std::unordered_map<int, BoneWeights>& boneWeightsMap);
+void ProcessCluster(FbxCluster* cluster, FbxMesh* mesh, MeshData& meshData, std::unordered_map<int, BoneWeights>& boneWeightsMap);
+void ProcessVertices(FbxMesh* mesh, MeshData& meshData, const std::unordered_map<int, BoneWeights>& boneWeightsMap);
 
 void FBXLoader::Init()
 {
@@ -247,232 +259,251 @@ std::map<std::string, Animation> FBXLoader::ImportAsAnimation(const std::string 
 
 void ProcessAllChildNodes(std::string fbxFilename, FbxNode* node, MeshData& meshData)
 {
-	//Recursion for dealing with nodes in the heirarchy.
+	// Recursion for handling child nodes.
+	ProcessChildNodes(fbxFilename, node, meshData);
+
+	// Process the mesh associated with this node.
+	ProcessMesh(node, meshData, fbxFilename);
+}
+
+void ProcessChildNodes(std::string fbxFilename, FbxNode* node, MeshData& meshData)
+{
 	int childNodeCount = node->GetChildCount();
 	for (int i = 0; i < childNodeCount; i++)
 	{
 		ProcessAllChildNodes(fbxFilename, node->GetChild(i), meshData);
 	}
+}
 
-	std::string nodename = node->GetName();
+void ProcessMesh(FbxNode* node, MeshData& meshData, const std::string& fbxFilename)
+{
+	FbxMesh* mesh = node->GetMesh();
+	if (!mesh)
+		return;
 
 	std::unordered_map<int, BoneWeights> boneWeightsMap;
+	ProcessBoneWeights(mesh, meshData, boneWeightsMap);
+	ProcessMaterials(node, fbxFilename);
+	ProcessVertices(mesh, meshData, boneWeightsMap);
+}
 
-	FbxMesh* mesh = node->GetMesh();
-	if (mesh)
+void ProcessBoneWeights(FbxMesh* mesh, MeshData& meshData, std::unordered_map<int, BoneWeights>& boneWeightsMap)
+{
+	const int deformerCount = mesh->GetDeformerCount(FbxDeformer::eSkin);
+	for (int deformerIndex = 0; deformerIndex < deformerCount; deformerIndex++)
 	{
-		//WEIGHT AND BONE INDICES CODE
-		const int deformerCount = mesh->GetDeformerCount(FbxDeformer::eSkin);
-		for (int deformerIndex = 0; deformerIndex < deformerCount; deformerIndex++)
+		FbxSkin* skin = reinterpret_cast<FbxSkin*>(mesh->GetDeformer(deformerIndex, FbxDeformer::eSkin));
+		if (!skin) continue;
+
+		const int clusterCount = skin->GetClusterCount();
+		for (int clusterIndex = 0; clusterIndex < clusterCount; clusterIndex++)
 		{
-			FbxSkin* skin = reinterpret_cast<FbxSkin*>(mesh->GetDeformer(deformerIndex, FbxDeformer::eSkin));
-			if (!skin) continue;
+			ProcessCluster(skin->GetCluster(clusterIndex), mesh, meshData, boneWeightsMap);
+		}
+	}
+}
 
-			const int clusterCount = skin->GetClusterCount();
-			for (int clusterIndex = 0; clusterIndex < clusterCount; clusterIndex++)
+void ProcessCluster(FbxCluster* cluster, FbxMesh* mesh, MeshData& meshData, std::unordered_map<int, BoneWeights>& boneWeightsMap)
+{
+	// Get current joint name and index
+	std::string currentJointName = cluster->GetLink()->GetName();
+	int currentJointIndex = meshData.skeleton.FindJointIndexByName(currentJointName);
+
+	FbxAMatrix clusterMatrix, linkMatrix;
+	cluster->GetTransformMatrix(clusterMatrix);
+	cluster->GetTransformLinkMatrix(linkMatrix);
+
+	// Set inverse bind pose for joint
+	SetInverseBindPose(meshData, currentJointIndex, linkMatrix, clusterMatrix);
+
+	const int vertexIndexCount = cluster->GetControlPointIndicesCount();
+	for (int i = 0; i < vertexIndexCount; i++)
+	{
+		ProcessVertexWeights(cluster, i, currentJointIndex, boneWeightsMap);
+	}
+}
+
+void SetInverseBindPose(MeshData& meshData, int currentJointIndex, const FbxAMatrix& linkMatrix, const FbxAMatrix& clusterMatrix)
+{
+	FbxAMatrix bindposeInverseMatrix = linkMatrix.Inverse() * clusterMatrix;
+
+	FbxQuaternion Q = bindposeInverseMatrix.GetQ();
+	FbxVector4 T = bindposeInverseMatrix.GetT();
+
+	XMVECTOR pos = XMVectorSet(T[0], T[1], T[2], 1.0f);
+	XMVECTOR scale = XMVectorSet(1.f, 1.f, 1.f, 0.f);
+	XMVECTOR rot = XMVectorSet(Q[0], Q[1], Q[2], Q[3]);
+
+	XMMATRIX pose = XMMatrixAffineTransformation(scale, XMVectorSet(0.f, 0.f, 0.f, 1.f), rot, pos);
+
+	meshData.skeleton.GetJoint(currentJointIndex).inverseBindPose = pose;
+	meshData.skeleton.GetJoint(currentJointIndex).currentPose = pose;
+}
+
+void ProcessVertexWeights(FbxCluster* cluster, int i, int currentJointIndex, std::unordered_map<int, BoneWeights>& boneWeightsMap)
+{
+	double weight = cluster->GetControlPointWeights()[i];
+	weight = std::clamp(weight, 0.0, 1.0);
+	int index = cluster->GetControlPointIndices()[i];
+
+	if (boneWeightsMap[index].boneIndex.size() < BoneWeights::MAX_BONE_INDICES)
+	{
+		boneWeightsMap[index].boneIndex.emplace_back(currentJointIndex);
+	}
+
+	if (boneWeightsMap[index].weights.size() < BoneWeights::MAX_WEIGHTS)
+	{
+		boneWeightsMap[index].weights.emplace_back(weight);
+	}
+}
+
+void ProcessMaterials(FbxNode* node, const std::string& fbxFilename)
+{
+	const int materialCount = node->GetMaterialCount();
+	for (int materialIndex = 0; materialIndex < materialCount; materialIndex++)
+	{
+		auto FBXMaterial = (FbxSurfacePhong*)node->GetMaterial(materialIndex);
+		ProcessMaterial(FBXMaterial, fbxFilename);
+	}
+}
+
+void ProcessMaterial(FbxSurfacePhong* fbxMaterial, const std::string& fbxFilename)
+{
+	MaterialShaderData shaderData;
+	shaderData.ambient = FBXDouble3ToXMFloat3(fbxMaterial->Ambient.Get());
+	shaderData.emissive = FBXDouble3ToXMFloat3(fbxMaterial->Emissive.Get());
+	shaderData.diffuse = FBXDouble3ToXMFloat3(fbxMaterial->Diffuse.Get());
+	shaderData.specular = FBXDouble3ToXMFloat3(fbxMaterial->Specular.Get());
+
+	//@Todo: No idea how to get metallic & roughness GGX material data from blender.
+	//(Don't think PBR material export values exist in FBX SDK. Maybe you'd have to define your
+	//own user values in DCC? Here's some dudes talking about it.
+	//https://forums.autodesk.com/t5/fbx-forum/pbr-materials/td-p/7418493)
+	//@Todo: textures (really just texture filenames)
+	//@Todo: No idea how transparency applies to each material per colour property in DCC.
+
+	Material engineMaterial("test.png", "Default");
+	engineMaterial.GetMaterialShaderData() = shaderData;
+
+	const std::string materialName = AssetBaseFolders::material + VString::GetSubStringBeforeFoundOffset(fbxFilename, ".fbx") + fbxMaterial->GetName() + AssetFileExtensions::material;
+	assert(!std::filesystem::exists(materialName));
+
+	Serialiser s(materialName, OpenMode::Out);
+	Properties materialProps = engineMaterial.GetProps();
+	s.Serialise(materialProps);
+
+	Log("Material file [%s] created from mesh import [%s].", materialName.c_str(), fbxFilename.c_str());
+}
+
+void ProcessVertices(FbxMesh* mesh, MeshData& meshData, const std::unordered_map<int, BoneWeights>& boneWeightsMap)
+{
+	int numVerts = mesh->GetControlPointsCount();
+	int vectorSize = numVerts * mesh->GetPolygonSize(0);
+	assert((vectorSize % 3) == 0 && "FBX model isn't triangulated");
+
+	int polyIndexCounter = 0;
+	const int triangleCount = mesh->GetPolygonCount();
+	meshData.vertices.reserve(triangleCount);
+
+	//Blender exporting FBX to right-handed coordinate system means you have to:
+	// - invert the vertex's Z by -1 (-1.0 * vertex.z)
+	// - invert the texture UV u coordinate by (1.0 - uv.v) [can be done in shader too]
+	// - flip the vertex order (from v0, v1, v2 to v0, v2, v1)
+	// Also optional to rotate the model around a bit (apply a -90 rotation on the x-axis, apply the rotation
+	//then rotate 90 deg on the x-axis), I think Unity does this approach internally.
+
+	for (int i = 0; i < triangleCount; i++)
+	{
+		ProcessTriangle(mesh, i, polyIndexCounter, meshData, boneWeightsMap);
+	}
+
+	FlipVertexFaceOrder(meshData);
+}
+
+void ProcessTriangle(FbxMesh* mesh, int triangleIndex, int& polyIndexCounter, MeshData& meshData, const std::unordered_map<int, BoneWeights>& boneWeightsMap)
+{
+	const int triangleSize = mesh->GetPolygonSize(triangleIndex);
+	assert((triangleSize % 3) == 0 && "FBX model isn't triangulated");
+
+	for (int j = 0; j < triangleSize; j++)
+	{
+		const int index = mesh->GetPolygonVertex(triangleIndex, j);
+
+		Vertex vert = {};
+		auto controlPoint = mesh->GetControlPointAt(index);
+		vert.pos.x = controlPoint.mData[0];
+		vert.pos.y = controlPoint.mData[1];
+		vert.pos.z = -1.0f * controlPoint.mData[2];
+
+		ReadUVs(mesh, index, polyIndexCounter, vert.uv);
+		vert.uv.y = 1.0f - vert.uv.y;
+
+		ReadVertexColours(mesh, index, polyIndexCounter, vert.colour);
+		ReadNormal(mesh, index, polyIndexCounter, vert.normal);
+
+		vert.normal.z = -1.0f * vert.normal.z;
+
+		// Bone Weights
+		if (boneWeightsMap.find(index) != boneWeightsMap.end())
+		{
+			const BoneWeights& boneData = boneWeightsMap.find(index)->second;
+
+			for (int weightIndex = 0; weightIndex < boneData.weights.size(); weightIndex++)
 			{
-				FbxCluster* cluster = skin->GetCluster(clusterIndex);
+				vert.weights[weightIndex] = boneData.weights[weightIndex];
+			}
 
-				//'Link' is the joint
-				std::string currentJointName = cluster->GetLink()->GetName();
-				int currentJointIndex = meshData.skeleton.FindJointIndexByName(currentJointName);
-
-				FbxAMatrix clusterMatrix, linkMatrix;
-				cluster->GetTransformMatrix(clusterMatrix);
-				cluster->GetTransformLinkMatrix(linkMatrix);
-
-				{
-					//Set inverse bind pose for joint
-					FbxAMatrix bindposeInverseMatrix = linkMatrix.Inverse() * clusterMatrix;
-
-					FbxQuaternion Q = bindposeInverseMatrix.GetQ();
-					FbxVector4 T = bindposeInverseMatrix.GetT();
-
-					XMVECTOR pos = XMVectorSet(T[0], T[1], T[2], 1.0f);
-					XMVECTOR scale = XMVectorSet(1.f, 1.f, 1.f, 0.f);
-					XMVECTOR rot = XMVectorSet(Q[0], Q[1], Q[2], Q[3]);
-
-					XMMATRIX pose = XMMatrixAffineTransformation(scale,
-						XMVectorSet(0.f, 0.f, 0.f, 1.f), rot, pos);
-
-					meshData.skeleton.GetJoint(currentJointIndex).inverseBindPose = pose;
-					meshData.skeleton.GetJoint(currentJointIndex).currentPose = pose;
-				}
-
-				const int vertexIndexCount = cluster->GetControlPointIndicesCount();
-				for (int i = 0; i < vertexIndexCount; i++)
-				{
-					double weight = cluster->GetControlPointWeights()[i];
-					weight = std::clamp(weight, 0.0, 1.0);
-
-					int index = cluster->GetControlPointIndices()[i];
-
-					if (boneWeightsMap[index].boneIndex.size() < BoneWeights::MAX_BONE_INDICES)
-					{
-						boneWeightsMap[index].boneIndex.emplace_back(currentJointIndex);
-					}
-
-					if (boneWeightsMap[index].weights.size() < BoneWeights::MAX_WEIGHTS)
-					{
-						boneWeightsMap[index].weights.emplace_back(weight);
-					}
-				}
+			for (int boneIndex = 0; boneIndex < boneData.boneIndex.size(); boneIndex++)
+			{
+				vert.boneIndices[boneIndex] = boneData.boneIndex[boneIndex];
 			}
 		}
 
-		//Materials
-		const int materialCount = node->GetMaterialCount();
-		for (int materialIndex = 0; materialIndex < materialCount; materialIndex++)
-		{
-			FbxSurfacePhong* FBXMaterial = (FbxSurfacePhong*)node->GetMaterial(materialIndex);
-			const FbxClassId surfaceID = FBXMaterial->GetClassId();
-			const FbxDouble3 specular = FBXMaterial->Specular.Get();
+		meshData.vertices.emplace_back(vert);
+		polyIndexCounter++;
+	}
+}
 
-			MaterialShaderData shaderData;
-			shaderData.ambient = FBXDouble3ToXMFloat3(FBXMaterial->Ambient.Get());
-			shaderData.emissive = FBXDouble3ToXMFloat3(FBXMaterial->Emissive.Get());
-			shaderData.diffuse = FBXDouble3ToXMFloat3(FBXMaterial->Diffuse.Get());
-			shaderData.specular = FBXDouble3ToXMFloat3(FBXMaterial->Specular.Get());
-			//@Todo: No idea how to get metallic & roughness GGX material data from blender.
-			//(Don't think PBR material export values exist in FBX SDK. Maybe you'd have to define your
-			//own user values in DCC? Here's some dudes talking about it.
-			//https://forums.autodesk.com/t5/fbx-forum/pbr-materials/td-p/7418493)
-			//@Todo: textures (really just texture filenames)
-			//@Todo: No idea how transparency applies to each material per colour property in DCC.
+void FlipVertexFaceOrder(MeshData& meshData)
+{
+	for (int i = 0; i < meshData.vertices.size() / 3; i++)
+	{
+		const int index1 = i * 3 + 1;
+		const int index2 = i * 3 + 2;
+		std::swap(meshData.vertices[index1], meshData.vertices[index2]);
+	}
 
-			Material engineMaterial("test.png", "Default");
-			engineMaterial.GetMaterialShaderData() = shaderData;
+	// Also set tangents
+	for (int i = 0; i < meshData.vertices.size() / 3; i++)
+	{
+		const int index0 = i * 3;
+		const int index1 = i * 3 + 1;
+		const int index2 = i * 3 + 2;
 
-			const std::string materialName =
-				AssetBaseFolders::material +
-				VString::GetSubStringBeforeFoundOffset(fbxFilename, ".fbx") +
-				FBXMaterial->GetName() +
-				AssetFileExtensions::material;
-			assert(!std::filesystem::exists(materialName));
+		Vertex* verts[3] = { &meshData.vertices[index0], &meshData.vertices[index1], &meshData.vertices[index2] };
+		SetTangents(verts);
+	}
+}
 
-			Serialiser s(materialName, OpenMode::Out);
-			Properties materialProps = engineMaterial.GetProps();
-			s.Serialise(materialProps);
+void SetTangents(Vertex* verts[3])
+{
+	const XMFLOAT3 edge1 = VMath::Float3Subtract(verts[1]->pos, verts[0]->pos);
+	const XMFLOAT3 edge2 = VMath::Float3Subtract(verts[2]->pos, verts[0]->pos);
 
-			Log("Material file [%s] created from mesh import [%s].", materialName.c_str(), fbxFilename.c_str());
-		}
+	const XMFLOAT2 deltaUV1 = VMath::Float2Subtract(verts[1]->uv, verts[0]->uv);
+	const XMFLOAT2 deltaUV2 = VMath::Float2Subtract(verts[2]->uv, verts[0]->uv);
 
-		//Array setup
-		int numVerts = mesh->GetControlPointsCount();
-		int vectorSize = numVerts * mesh->GetPolygonSize(0);
-		assert((vectorSize % 3) == 0 && "FBX model isn't triangulated"); //This is a check to make sure the mesh is triangulated (in blender, Ctrl+T)
+	const float f = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV2.x * deltaUV1.y);
 
-		int polyIndexCounter = 0; //Used to index into normals and UVs on a per vertex basis
-		int triangleCount = mesh->GetPolygonCount();
+	XMFLOAT3 tangent1{};
+	tangent1.x = f * (deltaUV2.y * edge1.x - deltaUV1.y * edge2.x);
+	tangent1.y = f * (deltaUV2.y * edge1.y - deltaUV1.y * edge2.y);
+	tangent1.z = f * (deltaUV2.y * edge1.z - deltaUV1.y * edge2.z);
 
-		meshData.vertices.reserve(triangleCount);
-
-		//Blender exporting FBX to right-handed coordinate system means you have to:
-		// - invert the vertex's Z by -1 (-1.0 * vertex.z)
-		// - invert the texture UV u coordinate by (1.0 - uv.v) [can be done in shader too]
-		// - flip the vertex order (from v0, v1, v2 to v0, v2, v1)
-		// Also optional to rotate the model around a bit (apply a -90 rotation on the x-axis, apply the rotation
-		//then rotate 90 deg on the x-axis), I think Unity does this approach internally.
-
-		//Main import loop
-		for (int i = 0; i < triangleCount; i++)
-		{
-			const int triangleSize = mesh->GetPolygonSize(i);
-			assert((triangleSize % 3) == 0 && "FBX model isn't triangulated");
-
-			for (int j = 0; j < triangleSize; j++)
-			{
-				int index = mesh->GetPolygonVertex(i, j);
-
-				Vertex vert = {};
-				auto controlPoint = mesh->GetControlPointAt(index);
-				vert.pos.x = controlPoint.mData[0];
-				vert.pos.y = controlPoint.mData[1];
-				vert.pos.z = -1.0f * controlPoint.mData[2];
-
-				ReadUVs(mesh, index, polyIndexCounter, vert.uv);
-				vert.uv.y = 1.0f - vert.uv.y;
-
-				ReadVertexColours(mesh, index, polyIndexCounter, vert.colour);
-				ReadNormal(mesh, index, polyIndexCounter, vert.normal);
-
-				vert.normal.z = -1.0f * vert.normal.z;
-
-				//Bone Weights
-				if (boneWeightsMap.find(index) != boneWeightsMap.end())
-				{
-					BoneWeights* boneData = &boneWeightsMap.find(index)->second;
-					if (boneData)
-					{
-						//There must be a way to merge the above cluster FBX code and the vertices.
-						for (int weightIndex = 0; weightIndex < boneData->weights.size(); weightIndex++)
-						{
-							vert.weights[weightIndex] = boneData->weights[weightIndex];
-						}
-
-						for (int boneIndex = 0; boneIndex < boneData->boneIndex.size(); boneIndex++)
-						{
-							vert.boneIndices[boneIndex] = boneData->boneIndex[boneIndex];
-						}
-					}
-				}
-
-				meshData.vertices.emplace_back(vert);
-				polyIndexCounter++;
-			}
-		}
-
-		//Flip vertex face order
-		for (int i = 0; i < meshData.vertices.size() / 3; i++)
-		{
-			const int index1 = i * 3 + 1;
-			const int index2 = i * 3 + 2;
-
-			std::swap(meshData.vertices[index1], meshData.vertices[index2]);
-		}
-
-		for (int i = 0; i < meshData.vertices.size() / 3; i++)
-		{
-			const int index0 = i * 3;
-			const int index1 = i * 3 + 1;
-			const int index2 = i * 3 + 2;
-
-			Vertex* verts[3] = {
-				&meshData.vertices[index0], &meshData.vertices[index1], &meshData.vertices[index2]
-			};
-
-			//Assert all normals are equal
-			//@Todo: come back here and figure out how to set up correctly in DCC
-			//const XMVECTOR n0 = XMLoadFloat3(&verts[index0]->normal);
-			//const XMVECTOR n1 = XMLoadFloat3(&verts[index1]->normal);
-			//const XMVECTOR n2 = XMLoadFloat3(&verts[index2]->normal);
-			//assert(XMVector4Equal(n0, n1) && XMVector4Equal(n1, n2));
-
-			//tangent/bitangent testing
-			//Ref:https://learnopengl.com/Advanced-Lighting/Normal-Mapping
-			const XMFLOAT3 edge1 = VMath::Float3Subtract(verts[1]->pos, verts[0]->pos);
-			const XMFLOAT3 edge2 = VMath::Float3Subtract(verts[2]->pos, verts[0]->pos);
-
-			const XMFLOAT2 deltaUV1 = VMath::Float2Subtract(verts[1]->uv, verts[0]->uv);
-			const XMFLOAT2 deltaUV2 = VMath::Float2Subtract(verts[2]->uv, verts[0]->uv);
-
-			const float f = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV2.x * deltaUV1.y);
-
-			XMFLOAT3 tangent1{};
-			XMFLOAT3 bitangent1{};
-
-			tangent1.x = f * (deltaUV2.y * edge1.x - deltaUV1.y * edge2.x);
-			tangent1.y = f * (deltaUV2.y * edge1.y - deltaUV1.y * edge2.y);
-			tangent1.z = f * (deltaUV2.y * edge1.z - deltaUV1.y * edge2.z);
-
-			bitangent1.x = f * (-deltaUV2.x * edge1.x + deltaUV1.x * edge2.x);
-			bitangent1.y = f * (-deltaUV2.x * edge1.y + deltaUV1.x * edge2.y);
-			bitangent1.z = f * (-deltaUV2.x * edge1.z + deltaUV1.x * edge2.z);
-
-			verts[0]->tangent = tangent1;
-			verts[1]->tangent = tangent1;
-			verts[2]->tangent = tangent1;
-		}
+	// Assign tangent to all verts
+	for (int vIndex = 0; vIndex < 3; ++vIndex)
+	{
+		verts[vIndex]->tangent = tangent1;
 	}
 }
 
