@@ -1,7 +1,5 @@
 #include "vpch.h"
 #include "MeshComponent.h"
-#include <algorithm>
-#include "Core/Camera.h"
 #include "Asset/AssetSystem.h"
 #include "Render/Material.h"
 #include "Render/MaterialSystem.h"
