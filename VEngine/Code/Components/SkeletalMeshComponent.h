@@ -15,6 +15,8 @@ enum class AnimationState
 	Pause
 };
 
+//Todo: I think there's a bug here where deleting skeletal mesh components in the scene isn't cleaning them up
+
 class SkeletalMeshComponent : public MeshComponent
 {
 public:
@@ -28,7 +30,8 @@ public:
 
 	SkeletalMeshComponent() {}
 	SkeletalMeshComponent(std::string meshFilename, std::string textureFilename) :
-		MeshComponent(meshFilename, textureFilename) {}
+		MeshComponent(meshFilename, textureFilename) {
+	}
 
 	Properties GetProps() override;
 	void Create() override;
