@@ -56,7 +56,6 @@
 #include "Render/ShaderData/ShaderTimeData.h"
 #include "Render/ShaderData/ShaderLightProbeData.h"
 #include "Render/SpriteSystem.h"
-#include "Render/VertexShader.h"
 #include "RenderUtils.h"
 #include "ShaderData/MaterialShaderData.h"
 #include "ShaderItem.h"
