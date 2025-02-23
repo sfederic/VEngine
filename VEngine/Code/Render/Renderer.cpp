@@ -1686,7 +1686,10 @@ void AnimateAndRenderSkeletalMeshes()
 
 	for (auto skeletalMesh : RenderUtils::SortMeshesByDistanceToCamera<SkeletalMeshComponent>())
 	{
-		if (!skeletalMesh->IsVisible()) { continue; }
+		if (!skeletalMesh->IsVisible() || !skeletalMesh->IsActive())
+		{
+			continue;
+		}
 
 		SetRenderPipelineStates(skeletalMesh);
 
@@ -2237,27 +2240,27 @@ void RenderPostProcess()
 void RenderWireframeForVertexPaintingAndPickedActor()
 {
 	const auto wireframeRender = [&](MeshComponent* mesh)
-		{
-			context->RSSetState(rastStateMap.find(RastStates::wireframe)->second->GetData());
+	{
+		context->RSSetState(rastStateMap.find(RastStates::wireframe)->second->GetData());
 
-			MaterialShaderData materialShaderData;
-			materialShaderData.ambient = XMFLOAT4(1.f, 0.f, 1.f, 1.f);
-			cbMaterial.Map(&materialShaderData);
-			cbMaterial.SetPS();
+		MaterialShaderData materialShaderData;
+		materialShaderData.ambient = XMFLOAT4(1.f, 0.f, 1.f, 1.f);
+		cbMaterial.Map(&materialShaderData);
+		cbMaterial.SetPS();
 
-			ShaderItem* shaderItem = ShaderSystem::FindShaderItem("SolidColour");
-			context->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
-			context->IASetInputLayout(shaderItem->GetInputLayout());
-			context->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
+		ShaderItem* shaderItem = ShaderSystem::FindShaderItem("SolidColour");
+		context->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
+		context->IASetInputLayout(shaderItem->GetInputLayout());
+		context->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
 
-			SetVertexBuffer(mesh->GetVertexBuffer());
+		SetVertexBuffer(mesh->GetVertexBuffer());
 
-			SetMatricesFromMesh(mesh);
-			SetShaderMeshData(mesh);
-			SetLightProbeData(mesh);
+		SetMatricesFromMesh(mesh);
+		SetShaderMeshData(mesh);
+		SetLightProbeData(mesh);
 
-			DrawMesh(mesh);
-		};
+		DrawMesh(mesh);
+	};
 
 	if (!Core::gameplayOn)
 	{
