@@ -61,6 +61,8 @@ public:
 		std::swap(components[index], components.back());
 		components[index]->SetIndex(index);
 
+		components.back().get()->Destroy();
+
 		if (components.back()->GetOwnerUID() != 0)
 		{
 			auto owner = World::GetActorByUID(components.back()->GetOwnerUID());
