@@ -3,6 +3,7 @@
 #include "Actors/DiffuseProbeMap.h"
 #include "Actors/PostProcessVolume.h"
 #include "BlendStates.h"
+#include "Device.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Components/CameraComponent.h"
 #include "Components/CharacterControllerComponent.h"
@@ -88,7 +89,6 @@
 #include <windef.h>
 
 void CreateFactory();
-void CreateDevice();
 void CreateRTVAndDSV();
 void CreateRasterizerStates();
 void CreateBlendStates();
@@ -164,10 +164,6 @@ unsigned int Renderer::offset = 0;
 
 DepthStencil depthStencil;
 
-Microsoft::WRL::ComPtr<ID3D11Device> device;
-Microsoft::WRL::ComPtr<ID3D11Debug> debugDevice;
-Microsoft::WRL::ComPtr<ID3D11DeviceContext> context;
-
 RenderTarget rtvs[Swapchain::SWAPCHAIN_COUNT];
 
 //Rasterizer states
@@ -240,6 +236,8 @@ std::vector<Vertex> debugLines;
 Microsoft::WRL::ComPtr<ID3D11Buffer> debugLinesBuffer;
 static const uint64_t debugLinesBufferSize = 32 * 32 * sizeof(Vertex);
 
+Device device;
+
 void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 {
 	viewport.Width = viewportWidth;
@@ -250,7 +248,7 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 	viewport.MinDepth = 0.0f;
 
 	CreateFactory();
-	CreateDevice();
+	device.Create();
 
 	ShaderSystem::Init();
 
@@ -278,9 +276,6 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 
 void Renderer::Cleanup()
 {
-	device.Reset();
-	context.Reset();
-
 	for (int i = 0; i < Swapchain::SWAPCHAIN_COUNT; i++)
 	{
 		rtvs[i].Recycle();
@@ -346,29 +341,6 @@ void CreateFactory()
 	HR(CreateDXGIFactory(IID_PPV_ARGS(&tempDxgiFactory)));
 	HR(tempDxgiFactory->QueryInterface(dxgiFactory.GetAddressOf()));
 	tempDxgiFactory->Release();
-}
-
-void CreateDevice()
-{
-	//BGRA support needed for DirectWrite and Direct2D
-	UINT createDeviceFlags = D3D11_CREATE_DEVICE_BGRA_SUPPORT;
-#ifdef _DEBUG
-	createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
-#endif
-	const D3D_FEATURE_LEVEL featureLevels[] = { D3D_FEATURE_LEVEL_11_1 };
-	D3D_FEATURE_LEVEL selectedFeatureLevel;
-
-	//@Todo: this shit always causes problems. From HDR to graphics debugging, all sorts of issues.
-	//For now, keep adapter CreateDevice() input as nullptr. Change on release.
-	//IDXGIAdapter1* adapter = nullptr;
-	//HR(dxgiFactory->EnumAdapterByGpuPreference(0, DXGI_GPU_PREFERENCE_HIGH_PERFORMANCE, IID_PPV_ARGS(&adapter)));
-
-	HR(D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, createDeviceFlags,
-		featureLevels, _countof(featureLevels), D3D11_SDK_VERSION, device.GetAddressOf(),
-		&selectedFeatureLevel, context.GetAddressOf()));
-
-	//Create debug device
-	HR(device->QueryInterface(IID_PPV_ARGS(debugDevice.GetAddressOf())));
 }
 
 void CreateRTVAndDSV()
@@ -498,23 +470,23 @@ void CreateConstantBuffers()
 void MapBuffer(ID3D11Resource* resource, const void* src, size_t size)
 {
 	D3D11_MAPPED_SUBRESOURCE mapped = {};
-	HR(context->Map(resource, 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped));
+	HR(device.GetContext()->Map(resource, 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped));
 	std::memcpy(mapped.pData, src, size);
-	context->Unmap(resource, 0);
+	device.GetContext()->Unmap(resource, 0);
 }
 
 void SetNullRTV()
 {
 	ID3D11RenderTargetView* nullRTV = nullptr;
-	context->OMSetRenderTargets(1, &nullRTV, nullptr);
+	device.GetContext()->OMSetRenderTargets(1, &nullRTV, nullptr);
 }
 
 void SetGeneralShaderResourcesToNull()
 {
 	//Set to null to remove warnings
 	ID3D11ShaderResourceView* nullSRV = nullptr;
-	context->PSSetShaderResources(shadowMapTextureRegister, 1, &nullSRV);
-	context->PSSetShaderResources(reflectionTextureRegister, 1, &nullSRV);
+	device.GetContext()->PSSetShaderResources(shadowMapTextureRegister, 1, &nullSRV);
+	device.GetContext()->PSSetShaderResources(reflectionTextureRegister, 1, &nullSRV);
 }
 
 void SetShadowData()
@@ -564,12 +536,12 @@ void SetLightResources()
 
 void DrawMesh(MeshComponent* mesh)
 {
-	context->Draw(static_cast<UINT>(mesh->meshDataProxy.vertices.size()), 0);
+	device.GetContext()->Draw(static_cast<UINT>(mesh->meshDataProxy.vertices.size()), 0);
 }
 
 void DrawMeshInstanced(InstanceMeshComponent* mesh)
 {
-	context->DrawInstanced(static_cast<UINT>(mesh->meshDataProxy.vertices.size()), mesh->GetInstanceCount(), 0, 0);
+	device.GetContext()->DrawInstanced(static_cast<UINT>(mesh->meshDataProxy.vertices.size()), mesh->GetInstanceCount(), 0, 0);
 }
 
 void DrawBoundingBox(MeshComponent* mesh, MeshComponent* boundsMesh)
@@ -609,33 +581,33 @@ void RenderDebugLines()
 	SetShaders("SolidColour");
 
 	D3D11_MAPPED_SUBRESOURCE mappedResource{};
-	HR(context->Map(debugLinesBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
+	HR(device.GetContext()->Map(debugLinesBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
 	memcpy(mappedResource.pData, debugLines.data(), debugLinesBufferSize);
-	context->Unmap(debugLinesBuffer.Get(), 0);
+	device.GetContext()->Unmap(debugLinesBuffer.Get(), 0);
 
-	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
-	context->IASetVertexBuffers(0, 1, debugLinesBuffer.GetAddressOf(), &Renderer::stride, &Renderer::offset);
+	device.GetContext()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
+	device.GetContext()->IASetVertexBuffers(0, 1, debugLinesBuffer.GetAddressOf(), &Renderer::stride, &Renderer::offset);
 
 	shaderMatrices.model = XMMatrixIdentity();
 	shaderMatrices.MakeModelViewProjectionMatrix();
 	cbMatrices.Map(&shaderMatrices);
 	cbMatrices.SetVS();
 
-	context->Draw(static_cast<UINT>(debugLines.size()), 0);
+	device.GetContext()->Draw(static_cast<UINT>(debugLines.size()), 0);
 }
 
 void CheckSupportedFeatures()
 {
 	//Threading check
 	D3D11_FEATURE_DATA_THREADING threadFeature = {};
-	HR(device->CheckFeatureSupport(D3D11_FEATURE_THREADING, &threadFeature, sizeof(threadFeature)));
+	HR(device.Get()->CheckFeatureSupport(D3D11_FEATURE_THREADING, &threadFeature, sizeof(threadFeature)));
 
 	//Swapchain's SwapEffect needs to be DXGI_SWAP_EFFECT_DISCARD for MSAA to work.
 	const int sampleCount = 1;
 
 	//MSAA check and set
 	UINT msaaQualityLevel;
-	HR(device->CheckMultisampleQualityLevels(DXGI_FORMAT_R8G8B8A8_UNORM, sampleCount, &msaaQualityLevel));
+	HR(device.Get()->CheckMultisampleQualityLevels(DXGI_FORMAT_R8G8B8A8_UNORM, sampleCount, &msaaQualityLevel));
 	assert(msaaQualityLevel > 0);
 
 	//Quality has to be one less than what CheckMultisampleQualityLevels() spits out for some reason
@@ -663,11 +635,11 @@ void RenderMeshForShadowPass(MeshComponent* mesh)
 	cbMatrices.SetVS();
 
 	//Set textures
-	context->PSSetSamplers(0, 1, mat.GetSampler().GetDataAddress());
+	device.GetContext()->PSSetSamplers(0, 1, mat.GetSampler().GetDataAddress());
 	SetShaderResourceFromMaterial(mat);
 
 	//Draw
-	context->Draw(static_cast<UINT>(mesh->meshDataProxy.vertices.size()), 0);
+	device.GetContext()->Draw(static_cast<UINT>(mesh->meshDataProxy.vertices.size()), 0);
 }
 
 void RenderInstanceMeshForShadowPass(InstanceMeshComponent& instanceMesh)
@@ -692,11 +664,11 @@ void RenderInstanceMeshForShadowPass(InstanceMeshComponent& instanceMesh)
 		cbMatrices.SetVS();
 
 		//Set textures
-		context->PSSetSamplers(0, 1, mat.GetSampler().GetDataAddress());
+		device.GetContext()->PSSetSamplers(0, 1, mat.GetSampler().GetDataAddress());
 		SetShaderResourceFromMaterial(mat);
 
 		//Draw
-		context->Draw(static_cast<UINT>(vertexCount), 0);
+		device.GetContext()->Draw(static_cast<UINT>(vertexCount), 0);
 	}
 }
 
@@ -709,9 +681,9 @@ void RenderShadowPass()
 		return;
 	}
 
-	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	device.GetContext()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-	shadowMap.BindDsvAndSetNullRenderTarget(context.Get());
+	shadowMap.BindDsvAndSetNullRenderTarget(device.GetContext());
 
 	for (auto& mesh : MeshComponent::system.GetComponents())
 	{
@@ -734,15 +706,15 @@ void RenderShadowPass()
 			return;
 		}
 
-		context->RSSetState(rastStateMap.find(RastStates::shadow)->second->GetData());
+		device.GetContext()->RSSetState(rastStateMap.find(RastStates::shadow)->second->GetData());
 
-		context->IASetVertexBuffers(0, 1, mesh->GetVertexBuffer().GetDataAddress(), &Renderer::stride, &Renderer::offset);
+		device.GetContext()->IASetVertexBuffers(0, 1, mesh->GetVertexBuffer().GetDataAddress(), &Renderer::stride, &Renderer::offset);
 
 		ShaderItem* shader = ShaderSystem::FindShaderItem("ShadowAnimation");
 
-		context->VSSetShader(shader->GetVertexShader(), nullptr, 0);
-		context->IASetInputLayout(shader->GetInputLayout());
-		context->PSSetShader(shader->GetPixelShader(), nullptr, 0);
+		device.GetContext()->VSSetShader(shader->GetVertexShader(), nullptr, 0);
+		device.GetContext()->IASetInputLayout(shader->GetInputLayout());
+		device.GetContext()->PSSetShader(shader->GetPixelShader(), nullptr, 0);
 
 		//Set matrices
 		shaderMatrices.model = mesh->GetWorldMatrix();
@@ -760,11 +732,11 @@ void RenderShadowPass()
 
 		//Set textures
 		Material& mat = mesh->GetMaterial();
-		context->PSSetSamplers(0, 1, mat.GetSampler().GetDataAddress());
+		device.GetContext()->PSSetSamplers(0, 1, mat.GetSampler().GetDataAddress());
 		SetShaderResourceFromMaterial(mat);
 
 		//Draw
-		context->Draw(static_cast<UINT>(mesh->meshDataProxy.vertices.size()), 0);
+		device.GetContext()->Draw(static_cast<UINT>(mesh->meshDataProxy.vertices.size()), 0);
 	}
 
 	SetNullRTV();
@@ -774,37 +746,37 @@ void RenderShadowPass()
 
 static void RenderSetup()
 {
-	context->RSSetViewports(1, &viewport);
+	device.GetContext()->RSSetViewports(1, &viewport);
 
 	const float clearColour[4] = { 0.f, 0.f, 0.f, 1.f };
 	const UINT frameIndex = swapchain.GetCurrentBackBufferIndex();
 
-	context->ClearRenderTargetView(&rtvs[frameIndex].GetRTV(), clearColour);
+	device.GetContext()->ClearRenderTargetView(&rtvs[frameIndex].GetRTV(), clearColour);
 
 	depthStencil.ClearView();
-	context->OMSetRenderTargets(1, rtvs[frameIndex].GetRTVAddress(), depthStencil.GetView());
+	device.GetContext()->OMSetRenderTargets(1, rtvs[frameIndex].GetRTVAddress(), depthStencil.GetView());
 
-	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	device.GetContext()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }
 
 void RenderPostProcessSetup()
 {
-	context->RSSetViewports(1, &viewport);
+	device.GetContext()->RSSetViewports(1, &viewport);
 
 	constexpr float clearColour[4] = { 0.f, 0.f, 0.f, 1.f };
-	context->ClearRenderTargetView(&postProcessRenderTarget.GetRTV(), clearColour);
+	device.GetContext()->ClearRenderTargetView(&postProcessRenderTarget.GetRTV(), clearColour);
 
 	depthStencil.ClearView();
 
-	context->OMSetRenderTargets(1, postProcessRenderTarget.GetRTVAddress(), depthStencil.GetView());
+	device.GetContext()->OMSetRenderTargets(1, postProcessRenderTarget.GetRTVAddress(), depthStencil.GetView());
 
-	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	device.GetContext()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }
 
 void SetShadowResources()
 {
-	context->PSSetShaderResources(shadowMapTextureRegister, 1, shadowMap.GetDepthMapSRVAddress());
-	context->PSSetSamplers(1, 1, shadowMap.GetSamplerAddress());
+	device.GetContext()->PSSetShaderResources(shadowMapTextureRegister, 1, shadowMap.GetDepthMapSRVAddress());
+	device.GetContext()->PSSetSamplers(1, 1, shadowMap.GetSamplerAddress());
 }
 
 void Renderer::Render()
@@ -898,7 +870,7 @@ void SetLightProbeData(MeshComponent* mesh)
 
 	if (!DiffuseProbeMap::system.GetActors().empty())
 	{
-		context->PSSetShaderResources(environmentMapTextureRegister, 1, lightProbeSRV.GetAddressOf());
+		device.GetContext()->PSSetShaderResources(environmentMapTextureRegister, 1, lightProbeSRV.GetAddressOf());
 
 		const auto lightProbeMap = DiffuseProbeMap::system.GetFirstActor();
 		LightProbeInstanceData probeData;
@@ -1052,14 +1024,14 @@ void Renderer::RenderLightProbeViews()
 
 		for (int i = 0; i < textureCubeFaces; i++)
 		{
-			context->RSSetViewports(1, &viewport);
+			device.GetContext()->RSSetViewports(1, &viewport);
 			constexpr float clearColour[4] = { 0.f, 0.f, 0.f, 0.f };
-			context->ClearRenderTargetView(lightProbeRTVs[i].Get(), clearColour);
+			device.GetContext()->ClearRenderTargetView(lightProbeRTVs[i].Get(), clearColour);
 
-			context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-			context->OMSetRenderTargets(1, lightProbeRTVs[i].GetAddressOf(), nullptr);
+			device.GetContext()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+			device.GetContext()->OMSetRenderTargets(1, lightProbeRTVs[i].GetAddressOf(), nullptr);
 
-			context->RSSetState(rastStateMap.find(RastStates::solid)->second->GetData());
+			device.GetContext()->RSSetState(rastStateMap.find(RastStates::solid)->second->GetData());
 
 			SetLightsConstantBufferData();
 
@@ -1067,8 +1039,8 @@ void Renderer::RenderLightProbeViews()
 			cbLights.SetPS();
 
 			//Set shadow resources (not now for lightprobes)
-			//context->PSSetShaderResources(shadowMapTextureResgiter, 1, shadowMap->depthMapSRV.GetAddressOf());
-			//context->PSSetSamplers(1, 1, shadowMap->sampler.GetaddressOf());
+			//device.GetContext()->PSSetShaderResources(shadowMapTextureResgiter, 1, shadowMap->depthMapSRV.GetAddressOf());
+			//device.GetContext()->PSSetSamplers(1, 1, shadowMap->sampler.GetaddressOf());
 
 			ShaderItem* lightProbeShader = ShaderSystem::FindShaderItem("Default");
 
@@ -1082,19 +1054,19 @@ void Renderer::RenderLightProbeViews()
 				Material& material = mesh->GetMaterial();
 
 				const FLOAT blendState[4] = { 0.f };
-				context->OMSetBlendState(mesh->GetBlendState().GetData(), blendState, 0xFFFFFFFF);
-				context->RSSetState(mesh->GetRastState().GetData());
+				device.GetContext()->OMSetBlendState(mesh->GetBlendState().GetData(), blendState, 0xFFFFFFFF);
+				device.GetContext()->RSSetState(mesh->GetRastState().GetData());
 
-				context->VSSetShader(lightProbeShader->GetVertexShader(), nullptr, 0);
-				context->IASetInputLayout(lightProbeShader->GetInputLayout());
+				device.GetContext()->VSSetShader(lightProbeShader->GetVertexShader(), nullptr, 0);
+				device.GetContext()->IASetInputLayout(lightProbeShader->GetInputLayout());
 
-				context->PSSetShader(lightProbeShader->GetPixelShader(), nullptr, 0);
+				device.GetContext()->PSSetShader(lightProbeShader->GetPixelShader(), nullptr, 0);
 
-				context->PSSetSamplers(0, 1, material.GetSampler().GetDataAddress());
+				device.GetContext()->PSSetSamplers(0, 1, material.GetSampler().GetDataAddress());
 
 				SetShaderResourceFromMaterial(material);
 
-				context->IASetVertexBuffers(0, 1, mesh->GetVertexBuffer().GetDataAddress(), &stride, &offset);
+				device.GetContext()->IASetVertexBuffers(0, 1, mesh->GetVertexBuffer().GetDataAddress(), &stride, &offset);
 
 				cbMaterial.Map(&material.GetMaterialShaderData());
 				cbMaterial.SetPS();
@@ -1118,7 +1090,7 @@ void Renderer::RenderLightProbeViews()
 				cbMeshData.SetVSAndPS();
 
 				//Draw
-				context->Draw(static_cast<UINT>(mesh->meshDataProxy.vertices.size()), 0);
+				device.GetContext()->Draw(static_cast<UINT>(mesh->meshDataProxy.vertices.size()), 0);
 			}
 
 			//Remove lightprobe RTV
@@ -1127,7 +1099,7 @@ void Renderer::RenderLightProbeViews()
 
 		//Remember that there are 9 coefficients with 3rd order SH per channel
 		float SH_R[9] = {}, SH_G[9] = {}, SH_B[9] = {};
-		HR(DirectX::SHProjectCubeMap(context.Get(), 3, lightProbeTexture.Get(), SH_R, SH_G, SH_B));
+		HR(DirectX::SHProjectCubeMap(device.GetContext(), 3, lightProbeTexture.Get(), SH_R, SH_G, SH_B));
 
 		XMFLOAT4 coefs[9] = {};
 		for (int co_index = 0; co_index < 9; co_index++)
@@ -1187,8 +1159,8 @@ void RenderInstanceMeshComponents()
 
 		//Update instance data and set SRV
 		MapBuffer(instanceMesh->structuredBuffer.Get(), instanceMesh->GetInstanceData().data(), sizeof(InstanceData) * instanceMesh->GetInstanceData().size());
-		context->VSSetShaderResources(instanceSRVRegister, 1, instanceMesh->srv.GetAddressOf());
-		context->PSSetShaderResources(instanceSRVRegister, 1, instanceMesh->srv.GetAddressOf());
+		device.GetContext()->VSSetShaderResources(instanceSRVRegister, 1, instanceMesh->srv.GetAddressOf());
+		device.GetContext()->PSSetShaderResources(instanceSRVRegister, 1, instanceMesh->srv.GetAddressOf());
 
 		//Set lights buffer
 		cbLights.SetPS();
@@ -1311,12 +1283,12 @@ void RenderPhysicsMeshes()
 	auto& physicsMeshes = PhysicsSystem::GetAllPhysicsMeshes();
 	for (const auto& [uid, mesh] : physicsMeshes)
 	{
-		context->RSSetState(rastStateMap.find(RastStates::solid)->second->GetData());
+		device.GetContext()->RSSetState(rastStateMap.find(RastStates::solid)->second->GetData());
 
 		auto shaderItem = ShaderSystem::FindShaderItem("SolidColour");
-		context->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
-		context->IASetInputLayout(shaderItem->GetInputLayout());
-		context->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
+		device.GetContext()->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
+		device.GetContext()->IASetInputLayout(shaderItem->GetInputLayout());
+		device.GetContext()->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
 
 		SetVertexBuffer(mesh->GetVertexBuffer());
 
@@ -1351,7 +1323,7 @@ void CreateLightProbeBuffers()
 	texDesc.BindFlags = D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_RENDER_TARGET;
 	texDesc.MiscFlags = D3D11_RESOURCE_MISC_TEXTURECUBE;
 
-	HR(device->CreateTexture2D(&texDesc, 0, lightProbeTexture.GetAddressOf()));
+	HR(device.Get()->CreateTexture2D(&texDesc, 0, lightProbeTexture.GetAddressOf()));
 	assert(lightProbeTexture);
 
 	//SRV
@@ -1360,7 +1332,7 @@ void CreateLightProbeBuffers()
 	srvDesc.Format = texDesc.Format;
 	srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURECUBE;
 	srvDesc.TextureCube.MipLevels = 1;
-	HR(device->CreateShaderResourceView(lightProbeTexture.Get(), &srvDesc, lightProbeSRV.GetAddressOf()));
+	HR(device.Get()->CreateShaderResourceView(lightProbeTexture.Get(), &srvDesc, lightProbeSRV.GetAddressOf()));
 
 	//RTVs
 	D3D11_RENDER_TARGET_VIEW_DESC rtvDesc = {};
@@ -1371,7 +1343,7 @@ void CreateLightProbeBuffers()
 	for (int i = 0; i < 6; i++)
 	{
 		rtvDesc.Texture2DArray.FirstArraySlice = i;
-		HR(device->CreateRenderTargetView(lightProbeTexture.Get(), &rtvDesc, lightProbeRTVs[i].GetAddressOf()));
+		HR(device.Get()->CreateRenderTargetView(lightProbeTexture.Get(), &rtvDesc, lightProbeRTVs[i].GetAddressOf()));
 	}
 }
 
@@ -1561,30 +1533,30 @@ void RenderPolyboards()
 
 		polyboard->CalcVertices();
 
-		context->PSSetSamplers(0, 1, Renderer::GetDefaultSampler().GetDataAddress());
+		device.GetContext()->PSSetSamplers(0, 1, Renderer::GetDefaultSampler().GetDataAddress());
 
 		SetShaderResourcePixel(0, polyboard->GetTextureFilename());
 
 		//VERTEX MAP
 		{
 			D3D11_MAPPED_SUBRESOURCE mappedResource = {};
-			HR(context->Map(polyboard->GetVertexBuffer().GetData(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
+			HR(device.GetContext()->Map(polyboard->GetVertexBuffer().GetData(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
 			memcpy(mappedResource.pData, polyboard->GetVertices().data(), sizeof(Vertex) * polyboard->GetVertices().size());
-			context->Unmap(polyboard->GetVertexBuffer().GetData(), 0);
+			device.GetContext()->Unmap(polyboard->GetVertexBuffer().GetData(), 0);
 		}
 
 		//INDEX MAP
 		{
 			D3D11_MAPPED_SUBRESOURCE mappedResource = {};
-			HR(context->Map(polyboard->GetIndexBuffer().GetData(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
+			HR(device.GetContext()->Map(polyboard->GetIndexBuffer().GetData(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
 			memcpy(mappedResource.pData, polyboard->GetIndices().data(), sizeof(MeshData::indexDataType) * polyboard->GetIndices().size());
-			context->Unmap(polyboard->GetIndexBuffer().GetData(), 0);
+			device.GetContext()->Unmap(polyboard->GetIndexBuffer().GetData(), 0);
 		}
 
 		SetVertexBuffer(polyboard->GetVertexBuffer());
 		SetIndexBuffer(polyboard->GetIndexBuffer());
 
-		context->DrawIndexed(static_cast<UINT>(polyboard->GetIndices().size()), 0, 0);
+		device.GetContext()->DrawIndexed(static_cast<UINT>(polyboard->GetIndices().size()), 0, 0);
 	}
 
 	Profile::End();
@@ -1629,7 +1601,7 @@ void RenderSpriteSheets()
 		cbMatrices.Map(&shaderMatrices);
 		cbMatrices.SetVS();
 
-		context->DrawIndexed(6, 0, 0);
+		device.GetContext()->DrawIndexed(6, 0, 0);
 	}
 
 	Profile::End();
@@ -1661,9 +1633,9 @@ void AnimateAndRenderSkeletalMeshes()
 			{
 				//Set shader for skeletal animation
 				ShaderItem* shaderItem = ShaderSystem::FindShaderItem("Animation");
-				context->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
-				context->IASetInputLayout(shaderItem->GetInputLayout());
-				context->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
+				device.GetContext()->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
+				device.GetContext()->IASetInputLayout(shaderItem->GetInputLayout());
+				device.GetContext()->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
 
 				if (!skeletalMesh->GetNextAnimationName().empty())
 				{
@@ -1733,18 +1705,18 @@ void Renderer::RenderParticleEmitters()
 
 		if (drawAllAsWireframe)
 		{
-			context->RSSetState(rastStateMap.find(RastStates::wireframe)->second->GetData());
+			device.GetContext()->RSSetState(rastStateMap.find(RastStates::wireframe)->second->GetData());
 		}
 		else
 		{
-			context->RSSetState(rastStateMap.find(RastStates::noBackCull)->second->GetData());
+			device.GetContext()->RSSetState(rastStateMap.find(RastStates::noBackCull)->second->GetData());
 		}
 
 		SetBlendStateByName(BlendStates::Transparent);
 
 		SetShaders(emitter->GetMaterial().GetShaderItem().GetName());
 
-		context->PSSetSamplers(0, 1, Renderer::GetDefaultSampler().GetDataAddress());
+		device.GetContext()->PSSetSamplers(0, 1, Renderer::GetDefaultSampler().GetDataAddress());
 
 		//Set texture from emitter for every particle
 		SetShaderResourcePixel(0, emitter->GetMaterial().defaultTextureData.filename);
@@ -1772,7 +1744,7 @@ void Renderer::RenderParticleEmitters()
 
 			//Note: Apparently using DrawInstanced() degrades performance when the vertex count it really low
 			//and DrawIndexed is actually faster.
-			context->DrawIndexed(6, 0, 0);
+			device.GetContext()->DrawIndexed(6, 0, 0);
 		}
 	}
 
@@ -1803,7 +1775,7 @@ void Renderer::RenderSpritesInScreenSpace()
 		cbMatrices.Map(&shaderMatrices);
 		cbMatrices.SetVS();
 
-		context->DrawIndexed(6, 0, 0);
+		device.GetContext()->DrawIndexed(6, 0, 0);
 	}
 
 	Profile::End();
@@ -1876,7 +1848,7 @@ void Renderer::Present()
 
 		const std::wstring imageFile = L"Icons/MeshIcons/" +
 			VString::stows(captureMeshIconMeshFilename) + L".jpg";
-		HR(SaveWICTextureToFile(context.Get(), meshIconBackBuffer.Get(), GUID_ContainerFormatJpeg, imageFile.c_str()));
+		HR(SaveWICTextureToFile(device.GetContext(), meshIconBackBuffer.Get(), GUID_ContainerFormatJpeg, imageFile.c_str()));
 
 		Log("Mesh Icon created from [%s] mesh.", captureMeshIconMeshFilename.c_str());
 
@@ -1919,7 +1891,7 @@ void Renderer::ResizeSwapchain(int newWidth, int newHeight)
 {
 	if (swapchain.Get() == nullptr) return;
 
-	context->OMSetRenderTargets(0, 0, 0);
+	device.GetContext()->OMSetRenderTargets(0, 0, 0);
 
 	// Release all outstanding references to the swap chain's buffers.
 	for (int rtvIndex = 0; rtvIndex < Swapchain::SWAPCHAIN_COUNT; rtvIndex++)
@@ -1939,7 +1911,7 @@ void Renderer::ResizeSwapchain(int newWidth, int newHeight)
 	viewport.MaxDepth = 1.0f;
 	viewport.TopLeftX = 0;
 	viewport.TopLeftY = 0;
-	context->RSSetViewports(1, &viewport);
+	device.GetContext()->RSSetViewports(1, &viewport);
 
 	CreateRTVAndDSV();
 
@@ -1965,7 +1937,7 @@ void Renderer::ScreenshotCapture()
 		//Use a generated UID so that filenames are unique
 		UID imageFileID = GenerateUID();
 		std::wstring imageFile = L"Screenshots/" + std::to_wstring(imageFileID) + L".jpg";
-		HR(SaveWICTextureToFile(context.Get(), screenshotBackBuffer.Get(), GUID_ContainerFormatJpeg, imageFile.c_str()));
+		HR(SaveWICTextureToFile(device.GetContext(), screenshotBackBuffer.Get(), GUID_ContainerFormatJpeg, imageFile.c_str()));
 		debugMenu.AddNotification(L"Screen shot taken.");
 	}
 }
@@ -1985,7 +1957,7 @@ void Renderer::MeshIconImageCapture()
 
 		const std::wstring imageFile = L"Icons/MeshIcons/" +
 			VString::stows(mesh->meshComponentData.filename) + L".jpg";
-		HR(SaveWICTextureToFile(context.Get(), meshIconBackBuffer.Get(), GUID_ContainerFormatJpeg, imageFile.c_str()));
+		HR(SaveWICTextureToFile(device.GetContext(), meshIconBackBuffer.Get(), GUID_ContainerFormatJpeg, imageFile.c_str()));
 		debugMenu.AddNotification(L"Mesh Icon created.");
 	}
 }
@@ -1997,7 +1969,7 @@ void Renderer::MapIconImageCapture()
 	assert(iconImageBackBuffer);
 
 	const std::wstring imageFile = L"Icons/MapIcons/" + VString::stows(World::worldFilename) + L".jpg";
-	HR(SaveWICTextureToFile(context.Get(), iconImageBackBuffer.Get(), GUID_ContainerFormatJpeg, imageFile.c_str()));
+	HR(SaveWICTextureToFile(device.GetContext(), iconImageBackBuffer.Get(), GUID_ContainerFormatJpeg, imageFile.c_str()));
 	debugMenu.AddNotification(L"Map Icon created.");
 }
 
@@ -2010,7 +1982,7 @@ void Renderer::PlayerPhotoCapture(std::wstring outputFilename)
 	assert(photoCaptureBackBuffer);
 
 	std::wstring imageFile = L"Textures/" + outputFilename + L".jpg";
-	HR(SaveWICTextureToFile(context.Get(), photoCaptureBackBuffer.Get(), GUID_ContainerFormatJpeg, imageFile.c_str()));
+	HR(SaveWICTextureToFile(device.GetContext(), photoCaptureBackBuffer.Get(), GUID_ContainerFormatJpeg, imageFile.c_str()));
 	Log("Photo taken [%S]", imageFile.c_str());
 }
 
@@ -2020,22 +1992,22 @@ void SetRenderPipelineStates(MeshComponent* mesh)
 
 	if (Renderer::drawAllAsWireframe)
 	{
-		context->RSSetState(rastStateMap.find(RastStates::wireframe)->second->GetData());
+		device.GetContext()->RSSetState(rastStateMap.find(RastStates::wireframe)->second->GetData());
 	}
 	else
 	{
-		context->RSSetState(material.GetRastState().GetData());
+		device.GetContext()->RSSetState(material.GetRastState().GetData());
 	}
 
 	constexpr FLOAT blendState[4] = { 0.f };
-	context->OMSetBlendState(material.GetBlendState().GetData(), blendState, 0xFFFFFFFF);
+	device.GetContext()->OMSetBlendState(material.GetBlendState().GetData(), blendState, 0xFFFFFFFF);
 
-	context->VSSetShader(material.GetVertexShader(), nullptr, 0);
-	context->IASetInputLayout(material.GetInputLayout());
+	device.GetContext()->VSSetShader(material.GetVertexShader(), nullptr, 0);
+	device.GetContext()->IASetInputLayout(material.GetInputLayout());
 
-	context->PSSetShader(material.GetPixelShader(), nullptr, 0);
+	device.GetContext()->PSSetShader(material.GetPixelShader(), nullptr, 0);
 
-	context->PSSetSamplers(0, 1, material.GetSampler().GetDataAddress());
+	device.GetContext()->PSSetSamplers(0, 1, material.GetSampler().GetDataAddress());
 	SetShaderResourceFromMaterial(material);
 
 	SetVertexBuffer(mesh->GetVertexBuffer());
@@ -2046,93 +2018,93 @@ void SetRenderPipelineStates(MeshComponent* mesh)
 
 void SetRenderPipelineStatesForShadows(MeshComponent* mesh)
 {
-	context->RSSetState(rastStateMap.find(RastStates::shadow)->second->GetData());
+	device.GetContext()->RSSetState(rastStateMap.find(RastStates::shadow)->second->GetData());
 
 	ShaderItem* shader = ShaderSystem::FindShaderItem("Shadow");
 
-	context->VSSetShader(shader->GetVertexShader(), nullptr, 0);
-	context->IASetInputLayout(shader->GetInputLayout());
+	device.GetContext()->VSSetShader(shader->GetVertexShader(), nullptr, 0);
+	device.GetContext()->IASetInputLayout(shader->GetInputLayout());
 
-	context->PSSetShader(shader->GetPixelShader(), nullptr, 0);
+	device.GetContext()->PSSetShader(shader->GetPixelShader(), nullptr, 0);
 
-	context->IASetVertexBuffers(0, 1, mesh->GetVertexBuffer().GetDataAddress(), &Renderer::stride, &Renderer::offset);
+	device.GetContext()->IASetVertexBuffers(0, 1, mesh->GetVertexBuffer().GetDataAddress(), &Renderer::stride, &Renderer::offset);
 }
 
 void SetShaders(ShaderItem* shaderItem)
 {
-	context->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
-	context->IASetInputLayout(shaderItem->GetInputLayout());
-	context->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
+	device.GetContext()->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
+	device.GetContext()->IASetInputLayout(shaderItem->GetInputLayout());
+	device.GetContext()->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
 }
 
 void SetShaders(const std::string shaderItemName)
 {
 	ShaderItem* shaderItem = ShaderSystem::FindShaderItem(shaderItemName);
-	context->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
-	context->IASetInputLayout(shaderItem->GetInputLayout());
-	context->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
+	device.GetContext()->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
+	device.GetContext()->IASetInputLayout(shaderItem->GetInputLayout());
+	device.GetContext()->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
 }
 
 void SetRastStateByName(std::string rastStateName)
 {
 	if (Renderer::drawAllAsWireframe)
 	{
-		context->RSSetState(rastStateMap.find(RastStates::wireframe)->second->GetData());
+		device.GetContext()->RSSetState(rastStateMap.find(RastStates::wireframe)->second->GetData());
 		return;
 	}
 
 	auto& rastState = rastStateMap.find(rastStateName)->second;
-	context->RSSetState(rastState->GetData());
+	device.GetContext()->RSSetState(rastState->GetData());
 }
 
 void SetRastState(RastState& rastState)
 {
-	context->RSSetState(rastState.GetData());
+	device.GetContext()->RSSetState(rastState.GetData());
 }
 
 void SetBlendStateByName(std::string blendStateName)
 {
 	auto& blendState = blendStateMap.find(blendStateName)->second;
 	const float factor[4] = {};
-	context->OMSetBlendState(blendState->GetData(), factor, 0xFFFFFFFF);
+	device.GetContext()->OMSetBlendState(blendState->GetData(), factor, 0xFFFFFFFF);
 }
 
 void SetBlendState(BlendState& blendState)
 {
 	const float factor[4] = {};
-	context->OMSetBlendState(blendState.GetData(), factor, 0xFFFFFFFF);
+	device.GetContext()->OMSetBlendState(blendState.GetData(), factor, 0xFFFFFFFF);
 }
 
 void SetConstantBufferVertexPixel(uint32_t shaderRegister, ID3D11Buffer* constantBuffer)
 {
-	context->VSSetConstantBuffers(shaderRegister, 1, &constantBuffer);
-	context->PSSetConstantBuffers(shaderRegister, 1, &constantBuffer);
+	device.GetContext()->VSSetConstantBuffers(shaderRegister, 1, &constantBuffer);
+	device.GetContext()->PSSetConstantBuffers(shaderRegister, 1, &constantBuffer);
 }
 
 void SetConstantBufferVertex(uint32_t shaderRegister, ID3D11Buffer* constantBuffer)
 {
-	context->VSSetConstantBuffers(shaderRegister, 1, &constantBuffer);
+	device.GetContext()->VSSetConstantBuffers(shaderRegister, 1, &constantBuffer);
 }
 
 void SetConstantBufferPixel(uint32_t shaderRegister, ID3D11Buffer* constantBuffer)
 {
-	context->PSSetConstantBuffers(shaderRegister, 1, &constantBuffer);
+	device.GetContext()->PSSetConstantBuffers(shaderRegister, 1, &constantBuffer);
 }
 
 void SetVertexBuffer(VertexBuffer& vertexBuffer)
 {
-	context->IASetVertexBuffers(0, 1, vertexBuffer.GetDataAddress(), &Renderer::stride, &Renderer::offset);
+	device.GetContext()->IASetVertexBuffers(0, 1, vertexBuffer.GetDataAddress(), &Renderer::stride, &Renderer::offset);
 }
 
 void SetIndexBuffer(IndexBuffer& indexBuffer)
 {
 	const DXGI_FORMAT indexBufferFormat = DXGI_FORMAT_R32_UINT;
-	context->IASetIndexBuffer(indexBuffer.GetData(), indexBufferFormat, 0);
+	device.GetContext()->IASetIndexBuffer(indexBuffer.GetData(), indexBufferFormat, 0);
 }
 
 void SetSampler(uint32_t shaderRegister, Sampler& sampler)
 {
-	context->PSSetSamplers(shaderRegister, 1, sampler.GetDataAddress());
+	device.GetContext()->PSSetSamplers(shaderRegister, 1, sampler.GetDataAddress());
 }
 
 void SetShaderResourceFromMaterial(Material& material)
@@ -2140,20 +2112,20 @@ void SetShaderResourceFromMaterial(Material& material)
 	//Testing code for normal map SRV set
 	/*auto normalMapTexture = textureSystem.FindTexture2D("wall_normal_map.png");
 	auto normalMapSRV = normalMapTexture->GetSRV();
-	context->PSSetShaderResources(normalMapTexureRegister, 1, normalMapSRV.GetAddressOf());*/
+	device.GetContext()->PSSetShaderResources(normalMapTexureRegister, 1, normalMapSRV.GetAddressOf());*/
 
 	auto defaultTextureSRV = material.GetDefaultTexture().GetSRV();
-	context->PSSetShaderResources(defaultTextureRegister, 1, &defaultTextureSRV);
+	device.GetContext()->PSSetShaderResources(defaultTextureRegister, 1, &defaultTextureSRV);
 
 	auto secondaryTextureSRV = material.GetSecondaryTexture().GetSRV();
-	context->PSSetShaderResources(secondaryTextureRegister, 1, &secondaryTextureSRV);
+	device.GetContext()->PSSetShaderResources(secondaryTextureRegister, 1, &secondaryTextureSRV);
 }
 
 void SetShaderResourcePixel(uint32_t shaderRegister, std::string textureName)
 {
 	auto texture = TextureSystem::FindTexture2D(textureName);
 	auto textureSRV = texture->GetSRV();
-	context->PSSetShaderResources(shaderRegister, 1, &textureSRV);
+	device.GetContext()->PSSetShaderResources(shaderRegister, 1, &textureSRV);
 }
 
 void RenderPostProcess()
@@ -2167,11 +2139,11 @@ void RenderPostProcess()
 
 	ID3D11ShaderResourceView* nullSRV = nullptr;
 
-	context->RSSetState(rastStateMap.find(RastStates::solid)->second->GetData());
+	device.GetContext()->RSSetState(rastStateMap.find(RastStates::solid)->second->GetData());
 
-	context->IASetInputLayout(nullptr);
-	context->IASetVertexBuffers(0, 0, nullptr, nullptr, nullptr);
-	context->IASetIndexBuffer(nullptr, DXGI_FORMAT_UNKNOWN, 0);
+	device.GetContext()->IASetInputLayout(nullptr);
+	device.GetContext()->IASetVertexBuffers(0, 0, nullptr, nullptr, nullptr);
+	device.GetContext()->IASetIndexBuffer(nullptr, DXGI_FORMAT_UNKNOWN, 0);
 
 	SetShaders("PostProcess");
 
@@ -2180,25 +2152,25 @@ void RenderPostProcess()
 	cbPostProcess.Map(&postProcessData);
 	cbPostProcess.SetPS();
 
-	context->PSSetShaderResources(0, 1, postProcessRenderTarget.GetSRVAddress());
+	device.GetContext()->PSSetShaderResources(0, 1, postProcessRenderTarget.GetSRVAddress());
 	SetSampler(0, Renderer::GetDefaultSampler());
 
 	const UINT frameIndex = swapchain.GetCurrentBackBufferIndex();
-	context->OMSetRenderTargets(1, rtvs[frameIndex].GetRTVAddress(), depthStencil.GetView());
+	device.GetContext()->OMSetRenderTargets(1, rtvs[frameIndex].GetRTVAddress(), depthStencil.GetView());
 
 	const float clearColour[4] = { 0.f, 0.f, 0.f, 0.f };
-	context->ClearRenderTargetView(&rtvs[frameIndex].GetRTV(), clearColour);
+	device.GetContext()->ClearRenderTargetView(&rtvs[frameIndex].GetRTV(), clearColour);
 
-	context->Draw(6, 0);
+	device.GetContext()->Draw(6, 0);
 
-	context->PSSetShaderResources(0, 1, &nullSRV);
+	device.GetContext()->PSSetShaderResources(0, 1, &nullSRV);
 }
 
 void RenderWireframeForVertexPaintingAndPickedActor()
 {
 	const auto wireframeRender = [&](MeshComponent* mesh)
 	{
-		context->RSSetState(rastStateMap.find(RastStates::wireframe)->second->GetData());
+		device.GetContext()->RSSetState(rastStateMap.find(RastStates::wireframe)->second->GetData());
 
 		MaterialShaderData materialShaderData;
 		materialShaderData.ambient = XMFLOAT4(1.f, 0.f, 1.f, 1.f);
@@ -2206,9 +2178,9 @@ void RenderWireframeForVertexPaintingAndPickedActor()
 		cbMaterial.SetPS();
 
 		ShaderItem* shaderItem = ShaderSystem::FindShaderItem("SolidColour");
-		context->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
-		context->IASetInputLayout(shaderItem->GetInputLayout());
-		context->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
+		device.GetContext()->VSSetShader(shaderItem->GetVertexShader(), nullptr, 0);
+		device.GetContext()->IASetInputLayout(shaderItem->GetInputLayout());
+		device.GetContext()->PSSetShader(shaderItem->GetPixelShader(), nullptr, 0);
 
 		SetVertexBuffer(mesh->GetVertexBuffer());
 
@@ -2288,12 +2260,12 @@ void RenderLightProbes()
 	cbMatrices.SetVS();
 
 	ID3D11ShaderResourceView* srv = probeMap->GetSRV();
-	context->VSSetShaderResources(lightProbeInstanceDataRegister, 1, &srv);
-	context->PSSetShaderResources(lightProbeInstanceDataRegister, 1, &srv);
+	device.GetContext()->VSSetShaderResources(lightProbeInstanceDataRegister, 1, &srv);
+	device.GetContext()->PSSetShaderResources(lightProbeInstanceDataRegister, 1, &srv);
 
 	cbLights.SetPS();
 
-	context->DrawInstanced(static_cast<UINT>(instanceMesh->meshDataProxy.vertices.size()), probeMap->GetProbeCount(), 0, 0);
+	device.GetContext()->DrawInstanced(static_cast<UINT>(instanceMesh->meshDataProxy.vertices.size()), probeMap->GetProbeCount(), 0, 0);
 }
 
 void RenderMeshToCaptureMeshIcon()
@@ -2495,7 +2467,7 @@ ID3D11Device& Renderer::GetDevice()
 
 ID3D11DeviceContext& Renderer::GetDeviceContext()
 {
-	return *context.Get();
+	return *device.GetContext();
 }
 
 Sampler& Renderer::GetDefaultSampler()
@@ -2517,5 +2489,5 @@ bool Renderer::IsRendererSetToCaptureMeshIcon()
 
 void Renderer::ReportLiveObjectsVerbose()
 {
-	debugDevice->ReportLiveDeviceObjects(D3D11_RLDO_DETAIL);
+	device.GetDebugDevice()->ReportLiveDeviceObjects(D3D11_RLDO_DETAIL);
 }

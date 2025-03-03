@@ -390,6 +390,7 @@
     <ClCompile Include="Code\Render\DebugMeshMananger.cpp" />
     <ClCompile Include="Code\Render\Swapchain.cpp" />
     <ClCompile Include="Code\Render\DepthStencil.cpp" />
+    <ClCompile Include="Code\Render\Device.cpp" />
     <ClInclude Include="Code\Actors\Game\MapProjectionCrystal.h" />
     <ClInclude Include="Code\Actors\Game\BombRock.h" />
     <ClInclude Include="Code\Commands\UndoActorDeleteCommand.h" />
@@ -819,6 +820,7 @@
     <ClInclude Include="Code\Render\DebugMeshMananger.h" />
     <ClInclude Include="Code\Render\Swapchain.h" />
     <ClInclude Include="Code\Render\DepthStencil.h" />
+    <ClInclude Include="Device.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h" />
