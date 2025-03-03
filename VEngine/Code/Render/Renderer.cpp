@@ -209,17 +209,17 @@ RenderTarget postProcessRenderTarget;
 DXGI_SAMPLE_DESC sampleDesc;
 
 //Make sure these match up with the register definitions in Commmon.hlsli
-const int defaultTextureRegister = 0;
-const int secondaryTextureRegister = 1;
-const int shadowMapTextureRegister = 2;
-const int reflectionTextureRegister = 3;
-const int instanceSRVRegister = 4;
-const int environmentMapTextureRegister = 5;
-const int normalMapTextureRegister = 6;
-const int lightProbeInstanceDataRegister = 7;
+constexpr int defaultTextureRegister = 0;
+constexpr int secondaryTextureRegister = 1;
+constexpr int shadowMapTextureRegister = 2;
+constexpr int reflectionTextureRegister = 3;
+constexpr int instanceSRVRegister = 4;
+constexpr int environmentMapTextureRegister = 5;
+constexpr int normalMapTextureRegister = 6;
+constexpr int lightProbeInstanceDataRegister = 7;
 
-const int lightProbeTextureWidth = 64;
-const int lightProbeTextureHeight = 64;
+constexpr int lightProbeTextureWidth = 64;
+constexpr int lightProbeTextureHeight = 64;
 
 ShaderMatrices shaderMatrices;
 ShaderLights shaderLights;
