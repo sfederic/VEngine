@@ -169,7 +169,7 @@ Microsoft::WRL::ComPtr<ID3D11Device> device;
 Microsoft::WRL::ComPtr<ID3D11Debug> debugDevice;
 Microsoft::WRL::ComPtr<ID3D11DeviceContext> context;
 
-Microsoft::WRL::ComPtr<ID3D11RenderTargetView> rtvs[Swapchain::SWAPCHAIN_COUNT];
+RenderTarget rtvs[Swapchain::SWAPCHAIN_COUNT];
 
 Microsoft::WRL::ComPtr<ID3D11DepthStencilView> dsv;
 
@@ -206,7 +206,7 @@ Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> lightProbeSRV;
 Microsoft::WRL::ComPtr<ID3D11Texture2D> lightProbeTexture;
 
 //Post process
-RenderTarget postProcessRenderTarget(DXGI_FORMAT_R16G16B16A16_FLOAT);
+RenderTarget postProcessRenderTarget;
 
 //Quality = 0 and Count = 1 are the 'default'
 DXGI_SAMPLE_DESC sampleDesc;
@@ -267,7 +267,7 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 	CreateBlendStates();
 	CreateConstantBuffers();
 
-	postProcessRenderTarget.Create(viewport.Width, viewport.Height);
+	postProcessRenderTarget.Create(viewport.Width, viewport.Height, DXGI_FORMAT_R16G16B16A16_FLOAT);
 
 	defaultSampler.Create();
 
@@ -288,7 +288,7 @@ void Renderer::Cleanup()
 
 	for (int i = 0; i < Swapchain::SWAPCHAIN_COUNT; i++)
 	{
-		rtvs[i].Reset();
+		rtvs[i].Recycle();
 	}
 
 	dsv.Reset();
@@ -383,13 +383,11 @@ void CreateRTVAndDSV()
 	ID3D11Texture2D* backBuffer = nullptr;
 	swapchain.GetBackBuffer(&backBuffer);
 
-	//Create Render target views
 	for (int i = 0; i < Swapchain::SWAPCHAIN_COUNT; i++)
 	{
-		HR(device->CreateRenderTargetView(backBuffer, nullptr, rtvs[i].GetAddressOf()));
+		rtvs[i].CreateFromSwapchainBackBuffer(backBuffer);
 	}
 
-	//Create depth stencil view
 	D3D11_TEXTURE2D_DESC dsDesc = {};
 	dsDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
 	dsDesc.ArraySize = 1;
@@ -792,17 +790,17 @@ void RenderShadowPass()
 	Profile::End();
 }
 
-void RenderSetup()
+static void RenderSetup()
 {
 	context->RSSetViewports(1, &viewport);
 
 	const float clearColour[4] = { 0.f, 0.f, 0.f, 1.f };
 	const UINT frameIndex = swapchain.GetCurrentBackBufferIndex();
 
-	context->ClearRenderTargetView(rtvs[frameIndex].Get(), clearColour);
+	context->ClearRenderTargetView(&rtvs[frameIndex].GetRTV(), clearColour);
 	context->ClearDepthStencilView(dsv.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
 
-	context->OMSetRenderTargets(1, rtvs[frameIndex].GetAddressOf(), dsv.Get());
+	context->OMSetRenderTargets(1, rtvs[frameIndex].GetRTVAddress(), dsv.Get());
 
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }
@@ -1943,7 +1941,7 @@ void Renderer::ResizeSwapchain(int newWidth, int newHeight)
 	// Release all outstanding references to the swap chain's buffers.
 	for (int rtvIndex = 0; rtvIndex < Swapchain::SWAPCHAIN_COUNT; rtvIndex++)
 	{
-		rtvs[rtvIndex].Reset();
+		rtvs[rtvIndex].Recycle();
 	}
 
 	dsv.Reset();
@@ -1963,7 +1961,7 @@ void Renderer::ResizeSwapchain(int newWidth, int newHeight)
 	CreateRTVAndDSV();
 
 	postProcessRenderTarget.Recycle();
-	postProcessRenderTarget.Create(viewport.Width, viewport.Height);
+	postProcessRenderTarget.Create(viewport.Width, viewport.Height, DXGI_FORMAT_R16G16B16A16_FLOAT);
 
 	UISystem::Init((void*)swapchain.Get());
 
@@ -2202,10 +2200,10 @@ void RenderPostProcess()
 	SetSampler(0, Renderer::GetDefaultSampler());
 
 	const UINT frameIndex = swapchain.GetCurrentBackBufferIndex();
-	context->OMSetRenderTargets(1, rtvs[frameIndex].GetAddressOf(), dsv.Get());
+	context->OMSetRenderTargets(1, rtvs[frameIndex].GetRTVAddress(), dsv.Get());
 
 	const float clearColour[4] = { 0.f, 0.f, 0.f, 0.f };
-	context->ClearRenderTargetView(rtvs[frameIndex].Get(), clearColour);
+	context->ClearRenderTargetView(&rtvs[frameIndex].GetRTV(), clearColour);
 
 	context->Draw(6, 0);
 

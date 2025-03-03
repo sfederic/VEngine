@@ -6,9 +6,8 @@
 class RenderTarget
 {
 public:
-	RenderTarget(DXGI_FORMAT format_) : format(format_) {}
-
-	void Create(uint32_t width, uint32_t height);
+	void Create(uint32_t width, uint32_t height, DXGI_FORMAT format);
+	void CreateFromSwapchainBackBuffer(ID3D11Texture2D* backBuffer);
 	void Recycle();
 
 	auto& GetRTV() { return *rtv.Get(); }
@@ -21,6 +20,4 @@ private:
 	Microsoft::WRL::ComPtr<ID3D11Texture2D> texture;
 	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> rtv;
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> srv;
-
-	DXGI_FORMAT format;
 };
