@@ -162,8 +162,6 @@ bool Renderer::drawAllAsWireframe = false;
 unsigned int Renderer::stride = sizeof(Vertex);
 unsigned int Renderer::offset = 0;
 
-DXGI_FORMAT indexBufferFormat = DXGI_FORMAT_R32_UINT;
-
 DepthStencil depthStencil;
 
 Microsoft::WRL::ComPtr<ID3D11Device> device;
@@ -2130,6 +2128,7 @@ void SetVertexBuffer(VertexBuffer& vertexBuffer)
 
 void SetIndexBuffer(IndexBuffer& indexBuffer)
 {
+	const DXGI_FORMAT indexBufferFormat = DXGI_FORMAT_R32_UINT;
 	context->IASetIndexBuffer(indexBuffer.GetData(), indexBufferFormat, 0);
 }
 
