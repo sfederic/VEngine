@@ -56,6 +56,7 @@
 #include "Render/ShaderData/ShaderTimeData.h"
 #include "Render/ShaderData/ShaderLightProbeData.h"
 #include "Render/SpriteSystem.h"
+#include "Render/Swapchain.h"
 #include "RenderUtils.h"
 #include "ShaderData/MaterialShaderData.h"
 #include "ShaderItem.h"
@@ -73,9 +74,6 @@
 #include <DirectXMathConvert.inl>
 #include <DirectXMathMatrix.inl>
 #include <DirectXMathVector.inl>
-#include <dxgi.h>
-#include <dxgi1_4.h>
-#include <dxgi1_6.h>
 #include <dxgicommon.h>
 #include <dxgiformat.h>
 #include <memory>
@@ -90,7 +88,6 @@
 
 void CreateFactory();
 void CreateDevice();
-void CreateSwapchain(HWND window);
 void CreateRTVAndDSV();
 void CreateRasterizerStates();
 void CreateBlendStates();
@@ -166,16 +163,13 @@ unsigned int Renderer::offset = 0;
 
 DXGI_FORMAT indexBufferFormat = DXGI_FORMAT_R32_UINT;
 
-Microsoft::WRL::ComPtr<ID3D11Texture2D> backBuffer;
 Microsoft::WRL::ComPtr<ID3D11Texture2D> depthStencilBuffer;
-
-static const int swapchainCount = 2;
 
 Microsoft::WRL::ComPtr<ID3D11Device> device;
 Microsoft::WRL::ComPtr<ID3D11Debug> debugDevice;
 Microsoft::WRL::ComPtr<ID3D11DeviceContext> context;
 
-Microsoft::WRL::ComPtr<ID3D11RenderTargetView> rtvs[swapchainCount];
+Microsoft::WRL::ComPtr<ID3D11RenderTargetView> rtvs[Swapchain::SWAPCHAIN_COUNT];
 
 Microsoft::WRL::ComPtr<ID3D11DepthStencilView> dsv;
 
@@ -184,7 +178,7 @@ std::unordered_map<std::string, std::unique_ptr<RastState>> rastStateMap;
 std::unordered_map<std::string, std::unique_ptr<BlendState>> blendStateMap;
 
 //DXGI
-Microsoft::WRL::ComPtr<IDXGISwapChain3> swapchain;
+Swapchain swapchain;
 Microsoft::WRL::ComPtr<IDXGIFactory6> dxgiFactory;
 
 //Constant buffers and data
@@ -267,7 +261,7 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 
 	CheckSupportedFeatures();
 
-	CreateSwapchain((HWND)window);
+	swapchain.Create(viewport.Width, viewport.Height, (HWND)window, sampleDesc, device.Get(), dxgiFactory.Get());
 	CreateRTVAndDSV();
 	CreateRasterizerStates();
 	CreateBlendStates();
@@ -287,13 +281,12 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 
 void Renderer::Cleanup()
 {
-	backBuffer.Reset();
 	depthStencilBuffer.Reset();
 
 	device.Reset();
 	context.Reset();
 
-	for (int i = 0; i < swapchainCount; i++)
+	for (int i = 0; i < Swapchain::SWAPCHAIN_COUNT; i++)
 	{
 		rtvs[i].Reset();
 	}
@@ -385,33 +378,15 @@ void CreateDevice()
 	HR(device->QueryInterface(IID_PPV_ARGS(debugDevice.GetAddressOf())));
 }
 
-void CreateSwapchain(HWND window)
-{
-	DXGI_SWAP_CHAIN_DESC sd = {};
-	sd.BufferDesc = { (UINT)viewport.Width, (UINT)viewport.Height, {60, 1}, DXGI_FORMAT_R8G8B8A8_UNORM };
-	sd.Windowed = TRUE;
-	sd.SampleDesc = sampleDesc;
-	sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-	sd.OutputWindow = window;
-	sd.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
-	sd.BufferCount = swapchainCount;
-
-	IDXGISwapChain* tempSwapchain = nullptr;
-	HR(dxgiFactory->CreateSwapChain(device.Get(), &sd, &tempSwapchain));
-	HR(tempSwapchain->QueryInterface(swapchain.GetAddressOf()));
-	tempSwapchain->Release();
-
-	dxgiFactory->MakeWindowAssociation(window, DXGI_MWA_NO_WINDOW_CHANGES | DXGI_MWA_NO_ALT_ENTER);
-}
-
 void CreateRTVAndDSV()
 {
-	swapchain->GetBuffer(0, IID_PPV_ARGS(backBuffer.GetAddressOf()));
+	ID3D11Texture2D* backBuffer = nullptr;
+	swapchain.GetBackBuffer(&backBuffer);
 
 	//Create Render target views
-	for (int i = 0; i < swapchainCount; i++)
+	for (int i = 0; i < Swapchain::SWAPCHAIN_COUNT; i++)
 	{
-		HR(device->CreateRenderTargetView(backBuffer.Get(), nullptr, rtvs[i].GetAddressOf()));
+		HR(device->CreateRenderTargetView(backBuffer, nullptr, rtvs[i].GetAddressOf()));
 	}
 
 	//Create depth stencil view
@@ -427,6 +402,8 @@ void CreateRTVAndDSV()
 	HR(device->CreateTexture2D(&dsDesc, nullptr, depthStencilBuffer.GetAddressOf()));
 	assert(depthStencilBuffer);
 	HR(device->CreateDepthStencilView(depthStencilBuffer.Get(), nullptr, dsv.GetAddressOf()));
+
+	backBuffer->Release();
 }
 
 void CreateRasterizerStates()
@@ -820,7 +797,7 @@ void RenderSetup()
 	context->RSSetViewports(1, &viewport);
 
 	const float clearColour[4] = { 0.f, 0.f, 0.f, 1.f };
-	UINT frameIndex = swapchain->GetCurrentBackBufferIndex();
+	const UINT frameIndex = swapchain.GetCurrentBackBufferIndex();
 
 	context->ClearRenderTargetView(rtvs[frameIndex].Get(), clearColour);
 	context->ClearDepthStencilView(dsv.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
@@ -1914,8 +1891,7 @@ void Renderer::Present()
 		debugMenu.debugNotifications.clear();
 
 		Microsoft::WRL::ComPtr<ID3D11Texture2D> meshIconBackBuffer;
-		HR(swapchain->GetBuffer(0, IID_PPV_ARGS(meshIconBackBuffer.GetAddressOf())));
-		assert(backBuffer);
+		swapchain.GetBackBuffer(meshIconBackBuffer.GetAddressOf());
 
 		const std::wstring imageFile = L"Icons/MeshIcons/" +
 			VString::stows(captureMeshIconMeshFilename) + L".jpg";
@@ -1929,7 +1905,7 @@ void Renderer::Present()
 		return;
 	}
 
-	HR(swapchain->Present(1, 0));
+	swapchain.Present();
 }
 
 void* Renderer::GetSwapchain()
@@ -1960,12 +1936,12 @@ void Renderer::SetViewportWidthHeight(float width, float height)
 
 void Renderer::ResizeSwapchain(int newWidth, int newHeight)
 {
-	if (swapchain == nullptr) return;
+	if (swapchain.Get() == nullptr) return;
 
 	context->OMSetRenderTargets(0, 0, 0);
 
 	// Release all outstanding references to the swap chain's buffers.
-	for (int rtvIndex = 0; rtvIndex < swapchainCount; rtvIndex++)
+	for (int rtvIndex = 0; rtvIndex < Swapchain::SWAPCHAIN_COUNT; rtvIndex++)
 	{
 		rtvs[rtvIndex].Reset();
 	}
@@ -1974,8 +1950,7 @@ void Renderer::ResizeSwapchain(int newWidth, int newHeight)
 
 	UISystem::Cleanup();
 
-	backBuffer.Reset();
-	HR(swapchain->ResizeBuffers(swapchainCount, newWidth, newHeight, DXGI_FORMAT_R8G8B8A8_UNORM, 0));
+	swapchain.ResizeBuffers(newWidth, newHeight);
 
 	viewport.Width = newWidth;
 	viewport.Height = newHeight;
@@ -2003,7 +1978,7 @@ void Renderer::ScreenshotCapture()
 		debugMenu.debugNotifications.clear();
 
 		Microsoft::WRL::ComPtr<ID3D11Texture2D> screenshotBackBuffer;
-		HR(swapchain->GetBuffer(0, IID_PPV_ARGS(screenshotBackBuffer.GetAddressOf())));
+		swapchain.GetBackBuffer(screenshotBackBuffer.GetAddressOf());
 		assert(screenshotBackBuffer);
 
 		//Use a generated UID so that filenames are unique
@@ -2024,7 +1999,7 @@ void Renderer::MeshIconImageCapture()
 		MeshComponent* mesh = meshComponents.front();
 
 		Microsoft::WRL::ComPtr<ID3D11Texture2D> meshIconBackBuffer;
-		HR(swapchain->GetBuffer(0, IID_PPV_ARGS(meshIconBackBuffer.GetAddressOf())));
+		swapchain.GetBackBuffer(meshIconBackBuffer.GetAddressOf());
 		assert(meshIconBackBuffer);
 
 		const std::wstring imageFile = L"Icons/MeshIcons/" +
@@ -2037,7 +2012,7 @@ void Renderer::MeshIconImageCapture()
 void Renderer::MapIconImageCapture()
 {
 	Microsoft::WRL::ComPtr<ID3D11Texture2D> iconImageBackBuffer;
-	HR(swapchain->GetBuffer(0, IID_PPV_ARGS(iconImageBackBuffer.GetAddressOf())));
+	swapchain.GetBackBuffer(iconImageBackBuffer.GetAddressOf());
 	assert(iconImageBackBuffer);
 
 	const std::wstring imageFile = L"Icons/MapIcons/" + VString::stows(World::worldFilename) + L".jpg";
@@ -2050,7 +2025,7 @@ void Renderer::PlayerPhotoCapture(std::wstring outputFilename)
 	debugMenu.debugNotifications.clear();
 
 	Microsoft::WRL::ComPtr<ID3D11Texture2D> photoCaptureBackBuffer;
-	HR(swapchain->GetBuffer(0, IID_PPV_ARGS(photoCaptureBackBuffer.GetAddressOf())));
+	swapchain.GetBackBuffer(photoCaptureBackBuffer.GetAddressOf());
 	assert(photoCaptureBackBuffer);
 
 	std::wstring imageFile = L"Textures/" + outputFilename + L".jpg";
@@ -2226,7 +2201,7 @@ void RenderPostProcess()
 	context->PSSetShaderResources(0, 1, postProcessRenderTarget.GetSRVAddress());
 	SetSampler(0, Renderer::GetDefaultSampler());
 
-	UINT frameIndex = swapchain->GetCurrentBackBufferIndex();
+	const UINT frameIndex = swapchain.GetCurrentBackBufferIndex();
 	context->OMSetRenderTargets(1, rtvs[frameIndex].GetAddressOf(), dsv.Get());
 
 	const float clearColour[4] = { 0.f, 0.f, 0.f, 0.f };
