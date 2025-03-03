@@ -5,8 +5,9 @@
 #include "Core/VMath.h"
 #include "Components/Lights/DirectionalLightComponent.h"
 #include "Components/Lights/SpotLightComponent.h"
+#include "Renderer.h"
 
-ShadowMap::ShadowMap(ID3D11Device* device, int width_, int height_)
+void ShadowMap::Create(int width_, int height_)
 {
 	width = width_;
 	height = height_;
@@ -28,7 +29,7 @@ ShadowMap::ShadowMap(ID3D11Device* device, int width_, int height_)
 	texDesc.MiscFlags = 0;
 
 	Microsoft::WRL::ComPtr<ID3D11Texture2D> depthMap;
-	HR(device->CreateTexture2D(&texDesc, 0, depthMap.GetAddressOf()));
+	HR(Renderer::GetDevice().CreateTexture2D(&texDesc, 0, depthMap.GetAddressOf()));
 
 	D3D11_DEPTH_STENCIL_VIEW_DESC dsvDesc = {};
 	dsvDesc.Flags = 0;
@@ -37,7 +38,7 @@ ShadowMap::ShadowMap(ID3D11Device* device, int width_, int height_)
 	dsvDesc.Texture2D.MipSlice = 0;
 
 	assert(depthMap);
-	HR(device->CreateDepthStencilView(depthMap.Get(), &dsvDesc, depthMapDSV.GetAddressOf()));
+	HR(Renderer::GetDevice().CreateDepthStencilView(depthMap.Get(), &dsvDesc, depthMapDSV.GetAddressOf()));
 
 	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
 	srvDesc.Format = DXGI_FORMAT_R24_UNORM_X8_TYPELESS;
@@ -45,7 +46,7 @@ ShadowMap::ShadowMap(ID3D11Device* device, int width_, int height_)
 	srvDesc.Texture2D.MipLevels = texDesc.MipLevels;
 	srvDesc.Texture2D.MostDetailedMip = 0;
 	assert(depthMap);
-	HR(device->CreateShaderResourceView(depthMap.Get(), &srvDesc, depthMapSRV.GetAddressOf()));
+	HR(Renderer::GetDevice().CreateShaderResourceView(depthMap.Get(), &srvDesc, depthMapSRV.GetAddressOf()));
 
 	D3D11_SAMPLER_DESC sd = {};
 	sd.Filter = D3D11_FILTER_COMPARISON_MIN_MAG_MIP_LINEAR;
@@ -58,7 +59,7 @@ ShadowMap::ShadowMap(ID3D11Device* device, int width_, int height_)
 	sd.BorderColor[3] = 1.f;
 	sd.ComparisonFunc = D3D11_COMPARISON_LESS;
 
-	HR(device->CreateSamplerState(&sd, sampler.GetAddressOf()));
+	HR(Renderer::GetDevice().CreateSamplerState(&sd, sampler.GetAddressOf()));
 }
 
 void ShadowMap::BindDsvAndSetNullRenderTarget(ID3D11DeviceContext* dc)
@@ -95,7 +96,7 @@ XMMATRIX ShadowMap::GetDirectionalLightOrthoMatrix()
 	return P;
 }
 
-XMMATRIX ShadowMap::GetSpotLightPerspectiveMatrix(SpotLightComponent* spotLight)
+XMMATRIX ShadowMap::GetSpotLightPerspectiveMatrix(SpotLightComponent* spotLight) const
 {
 	const float angle = XMConvertToRadians(spotLight->GetLightData().spotAngle);
 	return XMMatrixPerspectiveFovLH(angle, width / height, 0.01f, 1000.f);
@@ -138,4 +139,3 @@ XMMATRIX ShadowMap::SpotLightViewProjectionTextureMatrix(SpotLightComponent* spo
 	XMMATRIX S = V * P * T;
 	return S;
 }
-

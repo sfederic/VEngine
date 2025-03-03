@@ -193,7 +193,7 @@ ConstantBuffer<ShaderLightProbeData> cbLightProbeData;
 D3D11_VIEWPORT viewport;
 
 //Shadow maps
-ShadowMap* shadowMap;
+ShadowMap shadowMap;
 
 Sampler defaultSampler;
 
@@ -254,7 +254,7 @@ void Renderer::Init(void* window, int viewportWidth, int viewportHeight)
 
 	ShaderSystem::Init();
 
-	shadowMap = new ShadowMap(device.Get(), 2048, 2048);
+	shadowMap.Create(2048, 2048);
 
 	CheckSupportedFeatures();
 
@@ -293,8 +293,6 @@ void Renderer::Cleanup()
 
 	swapchain.Reset();
 	dxgiFactory.Reset();
-
-	delete shadowMap;
 
 	for (int i = 0; i < 6; i++)
 	{
@@ -533,9 +531,9 @@ void SetShadowData()
 			shaderLights.shadowsEnabled = dLight->IsShadowsEnabled();
 		}
 
-		shaderMatrices.lightMVP = shadowMap->DirectionalLightViewProjectionTextureMatrix(dLight);
+		shaderMatrices.lightMVP = shadowMap.DirectionalLightViewProjectionTextureMatrix(dLight);
 		shaderMatrices.lightViewProj =
-			shadowMap->GetLightViewMatrix(dLight) * shadowMap->GetDirectionalLightOrthoMatrix();
+			shadowMap.GetLightViewMatrix(dLight) * shadowMap.GetDirectionalLightOrthoMatrix();
 	}
 	else if (SpotLightComponent::system.GetNumComponents() > 0)
 	{
@@ -549,9 +547,9 @@ void SetShadowData()
 			shaderLights.shadowsEnabled = spotLight->IsShadowsEnabled();
 		}
 
-		shaderMatrices.lightMVP = shadowMap->SpotLightViewProjectionTextureMatrix(spotLight);
+		shaderMatrices.lightMVP = shadowMap.SpotLightViewProjectionTextureMatrix(spotLight);
 		shaderMatrices.lightViewProj =
-			shadowMap->GetLightViewMatrix(spotLight) * shadowMap->GetSpotLightPerspectiveMatrix(spotLight);
+			shadowMap.GetLightViewMatrix(spotLight) * shadowMap.GetSpotLightPerspectiveMatrix(spotLight);
 	}
 	else
 	{
@@ -713,7 +711,7 @@ void RenderShadowPass()
 
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-	shadowMap->BindDsvAndSetNullRenderTarget(context.Get());
+	shadowMap.BindDsvAndSetNullRenderTarget(context.Get());
 
 	for (auto& mesh : MeshComponent::system.GetComponents())
 	{
@@ -805,8 +803,8 @@ void RenderPostProcessSetup()
 
 void SetShadowResources()
 {
-	context->PSSetShaderResources(shadowMapTextureRegister, 1, shadowMap->depthMapSRV.GetAddressOf());
-	context->PSSetSamplers(1, 1, shadowMap->sampler.GetAddressOf());
+	context->PSSetShaderResources(shadowMapTextureRegister, 1, shadowMap.GetDepthMapSRVAddress());
+	context->PSSetSamplers(1, 1, shadowMap.GetSamplerAddress());
 }
 
 void Renderer::Render()
