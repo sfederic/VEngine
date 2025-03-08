@@ -132,10 +132,10 @@ void Core::EndTimer()
 void Core::StartGame()
 {
 	gameplayOn = true;
-	initialStartingWorldFromEditor = World::worldFilename;
+	initialStartingWorldFromEditor = World::Get().worldFilename;
 
-	World::StartAllComponents();
-	World::WakeAndStartAllActors();
+	World::Get().StartAllComponents();
+	World::Get().WakeAndStartAllActors();
 
 	PhysicsSystem::Start();
 
@@ -149,7 +149,7 @@ void Core::StartGame()
 
 void Core::EndGame()
 {
-	World::EndAllActors();
+	World::Get().EndAllActors();
 
 	gameplayOn = false;
 

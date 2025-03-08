@@ -2,7 +2,6 @@
 #include "WorldEditor.h"
 #include <filesystem>
 #include <QFileDialog>
-#include <QDesktopServices>
 #include "Physics/Raycast.h"
 #include "Input.h"
 #include "Core/VMath.h"
@@ -236,7 +235,7 @@ void DuplicateActor()
 					mesh->CreateNewVertexBuffer();
 				}
 
-				World::AddActorToWorld(newDuplicateActor);
+				World::Get().AddActorToWorld(newDuplicateActor);
 
 				Editor::Get().SetActorProps(newDuplicateActor);
 				Editor::Get().UpdateWorldList();

@@ -8,7 +8,7 @@ void Pulley::Start()
 {
 	__super::Start();
 
-	pullActor = dynamic_cast<GridActor*>(World::GetActorByName(pullActorName));
+	pullActor = dynamic_cast<GridActor*>(World::Get().GetActorByName(pullActorName));
 	if (pullActor == nullptr)
 	{
 		Log("Pull actor [%s] not found for Pulley [%s].", pullActorName.c_str(), GetName().c_str());

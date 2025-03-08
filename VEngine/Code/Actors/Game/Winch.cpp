@@ -14,7 +14,7 @@ void Winch::Start()
 {
 	__super::Start();
 
-	linkedActor = World::GetActorByNameAndLogCast<GridActor>(linkedActorName);
+	linkedActor = World::Get().GetActorByNameAndLogCast<GridActor>(linkedActorName);
 }
 
 Properties Winch::GetProps()

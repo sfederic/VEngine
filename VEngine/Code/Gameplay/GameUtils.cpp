@@ -67,11 +67,11 @@ namespace GameUtils
 		//and the .sav version of it is based on in-game player saves. So if a .sav version exists, that is loaded
 		//instead of the .vmap file, during gameplay.
 
-		auto firstOf = World::worldFilename.find_first_of(".");
-		std::string str = World::worldFilename.substr(0, firstOf);
+		auto firstOf = World::Get().worldFilename.find_first_of(".");
+		std::string str = World::Get().worldFilename.substr(0, firstOf);
 		std::string file = str += AssetFileExtensions::gameSave;
 
-		World::worldFilename = file;
+		World::Get().worldFilename = file;
 		FileSystem::SerialiseAllSystems();
 	}
 

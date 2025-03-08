@@ -1381,7 +1381,7 @@ void Renderer::RenderPolyboards()
 	SetRastStateByName(RastStates::noBackCull);
 	SetShaders("DefaultClip");
 
-	for (auto polyboard : World::GetAllComponentsOfType<Polyboard>())
+	for (auto polyboard : World::Get().GetAllComponentsOfType<Polyboard>())
 	{
 		if (!polyboard->IsActive() || !polyboard->IsVisible()) continue;
 
@@ -1822,7 +1822,7 @@ void Renderer::MapIconImageCapture()
 	swapchain.GetBackBuffer(iconImageBackBuffer.GetAddressOf());
 	assert(iconImageBackBuffer);
 
-	const std::wstring imageFile = L"Icons/MapIcons/" + VString::stows(World::worldFilename) + L".jpg";
+	const std::wstring imageFile = L"Icons/MapIcons/" + VString::stows(World::Get().worldFilename) + L".jpg";
 	HR(SaveWICTextureToFile(device.GetContext(), iconImageBackBuffer.Get(), GUID_ContainerFormatJpeg, imageFile.c_str()));
 	debugMenu.AddNotification(L"Map Icon created.");
 }

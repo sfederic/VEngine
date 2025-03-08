@@ -16,7 +16,7 @@ void Rotator::Start()
 {
 	__super::Start();
 
-	actorToRotate = dynamic_cast<GridActor*>(World::GetActorByNameAllowNull(actorNameToRotate));
+	actorToRotate = dynamic_cast<GridActor*>(World::Get().GetActorByNameAllowNull(actorNameToRotate));
 	if (actorToRotate == nullptr)
 	{
 		Log("[%s] GridActor not found for [%s].", actorNameToRotate.c_str(), GetName().c_str());

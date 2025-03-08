@@ -95,7 +95,7 @@ bool DialogueComponent::ShowTextAtActor()
 		return false;
 	}
 
-	Actor* actor = World::GetActorByNameAllowNull(VString::wstos(dataIt->second.actorName));
+	Actor* actor = World::Get().GetActorByNameAllowNull(VString::wstos(dataIt->second.actorName));
 	if (actor == nullptr)
 	{
 		Log("Dialogue actor [%s] not found at line [%d]", dataIt->second.actorName.c_str(), currentLine);
@@ -172,7 +172,7 @@ void DialogueComponent::ConversationShowTextAtActor()
 		return;
 	}
 
-	Actor* actor = World::GetActorByNameAllowNull(VString::wstos(dataIt->second.actorName));
+	Actor* actor = World::Get().GetActorByNameAllowNull(VString::wstos(dataIt->second.actorName));
 	if (actor == nullptr)
 	{
 		Log("Dialogue actor [%s] not found at line [%d]", dataIt->second.actorName.c_str(), currentLine);

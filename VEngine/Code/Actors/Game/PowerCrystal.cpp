@@ -26,7 +26,7 @@ void PowerCrystal::Tick(float deltaTime)
 
 void PowerCrystal::PowerUpSurroundingGridActors()
 {
-	for (GridActor* actor : World::GetAllActorsAsBaseType<GridActor>())
+	for (GridActor* actor : World::Get().GetAllActorsAsBaseType<GridActor>())
 	{
 		if (actor == this)
 		{

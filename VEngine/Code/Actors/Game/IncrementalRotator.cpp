@@ -5,7 +5,7 @@ void IncrementalRotator::Start()
 {
 	__super::Start();
 
-	actorToRotate = World::GetActorByNameAndLogCast<GridActor>(actorNameToRotate);
+	actorToRotate = World::Get().GetActorByNameAndLogCast<GridActor>(actorNameToRotate);
 	SetPlayerFocusGridActor(actorToRotate);
 }
 

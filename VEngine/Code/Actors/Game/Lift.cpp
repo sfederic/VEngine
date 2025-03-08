@@ -26,7 +26,7 @@ void Lift::Tick(float deltaTime)
 {
 	__super::Tick(deltaTime);
 
-	for (auto gridActor : World::GetAllActorsAsBaseType<GridActor>())
+	for (auto gridActor : World::Get().GetAllActorsAsBaseType<GridActor>())
 	{
 		if (liftTrigger->Contains(gridActor->GetPositionV()))
 		{
@@ -49,7 +49,7 @@ Properties Lift::GetProps()
 std::vector<GridActor*> Lift::GetGridActorsContainedInLiftTrigger()
 {
 	std::vector<GridActor*> gridActors;
-	for (auto gridActor : World::GetAllActorsAsBaseType<GridActor>())
+	for (auto gridActor : World::Get().GetAllActorsAsBaseType<GridActor>())
 	{
 		if (gridActor == this) //Ignore self
 		{

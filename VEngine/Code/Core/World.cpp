@@ -26,14 +26,6 @@
 #include "Gameplay/GameUtils.h"
 #include "Physics/PhysicsSystem.h"
 
-std::string World::worldFilename;
-
-std::unordered_map<UID, Actor*> World::actorUIDMap;
-std::unordered_map<std::string, Actor*> World::actorNameMap;
-
-std::vector<IActorSystem*> World::activeActorSystems;
-std::vector<IComponentSystem*> World::activeComponentSystems;
-
 void World::Init()
 {
 	for (auto actorSystem : ActorSystemCache::Get().GetAllSystems())

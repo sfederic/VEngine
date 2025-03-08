@@ -45,6 +45,6 @@ bool Component::HasTag(const std::string& tag)
 
 Actor* Component::GetOwner()
 {
-	Actor* owner = World::GetActorByUID(ownerUID);
+	Actor* owner = World::Get().GetActorByUID(ownerUID);
 	return owner;
 }

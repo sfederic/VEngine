@@ -63,7 +63,7 @@ public:
 		std::swap(actors[index], actors.back());
 		actors[index]->SetSystemIndex(index);
 
-		World::RemoveActorFromWorld(actors.back().get());
+		World::Get().RemoveActorFromWorld(actors.back().get());
 		actors.pop_back();
 
 		Editor::Get().UpdateWorldList();
@@ -279,7 +279,7 @@ public:
 		auto actor = deletedActors.back();
 
 		//Temporarily add actor to world so that the component deletes can find the actor by UID in world.
-		World::AddActorToWorld(actor);
+		World::Get().AddActorToWorld(actor);
 
 		auto components = actor->GetAllComponents();
 		for (int i = 0; i < components.size(); i++)
@@ -289,7 +289,7 @@ public:
 			component->Remove();
 		}
 
-		World::RemoveActorFromWorld(actor);
+		World::Get().RemoveActorFromWorld(actor);
 
 		//This will cause leaks calling this and not cleaning the actor up properly,
 		//it shouldn't matter too much as it's just in the editor but keep an eye on it.

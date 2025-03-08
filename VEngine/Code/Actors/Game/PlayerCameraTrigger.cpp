@@ -18,22 +18,22 @@ void PlayerCameraTrigger::Start()
 		initialLocalCameraPos = player->GetCameraLocalPosition();
 	}
 	boxTrigger->SetTriggerEnterCallback([&]()
-		{
-			ResetCameraPosAndTarget();
-		});
+	{
+		ResetCameraPosAndTarget();
+	});
 	boxTrigger->SetTriggerExitCallback([&]()
-		{
-			auto player = Player::system.GetOnlyActor();
-			player->SetNextCameraPosition(initialLocalCameraPos);
-			player->SetCameraTargetActor(initialTargetActor);
-		});
+	{
+		auto player = Player::system.GetOnlyActor();
+		player->SetNextCameraPosition(initialLocalCameraPos);
+		player->SetCameraTargetActor(initialTargetActor);
+	});
 }
 
 void PlayerCameraTrigger::LateStart()
 {
 	//Set these fields on late start so player has a chance to set up camera
 	//and new targets have a chance to spawn.
-	newTargetActor = World::GetActorByNameAllowNull(newTargetActorName);
+	newTargetActor = World::Get().GetActorByNameAllowNull(newTargetActorName);
 	auto player = Player::system.GetOnlyActor();
 	initialTargetActor = &player->GetCameraTargetActor();
 	assert(initialTargetActor);

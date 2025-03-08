@@ -28,7 +28,7 @@ void OrientationTrigger::CheckIfOrientationLockIsAlignedInTrigger()
 {
 	if (!actorInTrigger)
 	{
-		for (auto orientationLock : World::GetAllActorsOfTypeInWorld<OrientationLock>())
+		for (auto orientationLock : World::Get().GetAllActorsOfTypeInWorld<OrientationLock>())
 		{
 			if (boxTrigger->Contains(orientationLock->GetPositionV()))
 			{

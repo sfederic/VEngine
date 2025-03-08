@@ -70,7 +70,7 @@ void Engine::Init(int argc, char* argv[])
 	fbxInit.wait();
 	uiInit.wait();
 
-	World::Init();
+	World::Get().Init();
 
 	Editor::Get().UpdateWorldList();
 	Editor::Get().UpdateSystemsList();
@@ -104,8 +104,8 @@ void Engine::TickSystems(float deltaTime)
 
 	if (Core::gameplayOn && !Core::IsGameWorldPaused())
 	{
-		World::TickAllActorSystems(deltaTime);
-		World::TickAllComponentSystems(deltaTime);
+		World::Get().TickAllActorSystems(deltaTime);
+		World::Get().TickAllComponentSystems(deltaTime);
 	}
 }
 
@@ -127,7 +127,7 @@ void Engine::MainLoop()
 
 		ResetSystems();
 
-		World::DestroyAllDeferredActors();
+		World::Get().DestroyAllDeferredActors();
 		FileSystem::DeferredWorldLoad();
 
 		Core::EndTimer();

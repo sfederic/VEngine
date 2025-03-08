@@ -28,7 +28,7 @@ void UndoActorDeleteCommand::Execute()
 	undoActor->CreateAllComponents();
 	undoActor->PostCreate();
 
-	World::AddActorToWorld(undoActor);
+	World::Get().AddActorToWorld(undoActor);
 	Editor::Get().UpdateWorldList();
 
 	_actorSystem->PopBackLastDeletedActor();

@@ -22,7 +22,7 @@ void WaterValve::OnLinkRotate()
 {
 	__super::OnLinkRotate();
 
-	auto waterSource = dynamic_cast<WaterSource*>(World::GetActorByNameAllowNull(waterSourceName));
+	auto waterSource = dynamic_cast<WaterSource*>(World::Get().GetActorByNameAllowNull(waterSourceName));
 	if (waterSource)
 	{
 		waterSource->ToggleActive();

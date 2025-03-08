@@ -88,7 +88,7 @@ void StringWidget::SetActorWorldListAutoComplete()
 	assert(prop.autoCompletePath.empty() == true);
 
 	QStringList actorNameList;
-	for (Actor* actor : World::GetAllActorsInWorld())
+	for (Actor* actor : World::Get().GetAllActorsInWorld())
 	{
 		std::string actorName = actor->GetName();
 		actorNameList.append(QString::fromStdString(actorName));

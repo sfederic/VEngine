@@ -13,7 +13,7 @@ void PlayerTeleporter::Start()
 {
 	__super::Start();
 
-	linkedTeleporter = World::GetActorByNameAndLogCast<PlayerTeleporter>(linkedTeleporterName);
+	linkedTeleporter = World::Get().GetActorByNameAndLogCast<PlayerTeleporter>(linkedTeleporterName);
 
 	boxTrigger->SetTargetAsPlayer();
 }

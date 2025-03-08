@@ -8,7 +8,7 @@ void OrientationLock::Start()
 {
 	__super::Start();
 
-	linkedGridActor = World::GetActorByNameAndLogCast<GridActor>(gridActorToActivateOnCorrectOrientation);
+	linkedGridActor = World::Get().GetActorByNameAndLogCast<GridActor>(gridActorToActivateOnCorrectOrientation);
 }
 
 void OrientationLock::Tick(float deltaTime)

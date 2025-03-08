@@ -28,7 +28,7 @@ void GridActorTeleporter::Start()
 {
 	__super::Start();
 
-	_otherTeleporter = World::GetActorByNameAndLogCast<GridActorTeleporter>(_otherTeleporterName);
+	_otherTeleporter = World::Get().GetActorByNameAndLogCast<GridActorTeleporter>(_otherTeleporterName);
 }
 
 void GridActorTeleporter::Tick(float deltaTime)

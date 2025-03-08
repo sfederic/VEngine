@@ -47,8 +47,8 @@ void FileSystem::SerialiseAllSystems()
 {
 	const auto start = Profile::QuickStart();
 
-	auto lastOf = World::worldFilename.find_last_of("/\\");
-	std::string str = World::worldFilename.substr(lastOf + 1);
+	auto lastOf = World::Get().worldFilename.find_last_of("/\\");
+	std::string str = World::Get().worldFilename.substr(lastOf + 1);
 
 	std::string file = "WorldMaps/" + str;
 
@@ -65,7 +65,7 @@ void FileSystem::SerialiseAllSystems()
 
 	Serialiser s(file, OpenMode::Out);
 
-	for (IActorSystem* actorSystem : World::activeActorSystems)
+	for (IActorSystem* actorSystem : World::Get().activeActorSystems)
 	{
 		if (actorSystem->GetNumActors() > 0)
 		{
@@ -73,7 +73,7 @@ void FileSystem::SerialiseAllSystems()
 		}
 	}
 
-	for (IComponentSystem* componentSystem : World::activeComponentSystems)
+	for (IComponentSystem* componentSystem : World::Get().activeComponentSystems)
 	{
 		if (componentSystem->GetNumComponents() > 0)
 		{
@@ -85,7 +85,7 @@ void FileSystem::SerialiseAllSystems()
 
 	//AssetSystem::WriteOutAllVertexColourData();
 
-	debugMenu.AddNotification(VString::wformat(L"%S world saved", World::worldFilename.c_str()));
+	debugMenu.AddNotification(VString::wformat(L"%S world saved", World::Get().worldFilename.c_str()));
 
 	const auto end = Profile::QuickEnd(start);
 	Log("Text save for [%s] took [%f].", str.c_str(), end);
@@ -95,14 +95,14 @@ void FileSystem::WriteAllSystemsToBinary()
 {
 	const auto start = Profile::QuickStart();
 
-	auto lastOf = World::worldFilename.find_last_of("/\\");
-	std::string str = World::worldFilename.substr(lastOf + 1);
+	auto lastOf = World::Get().worldFilename.find_last_of("/\\");
+	std::string str = World::Get().worldFilename.substr(lastOf + 1);
 
 	std::string file = "WorldMaps/Binary/" + str;
 
 	BinarySerialiser s(file.c_str());
 
-	for (IActorSystem* actorSystem : World::activeActorSystems)
+	for (IActorSystem* actorSystem : World::Get().activeActorSystems)
 	{
 		if (actorSystem->GetNumActors() > 0)
 		{
@@ -110,7 +110,7 @@ void FileSystem::WriteAllSystemsToBinary()
 		}
 	}
 
-	for (IComponentSystem* componentSystem : World::activeComponentSystems)
+	for (IComponentSystem* componentSystem : World::Get().activeComponentSystems)
 	{
 		if (componentSystem->GetNumComponents() > 0)
 		{
@@ -118,7 +118,7 @@ void FileSystem::WriteAllSystemsToBinary()
 		}
 	}
 
-	debugMenu.AddNotification(VString::wformat(L"%S world saved to binary", World::worldFilename.c_str()));
+	debugMenu.AddNotification(VString::wformat(L"%S world saved to binary", World::Get().worldFilename.c_str()));
 
 	const auto end = Profile::QuickEnd(start);
 	Log("Binary save for [%s] took [%f].", str.c_str(), end);
@@ -128,13 +128,13 @@ void FileSystem::ReadAllSystemsFromBinary()
 {
 	const auto start = Profile::QuickStart();
 
-	std::string worldName = World::worldFilename;
+	std::string worldName = World::Get().worldFilename;
 
 	std::string path = "WorldMaps/Binary/" + worldName;
 
 	assert(std::filesystem::exists(path) && "Map file doesn't exist");
 
-	World::Cleanup();
+	World::Get().Cleanup();
 
 	BinaryDeserialiser d(path);
 
@@ -159,14 +159,14 @@ void FileSystem::ReadAllSystemsFromBinary()
 			for (int i = 0; i < numObjectsToSpawn; i++)
 			{
 				Actor* actor = actorSystem->SpawnActor(Transform());
-				World::RemoveActorFromWorld(actor);
+				World::Get().RemoveActorFromWorld(actor);
 
 				auto props = actor->GetProps();
 				d.Deserialise(props);
 
 				actor->ResetOwnerUIDToComponents();
 
-				World::AddActorToWorld(actor);
+				World::Get().AddActorToWorld(actor);
 			}
 		}
 		else if (componentSystem != nullptr)
@@ -179,7 +179,7 @@ void FileSystem::ReadAllSystemsFromBinary()
 				std::string componentName;
 				d.ReadString(&componentName);
 
-				Actor* owner = World::GetActorByUID(ownerUID);
+				Actor* owner = World::Get().GetActorByUID(ownerUID);
 				Component* foundComponent = owner->FindComponentAllowNull(componentName);
 				if (foundComponent)
 				{
@@ -192,7 +192,7 @@ void FileSystem::ReadAllSystemsFromBinary()
 
 	ResetWorldState();
 
-	debugMenu.AddNotification(VString::wformat(L"%S world loaded from binary", World::worldFilename.c_str()));
+	debugMenu.AddNotification(VString::wformat(L"%S world loaded from binary", World::Get().worldFilename.c_str()));
 
 	const auto end = Profile::QuickEnd(start);
 	Log("Binary load for [%s] took [%f].", worldName.c_str(), end);
@@ -204,9 +204,9 @@ void FileSystem::LoadWorld(std::string worldName)
 
 	Editor::Get().SetEditorTitle(worldName);
 
-	GameInstance::previousMapMovedFrom = World::worldFilename;
+	GameInstance::previousMapMovedFrom = World::Get().worldFilename;
 
-	World::worldFilename = worldName;
+	World::Get().worldFilename = worldName;
 
 	std::string path = AssetBaseFolders::worldMap + worldName;
 
@@ -219,7 +219,7 @@ void FileSystem::LoadWorld(std::string worldName)
 
 	GameUtils::SaveGameInstanceData();
 
-	World::Cleanup();
+	World::Get().Cleanup();
 
 	Deserialiser d(path, OpenMode::In);
 
@@ -250,14 +250,14 @@ void FileSystem::LoadWorld(std::string worldName)
 				Actor* actor = actorSystem->SpawnActor(Transform());
 
 				//ActorSystem will add in actor. Remove it here before getting correct UID and name on serialise.
-				World::RemoveActorFromWorld(actor);
+				World::Get().RemoveActorFromWorld(actor);
 
 				auto props = actor->GetProps();
 				d.Deserialise(props);
 
 				actor->ResetOwnerUIDToComponents();
 
-				World::AddActorToWorld(actor);
+				World::Get().AddActorToWorld(actor);
 			}
 		}
 		else if (componentSystem)
@@ -267,7 +267,7 @@ void FileSystem::LoadWorld(std::string worldName)
 			{
 				auto ownerUIDAndName = GetComponentOwnerUIDAndNameOnDeserialise(d);
 
-				Actor* owner = World::GetActorByUIDAllowNull(ownerUIDAndName.first);
+				Actor* owner = World::Get().GetActorByUIDAllowNull(ownerUIDAndName.first);
 				if (owner == nullptr)
 				{
 					Log("Owner %s not found in world for components. Skipping component creations.",
@@ -331,10 +331,10 @@ void FileSystem::LoadWorld(std::string worldName)
 
 	AssetSystem::LoadVertexColourDataFromFile();
 
-	WorldFunctions::CallWorldStartFunction(World::worldFilename);
+	WorldFunctions::CallWorldStartFunction(World::Get().worldFilename);
 
 	Profile::Reset();
-	debugMenu.AddNotification(VString::wformat(L"%S world loaded", World::worldFilename.c_str()));
+	debugMenu.AddNotification(VString::wformat(L"%S world loaded", World::Get().worldFilename.c_str()));
 
 	double endTime = Profile::QuickEnd(startTime);
 	Log("World load took %f sec.", endTime);
@@ -342,7 +342,7 @@ void FileSystem::LoadWorld(std::string worldName)
 
 void FileSystem::ReloadCurrentWorld()
 {
-	LoadWorld(World::worldFilename);
+	LoadWorld(World::Get().worldFilename);
 }
 
 void FileSystem::CreateGameplayWorldSave(std::string worldName)
@@ -362,7 +362,7 @@ void FileSystem::ResetWorldState()
 	Input::Reset();
 
 	//A world reset should call End() for all actors. Liken it to ending the game.
-	World::EndAllActors();
+	World::Get().EndAllActors();
 
 	//Set player camera on world change as active if in-gameplay
 	if (Core::gameplayOn)
@@ -375,7 +375,7 @@ void FileSystem::ResetWorldState()
 	}
 
 	//Make sure always after camera gets set
-	World::Start();
+	World::Get().Start();
 
 	Editor::Get().UpdateWorldList();
 	Editor::Get().ClearProperties();
@@ -388,14 +388,14 @@ void FileSystem::SetDeferredWorldLoad(const std::string_view filename)
 
 void FileSystem::SetDeferredWorldReset()
 {
-	defferedWorldLoadFilename = World::worldFilename;
+	defferedWorldLoadFilename = World::Get().worldFilename;
 }
 
 void FileSystem::DeferredWorldLoad()
 {
 	if (!defferedWorldLoadFilename.empty())
 	{
-		previousWorldMovedFromFilename = World::worldFilename;
+		previousWorldMovedFromFilename = World::Get().worldFilename;
 		entranceTriggerTag = GameUtils::entranceTriggerTag;
 
 		LoadWorld(defferedWorldLoadFilename);
@@ -428,12 +428,12 @@ void MovePlayerToEntranceTriggerFromPreviousWorldFilename()
 	}
 
 	const auto MoveToEntrance = [&](EntranceTrigger* entranceTrigger)
-		{
-			player->SetPosition(entranceTrigger->GetPositionV());
-			//Want the opposite rotation on exit for player to face in vs the orientation to enter the entrance
-			player->SetRotation(entranceTrigger->GetRotationV());
-			player->SetNextPosAndRotToCurrent();
-		};
+	{
+		player->SetPosition(entranceTrigger->GetPositionV());
+		//Want the opposite rotation on exit for player to face in vs the orientation to enter the entrance
+		player->SetRotation(entranceTrigger->GetRotationV());
+		player->SetNextPosAndRotToCurrent();
+	};
 
 	//Deal with only one potential entrance
 	if (possibleEntrancesToMoveTo.size() == 1)

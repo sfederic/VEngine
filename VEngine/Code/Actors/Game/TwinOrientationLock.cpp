@@ -6,8 +6,8 @@ void TwinOrientationLock::Start()
 {
 	__super::Start();
 
-	actor0 = World::GetActorByNameAndLogCast<Actor>(actorName0);
-	actor1 = World::GetActorByNameAndLogCast<Actor>(actorName1);
+	actor0 = World::Get().GetActorByNameAndLogCast<Actor>(actorName0);
+	actor1 = World::Get().GetActorByNameAndLogCast<Actor>(actorName1);
 }
 
 void TwinOrientationLock::Tick(float deltaTime)

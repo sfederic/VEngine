@@ -241,7 +241,7 @@ void DebugMenu::RenderWorldStats()
 
 	//Num of actors
 	uint64_t actorCount = 0;
-	for (auto actorSystem : World::activeActorSystems)
+	for (auto actorSystem : World::Get().activeActorSystems)
 	{
 		actorCount += actorSystem->GetActorsAsBaseClass().size();
 	}
@@ -250,7 +250,7 @@ void DebugMenu::RenderWorldStats()
 
 	//Num of components
 	uint64_t componentCount = 0;
-	for (auto componentSystem : World::activeComponentSystems)
+	for (auto componentSystem : World::Get().activeComponentSystems)
 	{
 		componentCount += componentSystem->GetNumComponents();
 	}
@@ -274,7 +274,7 @@ void DebugMenu::RenderActorSystemMenu()
 
 	ImGui::Begin("Actor Systems");
 
-	for (auto actorSystem : World::activeActorSystems)
+	for (auto actorSystem : World::Get().activeActorSystems)
 	{
 		if (actorSystem->GetNumActors() > 0)
 		{
@@ -293,7 +293,7 @@ void DebugMenu::RenderComponentSystemMenu()
 
 	ImGui::Begin("Component Systems");
 
-	for (auto componentSystem : World::activeComponentSystems)
+	for (auto componentSystem : World::Get().activeComponentSystems)
 	{
 		if (componentSystem->GetNumComponents() > 0)
 		{
@@ -399,7 +399,7 @@ void DebugMenu::RenderParticleMenu()
 
 	ImGui::Begin("Particles");
 
-	for (auto emitter : World::GetAllComponentsOfType<ParticleEmitter>())
+	for (auto emitter : World::Get().GetAllComponentsOfType<ParticleEmitter>())
 	{
 		ImGui::Text(emitter->GetName().c_str());
 		ImGui::Text("Particle Count: %u", emitter->GetParticleCount());

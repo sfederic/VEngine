@@ -49,7 +49,7 @@ void InteractTrigger::Tick(float deltaTime)
 
 				interactWidget->interactText = interactText;
 
-				Actor* targetActor = World::GetActorByNameAllowNull(targetActorName);
+				Actor* targetActor = World::Get().GetActorByNameAllowNull(targetActorName);
 				if (targetActor)
 				{
 					Camera::SetActiveCameraTargetAndZoomIn(targetActor);

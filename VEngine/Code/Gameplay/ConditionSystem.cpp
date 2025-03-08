@@ -11,7 +11,7 @@ ConditionSystem conditionSystem;
 
 bool UnlockEntrance(std::string arg)
 {
-	Actor* actor = World::GetActorByName(arg);
+	Actor* actor = World::Get().GetActorByName(arg);
 	auto entranceTrigger = dynamic_cast<EntranceTrigger*>(actor);
 	assert(entranceTrigger);
 	entranceTrigger->UnlockEntrance();

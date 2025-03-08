@@ -28,7 +28,7 @@ void SpecificSwitch::Start()
 {
 	__super::Start();
 
-	gridActorToCheck = dynamic_cast<GridActor*>(World::GetActorByNameAllowNull(gridActorToCheckName));
+	gridActorToCheck = dynamic_cast<GridActor*>(World::Get().GetActorByNameAllowNull(gridActorToCheckName));
 	if (gridActorToCheck == nullptr)
 	{
 		Log("%s not found for %s", gridActorToCheckName.c_str(), GetName().c_str());

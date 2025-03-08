@@ -13,7 +13,7 @@ void RotatorSwitch::Start()
 {
 	__super::Start();
 
-	actorToRotate = World::GetActorByName(actorToRotateName);
+	actorToRotate = World::Get().GetActorByName(actorToRotateName);
 	nextRotation = actorToRotate->GetRotationV();
 }
 

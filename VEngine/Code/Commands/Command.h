@@ -21,7 +21,7 @@ struct Command : ICommand
 
 	void Execute() override
 	{
-		auto actor = World::GetActorByUIDAllowNull(prop.ownerUID);
+		auto actor = World::Get().Get().GetActorByUIDAllowNull(prop.ownerUID);
 		if (actor == nullptr)
 		{
 			return;

@@ -41,7 +41,7 @@ bool GearSet::Intersects(const DirectX::BoundingOrientedBox& intersectCheck) con
 
 void GearSet::IncrementDoor()
 {
-	auto door = dynamic_cast<GearSetDoor*>(World::GetActorByNameAllowNull(gearSetDoorName));
+	auto door = dynamic_cast<GearSetDoor*>(World::Get().GetActorByNameAllowNull(gearSetDoorName));
 	if (door)
 	{
 		if (numDoorIncrementsDone < door->maxNumIncrements)

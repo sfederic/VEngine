@@ -20,7 +20,7 @@ void SteamValve::Start()
 {
 	__super::Start();
 
-	steam = World::GetActorByNameAndLogCast<Steam>(steamName);
+	steam = World::Get().GetActorByNameAndLogCast<Steam>(steamName);
 	EnableDisableSteam();
 }
 

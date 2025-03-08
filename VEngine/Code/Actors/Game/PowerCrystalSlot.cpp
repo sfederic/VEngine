@@ -14,7 +14,7 @@ void PowerCrystalSlot::Start()
 {
 	__super::Start();
 
-	powerUpActor = World::GetActorByNameAndLogCast<GridActor>(powerUpActorName);
+	powerUpActor = World::Get().GetActorByNameAndLogCast<GridActor>(powerUpActorName);
 }
 
 void PowerCrystalSlot::Tick(float deltaTime)

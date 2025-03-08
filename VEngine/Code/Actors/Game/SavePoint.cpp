@@ -33,7 +33,7 @@ void SavePoint::Tick(float deltaTime)
 
 		if (Input::GetKeyUp(Keys::Enter))
 		{
-			GameInstance::SetContinueMapName(World::worldFilename);
+			GameInstance::SetContinueMapName(World::Get().worldFilename);
 			GameUtils::SaveGameInstanceData();
 			GameUtils::SaveGameWorldState();
 		}

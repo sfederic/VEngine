@@ -114,7 +114,7 @@ bool Physics::Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction,
 		}
 	};
 
-	auto actorsInWorld = World::GetAllActorsInWorld();
+	auto actorsInWorld = World::Get().GetAllActorsInWorld();
 	for (auto actor : actorsInWorld)
 	{
 		if (!actor->IsActive())
@@ -260,7 +260,7 @@ bool Physics::RaycastTriangleIntersect(HitResult& hitResult)
 
 				//Set hit component and actor
 				tempHitResult.hitComponent = &mesh;
-				tempHitResult.hitActor = World::GetActorByUID(mesh.GetOwnerUID());
+				tempHitResult.hitActor = World::Get().GetActorByUID(mesh.GetOwnerUID());
 
 				hitResults.emplace_back(tempHitResult);
 			}
@@ -379,7 +379,7 @@ bool Physics::OrientedBoxCast(HitResult& hit, BoundingOrientedBox& boundsInWorld
 		Renderer::Get().AddDebugDrawOrientedBox(boundsInWorldSpace, clearDebugDrawWithTimer);
 	}
 
-	for (auto actor : World::GetAllActorsInWorld())
+	for (auto actor : World::Get().GetAllActorsInWorld())
 	{
 		if (!actor->IsActive())
 		{
@@ -441,7 +441,7 @@ bool Physics::OrientedBoxCast(HitResult& hitResult, XMVECTOR origin, XMVECTOR en
 		Renderer::Get().AddDebugDrawOrientedBox(boundingOrientedBox, clearDebugDrawWithTimer);
 	}
 
-	for (auto actor : World::GetAllActorsInWorld())
+	for (auto actor : World::Get().GetAllActorsInWorld())
 	{
 		if (IsIgnoredActor(actor, hitResult))
 		{
@@ -485,7 +485,7 @@ bool Physics::SimpleBoxCast(XMVECTOR center, XMFLOAT3 extents, HitResult& hit, b
 		Renderer::Get().AddDebugDrawOrientedBox(orientedBox, clearDebugDrawWithTimer);
 	}
 
-	for (auto actor : World::GetAllActorsInWorld())
+	for (auto actor : World::Get().GetAllActorsInWorld())
 	{
 		if (IsIgnoredActor(actor, hit))
 		{

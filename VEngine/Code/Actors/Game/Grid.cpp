@@ -130,7 +130,7 @@ void Grid::RecalcAllNodes(HitResult& hit, bool preserveNodeScaleValues)
 	//Ignore player and units
 	hit.ignoreLayer = CollisionLayers::Editor;
 	hit.actorsToIgnore.emplace_back((Actor*)Player::system.GetFirstActor());
-	auto gridActors = World::GetAllActorsOfTypeAsActor<GridActor>();
+	auto gridActors = World::Get().GetAllActorsOfTypeAsActor<GridActor>();
 	for (auto gridActor : gridActors)
 	{
 		auto castActor = (GridActor*)gridActor;
@@ -145,7 +145,7 @@ void Grid::RecalcAllNodes(HitResult& hit, bool preserveNodeScaleValues)
 		hit.actorsToIgnore.emplace_back(gridActor);
 	}
 
-	auto meshesToIgnore = World::GetAllComponentsOfType<MeshComponent>();
+	auto meshesToIgnore = World::Get().GetAllComponentsOfType<MeshComponent>();
 	for (auto mesh : meshesToIgnore)
 	{
 		if (mesh->ignoreGridRaycasts)

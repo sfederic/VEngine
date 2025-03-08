@@ -25,7 +25,7 @@ void PressureSwitch::Start()
 {
 	__super::Start();
 
-	actorToActivate = World::GetActorByNameAllowNull(actorToActivateName);
+	actorToActivate = World::Get().GetActorByNameAllowNull(actorToActivateName);
 }
 
 void PressureSwitch::Tick(float deltaTime)

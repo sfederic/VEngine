@@ -44,7 +44,7 @@ public:
 	{
 		std::vector<T*> containedActors;
 
-		std::vector<T*> actors = World::GetAllActorsOfTypeInWorld<T>();
+		std::vector<T*> actors = World::Get().GetAllActorsOfTypeInWorld<T>();
 		for (auto actor : actors)
 		{
 			if (Contains(actor->GetPositionV()))

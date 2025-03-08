@@ -13,7 +13,7 @@ void WaterWheel::Create()
 void WaterWheel::Start()
 {
 	__super::Start();
-	waterVolume = World::GetActorByNameAndLogCast<WaterVolume>(waterVolumeName);
+	waterVolume = World::Get().GetActorByNameAndLogCast<WaterVolume>(waterVolumeName);
 }
 
 Properties WaterWheel::GetProps()

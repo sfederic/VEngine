@@ -61,7 +61,7 @@ bool WaterSource::Contains(DirectX::XMVECTOR point)
 
 void WaterSource::DouseGridActorsInTrigger()
 {
-	for (auto gridActor : World::GetAllActorsAsBaseType<GridActor>())
+	for (auto gridActor : World::Get().GetAllActorsAsBaseType<GridActor>())
 	{
 		if (boxTrigger->Contains(gridActor->GetPositionV()))
 		{

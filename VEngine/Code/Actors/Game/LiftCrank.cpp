@@ -15,7 +15,7 @@ void LiftCrank::Start()
 {
 	__super::Start();
 
-	linkedLift = World::GetActorByNameAndLogCast<Lift>(linkedLiftName);
+	linkedLift = World::Get().GetActorByNameAndLogCast<Lift>(linkedLiftName);
 	if (linkedLift != nullptr)
 	{
 		SetPlayerFocusGridActor(linkedLift);

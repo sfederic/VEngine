@@ -662,7 +662,7 @@ bool Player::AttackGridActorBasedOnNode()
 	const int attackNodeIndexY = yIndex + GetForwardVector().z;
 	auto attackNode = grid->GetNodeLimit(attackNodeIndexX, attackNodeIndexY);
 
-	for (auto gridActor : World::GetAllActorsOfTypeInWorld<GridActor>())
+	for (auto gridActor : World::Get().GetAllActorsOfTypeInWorld<GridActor>())
 	{
 		if (gridActor->GetCurrentNode()->Equals(attackNode))
 		{

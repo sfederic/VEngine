@@ -194,11 +194,11 @@ void Actor::DeferDestroy()
 bool Actor::SetName(const std::string newName)
 {
 	//Check for duplicate names in world
-	if (!World::CheckIfActorExistsInWorld(newName))
+	if (!World::Get().CheckIfActorExistsInWorld(newName))
 	{
-		World::RemoveActorFromWorld(this);
+		World::Get().RemoveActorFromWorld(this);
 		_name = newName;
-		World::AddActorToWorld(this);
+		World::Get().AddActorToWorld(this);
 
 		return true;
 	}

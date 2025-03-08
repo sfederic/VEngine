@@ -321,7 +321,7 @@ void AssetSystem::BuildAllGameplayMapFiles()
 void AssetSystem::WriteOutAllVertexColourData()
 {
 	const std::string vertexColourFileFilename = AssetBaseFolders::vertexColourData +
-		VString::ReplaceFileExtesnion(World::worldFilename, vertexColourDataFileExtension);
+		VString::ReplaceFileExtesnion(World::Get().worldFilename, vertexColourDataFileExtension);
 	FILE* file = nullptr;
 	fopen_s(&file, vertexColourFileFilename.c_str(), "wb");
 	assert(file);
@@ -360,7 +360,7 @@ void AssetSystem::WriteOutAllVertexColourData()
 void AssetSystem::LoadVertexColourDataFromFile()
 {
 	const std::string vertexColourFileFilename = AssetBaseFolders::vertexColourData +
-		VString::ReplaceFileExtesnion(World::worldFilename, vertexColourDataFileExtension);
+		VString::ReplaceFileExtesnion(World::Get().worldFilename, vertexColourDataFileExtension);
 
 	LoadVertexColourDataFromFilename(vertexColourFileFilename);
 }
@@ -370,7 +370,7 @@ void AssetSystem::LoadVertexColourDataFromFilename(const std::string filename)
 	FILE* file = nullptr;
 	if (!std::filesystem::exists(filename))
 	{
-		Log("No vertex colour file data for world %s.", World::worldFilename.c_str());
+		Log("No vertex colour file data for world %s.", World::Get().worldFilename.c_str());
 		return;
 	}
 

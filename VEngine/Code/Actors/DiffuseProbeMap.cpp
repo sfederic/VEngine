@@ -105,7 +105,7 @@ LightProbeInstanceData DiffuseProbeMap::FindClosestProbe(XMVECTOR pos)
 
 	auto ProbeDistCompare = [](const ProbeDist& l, const ProbeDist& r) -> bool {
 		return l.distance < r.distance;
-		};
+	};
 
 	std::sort(probeDistances.begin(), probeDistances.end(), ProbeDistCompare);
 
@@ -181,7 +181,7 @@ void DiffuseProbeMap::ReadProbeDataFromFile()
 
 std::string DiffuseProbeMap::GetWorldNameAsFilename()
 {
-	std::string worldName = VString::GetSubStringBeforeFoundOffset(World::worldFilename, "."); //trim .vmap
+	std::string worldName = VString::GetSubStringBeforeFoundOffset(World::Get().worldFilename, "."); //trim .vmap
 	std::string filename = "LightProbeData/" + worldName + ".probedata";
 	return filename;
 }

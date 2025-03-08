@@ -12,15 +12,22 @@ class IComponentSystem;
 class Component;
 class Actor;
 
-namespace World
+class World
 {
-	extern std::string worldFilename;
+public:
+	static World& Get()
+	{
+		static World instance;
+		return instance;
+	}
 
-	extern std::unordered_map<UID, Actor*> actorUIDMap;
-	extern std::unordered_map<std::string, Actor*> actorNameMap;
+	std::string worldFilename;
 
-	extern std::vector<IActorSystem*> activeActorSystems;
-	extern std::vector<IComponentSystem*> activeComponentSystems;
+	std::unordered_map<UID, Actor*> actorUIDMap;
+	std::unordered_map<std::string, Actor*> actorNameMap;
+
+	std::vector<IActorSystem*> activeActorSystems;
+	std::vector<IComponentSystem*> activeComponentSystems;
 
 	void Init();
 

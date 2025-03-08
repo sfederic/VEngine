@@ -47,7 +47,7 @@ void Console::Init()
 
 	executeMap.emplace(L"CLEAR",
 		std::make_pair([]() {
-		World::DestroyAllActorsAndComponentsInWorld();
+		World::Get().DestroyAllActorsAndComponentsInWorld();
 	},
 			"Deletes all actors and components in world."));
 
@@ -140,7 +140,7 @@ void Console::Init()
 			"Write all game save maps."));
 
 	executeMap.emplace(L"DEFAULT",
-		std::make_pair([]() { World::CreateDefaultMapActors(); },
+		std::make_pair([]() { World::Get().CreateDefaultMapActors(); },
 			"Load in default actors for most worlds (Player, Grid, DirectionalLight, etc.)"));
 
 	executeMap.emplace(L"TEX",
@@ -217,7 +217,7 @@ void Console::Init()
 	executeMap.emplace(L"RESET UID",
 		std::make_pair([]() {
 		ResetUIDCache();
-		auto components = World::GetAllComponentsInWorld();
+		auto components = World::Get().GetAllComponentsInWorld();
 		for (auto component : components)
 		{
 			component->SetUID(GenerateUID());

@@ -82,7 +82,7 @@ static void ReassignTexture(Property& prop)
 		return;
 	}
 
-	auto actor = World::GetActorByUIDAllowNull(prop.ownerUID);
+	auto actor = World::Get().GetActorByUIDAllowNull(prop.ownerUID);
 	if (actor)
 	{
 		auto meshes = actor->GetComponents<MeshComponent>();
@@ -104,7 +104,7 @@ static void ReassignTextureSecondary(Property& prop)
 		return;
 	}
 
-	auto actor = World::GetActorByUIDAllowNull(prop.ownerUID);
+	auto actor = World::Get().GetActorByUIDAllowNull(prop.ownerUID);
 	if (actor)
 	{
 		auto meshes = actor->GetComponents<MeshComponent>();

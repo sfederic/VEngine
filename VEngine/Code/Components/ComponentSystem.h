@@ -68,7 +68,7 @@ public:
 
 		if (components.back()->GetOwnerUID() != 0)
 		{
-			auto owner = World::GetActorByUID(components.back()->GetOwnerUID());
+			auto owner = World::Get().GetActorByUID(components.back()->GetOwnerUID());
 			owner->RemoveComponent(components.back().get());
 		}
 

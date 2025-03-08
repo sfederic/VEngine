@@ -12,12 +12,12 @@ void MultiSpecificSwitchLock::Start()
 {
 	__super::Start();
 
-	switchActors.emplace_back(dynamic_cast<SpecificSwitch*>(World::GetActorByNameAllowNull(switchActorName0)));
-	switchActors.emplace_back(dynamic_cast<SpecificSwitch*>(World::GetActorByNameAllowNull(switchActorName1)));
-	switchActors.emplace_back(dynamic_cast<SpecificSwitch*>(World::GetActorByNameAllowNull(switchActorName2)));
-	switchActors.emplace_back(dynamic_cast<SpecificSwitch*>(World::GetActorByNameAllowNull(switchActorName3)));
+	switchActors.emplace_back(dynamic_cast<SpecificSwitch*>(World::Get().GetActorByNameAllowNull(switchActorName0)));
+	switchActors.emplace_back(dynamic_cast<SpecificSwitch*>(World::Get().GetActorByNameAllowNull(switchActorName1)));
+	switchActors.emplace_back(dynamic_cast<SpecificSwitch*>(World::Get().GetActorByNameAllowNull(switchActorName2)));
+	switchActors.emplace_back(dynamic_cast<SpecificSwitch*>(World::Get().GetActorByNameAllowNull(switchActorName3)));
 
-	actorToActivateOnAllSwitchesActive = World::GetActorByNameAllowNull(actorToActivateName);
+	actorToActivateOnAllSwitchesActive = World::Get().GetActorByNameAllowNull(actorToActivateName);
 }
 
 void MultiSpecificSwitchLock::Tick(float deltaTime)

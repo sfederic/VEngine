@@ -22,7 +22,7 @@ void MeshSliceActor::SliceMesh(DirectX::XMVECTOR planeCenter, DirectX::XMVECTOR 
 {
 	sliceableMesh->SliceMesh(planeCenter, planeNormal);
 
-	auto actor = World::GetActorByNameAllowNull(linkedActor);
+	auto actor = World::Get().GetActorByNameAllowNull(linkedActor);
 	if (actor)
 	{
 		auto meshSliceReaction = dynamic_cast<IMeshSliceReaction*>(actor);

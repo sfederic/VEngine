@@ -39,7 +39,7 @@ void FireSource::Tick(float deltaTime)
 {
 	__super::Tick(deltaTime);
 
-	for (auto& gridActor : World::GetAllActorsAsBaseType<GridActor>())
+	for (auto& gridActor : World::Get().GetAllActorsAsBaseType<GridActor>())
 	{
 		for (auto mesh : gridActor->GetComponents<MeshComponent>())
 		{
