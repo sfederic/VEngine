@@ -17,7 +17,7 @@
 #include "Render/MaterialSystem.h"
 #include "Audio/AudioSystem.h"
 #include "Render/SpriteSystem.h"
-#include "Render/DebugMeshMananger.h"
+#include "Render/DebugMeshManager.h"
 #include "UI/UISystem.h"
 #include "UI/Game/MapInfoWidget.h"
 #include "Gameplay/GameInstance.h"

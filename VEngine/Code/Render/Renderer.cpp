@@ -11,7 +11,7 @@
 #include "Components/InstanceMeshComponent.h"
 #include "Components/Lights/DirectionalLightComponent.h"
 #include "Render/Texture2D.h"
-#include "Render/DebugMeshMananger.h"
+#include "Render/DebugMeshManager.h"
 #include "Components/AudioComponent.h"
 #include "Components/Lights/PointLightComponent.h"
 #include "Components/Lights/SpotLightComponent.h"

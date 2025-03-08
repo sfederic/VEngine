@@ -6,7 +6,7 @@
 #include "Render/Line.h"
 #include "Render/RastStates.h"
 #include "Render/RastState.h"
-#include "Render/DebugMeshMananger.h"
+#include "Render/DebugMeshManager.h"
 #include "Editor/Editor.h"
 #include "Core/VMath.h"
 #include "Core/Core.h"

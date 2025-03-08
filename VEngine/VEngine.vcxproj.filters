@@ -917,7 +917,7 @@
     <ClCompile Include="Code\Localisation\Localisation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Render\DebugMeshMananger.cpp">
+    <ClCompile Include="Code\Render\DebugMeshManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Render\Swapchain.cpp">
@@ -1931,7 +1931,7 @@
     <ClInclude Include="Code\Editor\DebugNotification.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\DebugMeshMananger.h">
+    <ClInclude Include="Code\Render\DebugMeshManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Render\Swapchain.h">
