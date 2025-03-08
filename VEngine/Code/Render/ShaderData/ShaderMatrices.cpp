@@ -6,9 +6,6 @@
 
 void ShaderMatrices::Create()
 {
-	model = XMMatrixIdentity();
-	view = XMMatrixIdentity();
-	texMatrix = XMMatrixIdentity();
 	proj = Camera::GetActiveCamera().GetProjectionMatrix();
 
 	MakeModelViewProjectionMatrix();
