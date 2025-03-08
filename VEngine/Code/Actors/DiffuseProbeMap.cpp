@@ -181,7 +181,7 @@ void DiffuseProbeMap::ReadProbeDataFromFile()
 
 std::string DiffuseProbeMap::GetWorldNameAsFilename()
 {
-	std::string worldName = VString::GetSubStringBeforeFoundOffset(World::Get().worldFilename, "."); //trim .vmap
+	std::string worldName = VString::GetSubStringBeforeFoundOffset(World::Get().GetWorldFilename(), "."); //trim .vmap
 	std::string filename = "LightProbeData/" + worldName + ".probedata";
 	return filename;
 }

@@ -1822,7 +1822,7 @@ void Renderer::MapIconImageCapture()
 	swapchain.GetBackBuffer(iconImageBackBuffer.GetAddressOf());
 	assert(iconImageBackBuffer);
 
-	const std::wstring imageFile = L"Icons/MapIcons/" + VString::stows(World::Get().worldFilename) + L".jpg";
+	const std::wstring imageFile = L"Icons/MapIcons/" + VString::stows(World::Get().GetWorldFilename()) + L".jpg";
 	HR(SaveWICTextureToFile(device.GetContext(), iconImageBackBuffer.Get(), GUID_ContainerFormatJpeg, imageFile.c_str()));
 	debugMenu.AddNotification(L"Map Icon created.");
 }

@@ -21,14 +21,6 @@ public:
 		return instance;
 	}
 
-	std::string worldFilename;
-
-	std::unordered_map<UID, Actor*> actorUIDMap;
-	std::unordered_map<std::string, Actor*> actorNameMap;
-
-	std::vector<IActorSystem*> activeActorSystems;
-	std::vector<IComponentSystem*> activeComponentSystems;
-
 	void Init();
 
 	//Called on level load
@@ -184,4 +176,19 @@ public:
 			}
 		}
 	}
+
+	auto GetWorldFilename() { return worldFilename; }
+	void SetWorldFilename(std::string name) { worldFilename = name; }
+
+	auto GetActiveActorSystems() { return activeActorSystems; }
+	auto GetActiveComponentSystems() { return activeComponentSystems; }
+
+private:
+	std::string worldFilename;
+
+	std::unordered_map<UID, Actor*> actorUIDMap;
+	std::unordered_map<std::string, Actor*> actorNameMap;
+
+	std::vector<IActorSystem*> activeActorSystems;
+	std::vector<IComponentSystem*> activeComponentSystems;
 };

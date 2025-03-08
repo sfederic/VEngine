@@ -47,8 +47,8 @@ void FileSystem::SerialiseAllSystems()
 {
 	const auto start = Profile::QuickStart();
 
-	auto lastOf = World::Get().worldFilename.find_last_of("/\\");
-	std::string str = World::Get().worldFilename.substr(lastOf + 1);
+	auto lastOf = World::Get().GetWorldFilename().find_last_of("/\\");
+	std::string str = World::Get().GetWorldFilename().substr(lastOf + 1);
 
 	std::string file = "WorldMaps/" + str;
 
@@ -65,7 +65,7 @@ void FileSystem::SerialiseAllSystems()
 
 	Serialiser s(file, OpenMode::Out);
 
-	for (IActorSystem* actorSystem : World::Get().activeActorSystems)
+	for (IActorSystem* actorSystem : World::Get().GetActiveActorSystems())
 	{
 		if (actorSystem->GetNumActors() > 0)
 		{
@@ -73,7 +73,7 @@ void FileSystem::SerialiseAllSystems()
 		}
 	}
 
-	for (IComponentSystem* componentSystem : World::Get().activeComponentSystems)
+	for (IComponentSystem* componentSystem : World::Get().GetActiveComponentSystems())
 	{
 		if (componentSystem->GetNumComponents() > 0)
 		{
@@ -85,7 +85,7 @@ void FileSystem::SerialiseAllSystems()
 
 	//AssetSystem::WriteOutAllVertexColourData();
 
-	debugMenu.AddNotification(VString::wformat(L"%S world saved", World::Get().worldFilename.c_str()));
+	debugMenu.AddNotification(VString::wformat(L"%S world saved", World::Get().GetWorldFilename().c_str()));
 
 	const auto end = Profile::QuickEnd(start);
 	Log("Text save for [%s] took [%f].", str.c_str(), end);
@@ -95,14 +95,14 @@ void FileSystem::WriteAllSystemsToBinary()
 {
 	const auto start = Profile::QuickStart();
 
-	auto lastOf = World::Get().worldFilename.find_last_of("/\\");
-	std::string str = World::Get().worldFilename.substr(lastOf + 1);
+	auto lastOf = World::Get().GetWorldFilename().find_last_of("/\\");
+	std::string str = World::Get().GetWorldFilename().substr(lastOf + 1);
 
 	std::string file = "WorldMaps/Binary/" + str;
 
 	BinarySerialiser s(file.c_str());
 
-	for (IActorSystem* actorSystem : World::Get().activeActorSystems)
+	for (IActorSystem* actorSystem : World::Get().GetActiveActorSystems())
 	{
 		if (actorSystem->GetNumActors() > 0)
 		{
@@ -110,7 +110,7 @@ void FileSystem::WriteAllSystemsToBinary()
 		}
 	}
 
-	for (IComponentSystem* componentSystem : World::Get().activeComponentSystems)
+	for (IComponentSystem* componentSystem : World::Get().GetActiveComponentSystems())
 	{
 		if (componentSystem->GetNumComponents() > 0)
 		{
@@ -118,7 +118,7 @@ void FileSystem::WriteAllSystemsToBinary()
 		}
 	}
 
-	debugMenu.AddNotification(VString::wformat(L"%S world saved to binary", World::Get().worldFilename.c_str()));
+	debugMenu.AddNotification(VString::wformat(L"%S world saved to binary", World::Get().GetWorldFilename().c_str()));
 
 	const auto end = Profile::QuickEnd(start);
 	Log("Binary save for [%s] took [%f].", str.c_str(), end);
@@ -128,7 +128,7 @@ void FileSystem::ReadAllSystemsFromBinary()
 {
 	const auto start = Profile::QuickStart();
 
-	std::string worldName = World::Get().worldFilename;
+	std::string worldName = World::Get().GetWorldFilename();
 
 	std::string path = "WorldMaps/Binary/" + worldName;
 
@@ -192,7 +192,7 @@ void FileSystem::ReadAllSystemsFromBinary()
 
 	ResetWorldState();
 
-	debugMenu.AddNotification(VString::wformat(L"%S world loaded from binary", World::Get().worldFilename.c_str()));
+	debugMenu.AddNotification(VString::wformat(L"%S world loaded from binary", World::Get().GetWorldFilename().c_str()));
 
 	const auto end = Profile::QuickEnd(start);
 	Log("Binary load for [%s] took [%f].", worldName.c_str(), end);
@@ -204,9 +204,9 @@ void FileSystem::LoadWorld(std::string worldName)
 
 	Editor::Get().SetEditorTitle(worldName);
 
-	GameInstance::previousMapMovedFrom = World::Get().worldFilename;
+	GameInstance::previousMapMovedFrom = World::Get().GetWorldFilename();
 
-	World::Get().worldFilename = worldName;
+	World::Get().SetWorldFilename(worldName);
 
 	std::string path = AssetBaseFolders::worldMap + worldName;
 
@@ -331,10 +331,10 @@ void FileSystem::LoadWorld(std::string worldName)
 
 	AssetSystem::LoadVertexColourDataFromFile();
 
-	WorldFunctions::CallWorldStartFunction(World::Get().worldFilename);
+	WorldFunctions::CallWorldStartFunction(World::Get().GetWorldFilename());
 
 	Profile::Reset();
-	debugMenu.AddNotification(VString::wformat(L"%S world loaded", World::Get().worldFilename.c_str()));
+	debugMenu.AddNotification(VString::wformat(L"%S world loaded", World::Get().GetWorldFilename().c_str()));
 
 	double endTime = Profile::QuickEnd(startTime);
 	Log("World load took %f sec.", endTime);
@@ -342,7 +342,7 @@ void FileSystem::LoadWorld(std::string worldName)
 
 void FileSystem::ReloadCurrentWorld()
 {
-	LoadWorld(World::Get().worldFilename);
+	LoadWorld(World::Get().GetWorldFilename());
 }
 
 void FileSystem::CreateGameplayWorldSave(std::string worldName)
@@ -388,14 +388,14 @@ void FileSystem::SetDeferredWorldLoad(const std::string_view filename)
 
 void FileSystem::SetDeferredWorldReset()
 {
-	defferedWorldLoadFilename = World::Get().worldFilename;
+	defferedWorldLoadFilename = World::Get().GetWorldFilename();
 }
 
 void FileSystem::DeferredWorldLoad()
 {
 	if (!defferedWorldLoadFilename.empty())
 	{
-		previousWorldMovedFromFilename = World::Get().worldFilename;
+		previousWorldMovedFromFilename = World::Get().GetWorldFilename();
 		entranceTriggerTag = GameUtils::entranceTriggerTag;
 
 		LoadWorld(defferedWorldLoadFilename);

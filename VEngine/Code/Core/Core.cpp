@@ -132,7 +132,7 @@ void Core::EndTimer()
 void Core::StartGame()
 {
 	gameplayOn = true;
-	initialStartingWorldFromEditor = World::Get().worldFilename;
+	initialStartingWorldFromEditor = World::Get().GetWorldFilename();
 
 	World::Get().StartAllComponents();
 	World::Get().WakeAndStartAllActors();

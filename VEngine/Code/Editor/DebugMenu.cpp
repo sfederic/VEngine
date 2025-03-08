@@ -241,7 +241,7 @@ void DebugMenu::RenderWorldStats()
 
 	//Num of actors
 	uint64_t actorCount = 0;
-	for (auto actorSystem : World::Get().activeActorSystems)
+	for (auto actorSystem : World::Get().GetActiveActorSystems())
 	{
 		actorCount += actorSystem->GetActorsAsBaseClass().size();
 	}
@@ -250,7 +250,7 @@ void DebugMenu::RenderWorldStats()
 
 	//Num of components
 	uint64_t componentCount = 0;
-	for (auto componentSystem : World::Get().activeComponentSystems)
+	for (auto componentSystem : World::Get().GetActiveComponentSystems())
 	{
 		componentCount += componentSystem->GetNumComponents();
 	}
@@ -274,7 +274,7 @@ void DebugMenu::RenderActorSystemMenu()
 
 	ImGui::Begin("Actor Systems");
 
-	for (auto actorSystem : World::Get().activeActorSystems)
+	for (auto actorSystem : World::Get().GetActiveActorSystems())
 	{
 		if (actorSystem->GetNumActors() > 0)
 		{
@@ -293,7 +293,7 @@ void DebugMenu::RenderComponentSystemMenu()
 
 	ImGui::Begin("Component Systems");
 
-	for (auto componentSystem : World::Get().activeComponentSystems)
+	for (auto componentSystem : World::Get().GetActiveComponentSystems())
 	{
 		if (componentSystem->GetNumComponents() > 0)
 		{
