@@ -1,6 +1,5 @@
 #include "vpch.h"
 #include "Animation.h"
-#include "Skeleton.h"
 
 using namespace DirectX;
 
