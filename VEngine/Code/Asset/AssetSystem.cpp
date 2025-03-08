@@ -148,7 +148,7 @@ void AssetSystem::BuildSingleVMeshFromFBX(const std::string fbxFilePath, const s
 	const auto meshFilePath = std::filesystem::absolute(filepath);
 
 	MeshData meshData;
-	FBXLoader::ImportAsMesh(fbxFilePath, meshData);
+	FBXLoader::Get().ImportAsMesh(fbxFilePath, meshData);
 
 	MeshAssetHeader header;
 	header.sourceMeshFormat = SourceMeshFormat::FBX;
@@ -172,7 +172,7 @@ void AssetSystem::BuildSingleVMeshFromFBX(const std::string fbxFilePath, const s
 
 void AssetSystem::BuildSingleVAnimFromFBX(const std::string fbxAnimFilePath, const std::string fbxAnimFilename)
 {
-	auto animations = FBXLoader::ImportAsAnimation(fbxAnimFilePath, fbxAnimFilename);
+	auto animations = FBXLoader::Get().ImportAsAnimation(fbxAnimFilePath, fbxAnimFilename);
 
 	const std::string baseFBXAnimPath = VString::GetSubStringAtFoundOffset(fbxAnimFilePath, AssetBaseFolders::animationFBXFiles);
 	const std::string vAnimPath = VString::ReplaceFileExtesnion(baseFBXAnimPath, ".vanim");

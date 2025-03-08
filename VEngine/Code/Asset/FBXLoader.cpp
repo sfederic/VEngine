@@ -1,17 +1,13 @@
 #include "vpch.h"
 #include "FBXLoader.h"
-#define FBXSDK_SHARED //Needs to be defined for static linking
-#include <fbxsdk.h>
 #include <cassert>
 #include <filesystem>
 #include "Core/VString.h"
 #include "AssetBaseFolders.h"
-#include "Animation/BoneWeights.h"
 #include "Animation/Animation.h"
 #include "Animation/AnimFrame.h"
 #include "Animation/Joint.h"
 #include "Animation/Skeleton.h"
-#include "Render/Vertex.h"
 #include "Render/MeshData.h"
 #include "Render/ShaderData/MaterialShaderData.h"
 #include "Render/Material.h"
@@ -22,33 +18,6 @@
 
 using namespace fbxsdk;
 using namespace DirectX;
-
-FbxManager* manager;
-FbxIOSettings* ioSetting;
-FbxImporter* importer;
-
-void ProcessAllChildNodes(std::string fbxFilename, FbxNode* node, MeshData& meshData);
-void ProcessSkeletonNodes(FbxNode* node, Skeleton& skeleton, int parentIndex);
-
-void ReadNormal(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, XMFLOAT3& outNormal);
-void ReadUVs(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, XMFLOAT2& outUVs);
-void ReadVertexColours(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, XMFLOAT4& outColour);
-
-XMFLOAT4 FBXDouble3ToXMFloat3(const fbxsdk::FbxDouble3& fbxDouble);
-
-std::vector<XMFLOAT3> ProcessControlPoints(FbxMesh* currMesh);
-void ProcessTriangle(FbxMesh* mesh, int triangleIndex, int& polyIndexCounter, MeshData& meshData, const std::unordered_map<int, BoneWeights>& boneWeightsMap);
-void ProcessMaterials(FbxNode* node, const std::string& fbxFilename);
-void ProcessMaterial(FbxSurfacePhong* fbxMaterial, const std::string& fbxFilename);
-void SetTangents(Vertex* verts[3]);
-void FlipVertexFaceOrder(MeshData& meshData);
-void ProcessChildNodes(std::string fbxFilename, FbxNode* node, MeshData& meshData);
-void ProcessVertexWeights(FbxCluster* cluster, int i, int currentJointIndex, std::unordered_map<int, BoneWeights>& boneWeightsMap);
-void SetInverseBindPose(MeshData& meshData, int currentJointIndex, const FbxAMatrix& linkMatrix, const FbxAMatrix& clusterMatrix);
-void ProcessMesh(FbxNode* node, MeshData& meshData, const std::string& fbxFilename);
-void ProcessBoneWeights(FbxMesh* mesh, MeshData& meshData, std::unordered_map<int, BoneWeights>& boneWeightsMap);
-void ProcessCluster(FbxCluster* cluster, FbxMesh* mesh, MeshData& meshData, std::unordered_map<int, BoneWeights>& boneWeightsMap);
-void ProcessVertices(FbxMesh* mesh, MeshData& meshData, const std::unordered_map<int, BoneWeights>& boneWeightsMap);
 
 void FBXLoader::Init()
 {
@@ -262,7 +231,7 @@ std::map<std::string, Animation> FBXLoader::ImportAsAnimation(const std::string 
 	return skeleton.GetAnimations();
 }
 
-void ProcessAllChildNodes(std::string fbxFilename, FbxNode* node, MeshData& meshData)
+void FBXLoader::ProcessAllChildNodes(std::string fbxFilename, FbxNode* node, MeshData& meshData)
 {
 	// Recursion for handling child nodes.
 	ProcessChildNodes(fbxFilename, node, meshData);
@@ -271,7 +240,7 @@ void ProcessAllChildNodes(std::string fbxFilename, FbxNode* node, MeshData& mesh
 	ProcessMesh(node, meshData, fbxFilename);
 }
 
-void ProcessChildNodes(std::string fbxFilename, FbxNode* node, MeshData& meshData)
+void FBXLoader::ProcessChildNodes(std::string fbxFilename, FbxNode* node, MeshData& meshData)
 {
 	int childNodeCount = node->GetChildCount();
 	for (int i = 0; i < childNodeCount; i++)
@@ -280,7 +249,7 @@ void ProcessChildNodes(std::string fbxFilename, FbxNode* node, MeshData& meshDat
 	}
 }
 
-void ProcessMesh(FbxNode* node, MeshData& meshData, const std::string& fbxFilename)
+void FBXLoader::ProcessMesh(FbxNode* node, MeshData& meshData, const std::string& fbxFilename)
 {
 	FbxMesh* mesh = node->GetMesh();
 	if (!mesh)
@@ -292,7 +261,7 @@ void ProcessMesh(FbxNode* node, MeshData& meshData, const std::string& fbxFilena
 	ProcessVertices(mesh, meshData, boneWeightsMap);
 }
 
-void ProcessBoneWeights(FbxMesh* mesh, MeshData& meshData, std::unordered_map<int, BoneWeights>& boneWeightsMap)
+void FBXLoader::ProcessBoneWeights(FbxMesh* mesh, MeshData& meshData, std::unordered_map<int, BoneWeights>& boneWeightsMap)
 {
 	const int deformerCount = mesh->GetDeformerCount(FbxDeformer::eSkin);
 	for (int deformerIndex = 0; deformerIndex < deformerCount; deformerIndex++)
@@ -308,7 +277,7 @@ void ProcessBoneWeights(FbxMesh* mesh, MeshData& meshData, std::unordered_map<in
 	}
 }
 
-void ProcessCluster(FbxCluster* cluster, FbxMesh* mesh, MeshData& meshData, std::unordered_map<int, BoneWeights>& boneWeightsMap)
+void FBXLoader::ProcessCluster(FbxCluster* cluster, FbxMesh* mesh, MeshData& meshData, std::unordered_map<int, BoneWeights>& boneWeightsMap)
 {
 	// Get current joint name and index
 	std::string currentJointName = cluster->GetLink()->GetName();
@@ -328,7 +297,7 @@ void ProcessCluster(FbxCluster* cluster, FbxMesh* mesh, MeshData& meshData, std:
 	}
 }
 
-void SetInverseBindPose(MeshData& meshData, int currentJointIndex, const FbxAMatrix& linkMatrix, const FbxAMatrix& clusterMatrix)
+void FBXLoader::SetInverseBindPose(MeshData& meshData, int currentJointIndex, const FbxAMatrix& linkMatrix, const FbxAMatrix& clusterMatrix)
 {
 	FbxAMatrix bindposeInverseMatrix = linkMatrix.Inverse() * clusterMatrix;
 
@@ -345,7 +314,7 @@ void SetInverseBindPose(MeshData& meshData, int currentJointIndex, const FbxAMat
 	meshData.skeleton.GetJoint(currentJointIndex).currentPose = pose;
 }
 
-void ProcessVertexWeights(FbxCluster* cluster, int i, int currentJointIndex, std::unordered_map<int, BoneWeights>& boneWeightsMap)
+void FBXLoader::ProcessVertexWeights(FbxCluster* cluster, int i, int currentJointIndex, std::unordered_map<int, BoneWeights>& boneWeightsMap)
 {
 	double weight = cluster->GetControlPointWeights()[i];
 	weight = std::clamp(weight, 0.0, 1.0);
@@ -362,7 +331,7 @@ void ProcessVertexWeights(FbxCluster* cluster, int i, int currentJointIndex, std
 	}
 }
 
-void ProcessMaterials(FbxNode* node, const std::string& fbxFilename)
+void FBXLoader::ProcessMaterials(FbxNode* node, const std::string& fbxFilename)
 {
 	const int materialCount = node->GetMaterialCount();
 	for (int materialIndex = 0; materialIndex < materialCount; materialIndex++)
@@ -372,7 +341,7 @@ void ProcessMaterials(FbxNode* node, const std::string& fbxFilename)
 	}
 }
 
-void ProcessMaterial(FbxSurfacePhong* fbxMaterial, const std::string& fbxFilename)
+void FBXLoader::ProcessMaterial(FbxSurfacePhong* fbxMaterial, const std::string& fbxFilename)
 {
 	MaterialShaderData shaderData;
 	shaderData.ambient = FBXDouble3ToXMFloat3(fbxMaterial->Ambient.Get());
@@ -400,7 +369,7 @@ void ProcessMaterial(FbxSurfacePhong* fbxMaterial, const std::string& fbxFilenam
 	Log("Material file [%s] created from mesh import [%s].", materialName.c_str(), fbxFilename.c_str());
 }
 
-void ProcessVertices(FbxMesh* mesh, MeshData& meshData, const std::unordered_map<int, BoneWeights>& boneWeightsMap)
+void FBXLoader::ProcessVertices(FbxMesh* mesh, MeshData& meshData, const std::unordered_map<int, BoneWeights>& boneWeightsMap)
 {
 	int numVerts = mesh->GetControlPointsCount();
 	int vectorSize = numVerts * mesh->GetPolygonSize(0);
@@ -425,7 +394,7 @@ void ProcessVertices(FbxMesh* mesh, MeshData& meshData, const std::unordered_map
 	FlipVertexFaceOrder(meshData);
 }
 
-void ProcessTriangle(FbxMesh* mesh, int triangleIndex, int& polyIndexCounter, MeshData& meshData, const std::unordered_map<int, BoneWeights>& boneWeightsMap)
+void FBXLoader::ProcessTriangle(FbxMesh* mesh, int triangleIndex, int& polyIndexCounter, MeshData& meshData, const std::unordered_map<int, BoneWeights>& boneWeightsMap)
 {
 	const int triangleSize = mesh->GetPolygonSize(triangleIndex);
 	assert((triangleSize % 3) == 0 && "FBX model isn't triangulated");
@@ -469,7 +438,7 @@ void ProcessTriangle(FbxMesh* mesh, int triangleIndex, int& polyIndexCounter, Me
 	}
 }
 
-void FlipVertexFaceOrder(MeshData& meshData)
+void FBXLoader::FlipVertexFaceOrder(MeshData& meshData)
 {
 	for (int i = 0; i < meshData.vertices.size() / 3; i++)
 	{
@@ -490,7 +459,7 @@ void FlipVertexFaceOrder(MeshData& meshData)
 	}
 }
 
-void SetTangents(Vertex* verts[3])
+void FBXLoader::SetTangents(Vertex* verts[3])
 {
 	const XMFLOAT3 edge1 = VMath::Float3Subtract(verts[1]->pos, verts[0]->pos);
 	const XMFLOAT3 edge2 = VMath::Float3Subtract(verts[2]->pos, verts[0]->pos);
@@ -512,7 +481,7 @@ void SetTangents(Vertex* verts[3])
 	}
 }
 
-void ProcessSkeletonNodes(FbxNode* node, Skeleton& skeleton, int parentIndex)
+void FBXLoader::ProcessSkeletonNodes(FbxNode* node, Skeleton& skeleton, int parentIndex)
 {
 	const int childCount = node->GetChildCount();
 	for (int i = 0; i < childCount; i++)
@@ -567,7 +536,7 @@ void FBXLoader::ImportFracturedMesh(std::string filename, std::vector<MeshData>&
 }
 
 //Took this function and ReadUVs() from a tutorial but forgot where from.
-void ReadNormal(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, XMFLOAT3& outNormal)
+void FBXLoader::ReadNormal(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, XMFLOAT3& outNormal)
 {
 	if (inMesh->GetElementNormalCount() < 1) { throw std::exception("Invalid Normal Number"); }
 
@@ -623,7 +592,7 @@ void ReadNormal(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, XMFL
 	}
 }
 
-void ReadUVs(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, XMFLOAT2& outUVs)
+void FBXLoader::ReadUVs(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, XMFLOAT2& outUVs)
 {
 	if (inMesh->GetElementNormalCount() < 1) { throw std::exception("Invalid Normal Number"); }
 
@@ -675,7 +644,7 @@ void ReadUVs(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, XMFLOAT
 	}
 }
 
-void ReadVertexColours(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, XMFLOAT4& outColour)
+void FBXLoader::ReadVertexColours(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, XMFLOAT4& outColour)
 {
 	FbxGeometryElementVertexColor* vertexColour = inMesh->GetElementVertexColor(0);
 
@@ -738,12 +707,12 @@ void ReadVertexColours(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounte
 	}
 }
 
-XMFLOAT4 FBXDouble3ToXMFloat3(const fbxsdk::FbxDouble3& fbxDouble)
+XMFLOAT4 FBXLoader::FBXDouble3ToXMFloat3(const fbxsdk::FbxDouble3& fbxDouble)
 {
 	return XMFLOAT4(fbxDouble.mData[0], fbxDouble.mData[1], fbxDouble.mData[2], 1.f);
 }
 
-std::vector<XMFLOAT3> ProcessControlPoints(FbxMesh* currMesh)
+std::vector<XMFLOAT3> FBXLoader::ProcessControlPoints(FbxMesh* currMesh)
 {
 	const int ctrlPointCount = currMesh->GetControlPointsCount();
 	std::vector<XMFLOAT3> controlPoints;

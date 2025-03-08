@@ -55,7 +55,7 @@ void Engine::Init(int argc, char* argv[])
 	auto consoleInit = std::async(std::launch::async, []() { Console::Init(); });
 
 	auto physicsInit = std::async(std::launch::async, []() { PhysicsSystem::Init(); });
-	auto fbxInit = std::async(std::launch::async, []() { FBXLoader::Init(); });
+	auto fbxInit = std::async(std::launch::async, []() { FBXLoader::Get().Init(); });
 
 	Editor::Get().Init(argc, argv);
 	auto rendererInit = std::async(std::launch::async, []() { Renderer::Get().Init(Editor::Get().windowHwnd, Editor::Get().GetViewportWidth(), Editor::Get().GetViewportHeight()); });
