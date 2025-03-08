@@ -277,7 +277,7 @@ void Core::HandleWin32MessagePump(UINT message, WPARAM wparam, LPARAM lparam)
 			break;
 		}
 
-		Renderer::ResizeSwapchain(resizedWidth, resizedHeight);
+		Renderer::Get().ResizeSwapchain(resizedWidth, resizedHeight);
 
 		previousWidth = resizedWidth;
 		previousHeight = resizedHeight;

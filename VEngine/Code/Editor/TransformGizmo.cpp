@@ -27,7 +27,7 @@ void TransformGizmo::Tick()
 	if (!Core::isImGUIEnabled || Core::gameplayOn) return;
 
 	//Set Imgui window
-	ImGui::SetNextWindowSize(ImVec2(Renderer::GetViewportWidth(), Renderer::GetViewportHeight()));
+	ImGui::SetNextWindowSize(ImVec2(Renderer::Get().GetViewportWidth(), Renderer::Get().GetViewportHeight()));
 	ImGui::SetNextWindowPos(ImVec2(0, 0));
 	ImGui::Begin("Transform Gizmo", 0, ImGuiWindowFlags_NoMove |
 		ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoMouseInputs | ImGuiWindowFlags_NoTitleBar);

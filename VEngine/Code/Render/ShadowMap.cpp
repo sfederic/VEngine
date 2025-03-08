@@ -29,7 +29,7 @@ void ShadowMap::Create(int width_, int height_)
 	texDesc.MiscFlags = 0;
 
 	Microsoft::WRL::ComPtr<ID3D11Texture2D> depthMap;
-	HR(Renderer::GetDevice().CreateTexture2D(&texDesc, 0, depthMap.GetAddressOf()));
+	HR(Renderer::Get().GetDevice().CreateTexture2D(&texDesc, 0, depthMap.GetAddressOf()));
 
 	D3D11_DEPTH_STENCIL_VIEW_DESC dsvDesc = {};
 	dsvDesc.Flags = 0;
@@ -38,7 +38,7 @@ void ShadowMap::Create(int width_, int height_)
 	dsvDesc.Texture2D.MipSlice = 0;
 
 	assert(depthMap);
-	HR(Renderer::GetDevice().CreateDepthStencilView(depthMap.Get(), &dsvDesc, depthMapDSV.GetAddressOf()));
+	HR(Renderer::Get().GetDevice().CreateDepthStencilView(depthMap.Get(), &dsvDesc, depthMapDSV.GetAddressOf()));
 
 	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
 	srvDesc.Format = DXGI_FORMAT_R24_UNORM_X8_TYPELESS;
@@ -46,7 +46,7 @@ void ShadowMap::Create(int width_, int height_)
 	srvDesc.Texture2D.MipLevels = texDesc.MipLevels;
 	srvDesc.Texture2D.MostDetailedMip = 0;
 	assert(depthMap);
-	HR(Renderer::GetDevice().CreateShaderResourceView(depthMap.Get(), &srvDesc, depthMapSRV.GetAddressOf()));
+	HR(Renderer::Get().GetDevice().CreateShaderResourceView(depthMap.Get(), &srvDesc, depthMapSRV.GetAddressOf()));
 
 	D3D11_SAMPLER_DESC sd = {};
 	sd.Filter = D3D11_FILTER_COMPARISON_MIN_MAG_MIP_LINEAR;
@@ -59,7 +59,7 @@ void ShadowMap::Create(int width_, int height_)
 	sd.BorderColor[3] = 1.f;
 	sd.ComparisonFunc = D3D11_COMPARISON_LESS;
 
-	HR(Renderer::GetDevice().CreateSamplerState(&sd, sampler.GetAddressOf()));
+	HR(Renderer::Get().GetDevice().CreateSamplerState(&sd, sampler.GetAddressOf()));
 }
 
 void ShadowMap::BindDsvAndSetNullRenderTarget(ID3D11DeviceContext* dc)

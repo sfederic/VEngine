@@ -61,7 +61,7 @@ void AssetSystem::BuildAllVMeshDataFromFBXImport()
 	for (const auto& fileInfo : fbxFileInfos)
 	{
 		AssetSystem::BuildSingleVMeshFromFBX(fileInfo.filepath, fileInfo.filename);
-		Renderer::SetRendererToCaptureMeshIcon(fileInfo.filename);
+		Renderer::Get().SetRendererToCaptureMeshIcon(fileInfo.filename);
 		numberOfMeshFilesBuilt++;
 	}
 

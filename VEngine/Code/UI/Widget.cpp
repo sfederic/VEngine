@@ -285,8 +285,8 @@ void Widget::FillRect(Layout layout, D2D1_COLOR_F color, float opacity)
 
 Layout Widget::AlignLayout(float w, float h, Align align)
 {
-	float vw = Renderer::GetViewportWidth();
-	float vh = Renderer::GetViewportHeight();
+	float vw = Renderer::Get().GetViewportWidth();
+	float vh = Renderer::Get().GetViewportHeight();
 
 	switch (align)
 	{
@@ -340,8 +340,8 @@ Layout Widget::AlignLayout(float w, float h, Align align)
 
 	if (rect.left < 0.f) rect.left = 0.f;
 	if (rect.top < 0.f) rect.top = 0.f;
-	if (rect.right > Renderer::GetViewportWidth()) rect.right = vw;
-	if (rect.bottom > Renderer::GetViewportHeight()) rect.bottom = vh;
+	if (rect.right > Renderer::Get().GetViewportWidth()) rect.right = vw;
+	if (rect.bottom > Renderer::Get().GetViewportHeight()) rect.bottom = vh;
 
 	Layout layout = {};
 	layout.rect = rect;
@@ -351,8 +351,8 @@ Layout Widget::AlignLayout(float w, float h, Align align)
 
 Layout Widget::PercentAlignLayout(float left, float top, float right, float bottom)
 {
-	const float vw = Renderer::GetViewportWidth();
-	const float vh = Renderer::GetViewportHeight();
+	const float vw = Renderer::Get().GetViewportWidth();
+	const float vh = Renderer::Get().GetViewportHeight();
 
 	const float endLeft = vw * left;
 	const float endTop = vh * top;
@@ -362,8 +362,8 @@ Layout Widget::PercentAlignLayout(float left, float top, float right, float bott
 
 	if (rect.left < 0.f) rect.left = 0.f;
 	if (rect.top < 0.f) rect.top = 0.f;
-	if (rect.right > Renderer::GetViewportWidth()) rect.right = vw;
-	if (rect.bottom > Renderer::GetViewportHeight()) rect.bottom = vh;
+	if (rect.right > Renderer::Get().GetViewportWidth()) rect.right = vw;
+	if (rect.bottom > Renderer::Get().GetViewportHeight()) rect.bottom = vh;
 
 	return rect;
 }
@@ -380,8 +380,8 @@ Layout Widget::CenterLayoutOnScreenSpaceCoords(float w, float h, float sx, float
 {
 	D2D1_RECT_F rect = { sx - w, sy - h, sx + w, sy + h };
 
-	const float vw = Renderer::GetViewportWidth();
-	const float vh = Renderer::GetViewportHeight();
+	const float vw = Renderer::Get().GetViewportWidth();
+	const float vh = Renderer::Get().GetViewportHeight();
 
 	if (rect.left < 0.f) rect.left = 0.f;
 	if (rect.top < 0.f) rect.top = 0.f;

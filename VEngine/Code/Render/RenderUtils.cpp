@@ -1,8 +1,6 @@
 #include "vpch.h"
 #include "RenderUtils.h"
-#include "Texture2D.h"
 #include "Core/Debug.h"
-#include "Core/VString.h"
 #include "MeshDataProxy.h"
 #include "MeshData.h"
 #include "Renderer.h"
@@ -19,7 +17,7 @@ namespace RenderUtils
 		D3D11_SUBRESOURCE_DATA data = {};
 		data.pSysMem = initData;
 
-		HR(Renderer::GetDevice().CreateBuffer(&desc, &data, outputBuffer.ReleaseAndGetAddressOf()));
+		HR(Renderer::Get().GetDevice().CreateBuffer(&desc, &data, outputBuffer.ReleaseAndGetAddressOf()));
 
 		SetResourceName(outputBuffer.Get(), "default_buffer_" + std::to_string(GenerateUID()));
 	}
@@ -35,7 +33,7 @@ namespace RenderUtils
 		D3D11_SUBRESOURCE_DATA data = {};
 		data.pSysMem = initData;
 
-		HR(Renderer::GetDevice().CreateBuffer(&desc, &data, outputBuffer.ReleaseAndGetAddressOf()));
+		HR(Renderer::Get().GetDevice().CreateBuffer(&desc, &data, outputBuffer.ReleaseAndGetAddressOf()));
 
 		SetResourceName(outputBuffer.Get(), "dynamic_buffer_" + std::to_string(GenerateUID()));
 	}
@@ -60,7 +58,7 @@ namespace RenderUtils
 		srvDesc.BufferEx.NumElements = numBufferElements;
 
 		Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> srv;
-		HR(Renderer::GetDevice().CreateShaderResourceView(structuredBuffer, &srvDesc, outputSrv.ReleaseAndGetAddressOf()));
+		HR(Renderer::Get().GetDevice().CreateShaderResourceView(structuredBuffer, &srvDesc, outputSrv.ReleaseAndGetAddressOf()));
 
 		SetResourceName(outputSrv.Get(), "srv_" + std::to_string(GenerateUID()));
 	}
@@ -78,7 +76,7 @@ namespace RenderUtils
 		D3D11_SUBRESOURCE_DATA data = {};
 		data.pSysMem = initData;
 
-		HR(Renderer::GetDevice().CreateBuffer(&desc, &data, outputBuffer.ReleaseAndGetAddressOf()));
+		HR(Renderer::Get().GetDevice().CreateBuffer(&desc, &data, outputBuffer.ReleaseAndGetAddressOf()));
 
 		SetResourceName(outputBuffer.Get(), "structured_buffer_" + std::to_string(GenerateUID()));
 	}
@@ -91,24 +89,34 @@ namespace RenderUtils
 		sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
 		sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
 
-		HR(Renderer::GetDevice().CreateSamplerState(&sampDesc, samplerState.ReleaseAndGetAddressOf()));
+		HR(Renderer::Get().GetDevice().CreateSamplerState(&sampDesc, samplerState.ReleaseAndGetAddressOf()));
 
 		SetResourceName(samplerState.Get(), "sampler_" + std::to_string(GenerateUID()));
 	}
 
 	void CreateBlendState(D3D11_BLEND_DESC blendDesc, Microsoft::WRL::ComPtr<ID3D11BlendState>& blendState)
 	{
-		HR(Renderer::GetDevice().CreateBlendState(&blendDesc, blendState.ReleaseAndGetAddressOf()));
+		HR(Renderer::Get().GetDevice().CreateBlendState(&blendDesc, blendState.ReleaseAndGetAddressOf()));
 	}
 
 	void CreateRastState(D3D11_RASTERIZER_DESC rastDesc, Microsoft::WRL::ComPtr<ID3D11RasterizerState>& rastState)
 	{
-		HR(Renderer::GetDevice().CreateRasterizerState(&rastDesc, rastState.ReleaseAndGetAddressOf()));
+		HR(Renderer::Get().GetDevice().CreateRasterizerState(&rastDesc, rastState.ReleaseAndGetAddressOf()));
 	}
 
 	void SetResourceName(ID3D11DeviceChild* resource, std::string name)
 	{
 		HR(resource->SetPrivateData(WKPDID_D3DDebugObjectName, static_cast<UINT>(name.size()), name.c_str()));
+	}
+
+	ID3D11Device& GetDevice()
+	{
+		return Renderer::Get().GetDevice();
+	}
+
+	ID3D11DeviceContext& GetDeviceContext()
+	{
+		return Renderer::Get().GetDeviceContext();
 	}
 
 	UINT CalcBufferByteSize(UINT byteSize)

@@ -34,14 +34,14 @@ void Texture2D::Create()
 	uid = GenerateUID();
 
 	//SRBG
-	//HR(DirectX::CreateWICTextureFromFileEx(&Renderer::GetDevice(), &Renderer::GetDeviceContext(),
+	//HR(DirectX::CreateWICTextureFromFileEx(&Renderer::Get().GetDevice(), &Renderer::Get().GetDeviceContext(),
 	//	path.c_str(),
 	//	0,
 	//	D3D11_USAGE_DEFAULT, D3D11_BIND_SHADER_RESOURCE, 0, 0,
 	//	WIC_LOADER_FORCE_SRGB,
 	//	&resource, &srv));
 
-	HR(DirectX::CreateWICTextureFromFile(&Renderer::GetDevice(), path.c_str(), data.GetAddressOf(), srv.GetAddressOf()));
+	HR(DirectX::CreateWICTextureFromFile(&Renderer::Get().GetDevice(), path.c_str(), data.GetAddressOf(), srv.GetAddressOf()));
 
 	//CreateWICTextureFromFile() doesn't like ID3D11Texture2D, so casting down here to get the texture desc.
 	Microsoft::WRL::ComPtr<ID3D11Texture2D> textureResource;

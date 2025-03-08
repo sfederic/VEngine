@@ -13,7 +13,6 @@
 #include "RastState.h"
 #include "BlendStates.h"
 #include "BlendState.h"
-#include "Sampler.h"
 #include "Audio/MaterialAudioType.h"
 
 static VEnum rastStates;
@@ -61,9 +60,9 @@ void Material::Create()
 	defaultTexture = TextureSystem::FindTexture2D(defaultTextureData.filename);
 	secondaryTexture = TextureSystem::FindTexture2D(secondaryTextureData.filename);
 
-	sampler = &Renderer::GetDefaultSampler();
-	rastState = Renderer::GetRastState(rastStateValue.GetValue());
-	blendState = Renderer::GetBlendState(blendStateValue.GetValue());
+	sampler = &Renderer::Get().GetDefaultSampler();
+	rastState = Renderer::Get().GetRastState(rastStateValue.GetValue());
+	blendState = Renderer::Get().GetBlendState(blendStateValue.GetValue());
 	shaderItem = ShaderSystem::FindShaderItem(shaderItemValue.GetValue());
 }
 
@@ -120,7 +119,7 @@ static void ReassignRastState(Property& prop)
 {
 	auto rastState = prop.GetData<VEnum>();
 	auto rastName = rastState->GetValue();
-	RastState* foundRastState = Renderer::GetRastState(rastName);
+	RastState* foundRastState = Renderer::Get().GetRastState(rastName);
 	if (foundRastState == nullptr)
 	{
 		Log("[%s] not found on rast state change.", rastName.c_str());
@@ -141,7 +140,7 @@ static void ReassignBlendState(Property& prop)
 {
 	auto blendState = prop.GetData<VEnum>();
 	auto blendName = blendState->GetValue();
-	BlendState* foundBlendState = Renderer::GetBlendState(blendName);
+	BlendState* foundBlendState = Renderer::Get().GetBlendState(blendName);
 	if (foundBlendState == nullptr)
 	{
 		Log("[%s] not found on blend state change.", blendName.c_str());

@@ -46,7 +46,7 @@ void SpriteSystem::CreateScreenSprite(Sprite& sprite)
 
 void SpriteSystem::UpdateAndSetSpriteBuffers()
 {
-	ID3D11DeviceContext& context = Renderer::GetDeviceContext();
+	ID3D11DeviceContext& context = Renderer::Get().GetDeviceContext();
 
 	//Update vertex buffer
 	D3D11_MAPPED_SUBRESOURCE mappedResource{};
@@ -54,7 +54,7 @@ void SpriteSystem::UpdateAndSetSpriteBuffers()
 	memcpy(mappedResource.pData, &verts, sizeof(verts));
 	context.Unmap(spriteVertexBuffer.Get(), 0);
 
-	context.IASetVertexBuffers(0, 1, spriteVertexBuffer.GetAddressOf(), &Renderer::stride, &Renderer::offset);
+	context.IASetVertexBuffers(0, 1, spriteVertexBuffer.GetAddressOf(), &Renderer::Get().stride, &Renderer::Get().offset);
 	context.IASetIndexBuffer(spriteIndexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
 }
 
@@ -160,8 +160,8 @@ void SpriteSystem::BuildSpriteQuadForParticleRendering()
 XMFLOAT3 PointToNdc(int x, int y, float z)
 {
 	XMFLOAT3 p = {};
-	p.x = 2.0f * (float)x / Renderer::GetViewportWidth() - 1.0f;
-	p.y = 1.0f - 2.0f * (float)y / Renderer::GetViewportHeight();
+	p.x = 2.0f * (float)x / Renderer::Get().GetViewportWidth() - 1.0f;
+	p.y = 1.0f - 2.0f * (float)y / Renderer::Get().GetViewportHeight();
 	p.z = z;
 	return p;
 }

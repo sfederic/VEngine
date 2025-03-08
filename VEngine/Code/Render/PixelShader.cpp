@@ -7,7 +7,7 @@ void PixelShader::Create(const std::wstring filename)
 {
 	ReadData(filename);
 
-	HR(Renderer::GetDevice().CreatePixelShader(
+	HR(Renderer::Get().GetDevice().CreatePixelShader(
 		GetByteCodeData(),
 		GetByteCodeSize(),
 		nullptr,

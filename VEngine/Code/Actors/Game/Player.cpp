@@ -5,7 +5,6 @@
 #include "Core/Input.h"
 #include "Core/VMath.h"
 #include "Core/Log.h"
-#include "Core/Timer.h"
 #include "Physics/Raycast.h"
 #include "Audio/MaterialAudioType.h"
 #include "Actors/Game/NPC.h"
@@ -760,14 +759,14 @@ void Player::MoveLinkedGridActor()
 	}
 
 	const auto checkLinkMovement = [](bool canBeMoved) -> bool
+	{
+		if (!canBeMoved)
 		{
-			if (!canBeMoved)
-			{
-				Camera::GetActiveCamera().SetShakeLevel(0.25f);
-				return false;
-			}
-			return true;
-		};
+			Camera::GetActiveCamera().SetShakeLevel(0.25f);
+			return false;
+		}
+		return true;
+	};
 
 	if (Input::GetKeyUp("MoveForward"))
 	{
@@ -899,14 +898,14 @@ void Player::RotateLinkedGridActor()
 	}
 
 	const auto checkLinkRotation = [](bool canBeRotated) -> bool
+	{
+		if (!canBeRotated)
 		{
-			if (!canBeRotated)
-			{
-				Camera::GetActiveCamera().SetShakeLevel(0.25f);
-				return false;
-			}
-			return true;
-		};
+			Camera::GetActiveCamera().SetShakeLevel(0.25f);
+			return false;
+		}
+		return true;
+	};
 
 	constexpr float angleIncrement = 90.f;
 
@@ -1399,7 +1398,7 @@ void Player::ReconSnapshot()
 {
 	if (reconModeOn && Input::GetKeyUp("ReconSnapshot"))
 	{
-		Renderer::PlayerPhotoCapture(std::to_wstring(GenerateUID()));
+		Renderer::Get().PlayerPhotoCapture(std::to_wstring(GenerateUID()));
 	}
 }
 

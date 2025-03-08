@@ -512,9 +512,9 @@ namespace VMath
 	bool IsUVInTriangleUVs(XMFLOAT2 pt, XMFLOAT2 v1, XMFLOAT2 v2, XMFLOAT2 v3)
 	{
 		auto sign = [](const XMFLOAT2& p1, const XMFLOAT2& p2, const XMFLOAT2& p3)
-			{
-				return (p1.x - p3.x) * (p2.y - p3.y) - (p2.x - p3.x) * (p1.y - p3.y);
-			};
+		{
+			return (p1.x - p3.x) * (p2.y - p3.y) - (p2.x - p3.x) * (p1.y - p3.y);
+		};
 
 		float d1 = sign(pt, v1, v2);
 		float d2 = sign(pt, v2, v3);
@@ -598,7 +598,7 @@ namespace VMath
 		const float f1 = worldPos.m128_f32[0] / worldPos.m128_f32[3];
 		const float f2 = worldPos.m128_f32[1] / worldPos.m128_f32[3];
 
-		screenX = ((f1 * 0.5f) + 0.5) * Renderer::GetViewportWidth();
-		screenY = ((f2 * -0.5f) + 0.5) * Renderer::GetViewportHeight();
+		screenX = ((f1 * 0.5f) + 0.5) * Renderer::Get().GetViewportWidth();
+		screenY = ((f2 * -0.5f) + 0.5) * Renderer::Get().GetViewportHeight();
 	}
 }

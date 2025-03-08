@@ -14,9 +14,9 @@ void DepthStencil::Create(int width, int height, const DXGI_SAMPLE_DESC& sampleD
 	dsDesc.Width = width;
 	dsDesc.Height = height;
 
-	HR(Renderer::GetDevice().CreateTexture2D(&dsDesc, nullptr, _depthStencilBuffer.GetAddressOf()));
+	HR(Renderer::Get().GetDevice().CreateTexture2D(&dsDesc, nullptr, _depthStencilBuffer.GetAddressOf()));
 
-	HR(Renderer::GetDevice().CreateDepthStencilView(_depthStencilBuffer.Get(),
+	HR(Renderer::Get().GetDevice().CreateDepthStencilView(_depthStencilBuffer.Get(),
 		nullptr, _depthStencilView.GetAddressOf()));
 }
 
@@ -27,6 +27,6 @@ void DepthStencil::Reset()
 
 void DepthStencil::ClearView()
 {
-	Renderer::GetDeviceContext().ClearDepthStencilView(
+	Renderer::Get().GetDeviceContext().ClearDepthStencilView(
 		_depthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
 }

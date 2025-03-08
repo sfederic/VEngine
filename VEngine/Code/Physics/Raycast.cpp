@@ -17,7 +17,6 @@
 #include "Components/Lights/SpotLightComponent.h"
 #include "Components/Lights/DirectionalLightComponent.h"
 #include "Core/World.h"
-#include "Physics/PhysicsSystem.h"
 
 using namespace DirectX;
 
@@ -89,31 +88,31 @@ bool Physics::Raycast(HitResult& hitResult, XMVECTOR origin, XMVECTOR direction,
 	hitResult.hitComponents.clear();
 
 	const auto checkSpatialComponentCollision = [&](SpatialComponent* spatialComponent)
+	{
+		if (!spatialComponent->IsActive())
 		{
-			if (!spatialComponent->IsActive())
-			{
-				return;
-			}
+			return;
+		}
 
-			if (!CollisionLayerCheck(spatialComponent->GetCollisionLayer(), hitResult.ignoreLayer))
-			{
-				return;
-			}
+		if (!CollisionLayerCheck(spatialComponent->GetCollisionLayer(), hitResult.ignoreLayer))
+		{
+			return;
+		}
 
-			if (IsIgnoredSpatialComponent(spatialComponent, hitResult))
-			{
-				return;
-			}
+		if (IsIgnoredSpatialComponent(spatialComponent, hitResult))
+		{
+			return;
+		}
 
-			const BoundingOrientedBox boundingBox = spatialComponent->GetBoundsInWorldSpace();
+		const BoundingOrientedBox boundingBox = spatialComponent->GetBoundsInWorldSpace();
 
-			float hitDistance = 0.f;
-			if (boundingBox.Intersects(hitResult.origin, hitResult.direction, hitDistance))
-			{
-				hitResult.hitComponents.emplace_back(spatialComponent);
-				bRayHit = true;
-			}
-		};
+		float hitDistance = 0.f;
+		if (boundingBox.Intersects(hitResult.origin, hitResult.direction, hitDistance))
+		{
+			hitResult.hitComponents.emplace_back(spatialComponent);
+			bRayHit = true;
+		}
+	};
 
 	auto actorsInWorld = World::GetAllActorsInWorld();
 	for (auto actor : actorsInWorld)
@@ -186,95 +185,95 @@ bool Physics::RaycastTriangleIntersect(HitResult& hitResult)
 	std::vector<HitResult> hitResults;
 
 	const auto checkMeshVerticesCollision = [&](MeshComponent& mesh)
+	{
+		const XMMATRIX meshWorldMatrix = mesh.GetWorldMatrix();
+
+		bool ignoreBackFacHits = hitResult.ignoreBackFaceHits;
+		if (mesh.GetRastState().GetName() == RastStates::noBackCull)
 		{
-			const XMMATRIX meshWorldMatrix = mesh.GetWorldMatrix();
+			ignoreBackFacHits = false;
+		}
 
-			bool ignoreBackFacHits = hitResult.ignoreBackFaceHits;
-			if (mesh.GetRastState().GetName() == RastStates::noBackCull)
+		const auto& vertices = mesh.meshDataProxy.GetVertices();
+		const size_t vertexTriangleCount = vertices.size() / 3;
+		for (int i = 0; i < vertexTriangleCount; i++)
+		{
+			const int index0 = i * 3;
+			const int index1 = i * 3 + 1;
+			const int index2 = i * 3 + 2;
+
+			XMVECTOR v0 = XMLoadFloat3(&vertices[index0].pos);
+			v0 = XMVector3TransformCoord(v0, meshWorldMatrix);
+
+			XMVECTOR v1 = XMLoadFloat3(&vertices[index1].pos);
+			v1 = XMVector3TransformCoord(v1, meshWorldMatrix);
+
+			XMVECTOR v2 = XMLoadFloat3(&vertices[index2].pos);
+			v2 = XMVector3TransformCoord(v2, meshWorldMatrix);
+
+			float hitDistance = 0.f;
+			if (DirectX::TriangleTests::Intersects(hitResult.origin, hitResult.direction, v0, v1, v2, hitDistance))
 			{
-				ignoreBackFacHits = false;
-			}
+				HitResult tempHitResult = hitResult;
+				tempHitResult.hitDistance = hitDistance;
 
-			const auto& vertices = mesh.meshDataProxy.GetVertices();
-			const size_t vertexTriangleCount = vertices.size() / 3;
-			for (int i = 0; i < vertexTriangleCount; i++)
-			{
-				const int index0 = i * 3;
-				const int index1 = i * 3 + 1;
-				const int index2 = i * 3 + 2;
+				//Get normal for triangle
+				XMVECTOR normal = XMLoadFloat3(&mesh.meshDataProxy.vertices[index0].normal);
+				normal = XMVector3TransformNormal(normal, meshWorldMatrix);
+				normal = XMVector3Normalize(normal);
+				XMStoreFloat3(&tempHitResult.hitNormal, normal);
 
-				XMVECTOR v0 = XMLoadFloat3(&vertices[index0].pos);
-				v0 = XMVector3TransformCoord(v0, meshWorldMatrix);
-
-				XMVECTOR v1 = XMLoadFloat3(&vertices[index1].pos);
-				v1 = XMVector3TransformCoord(v1, meshWorldMatrix);
-
-				XMVECTOR v2 = XMLoadFloat3(&vertices[index2].pos);
-				v2 = XMVector3TransformCoord(v2, meshWorldMatrix);
-
-				float hitDistance = 0.f;
-				if (DirectX::TriangleTests::Intersects(hitResult.origin, hitResult.direction, v0, v1, v2, hitDistance))
+				//Check if back facing triangle
+				if (ignoreBackFacHits)
 				{
-					HitResult tempHitResult = hitResult;
-					tempHitResult.hitDistance = hitDistance;
-
-					//Get normal for triangle
-					XMVECTOR normal = XMLoadFloat3(&mesh.meshDataProxy.vertices[index0].normal);
-					normal = XMVector3TransformNormal(normal, meshWorldMatrix);
-					normal = XMVector3Normalize(normal);
-					XMStoreFloat3(&tempHitResult.hitNormal, normal);
-
-					//Check if back facing triangle
-					if (ignoreBackFacHits)
+					const float angleBetweenRaycastDirectionAndTriangleNormal =
+						XMConvertToDegrees(XMVector3AngleBetweenNormals(
+							normal,
+							hitResult.direction).m128_f32[0]);
+					if (angleBetweenRaycastDirectionAndTriangleNormal < 90.f)
 					{
-						const float angleBetweenRaycastDirectionAndTriangleNormal =
-							XMConvertToDegrees(XMVector3AngleBetweenNormals(
-								normal,
-								hitResult.direction).m128_f32[0]);
-						if (angleBetweenRaycastDirectionAndTriangleNormal < 90.f)
-						{
-							//has hit the back face of a triangle, so skip
-							continue;
-						}
+						//has hit the back face of a triangle, so skip
+						continue;
 					}
-
-					//hit position
-					const XMVECTOR hitPosition = hitResult.origin + (hitResult.direction * tempHitResult.hitDistance);
-
-					//Hit vertex indices
-					std::unordered_map<int, XMVECTOR> indexToVertMap;
-					indexToVertMap.emplace(index0, v0);
-					indexToVertMap.emplace(index1, v1);
-					indexToVertMap.emplace(index2, v2);
-					tempHitResult.hitVertIndexes.emplace_back(VMath::GetIndexOfClosestVertexFromTriangleIntersect(indexToVertMap, hitPosition));
-
-					tempHitResult.vertIndexesOfHitTriangleFace.emplace_back(index0);
-					tempHitResult.vertIndexesOfHitTriangleFace.emplace_back(index1);
-					tempHitResult.vertIndexesOfHitTriangleFace.emplace_back(index2);
-
-					//Get hit UV
-					float hitU, hitV;
-					VMath::TriangleXYZToUV(mesh.meshDataProxy.vertices[index0],
-						mesh.meshDataProxy.vertices[index1],
-						mesh.meshDataProxy.vertices[index2], hitPosition, hitU, hitV);
-					tempHitResult.uv = XMFLOAT2(hitU, hitV);
-
-					//Set hit component and actor
-					tempHitResult.hitComponent = &mesh;
-					tempHitResult.hitActor = World::GetActorByUID(mesh.GetOwnerUID());
-
-					hitResults.emplace_back(tempHitResult);
 				}
+
+				//hit position
+				const XMVECTOR hitPosition = hitResult.origin + (hitResult.direction * tempHitResult.hitDistance);
+
+				//Hit vertex indices
+				std::unordered_map<int, XMVECTOR> indexToVertMap;
+				indexToVertMap.emplace(index0, v0);
+				indexToVertMap.emplace(index1, v1);
+				indexToVertMap.emplace(index2, v2);
+				tempHitResult.hitVertIndexes.emplace_back(VMath::GetIndexOfClosestVertexFromTriangleIntersect(indexToVertMap, hitPosition));
+
+				tempHitResult.vertIndexesOfHitTriangleFace.emplace_back(index0);
+				tempHitResult.vertIndexesOfHitTriangleFace.emplace_back(index1);
+				tempHitResult.vertIndexesOfHitTriangleFace.emplace_back(index2);
+
+				//Get hit UV
+				float hitU, hitV;
+				VMath::TriangleXYZToUV(mesh.meshDataProxy.vertices[index0],
+					mesh.meshDataProxy.vertices[index1],
+					mesh.meshDataProxy.vertices[index2], hitPosition, hitU, hitV);
+				tempHitResult.uv = XMFLOAT2(hitU, hitV);
+
+				//Set hit component and actor
+				tempHitResult.hitComponent = &mesh;
+				tempHitResult.hitActor = World::GetActorByUID(mesh.GetOwnerUID());
+
+				hitResults.emplace_back(tempHitResult);
 			}
-		};
+		}
+	};
 
 	const auto setDebugMesh = [&](SpatialComponent* component, std::string_view debugMeshName)
-		{
-			auto debugMesh = DebugMeshManager::GetDebugMesh("DebugIcoSphere");
-			debugMesh->transform = component->transform;
-			debugMesh->SetOwnerUID(component->GetOwnerUID());
-			checkMeshVerticesCollision(*debugMesh);
-		};
+	{
+		auto debugMesh = DebugMeshManager::GetDebugMesh("DebugIcoSphere");
+		debugMesh->transform = component->transform;
+		debugMesh->SetOwnerUID(component->GetOwnerUID());
+		checkMeshVerticesCollision(*debugMesh);
+	};
 
 	for (auto component : hitResult.hitComponents)
 	{
@@ -353,8 +352,8 @@ bool Physics::RaycastFromScreen(HitResult& hitResult)
 
 	const XMMATRIX proj = Camera::GetActiveCamera().GetProjectionMatrix();
 
-	const float vx = (2.f * sx / Renderer::GetViewportWidth() - 1.0f) / proj.r[0].m128_f32[0];
-	const float vy = (-2.f * sy / Renderer::GetViewportHeight() + 1.0f) / proj.r[1].m128_f32[1];
+	const float vx = (2.f * sx / Renderer::Get().GetViewportWidth() - 1.0f) / proj.r[0].m128_f32[0];
+	const float vy = (-2.f * sy / Renderer::Get().GetViewportHeight() + 1.0f) / proj.r[1].m128_f32[1];
 
 	hitResult.origin = XMVectorSet(0.f, 0.f, 0.f, 1.f);
 	hitResult.direction = XMVectorSet(vx, vy, 1.f, 0.f);
@@ -370,14 +369,14 @@ void Physics::DrawDebugLine(XMVECTOR start, XMVECTOR end)
 	XMStoreFloat3(&line.p1, start);
 	XMStoreFloat3(&line.p2, end);
 
-	Renderer::AddDebugLine(line);
+	Renderer::Get().AddDebugLine(line);
 }
 
 bool Physics::OrientedBoxCast(HitResult& hit, BoundingOrientedBox& boundsInWorldSpace, bool drawDebug, bool clearDebugDrawWithTimer)
 {
 	if (drawDebug)
 	{
-		Renderer::AddDebugDrawOrientedBox(boundsInWorldSpace, clearDebugDrawWithTimer);
+		Renderer::Get().AddDebugDrawOrientedBox(boundsInWorldSpace, clearDebugDrawWithTimer);
 	}
 
 	for (auto actor : World::GetAllActorsInWorld())
@@ -439,7 +438,7 @@ bool Physics::OrientedBoxCast(HitResult& hitResult, XMVECTOR origin, XMVECTOR en
 
 	if (drawDebug)
 	{
-		Renderer::AddDebugDrawOrientedBox(boundingOrientedBox, clearDebugDrawWithTimer);
+		Renderer::Get().AddDebugDrawOrientedBox(boundingOrientedBox, clearDebugDrawWithTimer);
 	}
 
 	for (auto actor : World::GetAllActorsInWorld())
@@ -483,7 +482,7 @@ bool Physics::SimpleBoxCast(XMVECTOR center, XMFLOAT3 extents, HitResult& hit, b
 	{
 		DirectX::BoundingOrientedBox orientedBox;
 		DirectX::BoundingOrientedBox::CreateFromBoundingBox(orientedBox, boundingBox);
-		Renderer::AddDebugDrawOrientedBox(orientedBox, clearDebugDrawWithTimer);
+		Renderer::Get().AddDebugDrawOrientedBox(orientedBox, clearDebugDrawWithTimer);
 	}
 
 	for (auto actor : World::GetAllActorsInWorld())

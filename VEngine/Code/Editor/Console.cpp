@@ -47,8 +47,8 @@ void Console::Init()
 
 	executeMap.emplace(L"CLEAR",
 		std::make_pair([]() {
-			World::DestroyAllActorsAndComponentsInWorld();
-			},
+		World::DestroyAllActorsAndComponentsInWorld();
+	},
 			"Deletes all actors and components in world."));
 
 	executeMap.emplace(L"CINE",
@@ -116,7 +116,7 @@ void Console::Init()
 			"Show core engine variables"));
 
 	executeMap.emplace(L"BAKE",
-		std::make_pair([]() { Renderer::RenderLightProbeViews(); },
+		std::make_pair([]() { Renderer::Get().RenderLightProbeViews(); },
 			"Work through light probes in map and get their RBG values from a cubemap rendering"));
 
 	executeMap.emplace(L"BIN",
@@ -149,27 +149,27 @@ void Console::Init()
 
 	executeMap.emplace(L"ENT",
 		std::make_pair([]() {
-			WorldEditor::entranceTriggerWorldLoadMode = !WorldEditor::entranceTriggerWorldLoadMode;
-			WorldEditor::entranceTriggerWorldLoadMode ?
-				debugMenu.AddStaticNotification(L"EntranceTrigger Load Mode Active") :
-				debugMenu.ClearAllStaticNotifications();
-			},
+		WorldEditor::entranceTriggerWorldLoadMode = !WorldEditor::entranceTriggerWorldLoadMode;
+		WorldEditor::entranceTriggerWorldLoadMode ?
+			debugMenu.AddStaticNotification(L"EntranceTrigger Load Mode Active") :
+			debugMenu.ClearAllStaticNotifications();
+	},
 			"Enable/Disable loading maps based on clicking an EntranceTrigger in-world."));
 
 	executeMap.emplace(L"MESH",
 		std::make_pair([]() {
-			WorldEditor::meshPlacement = !WorldEditor::meshPlacement;
-			WorldEditor::meshPlacement ? debugMenu.AddStaticNotification(L"MeshReplace Mode Active") :
-				debugMenu.ClearAllStaticNotifications();
-			},
+		WorldEditor::meshPlacement = !WorldEditor::meshPlacement;
+		WorldEditor::meshPlacement ? debugMenu.AddStaticNotification(L"MeshReplace Mode Active") :
+			debugMenu.ClearAllStaticNotifications();
+	},
 			"Toggle mesh component placement mode in editor."));
 
 	executeMap.emplace(L"PARENT",
 		std::make_pair([]() {
-			WorldEditor::parentSetActive = !WorldEditor::parentSetActive;
-			WorldEditor::parentSetActive ? debugMenu.AddStaticNotification(L"ParentSet Mode Active") :
-				debugMenu.ClearAllStaticNotifications();
-			},
+		WorldEditor::parentSetActive = !WorldEditor::parentSetActive;
+		WorldEditor::parentSetActive ? debugMenu.AddStaticNotification(L"ParentSet Mode Active") :
+			debugMenu.ClearAllStaticNotifications();
+	},
 			"Enable setting parent to currently selected actor in editor."));
 
 	executeMap.emplace(L"MATERIAL",
@@ -181,11 +181,11 @@ void Console::Init()
 			"Menu to set UV values for selected actor's materials."));
 
 	executeMap.emplace(L"MESHICON",
-		std::make_pair([]() { Renderer::MeshIconImageCapture(); },
+		std::make_pair([]() { Renderer::Get().MeshIconImageCapture(); },
 			"Take an editor icon image of the currently selected mesh."));
 
 	executeMap.emplace(L"MAPICON",
-		std::make_pair([]() { Renderer::MapIconImageCapture(); },
+		std::make_pair([]() { Renderer::Get().MapIconImageCapture(); },
 			"Take an editor icon image of the currently loaded level."));
 
 	executeMap.emplace(L"WORLD",
@@ -194,66 +194,66 @@ void Console::Init()
 
 	executeMap.emplace(L"REP",
 		std::make_pair([]() {
-			WorldEditor::actorReplaceModeActive = !WorldEditor::actorReplaceModeActive;
-			WorldEditor::actorReplaceModeActive ? debugMenu.AddStaticNotification(L"Actor Replace Mode Active") :
-				debugMenu.ClearAllStaticNotifications();
-			},
+		WorldEditor::actorReplaceModeActive = !WorldEditor::actorReplaceModeActive;
+		WorldEditor::actorReplaceModeActive ? debugMenu.AddStaticNotification(L"Actor Replace Mode Active") :
+			debugMenu.ClearAllStaticNotifications();
+	},
 			"Replace clicked actor in world with the currently selected actor system."));
 
 	executeMap.emplace(L"PAINT",
 		std::make_pair([]() {
-			debugMenu.vertexPaintMenuOpen = !debugMenu.vertexPaintMenuOpen;
-			WorldEditor::vertexPaintActive = !WorldEditor::vertexPaintActive;
-			}, "Activate vertex paint mode."));
+		debugMenu.vertexPaintMenuOpen = !debugMenu.vertexPaintMenuOpen;
+		WorldEditor::vertexPaintActive = !WorldEditor::vertexPaintActive;
+	}, "Activate vertex paint mode."));
 
 	executeMap.emplace(L"UVP",
 		std::make_pair([]() {
-			WorldEditor::uvPaintActive = !WorldEditor::uvPaintActive;
-			debugMenu.uvPaintMenuOpen = !debugMenu.uvPaintMenuOpen;
-			debugMenu.CreateUVPaintWidget();
-			debugMenu.SetUVPaintMenuTextureFilename();
-			}, "Activate UV paint mode."));
+		WorldEditor::uvPaintActive = !WorldEditor::uvPaintActive;
+		debugMenu.uvPaintMenuOpen = !debugMenu.uvPaintMenuOpen;
+		debugMenu.CreateUVPaintWidget();
+		debugMenu.SetUVPaintMenuTextureFilename();
+	}, "Activate UV paint mode."));
 
 	executeMap.emplace(L"RESET UID",
 		std::make_pair([]() {
-			ResetUIDCache();
-			auto components = World::GetAllComponentsInWorld();
-			for (auto component : components)
-			{
-				component->SetUID(GenerateUID());
-			}
-			Log("Reset UIDs of %d components.", components.size());
-			},
+		ResetUIDCache();
+		auto components = World::GetAllComponentsInWorld();
+		for (auto component : components)
+		{
+			component->SetUID(GenerateUID());
+		}
+		Log("Reset UIDs of %d components.", components.size());
+	},
 			"Resets all component UIDs in world."));
 
 	executeMap.emplace(L"DELPROBE",
 		std::make_pair([]() {
-			auto probeMap = DiffuseProbeMap::system.GetFirstActor();
-			if (probeMap)
-			{
-				probeMap->DeleteLightProbeDataFile();
-			}
-			else
-			{
-				Log("No DiffuseLightMap in level.");
-			}
-			}, "Deletes this world's light probe data file."));
+		auto probeMap = DiffuseProbeMap::system.GetFirstActor();
+		if (probeMap)
+		{
+			probeMap->DeleteLightProbeDataFile();
+		}
+		else
+		{
+			Log("No DiffuseLightMap in level.");
+		}
+	}, "Deletes this world's light probe data file."));
 
 	executeMap.emplace(L"TEXOFF",
 		std::make_pair([]() {
-			for (auto& mesh : MeshComponent::system.GetComponents())
-			{
-				mesh->SetUseTexture(false);
-			}
-			}, "Sets all materials in world to NOT use texture via material shader data."));
+		for (auto& mesh : MeshComponent::system.GetComponents())
+		{
+			mesh->SetUseTexture(false);
+		}
+	}, "Sets all materials in world to NOT use texture via material shader data."));
 
 	executeMap.emplace(L"TEXON",
 		std::make_pair([]() {
-			for (auto& mesh : MeshComponent::system.GetComponents())
-			{
-				mesh->SetUseTexture(true);
-			}
-			}, "Sets all materials in world to USE texture via material shader data."));
+		for (auto& mesh : MeshComponent::system.GetComponents())
+		{
+			mesh->SetUseTexture(true);
+		}
+	}, "Sets all materials in world to USE texture via material shader data."));
 }
 
 void Console::ConsoleInput()
@@ -277,8 +277,8 @@ void Console::Tick()
 {
 	if (bConsoleActive)
 	{
-		float width = (float)Renderer::GetViewportWidth();
-		float height = (float)Renderer::GetViewportHeight();
+		float width = (float)Renderer::Get().GetViewportWidth();
+		float height = (float)Renderer::Get().GetViewportHeight();
 
 		auto rectLayout = Layout({ 0, height - 50.f, width, height });
 		UISystem::DrawRect(rectLayout, Colours::Green, 2.f);

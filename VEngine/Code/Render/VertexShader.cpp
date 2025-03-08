@@ -8,7 +8,7 @@ void VertexShader::Create(const std::wstring filename)
 {
 	ReadData(filename);
 
-	HR(Renderer::GetDevice().CreateVertexShader(
+	HR(Renderer::Get().GetDevice().CreateVertexShader(
 		GetByteCodeData(),
 		GetByteCodeSize(),
 		nullptr,
@@ -74,7 +74,7 @@ void VertexShader::CreateInputLayoutDescFromVertexShaderSignature()
 		inputLayoutDesc.push_back(elementDesc);
 	}
 
-	HR(Renderer::GetDevice().CreateInputLayout(&inputLayoutDesc[0], inputLayoutDesc.size(), GetByteCodeData(), GetByteCodeSize(), inputLayout.GetAddressOf()));
+	HR(Renderer::Get().GetDevice().CreateInputLayout(&inputLayoutDesc[0], inputLayoutDesc.size(), GetByteCodeData(), GetByteCodeSize(), inputLayout.GetAddressOf()));
 
 	pReflector->Release();
 }

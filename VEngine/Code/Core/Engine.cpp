@@ -58,13 +58,13 @@ void Engine::Init(int argc, char* argv[])
 	auto fbxInit = std::async(std::launch::async, []() { FBXLoader::Init(); });
 
 	Editor::Get().Init(argc, argv);
-	auto rendererInit = std::async(std::launch::async, []() { Renderer::Init(Editor::Get().windowHwnd, Editor::Get().GetViewportWidth(), Editor::Get().GetViewportHeight()); });
+	auto rendererInit = std::async(std::launch::async, []() { Renderer::Get().Init(Editor::Get().windowHwnd, Editor::Get().GetViewportWidth(), Editor::Get().GetViewportHeight()); });
 
 	rendererInit.wait();
 	MaterialSystem::Init();
 
 	auto debugMenuInit = std::async(std::launch::async, []() { debugMenu.Init(); });
-	auto uiInit = std::async(std::launch::async, []() { UISystem::Init(Renderer::GetSwapchain()); });
+	auto uiInit = std::async(std::launch::async, []() { UISystem::Init(Renderer::Get().GetSwapchain()); });
 
 	physicsInit.wait();
 	fbxInit.wait();
@@ -99,7 +99,7 @@ void Engine::TickSystems(float deltaTime)
 
 	WorldEditor::Tick();
 	PhysicsSystem::Tick(deltaTime);
-	Renderer::Tick();
+	Renderer::Get().Tick();
 	UISystem::Tick();
 
 	if (Core::gameplayOn && !Core::IsGameWorldPaused())
@@ -136,25 +136,25 @@ void Engine::MainLoop()
 
 void Engine::Render(float deltaTime)
 {
-	Renderer::Render();
+	Renderer::Get().Render();
 
-	if (!Renderer::IsRendererSetToCaptureMeshIcon())
+	if (!Renderer::Get().IsRendererSetToCaptureMeshIcon())
 	{
-		Renderer::RenderParticleEmitters();
+		Renderer::Get().RenderParticleEmitters();
 
 		Console::InputTick();
 
 		UISystem::BeginDraw();
 		UISystem::DrawAllWidgets(deltaTime);
 
-		Renderer::RenderSpritesInScreenSpace();
+		Renderer::Get().RenderSpritesInScreenSpace();
 
 		Console::Tick();
 		debugMenu.Tick(deltaTime);
 		UISystem::EndDraw();
 	}
 
-	Renderer::Present();
+	Renderer::Get().Present();
 }
 
 void Engine::Cleanup()
@@ -164,5 +164,5 @@ void Engine::Cleanup()
 	debugMenu.Cleanup();
 	UISystem::Cleanup();
 
-	Renderer::Cleanup();
+	Renderer::Get().Cleanup();
 }

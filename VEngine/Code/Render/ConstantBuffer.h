@@ -3,8 +3,7 @@
 #include "RenderUtils.h"
 #include "Core/Debug.h"
 #include <wrl.h>
-
-struct ID3D11Buffer;
+#include <d3d11.h>
 
 template <typename T>
 class ConstantBuffer
@@ -23,19 +22,19 @@ public:
 	void Map(T* shaderData)
 	{
 		D3D11_MAPPED_SUBRESOURCE mapped = {};
-		HR(Renderer::GetDeviceContext().Map(buffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped));
+		HR(RenderUtils::GetDeviceContext().Map(buffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped));
 		std::memcpy(mapped.pData, shaderData, sizeof(T));
-		Renderer::GetDeviceContext().Unmap(buffer.Get(), 0);
+		RenderUtils::GetDeviceContext().Unmap(buffer.Get(), 0);
 	}
 
 	void SetVS()
 	{
-		Renderer::GetDeviceContext().VSSetConstantBuffers(shaderRegister, 1, buffer.GetAddressOf());
+		RenderUtils::GetDeviceContext().VSSetConstantBuffers(shaderRegister, 1, buffer.GetAddressOf());
 	}
 
 	void SetPS()
 	{
-		Renderer::GetDeviceContext().PSSetConstantBuffers(shaderRegister, 1, buffer.GetAddressOf());
+		RenderUtils::GetDeviceContext().PSSetConstantBuffers(shaderRegister, 1, buffer.GetAddressOf());
 	}
 
 	void SetVSAndPS()

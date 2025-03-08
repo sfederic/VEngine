@@ -32,6 +32,9 @@ namespace RenderUtils
 	void CreateSamplerState(Microsoft::WRL::ComPtr<ID3D11SamplerState>& samplerState);
 	void SetResourceName(ID3D11DeviceChild* resource, std::string name);
 
+	ID3D11Device& GetDevice();
+	ID3D11DeviceContext& GetDeviceContext();
+
 	//This function is done as a template because there are several classes inheriting from MeshComponent.
 	template <typename T>
 	std::vector<T*> SortMeshesByDistanceToCamera()
@@ -57,9 +60,9 @@ namespace RenderUtils
 		}
 
 		const auto DistCompare = [](const MeshPack& leftPack, const MeshPack& rightPack)
-			{
-				return leftPack.distance > rightPack.distance;
-			};
+		{
+			return leftPack.distance > rightPack.distance;
+		};
 		std::sort(meshPacks.begin(), meshPacks.end(), DistCompare);
 
 		std::vector<T*> sortedMeshes;

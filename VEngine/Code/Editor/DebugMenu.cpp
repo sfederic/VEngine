@@ -25,7 +25,6 @@
 #include "Core/World.h"
 #include "Gameplay/GameUtils.h"
 #include "Console.h"
-#include "Physics/PhysicsSystem.h"
 #include "Render/Texture2D.h"
 #include "Render/MaterialSystem.h"
 #include "Render/Material.h"
@@ -54,7 +53,7 @@ void DebugMenu::Init()
 
 	ImGui::StyleColorsDark();
 	ImGui_ImplWin32_Init((HWND)Editor::Get().windowHwnd);
-	ImGui_ImplDX11_Init(&Renderer::GetDevice(), &Renderer::GetDeviceContext());
+	ImGui_ImplDX11_Init(&Renderer::Get().GetDevice(), &Renderer::Get().GetDeviceContext());
 }
 
 void DebugMenu::Tick(float deltaTime)
@@ -798,7 +797,7 @@ void DebugMenu::RenderFPSMenu(float deltaTime)
 
 		ImGui::Text("FPS: %d", Core::finalFrameCount);
 		ImGui::Text("Total Frame Time %f | (60 FPS) %f", Profile::GetTotalFrameTime(), 60.0 / 1000.0);
-		ImGui::Text("GPU Render Time: %f", Renderer::frameTime);
+		ImGui::Text("GPU Render Time: %f", Renderer::Get().GetFrameTime());
 		ImGui::Text("Delta Time (ms): %f", deltaTime);
 		ImGui::Text("Time Since Startup: %f", Core::timeSinceStartup);
 

@@ -33,7 +33,7 @@ XMMATRIX CameraComponent::GetViewMatrix()
 XMMATRIX CameraComponent::GetProjectionMatrix()
 {
 	const float FOVRadian = XMConvertToRadians(FOV);
-	return XMMatrixPerspectiveFovLH(FOVRadian, Renderer::GetAspectRatio(), nearZ, farZ);
+	return XMMatrixPerspectiveFovLH(FOVRadian, Renderer::Get().GetAspectRatio(), nearZ, farZ);
 }
 
 void CameraComponent::Move(float d, XMVECTOR axis)

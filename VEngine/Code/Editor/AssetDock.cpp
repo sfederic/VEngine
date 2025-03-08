@@ -19,7 +19,6 @@
 #include "Render/TextureSystem.h"
 #include "Render/Material.h"
 #include "Render/Renderer.h"
-#include "Render/ShaderItem.h"
 #include "Render/MaterialSystem.h"
 #include "Gameplay/GameInstance.h"
 #include "Core/Log.h"
@@ -121,10 +120,10 @@ AssetDock::AssetDock() : QDockWidget("Assets")
 	//Create file extension map
 	fileExtensionToFunctionMap.emplace(".jpg", [&](QIcon& icon, std::string& filePath) {
 		icon = QPixmap(VString::GetSubStringWithFoundOffset(filePath, AssetBaseFolders::texture).c_str());
-		});
+	});
 	fileExtensionToFunctionMap.emplace(".png", [&](QIcon& icon, std::string& filePath) {
 		icon = QPixmap(VString::GetSubStringWithFoundOffset(filePath, AssetBaseFolders::texture).c_str());
-		});
+	});
 	fileExtensionToFunctionMap.emplace(".vmesh", [&](QIcon& icon, std::string&) { icon = *Icons::mesh; });
 	fileExtensionToFunctionMap.emplace(".fbx", [&](QIcon& icon, std::string&) { icon = *Icons::fbx; });
 	fileExtensionToFunctionMap.emplace(".ttf", [&](QIcon& icon, std::string&) { icon = *Icons::font; });
@@ -487,7 +486,7 @@ void AssetDock::ImportMesh()
 		AssetSystem::BuildSingleVMeshFromFBX(filePath.toStdString(), filename);
 		Log("VMesh built from [%s].", filename.c_str());
 
-		Renderer::SetRendererToCaptureMeshIcon(filename);
+		Renderer::Get().SetRendererToCaptureMeshIcon(filename);
 
 		Editor::Get().RefreshAssetList();
 	}
