@@ -49,7 +49,7 @@ void MeshComponent::Create()
 	//Material's create needs to be called here to deal with serialisation
 	material->Create();
 
-	meshDataProxy = AssetSystem::ReadVMeshAssetFromFile(meshComponentData.filename);
+	meshDataProxy = AssetSystem::Get().ReadVMeshAssetFromFile(meshComponentData.filename);
 
 	BoundingOrientedBox::CreateFromBoundingBox(boundingBox, *meshDataProxy.boundingBox);
 
@@ -102,7 +102,7 @@ Properties MeshComponent::GetProps()
 void MeshComponent::ReCreate()
 {
 	material->Create();
-	meshDataProxy = AssetSystem::ReadVMeshAssetFromFile(meshComponentData.filename);
+	meshDataProxy = AssetSystem::Get().ReadVMeshAssetFromFile(meshComponentData.filename);
 	CreateNewVertexBuffer();
 }
 

@@ -1,11 +1,21 @@
 #pragma once
 
 #include <vector>
+#include <unordered_map>
+#include <string>
+#include "Render/MeshData.h"
 #include "Render/MeshDataProxy.h"
 #include "Animation/Animation.h"
 
-namespace AssetSystem
+class AssetSystem
 {
+public:
+	static AssetSystem Get()
+	{
+		static AssetSystem instance;
+		return instance;
+	}
+
 	void ResetMeshData();
 
 	void BuildAllVMeshDataFromFBXImport();
@@ -23,4 +33,15 @@ namespace AssetSystem
 	void WriteOutAllVertexColourData();
 	void LoadVertexColourDataFromFile();
 	void LoadVertexColourDataFromFilename(const std::string filename);
+
+private:
+	struct FBXFileInfo
+	{
+		std::string filepath;
+		std::string filename;
+	};
+
+	std::unordered_map<std::string, MeshData> existingMeshData;
+
+	inline static const std::string vertexColourDataFileExtension = ".vertexcolourdata";
 };

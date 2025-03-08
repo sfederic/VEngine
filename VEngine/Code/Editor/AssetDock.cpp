@@ -483,7 +483,7 @@ void AssetDock::ImportMesh()
 	if (!filePath.isEmpty())
 	{
 		const std::string filename = QFileInfo(filePath).fileName().toStdString();
-		AssetSystem::BuildSingleVMeshFromFBX(filePath.toStdString(), filename);
+		AssetSystem::Get().BuildSingleVMeshFromFBX(filePath.toStdString(), filename);
 		Log("VMesh built from [%s].", filename.c_str());
 
 		Renderer::Get().SetRendererToCaptureMeshIcon(filename);
@@ -508,7 +508,7 @@ void AssetDock::ImportAnim()
 	if (!filePath.isEmpty())
 	{
 		const std::string filename = QFileInfo(filePath).fileName().toStdString();
-		AssetSystem::BuildSingleVAnimFromFBX(filePath.toStdString(), filename);
+		AssetSystem::Get().BuildSingleVAnimFromFBX(filePath.toStdString(), filename);
 		Log("VAnim built from [%s].", filename.c_str());
 
 		Editor::Get().RefreshAssetList();

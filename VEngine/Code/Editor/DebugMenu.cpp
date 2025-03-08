@@ -453,7 +453,7 @@ void DebugMenu::RenderVertexPaintMenu()
 
 	if (ImGui::Button("Save Vertex Colours"))
 	{
-		AssetSystem::WriteOutAllVertexColourData();
+		AssetSystem::Get().WriteOutAllVertexColourData();
 	}
 
 	float colour[4] = {
@@ -472,7 +472,7 @@ void DebugMenu::RenderVertexPaintMenu()
 
 	if (ImGui::Button("Load Vertex Colours"))
 	{
-		AssetSystem::LoadVertexColourDataFromFile();
+		AssetSystem::Get().LoadVertexColourDataFromFile();
 	}
 
 	if (ImGui::Button("Lock Actor to Paint"))
@@ -554,7 +554,7 @@ void DebugMenu::RenderVertexPaintMenu()
 
 	if (ImGui::Button("Export VMesh"))
 	{
-		AssetSystem::CreateVMeshFromInWorldMesh();
+		AssetSystem::Get().CreateVMeshFromInWorldMesh();
 	}
 
 	ImGui::End();
@@ -674,7 +674,7 @@ void DebugMenu::RenderUVPaintMenu()
 
 	if (ImGui::Button("Export Selected Actor .vmesh"))
 	{
-		AssetSystem::CreateVMeshFromInWorldMesh();
+		AssetSystem::Get().CreateVMeshFromInWorldMesh();
 		Log("Exported .vmesh for picked actor UV painting.");
 	}
 

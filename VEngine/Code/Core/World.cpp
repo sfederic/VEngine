@@ -338,5 +338,5 @@ void World::Cleanup()
 	MaterialSystem::Cleanup();
 	SpriteSystem::Reset();
 	UISystem::Reset();
-	AssetSystem::ResetMeshData();
+	AssetSystem::Get().ResetMeshData();
 }

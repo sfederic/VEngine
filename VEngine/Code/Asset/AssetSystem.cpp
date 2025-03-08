@@ -15,19 +15,8 @@
 #include "Asset/AssetBaseFolders.h"
 #include "Asset/VertexColourData.h"
 #include "Asset/VertexColourHeader.h"
-#include "Render/MeshData.h"
 #include "Render/Vertex.h"
 #include "Render/Renderer.h"
-
-struct FBXFileInfo
-{
-	std::string filepath;
-	std::string filename;
-};
-
-std::unordered_map<std::string, MeshData> existingMeshData;
-
-static const std::string vertexColourDataFileExtension = ".vertexcolourdata";
 
 void AssetSystem::ResetMeshData()
 {

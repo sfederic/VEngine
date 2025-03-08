@@ -329,7 +329,7 @@ void FileSystem::LoadWorld(std::string worldName)
 
 	ResetWorldState();
 
-	AssetSystem::LoadVertexColourDataFromFile();
+	AssetSystem::Get().LoadVertexColourDataFromFile();
 
 	WorldFunctions::CallWorldStartFunction(World::Get().GetWorldFilename());
 

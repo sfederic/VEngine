@@ -216,16 +216,16 @@ void PhysicsSystem::CreatePhysicsActor(MeshComponent* mesh, const PhysicsActorSh
 
 	switch (physicsActorShape)
 	{
-		case PhysicsActorShape::Box:
-		{
-			shape = physics->createShape(PxBoxGeometry(extents.x, extents.y, extents.z), *physicsMaterial);
-			break;
-		}
-		case PhysicsActorShape::Sphere:
-		{
-			shape = physics->createShape(PxSphereGeometry(extents.x), *physicsMaterial);
-			break;
-		}
+	case PhysicsActorShape::Box:
+	{
+		shape = physics->createShape(PxBoxGeometry(extents.x, extents.y, extents.z), *physicsMaterial);
+		break;
+	}
+	case PhysicsActorShape::Sphere:
+	{
+		shape = physics->createShape(PxSphereGeometry(extents.x), *physicsMaterial);
+		break;
+	}
 	}
 
 	PhysicsType physicsType =
@@ -340,7 +340,7 @@ void PhysicsSystem::CreateConvexPhysicsMeshFromCollisionMesh(MeshComponent* mesh
 	//Set the UID to the actual mesh so that the physics actor is connected to the mesh, not the collision mesh.
 	collisionMesh->SetUID(mesh->GetUID());
 
-	collisionMesh->meshDataProxy = AssetSystem::ReadVMeshAssetFromFile(filename);
+	collisionMesh->meshDataProxy = AssetSystem::Get().ReadVMeshAssetFromFile(filename);
 	collisionMesh->CreateVertexBuffer();
 
 	CreateConvexPhysicsMesh(collisionMesh);

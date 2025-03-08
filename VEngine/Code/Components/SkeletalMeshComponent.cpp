@@ -28,7 +28,7 @@ void SkeletalMeshComponent::Create()
 void SkeletalMeshComponent::LoadAnimations(std::string animationFilename)
 {
 	Skeleton& skel = GetSkeleton();
-	std::vector<Animation> animations = AssetSystem::ReadVAnimAssetFromFile(animationFilename);
+	std::vector<Animation> animations = AssetSystem::Get().ReadVAnimAssetFromFile(animationFilename);
 	for (auto& anim : animations)
 	{
 		skel.GetAnimations().emplace(anim.GetName(), anim);
