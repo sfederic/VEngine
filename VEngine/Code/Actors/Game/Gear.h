@@ -1,10 +1,7 @@
 #pragma once
 
 #include "GridActor.h"
-
-namespace DirectX {
-	struct BoundingOrientedBox;
-}
+#include <DirectXCollision.h>
 
 class Gear : public GridActor
 {
