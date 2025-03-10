@@ -73,9 +73,10 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(UniversalCRT_IncludePath);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>vpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level4</WarningLevel>
+      <EnableModules>false</EnableModules>
     </ClCompile>
     <Link>
       <AdditionalDependencies>d3d11.lib;dxgi.lib;d3dcompiler.lib;libfbxsdk.lib;d2d1.lib;dwrite.lib;PhysXCommon_64.lib;PhysX_64.lib;PhysXFoundation_64.lib;PhysXCooking_64.lib;PhysXExtensions_static_64.lib;PhysXCharacterKinematic_static_64.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -118,10 +119,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Code\Actors\Actor.ixx" />
     <ClCompile Include="Code\Actors\Game\MapProjectionCrystal.cpp" />
     <ClCompile Include="Code\Actors\Game\BombRock.cpp" />
     <ClCompile Include="Code\Commands\UndoActorDeleteCommand.cpp" />
-    <ClCompile Include="Code\Core\EditorCamera.ixx" />
+    <ClCompile Include="Code\Components\ComponentSystemDefine.ixx" />
+    <ClCompile Include="Code\Core\EditorCamera.cpp" />
+    <ClCompile Include="Code\Core\EditorCamera.ixx">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Code\Core\Log.ixx" />
+    <ClCompile Include="Code\Core\VAssert.ixx" />
     <ClCompile Include="Code\Editor\Sequencer\ActiveCameraLerpToOffsetPosition.cpp" />
     <ClCompile Include="Code\Editor\Sequencer\CameraSequenceEntryData.cpp" />
     <ClCompile Include="Code\Actors\Game\BloomSeedSoil.cpp" />
@@ -174,7 +182,6 @@
     <ClCompile Include="Code\Actors\CameraActor.cpp" />
     <ClCompile Include="Code\Core\Camera.cpp" />
     <ClCompile Include="Code\Components\Component.cpp" />
-    <ClCompile Include="Code\Core\PropertyTypes.cpp" />
     <ClCompile Include="Code\Editor\ImGuizmo\ImSequencer.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
@@ -211,24 +218,17 @@
     <ClCompile Include="Code\Editor\PropertyWidgets\SpinBox.cpp" />
     <ClCompile Include="Code\Editor\PropertyWidgets\StringWidget.cpp" />
     <ClCompile Include="Code\Gameplay\GameInstance.cpp" />
-    <ClCompile Include="Code\Core\Properties.cpp" />
-    <ClCompile Include="Code\Core\UID.cpp" />
     <ClCompile Include="Code\Core\VEnum.cpp" />
     <ClCompile Include="Code\UI\Game\DialogueWidget.cpp" />
     <ClCompile Include="Code\UI\Game\HealthWidget.cpp" />
     <ClCompile Include="Code\UI\Game\MapInfoWidget.cpp" />
     <ClCompile Include="Code\UI\Game\PopupWidget.cpp" />
-    <ClCompile Include="Code\vpch.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="Code\Core\VString.cpp" />
     <ClCompile Include="Code\UI\Widget.cpp" />
     <ClCompile Include="Code\Components\SpatialComponent.cpp" />
     <ClCompile Include="Code\Actors\DebugActors\DebugBox.cpp" />
-    <ClCompile Include="Code\Core\FileSystem.cpp" />
     <ClCompile Include="Code\Components\InstanceMeshComponent.cpp" />
     <ClCompile Include="Code\Actors\MeshActor.cpp" />
-    <ClCompile Include="Code\Components\ComponentSystemCache.cpp" />
     <ClCompile Include="Code\Editor\SystemDock.cpp" />
     <ClCompile Include="Code\Render\Material.cpp" />
     <ClCompile Include="Code\Render\TextureSystem.cpp" />
@@ -416,8 +416,8 @@
     <ClInclude Include="Code\Render\ShaderData\ShaderCameraData.h" />
     <ClInclude Include="Code\Render\ShaderData\ShaderLightProbeData.h" />
     <ClInclude Include="Code\Render\VertexBuffer.h" />
-    <ClInclude Include="Code\Core\BinaryDeserialiser.h" />
-    <ClInclude Include="Code\Core\BinarySerialiser.h" />
+    <ClInclude Include="Code\Core\BinaryDeserialiser.ixx" />
+    <ClInclude Include="Code\Core\BinarySerialiser.ixx" />
     <ClInclude Include="Code\Actors\Game\GlobalPropSetter.h" />
     <ClInclude Include="Code\Actors\Game\ActivateOnGlobalProp.h" />
     <ClInclude Include="Code\Actors\Game\ClockHand.h" />
@@ -449,8 +449,8 @@
     <ClInclude Include="Code\Asset\VertexColourHeader.h" />
     <ClInclude Include="Code\Components\Game\ConditionComponent.h" />
     <ClInclude Include="Code\Components\Game\DialogueComponent.h" />
-    <ClInclude Include="Code\Core\OpenMode.h" />
-    <ClInclude Include="Code\Core\PropertyTypes.h" />
+    <ClInclude Include="Code\Core\OpenMode.ixx" />
+    <ClInclude Include="Code\Core\PropertyTypes.ixx" />
     <ClInclude Include="Code\Core\Win32Keys.h" />
     <ClInclude Include="Code\Gameplay\BattleEnums.h" />
     <ClInclude Include="Code\Gameplay\ConditionSystem.h" />
@@ -463,7 +463,7 @@
     <ClInclude Include="Code\Animation\Joint.h" />
     <ClInclude Include="Code\Render\LightData.h" />
     <ClInclude Include="Code\Render\Line.h" />
-    <ClInclude Include="Code\Render\RenderPropertyStructs.h" />
+    <ClInclude Include="Code\Render\RenderPropertyStructs.ixx" />
     <ClInclude Include="Code\Render\MeshData.h" />
     <ClInclude Include="Code\Render\MeshDataProxy.h" />
     <ClInclude Include="Code\Render\RastStates.h" />
@@ -484,14 +484,14 @@
     <ClInclude Include="Code\Actors\CameraActor.h" />
     <ClInclude Include="Code\Asset\AssetFileExtensions.h" />
     <ClInclude Include="Code\Asset\AssetBaseFolders.h" />
-    <ClInclude Include="Code\Core\Camera.h" />
+    <ClInclude Include="Code\Core\Camera.ixx" />
     <ClInclude Include="Code\Editor\ImGuizmo\ImSequencer.h" />
     <ClInclude Include="Code\Gameplay\GameplayTags.h" />
     <ClInclude Include="Code\Gameplay\Mission.h" />
     <ClInclude Include="Code\Gameplay\WorldFunctions.h" />
     <ClInclude Include="Code\Core\IFunction.h" />
     <ClInclude Include="Code\Particle\ParticleData.h" />
-    <ClInclude Include="Code\Core\Property.h" />
+    <ClInclude Include="Code\Core\Property.ixx" />
     <ClInclude Include="Code\UI\Colours.h" />
     <ClInclude Include="Code\Render\PixelShader.h" />
     <ClInclude Include="Code\Render\Shader.h" />
@@ -508,23 +508,22 @@
     <ClInclude Include="Code\Audio\AudioChannel.h" />
     <ClInclude Include="Code\Components\BoxTriggerComponent.h" />
     <ClInclude Include="Code\Animation\Skeleton.h" />
-    <ClInclude Include="Code\Actors\Actor.h" />
-    <ClInclude Include="Code\Actors\ActorSystem.h" />
-    <ClInclude Include="Code\Actors\ActorSystemCache.h" />
-    <ClInclude Include="Code\Actors\IActorSystem.h" />
+    <ClInclude Include="Code\Actors\ActorSystem.ixx" />
+    <ClInclude Include="Code\Actors\ActorSystemCache.ixx" />
+    <ClInclude Include="Code\Actors\IActorSystem.ixx" />
     <ClCompile Include="Code\Animation\Skeleton.cpp" />
     <ClCompile Include="Code\Actors\Actor.cpp" />
     <ClCompile Include="Code\Audio\AudioSystem.cpp" />
     <ClInclude Include="Code\Audio\AudioSystem.h" />
-    <ClInclude Include="Code\Components\CameraComponent.h" />
+    <ClInclude Include="Code\Components\CameraComponent.ixx" />
     <ClCompile Include="Code\Components\CameraComponent.cpp" />
     <ClCompile Include="Code\Commands\CommandSystem.cpp" />
     <ClInclude Include="Code\Commands\CommandSystem.h" />
     <ClInclude Include="Code\Commands\Command.h" />
     <ClInclude Include="Code\Commands\ICommand.h" />
-    <ClInclude Include="Code\Components\Component.h" />
-    <ClInclude Include="Code\Components\ComponentSystem.h" />
-    <ClInclude Include="Code\Components\IComponentSystem.h" />
+    <ClInclude Include="Code\Components\Component.ixx" />
+    <ClInclude Include="Code\Components\ComponentSystem.ixx" />
+    <ClInclude Include="Code\Components\IComponentSystem.ixx" />
     <ClCompile Include="Code\Components\MeshComponent.cpp" />
     <ClInclude Include="Code\Components\MeshComponent.h" />
     <ClCompile Include="Code\Core\Debug.cpp" />
@@ -565,7 +564,7 @@
     <ClInclude Include="Code\Editor\imgui\imstb_textedit.h" />
     <ClInclude Include="Code\Editor\imgui\imstb_truetype.h" />
     <ClInclude Include="Code\Editor\LogDock.h" />
-    <ClInclude Include="Code\Editor\Editor.h" />
+    <ClInclude Include="Code\Editor\Editor.ixx" />
     <ClCompile Include="Code\Editor\EditorMainWindow.cpp" />
     <ClCompile Include="Code\Editor\imgui\backends\imgui_impl_dx11.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
@@ -596,14 +595,14 @@
     <ClInclude Include="Code\Editor\ToolbarDock.h" />
     <ClCompile Include="Code\Editor\Win32Editor.cpp" />
     <ClInclude Include="Code\Editor\Win32Editor.h" />
-    <ClInclude Include="Code\Editor\QtEditor.h" />
+    <ClInclude Include="Code\Editor\QtEditor.ixx" />
     <ClInclude Include="Code\Editor\EditorMainWindow.h" />
-    <ClInclude Include="Code\Editor\IEditor.h" />
-    <ClInclude Include="Code\Core\Core.h" />
+    <ClInclude Include="Code\Editor\IEditor.ixx" />
+    <ClInclude Include="Code\Core\Core.ixx" />
     <ClCompile Include="Code\Editor\WorldDock.cpp" />
     <ClInclude Include="Code\Editor\WorldDock.h" />
     <ClCompile Include="Code\Core\Engine.cpp" />
-    <ClInclude Include="Code\Core\Engine.h" />
+    <ClInclude Include="Code\Core\Engine.ixx" />
     <ClCompile Include="Code\Asset\FBXLoader.cpp" />
     <ClInclude Include="Code\Asset\FBXLoader.h" />
     <ClCompile Include="Code\Core\Input.cpp" />
@@ -614,15 +613,15 @@
     <ClCompile Include="Code\Core\VMath.cpp" />
     <ClInclude Include="Code\Asset\MeshAssetHeader.h" />
     <ClInclude Include="Code\Particle\Particle.h" />
-    <ClInclude Include="Code\Physics\CollisionLayers.h" />
-    <ClInclude Include="Code\Core\UID.h" />
+    <ClInclude Include="Code\Physics\CollisionLayers.ixx" />
+    <ClInclude Include="Code\Core\UID.ixx" />
     <ClInclude Include="Code\UI\Game\DialogueWidget.h" />
     <ClInclude Include="Code\UI\Game\HealthWidget.h" />
     <ClInclude Include="Code\UI\Game\InteractWidget.h" />
     <ClInclude Include="Code\UI\Game\MapInfoWidget.h" />
     <ClInclude Include="Code\UI\Game\PopupWidget.h" />
     <ClInclude Include="Code\UI\Layout.h" />
-    <ClInclude Include="Code\Core\VEnum.h" />
+    <ClInclude Include="Code\Core\VEnum.ixx" />
     <ClInclude Include="Code\Core\VFunction.h" />
     <ClInclude Include="Code\Core\VMath.h" />
     <ClCompile Include="Code\Physics\Raycast.cpp" />
@@ -631,33 +630,31 @@
     <ClCompile Include="Code\Core\World.cpp" />
     <ClCompile Include="Code\Core\WorldEditor.cpp" />
     <ClCompile Include="Code\Core\Profile.cpp" />
-    <ClInclude Include="Code\Core\Profile.h" />
-    <ClInclude Include="Code\Core\Properties.h" />
+    <ClInclude Include="Code\Core\Profile.ixx" />
+    <ClInclude Include="Code\Core\Properties.ixx" />
     <ClCompile Include="Code\Render\Renderer.cpp" />
     <ClInclude Include="Code\Render\Renderer.h" />
     <ClInclude Include="Code\Render\ShaderSystem.h" />
     <ClCompile Include="Code\Core\Serialiser.cpp" />
     <ClInclude Include="Code\Core\Serialiser.h" />
-    <ClCompile Include="Code\Core\Timer.cpp" />
-    <ClInclude Include="Code\Core\SystemStates.h" />
-    <ClInclude Include="Code\Core\Timer.h" />
+    <ClInclude Include="Code\Core\SystemStates.ixx" />
+    <ClInclude Include="Code\Core\Timer.ixx" />
     <ClCompile Include="Code\Core\Transform.cpp" />
-    <ClInclude Include="Code\Core\Transform.h" />
+    <ClInclude Include="Code\Core\Transform.ixx" />
     <ClCompile Include="Code\Editor\TransformGizmo.cpp" />
     <ClInclude Include="Code\Editor\TransformGizmo.h" />
     <ClInclude Include="Code\UI\UISystem.h" />
-    <ClInclude Include="Code\vpch.h" />
-    <ClInclude Include="Code\Core\World.h" />
+    <ClInclude Include="Code\Core\World.ixx" />
     <ClInclude Include="Code\Core\WorldEditor.h" />
     <ClCompile Include="Code\UI\UISystem.cpp" />
     <ClInclude Include="Code\Core\VString.h" />
     <ClInclude Include="Code\UI\Widget.h" />
-    <ClInclude Include="Code\Components\SpatialComponent.h" />
+    <ClInclude Include="Code\Components\SpatialComponent.ixx" />
     <ClInclude Include="Code\Actors\DebugActors\DebugBox.h" />
-    <ClInclude Include="Code\Core\FileSystem.h" />
+    <ClInclude Include="Code\Core\FileSystem.ixx" />
     <ClInclude Include="Code\Components\InstanceMeshComponent.h" />
     <ClInclude Include="Code\Actors\MeshActor.h" />
-    <ClInclude Include="Code\Components\ComponentSystemCache.h" />
+    <ClInclude Include="Code\Components\ComponentSystemCache.ixx" />
     <ClInclude Include="Code\Editor\SystemDock.h" />
     <ClInclude Include="Code\Render\Material.h" />
     <ClInclude Include="Code\Render\TextureSystem.h" />
@@ -785,7 +782,7 @@
     <ClInclude Include="Code\UI\GridLayout.h" />
     <ClInclude Include="Code\Actors\OcclusionWall.h" />
     <ClInclude Include="Code\Actors\Game\MinesGenerator.h" />
-    <ClInclude Include="Code\Core\Deserialiser.h" />
+    <ClInclude Include="Code\Core\Deserialiser.ixx" />
     <ClInclude Include="Code\Render\RastState.h" />
     <ClInclude Include="Code\Render\Sampler.h" />
     <ClInclude Include="Code\Render\IndexBuffer.h" />

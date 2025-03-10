@@ -1,28 +1,8 @@
-#include "vpch.h"
-#include "World.h"
-#include "FileSystem.h"
-#include "Profile.h"
-#include "Core.h"
-#include "Timer.h"
-#include "Log.h"
-#include "Asset/AssetSystem.h"
-#include "Actors/MeshActor.h"
-#include "Actors/Game/Player.h"
-#include "Actors/Game/Grid.h"
-#include "Actors/DirectionalLightActor.h"
-#include "Actors/ActorSystemCache.h"
-#include "Components/ComponentSystemCache.h"
-#include "Components/IComponentSystem.h"
-#include "Render/TextureSystem.h"
-#include "Render/MaterialSystem.h"
-#include "Audio/AudioSystem.h"
-#include "Render/SpriteSystem.h"
-#include "Render/DebugMeshManager.h"
-#include "UI/UISystem.h"
-#include "UI/Game/MapInfoWidget.h"
-#include "Gameplay/GameInstance.h"
-#include "Gameplay/GameUtils.h"
-#include "Physics/PhysicsSystem.h"
+import Core.World;
+import Core.Core;
+import Actors.ActorSystemCache;
+import Core.Log;
+import Components.IComponentSystem;
 
 void World::Init()
 {

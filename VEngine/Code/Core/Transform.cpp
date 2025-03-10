@@ -1,5 +1,6 @@
-#include "vpch.h"
-#include "Transform.h"
+#include <DirectXMath.h>
+
+import Core.Transform;
 
 using namespace DirectX;
 

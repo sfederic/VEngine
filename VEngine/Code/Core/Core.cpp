@@ -1,22 +1,5 @@
-#include "vpch.h"
-#include "Core.h"
-#include "Audio/AudioSystem.h"
-#include "Components/SkeletalMeshComponent.h"
-#include "Core/Camera.h"
-#include "Core/Debug.h"
-#include "Core/FileSystem.h"
-#include "Core/Input.h"
-#include "Core/Profile.h"
-#include "Core/Timer.h"
-#include "Core/World.h"
-#include "Core/WorldEditor.h"
-#include "Editor/DebugMenu.h"
-#include "Editor/Editor.h"
-#include "Gameplay/GameUtils.h"
-#include "Physics/PhysicsSystem.h"
-#include "Render/Renderer.h"
-#include "Render/SpriteSystem.h"
-#include "UI/UISystem.h"
+import Core.Core;
+import std.core;
 
 static bool gameWorldPaused = false;
 

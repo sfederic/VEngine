@@ -1,30 +1,6 @@
-#include "vpch.h"
-#include "Engine.h"
+#include <fstream>
 #include <future>
-#include "Core.h"
-#include "Profile.h"
-#include "Input.h"
-#include "Camera.h"
-#include "Timer.h"
-#include "World.h"
-#include "Log.h"
-#include "Core/PropertyTypes.h"
-#include "WorldEditor.h"
-#include "FileSystem.h"
-#include "Asset/FBXLoader.h"
-#include "Render/Renderer.h"
-#include "Render/ShaderSystem.h"
-#include "Render/MaterialSystem.h"
-#include "Render/SpriteSystem.h"
-#include "UI/UISystem.h"
-#include "Editor/DebugMenu.h"
-#include "Editor/Console.h"
-#include "Editor/Sequencer/Sequencer.h"
-#include "Editor/Editor.h"
-#include "Commands/CommandSystem.h"
-#include "Audio/AudioSystem.h"
-#include "Physics/PhysicsSystem.h"
-#include "Gameplay/WorldFunctions.h"
+import Core.Engine;
 
 static void ClearLog()
 {

@@ -1,8 +1,10 @@
-#include "vpch.h"
-#include "Camera.h"
-#include "Actors/Game/Player.h"
+#include <DirectXMath.h>
 
 import Core.EditorCamera;
+import Core.Camera;
+import Components.CameraComponent;
+
+using namespace DirectX;
 
 static CameraComponent* activeCamera;
 static EditorCamera editorCamera(XMFLOAT3(0.f, 1.f, -3.f));

@@ -1,23 +1,6 @@
-#include "vpch.h"
-#include "QtEditor.h"
-#include <QtWidgets/QApplication>
-#include <QWidget>
-#include <QFont>
-#include <QComboBox>
-#include <qlabel.h>
-#include <qgridlayout.h>
-#include <qscrollarea.h>
-#include <qpushbutton.h>
-#include "EditorMainWindow.h"
-#include "Core/Input.h"
-#include "RenderViewWidget.h"
-#include "LogDock.h"
-#include "PropertiesDock.h"
-#include "AssetDock.h"
-#include "WorldDock.h"
-#include "SystemDock.h"
-#include "ToolbarDock.h"
-#include "Core/Core.h"
+#include <QApplication>
+
+import Editor.QtEditor;
 
 void QtEditor::Init(int argc, char* argv[])
 {

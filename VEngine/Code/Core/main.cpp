@@ -1,11 +1,10 @@
-#include "vpch.h"
-#include "Engine.h"
+import Core.Engine;
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
 	Engine::Init(argc, argv);
 	Engine::MainLoop();
 	Engine::Cleanup();
-	 
+
 	return 0;
 }

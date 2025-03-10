@@ -53,9 +53,6 @@
     <ClCompile Include="Code\Core\Serialiser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Core\Timer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Core\Transform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -176,9 +173,6 @@
     <ClCompile Include="Code\Actors\DebugActors\DebugBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Core\FileSystem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Components\InstanceMeshComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -186,9 +180,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Actors\MeshActor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Components\ComponentSystemCache.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Editor\SystemDock.cpp">
@@ -290,9 +281,6 @@
     <ClCompile Include="Code\Particle\ParticleSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Core\UID.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Editor\PropertyWidgets\UintWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -321,9 +309,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\UI\ScreenFadeWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Core\Properties.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Core\Package.cpp">
@@ -374,9 +359,6 @@
     <ClCompile Include="Code\Render\Texture2D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\vpch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Core\VFunctionSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -396,9 +378,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Render\PixelShader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Core\EditorCamera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Core\Camera.cpp">
@@ -671,9 +650,6 @@
     <ClCompile Include="Code\Actors\Game\ActivateOnGlobalProp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Core\PropertyTypes.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Actors\Game\Lift.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -929,6 +905,14 @@
     <ClCompile Include="Code\Render\Device.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Core\EditorCamera.ixx" />
+    <ClCompile Include="Code\Core\EditorCamera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Actors\Actor.ixx" />
+    <ClCompile Include="Code\Components\ComponentSystemDefine.ixx" />
+    <ClCompile Include="Code\Core\VAssert.ixx" />
+    <ClCompile Include="Code\Core\Log.ixx" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\main.cpp">
@@ -951,43 +935,42 @@
     <ClInclude Include="Code\Editor\AssetDock.h" />
     <ClInclude Include="Code\Editor\Console.h" />
     <ClInclude Include="Code\Editor\DebugMenu.h" />
-    <ClInclude Include="Code\Editor\Editor.h" />
+    <ClInclude Include="Code\Editor\Editor.ixx" />
     <ClInclude Include="Code\Editor\EditorMainWindow.h" />
-    <ClInclude Include="Code\Editor\IEditor.h" />
+    <ClInclude Include="Code\Editor\IEditor.ixx" />
     <ClInclude Include="Code\Editor\LogDock.h" />
     <ClInclude Include="Code\Editor\PropertiesDock.h" />
-    <ClInclude Include="Code\Editor\QtEditor.h" />
+    <ClInclude Include="Code\Editor\QtEditor.ixx" />
     <ClInclude Include="Code\Editor\RenderViewWidget.h" />
     <ClInclude Include="Code\Editor\ToolbarDock.h" />
     <ClInclude Include="Code\Editor\Win32Editor.h" />
     <ClInclude Include="Code\Editor\WorldDock.h" />
-    <ClInclude Include="Code\Components\Component.h" />
-    <ClInclude Include="Code\Components\ComponentSystem.h" />
-    <ClInclude Include="Code\Components\IComponentSystem.h" />
+    <ClInclude Include="Code\Components\Component.ixx" />
+    <ClInclude Include="Code\Components\ComponentSystem.ixx" />
+    <ClInclude Include="Code\Components\IComponentSystem.ixx" />
     <ClInclude Include="Code\Components\MeshComponent.h" />
     <ClInclude Include="Code\Commands\CommandSystem.h" />
     <ClInclude Include="Code\Commands\Command.h" />
     <ClInclude Include="Code\Commands\ICommand.h" />
     <ClInclude Include="Code\Audio\AudioSystem.h" />
-    <ClInclude Include="Code\Actors\Actor.h" />
-    <ClInclude Include="Code\Actors\ActorSystem.h" />
-    <ClInclude Include="Code\Actors\ActorSystemCache.h" />
-    <ClInclude Include="Code\Actors\IActorSystem.h" />
-    <ClInclude Include="Code\Components\CameraComponent.h" />
-    <ClInclude Include="Code\Core\Core.h" />
+    <ClInclude Include="Code\Actors\ActorSystem.ixx" />
+    <ClInclude Include="Code\Actors\ActorSystemCache.ixx" />
+    <ClInclude Include="Code\Actors\IActorSystem.ixx" />
+    <ClInclude Include="Code\Components\CameraComponent.ixx" />
+    <ClInclude Include="Code\Core\Core.ixx" />
     <ClInclude Include="Code\Core\Debug.h" />
-    <ClInclude Include="Code\Core\Engine.h" />
+    <ClInclude Include="Code\Core\Engine.ixx" />
     <ClInclude Include="Code\Asset\FBXLoader.h" />
     <ClInclude Include="Code\Core\Input.h" />
     <ClInclude Include="Code\Core\VMath.h" />
-    <ClInclude Include="Code\Core\Profile.h" />
+    <ClInclude Include="Code\Core\Profile.ixx" />
     <ClInclude Include="Code\Core\Serialiser.h" />
-    <ClInclude Include="Code\Core\Properties.h" />
-    <ClInclude Include="Code\Core\Timer.h" />
-    <ClInclude Include="Code\Core\Transform.h" />
+    <ClInclude Include="Code\Core\Properties.ixx" />
+    <ClInclude Include="Code\Core\Timer.ixx" />
+    <ClInclude Include="Code\Core\Transform.ixx" />
     <ClInclude Include="Code\UI\UISystem.h" />
     <ClInclude Include="Code\Editor\TransformGizmo.h" />
-    <ClInclude Include="Code\Core\World.h" />
+    <ClInclude Include="Code\Core\World.ixx" />
     <ClInclude Include="Code\Core\WorldEditor.h" />
     <ClInclude Include="Code\Editor\ImGuizmo\ImGuizmo.h">
       <Filter>Header Files</Filter>
@@ -1031,10 +1014,10 @@
     <ClInclude Include="Code\Core\VString.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Core\SystemStates.h">
+    <ClInclude Include="Code\Core\SystemStates.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Components\SpatialComponent.h">
+    <ClInclude Include="Code\Components\SpatialComponent.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\DebugActors\DebugBox.h">
@@ -1046,7 +1029,7 @@
     <ClInclude Include="Code\Editor\PropertyWidgets\IPropertyWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Core\FileSystem.h">
+    <ClInclude Include="Code\Core\FileSystem.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Components\InstanceMeshComponent.h">
@@ -1058,7 +1041,7 @@
     <ClInclude Include="Code\Actors\MeshActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Components\ComponentSystemCache.h">
+    <ClInclude Include="Code\Components\ComponentSystemCache.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Editor\SystemDock.h">
@@ -1172,7 +1155,7 @@
     <ClInclude Include="Code\Particle\ParticleSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Core\UID.h">
+    <ClInclude Include="Code\Core\UID.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Editor\PropertyWidgets\UintWidget.h">
@@ -1193,7 +1176,7 @@
     <ClInclude Include="Code\Editor\ActorTreeWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Physics\CollisionLayers.h">
+    <ClInclude Include="Code\Physics\CollisionLayers.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Physics\PhysicsSystem.h">
@@ -1208,7 +1191,7 @@
     <ClInclude Include="Code\UI\ScreenFadeWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Core\VEnum.h">
+    <ClInclude Include="Code\Core\VEnum.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Editor\PropertyWidgets\VEnumWidget.h">
@@ -1250,9 +1233,6 @@
     <ClInclude Include="Code\Render\Texture2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\vpch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Code\Render\ConstantBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -1271,7 +1251,7 @@
     <ClInclude Include="Code\Asset\AssetFileExtensions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Core\Property.h">
+    <ClInclude Include="Code\Core\Property.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\CameraActor.h">
@@ -1289,10 +1269,7 @@
     <ClInclude Include="Code\Render\Shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Core\EditorCamera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Core\Camera.h">
+    <ClInclude Include="Code\Core\Camera.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Gameplay\Mission.h">
@@ -1385,7 +1362,7 @@
     <ClInclude Include="Code\Render\MeshData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\RenderPropertyStructs.h">
+    <ClInclude Include="Code\Render\RenderPropertyStructs.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Render\MeshDataProxy.h">
@@ -1640,7 +1617,7 @@
     <ClInclude Include="Code\Actors\Game\ActivateOnGlobalProp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Core\PropertyTypes.h">
+    <ClInclude Include="Code\Core\PropertyTypes.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\Lift.h">
@@ -1754,16 +1731,16 @@
     <ClInclude Include="Code\UI\Game\InteractWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Core\OpenMode.h">
+    <ClInclude Include="Code\Core\OpenMode.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Core\BinarySerialiser.h">
+    <ClInclude Include="Code\Core\BinarySerialiser.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Core\BinaryDeserialiser.h">
+    <ClInclude Include="Code\Core\BinaryDeserialiser.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Core\Deserialiser.h">
+    <ClInclude Include="Code\Core\Deserialiser.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Render\BlendState.h">

@@ -1,7 +1,5 @@
-#include "vpch.h"
-#include "VEnum.h"
-#include "Log.h"
-
+import Core.VEnum;
+import Core.Log;
 void VEnum::SetValue(const std::string& newValue)
 {
 	auto dataIt = data.find(newValue);

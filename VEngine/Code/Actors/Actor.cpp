@@ -1,12 +1,9 @@
-#include "vpch.h"
-#include "Actor.h"
-#include "IActorSystem.h"
-#include "Components/MeshComponent.h"
-#include "Components/EmptyComponent.h"
-#include "Core/World.h"
-#include "Core/Log.h"
-#include "Core/Camera.h"
-#include "Physics/PhysicsSystem.h"
+#include <DirectXMath.h>
+
+import Actors.Actor;
+import Core.World;
+
+using namespace DirectX;
 
 XMMATRIX Actor::GetWorldMatrix() const
 {

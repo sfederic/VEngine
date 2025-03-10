@@ -1,9 +1,6 @@
-#include "vpch.h"
-#include "Editor.h"
-#include "QtEditor.h"
-//#include "Win32Editor.h"
+import Editor.Editor;
 
-static QtEditor gEditor;
+QtEditor gEditor;
 
 IEditor& Editor::Get()
 {

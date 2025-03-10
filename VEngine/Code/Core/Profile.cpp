@@ -1,7 +1,12 @@
-#include "vpch.h"
-#include "Profile.h"
-#include <source_location>
+import Core.Profile;
 
+#include <Windows.h>
+
+import <unordered_map>;
+
+import Core.VAssert;
+
+//Todo: profiler needs to be moved into its own class
 std::unordered_map<std::string, TimeFrame> timeFrames;
 
 void TimeFrame::SetElapsedTime()
@@ -108,7 +113,7 @@ void Profile::End(std::string funcName)
 	QueryPerformanceCounter((LARGE_INTEGER*)&endTime);
 
 	auto timeFramesIt = timeFrames.find(funcName);
-	assert(timeFramesIt != timeFrames.end() && "Check for matching PROFILE_START in function.");
+	VAssert(timeFramesIt != timeFrames.end(), "Check for matching PROFILE_START in function.");
 
 	TimeFrame& currentTimeFrame = timeFramesIt->second;
 	currentTimeFrame.endTime = endTime;

@@ -1,8 +1,4 @@
-#include "vpch.h"
-#include "BinarySerialiser.h"
-#include "Core/VEnum.h"
-#include "Core/VString.h"
-#include "Core/Properties.h"
+import Core.BinarySerialiser;
 
 void BinarySerialiser::Serialise(Properties& props)
 {
