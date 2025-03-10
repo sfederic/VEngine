@@ -11,6 +11,8 @@
 #include "Core/Camera.h"
 #include "Core/WorldEditor.h"
 
+import Core.EditorCamera;
+
 ToolbarDock::ToolbarDock() : QDockWidget("Toolbar")
 {
 	auto hLayout = new QHBoxLayout();

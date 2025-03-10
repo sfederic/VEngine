@@ -1,9 +1,9 @@
 #pragma once
 
-#include "EditorCamera.h"
 #include "Components/CameraComponent.h"
 
 class Actor;
+class EditorCamera;
 
 namespace Camera
 {

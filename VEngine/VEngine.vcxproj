@@ -121,6 +121,7 @@
     <ClCompile Include="Code\Actors\Game\MapProjectionCrystal.cpp" />
     <ClCompile Include="Code\Actors\Game\BombRock.cpp" />
     <ClCompile Include="Code\Commands\UndoActorDeleteCommand.cpp" />
+    <ClCompile Include="Code\Core\EditorCamera.ixx" />
     <ClCompile Include="Code\Editor\Sequencer\ActiveCameraLerpToOffsetPosition.cpp" />
     <ClCompile Include="Code\Editor\Sequencer\CameraSequenceEntryData.cpp" />
     <ClCompile Include="Code\Actors\Game\BloomSeedSoil.cpp" />
@@ -275,7 +276,6 @@
     <ClCompile Include="Code\Actors\PostProcessVolume.cpp" />
     <ClCompile Include="Code\Render\Texture2D.cpp" />
     <ClCompile Include="Code\Core\VFunctionSystem.cpp" />
-    <ClCompile Include="Code\Core\EditorCamera.cpp" />
     <ClCompile Include="Code\Actors\SkyBox.cpp" />
     <ClCompile Include="Code\Components\SkeletalMeshComponent.cpp" />
     <ClCompile Include="Code\Particle\MeshParticleEmitter.cpp" />
@@ -706,7 +706,6 @@
     <ClInclude Include="Code\Render\Texture2D.h" />
     <ClInclude Include="Code\Render\ConstantBuffer.h" />
     <ClInclude Include="Code\Core\VFunctionSystem.h" />
-    <ClInclude Include="Code\Core\EditorCamera.h" />
     <ClInclude Include="Code\Actors\SkyBox.h" />
     <ClInclude Include="Code\Components\SkeletalMeshComponent.h" />
     <ClInclude Include="Code\Particle\MeshParticleEmitter.h" />

@@ -1,11 +1,29 @@
+module;
+
 #include "vpch.h"
-#include "EditorCamera.h"
+#include "Components/CameraComponent.h"
 #include "WorldEditor.h"
 #include "VMath.h"
 #include "Input.h"
 #include "Editor/DebugMenu.h"
 #include "Editor/Console.h"
 #include "Editor/Editor.h"
+
+export module Core.EditorCamera;
+
+export class EditorCamera : public CameraComponent
+{
+public:
+	EditorCamera(XMFLOAT3 startPos) : CameraComponent(startPos) {}
+	virtual void Tick(float deltaTime) override;
+	XMMATRIX GetViewMatrix();
+
+private:
+	void MouseMove(int x, int y);
+
+	XMINT2 lastMousePos{};
+	bool arcBallMovementOn = false;
+};
 
 void EditorCamera::Tick(float deltaTime)
 {
