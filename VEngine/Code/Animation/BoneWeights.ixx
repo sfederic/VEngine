@@ -1,8 +1,8 @@
-#pragma once
+export module Animation.BoneWeights;
 
-#include <vector>
+import <vector>;
 
-struct BoneWeights
+export struct BoneWeights
 {
 	inline static int MAX_WEIGHTS = 3;
 	inline static int MAX_BONE_INDICES = 4;

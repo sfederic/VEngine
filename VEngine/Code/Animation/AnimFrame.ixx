@@ -1,8 +1,8 @@
-#pragma once
+export module Animation.AnimFrame;
 
 #include <DirectXMath.h>
 
-struct AnimFrame
+export struct AnimFrame
 {
 	DirectX::XMFLOAT4 rot = DirectX::XMFLOAT4(0.f, 0.f, 0.f, 1.f); //Quaternion
 	DirectX::XMFLOAT3 pos = DirectX::XMFLOAT3(0.f, 0.f, 0.f);

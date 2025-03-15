@@ -1,10 +1,15 @@
-#pragma once
+export module Animation.Joint;
 
 #include <DirectXMath.h>
 
-struct Joint
+import <string>;
+
+export struct Joint
 {
-	void SetName(const char* name_);
+	void SetName(const char* name_)
+	{
+		strcpy_s(name, sizeof(name), name_);
+	}
 
 	typedef int JointIndex;
 
