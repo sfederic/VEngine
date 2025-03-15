@@ -257,9 +257,6 @@
     <ClCompile Include="Code\Actors\Billboard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Audio\AudioChannel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Components\AudioComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -915,7 +912,7 @@
     <ClInclude Include="Code\Commands\CommandSystem.h" />
     <ClInclude Include="Code\Commands\Command.h" />
     <ClInclude Include="Code\Commands\ICommand.h" />
-    <ClInclude Include="Code\Audio\AudioSystem.h" />
+    <ClInclude Include="Code\Audio\AudioSystem.ixx" />
     <ClInclude Include="Code\Actors\ActorSystem.ixx" />
     <ClInclude Include="Code\Actors\ActorSystemCache.ixx" />
     <ClInclude Include="Code\Actors\IActorSystem.ixx" />
@@ -1091,13 +1088,13 @@
     <ClInclude Include="Code\Actors\Billboard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Audio\AudioBase.h">
+    <ClInclude Include="Code\Audio\AudioBase.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Audio\AudioChannel.h">
+    <ClInclude Include="Code\Audio\AudioChannel.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Components\AudioComponent.h">
+    <ClInclude Include="Code\Components\AudioComponent.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\AudioActor.h">

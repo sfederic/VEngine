@@ -1,6 +1,7 @@
 import Core.BinaryDeserialiser;
 import Core.Properties;
 import Core.VString;
+import Core.VEnum;
 import Core.VAssert;
 import Render.RenderPropertyStructs;
 

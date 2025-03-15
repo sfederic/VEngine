@@ -209,7 +209,6 @@
     <ClCompile Include="Code\Actors\AudioActor.cpp" />
     <ClCompile Include="Code\Asset\AssetSystem.cpp" />
     <ClCompile Include="Code\Components\AudioComponent.cpp" />
-    <ClCompile Include="Code\Audio\AudioChannel.cpp" />
     <ClCompile Include="Code\Components\BoxTriggerComponent.cpp" />
     <ClCompile Include="Code\Actors\ActorSystemCache.cpp" />
     <ClCompile Include="Code\Editor\PropertyWidgets\SpinBox.cpp" />
@@ -493,9 +492,9 @@
     <ClInclude Include="Code\Editor\ActorTreeWidget.h" />
     <ClInclude Include="Code\Actors\AudioActor.h" />
     <ClInclude Include="Code\Asset\AssetSystem.h" />
-    <ClInclude Include="Code\Components\AudioComponent.h" />
-    <ClInclude Include="Code\Audio\AudioBase.h" />
-    <ClInclude Include="Code\Audio\AudioChannel.h" />
+    <ClInclude Include="Code\Components\AudioComponent.ixx" />
+    <ClInclude Include="Code\Audio\AudioBase.ixx" />
+    <ClInclude Include="Code\Audio\AudioChannel.ixx" />
     <ClInclude Include="Code\Components\BoxTriggerComponent.h" />
     <ClInclude Include="Code\Animation\Skeleton.ixx" />
     <ClInclude Include="Code\Actors\ActorSystem.ixx" />
@@ -503,7 +502,7 @@
     <ClInclude Include="Code\Actors\IActorSystem.ixx" />
     <ClCompile Include="Code\Actors\Actor.cpp" />
     <ClCompile Include="Code\Audio\AudioSystem.cpp" />
-    <ClInclude Include="Code\Audio\AudioSystem.h" />
+    <ClInclude Include="Code\Audio\AudioSystem.ixx" />
     <ClInclude Include="Code\Components\CameraComponent.ixx" />
     <ClCompile Include="Code\Components\CameraComponent.cpp" />
     <ClCompile Include="Code\Commands\CommandSystem.cpp" />

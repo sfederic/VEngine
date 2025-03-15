@@ -1,13 +1,14 @@
-#pragma once
+export module Components.AudioComponent;
 
-#include "SpatialComponent.h"
-#include "ComponentSystem.h"
+import Components.SpatialComponent;
+import Components.ComponentSystemDefine;
+import Core.Properties;
+import Core.UID;
+import <string>;
 
-class AudioComponent : public SpatialComponent
+export class AudioComponent : public SpatialComponent, public ComponentSystemDefine<AudioComponent>
 {
 public:
-	COMPONENT_SYSTEM(AudioComponent);
-
 	enum class FadeValue
 	{
 		None,

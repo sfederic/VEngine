@@ -1,11 +1,14 @@
-#include "vpch.h"
-#include "AudioSystem.h"
-#include <filesystem>
-#include "AudioBase.h"
-#include "AudioChannel.h"
-#include "Core/Debug.h"
-#include "Core/Log.h"
-#include "Components/AudioComponent.h"
+import Audio.AudioSystem;
+import Audio.AudioBase;
+import Audio.AudioChannel;
+import Core.Debug;
+import Core.Log;
+import <filesystem>;
+import <cassert>;
+import <vector>;
+import <unordered_map>;
+
+#include <xaudio2.h>
 
 constexpr auto fourccRIFF = 'FFIR';
 constexpr auto fourccDATA = 'atad';

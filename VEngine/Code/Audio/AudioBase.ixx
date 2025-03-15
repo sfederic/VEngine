@@ -1,9 +1,8 @@
-#pragma once
+export module Audio.AudioBase;
 
 #include <xaudio2.h>
 
-//Base class for audio data
-struct AudioBase
+export struct AudioBase
 {
 	WAVEFORMATEXTENSIBLE waveFormat = {};
 	XAUDIO2_BUFFER buffer = {};

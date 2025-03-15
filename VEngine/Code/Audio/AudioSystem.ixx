@@ -1,13 +1,13 @@
-#pragma once
+export module Audio.AudioSystem;
 
-#include <string>
-#include "Core/UID.h"
+import Core.UID;
+import <string>;
 
 struct AudioChannel;
 
 //@Todo: Ogg Vorbis loader if file size becomes an issue https://www.gamedev.net/forums/topic/496350-xaudio2-and-ogg/
 //Lot of this was inspired by https://gdcvault.com/play/1022061/How-to-Write-an-Audio
-namespace AudioSystem
+export namespace AudioSystem
 {
 	void Init();
 	void Tick();
