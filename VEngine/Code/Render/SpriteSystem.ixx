@@ -1,16 +1,17 @@
-#pragma once
+export module Render.SpriteSystem;
 
-#include "Sprite.h"
+import Render.Sprite;
+import <vector>;
 
-struct SpriteSheetEmitter;
+export struct SpriteSheetEmitter;
 
 //Sprite and text rendering for D3D11
-//RRef:http://www.d3dcoder.net/Data/Resources/SpritesAndText.pdf
+//Ref:http://www.d3dcoder.net/Data/Resources/SpritesAndText.pdf
 
 //SpriteSystem is used for rendering both widget and particle images (screen space vs world space).
 //Ideally you would separate on-screen image and particle rendering out, but the quad building and buffers
 //are generic enough to be shared between the two.
-namespace SpriteSystem
+export namespace SpriteSystem
 {
 	void Init();
 	void Reset();

@@ -1,11 +1,10 @@
-#include "vpch.h"
-#include "TextureSystem.h"
-#include <filesystem>
-#include "Core/SystemStates.h"
-#include "Render/RenderUtils.h"
-#include "Render/Texture2D.h"
-#include "Core/Log.h"
-#include "Asset/AssetBaseFolders.h"
+import Render.TextureSystem;
+import Core.Log;
+import Core.SystemStates;
+import Render.Texture2D;
+import <filesystem>;
+import <string>;
+import <unordered_map>;
 
 static SystemStates systemState = SystemStates::Unloaded;
 static std::unordered_map<std::string, std::unique_ptr<Texture2D>> texture2DMap;

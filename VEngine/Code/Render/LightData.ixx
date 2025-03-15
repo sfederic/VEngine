@@ -1,15 +1,15 @@
-#pragma once
+export module Render.LightData;
 
 #include <DirectXMath.h>
 
-enum class LightType : int
+export enum class LightType : int
 {
 	Directional = 0,
 	Point = 1,
 	Spot = 2
 };
 
-struct LightData
+export struct LightData
 {
 	DirectX::XMFLOAT4 position = DirectX::XMFLOAT4(0.f, 0.f, 0.f, 1.f);
 	DirectX::XMFLOAT4 direction = DirectX::XMFLOAT4(0.f, 0.f, 0.f, 0.f);

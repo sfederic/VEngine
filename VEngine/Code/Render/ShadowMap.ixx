@@ -1,21 +1,14 @@
-#pragma once
+export module Render.ShadowMap;
 
 #include <DirectXMath.h>
 #include <d3d11.h>
 #include <wrl.h>
 
-class DirectionalLightComponent;
-class SpotLightComponent;
-class SpatialComponent;
+export class DirectionalLightComponent;
+export class SpotLightComponent;
+export class SpatialComponent;
 
-//Basic tutorial for shadow mapping
-//REF: https://takinginitiative.wordpress.com/2011/05/15/directx10-tutorial-10-shadow-mapping/
-//REF: https://takinginitiative.wordpress.com/2011/05/25/directx10-tutorial-10-shadow-mapping-part-2/
-
-//Cool presentation on Silhouette maps. Old (2004), but nice to look at for ideas
-//REF: https://jankautz.com/courses/ShadowCourse/04-SilhouetteMap.pdf
-
-class ShadowMap
+export class ShadowMap
 {
 public:
 	void Create(int width_, int height_);

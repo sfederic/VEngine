@@ -1,10 +1,10 @@
-#pragma once
+export module Render.TextureSystem;
 
-#include <string>
+import <string>;
 
-class Texture2D;
+export class Texture2D;
 
-namespace TextureSystem
+export namespace TextureSystem
 {
 	extern std::wstring selectedTextureInEditor;
 

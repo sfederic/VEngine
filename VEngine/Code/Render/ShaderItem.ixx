@@ -1,16 +1,13 @@
-#pragma once
+export module Render.ShaderItem;
 
-#include <string>
-#include <Core/UID.h>
+#include <d3d11.h>
 
-class VertexShader;
-class PixelShader;
-struct ID3D11VertexShader;
-struct ID3D11PixelShader;
-struct ID3D11InputLayout;
+import Core.UID;
+
+import <string>;
 
 //Helper structure when finding shaders from Shader System
-class ShaderItem
+export class ShaderItem
 {
 public:
 	ShaderItem(std::string shaderItemName_,

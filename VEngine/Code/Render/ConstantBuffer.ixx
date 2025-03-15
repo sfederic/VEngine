@@ -1,11 +1,11 @@
-#pragma once
+export module Render.ConstantBuffer;
 
-#include "RenderUtils.h"
-#include "Core/Debug.h"
 #include <wrl.h>
 #include <d3d11.h>
 
-template <typename T>
+import Render.RenderUtils;
+
+export template <typename T>
 class ConstantBuffer
 {
 private:

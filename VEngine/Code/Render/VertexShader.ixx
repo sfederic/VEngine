@@ -1,10 +1,9 @@
-#pragma once
+export module Render.VertexShader;
 
 #include <wrl.h>
-#include "Shader.h"
+#include <d3d11.h>
 
-struct ID3D11VertexShader;
-struct ID3D11InputLayout;
+import Render.Shader;
 
 class VertexShader : public Shader
 {

@@ -1,5 +1,4 @@
-#include "vpch.h"
-#include "SpriteSystem.h"
+import Render.SpriteSystem;
 #include "Renderer.h"
 #include "RenderUtils.h"
 #include "TextureSystem.h"

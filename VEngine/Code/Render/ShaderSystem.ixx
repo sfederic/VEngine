@@ -1,11 +1,11 @@
-#pragma once
+export module Render.ShaderSystem;
 
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
-class VertexShader;
-class PixelShader;
-class ShaderItem;
+export class VertexShader;
+export class PixelShader;
+export class ShaderItem;
 
 namespace ShaderSystem
 {

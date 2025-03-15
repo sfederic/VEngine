@@ -1,11 +1,10 @@
-#pragma once
+export module Render.Texture2D;
 
-#include <string>
-#include <Core/UID.h>
 #include <wrl.h>
+#include <d3d11.h>
 
-struct ID3D11Resource;
-struct ID3D11ShaderResourceView;
+import Core.UID;
+import <string>;
 
 class Texture2D
 {

@@ -1,21 +1,12 @@
-#pragma once
+export module Render.Material;
 
-#include "Core/Properties.h"
-#include "Core/VEnum.h"
-#include "Render/ShaderData/MaterialShaderData.h"
+#include <DirectXMath.h>
+#include <d3d11.h>
 
-class Texture2D;
-class Sampler;
-class RastState;
-class BlendState;
-class VertexShader;
-class PixelShader;
-class ShaderItem;
+import Core.VEnum;
+import Core.UID;
 
-struct ID3D11VertexShader;
-struct ID3D11PixelShader;
-
-class Material
+export class Material
 {
 public:
 	static void InitEnumValues();

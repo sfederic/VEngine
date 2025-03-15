@@ -1,8 +1,8 @@
-#include "vpch.h"
-#include "ShaderItem.h"
-#include "VertexShader.h"
-#include "PixelShader.h"
-#include "ShaderSystem.h"
+import Render.ShaderItem;
+import Render.VertexShader;
+import Render.PixelShader;
+
+import <string>;
 
 ShaderItem::ShaderItem(std::string shaderItemName_,
 	std::wstring vertexShaderFilename_,

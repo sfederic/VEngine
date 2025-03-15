@@ -1,10 +1,12 @@
-#pragma once
+export module Render.Sprite;
 
-#include <string>
-#include "Core/Transform.h"
-#include "VRect.h"
+#include <DirectXMath.h>
 
-struct Sprite
+import Core.Transform;
+import Render.VRect;
+import <string>;
+
+export struct Sprite
 {
 	Transform transform;
 

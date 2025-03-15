@@ -1,6 +1,24 @@
-#include "vpch.h"
-#include "Device.h"
-#include "Core/Debug.h"
+export module Render.Device;
+
+#include <d3d11.h>
+#include <wrl.h>
+
+import Core.Debug;
+
+export class Device
+{
+public:
+	void Create();
+
+	auto Get() { return device.Get(); }
+	auto GetContext() { return deviceContext.Get(); }
+	auto GetDebugDevice() { return debugDevice.Get(); }
+
+private:
+	Microsoft::WRL::ComPtr<ID3D11Device> device;
+	Microsoft::WRL::ComPtr<ID3D11Debug> debugDevice;
+	Microsoft::WRL::ComPtr<ID3D11DeviceContext> deviceContext;
+};
 
 void Device::Create()
 {

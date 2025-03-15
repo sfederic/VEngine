@@ -1,5 +1,4 @@
-#include "vpch.h"
-#include "Texture2D.h"
+import Render.Texture2D;
 #include "Asset/AssetBaseFolders.h"
 #include "Core/Debug.h"
 #include "Render/RenderUtils.h"

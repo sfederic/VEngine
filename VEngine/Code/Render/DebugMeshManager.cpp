@@ -1,8 +1,8 @@
-#include "vpch.h"
-#include "DebugMeshManager.h"
-#include "Components/MeshComponent.h"
-#include <memory>
-#include <unordered_map>
+import Render.DebugMeshManager;
+
+import <memory>;
+import <string>;
+import <unordered_map>;
 
 std::unordered_map<std::string, std::unique_ptr<MeshComponent>> debugMeshes;
 

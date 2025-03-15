@@ -1,8 +1,11 @@
-#include "vpch.h"
-#include "VertexShader.h"
-#include "Renderer.h"
-#include "Core/Debug.h"
+import Render.VertexShader;
+import Render.Renderer;
+import Core.Debug;
+import <string>;
+import <vector>;
+
 #include <d3dcompiler.h>
+#include <d3d11.h>
 
 void VertexShader::Create(const std::wstring filename)
 {
@@ -78,4 +81,3 @@ void VertexShader::CreateInputLayoutDescFromVertexShaderSignature()
 
 	pReflector->Release();
 }
-

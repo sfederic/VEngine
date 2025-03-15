@@ -1,8 +1,8 @@
-#pragma once
+export module Render.BlendStates;
 
-#include <string>
+import <string>;
 
-struct BlendStates
+export struct BlendStates
 {
 	inline static const std::string Default = "default";
 	inline static const std::string Transparent = "transparent";

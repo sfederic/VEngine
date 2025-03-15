@@ -365,16 +365,10 @@
     <ClCompile Include="Code\Actors\CameraActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Render\Shader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Render\ShaderItem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Render\VertexShader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Render\PixelShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Core\Camera.cpp">
@@ -761,12 +755,6 @@
     <ClCompile Include="Code\Render\RastState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Render\Sampler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Render\IndexBuffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Editor\AssetIconListWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -890,15 +878,6 @@
     <ClCompile Include="Code\Render\DebugMeshManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Render\Swapchain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Render\DepthStencil.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Render\Device.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Core\EditorCamera.ixx" />
     <ClCompile Include="Code\Core\EditorCamera.cpp">
       <Filter>Source Files</Filter>
@@ -928,7 +907,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Render\Renderer.ixx" />
-    <ClInclude Include="Code\Render\ShaderSystem.h" />
+    <ClInclude Include="Code\Render\ShaderSystem.ixx" />
     <ClInclude Include="Code\Physics\Raycast.h" />
     <ClInclude Include="Code\Editor\AssetDock.h" />
     <ClInclude Include="Code\Editor\Console.h" />
@@ -1051,16 +1030,16 @@
     <ClInclude Include="Code\Components\BoxTriggerComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\Material.h">
+    <ClInclude Include="Code\Render\Material.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\TextureSystem.h">
+    <ClInclude Include="Code\Render\TextureSystem.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Render\RenderUtils.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\MaterialSystem.h">
+    <ClInclude Include="Code\Render\MaterialSystem.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Editor\PropertyWidgets\Float2Widget.h">
@@ -1105,7 +1084,7 @@
     <ClInclude Include="Code\Actors\DebugActors\DebugCamera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\ShadowMap.h">
+    <ClInclude Include="Code\Render\ShadowMap.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Editor\DialogueDock.h">
@@ -1120,7 +1099,7 @@
     <ClInclude Include="Code\Gameplay\GameInstance.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\SpriteSystem.h">
+    <ClInclude Include="Code\Render\SpriteSystem.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Billboard.h">
@@ -1228,10 +1207,10 @@
     <ClInclude Include="Code\Actors\PostProcessVolume.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\Texture2D.h">
+    <ClInclude Include="Code\Render\Texture2D.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\ConstantBuffer.h">
+    <ClInclude Include="Code\Render\ConstantBuffer.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Core\VFunction.h">
@@ -1255,16 +1234,16 @@
     <ClInclude Include="Code\Actors\CameraActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\ShaderItem.h">
+    <ClInclude Include="Code\Render\ShaderItem.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\VertexShader.h">
+    <ClInclude Include="Code\Render\VertexShader.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\PixelShader.h">
+    <ClInclude Include="Code\Render\PixelShader.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\Shader.h">
+    <ClInclude Include="Code\Render\Shader.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Core\Camera.ixx">
@@ -1276,7 +1255,7 @@
     <ClInclude Include="Code\Gameplay\WorldFunctions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\Sprite.h">
+    <ClInclude Include="Code\Render\Sprite.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\Colours.h">
@@ -1339,22 +1318,22 @@
     <ClInclude Include="Code\Animation\Animation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\Vertex.h">
+    <ClInclude Include="Code\Render\Vertex.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\Triangle.h">
+    <ClInclude Include="Code\Render\Triangle.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\VRect.h">
+    <ClInclude Include="Code\Render\VRect.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Render\RastStates.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\BlendStates.h">
+    <ClInclude Include="Code\Render\BlendStates.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\Line.h">
+    <ClInclude Include="Code\Render\Line.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Render\MeshData.ixx">
@@ -1363,13 +1342,13 @@
     <ClInclude Include="Code\Render\RenderPropertyStructs.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\MeshDataProxy.h">
+    <ClInclude Include="Code\Render\MeshDataProxy.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Render\ShaderData\ShaderMatrices.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\LightData.h">
+    <ClInclude Include="Code\Render\LightData.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Render\ShaderData\ShaderLights.h">
@@ -1744,16 +1723,16 @@
     <ClInclude Include="Code\Render\BlendState.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\VertexBuffer.h">
+    <ClInclude Include="Code\Render\VertexBuffer.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Render\RastState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\Sampler.h">
+    <ClInclude Include="Code\Render\Sampler.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\IndexBuffer.h">
+    <ClInclude Include="Code\Render\IndexBuffer.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Editor\AssetIconListWidget.h">
@@ -1906,16 +1885,16 @@
     <ClInclude Include="Code\Editor\DebugNotification.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\DebugMeshManager.h">
+    <ClInclude Include="Code\Render\DebugMeshManager.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\Swapchain.h">
+    <ClInclude Include="Code\Render\Swapchain.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\DepthStencil.h">
+    <ClInclude Include="Code\Render\DepthStencil.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Device.h">
+    <ClInclude Include="Code\Render\Device.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

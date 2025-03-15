@@ -1,6 +1,27 @@
-#include "vpch.h"
-#include "IndexBuffer.h"
-#include "Render/RenderUtils.h"
+export module Render.INdexBuffer;
+
+#include <d3d11.h>
+#include <wrl.h>
+
+import <vector>;
+
+import Render.RenderUtils;
+import Render.MeshData;
+
+export class IndexBuffer
+{
+public:
+	void CreateDefault(std::vector<MeshData::indexDataType>& indices);
+	void CreateDynamic(std::vector<MeshData::indexDataType>& indices);
+	void CreateDynamicCapped(std::vector<MeshData::indexDataType>& indexData, uint32_t cappedSize);
+	void Destroy();
+
+	auto GetDataAddress() { return data.GetAddressOf(); }
+	auto GetData() { return data.Get(); }
+
+private:
+	Microsoft::WRL::ComPtr<ID3D11Buffer> data;
+};
 
 void IndexBuffer::CreateDefault(std::vector<MeshData::indexDataType>& indices)
 {

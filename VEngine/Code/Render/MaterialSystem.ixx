@@ -1,11 +1,12 @@
-#pragma once
+export module Render.MaterialSystem;
 
-#include <string>
-#include "Core/UID.h"
+import Core.UID;
 
-class Material;
+import <string>;
 
-namespace MaterialSystem
+export class Material;
+
+export namespace MaterialSystem
 {
 	extern std::string selectedMaterialInEditor;
 

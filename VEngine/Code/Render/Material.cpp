@@ -1,19 +1,4 @@
-#include "vpch.h"
-#include "Material.h"
-#include "Renderer.h"
-#include "ShaderSystem.h"
-#include "TextureSystem.h"
-#include "MaterialSystem.h"
-#include "Core/WorldEditor.h"
-#include "Actors/Actor.h"
-#include "Components/MeshComponent.h"
-#include "Core/Log.h"
-#include "ShaderItem.h"
-#include "RastStates.h"
-#include "RastState.h"
-#include "BlendStates.h"
-#include "BlendState.h"
-#include "Audio/MaterialAudioType.h"
+import Render.Material;
 
 static VEnum rastStates;
 static VEnum blendStates;

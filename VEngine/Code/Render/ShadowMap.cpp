@@ -1,11 +1,14 @@
-#include "vpch.h"
-#include "ShadowMap.h"
-#include "Core/Debug.h"
+import Render.ShadowMap;
+import Core.Debug;
+import Core.VMath;
+import Render.Renderer;
+
 #include <cassert>
-#include "Core/VMath.h"
+#include <DirectXMath.h>
 #include "Components/Lights/DirectionalLightComponent.h"
 #include "Components/Lights/SpotLightComponent.h"
-#include "Renderer.h"
+
+using namespace DirectX;
 
 void ShadowMap::Create(int width_, int height_)
 {

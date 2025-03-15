@@ -1,9 +1,12 @@
-#include "vpch.h"
-#include "MaterialSystem.h"
-#include "Material.h"
-#include "Core/Serialiser.h"
-#include "Core/Deserialiser.h"
-#include "Core/SystemStates.h"
+import Render.MaterialSystem;
+import Render.Material;
+import Core.SystemStates;
+import Core.Deserialiser;
+import Core.UID;
+
+import <unordered_map>;
+import <string>;
+import <memory>;
 
 static SystemStates systemState = SystemStates::Unloaded;
 std::unordered_map<UID, std::unique_ptr<Material>> materials;

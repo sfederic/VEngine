@@ -2,9 +2,13 @@ export module Core.Log;
 
 #include <Windows.h>
 
+import Editor.Editor;
 import <cstdarg>;
 import <fstream>;
 import <chrono>;
+import <iostream>;
+import <iomanip>;
+import <ctime>;
 
 void Log(std::string logMessage, ...)
 {
@@ -19,7 +23,10 @@ void Log(std::string logMessage, ...)
 
 	std::ofstream os;
 	os.open("Log.txt", std::ios_base::app);
-	os << std::chrono::system_clock::now() << " | " << msg << std::endl;
+
+	auto now = std::chrono::system_clock::now();
+	std::time_t now_c = std::chrono::system_clock::to_time_t(now);
+	os << std::put_time(std::localtime(&now_c), "%F %T") << " | " << msg << std::endl;
 
 	OutputDebugString(logMessage.c_str());
 }
@@ -37,5 +44,8 @@ void Log(std::wstring logMessage, ...)
 
 	std::wofstream os;
 	os.open("Log.txt", std::ios_base::app);
-	os << std::chrono::system_clock::now() << " | " << msg << std::endl;
+
+	auto now = std::chrono::system_clock::now();
+	std::time_t now_c = std::chrono::system_clock::to_time_t(now);
+	os << std::put_time(std::localtime(&now_c), "%F %T") << " | " << msg << std::endl;
 }

@@ -1,8 +1,8 @@
-#pragma once
+export module Render.Vertex;
 
 #include <DirectXMath.h>
 
-struct Vertex
+export struct Vertex
 {
 	DirectX::XMFLOAT4 colour = DirectX::XMFLOAT4(1.f, 1.f, 1.f, 1.f);
 	DirectX::XMFLOAT3 pos = DirectX::XMFLOAT3(0.f, 0.f, 0.f);

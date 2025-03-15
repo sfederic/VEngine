@@ -1,6 +1,6 @@
-#pragma once
+export module Render.VRect;
 
-struct VRect
+export struct VRect
 {
 	int left = 0;
 	int top = 0;

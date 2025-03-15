@@ -1,9 +1,11 @@
-#include "vpch.h"
-#include "ShaderSystem.h"
-#include <filesystem>
-#include "VertexShader.h"
-#include "PixelShader.h"
-#include "ShaderItem.h"
+import Render.ShaderSystem;
+import Render.VertexShader;
+import Render.PixelShader;
+import Render.ShaderItem;
+
+import <filesystem>;
+import <unordered_map>;
+import <memory>;
 
 void CompileAllShadersFromFile();
 
