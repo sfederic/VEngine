@@ -120,6 +120,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Code\Actors\Actor.ixx" />
+    <ClCompile Include="Code\Actors\ActorSystemDefine.ixx" />
     <ClCompile Include="Code\Actors\Game\MapProjectionCrystal.cpp" />
     <ClCompile Include="Code\Actors\Game\BombRock.cpp" />
     <ClCompile Include="Code\Commands\UndoActorDeleteCommand.cpp" />
@@ -172,13 +173,10 @@
     <ClCompile Include="Code\Actors\Game\SavePoint.cpp" />
     <ClCompile Include="Code\Actors\Game\TitleScreenActor.cpp" />
     <ClCompile Include="Code\Actors\Game\Unit.cpp" />
-    <ClCompile Include="Code\Animation\Animation.cpp" />
-    <ClCompile Include="Code\Animation\Joint.cpp" />
     <ClCompile Include="Code\Actors\SplitMesh.cpp" />
     <ClCompile Include="Code\Components\Game\ConditionComponent.cpp" />
     <ClCompile Include="Code\Components\Game\DialogueComponent.cpp" />
     <ClCompile Include="Code\Components\SocketMeshComponent.cpp" />
-    <ClCompile Include="Code\Actors\AnimCube.cpp" />
     <ClCompile Include="Code\Actors\DebugNoteActor.cpp" />
     <ClCompile Include="Code\Actors\CameraActor.cpp" />
     <ClCompile Include="Code\Core\Camera.cpp" />
@@ -381,7 +379,7 @@
     <ClCompile Include="Code\Actors\Game\GridActorTeleporter.cpp" />
     <ClCompile Include="Code\Actors\Game\PlayerTeleporter.cpp" />
     <ClCompile Include="Code\Actors\SpherePhysicsActor.cpp" />
-    <ClCompile Include="Code\Actors\FruitBasket.cpp" />
+    <ClCompile Include="Code\Actors\Game\FruitBasket.cpp" />
     <ClCompile Include="Code\Localisation\Localisation.cpp" />
     <ClCompile Include="Code\Render\DebugMeshManager.cpp" />
     <ClInclude Include="Code\Actors\Game\MapProjectionCrystal.h" />
@@ -403,8 +401,8 @@
     <ClInclude Include="Code\Editor\Sequencer\SequenceEntryTypes.h" />
     <ClInclude Include="Code\Localisation\Locales.h" />
     <ClInclude Include="Code\Localisation\LocalisationFiles.h" />
-    <ClInclude Include="Code\Physics\PhysicsActorShape.h" />
-    <ClInclude Include="Code\Physics\PhysicsType.h" />
+    <ClInclude Include="Code\Physics\PhysicsActorShape.ixx" />
+    <ClInclude Include="Code\Physics\PhysicsType.ixx" />
     <ClInclude Include="Code\Render\BlendState.ixx" />
     <ClInclude Include="Code\Render\ShaderData\ShaderCameraData.h" />
     <ClInclude Include="Code\Render\ShaderData\ShaderLightProbeData.h" />
@@ -436,7 +434,7 @@
     <ClInclude Include="Code\Actors\Game\SavePoint.h" />
     <ClInclude Include="Code\Actors\Game\TitleScreenActor.h" />
     <ClInclude Include="Code\Actors\Game\Unit.h" />
-    <ClInclude Include="Code\Animation\AnimFrame.h" />
+    <ClInclude Include="Code\Animation\AnimFrame.ixx" />
     <ClInclude Include="Code\Asset\AnimationAssetHeader.h" />
     <ClInclude Include="Code\Asset\VertexColourData.h" />
     <ClInclude Include="Code\Asset\VertexColourHeader.h" />
@@ -451,9 +449,9 @@
     <ClInclude Include="Code\Gameplay\ForwardFace.h" />
     <ClInclude Include="Code\Gameplay\GridNode.h" />
     <ClInclude Include="Code\Render\BlendStates.ixx" />
-    <ClInclude Include="Code\Animation\BoneWeights.h" />
-    <ClInclude Include="Code\Animation\Animation.h" />
-    <ClInclude Include="Code\Animation\Joint.h" />
+    <ClInclude Include="Code\Animation\BoneWeights.ixx" />
+    <ClInclude Include="Code\Animation\Animation.ixx" />
+    <ClInclude Include="Code\Animation\Joint.ixx" />
     <ClInclude Include="Code\Render\LightData.ixx" />
     <ClInclude Include="Code\Render\Line.ixx" />
     <ClInclude Include="Code\Render\RenderPropertyStructs.ixx" />
@@ -473,7 +471,7 @@
     <ClInclude Include="Code\Actors\SplitMesh.h" />
     <ClInclude Include="Code\Components\SocketMeshComponent.h" />
     <ClInclude Include="Code\Gameplay\IMeshSliceReaction.h" />
-    <ClInclude Include="Code\Actors\AnimCube.h" />
+    <ClInclude Include="Code\Actors\AnimCube.ixx" />
     <ClInclude Include="Code\Actors\CameraActor.h" />
     <ClInclude Include="Code\Asset\AssetFileExtensions.h" />
     <ClInclude Include="Code\Asset\AssetBaseFolders.h" />
@@ -500,11 +498,10 @@
     <ClInclude Include="Code\Audio\AudioBase.h" />
     <ClInclude Include="Code\Audio\AudioChannel.h" />
     <ClInclude Include="Code\Components\BoxTriggerComponent.h" />
-    <ClInclude Include="Code\Animation\Skeleton.h" />
+    <ClInclude Include="Code\Animation\Skeleton.ixx" />
     <ClInclude Include="Code\Actors\ActorSystem.ixx" />
     <ClInclude Include="Code\Actors\ActorSystemCache.ixx" />
     <ClInclude Include="Code\Actors\IActorSystem.ixx" />
-    <ClCompile Include="Code\Animation\Skeleton.cpp" />
     <ClCompile Include="Code\Actors\Actor.cpp" />
     <ClCompile Include="Code\Audio\AudioSystem.cpp" />
     <ClInclude Include="Code\Audio\AudioSystem.h" />
@@ -518,7 +515,7 @@
     <ClInclude Include="Code\Components\ComponentSystem.ixx" />
     <ClInclude Include="Code\Components\IComponentSystem.ixx" />
     <ClCompile Include="Code\Components\MeshComponent.cpp" />
-    <ClInclude Include="Code\Components\MeshComponent.h" />
+    <ClInclude Include="Code\Components\MeshComponent.ixx" />
     <ClCompile Include="Code\Core\Debug.cpp" />
     <ClCompile Include="Code\Editor\Console.cpp" />
     <ClInclude Include="Code\Editor\Console.h" />
@@ -618,7 +615,7 @@
     <ClInclude Include="Code\Core\VFunction.h" />
     <ClInclude Include="Code\Core\VMath.ixx" />
     <ClCompile Include="Code\Physics\Raycast.cpp" />
-    <ClInclude Include="Code\Physics\Raycast.h" />
+    <ClInclude Include="Code\Physics\Raycast.ixx" />
     <ClCompile Include="Code\Render\ShaderSystem.cpp" />
     <ClCompile Include="Code\Core\World.cpp" />
     <ClCompile Include="Code\Core\WorldEditor.cpp" />
@@ -680,7 +677,7 @@
     <ClInclude Include="Code\Editor\PropertyWidgets\MeshComponentDataWidget.h" />
     <ClInclude Include="Code\Editor\PropertyWidgets\WStringWidget.h" />
     <ClInclude Include="Code\Core\Log.h" />
-    <ClInclude Include="Code\Physics\PhysicsSystem.h" />
+    <ClInclude Include="Code\Physics\PhysicsSystem.ixx" />
     <ClInclude Include="Code\Components\DestructibleMeshComponent.h" />
     <ClInclude Include="Code\Actors\DestructibleActor.h" />
     <ClInclude Include="Code\UI\ScreenFadeWidget.h" />
@@ -761,7 +758,7 @@
     <ClInclude Include="Code\Actors\Game\InvisibleGridActor.h" />
     <ClInclude Include="Code\Actors\Game\PowerCrystalLampPost.h" />
     <ClInclude Include="Code\Actors\Game\PowerCrystalSlot.h" />
-    <ClInclude Include="Code\Physics\HitResult.h" />
+    <ClInclude Include="Code\Physics\HitResult.ixx" />
     <ClInclude Include="Code\Actors\Game\PlayerCameraTrigger.h" />
     <ClInclude Include="Code\Actors\EmptyActor.h" />
     <ClInclude Include="Code\UI\UVPaintWidget.h" />
@@ -804,7 +801,7 @@
     <ClInclude Include="Code\Actors\Game\GridActorTeleporter.h" />
     <ClInclude Include="Code\Actors\Game\PlayerTeleporter.h" />
     <ClInclude Include="Code\Actors\SpherePhysicsActor.h" />
-    <ClInclude Include="Code\Actors\FruitBasket.h" />
+    <ClInclude Include="Code\Actors\Game\FruitBasket.h" />
     <ClInclude Include="Code\Localisation\Localisation.h" />
     <ClInclude Include="Code\Render\DebugMeshManager.ixx" />
     <ClInclude Include="Code\Render\Swapchain.ixx" />

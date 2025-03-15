@@ -6,10 +6,10 @@ import <unordered_map>;
 
 import Core.UID;
 
-export class IActorSystem;
-export class IComponentSystem;
-export class Component;
-export class Actor;
+class IActorSystem;
+class IComponentSystem;
+class Component;
+class Actor;
 
 export class World
 {

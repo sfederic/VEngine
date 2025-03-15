@@ -4,6 +4,7 @@ import <string>;
 import <map>;
 import <typeindex>;
 import <vector>;
+import <cassert>;
 
 import Core.Property;
 import Core.UID;

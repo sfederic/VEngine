@@ -237,7 +237,3 @@ public:
 private:
 	std::vector<std::unique_ptr<T>> components;
 };
-
-#define COMPONENT_SYSTEM(type) \
-inline static ComponentSystem<type> system; \
-virtual void Remove() override { system.Remove(GetIndex()); } \

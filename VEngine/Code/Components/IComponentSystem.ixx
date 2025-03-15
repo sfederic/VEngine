@@ -5,12 +5,12 @@ import <string>;
 
 import Core.SystemStates;
 
-export class Component;
-export class Actor;
-export class Serialiser;
-export class BinarySerialiser;
-export class Deserialiser;
-export class BinaryDeserialiser;
+class Component;
+class Actor;
+class Serialiser;
+class BinarySerialiser;
+class Deserialiser;
+class BinaryDeserialiser;
 
 export class IComponentSystem
 {

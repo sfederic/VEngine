@@ -8,7 +8,7 @@ import <unordered_map>;
 
 import Core.VAssert;
 
-export class IComponentSystem;
+class IComponentSystem;
 
 export class ComponentSystemCache
 {

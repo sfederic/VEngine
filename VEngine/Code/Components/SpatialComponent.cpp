@@ -1,7 +1,13 @@
-#include "vpch.h"
-#include "SpatialComponent.h"
-#include "Core/VMath.h"
-#include "Editor/Editor.h"
+import Components.SpatialComponent;
+import Core.VMath;
+import Core.Transform;
+import Editor.Editor;
+import <cassert>;
+import <vector>;
+
+#include <DirectXMath.h>
+
+using namespace DirectX;
 
 void SpatialComponent::AddChild(SpatialComponent* component)
 {

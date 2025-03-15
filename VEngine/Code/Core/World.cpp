@@ -1,8 +1,10 @@
 import Core.World;
-import Core.Core;
 import Actors.ActorSystemCache;
-import Core.Log;
-import Components.IComponentSystem;
+import Core.FileSystem;
+import Core.UID;
+import Core.Core;
+import Render.TextureSystem;
+import Render.DebugMeshManager;
 
 void World::Init()
 {

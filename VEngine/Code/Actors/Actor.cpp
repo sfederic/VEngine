@@ -1,7 +1,6 @@
-#include <DirectXMath.h>
-
 import Actors.Actor;
-import Core.World;
+
+#include <DirectXMath.h>
 
 using namespace DirectX;
 

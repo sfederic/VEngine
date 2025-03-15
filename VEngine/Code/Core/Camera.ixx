@@ -1,8 +1,8 @@
 export module Core.Camera;
 
-export class Actor;
-export class EditorCamera;
-export class CameraComponent;
+class Actor;
+class EditorCamera;
+class CameraComponent;
 
 export namespace Camera
 {

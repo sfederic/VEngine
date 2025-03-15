@@ -1,4 +1,4 @@
-export module Components.ComponentSystemWrapper;
+export module Components.ComponentSystemDefine;
 
 import Components.ComponentSystem;
 

@@ -6,7 +6,7 @@ import Components.SpatialComponent;
 import Components.ComponentSystemDefine;
 import Core.Properties;
 
-export class Actor;
+class Actor;
 
 export class CameraComponent : public SpatialComponent, public ComponentSystemDefine<CameraComponent>
 {

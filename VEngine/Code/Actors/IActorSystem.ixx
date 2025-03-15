@@ -3,12 +3,12 @@ export module Actors.IActorSystem;
 import <string>;
 import <vector>;
 
-export class Actor;
-export class Serialiser;
-export class BinarySerialiser;
-export class Deserialiser;
-export class BinaryDeserialiser;
-export struct Transform;
+class Actor;
+class Serialiser;
+class BinarySerialiser;
+class Deserialiser;
+class BinaryDeserialiser;
+struct Transform;
 
 export class IActorSystem
 {

@@ -6,7 +6,7 @@ import <vector>;
 import <unordered_map>;
 import <optional>;
 
-export class IActorSystem;
+class IActorSystem;
 
 export class ActorSystemCache
 {

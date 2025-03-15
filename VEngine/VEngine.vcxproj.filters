@@ -155,9 +155,6 @@
     <ClCompile Include="Code\Editor\PropertyWidgets\VectorWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Animation\Skeleton.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\UI\Widget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -386,9 +383,6 @@
     <ClCompile Include="Code\Actors\SkyBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\AnimCube.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Components\SkeletalMeshComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -417,12 +411,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Components\MouseRotateComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Animation\Joint.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Animation\Animation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Render\ShaderData\ShaderMatrices.cpp">
@@ -866,7 +854,7 @@
     <ClCompile Include="Code\Actors\SpherePhysicsActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\FruitBasket.cpp">
+    <ClCompile Include="Code\Actors\Game\FruitBasket.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Commands\UndoActorDeleteCommand.cpp">
@@ -890,6 +878,7 @@
     <ClCompile Include="Code\Core\FileSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Actors\ActorSystemDefine.ixx" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\main.cpp">
@@ -908,7 +897,7 @@
     </ClInclude>
     <ClInclude Include="Code\Render\Renderer.ixx" />
     <ClInclude Include="Code\Render\ShaderSystem.ixx" />
-    <ClInclude Include="Code\Physics\Raycast.h" />
+    <ClInclude Include="Code\Physics\Raycast.ixx" />
     <ClInclude Include="Code\Editor\AssetDock.h" />
     <ClInclude Include="Code\Editor\Console.h" />
     <ClInclude Include="Code\Editor\DebugMenu.h" />
@@ -925,7 +914,7 @@
     <ClInclude Include="Code\Components\Component.ixx" />
     <ClInclude Include="Code\Components\ComponentSystem.ixx" />
     <ClInclude Include="Code\Components\IComponentSystem.ixx" />
-    <ClInclude Include="Code\Components\MeshComponent.h" />
+    <ClInclude Include="Code\Components\MeshComponent.ixx" />
     <ClInclude Include="Code\Commands\CommandSystem.h" />
     <ClInclude Include="Code\Commands\Command.h" />
     <ClInclude Include="Code\Commands\ICommand.h" />
@@ -982,7 +971,7 @@
     <ClInclude Include="Code\Editor\PropertyWidgets\VectorWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Animation\Skeleton.h">
+    <ClInclude Include="Code\Animation\Skeleton.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\Widget.h">
@@ -1156,7 +1145,7 @@
     <ClInclude Include="Code\Physics\CollisionLayers.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Physics\PhysicsSystem.h">
+    <ClInclude Include="Code\Physics\PhysicsSystem.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Components\DestructibleMeshComponent.h">
@@ -1270,7 +1259,7 @@
     <ClInclude Include="Code\Actors\SkyBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\AnimCube.h">
+    <ClInclude Include="Code\Actors\AnimCube.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Components\SkeletalMeshComponent.h">
@@ -1306,16 +1295,16 @@
     <ClInclude Include="Code\Components\MouseRotateComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Animation\BoneWeights.h">
+    <ClInclude Include="Code\Animation\BoneWeights.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Animation\AnimFrame.h">
+    <ClInclude Include="Code\Animation\AnimFrame.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Animation\Joint.h">
+    <ClInclude Include="Code\Animation\Joint.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Animation\Animation.h">
+    <ClInclude Include="Code\Animation\Animation.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Render\Vertex.ixx">
@@ -1657,7 +1646,7 @@
     <ClInclude Include="Code\Gameplay\BattleEnums.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Physics\HitResult.h">
+    <ClInclude Include="Code\Physics\HitResult.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\PlayerCameraTrigger.h">
@@ -1858,16 +1847,16 @@
     <ClInclude Include="Code\Actors\Game\PlayerTeleporter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Physics\PhysicsActorShape.h">
+    <ClInclude Include="Code\Physics\PhysicsActorShape.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Physics\PhysicsType.h">
+    <ClInclude Include="Code\Physics\PhysicsType.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\SpherePhysicsActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\FruitBasket.h">
+    <ClInclude Include="Code\Actors\Game\FruitBasket.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Commands\UndoActorDeleteCommand.h">

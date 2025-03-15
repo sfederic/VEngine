@@ -1,18 +1,17 @@
-#pragma once
+export module Components.MeshComponent;
 
-#include "SpatialComponent.h"
-#include "ComponentSystem.h"
-#include "Render/ShaderItem.h"
-#include "Render/VertexBuffer.h"
-#include "Render/MeshDataProxy.h"
-#include "Physics/PhysicsActorShape.h"
+#include <DirectXMath.h>
+
+import Components.SpatialComponent;
+import <vector>;
+import <string>;
 
 class Material;
 class Skeleton;
 class RastState;
 class BlendState;
 
-class MeshComponent : public SpatialComponent
+export class MeshComponent : public SpatialComponent
 {
 public:
 	COMPONENT_SYSTEM(MeshComponent);
@@ -45,8 +44,8 @@ public:
 	void SetShaderItem(std::string shaderItemName);
 	std::string GetShaderItemName();
 
-	void SetAmbientColour(XMFLOAT3 ambientColour);
-	XMFLOAT3 GetAmbientColour();
+	void SetAmbientColour(DirectX::XMFLOAT3 ambientColour);
+	DirectX::XMFLOAT3 GetAmbientColour();
 	void SetAlpha(float alpha);
 	float GetAlpha();
 
@@ -54,7 +53,7 @@ public:
 	bool IsUsingTexture();
 
 	void SetUVRotationSpeed(float speed);
-	void SetUVOffsetSpeed(XMFLOAT2 speed);
+	void SetUVOffsetSpeed(DirectX::XMFLOAT2 speed);
 
 	VertexBuffer& GetVertexBuffer();
 	void CreateVertexBuffer();
@@ -63,7 +62,7 @@ public:
 	Material& GetMaterial() { return *material; }
 
 	std::vector<Vertex>& GetAllVertices();
-	std::vector<XMFLOAT3> GetAllVertexPositions();
+	std::vector<DirectX::XMFLOAT3> GetAllVertexPositions();
 
 	void SetCollisionMeshFilename(std::string_view filename) { collisionMeshFilename = filename; }
 	std::string GetCollisionMeshFilename() const { return collisionMeshFilename; }
@@ -81,7 +80,7 @@ public:
 	bool IsPhysicsStatic() const { return isPhysicsStatic; }
 
 	void ReCreateAsPhysicsActor(bool newPhysicsStaticValue);
-	void AddForce(XMVECTOR direction);
+	void AddForce(DirectX::XMVECTOR direction);
 
 	void SetPhysicsShape(PhysicsActorShape shape) { physicsShape = shape; }
 	auto GetPhysicsShape() const { return physicsShape; }

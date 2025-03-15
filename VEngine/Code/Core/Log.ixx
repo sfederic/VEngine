@@ -1,8 +1,7 @@
 export module Core.Log;
 
-#include <Windows.h>
-
 import Editor.Editor;
+import Editor.IEditor;
 import <cstdarg>;
 import <fstream>;
 import <chrono>;
@@ -10,7 +9,7 @@ import <iostream>;
 import <iomanip>;
 import <ctime>;
 
-void Log(std::string logMessage, ...)
+export void Log(std::string logMessage, ...)
 {
 	va_list args;
 	va_start(args, logMessage.c_str());
@@ -27,11 +26,9 @@ void Log(std::string logMessage, ...)
 	auto now = std::chrono::system_clock::now();
 	std::time_t now_c = std::chrono::system_clock::to_time_t(now);
 	os << std::put_time(std::localtime(&now_c), "%F %T") << " | " << msg << std::endl;
-
-	OutputDebugString(logMessage.c_str());
 }
 
-void Log(std::wstring logMessage, ...)
+export void Log(std::wstring logMessage, ...)
 {
 	va_list args;
 	va_start(args, logMessage.c_str());

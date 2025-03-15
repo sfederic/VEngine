@@ -1,7 +1,9 @@
-#include <DirectXCollision.h>
-
 export module Components.SpatialComponent;
 
+#include <DirectXCollision.h>
+
+import Core.Component;
+import Core.Properties;
 import Core.Transform;
 import Physics.CollisionLayers;
 

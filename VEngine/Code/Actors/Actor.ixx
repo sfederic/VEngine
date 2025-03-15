@@ -11,9 +11,9 @@ import Core.Transform;
 import Core.Properties;
 import Core.UID;
 
-export class Component;
-export class SpatialComponent;
-export class IActorSystem;
+class Component;
+class SpatialComponent;
+class IActorSystem;
 
 export class Actor
 {

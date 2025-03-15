@@ -6,8 +6,8 @@ import <set>;
 import Core.Properties;
 import Core.UID;
 
-export class IComponentSystem;
-export class Actor;
+class IComponentSystem;
+class Actor;
 
 export class Component
 {
