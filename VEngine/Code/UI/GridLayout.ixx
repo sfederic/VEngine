@@ -1,11 +1,11 @@
-#pragma once
+export module UI.GridLayout;
 
-#include <vector>
-#include "Layout.h"
+import UI.Layout;
+import <vector>;
 
 //Note that the vernacular with this class can be a bit funny with how its referencing columns, that being
 //that a 'column' is more like a single 'entry' along a row rather than an entire literal column of data.
-class GridLayout
+export class GridLayout
 {
 public:
 	Layout GetLayoutAt(int rowIndex, int columnIndex)

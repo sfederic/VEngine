@@ -1,14 +1,16 @@
-#pragma once
+export module UI.Widget;
 
-#include <string>
-#include <vector>
 #include <DirectXMath.h>
-#include "Layout.h"
-#include "Core/UID.h"
-#include "Colours.h"
+#include <dcommon.h>
+
+import UI.Layout;
+import UI.Colours;
+import Core.UID;
+import <string>;
+import <vector>;
 
 //Base widget class for in-game UI.
-class Widget
+export class Widget
 {
 public:
 	enum class TextAlign

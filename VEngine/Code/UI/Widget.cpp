@@ -1,15 +1,4 @@
-#include "vpch.h"
-#include "Widget.h"
-#include "UISystem.h"
-#include "Core/Input.h"
-#include "Core/Timer.h"
-#include "Core/VMath.h"
-#include "Core/VString.h"
-#include "Editor/Editor.h"
-#include "Render/Renderer.h"
-#include "Render/SpriteSystem.h"
-#include "Render/Texture2D.h"
-#include "Render/TextureSystem.h"
+import UI.Widget;
 
 void Widget::End()
 {

@@ -931,7 +931,7 @@
     <ClInclude Include="Code\Core\Properties.ixx" />
     <ClInclude Include="Code\Core\Timer.ixx" />
     <ClInclude Include="Code\Core\Transform.ixx" />
-    <ClInclude Include="Code\UI\UISystem.h" />
+    <ClInclude Include="Code\UI\UISystem.ixx" />
     <ClInclude Include="Code\Editor\TransformGizmo.h" />
     <ClInclude Include="Code\Core\World.ixx" />
     <ClInclude Include="Code\Core\WorldEditor.ixx" />
@@ -971,7 +971,7 @@
     <ClInclude Include="Code\Animation\Skeleton.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\UI\Widget.h">
+    <ClInclude Include="Code\UI\Widget.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Core\VString.ixx">
@@ -1244,10 +1244,10 @@
     <ClInclude Include="Code\Render\Sprite.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\UI\Colours.h">
+    <ClInclude Include="Code\UI\Colours.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\UI\Layout.h">
+    <ClInclude Include="Code\UI\Layout.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Gameplay\GameplayTags.h">
@@ -1676,7 +1676,7 @@
     <ClInclude Include="Code\Actors\Game\TwinOrientationLock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\UI\GridLayout.h">
+    <ClInclude Include="Code\UI\GridLayout.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\OcclusionWall.h">

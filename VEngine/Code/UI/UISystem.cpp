@@ -1,5 +1,4 @@
-#include "vpch.h"
-#include "UISystem.h"
+import UI.UISystem;
 #include <cassert>
 #include <dxgi1_6.h>
 #include "Core/Debug.h"
@@ -158,7 +157,7 @@ void UISystem::DrawAllWidgets(float deltaTime)
 void EndAllWidgets()
 {
 	//Todo: maybe throw a DEBUG #ifdef here. Clearing std::vectors every frame for widgets might not be great.
-	
+
 	//Same for loop use case as UISystem::DrawAllWidgets()
 	for (int i = 0; i < UISystem::widgetsInViewport.size(); i++)
 	{

@@ -1,17 +1,20 @@
-#pragma once
+export module UI.UISystem;
 
-#include <string>
-#include <vector>
-#include <unordered_map>
-#include <memory>
-#include "Layout.h"
-#include "Colours.h"
-#include "Widget.h"
+import Core.UID;
+import UI.Widget;
+import UI.Layout;
+import <string>;
+import <vector>;
+import <unordered_map>;
+import <memory>;
+
+#include <dcommon.h>
+#include <d2d1.h>
 
 class ScreenFadeWidget;
 class MapInfoWidget;
 
-namespace UISystem
+export namespace UISystem
 {
 	extern std::unordered_map<UID, std::unique_ptr<Widget>> widgets;
 	extern std::vector<Widget*> widgetsInViewport;

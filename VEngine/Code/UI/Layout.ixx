@@ -1,4 +1,4 @@
-#pragma once
+export module UI.Layout;
 
 #include <dcommon.h>
 

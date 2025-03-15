@@ -1,8 +1,8 @@
-#pragma once
+export module UI.Colours;
 
 #include <d2d1_1.h>
 
-namespace Colours
+export namespace Colours
 {
 	constexpr D2D1_COLOR_F White = { 1.f, 1.f, 1.f, 1.f };
 	constexpr D2D1_COLOR_F Black = { 0.f, 0.f, 0.f, 1.f };

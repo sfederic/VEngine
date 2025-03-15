@@ -482,7 +482,7 @@
     <ClInclude Include="Code\Core\IFunction.h" />
     <ClInclude Include="Code\Particle\ParticleData.h" />
     <ClInclude Include="Code\Core\Property.ixx" />
-    <ClInclude Include="Code\UI\Colours.h" />
+    <ClInclude Include="Code\UI\Colours.ixx" />
     <ClInclude Include="Code\Render\PixelShader.ixx" />
     <ClInclude Include="Code\Render\Shader.ixx" />
     <ClInclude Include="Code\Render\ShaderItem.ixx" />
@@ -609,7 +609,7 @@
     <ClInclude Include="Code\UI\Game\InteractWidget.h" />
     <ClInclude Include="Code\UI\Game\MapInfoWidget.h" />
     <ClInclude Include="Code\UI\Game\PopupWidget.h" />
-    <ClInclude Include="Code\UI\Layout.h" />
+    <ClInclude Include="Code\UI\Layout.ixx" />
     <ClInclude Include="Code\Core\VEnum.ixx" />
     <ClInclude Include="Code\Core\VFunction.h" />
     <ClInclude Include="Code\Core\VMath.ixx" />
@@ -632,12 +632,12 @@
     <ClInclude Include="Code\Core\Transform.ixx" />
     <ClCompile Include="Code\Editor\TransformGizmo.cpp" />
     <ClInclude Include="Code\Editor\TransformGizmo.h" />
-    <ClInclude Include="Code\UI\UISystem.h" />
+    <ClInclude Include="Code\UI\UISystem.ixx" />
     <ClInclude Include="Code\Core\World.ixx" />
     <ClInclude Include="Code\Core\WorldEditor.ixx" />
     <ClCompile Include="Code\UI\UISystem.cpp" />
     <ClInclude Include="Code\Core\VString.ixx" />
-    <ClInclude Include="Code\UI\Widget.h" />
+    <ClInclude Include="Code\UI\Widget.ixx" />
     <ClInclude Include="Code\Components\SpatialComponent.ixx" />
     <ClInclude Include="Code\Actors\DebugActors\DebugBox.h" />
     <ClInclude Include="Code\Core\FileSystem.ixx" />
@@ -768,7 +768,7 @@
     <ClInclude Include="Code\Actors\Game\LaserPowerUpGridActor.h" />
     <ClInclude Include="Code\Actors\Game\PowerUpLaserReflector.h" />
     <ClInclude Include="Code\Actors\Game\TwinOrientationLock.h" />
-    <ClInclude Include="Code\UI\GridLayout.h" />
+    <ClInclude Include="Code\UI\GridLayout.ixx" />
     <ClInclude Include="Code\Actors\OcclusionWall.h" />
     <ClInclude Include="Code\Actors\Game\MinesGenerator.h" />
     <ClInclude Include="Code\Core\Deserialiser.ixx" />
