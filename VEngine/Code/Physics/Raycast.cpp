@@ -1,5 +1,5 @@
-#include "vpch.h"
-#include "Raycast.h"
+import Physics.Raycast;
+
 #include <limits>
 #include "Core/Camera.h"
 #include "Render/Renderer.h"

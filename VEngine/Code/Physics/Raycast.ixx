@@ -1,10 +1,11 @@
-#pragma once
+export module Physics.Raycast;
+
+import Physics.HitResult;
 
 #include <DirectXMath.h>
 #include <DirectXCollision.h>
-#include "HitResult.h"
 
-namespace Physics
+export namespace Physics
 {
 	bool Raycast(HitResult& hitResult, DirectX::XMVECTOR origin, DirectX::XMVECTOR direction, float range, bool fromScreen = false);
 	bool Raycast(HitResult& hitResult, DirectX::XMVECTOR origin, DirectX::XMVECTOR end);

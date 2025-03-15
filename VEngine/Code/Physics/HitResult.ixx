@@ -1,14 +1,15 @@
-#pragma once
+export module Physics.HitResult;
 
-#include <vector>
+import Physics.CollisionLayers;
+import Render.Vertex;
+import <vector>;
+
 #include <DirectXMath.h>
-#include "CollisionLayers.h"
-#include "Render/Vertex.h"
 
 class Actor;
 class SpatialComponent;
 
-struct HitResult
+export struct HitResult
 {
 	//Mainly got this here for vertex colour painting, to be able to switch brush modes and paint entire faces at once.
 	std::vector<int> vertIndexesOfHitTriangleFace;

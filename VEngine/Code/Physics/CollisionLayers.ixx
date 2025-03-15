@@ -1,4 +1,4 @@
-module Physics.CollisionLayers;
+export module Physics.CollisionLayers;
 
 export enum class CollisionLayers : int
 {

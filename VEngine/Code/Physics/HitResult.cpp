@@ -1,7 +1,4 @@
-#include "vpch.h"
-#include "HitResult.h"
-#include "Components/MeshComponent.h"
-#include "Actors/Game/Player.h"
+import Physics.HitResult;
 
 Actor* HitResult::FindHitActor(Actor* findActor)
 {
@@ -34,9 +31,9 @@ Actor* HitResult::GetClosestHitActor(const DirectX::XMVECTOR point)
 	}
 
 	auto DistCompare = [](const ActorPack& leftPack, const ActorPack& rightPack)
-		{
-			return leftPack.distance < rightPack.distance;
-		};
+	{
+		return leftPack.distance < rightPack.distance;
+	};
 
 	std::sort(actorPacks.begin(), actorPacks.end(), DistCompare);
 

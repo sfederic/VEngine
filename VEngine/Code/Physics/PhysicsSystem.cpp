@@ -1,13 +1,15 @@
-#include "vpch.h"
-#include "PhysicsSystem.h"
+import Physics.PhysicsSystem;
+import Core.UID;
+import Components.MeshComponent;
+import <unordered_map>;
+import <memory>;
+
 #include <cassert>
 #include <PxPhysicsAPI.h>
 #include <PxRigidActor.h>
 #include <characterkinematic/PxControllerManager.h>
 #include "Components/CharacterControllerComponent.h"
-#include "Components/MeshComponent.h"
 #include "Components/DestructibleMeshComponent.h"
-#include "Core/World.h"
 #include "Asset/AssetSystem.h"
 #include "Physics/Raycast.h"
 

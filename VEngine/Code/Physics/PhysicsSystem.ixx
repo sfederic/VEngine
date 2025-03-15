@@ -1,17 +1,17 @@
-#pragma once
+export module Physics.PhysicsSystem;
 
 #define PX_PHYSX_STATIC_LIB
 
-#include <unordered_map>
+#include <DirectXMath.h>
 #include <foundation/PxTransform.h>
 #include <PxRigidActor.h>
-#include <memory>
-#include <string>
-#include <DirectXMath.h>
-#include "Core/UID.h"
-#include "Physics/HitResult.h"
-#include "Physics/PhysicsActorShape.h"
-#include "Physics/PhysicsType.h"
+
+import Physics.PhysicsActorShape;
+import Physics.HitResult;
+import Core.UID;
+import <unordered_map>;
+import <memory>;
+import <string>;
 
 class MeshComponent;
 class DestructibleMeshComponent;
@@ -25,7 +25,7 @@ class Actor;
 
 //Interface to PhysX systems
 //Ref: https://gameworksdocs.nvidia.com/PhysX/4.1/documentation/physxguide/Index.html
-namespace PhysicsSystem
+export namespace PhysicsSystem
 {
 	void Init();
 	void Start();
