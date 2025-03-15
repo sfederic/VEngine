@@ -2,8 +2,8 @@ export module Editor.IEditor;
 
 import <string>;
 
-export class Actor;
-export class IActorSystem;
+class Actor;
+class IActorSystem;
 
 //Base class for Toolkit and Native editors
 export class IEditor

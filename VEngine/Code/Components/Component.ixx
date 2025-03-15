@@ -1,4 +1,4 @@
-export Components.Component;
+export module Components.Component;
 
 import <string>;
 import <set>;

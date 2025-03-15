@@ -1,8 +1,8 @@
-#pragma once
+export module Editor.ActorTreeWidget;
 
 #include <qtreewidget.h>
 
-class ActorTreeWidget : public QTreeWidget
+export class ActorTreeWidget : public QTreeWidget
 {
 public:
 	ActorTreeWidget(QWidget* parent = nullptr) : QTreeWidget(parent) {}

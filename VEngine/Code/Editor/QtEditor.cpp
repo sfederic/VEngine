@@ -1,6 +1,9 @@
-#include <QApplication>
-
 import Editor.QtEditor;
+import Core.Input;
+import Core.Win32Keys;
+
+#include <QApplication>
+#include "EditorMainWindow.h"
 
 void QtEditor::Init(int argc, char* argv[])
 {

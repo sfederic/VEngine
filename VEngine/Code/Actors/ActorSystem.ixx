@@ -2,10 +2,21 @@ export module Actors.ActorSystem;
 
 import <string>;
 import <vector>;
+import <memory>;
 import <unordered_set>;
 
 import Actors.IActorSystem;
 import Actors.ActorSystemCache;
+import Actors.Actor;
+import Components.Component;
+import Editor.Editor;
+import Core.World;
+import Core.Properties;
+import Core.VString;
+import Core.Serialiser;
+import Core.BinarySerialiser;
+import Core.Deserialiser;
+import Core.BinaryDeserialiser;
 
 export template <typename T>
 class ActorSystem : public IActorSystem

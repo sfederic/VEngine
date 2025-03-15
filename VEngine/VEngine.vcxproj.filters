@@ -53,9 +53,6 @@
     <ClCompile Include="Code\Core\Serialiser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Core\Transform.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Editor\TransformGizmo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -737,9 +734,6 @@
     <ClCompile Include="Code\Render\VertexBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Editor\AssetIconListWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Actors\Game\FuseGridActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -873,6 +867,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Actors\ActorSystemDefine.ixx" />
+    <ClCompile Include="Code\Editor\Editor.ixx" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\main.cpp">
@@ -892,10 +887,9 @@
     <ClInclude Include="Code\Render\Renderer.ixx" />
     <ClInclude Include="Code\Render\ShaderSystem.ixx" />
     <ClInclude Include="Code\Physics\Raycast.ixx" />
-    <ClInclude Include="Code\Editor\AssetDock.h" />
-    <ClInclude Include="Code\Editor\Console.h" />
-    <ClInclude Include="Code\Editor\DebugMenu.h" />
-    <ClInclude Include="Code\Editor\Editor.ixx" />
+    <ClInclude Include="Code\Editor\AssetDock.ixx" />
+    <ClInclude Include="Code\Editor\Console.ixx" />
+    <ClInclude Include="Code\Editor\DebugMenu.ixx" />
     <ClInclude Include="Code\Editor\EditorMainWindow.h" />
     <ClInclude Include="Code\Editor\IEditor.ixx" />
     <ClInclude Include="Code\Editor\LogDock.h" />
@@ -1133,7 +1127,7 @@
     <ClInclude Include="Code\Core\Log.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Editor\ActorTreeWidget.h">
+    <ClInclude Include="Code\Editor\ActorTreeWidget.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Physics\CollisionLayers.ixx">
@@ -1718,7 +1712,7 @@
     <ClInclude Include="Code\Render\IndexBuffer.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Editor\AssetIconListWidget.h">
+    <ClInclude Include="Code\Editor\AssetIconListWidget.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\FuseGridActor.h">
@@ -1865,7 +1859,7 @@
     <ClInclude Include="Code\Localisation\Locales.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Editor\DebugNotification.h">
+    <ClInclude Include="Code\Editor\DebugNotification.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Render\DebugMeshManager.ixx">

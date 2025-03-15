@@ -1,30 +1,17 @@
-#include "vpch.h"
-#include "AssetDock.h"
-#include <qdesktopservices.h>
-#include <qmenu.h>
-#include <qfiledialog.h>
-#include <filesystem>
-#include <qpushbutton.h>
-#include <qdockwidget.h>
-#include <qfilesystemmodel.h>
-#include <qtreeview.h>
+import Editor.AssetDock;
+import Core.FileSystem;
+import <unordered_map>;
+import <string>;
+import <functional>;
+
+#include <qpixmap.h>
+#include <qwidget.h>
 #include <qlistwidget.h>
+#include <qicon.h>
+#include <qtreeview.h>
+#include <qfilesystemmodel.h>
 #include <qboxlayout.h>
-#include <qlineedit.h>
-#include "Editor/AssetIconListWidget.h"
-#include "Core/FileSystem.h"
-#include "Asset/AssetSystem.h"
-#include "Actors/MeshActor.h"
-#include "Core/WorldEditor.h"
-#include "Render/TextureSystem.h"
-#include "Render/Material.h"
-#include "Render/Renderer.h"
-#include "Render/MaterialSystem.h"
-#include "Gameplay/GameInstance.h"
-#include "Core/Log.h"
-#include "Asset/AssetBaseFolders.h"
-#include "Asset/AssetFileExtensions.h"
-#include "Components/MeshComponent.h"
+#include <qpushbutton.h>
 
 std::unordered_map<std::string, std::function<void(QIcon&, std::string&)>> fileExtensionToFunctionMap;
 

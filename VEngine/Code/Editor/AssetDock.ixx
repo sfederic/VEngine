@@ -1,7 +1,8 @@
-#pragma once
+export module Editor.AssetDocl;
 
 #include <qdockwidget.h>
-#include <string>
+
+import <string>;
 
 class QFileSystemModel;
 class QTreeView;
@@ -11,7 +12,7 @@ class QLineEdit;
 class Material;
 class AssetIconListWidget;
 
-class AssetDock : public QDockWidget
+export class AssetDock : public QDockWidget
 {
 public:
 	AssetDock();

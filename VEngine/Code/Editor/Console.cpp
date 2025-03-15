@@ -1,19 +1,12 @@
-#include "vpch.h"
-#include "Console.h"
+import Editor.Console;
+import Core.FileSystem;
+import Core.Log;
+import <filesystem>;
+import <map>;
+import <string>;
+import <functional>;
+
 #include <dwrite.h>
-#include <filesystem>
-#include "Actors/DiffuseProbeMap.h"
-#include "Components/MeshComponent.h"
-#include "Core/Input.h"
-#include "Core/Log.h"
-#include "UI/UISystem.h"
-#include "UI/Layout.h"
-#include "DebugMenu.h"
-#include "Render/Renderer.h"
-#include "Asset/AssetSystem.h"
-#include "Core/FileSystem.h"
-#include "Core/World.h"
-#include "Core/WorldEditor.h"
 
 std::map<std::wstring, std::pair<std::function<void()>, std::string>> Console::executeMap;
 

@@ -128,17 +128,17 @@
     <ClCompile Include="Code\Core\Debug.ixx" />
     <ClCompile Include="Code\Core\EditorCamera.cpp" />
     <ClCompile Include="Code\Core\EditorCamera.ixx">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Code\Core\FileSystem.cpp" />
     <ClCompile Include="Code\Core\Log.ixx" />
     <ClCompile Include="Code\Core\VAssert.ixx" />
+    <ClCompile Include="Code\Editor\Editor.ixx" />
     <ClCompile Include="Code\Editor\Sequencer\ActiveCameraLerpToOffsetPosition.cpp" />
     <ClCompile Include="Code\Editor\Sequencer\CameraSequenceEntryData.cpp" />
     <ClCompile Include="Code\Actors\Game\BloomSeedSoil.cpp" />
     <ClCompile Include="Code\Actors\Game\BloomSeed.cpp" />
     <ClCompile Include="Code\Actors\Game\TimerExplosive.cpp" />
-    <ClCompile Include="Code\Editor\AssetIconListWidget.cpp" />
     <ClCompile Include="Code\Editor\Editor.cpp" />
     <ClCompile Include="Code\Editor\imgui\misc\cpp\imgui_stdlib.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
@@ -383,7 +383,7 @@
     <ClInclude Include="Code\Actors\Game\MapProjectionCrystal.h" />
     <ClInclude Include="Code\Actors\Game\BombRock.h" />
     <ClInclude Include="Code\Commands\UndoActorDeleteCommand.h" />
-    <ClInclude Include="Code\Editor\DebugNotification.h" />
+    <ClInclude Include="Code\Editor\DebugNotification.ixx" />
     <ClInclude Include="Code\Editor\Sequencer\ActiveCameraLerpToOffsetPosition.h" />
     <ClInclude Include="Code\Editor\Sequencer\CameraSequenceEntryData.h" />
     <ClInclude Include="Code\Actors\Game\BloomSeedSoil.h" />
@@ -391,7 +391,7 @@
     <ClInclude Include="Code\Actors\Game\TimerExplosive.h" />
     <ClInclude Include="Code\Actors\Game\TeleportGridActor.h" />
     <ClInclude Include="Code\Audio\MaterialAudioType.h" />
-    <ClInclude Include="Code\Editor\AssetIconListWidget.h" />
+    <ClInclude Include="Code\Editor\AssetIconListWidget.ixx" />
     <ClInclude Include="Code\Editor\imgui\misc\cpp\imgui_stdlib.h" />
     <ClInclude Include="Code\Editor\Sequencer\AudioSequenceEntryData.h" />
     <ClInclude Include="Code\Editor\Sequencer\SequenceItem.h" />
@@ -489,7 +489,7 @@
     <ClInclude Include="Code\Render\VertexShader.ixx" />
     <ClInclude Include="Code\SHMath\DirectXSH.h" />
     <ClInclude Include="Code\Components\CharacterControllerComponent.h" />
-    <ClInclude Include="Code\Editor\ActorTreeWidget.h" />
+    <ClInclude Include="Code\Editor\ActorTreeWidget.ixx" />
     <ClInclude Include="Code\Actors\AudioActor.h" />
     <ClInclude Include="Code\Asset\AssetSystem.h" />
     <ClInclude Include="Code\Components\AudioComponent.ixx" />
@@ -516,13 +516,13 @@
     <ClInclude Include="Code\Components\MeshComponent.ixx" />
     <ClCompile Include="Code\Core\Debug.cpp" />
     <ClCompile Include="Code\Editor\Console.cpp" />
-    <ClInclude Include="Code\Editor\Console.h" />
+    <ClInclude Include="Code\Editor\Console.ixx" />
     <ClCompile Include="Code\Core\Core.cpp" />
     <ClInclude Include="Code\Core\Debug.h" />
     <ClCompile Include="Code\Editor\DebugMenu.cpp" />
-    <ClInclude Include="Code\Editor\DebugMenu.h" />
+    <ClInclude Include="Code\Editor\DebugMenu.ixx" />
     <ClCompile Include="Code\Editor\AssetDock.cpp" />
-    <ClInclude Include="Code\Editor\AssetDock.h" />
+    <ClInclude Include="Code\Editor\AssetDock.ixx" />
     <ClCompile Include="Code\Editor\ImGuizmo\ImGuizmo.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
@@ -552,7 +552,6 @@
     <ClInclude Include="Code\Editor\imgui\imstb_textedit.h" />
     <ClInclude Include="Code\Editor\imgui\imstb_truetype.h" />
     <ClInclude Include="Code\Editor\LogDock.h" />
-    <ClInclude Include="Code\Editor\Editor.ixx" />
     <ClCompile Include="Code\Editor\EditorMainWindow.cpp" />
     <ClCompile Include="Code\Editor\imgui\backends\imgui_impl_dx11.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
@@ -627,7 +626,6 @@
     <ClInclude Include="Code\Core\Serialiser.h" />
     <ClInclude Include="Code\Core\SystemStates.ixx" />
     <ClInclude Include="Code\Core\Timer.ixx" />
-    <ClCompile Include="Code\Core\Transform.cpp" />
     <ClInclude Include="Code\Core\Transform.ixx" />
     <ClCompile Include="Code\Editor\TransformGizmo.cpp" />
     <ClInclude Include="Code\Editor\TransformGizmo.h" />

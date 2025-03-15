@@ -1,10 +1,10 @@
-#include <qobject.h>
-
 export module Editor.QtEditor;
 
 import Editor.IEditor;
 
-class QtEditor : public IEditor, public QObject
+#include <qobject.h>
+
+export class QtEditor : public IEditor, public QObject
 {
 public:
 	class QApplication* app = nullptr;

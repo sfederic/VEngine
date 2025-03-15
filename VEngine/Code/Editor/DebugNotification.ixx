@@ -1,8 +1,8 @@
-#pragma once
+export module Editor.DebugNotification;
 
-#include <string>
+import <string>;
 
-struct DebugNotification
+export struct DebugNotification
 {
 	DebugNotification(std::wstring_view note) : text(note) {}
 

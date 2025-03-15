@@ -1,10 +1,10 @@
-#pragma once
+export module Editor.Console;
 
-#include <map>
-#include <string>
-#include <functional>
+import <map>;
+import <string>;
+import <functional>;
 
-namespace Console
+export namespace Console
 {
 	extern bool bConsoleActive;
 

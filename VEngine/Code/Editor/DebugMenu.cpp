@@ -1,39 +1,8 @@
-#include "vpch.h"
+import Editor.DebugMenu;
 #include <filesystem>
 #include <Windows.h>
 #include "backends/imgui_impl_win32.h"
 #include "backends/imgui_impl_dx11.h"
-#include "DebugMenu.h"
-#include "Core/VMath.h"
-#include "Editor.h"
-#include "Render/Renderer.h"
-#include "Render/TextureSystem.h"
-#include "TransformGizmo.h"
-#include "Core/Core.h"
-#include "Core/Profile.h"
-#include "Core/WorldEditor.h"
-#include "Actors/Actor.h"
-#include "Actors/IActorSystem.h"
-#include "Localisation/Localisation.h"
-#include "Components/MeshComponent.h"
-#include "Components/InstanceMeshComponent.h"
-#include "Components/SkeletalMeshComponent.h"
-#include "UI/UISystem.h"
-#include "UI/UVPaintWidget.h"
-#include "UI/Layout.h"
-#include "Physics/Raycast.h"
-#include "Core/World.h"
-#include "Gameplay/GameUtils.h"
-#include "Console.h"
-#include "Render/Texture2D.h"
-#include "Render/MaterialSystem.h"
-#include "Render/Material.h"
-#include "Particle/ParticleEmitter.h"
-#include "Animation/Skeleton.h"
-#include "Asset/AssetSystem.h"
-#include "Editor/Sequencer/Sequencer.h"
-
-DebugMenu debugMenu;
 
 void DebugMenu::Init()
 {

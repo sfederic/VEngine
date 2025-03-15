@@ -1,8 +1,7 @@
-#pragma once
+export module Editor.DebugMenu;
 
-#include <vector>
-#include <string>
-#include "Core/Log.h"
+import <vector>;
+import <string>;
 #include "DebugNotification.h"
 
 struct Properties;
@@ -79,4 +78,4 @@ private:
 	UVPaintWidget* uvPaintWidget = nullptr;
 };
 
-extern DebugMenu debugMenu;
+export DebugMenu debugMenu;
