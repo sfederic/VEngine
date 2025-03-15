@@ -1,9 +1,11 @@
-#pragma once
+export module Render.RenderTarget;
+
+import <cstdint>;
 
 #include <d3d11.h>
 #include <wrl.h>
 
-class RenderTarget
+export class RenderTarget
 {
 public:
 	void Create(uint32_t width, uint32_t height, DXGI_FORMAT format);

@@ -352,7 +352,6 @@
     <ClCompile Include="Code\Actors\OcclusionWall.cpp" />
     <ClCompile Include="Code\Actors\Game\MinesGenerator.cpp" />
     <ClCompile Include="Code\Core\Deserialiser.cpp" />
-    <ClCompile Include="Code\Render\RastState.cpp" />
     <ClCompile Include="Code\Actors\Game\FuseGridActor.cpp" />
     <ClCompile Include="Code\UI\Game\InputIconWidget.cpp" />
     <ClCompile Include="Code\Actors\Game\InputTutorialGridActor.cpp" />
@@ -457,7 +456,7 @@
     <ClInclude Include="Code\Render\RenderPropertyStructs.ixx" />
     <ClInclude Include="Code\Render\MeshData.ixx" />
     <ClInclude Include="Code\Render\MeshDataProxy.ixx" />
-    <ClInclude Include="Code\Render\RastStates.h" />
+    <ClInclude Include="Code\Render\RastStates.ixx" />
     <ClInclude Include="Code\Render\ShaderData\InstanceData.h" />
     <ClInclude Include="Code\Render\ShaderData\MaterialShaderData.h" />
     <ClInclude Include="Code\Render\ShaderData\ShaderLights.h" />
@@ -703,7 +702,7 @@
     <ClInclude Include="Code\Components\MouseRotateComponent.h" />
     <ClInclude Include="Code\Render\ShaderData\ShaderMatrices.h" />
     <ClInclude Include="Code\Actors\DebugActors\DebugLightProbe.h" />
-    <ClInclude Include="Code\Render\RenderTarget.h" />
+    <ClInclude Include="Code\Render\RenderTarget.ixx" />
     <ClInclude Include="Code\Actors\Game\WaterSource.h" />
     <ClInclude Include="Code\Actors\Game\Gear.h" />
     <ClInclude Include="Code\Actors\Game\GearSet.h" />
@@ -773,7 +772,7 @@
     <ClInclude Include="Code\Actors\OcclusionWall.h" />
     <ClInclude Include="Code\Actors\Game\MinesGenerator.h" />
     <ClInclude Include="Code\Core\Deserialiser.ixx" />
-    <ClInclude Include="Code\Render\RastState.h" />
+    <ClInclude Include="Code\Render\RastState.ixx" />
     <ClInclude Include="Code\Render\Sampler.ixx" />
     <ClInclude Include="Code\Render\IndexBuffer.ixx" />
     <ClInclude Include="Code\Actors\Game\FuseGridActor.h" />

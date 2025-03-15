@@ -1,8 +1,6 @@
-#include "vpch.h"
-#include "RenderTarget.h"
-#include "Render/RenderUtils.h"
-#include "Core/Debug.h"
-#include "Renderer.h"
+import Render.RenderTarget;
+import Core.Debug;
+import <cassert>;
 
 void RenderTarget::Create(uint32_t width, uint32_t height, DXGI_FORMAT format)
 {

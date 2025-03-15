@@ -1,8 +1,8 @@
-#pragma once
+export module Render.RastStates;
 
-#include <string>
+import <string>;
 
-struct RastStates
+export struct RastStates
 {
 	inline static const std::string solid = "solid";
 	inline static const std::string noBackCull = "nobackcull";
