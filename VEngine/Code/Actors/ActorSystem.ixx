@@ -1,7 +1,9 @@
 export module Actors.ActorSystem;
 
-import std.core;
-import std.memory;
+import <string>;
+import <vector>;
+import <unordered_set>;
+
 import Actors.IActorSystem;
 import Actors.ActorSystemCache;
 
@@ -288,6 +290,3 @@ private:
 	std::vector<Actor*> deletedActors;
 	std::unordered_set<size_t> actorIndexToDeferDestroy;
 };
-
-#define ACTOR_SYSTEM(type) inline static ActorSystem<type> system; \
-virtual void Remove() override { __super::Remove(); Destroy(); system.Remove(GetSystemIndex()); } \

@@ -1,28 +1,13 @@
-#include "vpch.h"
-#include "WorldEditor.h"
-#include <filesystem>
+import Core.WorldEditor;
+
 #include <QFileDialog>
-#include "Physics/Raycast.h"
-#include "Input.h"
-#include "Core/VMath.h"
-#include "Editor/Editor.h"
-#include "Actors/Actor.h"
-#include "Actors/IActorSystem.h"
-#include "Editor/TransformGizmo.h"
-#include "FileSystem.h"
-#include "Camera.h"
-#include "Actors/MeshActor.h"
-#include "Actors/Game/EntranceTrigger.h"
-#include "Editor/DebugMenu.h"
-#include "Core.h"
-#include "Core/Log.h"
-#include "Commands/CommandSystem.h"
-#include "Asset/AssetBaseFolders.h"
-#include "Render/TextureSystem.h"
-#include "Render/Texture2D.h"
-#include "Render/Material.h"
-#include "Render/MaterialSystem.h"
-#include "Components/MeshComponent.h"
+#include <DirectXMath.h>
+
+import <filesystem>;
+import <set>;
+import <string>;
+
+using namespace DirectX;
 
 std::set<Actor*> pickedActors;
 Actor* gPickedActor;

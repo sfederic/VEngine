@@ -1,17 +1,18 @@
-#pragma once
+export module Core.WorldEditor;
 
-#include <set>
-#include <string>
 #include <DirectXMath.h>
 
-class Actor;
-class IActorSystem;
-class SpatialComponent;
-struct Transform;
+import <set>;
+import <string>;
+
+export class Actor;
+export class IActorSystem;
+export class SpatialComponent;
+export struct Transform;
 
 //Because the UV painting is working with triangle faces and not quads, you can really only rotate
 //the newly set UVs either left or right.
-enum class UVPaintRotate
+export enum class UVPaintRotate
 {
 	Left,
 	Right,
@@ -19,7 +20,7 @@ enum class UVPaintRotate
 	Down
 };
 
-struct UVPaintData
+export struct UVPaintData
 {
 	std::string texture;
 	//Right is the default to map the texture uv to World axis (x-right, y-up, z-forward)
@@ -30,7 +31,7 @@ struct UVPaintData
 	float h = 0.f;
 };
 
-namespace WorldEditor
+export namespace WorldEditor
 {
 	enum class PickMode
 	{

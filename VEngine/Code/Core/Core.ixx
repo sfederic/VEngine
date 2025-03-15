@@ -1,8 +1,8 @@
-#include <Windows.h>
-
 export module Core.Core;
 
-import std.core;
+#include <Windows.h>
+
+import <string>;
 
 //Any utility functions or variables that are 'core' to the engine live here.
 export namespace Core

@@ -1,17 +1,18 @@
-#pragma once
+export module Core.VMath;
 
-#include <unordered_map>
 #include <DirectXMath.h>
 #include <DirectXCollision.h>
 
-class Actor;
-struct Transform;
-class SpatialComponent;
-struct Vertex;
+import <unordered_map>;
+
+export class Actor;
+export struct Transform;
+export class SpatialComponent;
+export struct Vertex;
 
 using namespace DirectX;
 
-namespace VMath
+export namespace VMath
 {
 	XMVECTOR GlobalRightVector();
 	XMVECTOR GlobalUpVector();

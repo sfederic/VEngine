@@ -1,24 +1,16 @@
-#pragma once
+export Render.RenderUtils;
 
-#include <cstdint>
-#include <string>
-#include <vector>
-#include <limits>
 #include <wrl.h>
-#include "Render/MeshData.h"
-#include "Core/Camera.h"
-#include <DirectXMath.h>
+#include <d3d11.h>
 
-struct ID3D11Buffer;
-struct ID3D11Device;
-struct ID3D11DeviceContext;
-struct ID3D11ShaderResourceView;
-struct ID3D11DeviceChild;
-class Sampler;
-struct MeshDataProxy;
-class Texture2D;
+import Render.MeshData;
 
-namespace RenderUtils
+import <cstdint>;
+import <string>;
+import <vector>;
+import <algorithm>;
+
+export namespace RenderUtils
 {
 	void CreateDefaultBuffer(uint64_t byteWidth, uint32_t bindFlags, const void* initData, Microsoft::WRL::ComPtr<ID3D11Buffer>& outputBuffer);
 	void CreateDynamicBuffer(uint64_t byteWidth, uint32_t bindFlags, const void* initData, Microsoft::WRL::ComPtr<ID3D11Buffer>& outputBuffer);

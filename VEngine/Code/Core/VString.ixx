@@ -1,10 +1,12 @@
-#include "vpch.h"
-#include "VString.h"
-#include <locale>
+export module Core.VString;
+
 #include <vadefs.h>
 #include <codecvt>
+#include <cstdarg>
 
-namespace VString
+import <string>;
+
+export namespace VString
 {
 	std::wstring stows(const std::string str)
 	{

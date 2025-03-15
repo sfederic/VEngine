@@ -1,6 +1,10 @@
 module Actors.ActorSystemCache;
 
-import std.core;
+import <typeindex>;
+import <string>;
+import <vector>;
+import <unordered_map>;
+import <optional>;
 
 export class IActorSystem;
 

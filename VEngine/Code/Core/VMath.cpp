@@ -1,13 +1,18 @@
-#include "vpch.h"
-#include "VMath.h"
-#include <cmath>
-#include <algorithm>
-#include <array>
-#include <random>
-#include "Actors/Actor.h"
-#include "Camera.h"
-#include "Render/Vertex.h"
-#include "Render/Renderer.h"
+import Core.VMath;
+
+#include <DirectXMath.h>
+
+import Actors.Actor;
+import Core.Transform;
+import Core.Camera;
+
+import <array>;
+import <unordered_map>;
+import <cmath>;
+import <algorithm>;
+import <random>;
+
+using namespace DirectX;
 
 namespace VMath
 {

@@ -1,8 +1,9 @@
-#include <comdef.h>
-
 export module Core.Debug;
 
-import std.core;
+#include <comdef.h>
+
+import <stdexcept>;
+import <source_location>;
 
 export void HR(HRESULT hr)
 {

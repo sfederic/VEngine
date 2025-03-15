@@ -1,9 +1,9 @@
-#pragma once
+export module Core.Win32Keys;
 
 #include <Windows.h>
 
 //All these values are Win32 virtual keys currently in use.
-enum class Keys
+export enum class Keys
 {
 	None = 0,
 	Space = VK_SPACE,

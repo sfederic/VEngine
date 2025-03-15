@@ -124,10 +124,12 @@
     <ClCompile Include="Code\Actors\Game\BombRock.cpp" />
     <ClCompile Include="Code\Commands\UndoActorDeleteCommand.cpp" />
     <ClCompile Include="Code\Components\ComponentSystemDefine.ixx" />
+    <ClCompile Include="Code\Core\Debug.ixx" />
     <ClCompile Include="Code\Core\EditorCamera.cpp" />
     <ClCompile Include="Code\Core\EditorCamera.ixx">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Code\Core\FileSystem.cpp" />
     <ClCompile Include="Code\Core\Log.ixx" />
     <ClCompile Include="Code\Core\VAssert.ixx" />
     <ClCompile Include="Code\Editor\Sequencer\ActiveCameraLerpToOffsetPosition.cpp" />
@@ -142,7 +144,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Code\Editor\Sequencer\AudioSequenceEntryData.cpp" />
-    <ClCompile Include="Code\Render\BlendState.cpp" />
     <ClCompile Include="Code\Render\VertexBuffer.cpp" />
     <ClCompile Include="Code\Core\BinaryDeserialiser.cpp" />
     <ClCompile Include="Code\Core\BinarySerialiser.cpp" />
@@ -223,7 +224,6 @@
     <ClCompile Include="Code\UI\Game\HealthWidget.cpp" />
     <ClCompile Include="Code\UI\Game\MapInfoWidget.cpp" />
     <ClCompile Include="Code\UI\Game\PopupWidget.cpp" />
-    <ClCompile Include="Code\Core\VString.cpp" />
     <ClCompile Include="Code\UI\Widget.cpp" />
     <ClCompile Include="Code\Components\SpatialComponent.cpp" />
     <ClCompile Include="Code\Actors\DebugActors\DebugBox.cpp" />
@@ -412,7 +412,7 @@
     <ClInclude Include="Code\Localisation\LocalisationFiles.h" />
     <ClInclude Include="Code\Physics\PhysicsActorShape.h" />
     <ClInclude Include="Code\Physics\PhysicsType.h" />
-    <ClInclude Include="Code\Render\BlendState.h" />
+    <ClInclude Include="Code\Render\BlendState.ixx" />
     <ClInclude Include="Code\Render\ShaderData\ShaderCameraData.h" />
     <ClInclude Include="Code\Render\ShaderData\ShaderLightProbeData.h" />
     <ClInclude Include="Code\Render\VertexBuffer.h" />
@@ -451,7 +451,7 @@
     <ClInclude Include="Code\Components\Game\DialogueComponent.h" />
     <ClInclude Include="Code\Core\OpenMode.ixx" />
     <ClInclude Include="Code\Core\PropertyTypes.ixx" />
-    <ClInclude Include="Code\Core\Win32Keys.h" />
+    <ClInclude Include="Code\Core\Win32Keys.ixx" />
     <ClInclude Include="Code\Gameplay\BattleEnums.h" />
     <ClInclude Include="Code\Gameplay\ConditionSystem.h" />
     <ClInclude Include="Code\Gameplay\DialogueStructures.h" />
@@ -464,7 +464,7 @@
     <ClInclude Include="Code\Render\LightData.h" />
     <ClInclude Include="Code\Render\Line.h" />
     <ClInclude Include="Code\Render\RenderPropertyStructs.ixx" />
-    <ClInclude Include="Code\Render\MeshData.h" />
+    <ClInclude Include="Code\Render\MeshData.ixx" />
     <ClInclude Include="Code\Render\MeshDataProxy.h" />
     <ClInclude Include="Code\Render\RastStates.h" />
     <ClInclude Include="Code\Render\ShaderData\InstanceData.h" />
@@ -623,7 +623,7 @@
     <ClInclude Include="Code\UI\Layout.h" />
     <ClInclude Include="Code\Core\VEnum.ixx" />
     <ClInclude Include="Code\Core\VFunction.h" />
-    <ClInclude Include="Code\Core\VMath.h" />
+    <ClInclude Include="Code\Core\VMath.ixx" />
     <ClCompile Include="Code\Physics\Raycast.cpp" />
     <ClInclude Include="Code\Physics\Raycast.h" />
     <ClCompile Include="Code\Render\ShaderSystem.cpp" />
@@ -633,7 +633,7 @@
     <ClInclude Include="Code\Core\Profile.ixx" />
     <ClInclude Include="Code\Core\Properties.ixx" />
     <ClCompile Include="Code\Render\Renderer.cpp" />
-    <ClInclude Include="Code\Render\Renderer.h" />
+    <ClInclude Include="Code\Render\Renderer.ixx" />
     <ClInclude Include="Code\Render\ShaderSystem.h" />
     <ClCompile Include="Code\Core\Serialiser.cpp" />
     <ClInclude Include="Code\Core\Serialiser.h" />
@@ -645,9 +645,9 @@
     <ClInclude Include="Code\Editor\TransformGizmo.h" />
     <ClInclude Include="Code\UI\UISystem.h" />
     <ClInclude Include="Code\Core\World.ixx" />
-    <ClInclude Include="Code\Core\WorldEditor.h" />
+    <ClInclude Include="Code\Core\WorldEditor.ixx" />
     <ClCompile Include="Code\UI\UISystem.cpp" />
-    <ClInclude Include="Code\Core\VString.h" />
+    <ClInclude Include="Code\Core\VString.ixx" />
     <ClInclude Include="Code\UI\Widget.h" />
     <ClInclude Include="Code\Components\SpatialComponent.ixx" />
     <ClInclude Include="Code\Actors\DebugActors\DebugBox.h" />
@@ -658,7 +658,7 @@
     <ClInclude Include="Code\Editor\SystemDock.h" />
     <ClInclude Include="Code\Render\Material.h" />
     <ClInclude Include="Code\Render\TextureSystem.h" />
-    <ClInclude Include="Code\Render\RenderUtils.h" />
+    <ClInclude Include="Code\Render\RenderUtils.ixx" />
     <ClInclude Include="Code\Render\MaterialSystem.h" />
     <ClInclude Include="Code\Editor\PropertyWidgets\Float2Widget.h" />
     <ClInclude Include="Code\Components\Lights\DirectionalLightComponent.h" />

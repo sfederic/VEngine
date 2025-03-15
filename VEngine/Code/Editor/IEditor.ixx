@@ -1,6 +1,6 @@
 export module Editor.IEditor;
 
-import std.core;
+import <string>;
 
 export class Actor;
 export class IActorSystem;

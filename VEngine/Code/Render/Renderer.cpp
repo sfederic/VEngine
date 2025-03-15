@@ -1,5 +1,5 @@
-#include "vpch.h"
-#include "Renderer.h"
+import Render.Renderer;
+
 #include "Actors/DiffuseProbeMap.h"
 #include "Actors/PostProcessVolume.h"
 #include "BlendStates.h"

@@ -1,6 +1,6 @@
 export module Core.Timer;
 
-#include <functional>
+import <functional>;
 
 export struct TimerItem
 {
@@ -17,7 +17,6 @@ export namespace Timer
 	TimerItem* SetTimer(float duration, std::function<void()> functionToCall, bool loop = false);
 };
 
-//Todo: wrapped in std::atomic
 std::vector<TimerItem> timerItems;
 
 void Timer::Tick(float deltaTime)
@@ -37,7 +36,7 @@ void Timer::Tick(float deltaTime)
 		}
 	}
 
-	//This looks stupid, but the erase call has to be below the timer function call
+	//Tthe erase call has to be below the timer function call
 	//for when world's load and all timers are cleared.
 	for (int timerIndex = 0; timerIndex < timerItems.size(); timerIndex++)
 	{

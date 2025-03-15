@@ -1,16 +1,18 @@
-#include "vpch.h"
-#include "IActorSystem.h"
-#include <cassert>
-
 import Actors.ActorSystemCache;
-import std.core;
+import Actors.IActorSystem;
+import Core.VAssert;
+
+import <typeindex>;
+import <string>;
+import <vector>;
+import <unordered_map>;
 
 void ActorSystemCache::AddSystem(std::type_index type, IActorSystem* actorSystem)
 {
-	assert(typeToSystemMap.find(type) == typeToSystemMap.end());
+	VAssert(typeToSystemMap.find(type) == typeToSystemMap.end(), "");
 	typeToSystemMap.emplace(type, actorSystem);
 
-	assert(nameToSystemMap.find(actorSystem->GetName()) == nameToSystemMap.end());
+	VAssert(nameToSystemMap.find(actorSystem->GetName()) == nameToSystemMap.end(), "");
 	nameToSystemMap.emplace(actorSystem->GetName(), actorSystem);
 }
 

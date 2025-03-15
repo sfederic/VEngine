@@ -1,7 +1,11 @@
 import Core.BinaryDeserialiser;
 import Core.Properties;
-import std.core;
+import Core.VString;
+import Core.VAssert;
 import Render.RenderPropertyStructs;
+
+import <string>;
+import <vector>;
 
 void BinaryDeserialiser::Deserialise(Properties& props)
 {
@@ -48,7 +52,7 @@ void BinaryDeserialiser::ReadString(std::string* str)
 
 	std::vector<char> buff(stringSize);
 	fread(buff.data(), stringSize, 1, file);
-	assert(buff.size() == stringSize);
+	VAssert(buff.size() == stringSize, "");
 
 	const std::string newStr(buff.data(), stringSize);
 	*str = newStr;

@@ -1,6 +1,7 @@
 export module Core.BinarySerialiser
 
-import std.core;
+import <cstdio>;
+import <string>;
 
 export struct Properties;
 

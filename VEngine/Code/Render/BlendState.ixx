@@ -1,13 +1,21 @@
-#pragma once
+export module Render.BlendState;
 
 #include <d3d11.h>
 #include <wrl.h>
-#include <string>
 
-class BlendState
+import Render.RenderUtils;
+
+import <string>;
+
+export class BlendState
 {
 public:
-	BlendState(std::string_view name_, D3D11_BLEND_DESC desc);
+	BlendState(std::string_view name_, D3D11_BLEND_DESC desc)
+		: name(name_)
+	{
+		RenderUtils::CreateBlendState(desc, data);
+	}
+
 	virtual ID3D11BlendState* GetData() { return data.Get(); }
 
 protected:
@@ -20,6 +28,11 @@ protected:
 class NullBlendState : public BlendState
 {
 public:
-	NullBlendState(std::string_view name_);
+	NullBlendState(std::string_view name_)
+		: BlendState(name_, D3D11_BLEND_DESC())
+	{
+		data.Reset();
+	}
+
 	ID3D11BlendState* GetData() override { return nullptr; }
 };

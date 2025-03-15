@@ -1,6 +1,7 @@
 export module Actors.IActorSystem;
 
-import std.core;
+import <string>;
+import <vector>;
 
 export class Actor;
 export class Serialiser;

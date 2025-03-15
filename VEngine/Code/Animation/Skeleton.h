@@ -1,11 +1,10 @@
-#pragma once
+export module Animation.Skeleton;
 
-#include <vector>
-#include <map>
-#include "Joint.h"
-#include "Animation.h"
+import <string>;
+import <vector>;
+import <map>;
 
-class Skeleton
+export class Skeleton
 {
 public:
 	void AddJoint(Joint& joint);

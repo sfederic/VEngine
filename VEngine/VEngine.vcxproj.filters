@@ -164,9 +164,6 @@
     <ClCompile Include="Code\Actors\ActorSystemCache.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Core\VString.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Components\SpatialComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -758,9 +755,6 @@
     <ClCompile Include="Code\Core\Deserialiser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Render\BlendState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Render\VertexBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -913,6 +907,10 @@
     <ClCompile Include="Code\Components\ComponentSystemDefine.ixx" />
     <ClCompile Include="Code\Core\VAssert.ixx" />
     <ClCompile Include="Code\Core\Log.ixx" />
+    <ClCompile Include="Code\Core\Debug.ixx" />
+    <ClCompile Include="Code\Core\FileSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\main.cpp">
@@ -929,7 +927,7 @@
     <ClInclude Include="Code\Editor\imgui\backends\imgui_impl_dx11.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\Renderer.h" />
+    <ClInclude Include="Code\Render\Renderer.ixx" />
     <ClInclude Include="Code\Render\ShaderSystem.h" />
     <ClInclude Include="Code\Physics\Raycast.h" />
     <ClInclude Include="Code\Editor\AssetDock.h" />
@@ -962,7 +960,7 @@
     <ClInclude Include="Code\Core\Engine.ixx" />
     <ClInclude Include="Code\Asset\FBXLoader.h" />
     <ClInclude Include="Code\Core\Input.h" />
-    <ClInclude Include="Code\Core\VMath.h" />
+    <ClInclude Include="Code\Core\VMath.ixx" />
     <ClInclude Include="Code\Core\Profile.ixx" />
     <ClInclude Include="Code\Core\Serialiser.h" />
     <ClInclude Include="Code\Core\Properties.ixx" />
@@ -971,7 +969,7 @@
     <ClInclude Include="Code\UI\UISystem.h" />
     <ClInclude Include="Code\Editor\TransformGizmo.h" />
     <ClInclude Include="Code\Core\World.ixx" />
-    <ClInclude Include="Code\Core\WorldEditor.h" />
+    <ClInclude Include="Code\Core\WorldEditor.ixx" />
     <ClInclude Include="Code\Editor\ImGuizmo\ImGuizmo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -1011,7 +1009,7 @@
     <ClInclude Include="Code\UI\Widget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Core\VString.h">
+    <ClInclude Include="Code\Core\VString.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Core\SystemStates.ixx">
@@ -1059,7 +1057,7 @@
     <ClInclude Include="Code\Render\TextureSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\RenderUtils.h">
+    <ClInclude Include="Code\Render\RenderUtils.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Render\MaterialSystem.h">
@@ -1359,7 +1357,7 @@
     <ClInclude Include="Code\Render\Line.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\MeshData.h">
+    <ClInclude Include="Code\Render\MeshData.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Render\RenderPropertyStructs.ixx">
@@ -1725,7 +1723,7 @@
     <ClInclude Include="Code\Actors\Game\MinesGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Core\Win32Keys.h">
+    <ClInclude Include="Code\Core\Win32Keys.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\UI\Game\InteractWidget.h">
@@ -1743,7 +1741,7 @@
     <ClInclude Include="Code\Core\Deserialiser.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\BlendState.h">
+    <ClInclude Include="Code\Render\BlendState.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Render\VertexBuffer.h">

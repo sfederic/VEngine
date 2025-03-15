@@ -8,7 +8,6 @@ import Core.VAssert;
 //Unique Identifier
 export typedef unsigned int UID;
 
-//Todo: these need to be wrapped up in some std::atomic thing else threading might fall apart.
 std::random_device randomDevice;
 std::mt19937 randomGenerator(randomDevice());
 std::uniform_int_distribution<UID> uidDist(std::numeric_limits<UID>::min(), std::numeric_limits<UID>::max());

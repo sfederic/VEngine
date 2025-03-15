@@ -1,11 +1,11 @@
-#pragma once
+export module Render.MeshData;
 
 #include <DirectXCollision.h>
 #include "Animation/Skeleton.h"
 #include "Vertex.h"
 
 //The actual data for each loaded mesh. Each loaded mesh file will have one of these per its filename.
-struct MeshData
+export struct MeshData
 {
 	typedef uint32_t indexDataType;
 

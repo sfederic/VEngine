@@ -1,36 +1,18 @@
-#pragma once
+export module Render.Renderer;
 
-#include <string>
 #include <d3d11.h>
 #include <DirectXCollision.h>
-#include "DepthStencil.h"
-#include "RenderTarget.h"
-#include "Swapchain.h"
-#include "Device.h"
-#include "ShadowMap.h"
-#include "Sampler.h"
-#include "ShaderData/ShaderMatrices.h"
-#include "ShaderData/ShaderLights.h"
-#include "Vertex.h"
-#include "RastState.h"
-#include "BlendState.h"
-#include "ConstantBuffer.h"
-#include "ShaderData/MaterialShaderData.h"
-#include "ShaderData/ShaderTimeData.h"
-#include "ShaderData/ShaderMeshData.h"
-#include "ShaderData/ShaderSkinningData.h"
-#include "ShaderData/ShaderPostProcessData.h"
-#include "ShaderData/ShaderCameraData.h"
-#include "ShaderData/ShaderLightProbeData.h"
 
-class Line;
-class VertexBuffer;
-class IndexBuffer;
-class MeshComponent;
-class InstanceMeshComponent;
-class ShaderItem;
+import <string>;
 
-class Renderer
+export class Line;
+export class VertexBuffer;
+export class IndexBuffer;
+export class MeshComponent;
+export class InstanceMeshComponent;
+export class ShaderItem;
+
+export class Renderer
 {
 public:
 	static Renderer& Get()

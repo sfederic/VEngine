@@ -1,11 +1,10 @@
-#include <cstdarg>
-#include <fstream>
-#include <chrono>
-#include <Windows.h>
-
 export module Core.Log;
 
-import std.core;
+#include <Windows.h>
+
+import <cstdarg>;
+import <fstream>;
+import <chrono>;
 
 void Log(std::string logMessage, ...)
 {

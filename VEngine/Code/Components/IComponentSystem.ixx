@@ -1,6 +1,8 @@
 export module Components.IComponentSystem;
 
-import std.core;
+import <vector>;
+import <string>;
+
 import Core.SystemStates;
 
 export class Component;

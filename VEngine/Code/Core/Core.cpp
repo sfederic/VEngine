@@ -1,5 +1,6 @@
 import Core.Core;
-import std.core;
+
+import <string>;
 
 static bool gameWorldPaused = false;
 

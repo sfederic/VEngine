@@ -1,9 +1,7 @@
-#include "vpch.h"
-#include "RenderUtils.h"
-#include "Core/Debug.h"
-#include "MeshDataProxy.h"
-#include "MeshData.h"
-#include "Renderer.h"
+import Render.RenderUtils;
+
+#include <d3d11.h>
+#include <wrl.h>
 
 namespace RenderUtils
 {

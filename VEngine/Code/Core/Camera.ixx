@@ -1,4 +1,4 @@
-export Core.Camera;
+export module Core.Camera;
 
 export class Actor;
 export class EditorCamera;

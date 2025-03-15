@@ -1,6 +1,5 @@
 export module Core.Deserialiser;
 
-import std.core;
 import Core.OpenMode;
 
 export struct Properties;

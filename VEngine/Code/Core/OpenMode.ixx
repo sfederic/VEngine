@@ -1,6 +1,6 @@
 export module Core.OpenMode
 
-import std.core;
+import <iostream>;
 
 export enum class OpenMode
 {
