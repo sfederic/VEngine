@@ -1,15 +1,15 @@
-#pragma once
+export module Core.Input;
 
-#include <unordered_set>
-#include <string>
-#include "Win32Keys.h"
+import Core.Win32Keys;
+import <unordered_set>;
+import <string>;
 
 //Todo: Input has the differentiation of "system" and "gameplay" keys. System means it's coming from the OS' Win32 handling
 //directly. There are calls to use "gameplay" keys in Input, but it's still using Win32 for now, previously was using
 //GameInput, Microsoft's package. Keep an eye on the state of that package, or maybe use SDL2 or something for 
 //controller input later down the line.
 
-namespace Input
+export namespace Input
 {
 	void Init();
 	void Reset();

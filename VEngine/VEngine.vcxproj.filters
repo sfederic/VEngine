@@ -924,7 +924,7 @@
     <ClInclude Include="Code\Core\Debug.h" />
     <ClInclude Include="Code\Core\Engine.ixx" />
     <ClInclude Include="Code\Asset\FBXLoader.h" />
-    <ClInclude Include="Code\Core\Input.h" />
+    <ClInclude Include="Code\Core\Input.ixx" />
     <ClInclude Include="Code\Core\VMath.ixx" />
     <ClInclude Include="Code\Core\Profile.ixx" />
     <ClInclude Include="Code\Core\Serialiser.h" />

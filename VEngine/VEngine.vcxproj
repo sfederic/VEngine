@@ -596,7 +596,7 @@
     <ClInclude Include="Code\Asset\FBXLoader.h" />
     <ClCompile Include="Code\Core\Input.cpp" />
     <ClInclude Include="Code\Gameplay\GameInstance.h" />
-    <ClInclude Include="Code\Core\Input.h" />
+    <ClInclude Include="Code\Core\Input.ixx" />
     <ClCompile Include="Code\Core\main.cpp" />
     <ClInclude Include="Code\Editor\RenderViewWidget.h" />
     <ClCompile Include="Code\Core\VMath.cpp" />

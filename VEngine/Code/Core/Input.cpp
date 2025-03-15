@@ -1,6 +1,8 @@
-#include "vpch.h"
-#include "Input.h"
-#include "Core/Debug.h"
+import Core.Input;
+import Core.Win32Keys;
+import <unordered_set>;
+import <unordered_map>;
+import <string>;
 
 std::unordered_set<Keys> pressedSystemKeys;
 std::unordered_set<Keys> releasedSystemKeys;
