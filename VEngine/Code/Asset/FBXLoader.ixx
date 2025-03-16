@@ -1,13 +1,13 @@
-#pragma once
+export module Asset.FBXLoader;
 
 #define FBXSDK_SHARED //Needs to be defined for static linking
-#include <fbxsdk.h>
-#include <string>
-#include <map>
-#include <vector>
-#include "Animation/Animation.h"
-#include "Animation/BoneWeights.h"
-#include "Render/Vertex.h"
+import <fbxsdk.h>;
+import <string>;
+import <map>;
+import <vector>;
+import Animation.Animation;
+import Animation.BoneWeights;
+import Render.Vertex;
 
 //The oficial docs on the FBX SDK (the current version is hard to find, google brings you to 2014 docs)
 //Ref: https://help.autodesk.com/view/FBX/2020/ENU/
@@ -18,7 +18,9 @@
 class Skeleton;
 struct MeshData;
 
-class FBXLoader
+using namespace fbxsdk;
+
+export class FBXLoader
 {
 public:
 	static FBXLoader Get()

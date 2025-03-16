@@ -1,20 +1,6 @@
-#include "vpch.h"
-#include "FBXLoader.h"
-#include <cassert>
-#include <filesystem>
-#include "Core/VString.h"
-#include "AssetBaseFolders.h"
-#include "Animation/Animation.h"
-#include "Animation/AnimFrame.h"
-#include "Animation/Joint.h"
-#include "Animation/Skeleton.h"
-#include "Render/MeshData.h"
-#include "Render/ShaderData/MaterialShaderData.h"
-#include "Render/Material.h"
-#include "Core/Serialiser.h"
-#include "Core/Log.h"
-#include "Core/VMath.h"
-#include "AssetFileExtensions.h"
+import Asset.FBXLoader;
+#define FBXSDK_SHARED //Needs to be defined for static linking
+import <fbxsdk.h>;
 
 using namespace fbxsdk;
 using namespace DirectX;

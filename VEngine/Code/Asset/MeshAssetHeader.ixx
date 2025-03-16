@@ -1,14 +1,14 @@
-#pragma once
+export module Asset.MeshAssetHeader;
 
-#include <cstdint>
+import <cstdint>;
 
-enum class SourceMeshFormat : uint8_t
+export enum class SourceMeshFormat : uint8_t
 {
 	FBX
 };
 
 //Binary header structure for mesh asset files
-struct MeshAssetHeader
+export struct MeshAssetHeader
 {
 	uint64_t vertexCount = 0;
 	uint64_t indexCount = 0;

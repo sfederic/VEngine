@@ -907,7 +907,7 @@
     <ClInclude Include="Code\Core\Core.ixx" />
     <ClInclude Include="Code\Core\Debug.h" />
     <ClInclude Include="Code\Core\Engine.ixx" />
-    <ClInclude Include="Code\Asset\FBXLoader.h" />
+    <ClInclude Include="Code\Asset\FBXLoader.ixx" />
     <ClInclude Include="Code\Core\Input.ixx" />
     <ClInclude Include="Code\Core\VMath.ixx" />
     <ClInclude Include="Code\Core\Profile.ixx" />
@@ -1087,10 +1087,10 @@
     <ClInclude Include="Code\Actors\AudioActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Asset\MeshAssetHeader.h">
+    <ClInclude Include="Code\Asset\MeshAssetHeader.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Asset\AssetSystem.h">
+    <ClInclude Include="Code\Asset\AssetSystem.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Particle\Particle.h">
@@ -1192,10 +1192,10 @@
     <ClInclude Include="Code\Core\IFunction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Asset\AssetBaseFolders.h">
+    <ClInclude Include="Code\Asset\AssetBaseFolders.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Asset\AssetFileExtensions.h">
+    <ClInclude Include="Code\Asset\AssetFileExtensions.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Core\Property.ixx">
@@ -1342,7 +1342,7 @@
     <ClInclude Include="Code\Render\ShaderData\MaterialShaderData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Asset\AnimationAssetHeader.h">
+    <ClInclude Include="Code\Asset\AnimationAssetHeader.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Gameplay\ConditionSystem.h">
@@ -1417,10 +1417,10 @@
     <ClInclude Include="Code\Components\Game\DialogueComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Asset\VertexColourData.h">
+    <ClInclude Include="Code\Asset\VertexColourData.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Asset\VertexColourHeader.h">
+    <ClInclude Include="Code\Asset\VertexColourHeader.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Core\BMPFileWriter.h">

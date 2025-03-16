@@ -1,9 +1,9 @@
-#pragma once
+export module Asset.AssetFileExtensions;
 
-#include <string>
+import <string>;
 
 //File extensions for engine specific formats
-namespace AssetFileExtensions
+export namespace AssetFileExtensions
 {
 	inline static const std::string mesh = ".vmesh";
 	inline static const std::string actorTemplate = ".actor";

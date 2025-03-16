@@ -1,4 +1,4 @@
-#pragma once
+export module Asset.AssetBaseFolders;
 
 #include <string>
 

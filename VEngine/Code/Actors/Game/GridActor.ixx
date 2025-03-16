@@ -3,9 +3,8 @@ export module Actors.Game.GridActor;
 import Actors.Actor;
 import Actors.ActorSystem;
 import <string>;
-
-#include <DirectXMath.h>
-#include "Actors/ActorSystemDefine.h"
+import <Actors/ActorSystemDefine.h>;
+import <DirectXMath.h>;
 
 class MeshComponent;
 class HealthWidget;

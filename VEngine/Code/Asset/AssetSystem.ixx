@@ -1,13 +1,13 @@
-#pragma once
+export module Asset.AssetSystem;
 
-#include <vector>
-#include <unordered_map>
-#include <string>
-#include "Render/MeshData.h"
-#include "Render/MeshDataProxy.h"
-#include "Animation/Animation.h"
+import <vector>;
+import <unordered_map>;
+import <string>;
+import Render.MeshData;
+import Render.MeshDataProxy;
+import Animation.Animation;
 
-class AssetSystem
+export class AssetSystem
 {
 public:
 	static AssetSystem Get()

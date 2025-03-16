@@ -1,22 +1,7 @@
-#include "vpch.h"
-#include "AssetSystem.h"
-#include <filesystem>
-#include <qfiledialog.h>
-#include "FBXLoader.h"
-#include "MeshAssetHeader.h"
-#include "AssetFileExtensions.h"
-#include "AnimationAssetHeader.h"
-#include "Core/Profile.h"
-#include "Core/Log.h"
-#include "Core/FileSystem.h"
-#include "Core/WorldEditor.h"
-#include "Core/VString.h"
-#include "Components/MeshComponent.h"
-#include "Asset/AssetBaseFolders.h"
-#include "Asset/VertexColourData.h"
-#include "Asset/VertexColourHeader.h"
-#include "Render/Vertex.h"
-#include "Render/Renderer.h"
+import Asset.AssetSystem;
+import Core.Profile;
+import <vector>;
+import <filesystem>;
 
 void AssetSystem::ResetMeshData()
 {

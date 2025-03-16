@@ -1,8 +1,8 @@
-#pragma once
+export module Asset.VertexColourData;
 
-#include <vector>
-#include <DirectXMath.h>
-#include "Core/UID.h"
+import Core.UID;
+import <vector>;
+import <DirectXMath.h>;
 
 struct VertexColourData
 {
