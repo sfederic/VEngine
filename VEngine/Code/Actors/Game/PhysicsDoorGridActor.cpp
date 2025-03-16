@@ -1,7 +1,7 @@
-#include "vpch.h"
+
 #include "PhysicsDoorGridActor.h"
-#include "Components/MeshComponent.h"
-#include "Actors/Game/Player.h"
+import Components.MeshComponent;
+import Actors.Game.Player;
 #include "Actors/Game/Grid.h"
 #include "Physics/HitResult.h"
 

@@ -11,7 +11,7 @@ import <memory>;
 #include "Components/CharacterControllerComponent.h"
 #include "Components/DestructibleMeshComponent.h"
 #include "Asset/AssetSystem.h"
-#include "Physics/Raycast.h"
+import Physics.Raycast;
 
 using namespace physx;
 

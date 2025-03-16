@@ -1,7 +1,7 @@
-#include "vpch.h"
+
 #include "BloomSeedSoil.h"
 #include "Components/BoxTriggerComponent.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 #include "BloomSeed.h"
 
 BloomSeedSoil::BloomSeedSoil()

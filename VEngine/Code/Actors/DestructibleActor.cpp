@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "DestructibleActor.h"
 #include "Components/DestructibleMeshComponent.h"
 

@@ -1,6 +1,6 @@
-#include "vpch.h"
+
 #include "LookingGlass.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 #include "Render/BlendStates.h"
 
 void LookingGlass::Create()

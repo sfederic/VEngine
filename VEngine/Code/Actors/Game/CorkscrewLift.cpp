@@ -1,6 +1,6 @@
-#include "vpch.h"
+
 #include "CorkscrewLift.h"
-#include "Core/VMath.h"
+import Core.VMath;
 
 void CorkscrewLift::Create()
 {

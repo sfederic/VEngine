@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "VEnumWidget.h"
 #include <QWheelEvent>
 #include "Core/VEnum.h"

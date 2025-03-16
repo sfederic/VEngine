@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "InputTutorialGridActor.h"
 #include "UI/UISystem.h"
 #include "UI/Game/InputIconWidget.h"

@@ -1,8 +1,8 @@
-#include "vpch.h"
+
 #include "Burnable.h"
 #include "Gameplay/GameUtils.h"
 #include "Core/Timer.h"
-#include "Core/VMath.h"
+import Core.VMath;
 #include "Core/Core.h"
 #include "Player.h"
 

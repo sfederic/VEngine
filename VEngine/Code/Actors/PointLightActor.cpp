@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "PointLightActor.h"
 #include "Components/Lights/PointLightComponent.h"
 

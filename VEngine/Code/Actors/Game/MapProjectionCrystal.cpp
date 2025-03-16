@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "MapProjectionCrystal.h"
 #include "MapProjectionActor.h"
 #include "Grid.h"

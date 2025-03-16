@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "OreSmashMachine.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Ore.h"

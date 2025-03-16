@@ -1,9 +1,9 @@
-#include "vpch.h"
+
 #include "SpotLightTower.h"
 #include "Components/Lights/SpotLightComponent.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 #include "IlluminatedGridActor.h"
-#include "Physics/Raycast.h"
+import Physics.Raycast;
 
 SpotLightTower::SpotLightTower()
 {

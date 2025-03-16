@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "SpinBox.h"
 #include <QWheelEvent>
 

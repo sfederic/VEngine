@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "WorldResetter.h"
 #include "Core/FileSystem.h"
 

@@ -1,8 +1,8 @@
-#include "vpch.h"
+
 #include "ScannerEnemy.h"
-#include "Physics/Raycast.h"
+import Physics.Raycast;
 #include "Player.h"
-#include "Core/VMath.h"
+import Core.VMath;
 #include "Particle/Polyboard.h"
 #include "Gameplay/GameUtils.h"
 #include "UI/Game/ScanningEnemyAlertWidget.h"

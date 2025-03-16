@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "MeshSliceActor.h"
 #include "Components/SliceableMeshComponent.h"
 #include "Gameplay/IMeshSliceReaction.h"

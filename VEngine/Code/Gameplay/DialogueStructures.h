@@ -1,6 +1,6 @@
 #pragma once
-#include <map>
-#include <string>
+import <map>;
+import <string>;
 
 struct DialogueData
 {

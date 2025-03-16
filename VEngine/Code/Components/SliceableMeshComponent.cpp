@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "SliceableMeshComponent.h"
 #include "Core/MeshSlicer.h"
 #include "Actors/SplitMesh.h"

@@ -1,6 +1,6 @@
-#include "vpch.h"
+
 #include "OrientationLock.h"
-#include "Core/VMath.h"
+import Core.VMath;
 #include "Core/Log.h"
 #include "Player.h"
 

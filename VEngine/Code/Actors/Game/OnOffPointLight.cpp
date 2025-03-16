@@ -1,7 +1,7 @@
-#include "vpch.h"
+
 #include "OnOffPointLight.h"
 #include "Components/Lights/PointLightComponent.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 
 OnOffPointLight::OnOffPointLight()
 {

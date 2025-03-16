@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "Bolt.h"
 
 void Bolt::Create()

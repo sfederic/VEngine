@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "ScanningEnemyAlertWidget.h"
 
 void ScanningEnemyAlertWidget::Draw(float deltaTime)

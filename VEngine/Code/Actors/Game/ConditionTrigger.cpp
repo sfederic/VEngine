@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "ConditionTrigger.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Components/Game/ConditionComponent.h"

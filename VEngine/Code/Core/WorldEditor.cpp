@@ -1,7 +1,7 @@
 import Core.WorldEditor;
 
 #include <QFileDialog>
-#include <DirectXMath.h>
+import <DirectXMath.h>;
 
 import <filesystem>;
 import <set>;

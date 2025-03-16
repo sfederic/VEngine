@@ -1,6 +1,6 @@
 export module UI.Widget;
 
-#include <DirectXMath.h>
+import <DirectXMath.h>;
 #include <dcommon.h>
 
 import UI.Layout;

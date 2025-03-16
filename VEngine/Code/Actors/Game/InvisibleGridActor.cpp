@@ -1,7 +1,7 @@
-#include "vpch.h"
+
 #include "InvisibleGridActor.h"
 #include "LookingGlass.h"
-#include "Physics/Raycast.h"
+import Physics.Raycast;
 #include "Core/Camera.h"
 
 void InvisibleGridActor::Create()

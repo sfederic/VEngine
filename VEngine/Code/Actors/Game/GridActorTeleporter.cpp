@@ -1,10 +1,10 @@
-#include "vpch.h"
+
 #include "GridActorTeleporter.h"
 #include "Components/BoxTriggerComponent.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 #include "Actors/Game/GridActor.h"
 #include "Gameplay/GameUtils.h"
-#include "Actors/Game/Player.h"
+import Actors.Game.Player;
 
 GridActorTeleporter::GridActorTeleporter()
 {

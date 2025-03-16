@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "Winch.h"
 
 using namespace DirectX;

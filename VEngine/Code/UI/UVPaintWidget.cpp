@@ -1,8 +1,8 @@
-#include "vpch.h"
+
 #include "UVPaintWidget.h"
 #include "Core/Input.h"
 #include "Core/WorldEditor.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 
 void UVPaintWidget::Draw(float deltaTime)
 {

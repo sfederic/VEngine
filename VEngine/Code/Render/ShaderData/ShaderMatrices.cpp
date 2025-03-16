@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "ShaderMatrices.h"
 #include "Render/Material.h"
 #include "Core/Camera.h"

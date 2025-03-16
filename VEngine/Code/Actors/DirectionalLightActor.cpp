@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "DirectionalLightActor.h"
 #include "Components/Lights/DirectionalLightComponent.h"
 

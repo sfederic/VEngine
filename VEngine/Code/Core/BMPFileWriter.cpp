@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "BMPFileWriter.h"
 
 const int BYTES_PER_PIXEL = 3; /// red, green, & blue

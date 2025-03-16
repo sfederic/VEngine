@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "CrystalRefineryMachine.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Mineable.h"

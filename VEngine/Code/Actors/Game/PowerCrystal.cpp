@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "PowerCrystal.h"
 #include "Components/BoxTriggerComponent.h"
 

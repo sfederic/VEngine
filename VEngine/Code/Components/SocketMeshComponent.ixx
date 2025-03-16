@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 #include "Animation/Joint.h"
 
 class SkeletalMeshComponent;

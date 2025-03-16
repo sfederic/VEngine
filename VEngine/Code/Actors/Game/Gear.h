@@ -1,7 +1,7 @@
 #pragma once
 
 #include "GridActor.h"
-#include <DirectXCollision.h>
+import <DirectXCollision.h>;
 
 class Gear : public GridActor
 {

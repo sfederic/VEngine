@@ -1,6 +1,6 @@
-#include "vpch.h"
+
 #include "TimerExplosive.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 
 void TimerExplosive::Create()
 {

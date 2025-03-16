@@ -1,6 +1,6 @@
 #pragma once
 
-#include <string>
+import <string>;
 #include <qdockwidget.h>
 
 class QTextEdit;

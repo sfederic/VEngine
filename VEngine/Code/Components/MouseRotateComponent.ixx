@@ -1,7 +1,7 @@
 #pragma once
 
-#include "SpatialComponent.h"
-#include "ComponentSystem.h"
+import Components.SpatialComponent;
+import Components.ComponentSystem;
 
 //Component where mouse fps controls can be used to rotate it.
 //(Mainly for pairing cameras and whatnot to it to preserve child parent transforms)

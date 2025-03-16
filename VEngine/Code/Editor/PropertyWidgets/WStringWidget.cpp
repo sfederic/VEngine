@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "WStringWidget.h"
 
 WStringWidget::WStringWidget(Property& value_)

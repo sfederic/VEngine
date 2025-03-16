@@ -1,6 +1,6 @@
-#include "vpch.h"
+
 #include "TransformativeGridActor.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 #include "Player.h"
 
 void TransformativeGridActor::Create()

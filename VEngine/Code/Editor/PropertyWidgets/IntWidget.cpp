@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "IntWidget.h"
 
 IntWidget::IntWidget(Property& prop_, bool readOnly, QWidget* parent) : IntSpinBox(parent)

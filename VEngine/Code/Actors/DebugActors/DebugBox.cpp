@@ -1,6 +1,6 @@
-#include "vpch.h"
+
 #include "DebugBox.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 
 DebugBox::DebugBox()
 {

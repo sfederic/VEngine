@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "DirectionalLightComponent.h"
 
 DirectionalLightComponent::DirectionalLightComponent()

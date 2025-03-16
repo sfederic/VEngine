@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "GameInstance.h"
 
 std::string GameInstance::startingMap = "recon_test_room.vmap";

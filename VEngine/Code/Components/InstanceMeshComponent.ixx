@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 #include "Render/ShaderData/InstanceData.h"
 #include <wrl.h>
 

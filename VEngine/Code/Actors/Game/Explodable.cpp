@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "Explodable.h"
 
 Properties Explodable::GetProps()

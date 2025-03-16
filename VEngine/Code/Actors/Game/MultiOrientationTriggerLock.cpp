@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "MultiOrientationTriggerLock.h"
 #include "OrientationTrigger.h"
 #include "Gameplay/GameUtils.h"

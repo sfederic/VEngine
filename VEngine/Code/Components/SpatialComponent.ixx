@@ -1,11 +1,11 @@
 export module Components.SpatialComponent;
 
-#include <DirectXCollision.h>
-
-import Core.Component;
+import Components.Component;
 import Core.Properties;
 import Core.Transform;
 import Physics.CollisionLayers;
+import <vector>;
+import <DirectXCollision.h>;
 
 export class SpatialComponent : public Component
 {

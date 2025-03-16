@@ -1,6 +1,6 @@
-#include "vpch.h"
+
 #include "DebugCamera.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 
 DebugCamera::DebugCamera()
 {

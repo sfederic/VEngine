@@ -1,6 +1,6 @@
-export module Actors.Actor;
-
 #include <DirectXMath.h>
+
+export module Actors.Actor;
 
 import <vector>;
 import <string>;

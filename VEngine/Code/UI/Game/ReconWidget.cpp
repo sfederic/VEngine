@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "ReconWidget.h"
 
 void ReconWidget::Draw(float deltaTime)

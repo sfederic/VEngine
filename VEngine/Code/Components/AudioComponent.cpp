@@ -1,7 +1,4 @@
 import Components.AudioComponent;
-#include "Audio/AudioSystem.h"
-#include "Audio/AudioChannel.h"
-#include "Actors/Game/Player.h"
 
 AudioComponent::AudioComponent()
 {

@@ -1,9 +1,9 @@
-#include "vpch.h"
+
 #include "OcclusionWall.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 #include "Core/Camera.h"
-#include "Physics/Raycast.h"
-#include "Actors/Game/Player.h"
+import Physics.Raycast;
+import Actors.Game.Player;
 
 OcclusionWall::OcclusionWall()
 {

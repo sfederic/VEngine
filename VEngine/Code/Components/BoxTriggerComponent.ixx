@@ -1,35 +1,37 @@
-#pragma once
+export module Components.BoxTriggerComponent;
 
-#include "SpatialComponent.h"
-#include "ComponentSystem.h"
-#include <functional>
+import Components.SpatialComponent;
+import Components.ComponentSystem;
+import <functional>;
+import <DirectXMath.h>
+import <DirectXCollision.h>
 
 class Actor;
 struct HitResult;
 
-class BoxTriggerComponent : public SpatialComponent
+export class BoxTriggerComponent : public SpatialComponent
 {
 public:
 	COMPONENT_SYSTEM(BoxTriggerComponent);
 
 	//default is green
-	XMFLOAT4 renderWireframeColour = XMFLOAT4(0.1f, 0.75f, 0.1f, 1.0f);
+	DirectX::XMFLOAT4 renderWireframeColour = DirectX::XMFLOAT4(0.1f, 0.75f, 0.1f, 1.0f);
 
 	BoxTriggerComponent();
 	void Tick(float deltaTime) override;
 	Properties GetProps() override;
 
 	//Remember to set arg as bounds in world space
-	bool Intersects(const BoundingOrientedBox& boundsInWorldSpaceToCheckAgainst);
+	bool Intersects(const DirectX::BoundingOrientedBox& boundsInWorldSpaceToCheckAgainst);
 	bool IntersectsWithAnyBoundingBoxInWorld();
 
-	bool Contains(XMVECTOR point);
+	bool Contains(DirectX::XMVECTOR point);
 	bool ContainsTarget();
 	void SetTargetAsPlayer();
-	XMVECTOR GetRandomPointInTrigger();
+	DirectX::XMVECTOR GetRandomPointInTrigger();
 
 	void SetExtents(float x, float y, float z);
-	XMFLOAT3 GetExtents() const;
+	DirectX::XMFLOAT3 GetExtents() const;
 
 	bool QuickInPlaceBoxCast(HitResult& hitResult, bool drawDebug);
 

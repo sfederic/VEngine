@@ -1,7 +1,7 @@
-#include "vpch.h"
+
 #include "WaterVolume.h"
 #include "GridActor.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 #include "Components/BoxTriggerComponent.h"
 #include "Render/BlendStates.h"
 

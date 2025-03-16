@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "GlobalPropSetter.h"
 #include "Gameplay/GameInstance.h"
 #include "Core/Log.h"

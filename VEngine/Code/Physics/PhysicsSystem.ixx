@@ -2,7 +2,7 @@ export module Physics.PhysicsSystem;
 
 #define PX_PHYSX_STATIC_LIB
 
-#include <DirectXMath.h>
+import <DirectXMath.h>;
 #include <foundation/PxTransform.h>
 #include <PxRigidActor.h>
 

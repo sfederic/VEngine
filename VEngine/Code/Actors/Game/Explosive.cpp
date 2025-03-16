@@ -1,11 +1,11 @@
-#include "vpch.h"
+
 #include "Explosive.h"
 #include "Gameplay/GameUtils.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 #include "Player.h"
 #include "Grid.h"
 #include "Explodable.h"
-#include "Physics/Raycast.h"
+import Physics.Raycast;
 #include "Core/Camera.h"
 
 Properties Explosive::GetProps()

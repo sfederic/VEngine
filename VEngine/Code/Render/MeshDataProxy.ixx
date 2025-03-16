@@ -1,6 +1,6 @@
 export module Render.MeshDataProxy;
 
-#include <DirectXCollision.h>
+import <DirectXCollision.h>;
 
 import Render.Vertex;
 

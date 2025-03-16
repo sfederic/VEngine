@@ -15,7 +15,7 @@ import Render.Renderer;
 #include "Components/AudioComponent.h"
 #include "Components/Lights/PointLightComponent.h"
 #include "Components/Lights/SpotLightComponent.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/SliceableMeshComponent.h"
 #include "Components/SocketMeshComponent.h"
@@ -26,7 +26,7 @@ import Render.Renderer;
 #include "Core/Log.h"
 #include "Core/Profile.h"
 #include "Core/UID.h"
-#include "Core/VMath.h"
+import Core.VMath;
 #include "Core/VString.h"
 #include "Core/World.h"
 #include "Core/WorldEditor.h"
@@ -37,7 +37,7 @@ import Render.Renderer;
 #include "Particle/Polyboard.h"
 #include "Particle/SpriteSheet.h"
 #include "Physics/PhysicsSystem.h"
-#include "Physics/Raycast.h"
+import Physics.Raycast;
 #include "RastStates.h"
 #include "Render/Line.h"
 #include "Render/Sampler.h"
@@ -62,8 +62,8 @@ import Render.Renderer;
 #include <cstdint>
 #include <d3d11.h>
 #include <d3dcommon.h>
-#include <DirectXCollision.h>
-#include <DirectXMath.h>
+import <DirectXCollision.h>;
+import <DirectXMath.h>;
 #include <DirectXMathConvert.inl>
 #include <DirectXMathMatrix.inl>
 #include <DirectXMathVector.inl>
@@ -73,9 +73,9 @@ import Render.Renderer;
 #include <minwindef.h>
 #include <ScreenGrab.h>
 #include <SHMath/DirectXSH.h>
-#include <string>
+import <string>;
 #include <utility>
-#include <vector>
+import <vector>;
 #include <WinCodec.h> //For GUID_ContainerFormatJpeg
 #include <windef.h>
 

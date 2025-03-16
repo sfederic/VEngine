@@ -1,7 +1,7 @@
 #pragma once
 
 #include "GridActor.h"
-#include <DirectXMath.h>
+import <DirectXMath.h>;
 
 //Metallic nut, not the squirrel nut.
 class Nut : public GridActor

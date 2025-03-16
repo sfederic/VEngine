@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "SystemDock.h"
 #include <qlistwidget.h>
 #include <qboxlayout.h>

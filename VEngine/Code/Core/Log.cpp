@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "Log.h"
 #include <chrono>
 #include <vadefs.h>

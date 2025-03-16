@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "OrientationTrigger.h"
 #include "OrientationLock.h"
 #include "Components/BoxTriggerComponent.h"

@@ -1,6 +1,6 @@
-#include "vpch.h"
+
 #include "DebugIcoSphere.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 
 DebugIcoSphere::DebugIcoSphere()
 {

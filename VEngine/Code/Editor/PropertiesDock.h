@@ -2,7 +2,7 @@
 
 #include <qdockwidget.h>
 #include <qgridlayout.h>
-#include <vector>
+import <vector>;
 
 class Actor;
 class IPropertyWidget;

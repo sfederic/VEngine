@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "InputIconWidget.h"
 #include "Core/Core.h"
 

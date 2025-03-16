@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "Sequencer.h"
 #include <QFileDialog>
 #include "Asset/AssetBaseFolders.h"

@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "TextureDataWidget.h"
 #include <qfiledialog.h>
 #include "Core/VString.h"

@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "InstanceMeshComponent.h"
 #include "Render/RenderUtils.h"
 #include "Render/ShaderData/InstanceData.h"

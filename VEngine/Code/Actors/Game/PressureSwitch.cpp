@@ -1,6 +1,6 @@
-#include "vpch.h"
+
 #include "PressureSwitch.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 #include "Components/BoxTriggerComponent.h"
 #include "Actors/Game/GridActor.h"
 

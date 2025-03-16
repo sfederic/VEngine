@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "MeshComponentDataWidget.h"
 #include <qfiledialog.h>
 #include "Core/VString.h"

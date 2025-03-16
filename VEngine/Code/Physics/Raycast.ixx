@@ -2,8 +2,8 @@ export module Physics.Raycast;
 
 import Physics.HitResult;
 
-#include <DirectXMath.h>
-#include <DirectXCollision.h>
+import <DirectXMath.h>;
+import <DirectXCollision.h>;
 
 export namespace Physics
 {

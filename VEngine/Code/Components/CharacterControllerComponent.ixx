@@ -1,7 +1,7 @@
 #pragma once
 
-#include "SpatialComponent.h"
-#include "ComponentSystem.h"
+import Components.SpatialComponent;
+import Components.ComponentSystem;
 #include <Physx/characterkinematic/PxController.h>
 
 //Component creates a Character Controller through PhysX

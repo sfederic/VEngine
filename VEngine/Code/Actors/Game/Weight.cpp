@@ -1,7 +1,7 @@
-#include "vpch.h"
+
 #include "Weight.h"
-#include "Physics/Raycast.h"
-#include "Core/VMath.h"
+import Physics.Raycast;
+import Core.VMath;
 #include "Crushable.h"
 
 void Weight::Create()

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Actors/Game/GridActor.h"
-#include <vector>
+import <vector>;
 
 //Fruitbasket is an actor holding fruits that are spawned as physics when flipped upside down.
 //It's a "fruit basket", but you can use it for anything.

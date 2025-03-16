@@ -1,6 +1,6 @@
-#include "vpch.h"
+
 #include "Grass.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 #include "Render/RastStates.h"
 
 Grass::Grass()

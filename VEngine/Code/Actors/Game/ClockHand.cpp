@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "ClockHand.h"
 #include "Components/SpatialComponent.h"
 

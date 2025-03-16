@@ -1,7 +1,7 @@
 #pragma once
 
 #include <qwidget.h>
-#include <DirectXMath.h>
+import <DirectXMath.h>;
 #include "IPropertyWidget.h"
 
 using namespace DirectX;

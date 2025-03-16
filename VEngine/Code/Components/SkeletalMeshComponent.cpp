@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "SkeletalMeshComponent.h"
 #include <algorithm>
 #include "Core/Core.h"

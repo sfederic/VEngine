@@ -1,6 +1,6 @@
-#include "vpch.h"
+
 #include "PowerCrystalSlot.h"
-#include "Physics/Raycast.h"
+import Physics.Raycast;
 #include "PowerCrystal.h"
 
 void PowerCrystalSlot::Create()

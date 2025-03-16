@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "BoolWidget.h"
 
 BoolWidget::BoolWidget(Property& prop_, QWidget* parent) : QCheckBox(parent)

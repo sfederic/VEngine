@@ -1,7 +1,7 @@
-#include "vpch.h"
+
 #include "SnapshotCrystal.h"
-#include "Physics/Raycast.h"
-#include "Components/MeshComponent.h"
+import Physics.Raycast;
+import Components.MeshComponent;
 #include "Core/Log.h"
 #include "Gameplay/GameUtils.h"
 

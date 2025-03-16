@@ -1,9 +1,9 @@
-#include "vpch.h"
+
 #include "OilBarrel.h"
-#include "Core/VMath.h"
-#include "Physics/Raycast.h"
+import Core.VMath;
+import Physics.Raycast;
 #include "OilSlick.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 
 void OilBarrel::Create()
 {

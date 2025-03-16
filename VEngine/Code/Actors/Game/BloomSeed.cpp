@@ -1,6 +1,6 @@
-#include "vpch.h"
+
 #include "BloomSeed.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 
 BloomSeed::BloomSeed()
 {

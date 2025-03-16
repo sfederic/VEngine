@@ -1,9 +1,13 @@
-#include "vpch.h"
-#include "BoxTriggerComponent.h"
-#include "Components/MeshComponent.h"
-#include "Core/VMath.h"
-#include "Actors/Game/Player.h"
-#include "Physics/Raycast.h"
+#include <DirectXMath.h>
+#include <DirectXCollision.h>
+
+import Components.BoxTriggerComponent;
+import Components.MeshComponent;
+import Core.VMath;
+import Actors.Game.Player;
+import Physics.Raycast;
+
+using namespace DirectX;
 
 BoxTriggerComponent::BoxTriggerComponent()
 {

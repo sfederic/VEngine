@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "IncrementalRotator.h"
 
 void IncrementalRotator::Start()

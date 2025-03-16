@@ -1,10 +1,9 @@
 export module Components.Component;
 
-import <string>;
-import <set>;
-
 import Core.Properties;
 import Core.UID;
+import <string>;
+import <set>;
 
 class IComponentSystem;
 class Actor;

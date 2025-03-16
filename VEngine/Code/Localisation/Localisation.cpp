@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "Localisation.h"
 #include "Core/Log.h"
 #include <qfile.h>

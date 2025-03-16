@@ -1,7 +1,7 @@
-#include "vpch.h"
+
 #include "LaserPowerUpGridActor.h"
 #include "Particle/Polyboard.h"
-#include "Physics/Raycast.h"
+import Physics.Raycast;
 
 LaserPowerUpGridActor::LaserPowerUpGridActor()
 {

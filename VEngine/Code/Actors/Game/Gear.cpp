@@ -1,7 +1,7 @@
-#include "vpch.h"
+
 #include "Gear.h"
 #include "GearSet.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 
 using namespace DirectX;
 

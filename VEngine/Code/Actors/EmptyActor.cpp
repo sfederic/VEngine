@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "EmptyActor.h"
 
 EmptyActor::EmptyActor()

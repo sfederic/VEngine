@@ -1,6 +1,6 @@
-#include "vpch.h"
+
 #include "GameUtils.h"
-#include "Actors/Game/Player.h"
+import Actors.Game.Player;
 #include "Audio/AudioSystem.h"
 #include "Core/World.h"
 #include "Core/FileSystem.h"
@@ -10,7 +10,7 @@
 #include "Particle/ParticleEmitter.h"
 #include "Particle/Polyboard.h"
 #include "Asset/AssetFileExtensions.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 
 namespace GameUtils
 {

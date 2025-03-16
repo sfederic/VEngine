@@ -1,7 +1,7 @@
-#include "vpch.h"
+
 #include "PlayerDialogueTrigger.h"
 #include "Components/BoxTriggerComponent.h"
-#include "Actors/Game/Player.h"
+import Actors.Game.Player;
 
 PlayerDialogueTrigger::PlayerDialogueTrigger()
 {

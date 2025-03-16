@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "BombRock.h"
 
 Properties BombRock::GetProps()

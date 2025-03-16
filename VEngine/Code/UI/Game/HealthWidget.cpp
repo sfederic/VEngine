@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "HealthWidget.h"
 #include "Core/VString.h"
 

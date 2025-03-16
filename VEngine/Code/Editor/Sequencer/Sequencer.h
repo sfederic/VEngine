@@ -4,7 +4,7 @@
 #include "Editor/Sequencer/SequenceItem.h"
 #include "Editor/Sequencer/SequenceEntryData.h"
 #include "Editor/Sequencer/SequenceEntryTypes.h"
-#include <vector>
+import <vector>;
 #include <cstdio>
 
 //Todo: I don't like Imguizmo's sequencer too much, there are no nodes per timeline.

@@ -1,6 +1,6 @@
-#include "vpch.h"
+
 #include "Particle.h"
-#include "Core/VMath.h"
+import Core.VMath;
 #include "ParticleData.h"
 
 void Particle::SetParticleRangeData(ParticleData& particleData)

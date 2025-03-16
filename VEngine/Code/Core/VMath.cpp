@@ -1,6 +1,6 @@
 import Core.VMath;
 
-#include <DirectXMath.h>
+import <DirectXMath.h>;
 
 import Actors.Actor;
 import Core.Transform;

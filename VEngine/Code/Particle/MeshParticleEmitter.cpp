@@ -1,6 +1,6 @@
-#include "vpch.h"
+
 #include "MeshParticleEmitter.h"
-#include "Core/VMath.h"
+import Core.VMath;
 #include "Components/InstanceMeshComponent.h"
 
 constexpr int maxMeshes = 5;

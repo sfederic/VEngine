@@ -1,6 +1,6 @@
-#include "vpch.h"
+
 #include "SpherePhysicsActor.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 
 SpherePhysicsActor::SpherePhysicsActor()
 {

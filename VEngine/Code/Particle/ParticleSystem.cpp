@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "ParticleSystem.h"
 #include "ParticleEmitter.h"
 

@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "Serialiser.h"
 #include "Properties.h"
 #include "Render/RenderPropertyStructs.h"

@@ -1,8 +1,8 @@
-#include "vpch.h"
+
 #include "FireSource.h"
 #include "Particle/SpriteSheet.h"
 #include "Gameplay/GameUtils.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 #include "Components/BoxTriggerComponent.h"
 
 FireSource::FireSource()

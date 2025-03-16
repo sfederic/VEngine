@@ -1,6 +1,6 @@
-#include "vpch.h"
+
 #include "OrientedCrushable.h"
-#include "Core/VMath.h"
+import Core.VMath;
 
 Properties OrientedCrushable::GetProps()
 {

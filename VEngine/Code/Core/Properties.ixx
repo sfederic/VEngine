@@ -1,16 +1,15 @@
 export module Core.Properties;
 
-import <string>;
-import <map>;
-import <typeindex>;
-import <vector>;
-import <cassert>;
-
 import Core.Property;
 import Core.UID;
 import Core.VAssert;
 import Render.RenderPropertyStructs;
 import Core.VEnum;
+import <string>;
+import <map>;
+import <typeindex>;
+import <vector>;
+import <cassert>;
 
 export struct Properties
 {

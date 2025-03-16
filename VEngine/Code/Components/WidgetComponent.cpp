@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "WidgetComponent.h"
 #include "UI/Widget.h"
 

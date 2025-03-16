@@ -1,6 +1,6 @@
 export module Render.Vertex;
 
-#include <DirectXMath.h>
+import <DirectXMath.h>;
 
 export struct Vertex
 {

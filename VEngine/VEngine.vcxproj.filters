@@ -979,7 +979,7 @@
     <ClInclude Include="Code\Core\FileSystem.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Components\InstanceMeshComponent.h">
+    <ClInclude Include="Code\Components\InstanceMeshComponent.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Editor\PropertyWidgets\SpinBox.h">
@@ -997,7 +997,7 @@
     <ClInclude Include="Code\Editor\PropertyWidgets\StringWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Components\BoxTriggerComponent.h">
+    <ClInclude Include="Code\Components\BoxTriggerComponent.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Render\Material.ixx">
@@ -1060,10 +1060,10 @@
     <ClInclude Include="Code\Editor\DialogueDock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Components\EmptyComponent.h">
+    <ClInclude Include="Code\Components\EmptyComponent.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Components\WidgetComponent.h">
+    <ClInclude Include="Code\Components\WidgetComponent.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Gameplay\GameInstance.h">
@@ -1129,7 +1129,7 @@
     <ClInclude Include="Code\Physics\PhysicsSystem.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Components\DestructibleMeshComponent.h">
+    <ClInclude Include="Code\Components\DestructibleMeshComponent.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\DestructibleActor.h">
@@ -1144,7 +1144,7 @@
     <ClInclude Include="Code\Editor\PropertyWidgets\VEnumWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Components\CharacterControllerComponent.h">
+    <ClInclude Include="Code\Components\CharacterControllerComponent.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Particle\Polyboard.h">
@@ -1243,7 +1243,7 @@
     <ClInclude Include="Code\Actors\AnimCube.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Components\SkeletalMeshComponent.h">
+    <ClInclude Include="Code\Components\SkeletalMeshComponent.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Particle\MeshParticleEmitter.h">
@@ -1258,7 +1258,7 @@
     <ClInclude Include="Code\Actors\MeshSliceActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Components\SliceableMeshComponent.h">
+    <ClInclude Include="Code\Components\SliceableMeshComponent.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\SplitMesh.h">
@@ -1267,13 +1267,13 @@
     <ClInclude Include="Code\Gameplay\IMeshSliceReaction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Components\SocketMeshComponent.h">
+    <ClInclude Include="Code\Components\SocketMeshComponent.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\DebugActors\DebugCapsule.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Components\MouseRotateComponent.h">
+    <ClInclude Include="Code\Components\MouseRotateComponent.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Animation\BoneWeights.ixx">
@@ -1573,7 +1573,7 @@
     <ClInclude Include="Code\Actors\Game\LiftCrank.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Components\PersistentAudioComponent.h">
+    <ClInclude Include="Code\Components\PersistentAudioComponent.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\PersistentAudioActor.h">

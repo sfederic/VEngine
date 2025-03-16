@@ -8,10 +8,10 @@ import Physics.Raycast;
 #include "Render/RastState.h"
 #include "Render/DebugMeshManager.h"
 #include "Editor/Editor.h"
-#include "Core/VMath.h"
+import Core.VMath;
 #include "Core/Core.h"
 #include "Actors/Actor.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 #include "Components/BoxTriggerComponent.h"
 #include "Components/Lights/PointLightComponent.h"
 #include "Components/Lights/SpotLightComponent.h"

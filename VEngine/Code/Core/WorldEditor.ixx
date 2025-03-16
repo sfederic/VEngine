@@ -1,6 +1,6 @@
 export module Core.WorldEditor;
 
-#include <DirectXMath.h>
+import <DirectXMath.h>;
 
 import <set>;
 import <string>;

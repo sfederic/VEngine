@@ -1,8 +1,8 @@
-#include "vpch.h"
+
 #include "SpriteSheet.h"
 #include "Render/TextureSystem.h"
 #include "Render/Texture2D.h"
-#include "Core/VMath.h"
+import Core.VMath;
 
 SpriteSheet::SpriteSheet()
 {

@@ -1,10 +1,10 @@
+#include <DirectXMath.h>
+
 export module Components.CameraComponent;
 
 import Components.SpatialComponent;
 import Components.ComponentSystemDefine;
 import Core.Properties;
-
-#include <DirectXMath.h>
 
 class Actor;
 

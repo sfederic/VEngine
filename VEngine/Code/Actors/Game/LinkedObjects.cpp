@@ -1,6 +1,6 @@
-#include "vpch.h"
+
 #include "LinkedObjects.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 #include "Particle/Polyboard.h"
 
 LinkedObjects::LinkedObjects()

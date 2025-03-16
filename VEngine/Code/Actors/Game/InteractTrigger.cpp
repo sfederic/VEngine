@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "InteractTrigger.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Gameplay/GameUtils.h"
@@ -6,7 +6,7 @@
 #include "UI/Game/InteractWidget.h"
 #include "UI/UISystem.h"
 #include "Core/Input.h"
-#include "Actors/Game/Player.h"
+import Actors.Game.Player;
 
 InteractTrigger::InteractTrigger()
 {

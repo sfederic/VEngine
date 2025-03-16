@@ -1,6 +1,6 @@
 export module Render.Material;
 
-#include <DirectXMath.h>
+import <DirectXMath.h>;
 #include <d3d11.h>
 
 import Core.VEnum;

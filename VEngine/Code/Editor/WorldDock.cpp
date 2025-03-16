@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "WorldDock.h"
 #include <QTreeWidgetItem>
 #include <qmenu.h>

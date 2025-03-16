@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "GearSetDoor.h"
 
 void GearSetDoor::Create()

@@ -1,7 +1,7 @@
-#include "vpch.h"
+
 #include "PlayerCameraTrigger.h"
 #include "Components/BoxTriggerComponent.h"
-#include "Actors/Game/Player.h"
+import Actors.Game.Player;
 
 PlayerCameraTrigger::PlayerCameraTrigger()
 {

@@ -1,11 +1,11 @@
-#include "vpch.h"
+
 #include "Player.h"
 #include "Core/Camera.h"
 #include "Core/Core.h"
 #include "Core/Input.h"
-#include "Core/VMath.h"
+import Core.VMath;
 #include "Core/Log.h"
-#include "Physics/Raycast.h"
+import Physics.Raycast;
 #include "Audio/MaterialAudioType.h"
 #include "Actors/Game/NPC.h"
 #include "Actors/Game/InspectionTrigger.h"
@@ -15,7 +15,7 @@
 #include "Grid.h"
 #include "GridActor.h"
 #include "Components/Game/DialogueComponent.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 #include "Render/RastState.h"
 #include "Render/BlendStates.h"
 #include "Render/Renderer.h"

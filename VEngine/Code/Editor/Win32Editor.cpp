@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "Win32Editor.h"
 #include "imgui_forward_declare.h"
 #include "Core/Core.h"

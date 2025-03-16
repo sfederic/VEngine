@@ -1,10 +1,10 @@
+#include <DirectXMath.h>
+
 export module Physics.HitResult;
 
 import Physics.CollisionLayers;
 import Render.Vertex;
 import <vector>;
-
-#include <DirectXMath.h>
 
 class Actor;
 class SpatialComponent;

@@ -1,6 +1,6 @@
-#include "vpch.h"
+
 #include "DebugSphere.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 
 DebugSphere::DebugSphere()
 {

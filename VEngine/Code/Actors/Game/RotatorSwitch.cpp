@@ -1,8 +1,8 @@
-#include "vpch.h"
+
 #include "RotatorSwitch.h"
 #include "Core/World.h"
-#include "Core/VMath.h"
-#include "Components/MeshComponent.h"
+import Core.VMath;
+import Components.MeshComponent;
 
 RotatorSwitch::RotatorSwitch()
 {

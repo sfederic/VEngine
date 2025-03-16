@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "ToolbarDock.h"
 #include <qpushbutton.h>
 #include <qboxlayout.h>

@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "InspectionActor.h"
 
 void InspectionActor::Create()

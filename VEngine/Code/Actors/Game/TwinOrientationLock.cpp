@@ -1,6 +1,6 @@
-#include "vpch.h"
+
 #include "TwinOrientationLock.h"
-#include "Core/VMath.h"
+import Core.VMath;
 
 void TwinOrientationLock::Start()
 {

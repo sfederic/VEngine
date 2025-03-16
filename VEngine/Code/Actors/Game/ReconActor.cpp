@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "ReconActor.h"
 #include "Localisation/Localisation.h"
 

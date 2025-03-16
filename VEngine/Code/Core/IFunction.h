@@ -1,8 +1,8 @@
 #pragma once
 
-#include <vector>
+import <vector>;
 #include <typeindex>
-#include <string>
+import <string>;
 
 //Base class for VFunctions
 class IFunction

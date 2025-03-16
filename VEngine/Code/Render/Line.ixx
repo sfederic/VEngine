@@ -1,6 +1,6 @@
 export module Render.Line;
 
-#include <DirectXMath.h>
+import <DirectXMath.h>;
 
 export struct Line
 {

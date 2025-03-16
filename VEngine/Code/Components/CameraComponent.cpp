@@ -1,6 +1,6 @@
-#include "vpch.h"
+
 #include "CameraComponent.h"
-#include "Core/VMath.h"
+import Core.VMath;
 #include "Core/Core.h"
 #include "Render/Renderer.h"
 #include "Core/Camera.h"

@@ -1,6 +1,6 @@
-export module Animation.AnimFrame;
-
 #include <DirectXMath.h>
+
+export module Animation.AnimFrame;
 
 export struct AnimFrame
 {

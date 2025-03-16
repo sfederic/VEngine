@@ -1,8 +1,8 @@
-#include "vpch.h"
+
 #include "FruitBasket.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 #include "Components/BoxTriggerComponent.h"
-#include "Core/VMath.h"
+import Core.VMath;
 
 FruitBasket::FruitBasket()
 {

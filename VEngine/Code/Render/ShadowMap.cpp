@@ -4,7 +4,7 @@ import Core.VMath;
 import Render.Renderer;
 
 #include <cassert>
-#include <DirectXMath.h>
+import <DirectXMath.h>;
 #include "Components/Lights/DirectionalLightComponent.h"
 #include "Components/Lights/SpotLightComponent.h"
 

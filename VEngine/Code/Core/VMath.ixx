@@ -1,7 +1,7 @@
 export module Core.VMath;
 
-#include <DirectXMath.h>
-#include <DirectXCollision.h>
+import <DirectXMath.h>;
+import <DirectXCollision.h>;
 
 import <unordered_map>;
 

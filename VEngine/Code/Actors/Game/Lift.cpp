@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "Lift.h"
 #include "Components/BoxTriggerComponent.h"
 

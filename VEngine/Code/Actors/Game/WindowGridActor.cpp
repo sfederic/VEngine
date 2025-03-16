@@ -1,9 +1,9 @@
-#include "vpch.h"
+
 #include "WindowGridActor.h"
 #include "Player.h"
 #include "Render/RastStates.h"
 #include "Render/BlendStates.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 
 void WindowGridActor::Create()
 {

@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "Ore.h"
 
 void Ore::Create()

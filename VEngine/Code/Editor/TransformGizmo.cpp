@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "TransformGizmo.h"
 #include "Render/Renderer.h"
 #include "Core/Camera.h"

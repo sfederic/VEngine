@@ -1,10 +1,10 @@
-#include "vpch.h"
+
 #include "DiffuseProbeMap.h"
 #include <filesystem>
 #include <algorithm>
 #include "Core/World.h"
 #include "Core/Log.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 #include "Render/RenderUtils.h"
 #include "Render/ShaderData/InstanceData.h"
 

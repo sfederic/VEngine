@@ -1,7 +1,7 @@
-#include "vpch.h"
+
 #include "Steam.h"
 #include "Particle/ParticleEmitter.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 #include "Components/AudioComponent.h"
 #include "Gameplay/GridNode.h"
 

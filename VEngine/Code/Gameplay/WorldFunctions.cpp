@@ -1,8 +1,8 @@
-#include "vpch.h"
+
 #include "WorldFunctions.h"
 #include "Core/Log.h"
 #include "Gameplay/GameInstance.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 
 static std::map<std::string, std::function<void()>> worldStartFunctionMap;
 

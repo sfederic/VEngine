@@ -1,7 +1,7 @@
-#include "vpch.h"
+
 #include "Billboard.h"
-#include "Components/MeshComponent.h"
-#include "Core/VMath.h"
+import Components.MeshComponent;
+import Core.VMath;
 #include "Render/RastStates.h"
 
 Billboard::Billboard()

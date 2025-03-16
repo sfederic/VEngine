@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Widget.h"
-#include <string>
+import <string>;
 
 class TitleScreenWidget : public Widget
 {

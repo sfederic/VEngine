@@ -1,6 +1,6 @@
 #pragma once
 
-#include <string>
+import <string>;
 #include <set>
 #include "Core/Properties.h"
 #include "Core/Log.h"

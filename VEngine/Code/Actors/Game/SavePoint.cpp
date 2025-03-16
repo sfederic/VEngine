@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "SavePoint.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Core/Input.h"

@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "EntranceInteractTrigger.h"
 #include "Core/Input.h"
 

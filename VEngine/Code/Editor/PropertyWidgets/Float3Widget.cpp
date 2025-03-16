@@ -1,8 +1,8 @@
-#include "vpch.h"
+
 #include "Float3Widget.h"
 #include <qboxlayout.h>
-#include <DirectXMath.h>
-#include "Core/VMath.h"
+import <DirectXMath.h>;
+import Core.VMath;
 
 using namespace DirectX;
 

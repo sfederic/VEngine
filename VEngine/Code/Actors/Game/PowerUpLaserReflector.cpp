@@ -1,7 +1,7 @@
-#include "vpch.h"
+
 #include "PowerUpLaserReflector.h"
 #include "Particle/Polyboard.h"
-#include "Physics/Raycast.h"
+import Physics.Raycast;
 
 PowerUpLaserReflector::PowerUpLaserReflector()
 {

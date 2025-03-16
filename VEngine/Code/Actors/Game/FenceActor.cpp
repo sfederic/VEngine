@@ -1,6 +1,6 @@
-#include "vpch.h"
+
 #include "FenceActor.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 #include "Render/RastStates.h"
 
 FenceActor::FenceActor()

@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "DebugNoteWidget.h"
 
 void DebugNoteWidget::Draw(float deltaTime)

@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "DebugLightProbe.h"
 #include "Components/InstanceMeshComponent.h"
 

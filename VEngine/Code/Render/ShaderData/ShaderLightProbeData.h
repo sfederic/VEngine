@@ -1,6 +1,6 @@
 #pragma once
 
-#include <DirectXMath.h>
+import <DirectXMath.h>;
 
 struct ShaderLightProbeData
 {

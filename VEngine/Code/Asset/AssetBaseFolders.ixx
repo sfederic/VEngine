@@ -1,6 +1,6 @@
 export module Asset.AssetBaseFolders;
 
-#include <string>
+import <string>;
 
 //Base folder starting paths for corresponding assets.
 namespace AssetBaseFolders

@@ -1,8 +1,8 @@
-#include "vpch.h"
+
 #include "MeshSlicer.h"
-#include <DirectXMath.h>
-#include <DirectXCollision.h>
-#include "Components/MeshComponent.h"
+import <DirectXMath.h>;
+import <DirectXCollision.h>;
+import Components.MeshComponent;
 #include "Render/Vertex.h"
 
 using namespace DirectX;

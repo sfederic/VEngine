@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "SocketMeshComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 

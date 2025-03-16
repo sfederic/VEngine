@@ -1,6 +1,6 @@
 export module Render.Sprite;
 
-#include <DirectXMath.h>
+import <DirectXMath.h>;
 
 import Core.Transform;
 import Render.VRect;

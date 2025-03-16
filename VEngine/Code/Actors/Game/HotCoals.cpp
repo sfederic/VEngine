@@ -1,6 +1,6 @@
-#include "vpch.h"
+
 #include "HotCoals.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 #include "Gameplay/GameUtils.h"
 #include "Gameplay/GridNode.h"
 

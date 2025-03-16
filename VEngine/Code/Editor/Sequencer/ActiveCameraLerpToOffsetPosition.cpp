@@ -1,7 +1,7 @@
-#include "vpch.h"
+
 #include "ActiveCameraLerpToOffsetPosition.h"
 #include "Core/Camera.h"
-#include "Core/VMath.h"
+import Core.VMath;
 #include "Core/Log.h"
 
 void ActiveCameraLerpToOffsetPosition::Tick(float deltaTime)

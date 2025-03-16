@@ -1,6 +1,6 @@
 export module Components.MeshComponent;
 
-#include <DirectXMath.h>
+import <DirectXMath.h>;
 
 import Components.SpatialComponent;
 import <vector>;

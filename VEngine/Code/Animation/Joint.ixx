@@ -1,6 +1,6 @@
-export module Animation.Joint;
-
 #include <DirectXMath.h>
+
+export module Animation.Joint;
 
 import <string>;
 

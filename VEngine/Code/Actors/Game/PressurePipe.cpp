@@ -1,6 +1,6 @@
-#include "vpch.h"
+
 #include "PressurePipe.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 
 PressurePipe::PressurePipe()
 {

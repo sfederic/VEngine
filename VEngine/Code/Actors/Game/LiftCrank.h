@@ -1,7 +1,7 @@
 #pragma once
 
 #include "GridActor.h"
-#include <DirectXMath.h>
+import <DirectXMath.h>;
 
 class Lift;
 

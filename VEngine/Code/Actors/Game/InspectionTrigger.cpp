@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "InspectionTrigger.h"
 #include "Components/BoxTriggerComponent.h"
 

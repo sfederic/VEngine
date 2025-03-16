@@ -1,6 +1,6 @@
-#include "vpch.h"
+
 #include "SpecificSwitch.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 #include "Components/BoxTriggerComponent.h"
 #include "GridActor.h"
 #include "Core/Log.h"

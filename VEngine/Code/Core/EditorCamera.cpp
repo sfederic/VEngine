@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "WorldEditor.h"
 #include "VMath.h"
 #include "Input.h"

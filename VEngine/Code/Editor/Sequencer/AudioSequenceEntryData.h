@@ -1,7 +1,7 @@
 #pragma once
 
 #include "SequenceEntryData.h"
-#include <string>
+import <string>;
 
 class AudioSequenceEntryData : public SequenceEntryData
 {

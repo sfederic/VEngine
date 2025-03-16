@@ -1,9 +1,9 @@
-#include "vpch.h"
+
 #include "QuickDialogueTrigger.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Components/Game/DialogueComponent.h"
 #include "UI/Game/DialogueWidget.h"
-#include "Core/VMath.h"
+import Core.VMath;
 
 QuickDialogueTrigger::QuickDialogueTrigger()
 {

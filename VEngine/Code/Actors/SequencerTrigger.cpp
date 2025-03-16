@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "SequencerTrigger.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Editor/Sequencer/Sequencer.h"

@@ -1,6 +1,6 @@
 export module Render.MeshData;
 
-#include <DirectXCollision.h>
+import <DirectXCollision.h>;
 #include "Animation/Skeleton.h"
 #include "Vertex.h"
 

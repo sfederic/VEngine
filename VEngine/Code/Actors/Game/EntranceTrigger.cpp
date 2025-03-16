@@ -1,9 +1,9 @@
-#include "vpch.h"
+
 #include "EntranceTrigger.h"
 #include <filesystem>
 #include "Player.h"
 #include "Core/Log.h"
-#include "Core/VMath.h"
+import Core.VMath;
 #include "Components/BoxTriggerComponent.h"
 #include "Components/Game/ConditionComponent.h"
 #include "Gameplay/GameUtils.h"

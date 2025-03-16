@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "ScreenFadeWidget.h"
 
 void ScreenFadeWidget::Draw(float deltaTime)

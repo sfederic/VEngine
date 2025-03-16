@@ -1,7 +1,7 @@
 #pragma once
 
 #include "SequenceEntryData.h"
-#include <DirectXMath.h>
+import <DirectXMath.h>;
 
 class ActiveCameraLerpToOffsetPosition : public SequenceEntryData
 {

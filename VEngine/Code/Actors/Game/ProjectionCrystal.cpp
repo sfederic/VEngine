@@ -1,6 +1,6 @@
-#include "vpch.h"
+
 #include "ProjectionCrystal.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 #include "Components/Lights/SpotLightComponent.h"
 #include "Grid.h"
 #include "Render/BlendStates.h"

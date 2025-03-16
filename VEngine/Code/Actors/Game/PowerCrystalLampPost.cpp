@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "PowerCrystalLampPost.h"
 #include "Components/Lights/PointLightComponent.h"
 

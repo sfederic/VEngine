@@ -1,6 +1,6 @@
-#include "vpch.h"
+
 #include "DebugCone.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 
 DebugCone::DebugCone()
 {

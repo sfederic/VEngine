@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "PlayerTeleporter.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Player.h"

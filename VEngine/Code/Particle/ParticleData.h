@@ -1,6 +1,6 @@
 #pragma once
 
-#include <DirectXMath.h>
+import <DirectXMath.h>;
 #include "Core/Properties.h"
 
 using namespace DirectX;

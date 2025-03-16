@@ -1,8 +1,8 @@
 #pragma once
 
 #include <functional>
-#include <map>
-#include <string>
+import <map>;
+import <string>;
 
 //CONDITION FUNCTIONS
 //Condition functions need to be created as free functions in Conditions.cpp and then added to the system.

@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "NPC.h"
 #include "EntranceTrigger.h"
 #include "Grid.h"

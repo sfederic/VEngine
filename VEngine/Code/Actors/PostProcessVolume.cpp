@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "PostProcessVolume.h"
 #include "Core/Camera.h"
 #include "Components/BoxTriggerComponent.h"

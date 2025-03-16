@@ -1,6 +1,6 @@
-#include "vpch.h"
+
 #include "MapProjectionActor.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 
 MapProjectionActor::MapProjectionActor()
 {

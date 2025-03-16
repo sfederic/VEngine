@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "Rotator.h"
 #include "Core/Log.h"
 #include "Grid.h"

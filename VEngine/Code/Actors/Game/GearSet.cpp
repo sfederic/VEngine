@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "GearSet.h"
 #include "Components/BoxTriggerComponent.h"
 #include "GearSetDoor.h"

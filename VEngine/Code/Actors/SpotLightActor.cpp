@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "SpotLightActor.h"
 #include "Components/Lights/SpotLightComponent.h"
 

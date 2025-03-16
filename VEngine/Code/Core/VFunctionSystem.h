@@ -1,5 +1,5 @@
 #pragma once
-#include <map>
+import <map>;
 #include "IFunction.h"
 
 class VFunctionSystem

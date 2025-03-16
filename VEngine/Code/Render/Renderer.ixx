@@ -1,7 +1,7 @@
 export module Render.Renderer;
 
 #include <d3d11.h>
-#include <DirectXCollision.h>
+import <DirectXCollision.h>;
 
 import <string>;
 

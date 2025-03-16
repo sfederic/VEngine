@@ -5,7 +5,7 @@ import Editor.Editor;
 import <cassert>;
 import <vector>;
 
-#include <DirectXMath.h>
+import <DirectXMath.h>;
 
 using namespace DirectX;
 

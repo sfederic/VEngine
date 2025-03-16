@@ -1,7 +1,7 @@
 #pragma once
 
-#include <string>
-#include <DirectXMath.h>
+import <string>;
+import <DirectXMath.h>;
 
 using namespace DirectX;
 

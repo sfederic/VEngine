@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "MeshComponent.h"
 #include "Asset/AssetSystem.h"
 #include "Render/Material.h"

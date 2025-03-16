@@ -1,6 +1,6 @@
-#include "vpch.h"
+
 #include "DouseFruit.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 #include "Gameplay/GameUtils.h"
 
 void DouseFruit::Create()

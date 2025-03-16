@@ -1,7 +1,7 @@
-#include "vpch.h"
+
 #include "MinesGenerator.h"
 #include "Components/BoxTriggerComponent.h"
-#include "Components/MeshComponent.h"
+import Components.MeshComponent;
 #include "PowerCrystal.h"
 #include "Gameplay/GameInstance.h"
 

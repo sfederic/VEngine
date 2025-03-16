@@ -1,4 +1,4 @@
-#include "vpch.h"
+
 #include "PersistentAudioActor.h"
 #include "Components/PersistentAudioComponent.h"
 
