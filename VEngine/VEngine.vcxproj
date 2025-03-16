@@ -388,7 +388,7 @@
     <ClInclude Include="Code\Actors\Game\BloomSeed.h" />
     <ClInclude Include="Code\Actors\Game\TimerExplosive.h" />
     <ClInclude Include="Code\Actors\Game\TeleportGridActor.h" />
-    <ClInclude Include="Code\Audio\MaterialAudioType.h" />
+    <ClInclude Include="Code\Audio\MaterialAudioType.ixx" />
     <ClInclude Include="Code\Editor\AssetIconListWidget.ixx" />
     <ClInclude Include="Code\Editor\imgui\misc\cpp\imgui_stdlib.h" />
     <ClInclude Include="Code\Editor\Sequencer\AudioSequenceEntryData.h" />
