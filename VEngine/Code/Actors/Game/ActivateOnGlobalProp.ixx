@@ -1,7 +1,27 @@
-#include "vpch.h"
-#include "ActivateOnGlobalProp.h"
-#include "Gameplay/GameInstance.h"
-#include "Core/PropertyTypes.h"
+export module Actors.Game.ActivateOnGlobalProp;
+
+import Core.Properties;
+import Core.PropertyTypes;
+import Core.VEnum;
+import Core.Log;
+import <string>;
+
+#include "Actors/ActorSystemDefine.h"
+
+//Grid actor that activates when a specified global property exists or has the correct value.
+export class ActivateOnGlobalProp : public GridActor
+{
+public:
+	ACTOR_SYSTEM(ActivateOnGlobalProp);
+
+	ActivateOnGlobalProp();
+	void Start() override;
+	Properties GetProps() override;
+
+private:
+	std::string propertyName;
+	VEnum propertyType;
+};
 
 ActivateOnGlobalProp::ActivateOnGlobalProp()
 {

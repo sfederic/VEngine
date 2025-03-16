@@ -1,8 +1,11 @@
-#pragma once
+export module Actors.Game.GridActor;
 
-#include "../Actor.h"
-#include "../ActorSystem.h"
-#include "Gameplay/ForwardFace.h"
+import Actors.Actor;
+import Actors.ActorSystem;
+import <string>;
+
+#include <DirectXMath.h>
+#include "Actors/ActorSystemDefine.h"
 
 class MeshComponent;
 class HealthWidget;
@@ -10,7 +13,7 @@ struct GridNode;
 class DialogueComponent;
 
 //Base struct for every interactive actor that is placed in the level
-class GridActor : public Actor
+export class GridActor : public Actor
 {
 public:
 	ACTOR_SYSTEM(GridActor);

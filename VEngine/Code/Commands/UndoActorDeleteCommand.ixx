@@ -1,6 +1,6 @@
-#pragma once
+export module Commands.UndoActorDeleteCommand;
 
-#include "ICommand.h"
+import Commands.ICommand;
 
 class IActorSystem;
 

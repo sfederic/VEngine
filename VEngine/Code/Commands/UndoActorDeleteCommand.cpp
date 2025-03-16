@@ -1,10 +1,8 @@
-#include "vpch.h"
-#include "UndoActorDeleteCommand.h"
-#include "Actors/IActorSystem.h"
-#include "Actors/Actor.h"
-#include "Core/Properties.h"
-#include "Core/World.h"
-#include "Editor/Editor.h"
+import Commands.UndoActorDeleteCommand;
+import Actors.IActorSystem;
+import Core.Properties;
+import Core.World;
+import Editor.Editor;
 
 void UndoActorDeleteCommand::Execute()
 {

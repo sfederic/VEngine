@@ -1,8 +1,11 @@
-#include "vpch.h"
-#include "CommandSystem.h"
-#include "Core/Input.h"
-#include "Editor/Editor.h"
-#include "UndoActorDeleteCommand.h"
+import Commands.CommandSystem;
+import Actors.Actor;
+import Actors.IActorSystem;
+import Core.Input;
+import Core.Win32Keys;
+import Editor.Editor;
+import <vector>;
+import <memory>;
 
 void CommandSystem::AddDeleteActorCommand(Actor* actorToDelete)
 {

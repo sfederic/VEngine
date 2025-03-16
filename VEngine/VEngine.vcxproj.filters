@@ -302,9 +302,6 @@
     <ClCompile Include="Code\Core\Package.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Core\VEnum.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Editor\PropertyWidgets\VEnumWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -620,9 +617,6 @@
     <ClCompile Include="Code\Actors\Game\IncrementalRotator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\Game\ActivateOnGlobalProp.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Actors\Game\Lift.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -866,7 +860,6 @@
     <ClCompile Include="Code\Core\FileSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Actors\ActorSystemDefine.ixx" />
     <ClCompile Include="Code\Editor\Editor.ixx" />
   </ItemGroup>
   <ItemGroup>
@@ -903,9 +896,9 @@
     <ClInclude Include="Code\Components\ComponentSystem.ixx" />
     <ClInclude Include="Code\Components\IComponentSystem.ixx" />
     <ClInclude Include="Code\Components\MeshComponent.ixx" />
-    <ClInclude Include="Code\Commands\CommandSystem.h" />
-    <ClInclude Include="Code\Commands\Command.h" />
-    <ClInclude Include="Code\Commands\ICommand.h" />
+    <ClInclude Include="Code\Commands\CommandSystem.ixx" />
+    <ClInclude Include="Code\Commands\Command.ixx" />
+    <ClInclude Include="Code\Commands\ICommand.ixx" />
     <ClInclude Include="Code\Audio\AudioSystem.ixx" />
     <ClInclude Include="Code\Actors\ActorSystem.ixx" />
     <ClInclude Include="Code\Actors\ActorSystemCache.ixx" />
@@ -1376,7 +1369,7 @@
     <ClInclude Include="Code\Actors\Game\Grid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\Game\GridActor.h">
+    <ClInclude Include="Code\Actors\Game\GridActor.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\InteractTrigger.h">
@@ -1568,7 +1561,7 @@
     <ClInclude Include="Code\Actors\Game\IncrementalRotator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Actors\Game\ActivateOnGlobalProp.h">
+    <ClInclude Include="Code\Actors\Game\ActivateOnGlobalProp.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Core\PropertyTypes.ixx">
@@ -1847,7 +1840,7 @@
     <ClInclude Include="Code\Actors\Game\FruitBasket.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Commands\UndoActorDeleteCommand.h">
+    <ClInclude Include="Code\Commands\UndoActorDeleteCommand.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Localisation\Localisation.h">
@@ -1872,6 +1865,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Render\Device.ixx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Actors\ActorSystemDefine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

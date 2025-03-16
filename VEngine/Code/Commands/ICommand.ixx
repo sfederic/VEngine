@@ -1,8 +1,8 @@
-#pragma once
+export module Commands.ICommand;
 
-#include <string>
+import <string>;
 
-class ICommand
+export class ICommand
 {
 public:
 	virtual ~ICommand() = default;

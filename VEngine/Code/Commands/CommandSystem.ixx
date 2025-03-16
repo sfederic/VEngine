@@ -1,12 +1,13 @@
-#pragma once
+export module Commands.CommandSystem;
 
-#include <vector>
-#include <memory>
-#include "Commands/Command.h"
+import Core.Property;
+import Commands.ICommand;
+import <vector>;
+import <memory>;
 
 class Actor;
 
-class CommandSystem
+export class CommandSystem
 {
 public:
 	static auto& Get()

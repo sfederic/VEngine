@@ -120,7 +120,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Code\Actors\Actor.ixx" />
-    <ClCompile Include="Code\Actors\ActorSystemDefine.ixx" />
     <ClCompile Include="Code\Actors\Game\MapProjectionCrystal.cpp" />
     <ClCompile Include="Code\Actors\Game\BombRock.cpp" />
     <ClCompile Include="Code\Commands\UndoActorDeleteCommand.cpp" />
@@ -149,7 +148,6 @@
     <ClCompile Include="Code\Core\BinaryDeserialiser.cpp" />
     <ClCompile Include="Code\Core\BinarySerialiser.cpp" />
     <ClCompile Include="Code\Actors\Game\GlobalPropSetter.cpp" />
-    <ClCompile Include="Code\Actors\Game\ActivateOnGlobalProp.cpp" />
     <ClCompile Include="Code\Actors\Game\ClockHand.cpp" />
     <ClCompile Include="Code\Actors\Game\LinkedObjects.cpp" />
     <ClCompile Include="Code\Actors\Game\Bolt.cpp" />
@@ -214,7 +212,6 @@
     <ClCompile Include="Code\Editor\PropertyWidgets\SpinBox.cpp" />
     <ClCompile Include="Code\Editor\PropertyWidgets\StringWidget.cpp" />
     <ClCompile Include="Code\Gameplay\GameInstance.cpp" />
-    <ClCompile Include="Code\Core\VEnum.cpp" />
     <ClCompile Include="Code\UI\Game\DialogueWidget.cpp" />
     <ClCompile Include="Code\UI\Game\HealthWidget.cpp" />
     <ClCompile Include="Code\UI\Game\MapInfoWidget.cpp" />
@@ -380,9 +377,10 @@
     <ClCompile Include="Code\Actors\Game\FruitBasket.cpp" />
     <ClCompile Include="Code\Localisation\Localisation.cpp" />
     <ClCompile Include="Code\Render\DebugMeshManager.cpp" />
+    <ClInclude Include="Code\Actors\ActorSystemDefine.h" />
     <ClInclude Include="Code\Actors\Game\MapProjectionCrystal.h" />
     <ClInclude Include="Code\Actors\Game\BombRock.h" />
-    <ClInclude Include="Code\Commands\UndoActorDeleteCommand.h" />
+    <ClInclude Include="Code\Commands\UndoActorDeleteCommand.ixx" />
     <ClInclude Include="Code\Editor\DebugNotification.ixx" />
     <ClInclude Include="Code\Editor\Sequencer\ActiveCameraLerpToOffsetPosition.h" />
     <ClInclude Include="Code\Editor\Sequencer\CameraSequenceEntryData.h" />
@@ -408,7 +406,7 @@
     <ClInclude Include="Code\Core\BinaryDeserialiser.ixx" />
     <ClInclude Include="Code\Core\BinarySerialiser.ixx" />
     <ClInclude Include="Code\Actors\Game\GlobalPropSetter.h" />
-    <ClInclude Include="Code\Actors\Game\ActivateOnGlobalProp.h" />
+    <ClInclude Include="Code\Actors\Game\ActivateOnGlobalProp.ixx" />
     <ClInclude Include="Code\Actors\Game\ClockHand.h" />
     <ClInclude Include="Code\Actors\Game\LinkedObjects.h" />
     <ClInclude Include="Code\Actors\Game\Bolt.h" />
@@ -422,7 +420,7 @@
     <ClInclude Include="Code\Actors\Game\EntranceTrigger.h" />
     <ClInclude Include="Code\Actors\Game\FenceActor.h" />
     <ClInclude Include="Code\Actors\Game\Grid.h" />
-    <ClInclude Include="Code\Actors\Game\GridActor.h" />
+    <ClInclude Include="Code\Actors\Game\GridActor.ixx" />
     <ClInclude Include="Code\Actors\Game\InteractTrigger.h" />
     <ClInclude Include="Code\Actors\Game\NPC.h" />
     <ClInclude Include="Code\Actors\Game\Player.h" />
@@ -506,9 +504,9 @@
     <ClInclude Include="Code\Components\CameraComponent.ixx" />
     <ClCompile Include="Code\Components\CameraComponent.cpp" />
     <ClCompile Include="Code\Commands\CommandSystem.cpp" />
-    <ClInclude Include="Code\Commands\CommandSystem.h" />
-    <ClInclude Include="Code\Commands\Command.h" />
-    <ClInclude Include="Code\Commands\ICommand.h" />
+    <ClInclude Include="Code\Commands\CommandSystem.ixx" />
+    <ClInclude Include="Code\Commands\Command.ixx" />
+    <ClInclude Include="Code\Commands\ICommand.ixx" />
     <ClInclude Include="Code\Components\Component.ixx" />
     <ClInclude Include="Code\Components\ComponentSystem.ixx" />
     <ClInclude Include="Code\Components\IComponentSystem.ixx" />

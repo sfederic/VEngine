@@ -1,13 +1,12 @@
-#pragma once
+export module Commands.Command;
 
-#include "ICommand.h"
-#include "Actors/Actor.h"
-#include "Core/Property.h"
-#include "Core/Properties.h"
-#include "Core/World.h"
+import Commands.ICommand;
+import Core.Property;
+import Core.World;
+import Core.UID;
 
-template <typename T>
-struct Command : ICommand
+export template <typename T>
+struct Command : public ICommand
 {
 	//Property prop;
 	T value;
