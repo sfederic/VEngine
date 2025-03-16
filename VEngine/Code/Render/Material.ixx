@@ -1,10 +1,19 @@
-export module Render.Material;
-
-import <DirectXMath.h>;
+#include <DirectXMath.h>
 #include <d3d11.h>
+
+export module Render.Material;
 
 import Core.VEnum;
 import Core.UID;
+import Render.ShaderData.MaterialShaderData;
+import Render.RenderPropertyStructs;
+import Core.Properties;
+
+class Texture2D;
+class ShaderItem;
+class Sampler;
+class RastState;
+class BlendState;
 
 export class Material
 {

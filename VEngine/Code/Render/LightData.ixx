@@ -1,6 +1,6 @@
-export module Render.LightData;
+#include <DirectXMath.h>
 
-import <DirectXMath.h>;
+export module Render.LightData;
 
 export enum class LightType : int
 {
