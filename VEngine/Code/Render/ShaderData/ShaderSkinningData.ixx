@@ -1,8 +1,8 @@
-#pragma once
+#include <DirectXMath.h>
 
-import <DirectXMath.h>;
+export module Render.ShaderData.ShaderSkinningData;
 
-struct ShaderSkinningData
+export struct ShaderSkinningData
 {
 	inline static const int MAX_SKINNING_DATA = 96;
 	DirectX::XMMATRIX skinningMatrices[MAX_SKINNING_DATA]{};

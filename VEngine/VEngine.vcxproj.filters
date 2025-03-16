@@ -1315,31 +1315,31 @@
     <ClInclude Include="Code\Render\MeshDataProxy.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\ShaderData\ShaderMatrices.h">
+    <ClInclude Include="Code\Render\ShaderData\ShaderMatrices.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Render\LightData.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\ShaderData\ShaderLights.h">
+    <ClInclude Include="Code\Render\ShaderData\ShaderLights.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\ShaderData\ShaderTimeData.h">
+    <ClInclude Include="Code\Render\ShaderData\ShaderTimeData.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\ShaderData\ShaderMeshData.h">
+    <ClInclude Include="Code\Render\ShaderData\ShaderMeshData.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\ShaderData\ShaderSkinningData.h">
+    <ClInclude Include="Code\Render\ShaderData\ShaderSkinningData.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\ShaderData\ShaderPostProcessData.h">
+    <ClInclude Include="Code\Render\ShaderData\ShaderPostProcessData.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\ShaderData\InstanceData.h">
+    <ClInclude Include="Code\Render\ShaderData\InstanceData.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\ShaderData\MaterialShaderData.h">
+    <ClInclude Include="Code\Render\ShaderData\MaterialShaderData.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Asset\AnimationAssetHeader.ixx">
@@ -1765,7 +1765,7 @@
     <ClInclude Include="Code\Editor\imgui\misc\cpp\imgui_stdlib.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\ShaderData\ShaderCameraData.h">
+    <ClInclude Include="Code\Render\ShaderData\ShaderCameraData.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Actors\Game\BloomSeed.h">
@@ -1777,7 +1777,7 @@
     <ClInclude Include="Code\UI\Game\PauseGameWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Render\ShaderData\ShaderLightProbeData.h">
+    <ClInclude Include="Code\Render\ShaderData\ShaderLightProbeData.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Editor\Sequencer\CameraSequenceEntryData.h">

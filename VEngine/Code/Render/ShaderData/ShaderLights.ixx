@@ -1,8 +1,10 @@
-#pragma once
+#include <DirectXMath.h>
 
-#include "Render/LightData.h"
+export module Render.Shaderdata.ShaderLights;
 
-struct ShaderLights
+import Render.LightData;
+
+export struct ShaderLights
 {
 	static const int MAX_LIGHTS = 32;
 

@@ -1,8 +1,12 @@
+#include <DirectXMath.h>
 
-#include "ShaderMatrices.h"
-#include "Render/Material.h"
+import Render.ShaderData.ShaderMatrices;
+import Render.Material;
 import Core.Camera;
 import Core.Core;
+import Components.CameraComponent;
+
+using namespace DirectX;
 
 void ShaderMatrices::Create()
 {

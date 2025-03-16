@@ -1,10 +1,10 @@
-#pragma once
+#include <DirectXMath.h>
 
-import <DirectXMath.h>;
+export module Render.ShaderData.ShaderMatrices;
 
 class Material;
 
-struct ShaderMatrices
+export struct ShaderMatrices
 {
 	DirectX::XMMATRIX model = DirectX::XMMatrixIdentity();
 	DirectX::XMMATRIX view = DirectX::XMMatrixIdentity();;

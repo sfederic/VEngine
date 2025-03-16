@@ -1,8 +1,8 @@
-#pragma once
+#include <DirectXMath.h>
 
-import <DirectXMath.h>;
+export module Render.ShaderData.MaterialShaderData;
 
-struct MaterialShaderData
+export struct MaterialShaderData
 {
 	DirectX::XMFLOAT4 ambient = DirectX::XMFLOAT4(1.f, 1.f, 1.f, 1.f);
 	DirectX::XMFLOAT4 emissive = DirectX::XMFLOAT4(1.f, 1.f, 1.f, 1.f);

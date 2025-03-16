@@ -1,6 +1,6 @@
-#pragma once
+export module Render.ShaderData.ShaderPostProcessData;
 
-struct ShaderPostProcessData
+export struct ShaderPostProcessData
 {
 	float exposure = 0.67f;
 	float linearAngle = 0.001f;
