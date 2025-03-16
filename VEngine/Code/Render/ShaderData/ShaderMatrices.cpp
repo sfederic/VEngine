@@ -1,8 +1,8 @@
 
 #include "ShaderMatrices.h"
 #include "Render/Material.h"
-#include "Core/Camera.h"
-#include "Core/Core.h"
+import Core.Camera;
+import Core.Core;
 
 void ShaderMatrices::Create()
 {

@@ -1,6 +1,7 @@
 export module Core.Timer;
 
 import <functional>;
+import <vector>;
 
 export struct TimerItem
 {

@@ -1,6 +1,6 @@
 
 #include "PauseGameWidget.h"
-#include "Core/Core.h"
+import Core.Core;
 
 void PauseGameWidget::Draw(float deltaTime)
 {

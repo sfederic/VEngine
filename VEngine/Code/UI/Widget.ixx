@@ -1,7 +1,7 @@
-export module UI.Widget;
+#include <d2d1.h>
+#include <DirectXMath.h>
 
-import <DirectXMath.h>;
-#include <dcommon.h>
+export module UI.Widget;
 
 import UI.Layout;
 import UI.Colours;

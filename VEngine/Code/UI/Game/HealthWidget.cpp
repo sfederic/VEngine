@@ -1,6 +1,6 @@
 
 #include "HealthWidget.h"
-#include "Core/VString.h"
+import Core.VString;
 
 void HealthWidget::Draw(float deltaTime)
 {

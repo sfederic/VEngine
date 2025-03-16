@@ -4,7 +4,7 @@
 #include "Gameplay/GameUtils.h"
 #include "Grid.h"
 import Core.VMath;
-#include "Core/Camera.h"
+import Core.Camera;
 #include "Player.h"
 #include "Core/Timer.h"
 #include "UI/UISystem.h"

@@ -1,10 +1,16 @@
+#include <DirectXMath.h>
+
 import Core.World;
 import Actors.ActorSystemCache;
 import Core.FileSystem;
 import Core.UID;
 import Core.Core;
+import Components.ComponentSystemCache;
 import Render.TextureSystem;
 import Render.DebugMeshManager;
+import UI.UISystem;
+
+using namespace DirectX;
 
 void World::Init()
 {

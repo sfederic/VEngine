@@ -1,15 +1,16 @@
+#include <d2d1.h>
+#include <dwrite_1.h>
+
 export module UI.UISystem;
 
 import Core.UID;
 import UI.Widget;
 import UI.Layout;
+import UI.Colours;
 import <string>;
 import <vector>;
 import <unordered_map>;
 import <memory>;
-
-#include <dcommon.h>
-#include <d2d1.h>
 
 class ScreenFadeWidget;
 class MapInfoWidget;

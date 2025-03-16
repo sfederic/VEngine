@@ -4,7 +4,7 @@
 #include <qlabel.h>
 #include <qboxlayout.h>
 #include <qscrollarea.h>
-#include "Actors/Actor.h"
+import Actors.Actor;
 #include "Components/Component.h"
 #include "PropertyWidgets/BoolWidget.h" 
 #include "PropertyWidgets/Float2Widget.h"
@@ -18,8 +18,8 @@
 #include "PropertyWidgets/TextureDataWidget.h"
 #include "PropertyWidgets/MeshComponentDataWidget.h"
 #include "PropertyWidgets/VEnumWidget.h"
-#include "Core/VEnum.h"
-#include "Render/RenderPropertyStructs.h"
+import Core.VEnum;
+import Render.RenderPropertyStructs;
 
 std::unordered_map<std::type_index, std::function<void(Property&, int)>> typeToFunctionMap;
 

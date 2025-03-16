@@ -2,7 +2,7 @@
 
 import <string>;
 #include <set>
-#include "Core/Properties.h"
+import Core.Properties;
 #include "Core/Log.h"
 
 //Instance holding data over the entirety of the game.

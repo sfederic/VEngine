@@ -1,10 +1,10 @@
+#include <d3d11.h>
+#include <wrl.h>
+
 export module Render.RastState;
 
 import Render.RenderUtils;
 import <string>;
-
-#include <d3d11.h>
-#include <wrl.h>
 
 export class RastState
 {

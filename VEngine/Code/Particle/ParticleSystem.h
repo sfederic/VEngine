@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Actors/Actor.h"
+import Actors.Actor;
 #include "Actors/ActorSystem.h"
 #include "ParticleEmitter.h"
 #include "Render/ShaderItem.h"

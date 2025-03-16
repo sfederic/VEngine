@@ -1,6 +1,6 @@
 
 #include "InputIconWidget.h"
-#include "Core/Core.h"
+import Core.Core;
 
 void InputIconWidget::Draw(float deltaTime)
 {

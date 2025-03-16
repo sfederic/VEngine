@@ -1,7 +1,7 @@
 
 #include "OcclusionWall.h"
 import Components.MeshComponent;
-#include "Core/Camera.h"
+import Core.Camera;
 import Physics.Raycast;
 import Actors.Game.Player;
 

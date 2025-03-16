@@ -1,12 +1,16 @@
-#pragma once
+export module Core.Serialiser;
 
-#include <fstream>
-#include "Core/OpenMode.h"
+import Core.OpenMode;
+import <fstream>;
+import <sstream>;
+import <unordered_map>;
+import <typeindex>;
+import <functional>;
 
 struct Property;
 struct Properties;
 
-class Serialiser
+export class Serialiser
 {
 private:
 	std::wofstream ofs;

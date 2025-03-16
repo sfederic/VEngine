@@ -1,4 +1,22 @@
+#include <d2d1.h>
+#include <dwrite_1.h>
+
 import UI.Widget;
+import UI.UISystem;
+import UI.Layout;
+import Core.Timer;
+import Editor.Editor;
+import Render.Sprite;
+import UI.Colours;
+import Core.VMath;
+import Core.VString;
+import Core.Input;
+import Render.SpriteSystem;
+import Render.Renderer;
+import Render.TextureSystem;
+import <vector>;
+import <string>;
+import <cassert>;
 
 void Widget::End()
 {
@@ -248,7 +266,7 @@ bool Widget::ImageButton(std::string_view filename, Layout layout, float alpha)
 		if (viewportMouseY > layout.rect.top && viewportMouseY < layout.rect.bottom)
 		{
 			//Hover animation/image
-			UISystem::DrawRect(layout, Colours::Black, 2.f);
+			UISystem::DrawRect(layout, Colours::Black, 2.f, 1.f);
 
 			if (Input::GetMouseLeftUp())
 			{

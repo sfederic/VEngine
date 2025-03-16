@@ -1,8 +1,8 @@
+#include <d2d1.h>
+
 export module UI.Layout;
 
-#include <dcommon.h>
-
-struct Layout
+export struct Layout
 {
 	D2D1_RECT_F rect = {};
 

@@ -3,7 +3,7 @@
 #include "Asset/AssetSystem.h"
 #include "Render/Material.h"
 #include "Render/MaterialSystem.h"
-#include "Render/Renderer.h"
+import Render.Renderer;
 #include "Render/TextureSystem.h"
 #include "Physics/PhysicsSystem.h"
 

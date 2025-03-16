@@ -1,4 +1,4 @@
-module Actors.ActorSystemCache;
+export module Actors.ActorSystemCache;
 
 import <typeindex>;
 import <string>;

@@ -2,7 +2,7 @@ export module Render.RenderPropertyStructs;
 
 import <string>;
 
-export class MeshComponent;
+class MeshComponent;
 
 export struct MeshComponentData
 {

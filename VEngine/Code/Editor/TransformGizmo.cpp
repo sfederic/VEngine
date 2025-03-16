@@ -1,13 +1,13 @@
 
 #include "TransformGizmo.h"
-#include "Render/Renderer.h"
-#include "Core/Camera.h"
+import Render.Renderer;
+import Core.Camera;
 #include "Core/Input.h"
 #include "Core/WorldEditor.h"
-#include "Actors/Actor.h"
+import Actors.Actor;
 #include "Editor.h"
 #include "Commands/CommandSystem.h"
-#include "Core/Core.h"
+import Core.Core;
 #include "Core/Log.h"
 #include "Console.h"
 

@@ -1,7 +1,7 @@
 
 #include "Win32Editor.h"
 #include "imgui_forward_declare.h"
-#include "Core/Core.h"
+import Core.Core;
 #include "Core/Debug.h"
 
 MSG msg;

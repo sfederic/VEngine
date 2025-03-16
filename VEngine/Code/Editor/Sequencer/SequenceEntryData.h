@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core/Properties.h"
+import Core.Properties;
 #include "Core/UID.h"
 #include "SequenceEntryTypes.h"
 

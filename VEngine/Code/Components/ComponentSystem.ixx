@@ -1,9 +1,23 @@
 export module Components.ComponentSystem;
 
+import Components.IComponentSystem;
+import Components.ComponentSystemCache;
+import Components.Component;
+import Actors.Actor;
+import Core.Serialiser;
+import Core.SystemStates;
+import Core.BinarySerialiser;
+import Core.Deserialiser;
+import Core.BinaryDeserialiser;
+import Core.World;
+import Core.UID;
+import Core.VString;
+import Editor.Editor;
 import <string>;
 import <vector>;
-
-import Core.World;
+import <memory>;
+import <utility>;
+import <cstdint>;
 
 export template <typename T>
 class ComponentSystem : public IComponentSystem

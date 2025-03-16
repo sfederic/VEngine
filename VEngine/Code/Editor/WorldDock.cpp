@@ -7,7 +7,7 @@
 #include <qlineedit.h>
 #include "ActorTreeWidget.h"
 #include "Actors/IActorSystem.h"
-#include "Actors/Actor.h"
+import Actors.Actor;
 #include "Actors/ActorSystemCache.h"
 #include "Core/World.h"
 #include "Core/WorldEditor.h"

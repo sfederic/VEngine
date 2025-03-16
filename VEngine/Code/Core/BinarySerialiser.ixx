@@ -1,11 +1,11 @@
-export module Core.BinarySerialiser
+export module Core.BinarySerialiser;
 
 import <cstdio>;
 import <string>;
 
-export struct Properties;
+struct Properties;
 
-class BinarySerialiser
+export class BinarySerialiser
 {
 private:
 	FILE* file = nullptr;

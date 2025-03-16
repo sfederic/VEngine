@@ -1,9 +1,12 @@
+#include <DirectXMath.h>
 
-#include "CameraComponent.h"
+import Components.CameraComponent;
 import Core.VMath;
-#include "Core/Core.h"
-#include "Render/Renderer.h"
-#include "Core/Camera.h"
+import Core.Core;
+import Render.Renderer;
+import Core.Camera;
+
+using namespace DirectX;
 
 CameraComponent::CameraComponent(XMFLOAT3 startPos)
 {

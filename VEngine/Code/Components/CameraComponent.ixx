@@ -1,16 +1,19 @@
 #include <DirectXMath.h>
+#include "Components/ComponentSystemDefine.h"
 
 export module Components.CameraComponent;
 
 import Components.SpatialComponent;
-import Components.ComponentSystemDefine;
+import Components.ComponentSystem;
 import Core.Properties;
 
 class Actor;
 
-export class CameraComponent : public SpatialComponent, public ComponentSystemDefine<CameraComponent>
+export class CameraComponent : public SpatialComponent
 {
 public:
+	COMPONENT_SYSTEM(CameraComponent);
+
 	CameraComponent() {}
 	CameraComponent(DirectX::XMFLOAT3 startPos);
 	Properties GetProps() override;

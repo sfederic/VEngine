@@ -1,6 +1,6 @@
-export module Core.OpenMode
+export module Core.OpenMode;
 
-import <iostream>;
+import <ostream>;
 
 export enum class OpenMode
 {

@@ -2,7 +2,7 @@
 #include "InteractTrigger.h"
 #include "Components/BoxTriggerComponent.h"
 #include "Gameplay/GameUtils.h"
-#include "Core/Camera.h"
+import Core.Camera;
 #include "UI/Game/InteractWidget.h"
 #include "UI/UISystem.h"
 #include "Core/Input.h"

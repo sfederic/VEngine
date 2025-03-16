@@ -1,13 +1,13 @@
-export module Render.VertexBuffer;
-
 #include <d3d11.h>
 #include <wrl.h>
+
+export module Render.VertexBuffer;
 
 import Render.Vertex;
 import Render.RenderUtils;
 import <vector>;
 
-export struct MeshDataProxy;
+struct MeshDataProxy;
 
 export class VertexBuffer
 {

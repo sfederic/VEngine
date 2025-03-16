@@ -6,7 +6,7 @@ import Components.MeshComponent;
 #include "Grid.h"
 #include "Explodable.h"
 import Physics.Raycast;
-#include "Core/Camera.h"
+import Core.Camera;
 
 Properties Explosive::GetProps()
 {

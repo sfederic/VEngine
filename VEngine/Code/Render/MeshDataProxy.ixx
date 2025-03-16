@@ -1,12 +1,11 @@
+#include <DirectXCollision.h>
+
 export module Render.MeshDataProxy;
 
-import <DirectXCollision.h>;
-
 import Render.Vertex;
-
 import <vector>;
 
-export class Skeleton;
+class Skeleton;
 
 //A pointer structure to a MeshData struct in memory. Each rendered component will have one of these pointing
 //to the mesh data on a per-filename basis.

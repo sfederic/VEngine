@@ -1,9 +1,14 @@
 export module Core.Deserialiser;
 
 import Core.OpenMode;
+import <string>;
+import <fstream>;
+import <unordered_map>;
+import <typeindex>;
+import <functional>;
 
-export struct Properties;
-export struct Property;
+struct Properties;
+struct Property;
 
 class Deserialiser
 {

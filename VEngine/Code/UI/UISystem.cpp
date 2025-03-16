@@ -3,12 +3,12 @@ import UI.UISystem;
 #include <dxgi1_6.h>
 #include "Core/Debug.h"
 #include "Core/Input.h"
-#include "Core/Core.h"
+import Core.Core;
 #include "UI/Widget.h"
 #include "UI/ScreenFadeWidget.h"
 #include "UI/Game/MapInfoWidget.h"
 #include "UI/Game/PauseGameWidget.h"
-#include "Core/SystemStates.h"
+import Core.SystemStates;
 
 void EndAllWidgets();
 

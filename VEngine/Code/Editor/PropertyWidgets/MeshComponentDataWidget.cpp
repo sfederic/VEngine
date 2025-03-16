@@ -1,8 +1,8 @@
 
 #include "MeshComponentDataWidget.h"
 #include <qfiledialog.h>
-#include "Core/VString.h"
-#include "Render/RenderPropertyStructs.h"
+import Core.VString;
+import Render.RenderPropertyStructs;
 #include "Asset/AssetBaseFolders.h"
 
 MeshComponentDataWidget::MeshComponentDataWidget(Property& prop_)

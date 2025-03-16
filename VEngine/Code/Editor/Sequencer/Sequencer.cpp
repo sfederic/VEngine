@@ -4,10 +4,10 @@
 #include "Asset/AssetBaseFolders.h"
 #include "Editor/ImGui/imgui.h"
 #include "Editor/ImGui/misc/cpp/imgui_stdlib.h"
-#include "Core/Core.h"
+import Core.Core;
 #include "Core/Log.h"
-#include "Core/Serialiser.h"
-#include "Core/Deserialiser.h"
+import Core.Serialiser;
+import Core.Deserialiser;
 #include "AudioSequenceEntryData.h"
 #include "CameraSequenceEntryData.h"
 #include "ActiveCameraLerpToOffsetPosition.h"

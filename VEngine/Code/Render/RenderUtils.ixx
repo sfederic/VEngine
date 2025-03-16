@@ -1,14 +1,23 @@
-export Render.RenderUtils;
+#define NOMINMAX
 
 #include <wrl.h>
 #include <d3d11.h>
+#include <DirectXMath.h>
+
+export module Render.RenderUtils;
 
 import Render.MeshData;
-
+import Render.MeshDataProxy;
+import Core.Camera;
+import Components.SpatialComponent;
+import Components.MeshComponent;
 import <cstdint>;
 import <string>;
 import <vector>;
+import <limits>;
 import <algorithm>;
+
+using namespace DirectX;
 
 export namespace RenderUtils
 {

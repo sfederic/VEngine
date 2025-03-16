@@ -1,11 +1,19 @@
+#include <DirectXMath.h>
 
-#include "Serialiser.h"
-#include "Properties.h"
-#include "Render/RenderPropertyStructs.h"
-#include "VString.h"
-#include "VEnum.h"
-#include <locale>
-#include <codecvt>
+import Core.Serialiser;
+import Core.OpenMode;
+import Core.Properties;
+import Core.Property;
+import Render.RenderPropertyStructs;
+import Core.VString;
+import Core.VEnum;
+import <locale>;
+import <codecvt>;
+import <sstream>;
+import <fstream>;
+import <unordered_map>;
+import <typeindex>;
+import <functional>;
 
 using namespace DirectX;
 

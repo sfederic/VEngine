@@ -2,7 +2,7 @@
 #include "InvisibleGridActor.h"
 #include "LookingGlass.h"
 import Physics.Raycast;
-#include "Core/Camera.h"
+import Core.Camera;
 
 void InvisibleGridActor::Create()
 {

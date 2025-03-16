@@ -1,11 +1,11 @@
 
 #include "DialogueComponent.h"
 #include "Core/World.h"
-#include "Core/Camera.h"
+import Core.Camera;
 #include "UI/UISystem.h"
 #include "UI/Game/DialogueWidget.h"
 #include "Core/Log.h"
-#include "Core/VString.h"
+import Core.VString;
 #include "Gameplay/ConditionSystem.h"
 
 void DialogueComponent::Start()

@@ -1,4 +1,10 @@
 import Core.BinarySerialiser;
+import Core.Properties;
+import Core.VEnum;
+import Core.VString;
+import Render.RenderPropertyStructs;
+import <string>;
+import <cstdio>;
 
 void BinarySerialiser::Serialise(Properties& props)
 {

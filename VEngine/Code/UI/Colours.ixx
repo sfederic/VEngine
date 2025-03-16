@@ -1,6 +1,6 @@
-export module UI.Colours;
-
 #include <d2d1_1.h>
+
+export module UI.Colours;
 
 export namespace Colours
 {

@@ -1,7 +1,7 @@
 
 #include "VEnumWidget.h"
 #include <QWheelEvent>
-#include "Core/VEnum.h"
+import Core.VEnum;
 
 VEnumWidget::VEnumWidget(Property& value_)
 {

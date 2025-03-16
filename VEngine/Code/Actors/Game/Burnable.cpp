@@ -3,7 +3,7 @@
 #include "Gameplay/GameUtils.h"
 #include "Core/Timer.h"
 import Core.VMath;
-#include "Core/Core.h"
+import Core.Core;
 #include "Player.h"
 
 Properties Burnable::GetProps()

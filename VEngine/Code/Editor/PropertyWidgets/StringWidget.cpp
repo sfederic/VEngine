@@ -1,6 +1,6 @@
 
 #include "StringWidget.h"
-#include "Actors/Actor.h"
+import Actors.Actor;
 #include <filesystem>
 #include <qcompleter.h>
 #include "Core/World.h"

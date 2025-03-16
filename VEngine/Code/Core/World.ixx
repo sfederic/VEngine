@@ -1,12 +1,14 @@
 export module Core.World;
 
+import Actors.Actor;
+import Actors.ActorSystemCache;
+import Actors.IActorSystem;
+import Core.UID;
+import Core.Log;
 import <vector>;
 import <string>;
 import <unordered_map>;
 
-import Core.UID;
-
-class IActorSystem;
 class IComponentSystem;
 class Component;
 class Actor;

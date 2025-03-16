@@ -1,7 +1,7 @@
 
 #include "SkeletalMeshComponent.h"
 #include <algorithm>
-#include "Core/Core.h"
+import Core.Core;
 #include "Core/Log.h"
 #include "Asset/AssetSystem.h"
 #include "Animation/Skeleton.h"

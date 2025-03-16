@@ -1,9 +1,9 @@
 export module Core.UID;
 
+import Core.VAssert;
 import <random>;
 import <unordered_set>;
-
-import Core.VAssert;
+import <limits>;
 
 //Unique Identifier
 export typedef unsigned int UID;

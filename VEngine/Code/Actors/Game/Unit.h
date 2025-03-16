@@ -2,7 +2,7 @@
 
 #include "GridActor.h"
 #include <memory>
-#include "Core/VEnum.h"
+import Core.VEnum;
 #include "Gameplay/BattleEnums.h"
 
 struct GridNode;

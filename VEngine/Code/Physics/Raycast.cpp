@@ -1,16 +1,16 @@
 import Physics.Raycast;
 
 #include <limits>
-#include "Core/Camera.h"
-#include "Render/Renderer.h"
+import Core.Camera;
+import Render.Renderer;
 #include "Render/Line.h"
 #include "Render/RastStates.h"
 #include "Render/RastState.h"
 #include "Render/DebugMeshManager.h"
 #include "Editor/Editor.h"
 import Core.VMath;
-#include "Core/Core.h"
-#include "Actors/Actor.h"
+import Core.Core;
+import Actors.Actor;
 import Components.MeshComponent;
 #include "Components/BoxTriggerComponent.h"
 #include "Components/Lights/PointLightComponent.h"

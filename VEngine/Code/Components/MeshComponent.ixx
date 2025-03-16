@@ -1,8 +1,15 @@
+#include <DirectXMath.h>
+#include "Components/ComponentSystemDefine.h"
+
 export module Components.MeshComponent;
 
-import <DirectXMath.h>;
-
 import Components.SpatialComponent;
+import Components.ComponentSystem;
+import Core.VMath;
+import Render.VertexBuffer;
+import Physics.PhysicsActorShape;
+import Render.RenderPropertyStructs;
+import Render.MeshDataProxy;
 import <vector>;
 import <string>;
 

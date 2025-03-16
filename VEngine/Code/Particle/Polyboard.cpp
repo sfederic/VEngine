@@ -1,6 +1,6 @@
 
 #include "Polyboard.h"
-#include "Core/Camera.h"
+import Core.Camera;
 import Physics.Raycast;
 
 static constexpr uint32_t cappedBufferSize = 512;

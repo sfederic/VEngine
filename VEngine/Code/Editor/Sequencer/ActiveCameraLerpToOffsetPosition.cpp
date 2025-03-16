@@ -1,6 +1,6 @@
 
 #include "ActiveCameraLerpToOffsetPosition.h"
-#include "Core/Camera.h"
+import Core.Camera;
 import Core.VMath;
 #include "Core/Log.h"
 

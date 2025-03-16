@@ -1,8 +1,10 @@
+#include <DirectXCollision.h>
+
 export module Render.MeshData;
 
-import <DirectXCollision.h>;
-#include "Animation/Skeleton.h"
-#include "Vertex.h"
+import Animation.Skeleton;
+import Render.Vertex;
+import <vector>;
 
 //The actual data for each loaded mesh. Each loaded mesh file will have one of these per its filename.
 export struct MeshData

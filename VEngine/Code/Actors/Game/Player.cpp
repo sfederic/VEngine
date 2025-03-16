@@ -1,7 +1,7 @@
 
 #include "Player.h"
-#include "Core/Camera.h"
-#include "Core/Core.h"
+import Core.Camera;
+import Core.Core;
 #include "Core/Input.h"
 import Core.VMath;
 #include "Core/Log.h"
@@ -18,7 +18,7 @@ import Physics.Raycast;
 import Components.MeshComponent;
 #include "Render/RastState.h"
 #include "Render/BlendStates.h"
-#include "Render/Renderer.h"
+import Render.Renderer;
 #include "Render/Material.h"
 #include "UI/UISystem.h"
 #include "UI/Game/DialogueWidget.h"

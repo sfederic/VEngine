@@ -725,9 +725,6 @@
     <ClCompile Include="Code\Core\Deserialiser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Render\VertexBuffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Actors\Game\FuseGridActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -853,7 +850,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Actors\Actor.ixx" />
-    <ClCompile Include="Code\Components\ComponentSystemDefine.ixx" />
+    <ClCompile Include="Code\Components\ComponentSystemDefine.h" />
     <ClCompile Include="Code\Core\VAssert.ixx" />
     <ClCompile Include="Code\Core\Log.ixx" />
     <ClCompile Include="Code\Core\Debug.ixx" />
@@ -861,6 +858,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Editor\Editor.ixx" />
+    <ClCompile Include="Code\Render\DepthStencil.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\main.cpp">
@@ -911,7 +911,7 @@
     <ClInclude Include="Code\Core\Input.ixx" />
     <ClInclude Include="Code\Core\VMath.ixx" />
     <ClInclude Include="Code\Core\Profile.ixx" />
-    <ClInclude Include="Code\Core\Serialiser.h" />
+    <ClInclude Include="Code\Core\Serialiser.ixx" />
     <ClInclude Include="Code\Core\Properties.ixx" />
     <ClInclude Include="Code\Core\Timer.ixx" />
     <ClInclude Include="Code\Core\Transform.ixx" />

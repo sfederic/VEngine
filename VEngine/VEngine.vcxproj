@@ -123,7 +123,7 @@
     <ClCompile Include="Code\Actors\Game\MapProjectionCrystal.cpp" />
     <ClCompile Include="Code\Actors\Game\BombRock.cpp" />
     <ClCompile Include="Code\Commands\UndoActorDeleteCommand.cpp" />
-    <ClCompile Include="Code\Components\ComponentSystemDefine.ixx" />
+    <ClCompile Include="Code\Components\ComponentSystemDefine.h" />
     <ClCompile Include="Code\Core\Debug.ixx" />
     <ClCompile Include="Code\Core\EditorCamera.cpp" />
     <ClCompile Include="Code\Core\EditorCamera.ixx">
@@ -144,7 +144,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Code\Editor\Sequencer\AudioSequenceEntryData.cpp" />
-    <ClCompile Include="Code\Render\VertexBuffer.cpp" />
+    <ClCompile Include="Code\Render\DepthStencil.cpp" />
     <ClCompile Include="Code\Core\BinaryDeserialiser.cpp" />
     <ClCompile Include="Code\Core\BinarySerialiser.cpp" />
     <ClCompile Include="Code\Actors\Game\GlobalPropSetter.cpp" />
@@ -621,7 +621,7 @@
     <ClInclude Include="Code\Render\Renderer.ixx" />
     <ClInclude Include="Code\Render\ShaderSystem.ixx" />
     <ClCompile Include="Code\Core\Serialiser.cpp" />
-    <ClInclude Include="Code\Core\Serialiser.h" />
+    <ClInclude Include="Code\Core\Serialiser.ixx" />
     <ClInclude Include="Code\Core\SystemStates.ixx" />
     <ClInclude Include="Code\Core\Timer.ixx" />
     <ClInclude Include="Code\Core\Transform.ixx" />

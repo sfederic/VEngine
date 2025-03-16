@@ -1,6 +1,6 @@
 
 #include "PostProcessVolume.h"
-#include "Core/Camera.h"
+import Core.Camera;
 #include "Components/BoxTriggerComponent.h"
 
 PostProcessVolume::PostProcessVolume()

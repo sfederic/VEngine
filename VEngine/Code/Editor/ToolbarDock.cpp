@@ -5,10 +5,10 @@
 #include <qcombobox.h>
 #include <qlabel.h>
 #include "PropertyWidgets/SpinBox.h"
-#include "Core/Core.h"
+import Core.Core;
 #include "TransformGizmo.h"
 #include "Core/FileSystem.h"
-#include "Core/Camera.h"
+import Core.Camera;
 #include "Core/WorldEditor.h"
 
 import Core.EditorCamera;

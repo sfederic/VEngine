@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Actors/Actor.h"
+import Actors.Actor;
 #include "Actors/ActorSystem.h"
 #include "Render/Vertex.h"
 

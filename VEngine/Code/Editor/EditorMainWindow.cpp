@@ -1,7 +1,7 @@
 
 #include "EditorMainWindow.h"
 #include "imgui_forward_declare.h"
-#include "Core/Core.h"
+import Core.Core;
 #include "RenderViewWidget.h"
 #include "PropertiesDock.h"
 #include "AssetDock.h"
