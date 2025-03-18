@@ -133,6 +133,7 @@
     <ClCompile Include="Code\Core\Log.ixx" />
     <ClCompile Include="Code\Core\VAssert.ixx" />
     <ClCompile Include="Code\Editor\Editor.ixx" />
+    <ClCompile Include="Code\Editor\IEditor.ixx" />
     <ClCompile Include="Code\Editor\Sequencer\ActiveCameraLerpToOffsetPosition.cpp" />
     <ClCompile Include="Code\Editor\Sequencer\CameraSequenceEntryData.cpp" />
     <ClCompile Include="Code\Actors\Game\BloomSeedSoil.cpp" />
@@ -204,7 +205,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Code\Components\CharacterControllerComponent.cpp" />
-    <ClCompile Include="Code\Actors\AudioActor.cpp" />
     <ClCompile Include="Code\Asset\AssetSystem.cpp" />
     <ClCompile Include="Code\Components\AudioComponent.cpp" />
     <ClCompile Include="Code\Components\BoxTriggerComponent.cpp" />
@@ -549,7 +549,7 @@
     <ClInclude Include="Code\Editor\imgui\imstb_rectpack.h" />
     <ClInclude Include="Code\Editor\imgui\imstb_textedit.h" />
     <ClInclude Include="Code\Editor\imgui\imstb_truetype.h" />
-    <ClInclude Include="Code\Editor\LogDock.h" />
+    <ClInclude Include="Code\Editor\LogDock.ixx" />
     <ClCompile Include="Code\Editor\EditorMainWindow.cpp" />
     <ClCompile Include="Code\Editor\imgui\backends\imgui_impl_dx11.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
@@ -560,8 +560,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Code\Editor\PropertiesDock.cpp" />
-    <ClInclude Include="Code\Editor\PropertiesDock.h" />
-    <ClCompile Include="Code\Editor\PropertyWidgets\BoolWidget.cpp" />
+    <ClInclude Include="Code\Editor\PropertiesDock.ixx" />
     <ClCompile Include="Code\Editor\PropertyWidgets\Float3Widget.cpp" />
     <ClCompile Include="Code\Editor\PropertyWidgets\FloatWidget.cpp" />
     <ClCompile Include="Code\Editor\PropertyWidgets\IntWidget.cpp" />
@@ -569,11 +568,11 @@
     <ClCompile Include="Code\Editor\QtEditor.cpp" />
     <ClCompile Include="Code\Editor\RenderViewWidget.cpp" />
     <ClCompile Include="Code\Editor\ToolbarDock.cpp" />
-    <ClInclude Include="Code\Editor\PropertyWidgets\BoolWidget.h" />
+    <ClInclude Include="Code\Editor\PropertyWidgets\BoolWidget.ixx" />
     <ClInclude Include="Code\Editor\PropertyWidgets\Float3Widget.h" />
     <ClInclude Include="Code\Editor\PropertyWidgets\FloatWidget.h" />
     <ClInclude Include="Code\Editor\PropertyWidgets\IntWidget.h" />
-    <ClInclude Include="Code\Editor\PropertyWidgets\IPropertyWidget.h" />
+    <ClInclude Include="Code\Editor\PropertyWidgets\IPropertyWidget.ixx" />
     <ClInclude Include="Code\Editor\PropertyWidgets\SpinBox.h" />
     <ClInclude Include="Code\Editor\PropertyWidgets\StringWidget.h" />
     <ClInclude Include="Code\Editor\PropertyWidgets\VectorWidget.h" />
@@ -581,8 +580,7 @@
     <ClCompile Include="Code\Editor\Win32Editor.cpp" />
     <ClInclude Include="Code\Editor\Win32Editor.h" />
     <ClInclude Include="Code\Editor\QtEditor.ixx" />
-    <ClInclude Include="Code\Editor\EditorMainWindow.h" />
-    <ClInclude Include="Code\Editor\IEditor.ixx" />
+    <ClInclude Include="Code\Editor\EditorMainWindow.ixx" />
     <ClInclude Include="Code\Core\Core.ixx" />
     <ClCompile Include="Code\Editor\WorldDock.cpp" />
     <ClInclude Include="Code\Editor\WorldDock.h" />

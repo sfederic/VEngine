@@ -1,6 +1,16 @@
 #include <DirectXMath.h>
 
 import Actors.Actor;
+import Actors.IActorSystem;
+import Components.Component;
+import Components.SpatialComponent;
+import Components.CameraComponent;
+import Components.MeshComponent;
+import Components.EmptyComponent;
+import Core.Camera;
+import Core.Log;
+import Core.World;
+import Physics.PhysicsSystem;
 
 using namespace DirectX;
 

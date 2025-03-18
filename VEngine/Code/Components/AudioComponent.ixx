@@ -1,14 +1,18 @@
+#include "Components/ComponentSystemDefine.h"
+
 export module Components.AudioComponent;
 
 import Components.SpatialComponent;
-import Components.ComponentSystemDefine;
+import Components.ComponentSystem;
 import Core.Properties;
 import Core.UID;
 import <string>;
 
-export class AudioComponent : public SpatialComponent, public ComponentSystemDefine<AudioComponent>
+export class AudioComponent : public SpatialComponent
 {
 public:
+	COMPONENT_SYSTEM(AudioComponent);
+
 	enum class FadeValue
 	{
 		None,

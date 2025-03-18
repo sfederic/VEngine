@@ -1,25 +1,16 @@
-
-#include "PropertiesDock.h"
 #include <qwidget.h>
 #include <qlabel.h>
 #include <qboxlayout.h>
 #include <qscrollarea.h>
+
+import Editor.PropertiesDock;
 import Actors.Actor;
-#include "Components/Component.h"
-#include "PropertyWidgets/BoolWidget.h" 
-#include "PropertyWidgets/Float2Widget.h"
-#include "PropertyWidgets/Float3Widget.h"
-#include "PropertyWidgets/Float4Widget.h"
-#include "PropertyWidgets/FloatWidget.h"
-#include "PropertyWidgets/IntWidget.h"
-#include "PropertyWidgets/VectorWidget.h"
-#include "PropertyWidgets/StringWidget.h"
-#include "PropertyWidgets/WStringWidget.h"
-#include "PropertyWidgets/TextureDataWidget.h"
-#include "PropertyWidgets/MeshComponentDataWidget.h"
-#include "PropertyWidgets/VEnumWidget.h"
+import Components.Component;
+import Editor.PropertyWidgets.BoolWidget 
 import Core.VEnum;
 import Render.RenderPropertyStructs;
+import <typeindex>;
+import <functional>;
 
 std::unordered_map<std::type_index, std::function<void(Property&, int)>> typeToFunctionMap;
 

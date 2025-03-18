@@ -1,5 +1,21 @@
+#include <qcheckbox.h>
 
-#include "BoolWidget.h"
+export module Editor.PropertyWidgets.BoolWidget;
+
+import Editor.PropertyWidgets.IPropertyWidget;
+import Core.Property;
+
+export class BoolWidget : public QCheckBox, public IPropertyWidget
+{
+public:
+	BoolWidget(Property& prop, QWidget* parent = 0);
+
+private:
+	void SetValueBool(int state);
+	virtual void ResetValue() override;
+
+	bool* value;
+};
 
 BoolWidget::BoolWidget(Property& prop_, QWidget* parent) : QCheckBox(parent)
 {

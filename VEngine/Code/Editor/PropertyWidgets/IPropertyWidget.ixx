@@ -1,9 +1,9 @@
-#pragma once
+export module Editor.PropertyWidgets.IPropertyWidget;
 
 import Core.Property;
-#include "Commands/CommandSystem.h"
+import Commands.CommandSystem;
 
-class IPropertyWidget
+export class IPropertyWidget
 {
 public:
 	Property prop;

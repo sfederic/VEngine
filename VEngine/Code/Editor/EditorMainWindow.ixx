@@ -1,8 +1,8 @@
-#pragma once
-
 #include <QtWidgets/QMainWindow>
 
-class EditorMainWindow : public QMainWindow
+export module Editor.EditorMainWindow;
+
+export class EditorMainWindow : public QMainWindow
 {
 public:
 	class RenderViewWidget* renderView = nullptr;

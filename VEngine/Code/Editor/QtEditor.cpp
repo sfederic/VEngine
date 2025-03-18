@@ -1,9 +1,14 @@
+#include <QApplication>
+#include <QIcon>
+#include <QPalette>
+#include <QColor>
+#include <QFont>
+
 import Editor.QtEditor;
 import Core.Input;
+import Core.Core;
 import Core.Win32Keys;
-
-#include <QApplication>
-#include "EditorMainWindow.h"
+import Actors.Actor;
 
 void QtEditor::Init(int argc, char* argv[])
 {

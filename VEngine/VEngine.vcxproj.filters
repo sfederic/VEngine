@@ -137,9 +137,6 @@
     <ClCompile Include="Code\Actors\Actor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Editor\PropertyWidgets\BoolWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Editor\PropertyWidgets\Float3Widget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -255,9 +252,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Components\AudioComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Actors\AudioActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Asset\AssetSystem.cpp">
@@ -861,6 +855,7 @@
     <ClCompile Include="Code\Render\DepthStencil.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Editor\IEditor.ixx" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\main.cpp">
@@ -883,10 +878,9 @@
     <ClInclude Include="Code\Editor\AssetDock.ixx" />
     <ClInclude Include="Code\Editor\Console.ixx" />
     <ClInclude Include="Code\Editor\DebugMenu.ixx" />
-    <ClInclude Include="Code\Editor\EditorMainWindow.h" />
-    <ClInclude Include="Code\Editor\IEditor.ixx" />
-    <ClInclude Include="Code\Editor\LogDock.h" />
-    <ClInclude Include="Code\Editor\PropertiesDock.h" />
+    <ClInclude Include="Code\Editor\EditorMainWindow.ixx" />
+    <ClInclude Include="Code\Editor\LogDock.ixx" />
+    <ClInclude Include="Code\Editor\PropertiesDock.ixx" />
     <ClInclude Include="Code\Editor\QtEditor.ixx" />
     <ClInclude Include="Code\Editor\RenderViewWidget.h" />
     <ClInclude Include="Code\Editor\ToolbarDock.h" />
@@ -940,7 +934,7 @@
     <ClInclude Include="Code\Editor\imgui\imstb_truetype.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Editor\PropertyWidgets\BoolWidget.h">
+    <ClInclude Include="Code\Editor\PropertyWidgets\BoolWidget.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Editor\PropertyWidgets\FloatWidget.h">
@@ -973,7 +967,7 @@
     <ClInclude Include="Code\Editor\PropertyWidgets\Float3Widget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Editor\PropertyWidgets\IPropertyWidget.h">
+    <ClInclude Include="Code\Editor\PropertyWidgets\IPropertyWidget.ixx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Core\FileSystem.ixx">

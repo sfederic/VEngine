@@ -1,8 +1,8 @@
-
-#include "LogDock.h"
 #include <qtextedit.h>
 #include <QVBoxLayout>
 #include <QPushButton>
+
+import Editor.LogDock;
 
 const int MAX_LOG_CHAR_LENGTH = 16384;
 

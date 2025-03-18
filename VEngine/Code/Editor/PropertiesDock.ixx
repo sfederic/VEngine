@@ -1,7 +1,8 @@
-#pragma once
-
 #include <qdockwidget.h>
 #include <qgridlayout.h>
+
+export module Editor.PropertiesDock;
+
 import <vector>;
 
 class Actor;
@@ -13,7 +14,7 @@ class QGridLayout;
 class QScrollArea;
 class QLineEdit;
 
-class PropertiesDock : public QDockWidget
+export class PropertiesDock : public QDockWidget
 {
 public:
 	PropertiesDock();

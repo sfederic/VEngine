@@ -1,15 +1,8 @@
-
-#include "EditorMainWindow.h"
 #include "imgui_forward_declare.h"
+
+import Editor.EditorMainWindow;
+import Editor.LogDock;
 import Core.Core;
-#include "RenderViewWidget.h"
-#include "PropertiesDock.h"
-#include "AssetDock.h"
-#include "WorldDock.h"
-#include "ToolbarDock.h"
-#include "LogDock.h"
-#include "SystemDock.h"
-#include "DialogueDock.h"
 
 EditorMainWindow::EditorMainWindow()
 {

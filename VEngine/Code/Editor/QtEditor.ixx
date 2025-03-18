@@ -1,14 +1,20 @@
+#include <qobject.h>
+#include <qstring.h>
+
 export module Editor.QtEditor;
 
 import Editor.IEditor;
+import <string>;
 
-#include <qobject.h>
+class Actor;
+class QApplication;
+class EditorMainWindow;
 
 export class QtEditor : public IEditor, public QObject
 {
 public:
-	class QApplication* app = nullptr;
-	class EditorMainWindow* mainWindow = nullptr;
+	QApplication* app = nullptr;
+	EditorMainWindow* mainWindow = nullptr;
 
 	void Init(int argc, char* argv[]) override;
 	void Tick() override;

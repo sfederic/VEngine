@@ -1,11 +1,13 @@
-#pragma once
+#include "Actors/ActorSystemDefine.h"
 
-#include "Actor.h"
-#include "ActorSystem.h"
+export module Actors.AudioActor;
 
-class AudioComponent;
+import Actors.Actor;
+import Actors.ActorSystem;
+import Components.AudioComponent;
+import Core.Properties;
 
-class AudioActor : public Actor
+export class AudioActor : public Actor
 {
 public:
 	ACTOR_SYSTEM(AudioActor);
@@ -16,3 +18,16 @@ public:
 private:
 	AudioComponent* audioComponent = nullptr;
 };
+
+AudioActor::AudioActor()
+{
+	audioComponent = AudioComponent::system.Add("Audio", this);
+	SetRootComponent(audioComponent);
+}
+
+Properties AudioActor::GetProps()
+{
+	auto props = __super::GetProps();
+	props.title = GetTypeName();
+	return props;
+}

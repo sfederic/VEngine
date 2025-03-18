@@ -12,6 +12,7 @@ import Core.BinaryDeserialiser;
 import Core.World;
 import Core.UID;
 import Core.VString;
+import Core.Properties;
 import Editor.Editor;
 import <string>;
 import <vector>;
@@ -34,7 +35,7 @@ public:
 
 	T* Add(std::string name, Actor* owner = nullptr, T newComponent = T(), bool callCreate = false)
 	{
-		components.emplace_back(std::make_unique<T>(std::move(newComponent)));
+		components.emplace_back(std::make_unique<T>(newComponent));
 		auto& component = components.back();
 
 		component->SetIndex(components.size() - 1);

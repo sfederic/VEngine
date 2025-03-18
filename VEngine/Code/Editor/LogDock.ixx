@@ -1,12 +1,13 @@
-#pragma once
+#include <qdockwidget.h>
+
+export module Editor.LogDock;
 
 import <string>;
-#include <qdockwidget.h>
 
 class QTextEdit;
 class QPushButton;
 
-class LogDock : public QDockWidget
+export class LogDock : public QDockWidget
 {
 public:
 	LogDock();
