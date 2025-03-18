@@ -1,10 +1,12 @@
+#include <DirectXMath.h>
+#include <DirectXCollision.h>
+#include "Components/ComponentSystemDefine.h"
+
 export module Components.BoxTriggerComponent;
 
 import Components.SpatialComponent;
 import Components.ComponentSystem;
 import <functional>;
-import <DirectXMath.h>
-import <DirectXCollision.h>
 
 class Actor;
 struct HitResult;

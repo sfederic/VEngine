@@ -4,6 +4,8 @@
 import Render.RenderUtils;
 import Render.Renderer;
 import Core.Debug;
+import <cstdint>;
+import <string>;
 
 namespace RenderUtils
 {

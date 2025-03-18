@@ -2,14 +2,13 @@
 
 export module Actors.Actor;
 
+import Core.Transform;
+import Core.Properties;
+import Core.UID;
 import <vector>;
 import <string>;
 import <unordered_map>;
 import <set>;
-
-import Core.Transform;
-import Core.Properties;
-import Core.UID;
 
 class Component;
 class SpatialComponent;

@@ -1,6 +1,6 @@
-export module Core.Transform;
+#include <DirectXMath.h>
 
-import <DirectXMath.h>;
+export module Core.Transform;
 
 export struct Transform
 {

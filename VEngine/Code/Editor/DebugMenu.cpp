@@ -1,8 +1,18 @@
-import Editor.DebugMenu;
-#include <filesystem>
 #include <Windows.h>
 #include "backends/imgui_impl_win32.h"
 #include "backends/imgui_impl_dx11.h"
+#include <DirectXMath.h>
+
+import Editor.DebugMenu;
+import Core.Core;
+import Core.Properties;
+import Editor.Editor;
+import UI.UISystem;
+import Core.Transform;
+import Render.Texture2D;
+import <filesystem>;
+
+using namespace DirectX;
 
 void DebugMenu::Init()
 {

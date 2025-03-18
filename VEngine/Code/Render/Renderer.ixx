@@ -1,4 +1,5 @@
 #include <d3d11.h>
+#include <dxgi1_6.h>
 #include <DirectXCollision.h>
 
 export module Render.Renderer;
@@ -8,7 +9,21 @@ import Render.BlendState;
 import Render.Sampler;
 import Render.Vertex;
 import Render.DepthStencil;
+import Render.ShaderData.ShaderMatrices;
+import Render.Swapchain;
+import Render.Shaderdata.ShaderLightProbeData;
+import Render.Shaderdata.ShaderCameraData;
+import Render.ShaderData.ShaderPostProcessData;
+import Render.ShaderData.ShaderSkinningData;
+import Render.ShaderData.ShaderMeshData;
+import Render.ShaderData.ShaderTimeData;
+import Render.Shaderdata.ShaderLights;
+import Render.ShaderData.MaterialShaderData;
+import Render.ShadowMap;
+import Render.Device;
 import <string>;
+import <unordered_map>;
+import <memory>;
 
 class Line;
 class VertexBuffer;

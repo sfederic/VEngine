@@ -2,7 +2,7 @@ export module Editor.DebugMenu;
 
 import <vector>;
 import <string>;
-#include "DebugNotification.h"
+import Editor.DebugNotification;
 
 struct Properties;
 class UVPaintWidget;

@@ -1,7 +1,7 @@
-export module Render.Texture2D;
-
 #include <wrl.h>
 #include <d3d11.h>
+
+export module Render.Texture2D;
 
 import Core.UID;
 import <string>;

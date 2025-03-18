@@ -1,11 +1,11 @@
-import Render.Texture2D;
-#include "Asset/AssetBaseFolders.h"
-#include "Core/Debug.h"
-#include "Render/RenderUtils.h"
-import Render.Renderer;
 #include <WICTextureLoader.h>
-#include <cassert>
-#include <filesystem>
+
+import Render.Texture2D;
+import Render.Renderer;
+import Core.VString;
+import Asset.AssetBaseFolders;
+import <string>;
+import <cassert>;
 
 Texture2D::~Texture2D()
 {

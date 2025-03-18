@@ -1,14 +1,14 @@
-export module Core.WorldEditor;
+#include <DirectXMath.h>
 
-import <DirectXMath.h>;
+export module Core.WorldEditor;
 
 import <set>;
 import <string>;
 
-export class Actor;
-export class IActorSystem;
-export class SpatialComponent;
-export struct Transform;
+class Actor;
+class IActorSystem;
+class SpatialComponent;
+struct Transform;
 
 //Because the UV painting is working with triangle faces and not quads, you can really only rotate
 //the newly set UVs either left or right.

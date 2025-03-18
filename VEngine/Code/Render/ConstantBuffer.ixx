@@ -1,7 +1,7 @@
-export module Render.ConstantBuffer;
-
 #include <wrl.h>
 #include <d3d11.h>
+
+export module Render.ConstantBuffer;
 
 import Render.RenderUtils;
 

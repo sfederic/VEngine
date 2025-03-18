@@ -1,11 +1,24 @@
-import Core.WorldEditor;
-
 #include <QFileDialog>
-import <DirectXMath.h>;
+#include <DirectXMath.h>;
+
+import Core.WorldEditor;
 
 import <filesystem>;
 import <set>;
 import <string>;
+import Editor.DebugMenu;
+import Core.Input;
+import Physics.HitResult;
+import Physics.Raycast;
+import Render.TextureSystem;
+import Components.MeshComponent;
+import Core.VString;
+import Render.MaterialSystem;
+import Render.Material;
+import Editor.Editor;
+import Core.Properties;
+import Core.Core;
+import Core.FileSystem;
 
 using namespace DirectX;
 

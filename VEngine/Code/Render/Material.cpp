@@ -1,4 +1,19 @@
+#include <d3d11.h>
+
 import Render.Material;
+import Actors.Actor;
+import Core.VEnum;
+import Core.Property;
+import Core.Properties;
+import Core.World;
+import Core.WorldEditor;
+import Components.MeshComponent;
+import Render.BlendStates;
+import Render.RastStates;
+import Render.TextureSystem;
+import Render.Renderer;
+import Render.ShaderSystem;
+import Render.RenderPropertyStructs;
 
 static VEnum rastStates;
 static VEnum blendStates;
