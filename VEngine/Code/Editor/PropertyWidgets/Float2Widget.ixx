@@ -1,8 +1,24 @@
-
-#include "Float2Widget.h"
+#include <QWidget>
 #include <qboxlayout.h>
-import <DirectXMath.h>;
+#include <DirectXMath.h>
+
+export module Editor.PropertyWidgets.Float2Widget;
+
+import Editor.PropertyWidgets.IPropertyWidget;
+import Editor.PropertyWidgets.SpinBox;
+import Core.Property;
 import Core.VMath;
+
+export struct Float2Widget : public QWidget, public IPropertyWidget
+{
+	SpinBox xSpinbox;
+	SpinBox ySpinbox;
+	DirectX::XMFLOAT2* value;
+
+	Float2Widget(Property& prop_, QWidget* parent = 0);
+	void SetValue();
+	virtual void ResetValue() override;
+};
 
 using namespace DirectX;
 

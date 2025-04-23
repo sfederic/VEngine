@@ -1,6 +1,27 @@
-
-#include "SpinBox.h"
+#include <qspinbox.h>
 #include <QWheelEvent>
+
+export module Editor.PropertyWidgets.SpinBox;
+
+class QWheelEvent;
+
+export struct SpinBox : public QDoubleSpinBox
+{
+	SpinBox(QWidget* parent = nullptr);
+	void wheelEvent(QWheelEvent* event_) override;
+};
+
+export struct IntSpinBox : public QSpinBox
+{
+	IntSpinBox(QWidget* parent = nullptr);
+	void wheelEvent(QWheelEvent* event_) override;
+};
+
+export struct UintSpinBox : public QSpinBox
+{
+	UintSpinBox(QWidget* parent = nullptr);
+	void wheelEvent(QWheelEvent* event_) override;
+};
 
 SpinBox::SpinBox(QWidget* parent) : QDoubleSpinBox(parent)
 {

@@ -1,13 +1,15 @@
-
-#include "WorldEditor.h"
-#include "VMath.h"
-#include "Input.h"
-#include "Editor/DebugMenu.h"
-#include "Editor/Console.h"
-#include "Editor/Editor.h"
+#include <DirectXMath.h>
 
 import Core.EditorCamera;
+import Core.Console;
+import Core.Input;
+import Core.Win32Keys;
+import Core.WorldEditor;
+import Core.DebugMenu;
 import Actors.Actor;
+import Editor.Editor;
+
+using namespace DirectX;
 
 void EditorCamera::Tick(float deltaTime)
 {

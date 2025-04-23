@@ -209,7 +209,6 @@
     <ClCompile Include="Code\Components\AudioComponent.cpp" />
     <ClCompile Include="Code\Components\BoxTriggerComponent.cpp" />
     <ClCompile Include="Code\Actors\ActorSystemCache.cpp" />
-    <ClCompile Include="Code\Editor\PropertyWidgets\SpinBox.cpp" />
     <ClCompile Include="Code\Editor\PropertyWidgets\StringWidget.cpp" />
     <ClCompile Include="Code\Gameplay\GameInstance.cpp" />
     <ClCompile Include="Code\UI\Game\DialogueWidget.cpp" />
@@ -226,7 +225,6 @@
     <ClCompile Include="Code\Render\TextureSystem.cpp" />
     <ClCompile Include="Code\Render\RenderUtils.cpp" />
     <ClCompile Include="Code\Render\MaterialSystem.cpp" />
-    <ClCompile Include="Code\Editor\PropertyWidgets\Float2Widget.cpp" />
     <ClCompile Include="Code\Components\Lights\DirectionalLightComponent.cpp" />
     <ClCompile Include="Code\Actors\DirectionalLightActor.cpp" />
     <ClCompile Include="Code\Actors\DebugActors\DebugSphere.cpp" />
@@ -573,7 +571,7 @@
     <ClInclude Include="Code\Editor\PropertyWidgets\FloatWidget.h" />
     <ClInclude Include="Code\Editor\PropertyWidgets\IntWidget.h" />
     <ClInclude Include="Code\Editor\PropertyWidgets\IPropertyWidget.ixx" />
-    <ClInclude Include="Code\Editor\PropertyWidgets\SpinBox.h" />
+    <ClInclude Include="Code\Editor\PropertyWidgets\SpinBox.ixx" />
     <ClInclude Include="Code\Editor\PropertyWidgets\StringWidget.h" />
     <ClInclude Include="Code\Editor\PropertyWidgets\VectorWidget.h" />
     <ClInclude Include="Code\Editor\ToolbarDock.h" />
@@ -642,7 +640,7 @@
     <ClInclude Include="Code\Render\TextureSystem.ixx" />
     <ClInclude Include="Code\Render\RenderUtils.ixx" />
     <ClInclude Include="Code\Render\MaterialSystem.ixx" />
-    <ClInclude Include="Code\Editor\PropertyWidgets\Float2Widget.h" />
+    <ClInclude Include="Code\Editor\PropertyWidgets\Float2Widget.ixx" />
     <ClInclude Include="Code\Components\Lights\DirectionalLightComponent.h" />
     <ClInclude Include="Code\Actors\DirectionalLightActor.h" />
     <ClInclude Include="Code\Actors\DebugActors\DebugSphere.h" />

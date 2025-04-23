@@ -1,6 +1,6 @@
-export module Core.Debug;
-
 #include <comdef.h>
+
+export module Core.Debug;
 
 import <stdexcept>;
 import <source_location>;

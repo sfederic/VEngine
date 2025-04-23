@@ -1,7 +1,7 @@
 export module Editor.PropertyWidgets.IPropertyWidget;
 
-import Core.Property;
 import Commands.CommandSystem;
+import Core.Property;
 
 export class IPropertyWidget
 {
