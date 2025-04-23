@@ -54,6 +54,8 @@ void Texture2D::Create()
 	height = texDesc.Height;
 
 	SetBufferNames();
+
+	stackTraceAtCreation = std::stacktrace::current();
 }
 
 void Texture2D::SetBufferNames()

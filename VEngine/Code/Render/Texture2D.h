@@ -3,6 +3,7 @@
 #include <string>
 #include <Core/UID.h>
 #include <wrl.h>
+#include <stacktrace>
 
 struct ID3D11Resource;
 struct ID3D11ShaderResourceView;
@@ -29,6 +30,8 @@ public:
 	void SetBufferNames();
 
 private:
+	std::stacktrace stackTraceAtCreation;
+
 	std::string filename;
 
 	Microsoft::WRL::ComPtr<ID3D11Resource> data;
