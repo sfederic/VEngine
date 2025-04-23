@@ -4,6 +4,7 @@
 #include "Render/Material.h"
 #include "Render/MaterialSystem.h"
 #include "Render/Renderer.h"
+#include "Render/ShaderItem.h"
 #include "Render/TextureSystem.h"
 #include "Physics/PhysicsSystem.h"
 

@@ -2,7 +2,6 @@
 
 #include "SpatialComponent.h"
 #include "ComponentSystem.h"
-#include "Render/ShaderItem.h"
 #include "Render/VertexBuffer.h"
 #include "Render/MeshDataProxy.h"
 #include "Physics/PhysicsActorShape.h"
