@@ -2,7 +2,6 @@
 #include "TextureSystem.h"
 #include <filesystem>
 #include "Core/SystemStates.h"
-#include "Render/RenderUtils.h"
 #include "Render/Texture2D.h"
 #include "Core/Log.h"
 #include "Asset/AssetBaseFolders.h"
